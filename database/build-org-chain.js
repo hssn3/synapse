@@ -17,7 +17,12 @@
  */
 const { db } = require('../src/config/database-sqlite');
 
+// اگر ستون سلسله‌مراتب هنوز ساخته نشده (بوتِ ناقص یا ترتیبِ متفاوت)، همه را هم‌سطح
+// حساب کن تا به‌جای خطا، زنجیره‌ی تخت ولی سالم ساخته شود.
+const HAS_HIER = db.prepare('PRAGMA table_info(roles)').all().some((c) => c.name === 'hierarchy_level');
+
 function level(roleCode) {
+  if (!HAS_HIER) return 99;
   const r = db.prepare('SELECT hierarchy_level FROM roles WHERE code = ?').get(roleCode);
   return r ? Number(r.hierarchy_level || 99) : 99;
 }
@@ -30,9 +35,13 @@ function codeToId(roleCode) {
 const head = db.prepare('SELECT COUNT(*) c FROM users WHERE is_active=1').get().c;
 console.log('[org-chain] کاربران فعال:', head);
 
-const roots = db.prepare(`
+const roots = HAS_HIER ? db.prepare(`
   SELECT u.id, r.code FROM users u JOIN roles r ON u.role_id = r.id
   WHERE u.is_active = 1 AND (r.code IN ('admin','hospital_president') OR r.hierarchy_level IS NULL)
+  ORDER BY r.code DESC
+`).all() : db.prepare(`
+  SELECT u.id, r.code FROM users u JOIN roles r ON u.role_id = r.id
+  WHERE u.is_active = 1 AND r.code IN ('admin','hospital_president')
   ORDER BY r.code DESC
 `).all();
 if (!roots.length) { console.log('[org-chain] هیچ ریشه‌ای پیدا نشد — داده‌ی نقش‌ها را ببین.'); process.exit(0); }
@@ -46,11 +55,16 @@ const tx = db.transaction(() => {
   let linked = 0;
   // نقش‌ها را بر اساس سطح مرتب کن: از پایین به بالا هر کس نزدیک‌ترین سرپرستِ
   // موجود در سطحِ بالاتر را می‌گیرد. سقف پویش: تعداد نقش‌ها.
-  const users = db.prepare(`
+  const users = HAS_HIER ? db.prepare(`
     SELECT u.id AS user_id, u.full_name, r.code AS role_code, COALESCE(r.hierarchy_level, 50) AS lvl
     FROM users u JOIN roles r ON u.role_id = r.id
     WHERE u.is_active = 1 AND u.id <> ?
     ORDER BY COALESCE(r.hierarchy_level, 50) DESC, u.rowid
+  `).all(rootId) : db.prepare(`
+    SELECT u.id AS user_id, u.full_name, r.code AS role_code, 50 AS lvl
+    FROM users u JOIN roles r ON u.role_id = r.id
+    WHERE u.is_active = 1 AND u.id <> ?
+    ORDER BY u.rowid
   `).all(rootId);
 
   const assignedByLevel = new Map(); // lvl -> [userIds] که به سطحِ بالاتر وصل شده‌اند

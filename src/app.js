@@ -681,6 +681,11 @@ catch (err) { console.error('[Boot] Document revisions migration failed:', err.m
 try { require('../database/seed-indicator-slides').runMigration(); }
 catch (err) { console.error('[Boot] Indicator slides migration failed:', err.message); }
 
+// مهاجرت‌های بازبینی 313 (ابلاغیه + یکسان‌سازی نقش‌ها + ACL فرم‌ها + زنجیره سرپرستی) —
+// همه idempotent اند؛ روی دیتابیس تازه جدول‌ها را می‌سازند، روی دیتابیس موجود فقط کمبودها را پر می‌کنند.
+try { require('../database/migrate-313-audit').runMigration(); }
+catch (err) { console.error('[Boot] Audit-313 migrations failed:', err.message); }
+
 // زمان‌بند فقط برای کانال‌های خروجی (ایمیل/پیامک). بدون پیکربندی، خودش اجرا نمی‌شود و
 // هرگز throw نمی‌کند — اقلام درون‌برنامه‌ای در کارتابل محاسبه می‌شوند و مستقل از این‌اند.
 try { require('./services/reminder-cron').startCron(); }
