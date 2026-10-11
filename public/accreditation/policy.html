@@ -7,7 +7,7 @@
   <link rel="preload" href="/fonts/Vazirmatn-Variable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/app.css?v=20260910a">
   <link rel="stylesheet" href="/css/bg-theme.css?v=20260910a">
-  <link rel="stylesheet" href="/css/design-system.css?v=20260910a">
+  <link rel="stylesheet" href="/css/design-system.css?v=20261011c">
   <link rel="stylesheet" href="/css/stitch-luxury.css?v=20260914">
   <link rel="stylesheet" href="/css/hassan-clean.css?v=20260917-3">
   <link rel="stylesheet" href="styles.css">
@@ -436,6 +436,9 @@
          min-height دارِ #app خودش صفحه‌های خالی اضافه می‌ساخت. */
       body.fc-printing #app {
         display: none !important;
+      }
+      body.fc-printing #fcPrintRoot {
+        padding: 0 !important;
       }
       /* ارتفاعِ اجباریِ پیش‌نمایش (۱۱۲۰px) از بودجه‌ی یک صفحه بیشتر است و همان
          «دوتایی شدن» چاپ بود؛ در حالت چاپِ جاگیر خنثی می‌شود. */
@@ -2224,9 +2227,10 @@
       root.innerHTML = ''; root.appendChild(box);
       document.body.classList.add('fc-printing');
 
-      // بودجه‌ی چاپ با حاشیه‌ی پیش‌فرض مرورگر: ‎~190×277mm‎؛ ۶mm برای گردکردن
-      // زیرپیکسلی کنار می‌رود تا لبه‌ی محتوا به صفحه‌ی دوم سرریز نکند.
-      const availW = fcMeasureMm(184), availH = fcMeasureMm(267);
+      // بودجه‌ی چاپ با حاشیه‌ی پیش‌فرض مرورگر: ‎~190×277mm‎؛ ۲۰mm برای حاشیه‌ی
+      // دو طرف و ۶mm برای گردکردن زیرپیکسلی کنار می‌رود تا لبه‌ی محتوا به
+      // صفحه‌ی دوم سرریز نکند (همان «دوتایی شدن» گزارش‌شده).
+      const availW = fcMeasureMm(184), availH = fcMeasureMm(257);
       inner.style.width = availW + 'px';
       const natW = inner.scrollWidth, natH = inner.scrollHeight;
       const scale = Math.min(1, availW / natW, availH / natH);

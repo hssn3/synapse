@@ -340,6 +340,18 @@ html[data-anim="off"] .hlp.fgh{animation:none}
   thead{display:table-header-group}
   h1,h2,h3{break-after:avoid;page-break-after:avoid}
   a[href]::after{content:''}
+  /* کاغذ سفیدِ برگه‌های چاپی (printListSheet و هم‌خانواده‌ها): جوهر تیره‌ی اجباری.
+     ریشه‌ی باگِ «برگه‌ی سیاه»: سلول‌ها و تیترها رنگِ تمِ تیره را نگه می‌داشتند و
+     با چاپِ رنگی، جدولِ سبزِ تیره با متنِ مشکیِ نامرئی چاپ می‌شد (با خروجی واقعی
+     دیده شد، نه حدس). بج‌های معنایی (.bdg/.badge و rep-*) دست‌نخورده می‌مانند چون
+     قانون‌های خودشان خاص‌ترند یا روی span داخلی‌اند، نه روی td. */
+  .psheet h1,.psheet h2,.psheet h3{color:#000!important}
+  .psheet .sub,.psheet .empty,.psheet .psheet-intro{color:#333!important}
+  .psheet-intro{font-size:12px;margin-bottom:12px}
+  .psheet table{background:#fff!important}
+  .psheet th{background:#f1f5f9!important;color:#0f172a!important;border-color:#999!important}
+  .psheet td{background:#fff!important;color:#000!important;border-color:#bbb!important}
+  .psheet tbody tr:nth-child(even):not(.drow) td{background:#f8fafc!important}
   /* حاشیه‌ی @page عمداً صفر است.
      کارفرما گزارش داد روی برگه‌ها «سامانه جامع اعتباربخشی بیمارستانی» و ساعت
      چاپ می‌شود. آن متن هیچ‌جای کد ما نیست: عنوانِ صفحه (<title>) و تاریخ/ساعت و

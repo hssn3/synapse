@@ -479,7 +479,7 @@ function printListSheet({page, title, code, intro, meta, headers, rows, foot}){
       </div></td></tr></tfoot>
       <tbody><tr><td>
         <h3 style="margin:0 0 4px">${esc(title)}</h3>
-        ${intro?`<div style="font-size:12px;color:var(--td);margin-bottom:12px">${esc(intro)}</div>`:''}
+        ${intro?`<div class="psheet-intro">${esc(intro)}</div>`:''}
         <div class="doc-dates">
           <div><span>تاریخ تهیه گزارش</span><b>${faDateISO(todayISO())}</b></div>
           <div><span>تهیه‌کننده</span><b>${esc((S.user&&S.user.full_name)||'—')}</b></div>
