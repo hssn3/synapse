@@ -432,6 +432,16 @@
       #side, .top, .policy-workspace-toolbar, .sn-policy-nav-cards, .sn-policy-footer-actions, .noprint, .floatdock, #floatDock {
         display: none !important;
       }
+      /* حالت چاپِ جاگیرِ فلوچارت: پوسته‌ی اپ از کاغذ می‌رود — وگرنه ارتفاعِ
+         min-height دارِ #app خودش صفحه‌های خالی اضافه می‌ساخت. */
+      body.fc-printing #app {
+        display: none !important;
+      }
+      /* ارتفاعِ اجباریِ پیش‌نمایش (۱۱۲۰px) از بودجه‌ی یک صفحه بیشتر است و همان
+         «دوتایی شدن» چاپ بود؛ در حالت چاپِ جاگیر خنثی می‌شود. */
+      body.fc-printing .a4-paper {
+        min-height: 0 !important;
+      }
       .main {
         padding: 0 !important;
         margin: 0 !important;
@@ -2036,7 +2046,7 @@
             <div style="font-size:12.5px;color:#f1f5f9;display:flex;align-items:center;gap:6px;">
               <span>📄</span> <span>پیش‌نمایش چاپ رسمی A4 (مطابق فرمت ابلاغی وزارت بهداشت، درمان و آموزش پزشکی)</span>
             </div>
-            <button type="button" class="sn-btn-act" onclick="window.print()" style="background:#0e7490;color:#fff;font-weight:800;padding:8px 20px;border-radius:6px;cursor:pointer;border:none;display:inline-flex;align-items:center;gap:6px;">
+            <button type="button" class="sn-btn-act" onclick="triggerDocPrint()" style="background:#0e7490;color:#fff;font-weight:800;padding:8px 20px;border-radius:6px;cursor:pointer;border:none;display:inline-flex;align-items:center;gap:6px;">
               <span>🖨️</span> <span>چاپ مستقیم این سند</span>
             </button>
           </div>
@@ -2180,6 +2190,65 @@
       }
     }
 
+    // چاپ سند: همه‌ی انواع مدرک مستقیم چاپ می‌شوند، جز فلوچارت که باید
+    // *دقیقاً* در یک صفحه‌ی A4 بنشیند (روی دیوار می‌رود؛ صفحه‌ی دوم یعنی نیمِ
+    // فلوچارت روی دیوار). الگو همان procPrintChart است: برگه به ریشه‌ی چاپ
+    // منتقل، اندازه‌ی طبیعی‌اش اندازه‌گیری و یکنواخت کوچک می‌شود.
+    window.triggerDocPrint = function() {
+      if (docType === 'flowchart') printFlowchartFit();
+      else window.print();
+    };
+
+    function fcMeasureMm(mm) {
+      const d = document.createElement('div');
+      d.style.cssText = 'position:absolute;visibility:hidden;width:' + mm + 'mm;height:0';
+      document.body.appendChild(d);
+      const px = d.offsetWidth;
+      d.remove();
+      return px;
+    }
+
+    function printFlowchartFit() {
+      const area = document.getElementById('snPrintableArea');
+      if (!area) { window.print(); return; }
+      let root = document.getElementById('fcPrintRoot');
+      if (!root) { root = document.createElement('div'); root.id = 'fcPrintRoot'; }
+      if (root.parentNode !== document.body) document.body.appendChild(root);
+      const home = area.parentNode, mark = document.createComment('sn-print');
+      home.insertBefore(mark, area);
+
+      const box = document.createElement('div'); box.className = 'fc-print-fit';
+      const inner = document.createElement('div'); inner.className = 'fc-print-inner';
+      inner.appendChild(area);
+      box.appendChild(inner);
+      root.innerHTML = ''; root.appendChild(box);
+      document.body.classList.add('fc-printing');
+
+      // بودجه‌ی چاپ با حاشیه‌ی پیش‌فرض مرورگر: ‎~190×277mm‎؛ ۶mm برای گردکردن
+      // زیرپیکسلی کنار می‌رود تا لبه‌ی محتوا به صفحه‌ی دوم سرریز نکند.
+      const availW = fcMeasureMm(184), availH = fcMeasureMm(267);
+      inner.style.width = availW + 'px';
+      const natW = inner.scrollWidth, natH = inner.scrollHeight;
+      const scale = Math.min(1, availW / natW, availH / natH);
+      inner.style.transform = 'scale(' + scale + ')';
+      inner.style.transformOrigin = 'top right';
+      box.style.width = availW + 'px';
+      box.style.height = Math.floor(natH * scale) + 'px';
+
+      let done = false;
+      const cleanup = () => {
+        if (done) return; done = true;
+        document.body.classList.remove('fc-printing');
+        if (mark.parentNode) mark.parentNode.insertBefore(area, mark);
+        if (mark.parentNode) mark.parentNode.removeChild(mark);
+        inner.style.transform = ''; inner.style.width = '';
+        root.innerHTML = '';
+      };
+      window.addEventListener('afterprint', cleanup, { once: true });
+      window.print();
+      setTimeout(cleanup, 4000);
+    }
+
     // مقداردهی اولیه پس از بارگذاری صفحه
     window.addEventListener('DOMContentLoaded', async () => {
       await loadHospitalSigners();
@@ -2195,11 +2264,11 @@
         alert('محتوای استاندارد و الزامات اعتباربخشی سنجه ' + docCode + ' بارگذاری شد.');
       });
 
-      // رویداد کلید پرینت
+      // رویداد کلید پرینت — هر دو دکمه‌ی چاپ (تولبار و داخل برگه) از یک مسیر می‌روند
       document.getElementById('btnTriggerPrint').addEventListener('click', () => {
         switchPolicyTab('a4');
         setTimeout(() => {
-          window.print();
+          triggerDocPrint();
         }, 300);
       });
 

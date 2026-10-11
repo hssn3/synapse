@@ -1225,6 +1225,15 @@ html[data-theme="light"] .mini-bar{background:var(--surface-3)}
 .fclegend i.s{border-radius:7px;border-color:var(--ok);background:rgba(28,143,104,.16)}
 .fclegend i.d{transform:rotate(45deg) scale(.78);border-color:var(--wr);background:rgba(214,158,46,.14)}
 .fclegend i.f{transform:skewX(-16deg);border-color:var(--bds);background:rgba(120,140,190,.14)}
+/* جوهر تیره‌ی اجباری روی کاغذ سفید (پیش‌نمایش چاپ).
+   متغیرهای تمِ تیره (--th/--gdl روشن) روی کاغذ سفید ناپدید می‌شوند و متن
+   فلوچارت سفید روی زمینه‌ی روشن می‌ماند (باگ گزارش‌شده). این قانون فقط داخل
+   برگه‌های سفید اثر می‌کند؛ پیش‌نمایش تیره‌ی ویرایشگر دست‌نخورده می‌ماند. */
+.a4-paper .fc-t{fill:#0f172a!important}
+.a4-paper .fc-o,.a4-paper .fc-e{fill:#334155!important}
+.a4-paper .fc-sh{stroke:#0f172a!important}
+.a4-paper .fc-ln{stroke:#475569!important}
+.a4-paper .fc-ar{fill:#475569!important}
 @media print{
   .fc-sh{fill:#fff!important;stroke:#000!important;stroke-width:1.6!important}
   .fc-start,.fc-end{fill:#eee!important;stroke:#000!important}
