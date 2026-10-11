@@ -1,0 +1,21 @@
+# Railway upload ignore — keep the deploy context small and secret-free.
+# NOTE: database/*.db* and backups are EXCLUDED on purpose. On first boot the
+# Dockerfile CMD runs `npm run init-db` and the ~45 idempotent seeds inside
+# src/app.js rebuild the schema + demo data from scratch. The /app/database
+# volume then persists it across redeploys.
+.env
+scratch/
+audit-evidence/
+DELIVERY/
+docs/
+backups/
+database/backups/
+database/*.db
+database/*.db-shm
+database/*.db-wal
+database/demo-snapshot/
+uploads/
+node_modules/
+.git/
+*.log
+npmci*.log
