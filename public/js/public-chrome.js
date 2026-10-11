@@ -54,7 +54,7 @@
               '<span>پس از ثبت، کد رهگیری دریافت می‌کنید.</span>') +
         '</div>' +
       '</div>' +
-      '<div class="gftr-cr">© ' + esc(new Date().getFullYear()) +
+      '<div class="gftr-cr">© ' + esc(new Date().toLocaleDateString('fa-IR', { year: 'numeric' })) +
         ' سامانه جامع مدیریت بیمارستانی — تمام حقوق محفوظ است.</div>';
     document.body.appendChild(ftr);
   }

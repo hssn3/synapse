@@ -368,7 +368,7 @@ function renderGlobalFooter(){
   // همان استدلال هدر: فوتر معرفی/بازاریابی محصول برای بازدیدکننده است. داخل حساب کاربری
   // فقط انتهای صفحات را می‌پوشاند — روی نمودار سازمانی، ردیف آخر کارت‌ها زیرش می‌رفت.
   if(S.user){ el.innerHTML=''; return; }
-  const yr=new Date().getFullYear();
+  const yr=new Date().toLocaleDateString('fa-IR', { year: 'numeric' });
   el.innerHTML=`
   <div class="gftr-in">
     <div class="gftr-brand"><div class="lmark sm shine">✦</div>

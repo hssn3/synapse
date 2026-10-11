@@ -23,9 +23,9 @@ function renderDirectives(){
       <tr class="${d.is_read ? '' : 'unread-row'}">
         <td>${esc(cat[d.category] || d.category)}
             ${d.priority !== 'normal' ? ` <span class="badge ${d.priority==='urgent'?'bd':'bw'}">${esc(prt[d.priority])}</span>` : ''}</td>
-        <td><b>${esc(d.title)}</b>${d.due_date ? `<div class="sub">مهلت: ${esc(fa(d.due_date))}</div>` : ''}</td>
+        <td><b>${esc(d.title)}</b>${d.deadline ? `<div class="sub">مهلت: ${esc(faDateISO(d.deadline))}</div>` : ''}</td>
         <td>${esc(d.sender_name || '—')}</td>
-        <td class="num">${esc((d.created_at||'').slice(0,10))}</td>
+        <td class="num">${esc(faDateISO(d.created_at))}</td>
         <td>${d.acknowledged_at
               ? '<span class="badge bg">جوابیه ثبت شد</span>'
               : d.is_read ? '<span class="badge bw">خوانده شد</span>' : '<span class="badge bd">جدید</span>'}</td>
@@ -40,10 +40,10 @@ function renderDirectives(){
       const pct = size ? Math.round(acked / size * 100) : 0;
       return `<tr>
         <td>${esc(cat[d.category] || d.category)}</td>
-        <td><b>${esc(d.title)}</b>${d.body ? `<div class="sub">${esc(String(d.body).slice(0,70))}</div>` : ''}</td>
+        <td><b>${esc(d.title)}</b>${d.body ? `<div class="sub">${esc(String(d.body).slice(0,70))}</div>` : ''}${d.deadline ? `<div class="sub">مهلت: ${esc(faDateISO(d.deadline))}</div>` : ''}</td>
         <td class="num">${fa(acked)} / ${fa(size)}</td>
         <td><div class="ackbar"><span style="width:${pct}%"></span></div><div class="sub num">${fa(pct)}٪</div></td>
-        <td class="num">${esc((d.created_at||'').slice(0,10))}</td>
+        <td class="num">${esc(faDateISO(d.created_at))}</td>
       </tr>`;
     }).join('');
 
@@ -70,7 +70,7 @@ function renderDirectives(){
           <div id="d_roles" class="rolepick">
             ${(data.roles||[]).map(r => `<label class="chip"><input type="checkbox" value="${esc(r.code)}"> ${esc(r.title_fa || r.code)}</label>`).join('')}
           </div></div>
-        <div class="fg"><label>مهلت اجرا (اختیاری)</label><input id="d_deadline" type="date" class="num"></div>
+        <div class="fg"><label>مهلت اجرا (اختیاری، شمسی)</label>${typeof jalaliDateInputHtml==='function'?jalaliDateInputHtml('d_deadline',{allowEmpty:true}):'<input id="d_deadline_fallback" class="num" style="direction:ltr" placeholder="1405/07/19">'}</div>
         <label class="fg"><input type="checkbox" id="d_ack" checked style="width:auto"> دریافت جوابیه اجباری باشد</label>
         <div style="display:flex;gap:8px">
           <button class="btn btn-g" id="d_submit">ثبت و ارسال</button>
@@ -116,7 +116,9 @@ async function submitDirective(){
       priority: $('d_priority').value,
       audience: 'roles',
       audience_ref: roles,
-      deadline: $('d_deadline').value || null,
+      // مهلت شمسی از سلکت‌ها خوانده و به میلادی استاندارد (ISO) برای ذخیره برمی‌گردد؛
+      // قرارداد پروژه: نمایش شمسی، ذخیره میلادی (مثل همه‌ی مهلت‌های دیگر).
+      deadline: (typeof readJalaliDateInputOpt==='function'?readJalaliDateInputOpt('d_deadline'):'') || null,
       requires_ack: $('d_ack').checked ? 1 : 0,
     });
     toast(`ابلاغیه برای ${fa(r.recipients)} گیرنده ارسال شد.`);
@@ -130,7 +132,7 @@ async function openDirective(id){
   if (!item) return;
   modal(`
     <div class="phd"><h3>${esc(item.title)}</h3>
-      <div class="sub">${esc(item.sender_name || '')} · ${esc((item.created_at||'').slice(0,10))}${item.due_date ? ' · مهلت: ' + esc(fa(item.due_date)) : ''}</div></div>
+      <div class="sub">${esc(item.sender_name || '')} · ${esc(faDateISO(item.created_at))}${item.deadline ? ' · مهلت: ' + esc(faDateISO(item.deadline)) : ''}</div></div>
     <div class="pbody" style="white-space:pre-wrap;line-height:1.9">${esc(item.body || '—')}</div>
     <div class="pbody noprint" style="display:flex;gap:8px;justify-content:flex-end">
       <button class="btn btn-o" onclick="closeModal()">بستن</button>
