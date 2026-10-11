@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" data-anim="on" data-snap="off">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0f172a">
+<link rel="icon" href="/img/icon-192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#0f172a">
+<link rel="apple-touch-icon" href="/img/icon-192.png">
+<title>سامانه جامع اعتباربخشی بیمارستانی</title>
+<link rel="preload" href="/fonts/Vazirmatn-Variable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/app.css?v=20260910a">
+<link rel="stylesheet" href="/css/bg-theme.css?v=20260910a">
+<link rel="stylesheet" href="/css/motion.css?v=20260910a">
+<link rel="stylesheet" href="/css/design-system.css?v=20260910a">
+<link rel="stylesheet" href="/css/stitch-luxury.css?v=20260914">
+<link rel="stylesheet" href="/css/acc-stack.css?v=20260916">
+<link rel="stylesheet" href="/css/hassan-clean.css?v=20260917">
+<link rel="stylesheet" href="/css/buttons-system.css?v=20260926">
+  <link rel="stylesheet" href="/css/touch-targets.css?v=20260929">
+  <link rel="stylesheet" href="/css/ui-polish.css?v=20260929d">
+  <link rel="stylesheet" href="/css/enterprise-components.css?v=20261007_unified_chat">
+  <link rel="stylesheet" href="/css/indicator-slides.css?v=20261010_luxury">
+<script>
+/* اعمال تم/ترجیحات پیش از رنگ‌آمیزی صفحه تا پرش رنگ (FOUC) رخ ندهد — طبق بخش ۴ مگاپرامپت */
+(function(){try{
+  var s=JSON.parse(localStorage.getItem('p_visual_prefs')||'{}');
+  var d=document.documentElement;
+  // تمِ روشن سراسری از پنل سوپرادمین کنترل می‌شود و پیش‌فرضش خاموش است (همیشه
+  // تمِ تیره). آخرین مقدارِ واقعیِ سرور که در boot() خوانده شده اینجا کش می‌شود
+  // تا حتی همین رندر اول (پیش از رسیدن پاسخ سرور) هم روشنش نکند.
+  // خواستهٔ صریح کارفرما: تمِ روشن حذف شد — همیشه تیرهٔ کلاسیک می‌مانیم.
+  // هیچ شاخهٔ «روشن» (نه از ترجیح کاربر، نه از تم سیستم) باقی نمی‌ماند.
+  d.setAttribute('data-theme','dark');
+  if(s.anim==='off'||window.matchMedia('(prefers-reduced-motion: reduce)').matches) d.setAttribute('data-anim','off');
+  if(s.snap==='on') d.setAttribute('data-snap','on');
+  if(s.shine!=null) d.style.setProperty('--shine-i', s.shine/100);
+  if(s.speed!=null) d.style.setProperty('--bg-speed', s.speed/100);
+  if(s.glow!=null)  d.style.setProperty('--glow-i', s.glow/100);
+  if('scrollRestoration' in history) history.scrollRestoration='manual';
+  window.scrollTo(0,0);
+}catch(e){}})();
+</script>
+<link rel="stylesheet" href="/css/print-and-size-polish.css"><script src="/js/views/users/form-filler.js"></script>
+<link rel="stylesheet" href="/css/tokens.css">
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/layout-modern.css">
+<link rel="stylesheet" href="/css/components.css">
+<link rel="stylesheet" href="/css/pages.css">
+<link rel="stylesheet" href="/css/mobile-system.css?v=20261010_mob">
+<link rel="stylesheet" href="/css/persian-rtl-fix.css?v=20261011_rtl">
+</head>
+<body>
+<a class="skip" href="#root">پرش به محتوای اصلی</a>
+<div id="ghdr"></div>
+<div id="root">
+  <div style="display:flex;align-items:center;justify-content:center;height:100vh;color:#c9d4cf">
+    <div style="text-align:center">
+      <div style="width:52px;height:52px;border:3px solid rgba(212,175,90,.2);border-top-color:#d4af5a;border-radius:50%;margin:0 auto 14px;animation:spin .8s linear infinite"></div>
+      در حال بارگذاری…
+    </div>
+  </div>
+</div>
+<div id="gftr"></div>
+<style>@keyframes spin{to{transform:rotate(360deg)}}</style>
+<script src="/js/icons.js?v=20260910a"></script>
+<script src="/js/rich-editor.js?v=20260910a"></script>
+<script src="/js/super-docs.js?v=20260910a"></script>
+<script src="/js/super-devchat.js?v=20260910a"></script>
+<script src="/js/shift-schedule.js?v=20260910a"></script>
+<script src="/js/shift-attendance.js?v=20260910a"></script>
+<script src="/js/facility-assets.js?v=20260910a"></script>
+<script src="/js/resource-page.js?v=20260910a"></script>
+<script src="/js/pharmacy.js?v=20260910a"></script>
+<script src="/js/disaster.js?v=20260910a"></script>
+<script src="/js/infection.js?v=20260910a"></script>
+<script src="/js/occupational-health.js?v=20260910a"></script>
+<script src="/js/hr-development.js?v=20260910a"></script>
+<script src="/js/vendors.js?v=20260910a"></script>
+<script src="/js/nursing-supervision.js?v=20260910a"></script>
+<script src="/js/finance.js?v=20260910a"></script>
+<script src="/js/patient-focus.js?v=20260910a"></script>
+<script src="/js/education.js?v=20260910a"></script>
+<script src="/js/blood.js?v=20260910a"></script>
+<script src="/js/lab.js?v=20260910a"></script>
+<script src="/js/imaging.js?v=20260910a"></script>
+<script src="/js/vendor/gsap.min.js?v=20260910a"></script>
+<script src="/js/gsap-anim.js?v=20260910a"></script>
+<script src="/js/flowchart.js?v=20260910a"></script>
+<script src="/js/crm.js?v=20260914_fix"></script>
+<script src="/js/clinical-safety.js?v=20260914_fix"></script>
+<script src="/js/api.js?v=20261007_v4"></script>
+<script src="/js/accreditation-suite.js?v=20260916"></script>
+<script src="/js/accreditation-standards-registry.js?v=20260917"></script>
+<script src="/js/accreditation-measures-registry.js?v=20260917"></script>
+<script src="/js/clinical-hubs.js?v=20260917"></script>
+<script src="/js/hassan-hubs.js?v=20260917"></script>
+<script src="/js/md-modules.js?v=20260926"></script>
+<script src="/js/buttons-system.js?v=20260926"></script>
+  <script src="/js/core/01-roles-permissions.js?v=20261007_unified_chat"></script>
+  <script src="/js/core/02-visual-theme.js?v=20261006_mod"></script>
+  <script src="/js/core/03-datetime-timezone.js?v=20261007_unified_chat"></script>
+  <script src="/js/core/04-floating-assistant.js?v=20261007_unified_chat"></script>
+  <script src="/js/core/05-boot-auth.js?v=20261006_mod"></script>
+  <script src="/js/views/dashboard/catalog-part1.js?v=20261006_mod"></script>
+  <script src="/js/views/dashboard/catalog-part2.js?v=20261006_mod"></script>
+  <script src="/js/views/dashboard/catalog-part3.js?v=20261006_mod"></script>
+  <script src="/js/views/dashboard/catalog-part4.js?v=20261006_mod"></script>
+  <script src="/js/views/users/superadmin-docs-p1.js?v=20261006_mod"></script>
+  <script src="/js/views/users/superadmin-docs-p2.js?v=20261006_mod"></script>
+  <script src="/js/core/06-data-loader.js?v=20261006_mod"></script>
+  <script src="/js/core/07-router-nav.js?v=20261006_mod"></script>
+  <script src="/js/core/08-router-routes.js?v=20261007_v7"></script>
+  <script src="/js/views/dashboard/dashboard-hubs.js?v=20261007_v7"></script>
+  <script src="/js/views/dashboard/dashboard-analytics.js?v=20261007_v7"></script>
+  <script src="/js/views/dashboard/dashboard-divisions.js?v=20261006_mod"></script>
+  <script src="/js/views/dashboard/dashboard-orgchart.js?v=20261006_mod"></script>
+  <script src="/js/views/accreditation/measures-view.js?v=20261006_mod"></script>
+  <script src="/js/views/accreditation/evidence-corrective.js?v=20261006_mod"></script>
+  <script src="/js/views/collaboration/search-calendar.js?v=20261006_mod"></script>
+  <script src="/js/views/collaboration/reports-kartabl.js?v=20261006_mod"></script>
+  <script src="/js/views/collaboration/dana-messages.js?v=20261006_mod"></script>
+  <script src="/js/views/collaboration/committees-view.js?v=20261006_mod"></script>
+  <script src="/js/views/collaboration/directives-view.js?v=20261011_dir"></script>
+  <script src="/js/views/documents/controlled-docs.js?v=20261006_mod"></script>
+  <script src="/js/views/documents/bulk-upload.js?v=20261006_mod"></script>
+  <script src="/js/views/quality/fmea-errors.js?v=20261006_mod"></script>
+  <script src="/js/views/quality/certifications-audits.js?v=20261006_mod"></script>
+  <script src="/js/views/documents/processes-flowchart.js?v=20261006_mod"></script>
+  <script src="/js/views/quality/walkarounds-library.js?v=20261006_mod"></script>
+  <script src="/js/views/quality/checklists-bank.js?v=20261006_mod"></script>
+  <script src="/js/views/quality/checklists-submissions.js?v=20261006_mod"></script>
+  <script src="/js/views/users/users-management.js?v=20261006_mod"></script>
+  <script src="/js/views/users/activities-formbuilder.js?v=20261006_mod"></script>
+  <script src="/js/views/quality/improvement-programs.js?v=20261006_mod"></script>
+  <script src="/js/views/quality/training-needs.js?v=20261006_mod"></script>
+  <script src="/js/views/quality/bsc-view.js?v=20261006_mod"></script>
+  <script src="/js/views/clinical/patient-followup.js?v=20261006_mod"></script>
+  <script src="/js/views/quality/indicators-compare.js?v=20261006_mod"></script>
+  <script src="/js/views/quality/indicators-reports.js?v=20261006_mod"></script>
+  <script src="/js/views/quality/indicator-slides-view.js?v=20261010_luxury"></script>
+  <script src="/js/views/users/org-structure.js?v=20261006_mod"></script>
+  <script src="/js/views/clinical/head-nurse-dashboard.js?v=20261006_mod"></script>
+<script src="/js/palette.js?v=20260923"></script>
+<script src="/js/bg-theme.js?v=20260914_fix"></script>
+  <script src="/js/ui-polish.js?v=20260929d"></script>
+  <script src="/js/rbac-guard.js?v=20261006"></script>
+  <script src="/js/enterprise-form-engine.js?v=20261006"></script>
+  <script src="/js/enterprise-assistant-panel.js?v=20261007_unified_chat"></script>
+<script>if ('serviceWorker' in navigator) { window.addEventListener('load', () => { navigator.serviceWorker.register('/sw.js').catch(() => {}); }); }</script>
+<script src="/js/views/users/admin-form-builder.js?v=1"></script>
+</body>
+</html>

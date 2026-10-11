@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>ثبت عوامل تهدید کننده ایمنی بیمار (FMEA)</title>
+<!-- فقط متغیرها/پس‌زمینه‌ی برند از app.css می‌آید؛ این صفحه عمداً پوسته‌ی کامل SPA را تکرار نمی‌کند -->
+<link rel="stylesheet" href="/css/app.css">
+<link rel="stylesheet" href="/css/design-system.css">
+<link rel="stylesheet" href="/css/public-form.css">
+<script src="/js/public-letterhead.js"></script>
+<script src="/js/public-chrome.js"></script>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <div class="pub-letterhead" id="pubLetterhead"></div>
+    <div class="pubtop">
+      <h1>عوامل تهدید کننده ایمنی بیمار (FMEA)</h1>
+      <a class="closebtn" id="closeTop" href="/">✕ بستن</a>
+    </div>
+    <div class="sub">این فرم عمومی است و نیاز به ورود ندارد. اطلاعات مستقیماً برای واحد بهبود کیفیت بیمارستان ثبت می‌شود.
+      درج نام گزارش‌دهنده اختیاری است.</div>
+    <form id="f">
+      <div class="grid2">
+        <div><label>نام گزارش‌دهنده (اختیاری)</label><input name="reporter_name" maxlength="120"></div>
+        <div><label class="req">واحد/بخش گزارش‌دهنده</label><input name="reporting_department" maxlength="120" required></div>
+      </div>
+      <label class="req">موضوع</label><input name="subject" maxlength="200" required>
+      <div class="grid2">
+        <div><label>حیطه‌ی خطر مرتبط</label><input name="related_hazard_area" maxlength="120"></div>
+        <div><label>نوع خطر</label><input name="hazard_type" maxlength="120"></div>
+      </div>
+      <label class="req">حالات بالقوه خطا</label><textarea name="failure_modes" required></textarea>
+      <label class="req">علل بالقوه (ریشه‌ای)</label><textarea name="root_causes" required></textarea>
+      <label class="req">اثرات بالقوه خطا</label><textarea name="effects" required></textarea>
+      <label class="req">کنترل‌های موجود</label><textarea name="existing_controls" required></textarea>
+      <label>اقدامات پیشنهادی</label><textarea name="recommended_actions"></textarea>
+      <button type="submit" id="sb">ثبت فرم</button>
+    </form>
+    <div class="msg" id="msg"></div>
+    <a class="backlink" id="back" href="#">◂ سایر خدمات همگانی این بیمارستان</a>
+  </div>
+</div>
+<script>
+// شناسه بیمارستان از مسیر تمیز /public/fmea/:hospital_id یا از ?hospital=<id> خوانده می‌شود
+(function(){
+  var m = location.pathname.match(/\/public\/fmea\/([^/?#]+)/);
+  var hospital = m ? decodeURIComponent(m[1]) : new URLSearchParams(location.search).get('hospital');
+  var msg = document.getElementById('msg'), btn = document.getElementById('sb');
+  function show(cls, text){ msg.className = 'msg ' + cls; msg.textContent = text; }
+  function showHtml(cls, html){ msg.className = 'msg ' + cls; msg.innerHTML = html; }
+  if (!hospital) show('err', 'شناسه بیمارستان در نشانی صفحه وجود ندارد. لطفاً از لینک/کد QR رسمی بیمارستان استفاده کنید.');
+  else {
+    var backHref = '/?hospital=' + encodeURIComponent(hospital);
+    document.getElementById('back').href = backHref;
+    document.getElementById('closeTop').href = backHref;
+  }
+  initPubLetterhead(hospital);
+  document.getElementById('f').addEventListener('submit', function(e){
+    e.preventDefault();
+    if (!hospital) return;
+    var body = { hospital_id: hospital };
+    new FormData(e.target).forEach(function(v, k){ body[k] = String(v).trim(); });
+    btn.disabled = true;
+    fetch('/api/public/fmea', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body)
+    }).then(function(r){ return r.json().then(function(d){ return { ok: r.ok, d: d }; }); })
+      .then(function(res){
+        if (!res.ok) { show('err', res.d.error || 'خطا در ثبت فرم'); btn.disabled = false; return; }
+        e.target.style.display = 'none';
+        showHtml('ok', 'فرم شما ثبت شد. سپاسگزاریم.' +
+          '<br><a class="backbtn" href="' + (hospital ? '/?hospital=' + encodeURIComponent(hospital) : '/') + '">بازگشت به خدمات ›</a>');
+      })
+      .catch(function(){ show('err', 'ارتباط با سرور برقرار نشد'); btn.disabled = false; });
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>نظرسنجی رضایت بیمار</title>
+<link rel="stylesheet" href="/css/app.css">
+<link rel="stylesheet" href="/css/design-system.css">
+<link rel="stylesheet" href="/css/public-form.css">
+<script src="/js/public-letterhead.js"></script>
+<script>
+  // این نظرسنجی بی‌نام است و کد رهگیری نمی‌دهد؛ راهنمای پیش‌فرضِ پابرگ خلافِ این
+  // را می‌گفت. (توضیح در public-chrome.js)
+  window.PUBLIC_NOTES = [
+    'این نظرسنجی بی‌نام است — نام و شماره‌ی شما پرسیده نمی‌شود.',
+    'پاسخ‌ها به‌صورت آماری در گزارش رضایت‌سنجی مرکز دیده می‌شود.',
+    'برای موضوعی که نیاز به پاسخ دارد، از فرم «ثبت شکایت و پیشنهاد» استفاده کنید.',
+  ];
+</script>
+<script src="/js/public-chrome.js"></script>
+<style>
+/* پرسشنامه‌ی رسمی — ویزارد چندمرحله‌ای: صفحه‌ی اطلاعات پایه + یک صفحه به‌ازای هر محور */
+.sat-q{background:rgba(0,0,0,.18);border:1px solid var(--bd);border-radius:var(--r);padding:15px 16px;margin-bottom:13px}
+.sat-qh{display:flex;align-items:center;gap:9px;font-family:var(--sf);font-size:14px;color:var(--gdl);font-weight:800;margin-bottom:10px}
+.sat-qh .qn{width:28px;height:28px;border-radius:9px;flex:none;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,var(--gdd),var(--gd));color:#20180a;font-size:12.5px;font-weight:800}
+.sat-row{border-top:1px dashed rgba(255,255,255,.07);padding:12px 2px 10px;border-radius:8px;transition:.2s}
+.sat-row:first-of-type{border-top:none}
+.sat-row.sat-current{background:rgba(212,175,90,.05)}
+.sat-row.sat-done{opacity:.55}
+/* سوالِ جامانده: کاربر از وسط شروع کرده و از این رد شده. درخششِ آرام و پیوسته
+   تا وقتی جواب بگیرد — نه یک فلاشِ گذرا که همان لحظه از دست می‌رود. */
+.sat-row.sat-missed{background:rgba(224,171,46,.07);box-shadow:0 0 0 1px rgba(224,171,46,.35) inset;
+  animation:satMissed 2.1s ease-in-out infinite}
+@keyframes satMissed{
+  0%,100%{box-shadow:0 0 0 1px rgba(224,171,46,.30) inset, 0 0 0 rgba(224,171,46,0)}
+  50%{box-shadow:0 0 0 1px rgba(224,171,46,.75) inset, 0 0 14px rgba(224,171,46,.30)}}
+@media(prefers-reduced-motion:reduce){.sat-row.sat-missed{animation:none;
+  box-shadow:0 0 0 2px rgba(224,171,46,.6) inset}}
+.sat-missed-tag{display:inline-block;margin-inline-start:8px;padding:2px 9px;border-radius:999px;
+  background:rgba(224,171,46,.16);border:1px solid rgba(224,171,46,.5);
+  color:var(--gdl);font-size:11px;font-weight:700;vertical-align:middle}
+/* فونت‌ها یک پله بزرگ‌تر: بیمار و همراهش اغلب مسن‌اند و این فرم را روی گوشی
+   و در سالن انتظار پر می‌کنند. */
+.sat-t{font-size:14.5px;color:var(--tm);line-height:2.05;margin-bottom:11px}
+.sat-t .qnum{color:var(--gdl);font-weight:700}
+.sat-scale{display:flex;flex-wrap:wrap;gap:7px}
+.sat-opt{flex:1;min-width:72px}
+.sat-opt input{display:none}
+.sat-opt label{display:block;margin:0;padding:11px 5px;text-align:center;border-radius:10px;background:rgba(0,0,0,.28);
+  border:1px solid var(--bd);font-size:13px;font-weight:400;color:var(--td);cursor:pointer;transition:.15s}
+.sat-opt label:hover{border-color:var(--bds);color:var(--th)}
+.sat-opt input:checked+label{background:rgba(212,175,90,.16);border-color:var(--gd);color:var(--gdl);font-weight:700}
+.sat-radio{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.sat-radio input{display:none}
+.sat-radio label{margin:0;padding:9px 16px;border-radius:11px;background:rgba(0,0,0,.28);border:1px solid var(--bd);
+  font-size:12.5px;font-weight:400;color:var(--td);cursor:pointer;transition:.15s}
+.sat-radio input:checked+label{background:rgba(212,175,90,.16);border-color:var(--gd);color:var(--gdl);font-weight:700}
+.gender-ic{display:inline-block;margin-inline-end:4px;font-weight:700}
+.sat-note{font-size:13px;color:var(--td);line-height:1.95;margin:2px 0 15px}
+.sat-foot{text-align:center;font-size:13.5px;color:var(--gdl);margin-top:20px;line-height:2}
+.sat-qh{font-size:15.5px}
+/* روی گوشی پنج گزینه در یک ردیف هرکدام ~۵۴px می‌شدند و برچسبِ «خیلی زیاد» در دو
+   خطِ فشرده می‌شکست. حالا دو ردیفِ سه‌تایی می‌شوند: هدفِ لمس بزرگ‌تر و متن خوانا. */
+@media(max-width:560px){
+  .sat-opt{flex:0 0 calc(33.333% - 5px);min-width:0}
+  .sat-opt label{padding:12px 4px;font-size:12.5px}
+  .sat-t{font-size:14px;line-height:2}
+  .sat-q{padding:14px 12px}
+  .sat-missed-tag{font-size:10.5px}
+}
+
+/* پیامِ پس از ثبت — «جواب من کجا رفت؟» */
+.sat-after{background:rgba(0,0,0,.2);border:1px solid var(--bd);border-radius:var(--r);padding:20px 18px;text-align:center}
+.sat-after-ic{width:48px;height:48px;border-radius:50%;margin:0 auto 12px;display:flex;align-items:center;
+  justify-content:center;font-size:24px;font-weight:800;color:#20180a;
+  background:linear-gradient(135deg,var(--gdd),var(--gd))}
+.sat-after-t{font-family:var(--sf);font-size:17px;font-weight:800;color:var(--gdl);margin-bottom:10px}
+.sat-after-x{font-size:13.5px;color:var(--tm);line-height:2;margin-bottom:12px}
+.sat-after-l{text-align:right;margin:0;padding:0 18px 0 0;list-style:none}
+.sat-after-l li{position:relative;font-size:13px;color:var(--tm);line-height:2.1;margin-bottom:9px;padding-inline-start:16px}
+.sat-after-l li::before{content:'•';position:absolute;inset-inline-start:0;color:var(--gd);font-weight:800}
+.sat-after-l b{color:var(--gdl)}
+.sat-after-n{text-align:right;font-size:12.5px;color:var(--td);line-height:2;margin-top:14px;
+  padding-top:12px;border-top:1px dashed var(--bd)}
+@media(max-width:560px){.sat-after{padding:16px 13px}.sat-after-t{font-size:15.5px}}
+
+/* گام پایه — متمرکز، بدون شلوغی، برای موبایل بهینه */
+.sat-basic{max-width:420px;margin:0 auto;text-align:center}
+.sat-basic .sat-q{text-align:right}
+
+/* نوار پیشرفت گام‌ها */
+.sat-steps{display:flex;justify-content:center;gap:6px;margin:6px 0 18px;flex-wrap:wrap}
+.sat-step-dot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.14);transition:.2s}
+.sat-step-dot.on{background:var(--gd);width:22px;border-radius:5px}
+.sat-step-dot.done{background:var(--gdl)}
+
+/* دکمه‌های قبلی/بعدی */
+.sat-nav{display:flex;justify-content:space-between;gap:10px;margin-top:18px}
+.sat-nav button{flex:1;padding:12px;border-radius:12px;font-size:13px;font-weight:700;cursor:pointer;
+  border:1px solid var(--bd);background:rgba(0,0,0,.24);color:var(--th)}
+.sat-nav button.sat-primary{background:linear-gradient(135deg,var(--gdd),var(--gd));color:#20180a;border-color:var(--gd)}
+.sat-nav button:disabled{opacity:.4;cursor:not-allowed}
+
+/* استفاده از همان افکت درخشش/فلاش موجود در بخش راهنمای فرم برای هایلایت سوال بعدی */
+@keyframes gfieldFlash{0%{box-shadow:0 0 0 0 rgba(212,175,90,0);background:rgba(212,175,90,0)}20%{box-shadow:0 0 0 4px rgba(212,175,90,.55);background:rgba(212,175,90,.14)}100%{box-shadow:0 0 0 0 rgba(212,175,90,0);background:rgba(212,175,90,0)}}
+.gfield-flash{animation:gfieldFlash 2.2s ease;border-radius:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <div class="pub-letterhead" id="pubLetterhead"></div>
+    <div style="display:flex;justify-content:flex-end;margin-bottom:6px">
+      <a id="closeX" href="#" style="display:inline-flex;align-items:center;gap:5px;padding:7px 13px;border-radius:10px;
+        background:rgba(0,0,0,.24);border:1px solid var(--bd);color:var(--td);font-size:12px;text-decoration:none;cursor:pointer">
+        ✕ بستن و بازگشت به خدمات
+      </a>
+    </div>
+    <h1>نظرسنجی رضایت بیمار</h1>
+    <div class="sub"><b id="hname">بیمارستان</b> متعهد به بهبود مداوم کیفیت خدمات خود، براساس نظرات و نیازهای
+      بیماران محترم است. پاسخ‌دهی به سوالات حداکثر <b>۱ دقیقه</b> زمان می‌برد. نظرات شما تبدیل به برنامه‌هایی
+      عملیاتی برای بهبود ارائه خدمات بیمارستان می‌شود.</div>
+    <div class="sat-note">تکمیل این فرم <b>بدون نیاز به ورود</b> و بدون ثبت هویت شماست و مستقیماً برای واحد بهبود کیفیت ارسال می‌شود.</div>
+
+    <div class="sat-steps" id="satSteps"></div>
+    <form id="satForm">
+      <div id="satStage"></div>
+      <div class="sat-nav" id="satNav"></div>
+    </form>
+    <div class="msg" id="msg"></div>
+    <!-- بازخورد کاربر: «بعد از نظرسنجی معلوم نیست جوابش کجا می‌رود». تشکرِ خالی
+         این را نمی‌گوید، پس مسیرِ واقعیِ پاسخ صریح نوشته می‌شود. هر سه بند با
+         رفتارِ واقعیِ سامانه می‌خواند: جدولِ public_satisfaction_surveys نه نام
+         دارد، نه شماره، نه IP؛ و نتایج فقط برای نقشی باز می‌شود که مجوز دیدنِ
+         داشبوردهای کل مرکز را دارد. -->
+    <div id="afterSubmit" style="display:none;margin-top:14px">
+      <div class="sat-after">
+        <div class="sat-after-ic">✓</div>
+        <div class="sat-after-t">پاسخ شما ثبت شد</div>
+        <div class="sat-after-x">پاسخ شما از این پس در گزارش‌های رضایت‌سنجی همین مرکز دیده می‌شود:</div>
+        <ul class="sat-after-l">
+          <li><b>چه کسی می‌بیند؟</b> مدیریت بیمارستان و واحد بهبود کیفیت — برای پایش
+            شاخص رضایت و پیگیری موارد نیازمند اصلاح.</li>
+          <li><b>بی‌نام است.</b> نام، شماره تماس و نشانی شما پرسیده و ذخیره نشد؛
+            پاسخ‌ها فقط به‌صورت آماری و در کنار بقیه‌ی پاسخ‌ها بررسی می‌شوند.</li>
+          <li><b>نکته‌ی نوشتاری شما</b> اگر چیزی نوشته باشید، جداگانه خوانده می‌شود
+            و در جلسه‌ی بررسیِ شکایات و پیشنهادها مطرح می‌گردد.</li>
+        </ul>
+        <div class="sat-after-n">اگر موضوعِ مشخصی دارید که نیاز به پاسخ و پیگیری
+          دارد، از فرم «ثبت شکایت، پیشنهاد و تقدیر» در فهرست خدمات همگانی استفاده
+          کنید — آنجا می‌توانید اطلاعات تماس بگذارید تا نتیجه به خودتان اعلام شود.
+          در این نظرسنجی چون بی‌نام است، امکان پاسخ‌دادن به یک فرد وجود ندارد.</div>
+        <a id="backCta" href="#" style="display:inline-block;margin-top:16px;padding:11px 22px;border-radius:12px;
+          background:linear-gradient(135deg,var(--gdd),var(--gd));color:#20180a;font-weight:800;font-size:13.5px;text-decoration:none">
+          ‹ بازگشت به فهرست خدمات همگانی
+        </a>
+      </div>
+    </div>
+    <a class="backlink" id="back" href="#">‹ بازگشت به فهرست خدمات همگانی</a>
+  </div>
+</div>
+<script>
+// شناسه بیمارستان از مسیر تمیز /public/satisfaction/:hospital_id یا از ?hospital=<id>
+(function(){
+  var m = location.pathname.match(/\/public\/satisfaction\/([^/?#]+)/);
+  var hospital = m ? decodeURIComponent(m[1]) : new URLSearchParams(location.search).get('hospital');
+  var msg = document.getElementById('msg');
+  function show(cls, text){ msg.className = 'msg ' + cls; msg.textContent = text; }
+  var FA = ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
+  function fa(n){ return String(n).replace(/\d/g, function(d){ return FA[+d]; }); }
+  if (!hospital) { show('err', 'شناسه بیمارستان در نشانی صفحه وجود ندارد. لطفاً از لینک/کد QR رسمی بیمارستان استفاده کنید.'); return; }
+  var backUrl = '/public/services/' + encodeURIComponent(hospital);
+  document.getElementById('back').href = backUrl;
+  document.getElementById('closeX').href = backUrl;
+  document.getElementById('backCta').href = backUrl;
+  initPubLetterhead(hospital);
+
+  fetch('/api/public/hospital/' + encodeURIComponent(hospital))
+    .then(function(r){ return r.json().then(function(d){ return { ok: r.ok, d: d }; }); })
+    .then(function(res){
+      if (!res.ok) { document.getElementById('satForm').style.display = 'none'; show('err', res.d.error || 'بیمارستان نامعتبر است'); return; }
+      document.getElementById('hname').textContent = res.d.hospital.name;
+    })
+    .catch(function(){ /* نام اختیاری است؛ نبودش صفحه را از کار نمی‌اندازد */ });
+
+  // شش محور امتیازی — متن رسمی پرسشنامه؛ همان کلیدها/متن سمت سرور (SAT_SECTIONS در src/routes/api.js)
+  var SECTIONS = [
+    { key: 'admission', title: 'پذیرش بیمارستان', qs: [
+      'طرز برخورد پرسنل پذیرش',
+      'ارائه آموزش‌های لازم بدو پذیرش' ]},
+    { key: 'medical', title: 'کادر پزشکی', qs: [
+      'طرز برخورد و پاسخگویی پزشکان',
+      'ارائه آموزش‌های لازم در طول درمان و ترخیص توسط پزشک به شما',
+      'حفظ حریم شما هنگام معاینه پزشکی' ]},
+    { key: 'nursing', title: 'کادر پرستاری', qs: [
+      'طرز برخورد و پاسخگویی پرسنل پرستاری',
+      'میزان رسیدگی پرستاران و ارائه خدمات به شما',
+      'ارائه اطلاعات در مورد مراقبت از خود توسط پرستار (رژیم غذایی، میدان فعالیت، استفاده از دارو و…)',
+      'حفظ حریم شما هنگام انجام مراقبت توسط پرسنل پرستاری' ]},
+    { key: 'nutrition', title: 'تغذیه', qs: [
+      'کیفیت غذا',
+      'ساعت توزیع غذا',
+      'طرز برخورد مسئول توزیع غذا' ]},
+    { key: 'discharge', title: 'ترخیص و صندوق', qs: [
+      'سرعت انجام ترخیص',
+      'ارائه راهنمایی لازم برای انجام امور بیمه‌گری',
+      'پرداخت هزینه فقط در صندوق',
+      'طرز برخورد پرسنل صندوق و ترخیص' ]},
+    { key: 'facilities', title: 'امکانات رفاهی', qs: [
+      'وجود آرامش در بخش (وضعیت سر و صدا، نور و ….)',
+      'وضعیت تهویه اتاق‌ها',
+      'وضعیت بهداشتی و نظافتی',
+      'علائم راهنما برای مراجعه به واحدهای مختلف' ]},
+  ];
+  var SCALE = [ {v:5,l:'خیلی زیاد'}, {v:4,l:'زیاد'}, {v:3,l:'متوسط'}, {v:2,l:'کم'}, {v:1,l:'خیلی کم'} ];
+
+  // ---- ویزارد: گام ۰ = اطلاعات پایه (سوال ۱ تا ۳)، گام ۱..۶ = هر محور یک صفحه، گام آخر = نکات تکمیلی+ثبت ----
+  var TOTAL_STEPS = 1 + SECTIONS.length + 1;
+  var step = 0;
+  var curQ = {}; // per section key -> index of current highlighted question
+  // پاسخ‌ها اینجا نگه داشته می‌شوند نه فقط در DOM — چون هر گام فقط HTML همان گام را دارد
+  // و رفتن به گام بعدی، ورودی‌های گام قبل را از DOM حذف می‌کند.
+  var ANSWERS = { resp: null, gender: null, ret: null, scores: {}, comment: '' };
+  SECTIONS.forEach(function(sec){ ANSWERS.scores[sec.key] = sec.qs.map(function(){ return null; }); });
+
+  function renderSteps(){
+    var el = document.getElementById('satSteps'); var h = '';
+    for (var i = 0; i < TOTAL_STEPS; i++) {
+      h += '<div class="sat-step-dot ' + (i === step ? 'on' : (i < step ? 'done' : '')) + '"></div>';
+    }
+    el.innerHTML = h;
+  }
+
+  function basicStageHtml(){
+    var ck = function(v, val){ return v === val ? 'checked' : ''; };
+    return '<div class="sat-basic">' +
+      '<div class="sat-q">' +
+        '<div class="sat-qh"><span class="qn">۱</span> وضعیت پاسخ‌دهی</div>' +
+        '<div class="sat-t">لطفاً مشخص کنید که خود به عنوان بیمار بستری بوده‌اید یا به عنوان همراه در حال تکمیل این فرم هستید.</div>' +
+        '<div class="sat-radio">' +
+          '<input type="radio" name="resp" id="r_in" value="بستری" ' + ck(ANSWERS.resp, 'بستری') + '><label for="r_in">بیمار بستری بوده‌ام</label>' +
+          '<input type="radio" name="resp" id="r_co" value="همراه" ' + ck(ANSWERS.resp, 'همراه') + '><label for="r_co">همراه بیمار هستم</label>' +
+        '</div></div>' +
+      '<div class="sat-q">' +
+        '<div class="sat-qh"><span class="qn">۲</span> جنسیت بیمار <span style="color:var(--dn)">*</span></div>' +
+        '<div class="sat-t">لطفاً جنسیت بیمار را مشخص کنید.</div>' +
+        '<div class="sat-radio">' +
+          '<input type="radio" name="gender" id="g_f" value="زن" ' + ck(ANSWERS.gender, 'زن') + '><label for="g_f"><span class="gender-ic">♀</span> زن</label>' +
+          '<input type="radio" name="gender" id="g_m" value="مرد" ' + ck(ANSWERS.gender, 'مرد') + '><label for="g_m"><span class="gender-ic">♂</span> مرد</label>' +
+        '</div></div>' +
+      '<div class="sat-q">' +
+        '<div class="sat-qh"><span class="qn">۳</span> انتخاب مجدد</div>' +
+        '<div class="sat-t">آیا مایل هستید مجدداً <b>بیمارستان</b> را برای انجام خدمات درمانی انتخاب نمائید؟</div>' +
+        '<div class="sat-radio">' +
+          '<input type="radio" name="ret" id="y_yes" value="بله" ' + ck(ANSWERS.ret, 'بله') + '><label for="y_yes">بله</label>' +
+          '<input type="radio" name="ret" id="y_no" value="خیر" ' + ck(ANSWERS.ret, 'خیر') + '><label for="y_no">خیر</label>' +
+        '</div></div>' +
+      '</div>';
+  }
+
+  function bindBasicEvents(){
+    document.querySelectorAll('input[name="resp"]').forEach(function(inp){ inp.addEventListener('change', function(){ ANSWERS.resp = inp.value; }); });
+    document.querySelectorAll('input[name="gender"]').forEach(function(inp){ inp.addEventListener('change', function(){ ANSWERS.gender = inp.value; show('', ''); }); });
+    document.querySelectorAll('input[name="ret"]').forEach(function(inp){ inp.addEventListener('change', function(){ ANSWERS.ret = inp.value; }); });
+  }
+
+  function sectionStageHtml(sec, si){
+    var secNo = si + 4;
+    var cur = curQ[sec.key] || 0;
+    var saved = ANSWERS.scores[sec.key];
+    // بالاترین سوالی که جواب گرفته. هر سوالِ بی‌پاسخِ *بالاتر* از آن یعنی کاربر
+    // از وسط شروع کرده و از رویش پریده — همان چیزی که باید درخشش بگیرد.
+    var maxAns = -1;
+    for (var mi = 0; mi < sec.qs.length; mi++)
+      if (saved[mi] !== null && saved[mi] !== undefined) maxAns = mi;
+    return '<div class="sat-q">' +
+      '<div class="sat-qh"><span class="qn">' + fa(secNo) + '</span> ' + sec.title + '</div>' +
+      '<div class="sat-note" style="margin-bottom:12px">مقیاس امتیازدهی: <b>خیلی زیاد=۵ · زیاد=۴ · متوسط=۳ · کم=۲ · خیلی کم=۱</b></div>' +
+      sec.qs.map(function(q, qi){
+        var nm = 's_' + sec.key + '_' + qi;
+        // «تمام‌شده» یعنی واقعاً جواب دارد، نه اینکه از رویش رد شده‌ایم. کاربر
+        // می‌تواند از وسط شروع کند، پس شماره‌ی سوال چیزی درباره‌ی پاسخ‌داشتنش
+        // نمی‌گوید. سوالِ بی‌پاسخی که از آن رد شده‌ایم «جامانده» است و درخشش
+        // می‌گیرد تا در فهرست گم نشود.
+        var isDone = saved[qi] !== null && saved[qi] !== undefined;
+        var isCur = qi === cur && !isDone;
+        var isMissed = !isDone && qi < maxAns;
+        return '<div class="sat-row' + (isCur ? ' sat-current' : '') + (isDone ? ' sat-done' : '') +
+          (isMissed ? ' sat-missed' : '') + '" data-qrow="' + nm + '">' +
+          '<div class="sat-t"><span class="qnum">' + fa(qi + 1) + '.' + fa(secNo) + '</span> — ' + q +
+          (isMissed ? '<span class="sat-missed-tag">بی‌پاسخ</span>' : '') + '</div>' +
+          '<div class="sat-scale">' + SCALE.map(function(s){
+            var checked = saved[qi] === s.v ? 'checked' : '';
+            return '<div class="sat-opt"><input type="radio" name="' + nm + '" id="' + nm + '_' + s.v + '" value="' + s.v + '" ' + checked + '>' +
+              '<label for="' + nm + '_' + s.v + '">' + s.l + '</label></div>';
+          }).join('') + '</div></div>';
+      }).join('') + '</div>';
+  }
+
+  function finalStageHtml(){
+    return '<div class="sat-q">' +
+      '<div class="sat-qh"><span class="qn">۱۰</span> نکات تکمیلی</div>' +
+      '<div class="sat-t">خوشحال می‌شویم نکات تکمیلی در راستای بهبود خدمات ما، اگر مایلید، بنویسید.</div>' +
+      '<textarea id="f_comment" placeholder="پیشنهادها، انتقادها و تقدیر شما…">' + ANSWERS.comment.replace(/</g, '&lt;') + '</textarea>' +
+      '</div><div class="sat-foot">از طرف ریاست بیمارستان از شما صمیمانه متشکریم.</div>';
+  }
+
+  function bindFinalEvents(){
+    var ta = document.getElementById('f_comment');
+    if (ta) ta.addEventListener('input', function(){ ANSWERS.comment = ta.value; });
+  }
+
+  // بعد از پاسخ به یک سوال: سوالِ بعدی روشن می‌شود و وقتی *همه‌ی* سوال‌های محور
+  // جواب گرفتند، خودکار به محور بعدی می‌رود.
+  //
+  // نسخه‌ی قبل با qi+1 جلو می‌رفت و فقط وقتی آخرین سوال جواب می‌گرفت مرحله را
+  // عوض می‌کرد. یعنی اگر کاربر از وسط شروع می‌کرد — که کارِ کاملاً طبیعی‌ای است —
+  // سوال‌های بالاتر بی‌پاسخ جا می‌ماندند و چون آخرین سوال زودتر جواب گرفته بود،
+  // صفحه با چند سوالِ خالی رد می‌شد. حالا «بعدی» یعنی نخستین سوالِ بی‌پاسخ، از
+  // هر کجای فهرست.
+  function firstUnanswered(sec){
+    var a = ANSWERS.scores[sec.key];
+    for (var i = 0; i < sec.qs.length; i++) if (a[i] === null || a[i] === undefined) return i;
+    return -1;
+  }
+  function onSectionAnswer(sec, qi, value){
+    ANSWERS.scores[sec.key][qi] = value;
+    var next = firstUnanswered(sec);
+    if (next === -1) { goStep(step + 1); return; }
+    curQ[sec.key] = next;
+    renderStage();
+    var row = document.querySelector('[data-qrow="s_' + sec.key + '_' + next + '"]');
+    if (row) {
+      row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      row.classList.add('gfield-flash');
+      setTimeout(function(){ row.classList.remove('gfield-flash'); }, 2300);
+    }
+  }
+
+  function bindSectionEvents(sec){
+    sec.qs.forEach(function(q, qi){
+      var nm = 's_' + sec.key + '_' + qi;
+      document.querySelectorAll('input[name="' + nm + '"]').forEach(function(inp){
+        inp.addEventListener('change', function(){ onSectionAnswer(sec, qi, +inp.value); });
+      });
+    });
+  }
+
+  function renderStage(){
+    var stage = document.getElementById('satStage');
+    if (step === 0) {
+      stage.innerHTML = basicStageHtml();
+      bindBasicEvents();
+    } else if (step >= 1 && step <= SECTIONS.length) {
+      var sec = SECTIONS[step - 1];
+      stage.innerHTML = sectionStageHtml(sec, step - 1);
+      bindSectionEvents(sec);
+    } else {
+      stage.innerHTML = finalStageHtml();
+      bindFinalEvents();
+    }
+    renderNav();
+    renderSteps();
+  }
+
+  function renderNav(){
+    var nav = document.getElementById('satNav');
+    var isFirst = step === 0, isLast = step === TOTAL_STEPS - 1;
+    nav.innerHTML =
+      '<button type="button" id="satPrev" ' + (isFirst ? 'disabled' : '') + '>‹ قبلی</button>' +
+      (isLast
+        ? '<button type="submit" class="sat-primary">ثبت نظرسنجی</button>'
+        : '<button type="button" id="satNext" class="sat-primary">بعدی ›</button>');
+    var prevBtn = document.getElementById('satPrev');
+    if (prevBtn) prevBtn.addEventListener('click', function(){ goStep(step - 1); });
+    var nextBtn = document.getElementById('satNext');
+    if (nextBtn) nextBtn.addEventListener('click', function(){
+      if (step === 0 && !validateBasic()) return;
+      goStep(step + 1);
+    });
+  }
+
+  function validateBasic(){
+    if (!ANSWERS.gender) { show('err', 'پاسخ سوال ۲ (جنسیت بیمار) الزامی است'); return false; }
+    show('', '');
+    return true;
+  }
+
+  function goStep(n){
+    if (n < 0 || n > TOTAL_STEPS - 1) return;
+    step = n;
+    renderStage();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  renderStage();
+
+  document.getElementById('satForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    var btn = e.target.querySelector('button[type=submit]');
+    // آخرین مقدار textarea را هم اگر روی گام آخر هستیم می‌گیریم (رویداد input ممکن است هنوز فایر نشده باشد)
+    var taNow = document.getElementById('f_comment'); if (taNow) ANSWERS.comment = taNow.value;
+    if (!ANSWERS.gender) { show('err', 'پاسخ سوال ۲ (جنسیت بیمار) الزامی است'); goStep(0); return; }
+    var answered = 0;
+    SECTIONS.forEach(function(sec){ ANSWERS.scores[sec.key].forEach(function(v){ if (v) answered++; }); });
+    if (!answered) { show('err', 'لطفاً حداقل به یکی از سوالات امتیازدهی پاسخ دهید'); return; }
+    if (!btn) return;
+    btn.disabled = true;
+    fetch('/api/public/satisfaction', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        hospital_id: hospital,
+        respondent_type: ANSWERS.resp || '',
+        patient_gender: ANSWERS.gender,
+        would_return: ANSWERS.ret || '',
+        scores: ANSWERS.scores,
+        comment: (ANSWERS.comment || '').trim(),
+      }),
+    }).then(function(r){ return r.json().then(function(d){ return { ok: r.ok, d: d }; }); })
+      .then(function(res){
+        if (!res.ok) { show('err', res.d.error || 'خطا در ثبت نظرسنجی'); btn.disabled = false; return; }
+        e.target.style.display = 'none';
+        document.getElementById('satSteps').style.display = 'none';
+        document.getElementById('afterSubmit').style.display = 'block';
+        show('ok', 'نظرسنجی شما ثبت شد. از همراهی شما سپاسگزاریم.');
+      })
+      .catch(function(){ show('err', 'ارتباط با سرور برقرار نشد'); btn.disabled = false; });
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>گزارش خطا و وقایع ناخواسته</title>
+<link rel="stylesheet" href="/css/app.css">
+<link rel="stylesheet" href="/css/design-system.css">
+<link rel="stylesheet" href="/css/public-form.css">
+<script src="/js/public-letterhead.js"></script>
+<script src="/js/public-chrome.js"></script>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <div class="pub-letterhead" id="pubLetterhead"></div>
+    <div class="pubtop">
+      <h1>گزارش خطا و وقایع ناخواسته</h1>
+      <a class="closebtn" id="closeTop" href="/">✕ بستن</a>
+    </div>
+    <div class="sub">این فرم عمومی است و نیاز به ورود ندارد. گزارش شما محرمانه ثبت می‌شود و پس از ثبت،
+      یک «کد رهگیری» دریافت می‌کنید. درج نام گزارش‌دهنده الزامی نیست.</div>
+    <form id="f">
+      <div class="grid2">
+        <div><label>بخش بروز خطا</label><input name="error_ward" maxlength="120" placeholder="مثال: بخش جراحی زنان"></div>
+        <div><label>بخش گزارش‌دهنده</label><input name="department" maxlength="120" placeholder="مثال: مدیریت خدمات پرستاری"></div>
+      </div>
+      <div class="grid2">
+        <div><label>دسته‌بندی خطا</label><input name="error_category" maxlength="120" placeholder="مثال: دارویی / تشخیصی / تجهیزات"></div>
+        <div><label>شدت خطا</label><select name="severity">
+          <option value="">—</option><option>خفیف</option><option>متوسط</option><option>شدید</option><option>بحرانی</option>
+        </select></div>
+      </div>
+      <label class="req">شرح خطا و اقدامات انجام‌شده</label>
+      <textarea name="description" required placeholder="آنچه رخ داد، عوارض ایجادشده و اقداماتی که انجام شد"></textarea>
+      <div class="grid2">
+        <div><label>آیا این گزارش خوداظهاری است؟</label><select name="is_self_declaration">
+          <option value="0">خیر</option><option value="1">بله</option></select></div>
+        <div><label>آیا نیاز به تحلیل ریشه‌ای (RCA) دارد؟</label><select name="needs_rca" id="nr">
+          <option value="0">خیر</option><option value="1">بله</option></select></div>
+      </div>
+      <div id="rcaw" style="display:none">
+        <label class="req">متن تحلیل ریشه‌ای (RCA)</label>
+        <textarea name="rca_text" placeholder="علل ریشه‌ای، زنجیرهٔ رخداد و اقدامات اصلاحی پیشنهادی"></textarea>
+      </div>
+      <button type="submit" id="sb">ثبت گزارش</button>
+    </form>
+    <div class="msg" id="msg"></div>
+    <a class="backlink" id="back" href="#">◂ سایر خدمات همگانی این بیمارستان</a>
+  </div>
+</div>
+<script>
+// شناسه بیمارستان از مسیر تمیز /public/error-report/:hospital_id یا از ?hospital=<id>
+(function(){
+  var m = location.pathname.match(/\/public\/error-report\/([^/?#]+)/);
+  var hospital = m ? decodeURIComponent(m[1]) : new URLSearchParams(location.search).get('hospital');
+  var msg = document.getElementById('msg'), btn = document.getElementById('sb');
+  function show(cls, text){ msg.className = 'msg ' + cls; msg.textContent = text; }
+  function showHtml(cls, html){ msg.className = 'msg ' + cls; msg.innerHTML = html; }
+  if (!hospital) show('err', 'شناسه بیمارستان در نشانی صفحه وجود ندارد. لطفاً از لینک/کد QR رسمی بیمارستان استفاده کنید.');
+  else {
+    var backHref = '/?hospital=' + encodeURIComponent(hospital);
+    document.getElementById('back').href = backHref;
+    document.getElementById('closeTop').href = backHref;
+  }
+  initPubLetterhead(hospital);
+
+  // متن RCA فقط وقتی لازم است دیده شود — همان رفتار شرطی فرم داخل سامانه
+  document.getElementById('nr').addEventListener('change', function(){
+    document.getElementById('rcaw').style.display = this.value === '1' ? '' : 'none';
+  });
+
+  document.getElementById('f').addEventListener('submit', function(e){
+    e.preventDefault();
+    if (!hospital) return;
+    var body = { hospital_id: hospital, is_anonymous: true };
+    new FormData(e.target).forEach(function(v, k){ body[k] = String(v).trim(); });
+    body.needs_rca = body.needs_rca === '1';
+    body.is_self_declaration = body.is_self_declaration === '1';
+    btn.disabled = true;
+    fetch('/api/public/medical-error', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body)
+    }).then(function(r){ return r.json().then(function(d){ return { ok: r.ok, d: d }; }); })
+      .then(function(res){
+        if (!res.ok) { show('err', res.d.error || 'خطا در ثبت گزارش'); btn.disabled = false; return; }
+        e.target.style.display = 'none';
+        showHtml('ok', 'گزارش شما ثبت شد. کد رهگیری: <b>' + res.d.tracking_code + '</b> — لطفاً آن را نگه دارید.' +
+          '<br><a class="backbtn" href="' + (hospital ? '/?hospital=' + encodeURIComponent(hospital) : '/') + '">بازگشت به خدمات ›</a>');
+      })
+      .catch(function(){ show('err', 'ارتباط با سرور برقرار نشد'); btn.disabled = false; });
+  });
+})();
+</script>
+</body>
+</html>

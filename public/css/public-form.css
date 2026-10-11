@@ -1,0 +1,64 @@
+/* پوسته‌ی مشترک صفحات عمومی بدون ورود (/public/*) — فقط توکن‌های برند از app.css استفاده می‌شود؛
+   این صفحات عمداً پوسته‌ی کامل SPA را بارگذاری نمی‌کنند. */
+.wrap{max-width:760px;margin:0 auto;padding:28px 16px 60px;position:relative;z-index:1}
+.card{background:var(--gb);border:1px solid var(--bd);border-radius:var(--r);padding:26px 24px;
+      backdrop-filter:blur(22px);box-shadow:0 8px 32px rgba(0,0,0,.35)}
+h1{font-family:var(--sf);color:var(--gdl);font-size:21px;margin-bottom:6px}
+.sub{color:var(--td);font-size:12.5px;margin-bottom:22px;line-height:2}
+label{display:block;font-size:12.5px;color:var(--gdl);font-weight:700;margin:14px 0 6px}
+.req::after{content:' *';color:var(--dn)}
+input,textarea,select{width:100%;padding:10px 12px;border-radius:var(--rs);background:rgba(0,0,0,.25);
+      border:1px solid var(--bd);color:var(--th);font-family:var(--sn);font-size:13px}
+textarea{min-height:74px;resize:vertical}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--bds)}
+button{margin-top:22px;width:100%;padding:12px;border:none;border-radius:var(--rs);cursor:pointer;
+      background:linear-gradient(135deg,var(--gdd),var(--gd));color:#20180a;font-weight:800;font-size:14px}
+button[disabled]{opacity:.55;cursor:progress}
+.msg{margin-top:18px;padding:12px 14px;border-radius:var(--rs);font-size:13px;display:none}
+.msg.ok{display:block;background:rgba(63,191,143,.14);border:1px solid var(--ok);color:var(--ok)}
+.msg.err{display:block;background:rgba(217,122,106,.14);border:1px solid var(--dn);color:var(--dn)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
+@media(max-width:620px){.grid2{grid-template-columns:1fr}}
+/* بازگشت به فهرست خدمات همگانی */
+.backlink{display:inline-block;margin-top:18px;font-size:12.5px;color:var(--gdl);text-decoration:none}
+.backlink:hover{text-decoration:underline}
+/* سربرگ استاندارد بالای فرم — لوگو در سمت چپ بصری (RTL) + نام بیمارستان؛ initPubLetterhead آن را پر می‌کند */
+.pub-letterhead{display:flex;align-items:center;gap:12px;margin-bottom:18px;padding-bottom:15px;border-bottom:1px solid var(--bd)}
+.pll-logo{flex:none;width:46px;height:46px;border-radius:9px;display:flex;align-items:center;justify-content:center;
+      background:rgba(212,175,90,.1);border:1px solid var(--bd);font-size:22px;overflow:hidden}
+.pll-img{width:100%;height:100%;object-fit:contain;background:#fff;border-radius:9px;padding:3px}
+.pll-txt{display:flex;flex-direction:column;gap:2px}
+.pll-txt b{color:var(--th);font-size:14.5px;font-weight:800}
+.pll-txt span{color:var(--td);font-size:11px}
+/* ردیف بالای کارت — عنوان + دکمه‌ی بستن (بازگشت به صفحه‌ی مرکز/فهرست خدمات) */
+.pubtop{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
+.pubtop h1{margin-bottom:0}
+.closebtn{flex:none;display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--td);
+      border:1px solid var(--bd);border-radius:999px;padding:6px 13px;text-decoration:none;
+      white-space:nowrap;transition:.15s}
+.closebtn:hover{border-color:var(--gd);color:var(--gdl);background:rgba(212,175,90,.08)}
+/* دکمه‌ی برجسته‌ی بازگشت — پس از ثبت موفق فرم، داخل پیام موفقیت */
+.backbtn{display:inline-block;margin-top:12px;padding:9px 18px;border-radius:var(--rs);text-decoration:none;
+      background:linear-gradient(135deg,var(--gdd),var(--gd));color:#20180a;font-weight:800;font-size:12.5px}
+/* فهرست خدمات (صفحه‌ی درگاه) */
+.svcs{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-top:4px}
+.svc{display:block;text-decoration:none;border:1px solid var(--bd);border-radius:var(--r);
+     padding:16px 15px;background:rgba(0,0,0,.18);transition:.15s}
+.svc:hover{border-color:var(--gd);background:rgba(212,175,90,.09)}
+.svc-ic{color:var(--gdl);font-size:17px}
+.svc-t{color:var(--th);font-size:13.5px;font-weight:700;margin:7px 0 5px}
+.svc-d{color:var(--td);font-size:11.5px;line-height:1.9}
+
+/* ============================================================================
+   فرم‌های عمومی بدون‌ورود — سیاست «بدون چاپ» (خواستهٔ صریح کارفرما)
+   ----------------------------------------------------------------------------
+   این فرم‌ها همه الکترونیکی پر می‌شوند و گزینهٔ چاپ ندارند؛ خروجیِ کاغذیِ آن‌ها
+   معنایی ندارد. پس در حالت چاپ هم ظاهر «سند چاپی/سربرگ» به خود نمی‌گیرند تا
+   کاربر فکر نکند قرار است این برگه چاپ شود. هیچ فیلد/قابلیتِ خودِ فرم حذف نمی‌شود.
+   (چاپِ برگه‌ها فقط داخل حساب کاربری و در ماژول‌هاست.)
+   ========================================================================== */
+@media print{
+  .pub-letterhead{display:none!important}
+  .closebtn{display:none!important}
+  .card{box-shadow:none!important}
+}

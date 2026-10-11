@@ -1,0 +1,480 @@
+/* ==========================================================================
+   سامانه جامع مدیریت و اعتباربخشی بیمارستان - استایل‌های لوکس تیره (Dark Emerald & Gold)
+   منطبق بر الزامات طراحی کارفرما: کارت‌های بزرگ افقی RTL، بدون انباشتگی عمودی
+   ========================================================================== */
+
+@font-face {
+  font-family: 'Vazirmatn';
+  src: url('/fonts/Vazirmatn-Variable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+:root {
+  --bg-dark-900: #040907;
+  --bg-dark-850: #060f0b;
+  --bg-dark-800: #081611;
+  --bg-dark-700: #0e241c;
+  --surface-glass: rgba(10, 26, 19, 0.82);
+  --surface-glass-card: rgba(12, 31, 23, 0.78);
+  --surface-glass-hover: rgba(18, 44, 33, 0.92);
+  --border-gold: rgba(212, 175, 90, 0.28);
+  --border-gold-strong: rgba(212, 175, 90, 0.75);
+  --border-emerald: rgba(16, 185, 129, 0.35);
+  --emerald-500: #10b981;
+  --emerald-400: #34d399;
+  --emerald-glow: rgba(16, 185, 129, 0.45);
+  --gold-500: #d4af5a;
+  --gold-400: #ecd599;
+  --gold-300: #fff0c7;
+  --gold-glow: rgba(212, 175, 90, 0.4);
+  --text-main: #f5f9f7;
+  --text-muted: #96b2a5;
+  --text-sub: #c7dbd2;
+  --shadow-lux: 0 20px 50px rgba(0, 0, 0, 0.65), 0 0 35px rgba(16, 185, 129, 0.08);
+  --transition-smooth: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Vazirmatn', -apple-system, BlinkMacSystemFont, Tahoma, sans-serif;
+  direction: rtl;
+  text-align: right;
+  background: radial-gradient(circle at 85% 5%, #102e21 0%, #071510 38%, #030806 100%);
+  background-attachment: fixed;
+  color: var(--text-main);
+  line-height: 1.75;
+  overflow-x: hidden;
+}
+
+/* هدر لوکس شیشه‌ای بالای صفحه */
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(6, 17, 12, 0.94);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1.5px solid var(--border-gold);
+  padding: 14px 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.55);
+}
+
+.brand-section {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.brand-logo {
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  background: radial-gradient(circle at 30% 30%, #174873, #071929 80%);
+  border: 1.5px solid var(--gold-500);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 24px;
+  box-shadow: 0 0 20px rgba(212, 175, 90, 0.35);
+}
+
+.brand-title {
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.brand-sub {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn-header-act {
+  background: linear-gradient(135deg, #ecd599 0%, #d4af5a 40%, #a87e2b 100%);
+  color: #06110b !important;
+  font-weight: 800;
+  font-size: 0.85rem;
+  padding: 9px 20px;
+  border-radius: 12px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #fff5d1;
+  box-shadow: 0 6px 20px rgba(212, 175, 90, 0.4);
+  transition: var(--transition-smooth);
+  cursor: pointer;
+}
+.btn-header-act:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(212, 175, 90, 0.6);
+}
+
+.btn-header-sub {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-sub) !important;
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 9px 18px;
+  border-radius: 12px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: var(--transition-smooth);
+  cursor: pointer;
+}
+.btn-header-sub:hover {
+  background: rgba(212, 175, 90, 0.15);
+  border-color: var(--gold-500);
+  color: var(--gold-300) !important;
+}
+
+/* نوار تب‌های شیشه‌ای افقی */
+.top-nav {
+  background: rgba(8, 22, 16, 0.85);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(212, 175, 90, 0.2);
+  padding: 0 28px;
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+}
+
+.nav-tab {
+  padding: 14px 20px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: var(--transition-smooth);
+  white-space: nowrap;
+}
+.nav-tab:hover {
+  color: var(--gold-300);
+  background: rgba(212, 175, 90, 0.06);
+}
+.nav-tab.active {
+  color: var(--gold-400);
+  border-bottom-color: var(--gold-500);
+  background: rgba(212, 175, 90, 0.12);
+}
+
+/* بدنه اصلی */
+.main-container {
+  max-width: 1420px;
+  margin: 0 auto;
+  padding: 28px 24px 60px 24px;
+}
+
+/* ردیف کارت‌های بزرگ آمار (Hero Cards) */
+.hero-cards-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  margin-bottom: 28px;
+}
+@media (max-width: 1150px) {
+  .hero-cards-row { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 650px) {
+  .hero-cards-row { grid-template-columns: 1fr; }
+}
+
+.hero-card {
+  background: var(--surface-glass-card);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--border-gold);
+  border-radius: 20px;
+  padding: 20px 18px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  transition: var(--transition-smooth);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.hero-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-gold-strong);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65), 0 0 24px rgba(212, 175, 90, 0.2);
+}
+
+.shining-icon-box {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.icon-blue { background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.4); color: #38bdf8; }
+.icon-emerald { background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.4); color: #34d399; }
+.icon-purple { background: rgba(168, 85, 247, 0.15); border: 1px solid rgba(168, 85, 247, 0.4); color: #c084fc; }
+.icon-amber { background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.4); color: #fbbf24; }
+.icon-rose { background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.4); color: #f87171; }
+
+.hero-card-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+.hero-card-val {
+  font-size: 1.45rem;
+  font-weight: 900;
+  color: #ffffff;
+  line-height: 1.2;
+}
+.hero-card-sub {
+  font-size: 0.75rem;
+  color: var(--gold-400);
+  margin-top: 2px;
+}
+
+/* شبکه کارت‌های بزرگ هاب‌های سه‌گانه (Rule 11: Horizontal RTL Connected Flow) */
+.hubs-connected-flow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  margin-bottom: 34px;
+}
+@media (max-width: 1050px) {
+  .hubs-connected-flow { grid-template-columns: 1fr; }
+}
+
+.hub-master-card {
+  background: var(--surface-glass-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1.5px solid var(--border-gold);
+  border-radius: 24px;
+  padding: 26px 24px;
+  box-shadow: var(--shadow-lux);
+  transition: var(--transition-smooth);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 18px;
+  position: relative;
+  overflow: hidden;
+}
+.hub-master-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--border-gold-strong);
+  box-shadow: 0 24px 55px rgba(0,0,0,0.75), 0 0 30px rgba(212, 175, 90, 0.25);
+}
+
+.hub-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hub-letter-badge {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  font-size: 1.4rem;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #06150e;
+  box-shadow: 0 0 16px rgba(212, 175, 90, 0.4);
+}
+.badge-hub-a { background: linear-gradient(135deg, #ecd599, #d4af5a); }
+.badge-hub-b { background: linear-gradient(135deg, #a7f3d0, #10b981); }
+.badge-hub-c { background: linear-gradient(135deg, #fed7aa, #f59e0b); }
+
+.hub-master-title {
+  font-size: 1.28rem;
+  font-weight: 900;
+  color: #ffffff;
+  margin-top: 10px;
+}
+.hub-master-desc {
+  font-size: 0.85rem;
+  color: var(--text-sub);
+  line-height: 1.85;
+}
+
+.hub-stat-badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 8px 0;
+}
+.hub-pill {
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text-sub);
+}
+
+.hub-actions-bar {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: auto;
+}
+
+.btn-open-workspace {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff !important;
+  font-size: 0.88rem;
+  font-weight: 800;
+  padding: 11px 18px;
+  border-radius: 12px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid rgba(167, 243, 208, 0.4);
+  box-shadow: 0 6px 18px rgba(16, 185, 129, 0.35);
+  transition: var(--transition-smooth);
+  flex: 1;
+}
+.btn-open-workspace:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+  box-shadow: 0 10px 24px rgba(16, 185, 129, 0.55);
+}
+
+/* شبکه ماژول‌های ۵گانه سنجه‌ها (Horizontal RTL Connected Flow) */
+.measures-suite-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 18px;
+  margin-top: 18px;
+}
+@media (max-width: 480px) {
+  .measures-suite-grid { grid-template-columns: 1fr; }
+}
+
+.measure-lux-card {
+  background: var(--surface-glass-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-gold);
+  border-radius: 20px;
+  padding: 22px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  transition: var(--transition-smooth);
+}
+.measure-lux-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--gold-400);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.65), 0 0 25px rgba(212, 175, 90, 0.2);
+}
+
+.m-code-badge {
+  font-size: 0.8rem;
+  font-weight: 900;
+  padding: 4px 10px;
+  border-radius: 8px;
+  background: rgba(212, 175, 90, 0.16);
+  border: 1px solid var(--gold-500);
+  color: var(--gold-300);
+}
+.m-safety-badge {
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 8px;
+  background: rgba(239, 68, 68, 0.18);
+  border: 1px solid rgba(239, 68, 68, 0.45);
+  color: #fca5a5;
+}
+
+.m-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.55;
+}
+.m-desc {
+  font-size: 0.82rem;
+  color: var(--text-sub);
+  line-height: 1.8;
+}
+
+.m-doc-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.btn-doc-chip {
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: var(--transition-smooth);
+}
+.chip-pol { background: rgba(212, 175, 90, 0.14); border: 1px solid var(--border-gold); color: var(--gold-300); }
+.chip-chk { background: rgba(56, 189, 248, 0.14); border: 1px solid rgba(56, 189, 248, 0.35); color: #7dd3fc; }
+.chip-prc { background: rgba(168, 85, 247, 0.14); border: 1px solid rgba(168, 85, 247, 0.35); color: #d8b4fe; }
+.chip-sop { background: rgba(16, 185, 129, 0.14); border: 1px solid rgba(16, 185, 129, 0.35); color: #86efac; }
+.chip-frm { background: rgba(244, 63, 94, 0.14); border: 1px solid rgba(244, 63, 94, 0.35); color: #fda4af; }
+
+.btn-doc-chip:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.2);
+}
+
+/* بنر اطلاع‌رسانی یکپارچگی */
+.integration-banner {
+  background: linear-gradient(135deg, rgba(16, 46, 33, 0.85) 0%, rgba(7, 21, 16, 0.95) 100%);
+  border: 1px solid var(--border-emerald);
+  border-radius: 18px;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 24px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}

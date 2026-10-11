@@ -1,0 +1,34 @@
+node_modules/
+.env
+*.sqlite
+*.sqlite3
+*.db
+*.db-shm
+*.db-wal
+backups/
+uploads/
+
+# استثنا: عکسِ نمایشیِ بیمارستان نمونه عمداً در مخزن می‌ماند تا اگر سایت بالا
+# نیامد، با clone + `npm run demo-restore` همان نمایش روی هر ماشینی تکرار شود.
+# فایل .db.gz خودش با الگوهای بالا نمی‌خورد، ولی پوشه‌ی uploads داخلش می‌خورد.
+!database/demo-snapshot/uploads/
+!database/demo-snapshot/uploads/**
+*.log
+.DS_Store
+.claude/
+graphify-out/
+
+.cluster/
+
+# رونوشت‌های گفت‌وگوی ایجنت‌ها — ممکن است داده‌ی بیمارستانی داشته باشند؛ کامیت نشوند
+agents/transcripts/
+
+# پوشهٔ موقتِ ابزارها (اسکریپت‌های اسکرچ)
+.openclaw/
+
+# پوشهٔ اسکرچِ بازبینی — کوکی نشست، لاگ خام و کپی‌های موقت؛ هرگز کامیت نشود
+scratch/
+
+# پوشه‌های شواهدِ بازبینی (حجم بالا، داده‌ی بیمارستانی نمونه)
+audit-evidence/
+DELIVERY/

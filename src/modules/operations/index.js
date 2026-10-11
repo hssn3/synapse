@@ -1,0 +1,18 @@
+const express = require('express');
+const router = express.Router();
+router.use(require('./facility-assets.routes'));
+router.use(require('./pharmacy.routes'));
+router.use(require('./disaster.routes'));
+router.use(require('./occupational-health.routes'));
+router.use(require('./hr-development.routes'));
+router.use(require('./vendors.routes'));
+router.use(require('./nursing-supervision.routes'));
+router.use(require('./finance.routes'));
+router.use(require('./education.routes'));
+router.use(require('./patient-focus.routes'));
+router.use(require('./infection-control.routes'));
+router.use(require('./blood-transfusion.routes'));
+router.use(require('./laboratory.routes'));
+router.use(require('./imaging.routes'));
+router.use(require('./crm.routes'));
+module.exports = router;

@@ -1,0 +1,570 @@
+/* ===== لایه مکمل Stitch Luxury — v1 =====
+   «چرا» فایل جدا: برای جلوگیری از تداخل با ۱۳۵KB استایل موجودِ app.css و ۱۴۸KB
+   design-system.css. این فایل فقط کلاس‌های جدید اضافه می‌کند و هیچ متغیر یا
+   قاعده‌ی موجود را override نمی‌کند. رنگ‌ها از توکن‌های :root فعلی
+   (--pri, --ok, --wr, --dn, --gd, --th, --tm, --td, --gb, --bd, --r) استفاده
+   می‌کنند تا با هر دو تم روشن/تیره سازگار باشد.
+   منبع الهام: گوگل اسنیچ فارسی (Stitch UI) — موکاپ ۷صفحه‌ای طراحی‌شده.
+   ============================================================= */
+
+/* ===== KPI Dashboard Tiles ===== */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.15rem;
+  margin-bottom: 1.5rem;
+}
+
+.kpi-card {
+  background: var(--gb);
+  backdrop-filter: blur(22px) saturate(140%);
+  -webkit-backdrop-filter: blur(22px) saturate(140%);
+  border: 1px solid var(--bd);
+  border-radius: var(--r, 18px);
+  padding: 1.35rem 1.45rem 1.2rem;
+  position: relative;
+  overflow: hidden;
+  transition: transform .3s cubic-bezier(.2,.7,.3,1), box-shadow .3s, border-color .3s;
+}
+
+/* نوار رنگی بالای کارت — نشان‌دهنده‌ی وضعیت */
+.kpi-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  border-radius: var(--r, 18px) var(--r, 18px) 0 0;
+  background: var(--pri);
+}
+
+/* شاین شیشه‌ای (شبیه .g::before ولی سبک‌تر) */
+.kpi-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 50%;
+  background: linear-gradient(180deg, rgba(255,255,255,.06) 0%, transparent 100%);
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+.kpi-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 42px rgba(0,0,0,.5), 0 0 24px rgba(56,189,248,.15);
+  border-color: var(--bds);
+}
+
+/* ---- نوارِ بالا: تعیین رنگ بر اساس وضعیت ---- */
+.kpi-card.kpi-success::before { background: linear-gradient(90deg, #059669, var(--ok)); }
+.kpi-card.kpi-info::before    { background: linear-gradient(90deg, #0284c7, var(--pri)); }
+.kpi-card.kpi-warning::before { background: linear-gradient(90deg, #b8912f, var(--wr)); }
+.kpi-card.kpi-danger::before  { background: linear-gradient(90deg, #a5503f, var(--dn)); }
+
+/* حاشیه رنگی خفیف */
+.kpi-card.kpi-success { border-color: rgba(52,211,153,.22); }
+.kpi-card.kpi-info    { border-color: rgba(56,189,248,.22); }
+.kpi-card.kpi-warning { border-color: rgba(224,184,78,.22); }
+.kpi-card.kpi-danger  { border-color: rgba(217,122,106,.22); }
+
+/* درخشش هنگام hover */
+.kpi-card.kpi-success:hover { box-shadow: 0 16px 42px rgba(0,0,0,.5), 0 0 28px rgba(52,211,153,.25); border-color: rgba(52,211,153,.4); }
+.kpi-card.kpi-info:hover    { box-shadow: 0 16px 42px rgba(0,0,0,.5), 0 0 28px rgba(56,189,248,.25); border-color: rgba(56,189,248,.4); }
+.kpi-card.kpi-warning:hover { box-shadow: 0 16px 42px rgba(0,0,0,.5), 0 0 28px rgba(224,184,78,.25); border-color: rgba(224,184,78,.4); }
+.kpi-card.kpi-danger:hover  { box-shadow: 0 16px 42px rgba(0,0,0,.5), 0 0 28px rgba(217,122,106,.25); border-color: rgba(217,122,106,.4); }
+
+.kpi-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: .75rem;
+  gap: .5rem;
+}
+
+.kpi-title {
+  font-size: .82rem;
+  font-weight: 700;
+  color: var(--tm);
+  line-height: 1.55;
+}
+
+.kpi-icon {
+  font-size: 1.55rem;
+  opacity: .8;
+  flex-shrink: 0;
+}
+
+.kpi-value {
+  font-size: 2.1rem;
+  font-weight: 900;
+  color: var(--th);
+  line-height: 1.15;
+  margin-bottom: .55rem;
+  font-feature-settings: 'tnum';
+  letter-spacing: -.02em;
+}
+
+.kpi-footer {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  font-size: .78rem;
+  color: var(--td);
+  flex-wrap: wrap;
+}
+
+/* ===== Trend Badge ===== */
+.trend-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .2rem;
+  padding: .18rem .6rem;
+  border-radius: 9999px;
+  font-size: .72rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+.trend-badge.trend-up {
+  background: rgba(52,211,153,.14);
+  color: var(--ok);
+}
+.trend-badge.trend-down {
+  background: rgba(217,122,106,.14);
+  color: var(--dn);
+}
+.trend-badge.trend-neutral {
+  background: rgba(148,163,184,.14);
+  color: var(--td);
+}
+
+/* ===== پیشرفت خطی مینیمال (داخل KPI) ===== */
+.kpi-progress {
+  width: 100%;
+  background: rgba(0,0,0,.3);
+  border-radius: 9999px;
+  height: 6px;
+  overflow: hidden;
+  margin-top: .5rem;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,.4);
+}
+.kpi-progress-bar {
+  height: 100%;
+  border-radius: 9999px;
+  transition: width .7s cubic-bezier(.16,1,.3,1);
+}
+.kpi-progress-bar.bar-ok  { background: linear-gradient(90deg, #059669, var(--ok)); box-shadow: 0 0 10px rgba(52,211,153,.5); }
+.kpi-progress-bar.bar-pri { background: linear-gradient(90deg, #0284c7, var(--pri)); box-shadow: 0 0 10px rgba(56,189,248,.5); }
+.kpi-progress-bar.bar-wr  { background: linear-gradient(90deg, #b8912f, var(--wr)); box-shadow: 0 0 10px rgba(224,184,78,.5); }
+.kpi-progress-bar.bar-dn  { background: linear-gradient(90deg, #a5503f, var(--dn)); box-shadow: 0 0 10px rgba(217,122,106,.5); }
+.kpi-progress-bar.bar-gd  { background: linear-gradient(90deg, var(--gdd), var(--gd)); box-shadow: 0 0 10px rgba(201,168,76,.5); }
+
+/* ===== جستجوی سایدبار ===== */
+.side-search {
+  padding: 0 16px 10px;
+}
+.side-search-input {
+  width: 100%;
+  background: rgba(0,0,0,.22);
+  border: 1px solid var(--bd);
+  border-radius: 9999px;
+  padding: 8px 14px 8px 32px;
+  color: var(--th);
+  font-family: inherit;
+  font-size: 12.5px;
+  outline: none;
+  transition: border-color .25s, box-shadow .25s, background .25s;
+  cursor: pointer;
+}
+.side-search-input:hover {
+  background: rgba(0,0,0,.32);
+  border-color: var(--bds);
+}
+.side-search-input:focus {
+  border-color: var(--pri);
+  box-shadow: 0 0 14px rgba(56,189,248,.25);
+  background: rgba(0,0,0,.35);
+}
+.side-search-input::placeholder {
+  color: var(--td);
+  font-size: 12px;
+}
+
+/* ===== تقویت استایل گروه‌های آکاردئونی سایدبار ===== */
+/* «چرا»: سایدبار قبلاً ۲ آیتم مسطح داشت؛ حالا ۴ گروه دارد و باید خوانایی گروه‌بندی بهتر شود */
+.navgroup {
+  margin-bottom: 4px;
+}
+.navgroup-hd {
+  border-radius: var(--rs, 10px);
+  transition: background .25s, color .25s;
+}
+.navgroup-hd:hover {
+  background: rgba(56,189,248,.08);
+}
+.navgroup-hd.on {
+  background: rgba(56,189,248,.06);
+}
+.navgroup-bd {
+  /* انتقال نرم ارتفاع */
+  transition: max-height .35s cubic-bezier(.2,.7,.3,1), opacity .3s;
+  overflow: hidden;
+}
+.navgroup-bd:not(.on) {
+  max-height: 0 !important;
+  opacity: 0;
+  pointer-events: none;
+}
+.navgroup-bd.on {
+  max-height: 2000px;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* بج تعداد آیتم‌ها در عنوان گروه */
+.navgroup-hd .cnt {
+  background: rgba(56,189,248,.12);
+  color: var(--pri);
+  padding: 1px 7px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 800;
+  min-width: 22px;
+  text-align: center;
+}
+
+/* ===== Page Hero (هدر لوکس بالای صفحات) ===== */
+.page-hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+.page-hero-info h2 {
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: var(--th);
+  margin-bottom: .3rem;
+}
+.page-hero-info p {
+  font-size: .84rem;
+  color: var(--td);
+  line-height: 1.6;
+}
+.page-hero-actions {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  flex-wrap: wrap;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1200px) {
+  .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .kpi-grid { grid-template-columns: 1fr; gap: .9rem; }
+  .kpi-card { padding: 1.1rem 1.2rem 1rem; }
+  .kpi-value { font-size: 1.7rem; }
+  .kpi-title { font-size: .78rem; }
+
+  .page-hero { flex-direction: column; align-items: stretch; }
+  .page-hero-actions { justify-content: flex-start; }
+}
+@media (max-width: 480px) {
+  .kpi-card { padding: .9rem 1rem .85rem; }
+  .kpi-value { font-size: 1.45rem; }
+  .kpi-icon { font-size: 1.3rem; }
+}
+
+
+/* ==========================================================================
+   Google Stitch Luxury Catalog Showcase (کاتالوگ شرکتی و تعاملی اسنیچ)
+   طراحی اختصاصی لوکس تیره با درخشش‌های طلایی و زمردی بر پایه Google Stitch
+   ========================================================================== */
+
+/* گرادینت متون زرین و زمردی */
+.gold-gradient-text {
+  background: linear-gradient(135deg, #ffffff 0%, #faecc3 30%, #ecd599 50%, #d4af5a 75%, #997828 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.emerald-gradient-text {
+  background: linear-gradient(135deg, #bbf7d0 0%, #34d399 45%, #10b981 75%, #059669 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+/* انیمیشن‌های اختصاصی اسنیچ */
+@keyframes radarPing {
+  0% { transform: scale(0.9); opacity: 0.9; }
+  70% { transform: scale(2.2); opacity: 0; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+
+@keyframes laserTrack {
+  0% { transform: translateX(100%); opacity: 0.2; }
+  50% { opacity: 1; }
+  100% { transform: translateX(-100%); opacity: 0.2; }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.6; filter: drop-shadow(0 0 10px rgba(212, 175, 90, 0.4)); }
+  50% { opacity: 1; filter: drop-shadow(0 0 22px rgba(212, 175, 90, 0.85)); }
+}
+
+/* کارت‌های با گوشه پخ‌خورده ۳بعدی (3D Beveled Folded Corner) */
+.folded-corner {
+  position: relative;
+}
+.folded-corner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 30px 30px 0 0;
+  border-color: #ecc976 transparent transparent transparent;
+  filter: drop-shadow(2px 3px 5px rgba(0, 0, 0, 0.7));
+  transition: all 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 2;
+}
+.folded-corner::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 0 30px 30px;
+  border-color: transparent transparent #050f0b transparent;
+  z-index: 3;
+}
+.folded-corner:hover::before {
+  border-color: #fff0c7 transparent transparent transparent;
+  filter: drop-shadow(2px 3px 8px rgba(212, 175, 90, 0.6));
+}
+
+/* شبکه آمار ۴تایی شیشه‌ای اسنیچ */
+.stat-counters-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin: 22px 0 30px 0;
+}
+@media (max-width: 980px) {
+  .stat-counters-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+}
+@media (max-width: 520px) {
+  .stat-counters-grid { grid-template-columns: 1fr; }
+}
+
+.stat-counter-card {
+  background: linear-gradient(145deg, rgba(16, 36, 28, 0.82), rgba(7, 19, 14, 0.9));
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(212, 175, 90, 0.28);
+  border-radius: 20px;
+  padding: 1.5rem 1.2rem;
+  text-align: center;
+  position: relative;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+.stat-counter-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(212, 175, 90, 0.75);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.65), 0 0 25px rgba(212, 175, 90, 0.25);
+}
+.stat-icon-halo {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, rgba(212, 175, 90, 0.22), rgba(6, 18, 12, 0.95));
+  border: 1px solid rgba(212, 175, 90, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  box-shadow: 0 0 16px rgba(212, 175, 90, 0.15);
+}
+.stat-number {
+  font-size: 2.3rem;
+  font-weight: 900;
+  line-height: 1.15;
+  margin-bottom: 4px;
+}
+.stat-label {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+.stat-meta {
+  font-size: 0.76rem;
+  color: #96b2a5;
+  line-height: 1.4;
+}
+
+/* شبکه ۸ فصلی کارت‌های کاتالوگ در صفحه اصلی */
+.cat-showcase-section {
+  background: radial-gradient(circle at 85% 15%, rgba(16, 46, 33, 0.7) 0%, rgba(7, 21, 16, 0.85) 50%, rgba(4, 9, 7, 0.95) 100%);
+  border: 1.5px solid rgba(212, 175, 90, 0.35);
+  border-radius: 28px;
+  padding: 34px 30px;
+  position: relative;
+  box-shadow: 0 25px 65px rgba(0,0,0,0.7), 0 0 40px rgba(16, 185, 129, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  margin: 28px 0;
+  overflow: hidden;
+}
+.cat-showcase-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 90, 0.8), rgba(52, 211, 153, 0.8), transparent);
+}
+
+.cat-laser-indicator {
+  position: absolute;
+  top: 0;
+  width: 120px;
+  height: 2px;
+  background: #fff;
+  box-shadow: 0 0 15px #34d399, 0 0 30px #d4af5a;
+  animation: laserTrack 6s infinite linear;
+}
+
+.cat-chapters-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 24px;
+}
+@media (max-width: 1100px) {
+  .cat-chapters-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 580px) {
+  .cat-chapters-grid { grid-template-columns: 1fr; }
+}
+
+.cat-chapter-box {
+  background: rgba(12, 31, 23, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(212, 175, 90, 0.22);
+  border-radius: 18px;
+  padding: 20px 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+  color: inherit;
+}
+.cat-chapter-box:hover {
+  transform: translateY(-4px) scale(1.01);
+  border-color: rgba(212, 175, 90, 0.7);
+  background: rgba(18, 44, 33, 0.92);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.65), 0 0 25px rgba(212, 175, 90, 0.2);
+}
+
+.cat-chapter-tag {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--gold-300, #fff0c7);
+  background: rgba(212, 175, 90, 0.16);
+  border: 1px solid rgba(212, 175, 90, 0.35);
+  padding: 3px 10px;
+  border-radius: 6px;
+  display: inline-block;
+  align-self: flex-start;
+}
+
+.cat-chapter-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.45;
+  margin: 4px 0;
+}
+
+.cat-chapter-desc {
+  font-size: 0.8rem;
+  color: #96b2a5;
+  line-height: 1.7;
+}
+
+.cat-chapter-link {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--gold-400, #ecd599);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+}
+.cat-chapter-box:hover .cat-chapter-link {
+  color: #ffffff;
+  gap: 10px;
+}
+
+.btn-catalog-gold {
+  background: linear-gradient(135deg, #ecd599 0%, #d4af5a 40%, #a87e2b 100%);
+  color: #06110b !important;
+  font-weight: 800;
+  font-size: 0.92rem;
+  padding: 12px 26px;
+  border-radius: 14px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #fff5d1;
+  box-shadow: 0 8px 24px rgba(212, 175, 90, 0.45);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+.btn-catalog-gold:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 12px 32px rgba(212, 175, 90, 0.65);
+  background: linear-gradient(135deg, #fff2cc 0%, #d4af5a 60%, #b88d37 100%);
+}
+
+.btn-catalog-emerald {
+  background: linear-gradient(135deg, #10b981 0%, #059669 60%, #047857 100%);
+  color: #ffffff !important;
+  font-weight: 800;
+  font-size: 0.92rem;
+  padding: 12px 26px;
+  border-radius: 14px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid rgba(167, 243, 208, 0.5);
+  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+.btn-catalog-emerald:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 12px 32px rgba(16, 185, 129, 0.6);
+  background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+}

@@ -1,0 +1,61 @@
+/**
+ * Core Boot & Login Flow
+ * Part of Modular Frontend Architecture (Zero-Monolith)
+ */
+function renderPreviewBanner(){
+  let el=document.getElementById('pvBanner');
+  if(!S.user || !S.user.preview){ if(el) el.remove(); document.body.style.paddingTop=''; return; }
+  if(!el){ el=document.createElement('div'); el.id='pvBanner'; document.body.appendChild(el); }
+  el.setAttribute('style','position:fixed;top:0;left:0;right:0;z-index:99999;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;padding:8px 14px;background:#7a4b00;color:#fff8e8;font-size:13px;font-weight:600;box-shadow:0 2px 10px rgba(0,0,0,.25)');
+  el.innerHTML=`<span>⚠ حالت پیش‌نمایش — نمایش داشبورد به‌عنوان «${esc(S.user.role_title||'')} — ${esc(S.user.full_name||'')}»</span>
+    <button type="button" onclick="exitRolePreview()" style="background:#fff8e8;color:#7a4b00;border:none;border-radius:6px;padding:4px 12px;font-weight:700;cursor:pointer;font-size:12.5px">بازگشت به حساب من (${esc(S.user.preview.real_admin_name||'ادمین')})</button>`;
+  document.body.style.paddingTop=el.offsetHeight+'px';
+}
+// روی هر پست پرشده‌ی نمودار سازمانی، ادمین می‌تواند داشبورد همان فرد/نقش را ببیند —
+// نشست موقت سرور (۱۵ دقیقه)، سپس بارگذاری کامل صفحه تا همه‌ی داده‌ها (درخت/مجوز/آمار)
+// واقعاً مطابق نقش هدف باشند، نه فقط ظاهر منو.
+async function startRolePreview(userId){
+  try{
+    await API.previewStart(userId);
+    toast('در حال ورود به پیش‌نمایش…');
+    setTimeout(()=>location.reload(), 300);
+  }catch(e){ toast(e.message,true); }
+}
+async function exitRolePreview(){
+  try{ await API.previewExit(); }catch(e){}
+  location.reload();
+}
+
+// ==================== LOGIN ====================
+// جریان ورود دو مرحله‌ای (چندمستأجری):
+//   ۱) صفحه‌ی ورودی عمومی — معرفی سامانه + «خدمات بدون احراز هویت» + انتخاب مرکز
+//   ۲) صفحه‌ی اختصاصی همان مرکز — لوگو و نام خودِ بیمارستان بالای فرم ورود
+// مرکز انتخاب‌شده در نشانی (?hospital=) و localStorage نگه داشته می‌شود تا دفعه‌ی بعد
+// کاربر مستقیم صفحه‌ی مرکز خودش را ببیند. کارت ورودِ ساده‌ی قبلی همان فرم مرحله‌ی ۲ است.
+
+const HOSP_KEY='p_last_hospital';
+let PUB_HOSPS=[];
+
+// ماژول‌های معرفی‌شده در صفحه‌ی خانه — دقیقاً از «وضعیت کامل پروژه» در docs/BACKUP_INFO.md،
+// چیزی اضافه/جعل نشده. آیکون‌ها از همان مجموعه‌ی نمادهای یونیکد فعلی سامانه (بدون تصویر).
+const PUB_FEATURES=[
+  { ic:ic('tree'), t:'ساختار سازمانی', d:'نمودار سازمانی، حوزه‌های مدیریت/پرستاری/پشتیبانی، گروه شغلی، واحد، پست سازمانی و ساختمان' },
+  { ic:ic('stethoscope'), t:'سلسله‌مراتب پرستاری', d:'سوپروایزرها، بخش‌ها و سرپرستاران؛ داشبورد سرپرستار برای حضور و غیاب، مرخصی و وظایف شیفت' },
+  { ic:ic('inbox'), t:'کارتابل و پیام‌رسانی', d:'کارتابل شخصی، پیام داخلی، یادآور خودکار روی همان کارتابل' },
+  { ic:ic('users'), t:'کمیته‌ها', d:'۱۷+ کمیته، صورت‌جلسه، زمان‌بندی جلسه با تشخیص تداخل اتاق' },
+  { ic:ic('chart'), t:'کارت امتیازی متوازن (BSC)', d:'شاخص‌های عملکردی ماهانه با تارگت و جهت مطلوب، به‌تفکیک وجه' },
+  { ic:ic('alert'), t:'ایمنی و مدیریت ریسک', d:'گزارش خطا با کد پیگیری، FMEA، بازدید میدانی مدیریتی با داشبورد مصوبات' },
+  { ic:ic('graduation'), t:'آموزش و بهبود', d:'نیازسنجی آموزشی و برنامه‌های بهبود مستمر کیفیت' },
+  { ic:ic('docs'), t:'مدارک کنترل‌شده', d:'خط‌مشی/روش‌اجرایی/دستورالعمل، امضای الکترونیکی، گردش امضا و تاریخچه‌ی نسخه' },
+  { ic:ic('clipboard'), t:'اعتباربخشی', d:'یکی از ماژول‌های سامانه: درخت ۵۲۰ سنجه / ۱۰۸ استاندارد (ویرایش پنجم)، داشبورد، گیج و نمودار روند' },
+  { ic:ic('grid'), t:'خدمات بدون‌ورود', d:'گزارش خطا، FMEA، انتقادات و پیشنهادها، نظرسنجی رضایت — مخصوص هر مرکز' }
+];
+
+// خدمات همگانی — دقیقاً همان صفحاتی که در PUBLIC_PAGES سرور تعریف شده‌اند؛ ماژول جعلی اضافه نمی‌کنیم.
+const PUB_SERVICES=[
+  { path:'error-report', ic:ic('alert'), title:'گزارش خطا و وقایع ناخواسته', desc:'ثبت محرمانه با کد رهگیری' },
+  { path:'fmea',         ic:ic('shield'), title:'عوامل تهدید کننده ایمنی بیمار', desc:'شناسایی خطر پیش از وقوع حادثه' },
+  { path:'complaint',    ic:ic('message'), title:'انتقادات، پیشنهادها و تقدیر', desc:'ناشناس یا با اطلاعات تماس' },
+  { path:'satisfaction', ic:ic('heart'), title:'نظرسنجی رضایت بیمار', desc:'پرسشنامه رسمی رضایت‌سنجی' },
+  { path:'services',     ic:ic('grid'), title:'درگاه خدمات همگانی', desc:'فهرست کامل فرم‌های بدون ورود' }
+];

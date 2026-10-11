@@ -1,0 +1,59 @@
+{
+  "createdAt": "2026-09-07T04:57:29.778Z",
+  "sourceDb": "/home/user/hospital-accreditation-platform/database/hospital.db",
+  "rawBytes": 7737344,
+  "gzipBytes": 1259820,
+  "hospitals": [
+    {
+      "name": "بیمارستان نمونه شماره یک",
+      "subdomain": "h3"
+    }
+  ],
+  "counts": {
+    "hospitals": 1,
+    "users": 62,
+    "roles": 19,
+    "measure_status": 520,
+    "shift_entries": 4539,
+    "committee_meeting_minutes": 104,
+    "controlled_documents": 22,
+    "hospital_kpis": 71,
+    "checklists": 4,
+    "processes": 6,
+    "facility_assets": 3,
+    "blood_bags": 4,
+    "lab_qc_records": 4,
+    "imaging_devices": 2,
+    "patient_satisfaction_surveys": 12,
+    "nursing_shift_attendance": 471,
+    "nursing_supervisor_reports": 2,
+    "occ_hazards": 4,
+    "occ_incidents": 4,
+    "fin_budget_lines": 6,
+    "fin_donations": 6,
+    "pf_coi_cases": 4,
+    "pf_readmissions": 8,
+    "pf_ama_discharges": 10,
+    "edu_policies": 3,
+    "edu_sessions": 5,
+    "edu_effectiveness": 4,
+    "fin_cost_management": 4,
+    "service_disruptions": 2,
+    "staff_surveys": 3,
+    "stakeholders": 6
+  },
+  "scrubbedColumns": [
+    "superadmin_dev_settings.github_token"
+  ],
+  "purgedTables": [
+    "assistant_conversations (49)",
+    "dev_assistant_messages (4)",
+    "audit_log (764)",
+    "super_audit_log (3)",
+    "error_log (8)",
+    "deleted_records (5564)"
+  ],
+  "uploads": [
+    "logo-sample-hospital.webp"
+  ]
+}

@@ -1,0 +1,327 @@
+{
+  "_meta": {
+    "description": "طرح دیتابیس پلتفرم یکپارچه اعتباربخشی و مدیریت پرستاری بیمارستانی",
+    "database": "PostgreSQL",
+    "multi_tenancy_note": "همه جدول‌های اصلی از همین ابتدا فیلد hospital_id دارند تا بدون بازنویسی به SaaS چندمستأجری قابل تبدیل باشند (حتی در فاز فعلی که فقط یک بیمارستان وجود دارد)",
+    "companion_files": [
+      "PROJECT_SPEC.md - پلن کامل پروژه و تصمیمات",
+      "accreditation-standards-data.json - داده کامل ۵۲۰ سنجه/۱۰۸ استاندارد کتاب اعتباربخشی",
+      "ROLES_AND_PERMISSIONS.json - نقش‌ها و سطوح دسترسی"
+    ],
+    "status": "نسخه اول طرح - قبل از پیاده‌سازی باید با کاربر مرور و تأیید نهایی شود",
+    "last_updated_context": "بعد از بحث پلتفرم یکپارچه (بخش ۶.۵ PROJECT_SPEC.md) و بحث امنیت/سرور"
+  },
+
+  "tables": {
+
+    "hospitals": {
+      "description": "بیمارستان‌ها - جدول پایه چندمستأجری (فعلاً فقط یک رکورد وجود دارد)",
+      "columns": {
+        "id": "UUID PRIMARY KEY",
+        "name": "VARCHAR(255) NOT NULL - نام بیمارستان",
+        "logo_url": "VARCHAR(500) NULL - آدرس لوگو برای سربرگ",
+        "letterhead_config": "JSONB - تنظیمات سربرگ رسمی (متن بالا/پایین، آدرس، لوگو، رنگ) - طبق درخواست کاربر برای خروجی اسناد/گزارش",
+        "signature_config": "JSONB - تنظیمات محل/تصویر امضای رسمی برای اسناد خروجی",
+        "is_active": "BOOLEAN DEFAULT true",
+        "created_at": "TIMESTAMP DEFAULT now()",
+        "updated_at": "TIMESTAMP DEFAULT now()"
+      },
+      "notes": "letterhead_config و signature_config طبق درخواست صریح کاربر: سربرگ و جای امضا باید توسط خود صاحب سیستم قابل تنظیم باشد"
+    },
+
+    "users": {
+      "description": "کاربران سیستم (تمام نقش‌ها)",
+      "columns": {
+        "id": "UUID PRIMARY KEY",
+        "hospital_id": "UUID NOT NULL REFERENCES hospitals(id)",
+        "full_name": "VARCHAR(255) NOT NULL",
+        "national_id": "VARCHAR(20) NULL - کد ملی (اختیاری، برای احراز هویت رسمی‌تر)",
+        "username": "VARCHAR(100) NOT NULL UNIQUE",
+        "password_hash": "VARCHAR(255) NOT NULL - هش‌شده با bcrypt",
+        "email": "VARCHAR(255) NULL",
+        "phone": "VARCHAR(20) NULL",
+        "role_id": "UUID NOT NULL REFERENCES roles(id)",
+        "department": "VARCHAR(255) NULL - بخش/واحد سازمانی",
+        "supervisor_id": "UUID NULL REFERENCES users(id) - سرپرست مستقیم (برای سلسله‌مراتب تعیین وظیفه)",
+        "is_active": "BOOLEAN DEFAULT true",
+        "last_login_at": "TIMESTAMP NULL",
+        "failed_login_attempts": "INT DEFAULT 0 - برای rate limiting/قفل حساب",
+        "locked_until": "TIMESTAMP NULL",
+        "created_at": "TIMESTAMP DEFAULT now()",
+        "updated_at": "TIMESTAMP DEFAULT now()"
+      }
+    },
+
+    "roles": {
+      "description": "نقش‌های سیستم - جزئیات کامل در ROLES_AND_PERMISSIONS.json",
+      "columns": {
+        "id": "UUID PRIMARY KEY",
+        "hospital_id": "UUID NULL REFERENCES hospitals(id) - NULL یعنی نقش سیستمی پیش‌فرض، پر شده یعنی نقش سفارشی همان بیمارستان",
+        "code": "VARCHAR(50) NOT NULL - مثل nursing_director, infection_control_supervisor",
+        "title_fa": "VARCHAR(255) NOT NULL - عنوان فارسی",
+        "permissions": "JSONB - آرایه‌ای از permission code ها (تفصیل در ROLES_AND_PERMISSIONS.json)",
+        "created_at": "TIMESTAMP DEFAULT now()"
+      }
+    },
+
+    "accreditation_sections": {
+      "description": "بخش‌ها/محورها/استانداردها/سنجه‌های کتاب اعتباربخشی - وارد شده از accreditation-standards-data.json",
+      "columns": {
+        "id": "UUID PRIMARY KEY",
+        "code": "VARCHAR(20) NOT NULL - مثل الف, الف-1, الف-1-1, الف-1-1-1",
+        "level_type": "ENUM('section','axis','standard','measure') - نوع سطح در سلسله‌مراتب",
+        "parent_id": "UUID NULL REFERENCES accreditation_sections(id) - برای ساختار درختی",
+        "title": "TEXT NULL - عنوان (برای section/axis)",
+        "statement": "TEXT NULL - متن استاندارد یا سنجه",
+        "detail_text": "TEXT NULL - توضیحات/ملاک ارزیابی کامل (فقط سنجه‌ها)",
+        "page": "INT NULL - شماره صفحه در کتاب مرجع",
+        "measure_level": "INT NULL - سطح ۱/۲/۳ (فقط سنجه‌ها)",
+        "patient_safety_flag": "BOOLEAN DEFAULT false - پرچم ایمنی بیمار، ضریب وزنی ۲ (فقط سنجه‌ها)",
+        "weight_multiplier": "DECIMAL(3,1) DEFAULT 1.0 - ضریب وزنی (۱ عادی / ۱.۵ میانی / ۲ ایمنی بیمار - طبق بخش ۲ قسمت ۴ TASK_LOG.md)"
+      },
+      "notes": "این جدول باید یک‌بار از accreditation-standards-data.json seed شود؛ ساختار درختی بخش>محور>استاندارد>سنجه با parent_id پیاده می‌شود"
+    },
+
+    "activity_types": {
+      "description": "انواع فعالیت‌های قابل ثبت در هر ماژول تخصصی (پرستاری، کنترل عفونت، آموزش، شیر مادر و...)",
+      "columns": {
+        "id": "UUID PRIMARY KEY",
+        "hospital_id": "UUID NOT NULL REFERENCES hospitals(id)",
+        "module": "VARCHAR(50) NOT NULL - nursing_management, infection_control, education, breastfeeding, clinical, committee, incident_report, patient_complaint, staff_suggestion",
+        "title": "VARCHAR(255) NOT NULL",
+        "description": "TEXT NULL",
+        "form_schema": "JSONB - تعریف فیلدهای فرم پویا برای این نوع فعالیت",
+        "requires_evidence_upload": "BOOLEAN DEFAULT false",
+        "is_active": "BOOLEAN DEFAULT true",
+        "created_at": "TIMESTAMP DEFAULT now()"
+      }
+    },
+
+    "activity_measure_mapping": {
+      "description": "⭐ قلب فنی پلتفرم یکپارچه (بخش ۶.۵ PROJECT_SPEC.md) - نگاشت فعالیت‌ها به سنجه‌های اعتباربخشی، many-to-many",
+      "columns": {
+        "id": "UUID PRIMARY KEY",
+        "activity_type_id": "UUID NOT NULL REFERENCES activity_types(id)",
+        "measure_id": "UUID NOT NULL REFERENCES accreditation_sections(id) - باید level_type='measure' باشد",
+        "auto_evidence": "BOOLEAN DEFAULT true - آیا ثبت این فعالیت خودکار به‌عنوان شاهد سنجه ثبت شود",
+        "created_by": "UUID REFERENCES users(id) - این نگاشت باید توسط کارشناس/انسان تعریف شود",
+        "created_at": "TIMESTAMP DEFAULT now()"
+      },
+      "notes": "این جدول باید تدریجی و توسط کارشناس اعتباربخشی تکمیل شود - نگاشت اولیه نیاز به کار دستی کارشناسی دارد (طبق بخش ۶.۵ PROJECT_SPEC.md)"
+    },
+
+    "activity_records": {
+      "description": "رکوردهای واقعی ثبت‌شده توسط کاربران در ماژول‌های تخصصی (این جدول اصلی است که همه‌چیز از آن تغذیه می‌شود)",
+      "columns": {
+        "id": "UUID PRIMARY KEY",
+        "hospital_id": "UUID NOT NULL REFERENCES hospitals(id)",
+        "activity_type_id": "UUID NOT NULL REFERENCES activity_types(id)",
+        "recorded_by": "UUID NOT NULL REFERENCES users(id)",
+        "department": "VARCHAR(255) NULL",
+        "form_data": "JSONB - داده‌ی واقعی فرم پرشده",
+        "status": "ENUM('draft','submitted','approved','rejected') DEFAULT 'submitted'",
+        "occurred_at": "TIMESTAMP NOT NULL - زمان وقوع فعالیت (نه لزوماً زمان ثبت)",
+        "is_confidential": "BOOLEAN DEFAULT false - محرمانگی فرم (مطابق فیچر طراحی اولیه حسن که کاربر خواست پوشش داده شود)",
+        "is_anonymous_submission": "BOOLEAN DEFAULT false - ثبت ناشناس بدون احراز هویت (برای فرم‌های همگانی مثل گزارش خطا/انتقاد)",
+        "created_at": "TIMESTAMP DEFAULT now()",
+        "updated_at": "TIMESTAMP DEFAULT now()"
+      }
+    },
+
+    "activity_evidence_files": {
+      "description": "فایل‌های آپلودی (عکس/سند) مرتبط با یک رکورد فعالیت - جدا از دیتابیس روی فایل‌سیستم/Object Storage ذخیره می‌شود",
+      "columns": {
+        "id": "UUID PRIMARY KEY",
+        "activity_record_id": "UUID NOT NULL REFERENCES activity_records(id)",
+        "file_path": "VARCHAR(500) NOT NULL - مسیر فایل روی سرور/Object Storage",
+        "file_type": "VARCHAR(50) - image/pdf/document",
+        "original_filename": "VARCHAR(255)",
+        "file_size_bytes": "BIGINT",
+        "uploaded_by": "UUID REFERENCES users(id)",
+        "uploaded_at": "TIMESTAMP DEFAULT now()"
+      },
+      "notes": "طبق تصمیم بخش ۵.۵ PROJECT_SPEC.md: فشرده‌سازی خودکار سمت سرور موقع آپلود، محدودیت حجم، ذخیره جدا از دیتابیس"
+    },
+
+    "measure_status": {
+      "description": "وضعیت فعلی هر سنجه برای بیمارستان (تطابق کامل/نسبی/عدم تطابق/بررسی‌نشده) - قلب داشبورد اعتباربخشی",
+      "columns": {
+        "id": "UUID PRIMARY KEY",
+        "hospital_id": "UUID NOT NULL REFERENCES hospitals(id)",
+        "measure_id": "UUID NOT NULL REFERENCES accreditation_sections(id)",
+        "status": "ENUM('not_reviewed','non_compliant','partial','full_compliant') DEFAULT 'not_reviewed'",
+        "notes": "TEXT NULL - یادداشت شواهد آزاد",
+        "last_reviewed_by": "UUID REFERENCES users(id)",
+        "last_reviewed_at": "TIMESTAMP NULL",
+        "linked_activity_record_id": "UUID NULL REFERENCES activity_records(id) - اگر وضعیت خودکار از یک فعالیت به‌روزرسانی شده (طبق activity_measure_mapping)"
+      }
+    },
+
+    "calendar_events": {
+      "description": "تقویم اعتباربخشی هوشمند - رویدادهای عمومی و نقش‌محور",
+      "columns": {
+        "id": "UUID PRIMARY KEY",
+        "hospital_id": "UUID NOT NULL REFERENCES hospitals(id)",
+        "title": "VARCHAR(255) NOT NULL",
+        "description": "TEXT NULL",
+        "event_date": "DATE NOT NULL",
+        "is_recurring": "BOOLEAN DEFAULT false",
+        "recurrence_rule": "VARCHAR(255) NULL - مثل yearly/monthly + جزئیات",
+        "target_role_ids": "UUID[] NULL - اگر خالی یعنی برای همه؛ اگر پر یعنی فقط نقش‌های مشخص یادآور می‌گیرند (مثل روز جهانی بهداشت دست فقط برای سوپروایزر کنترل عفونت)",
+        "reminder_days_before": "INT DEFAULT 1",
+        "related_measure_id": "UUID NULL REFERENCES accreditation_sections(id)",
+        "created_by": "UUID REFERENCES users(id)",
+        "created_at": "TIMESTAMP DEFAULT now()"
+      }
+    },
+
+    "tasks": {
+      "description": "تعیین وظیفه توسط سرپرستار/سوپروایزر برای پرسنل - پایه داده‌ای ارزیابی راندمان",
+      "columns": {
+        "id": "UUID PRIMARY KEY",
+        "hospital_id": "UUID NOT NULL REFERENCES hospitals(id)",
+        "title": "VARCHAR(255) NOT NULL",
+        "description": "TEXT NULL",
+        "assigned_by": "UUID NOT NULL REFERENCES users(id)",
+        "assigned_to": "UUID NOT NULL REFERENCES users(id)",
+        "related_measure_id": "UUID NULL REFERENCES accreditation_sections(id)",
+        "due_date": "TIMESTAMP NULL",
+        "status": "ENUM('assigned','in_progress','completed','overdue') DEFAULT 'assigned'",
+        "completed_at": "TIMESTAMP NULL",
+        "created_at": "TIMESTAMP DEFAULT now()"
+      }
+    },
+
+    "committees": {
+      "description": "کمیته‌های بیمارستانی (کنترل عفونت، اعتباربخشی، دارویی و...) - با گزینه‌های پیش‌فرض طبق درخواست کاربر",
+      "columns": {
+        "id": "UUID PRIMARY KEY",
+        "hospital_id": "UUID NOT NULL REFERENCES hospitals(id)",
+        "name": "VARCHAR(255) NOT NULL",
+        "committee_type": "VARCHAR(100) - از یک لیست پیش‌فرض قابل انتخاب سریع (infection_control, accreditation, pharmacy, patient_safety, ethics, ...)",
+        "members": "UUID[] - اعضای کمیته (لیست user id)",
+        "chairperson_id": "UUID REFERENCES users(id)",
+        "meeting_frequency": "VARCHAR(50) NULL - مثلاً ماهانه",
+        "created_at": "TIMESTAMP DEFAULT now()"
+      },
+      "notes": "طبق درخواست کاربر: باید گزینه پیش‌فرض برای نوشتن سریع صورت‌جلسه کمیته وجود داشته باشد"
+    },
+
+    "committee_meeting_minutes": {
+      "description": "صورت‌جلسه‌های کمیته - با قالب پیش‌فرض قابل تکمیل سریع",
+      "columns": {
+        "id": "UUID PRIMARY KEY",
+        "committee_id": "UUID NOT NULL REFERENCES committees(id)",
+        "meeting_date": "DATE NOT NULL",
+        "attendees": "UUID[] - حاضرین جلسه",
+        "agenda_items": "JSONB - آیتم‌های دستورجلسه با ساختار قالب پیش‌فرض",
+        "decisions": "JSONB - مصوبات (متن + مسئول اجرا + مهلت)",
+        "next_meeting_date": "DATE NULL",
+        "document_file_id": "UUID NULL REFERENCES activity_evidence_files(id) - فایل PDF نهایی صورت‌جلسه با سربرگ/امضا",
+        "created_by": "UUID REFERENCES users(id)",
+        "created_at": "TIMESTAMP DEFAULT now()"
+      }
+    },
+
+    "nursing_shift_reports": {
+      "description": "ماژول گزارش پرستاری (فاز بعدی طبق بخش ۹ آیتم ۱۱-۱۲ PROJECT_SPEC.md) - هدف: کاهش زمان مستندسازی",
+      "columns": {
+        "id": "UUID PRIMARY KEY",
+        "hospital_id": "UUID NOT NULL REFERENCES hospitals(id)",
+        "patient_reference": "VARCHAR(255) NULL - شماره پرونده/شناسه بیمار (بدون اطلاعات هویتی کامل در این فاز اولیه)",
+        "nurse_id": "UUID NOT NULL REFERENCES users(id)",
+        "shift_type": "ENUM('morning','evening','night')",
+        "shift_date": "DATE NOT NULL",
+        "structured_data": "JSONB - داده ساختاریافته شرح‌حال/گزارش (فرم هوشمند با پیش‌فرض، نه تایپ آزاد کامل)",
+        "free_text_notes": "TEXT NULL",
+        "created_at": "TIMESTAMP DEFAULT now()"
+      },
+      "notes": "این جدول فاز دوم است، طرح اولیه است و باید قبل از پیاده‌سازی با کاربر دقیق‌تر مرور شود (فرم هوشمند دقیقاً چه فیلدهایی دارد باید مشخص شود)"
+    },
+
+    "audit_log": {
+      "description": "لاگ فعالیت‌های حساس - الزام امنیتی بخش ۵ PROJECT_SPEC.md",
+      "columns": {
+        "id": "UUID PRIMARY KEY",
+        "hospital_id": "UUID NOT NULL REFERENCES hospitals(id)",
+        "user_id": "UUID NOT NULL REFERENCES users(id)",
+        "action": "VARCHAR(100) - مثل measure_status_changed, user_login, file_uploaded",
+        "target_table": "VARCHAR(100) NULL",
+        "target_id": "UUID NULL",
+        "old_value": "JSONB NULL",
+        "new_value": "JSONB NULL",
+        "ip_address": "VARCHAR(50) NULL",
+        "created_at": "TIMESTAMP DEFAULT now()"
+      }
+    },
+
+    "patient_complaints_suggestions": {
+      "description": "نظام انتقادات و پیشنهادات بیماران - پوشش فیچر طراحی اولیه حسن (بخش ۸.۵ PROJECT_SPEC.md)",
+      "columns": {
+        "id": "UUID PRIMARY KEY",
+        "hospital_id": "UUID NOT NULL REFERENCES hospitals(id)",
+        "type": "ENUM('complaint','suggestion','compliment')",
+        "content": "TEXT NOT NULL",
+        "is_anonymous": "BOOLEAN DEFAULT true",
+        "submitter_contact": "VARCHAR(255) NULL - اختیاری اگر ناشناس نبود",
+        "status": "ENUM('new','under_review','resolved','closed') DEFAULT 'new'",
+        "handled_by": "UUID NULL REFERENCES users(id)",
+        "response": "TEXT NULL",
+        "created_at": "TIMESTAMP DEFAULT now()"
+      }
+    },
+
+    "staff_suggestions": {
+      "description": "نظام پیشنهادات کارکنان - پوشش فیچر طراحی اولیه حسن",
+      "columns": {
+        "id": "UUID PRIMARY KEY",
+        "hospital_id": "UUID NOT NULL REFERENCES hospitals(id)",
+        "submitted_by": "UUID NOT NULL REFERENCES users(id)",
+        "title": "VARCHAR(255) NOT NULL",
+        "content": "TEXT NOT NULL",
+        "status": "ENUM('new','under_review','approved','rejected','implemented') DEFAULT 'new'",
+        "reviewer_notes": "TEXT NULL",
+        "created_at": "TIMESTAMP DEFAULT now()"
+      }
+    },
+
+    "medical_error_reports": {
+      "description": "گزارش خطای پزشکی - پوشش فیچر طراحی اولیه حسن (۲۸-۲۹ مورد رسمی خطای پزشکی)",
+      "columns": {
+        "id": "UUID PRIMARY KEY",
+        "hospital_id": "UUID NOT NULL REFERENCES hospitals(id)",
+        "error_category": "VARCHAR(100) - از لیست ۲۸/۲۹ گانه رسمی (باید بعداً دقیق تأیید شود - کار باز)",
+        "description": "TEXT NOT NULL",
+        "is_confidential": "BOOLEAN DEFAULT true",
+        "is_anonymous_submission": "BOOLEAN DEFAULT false",
+        "severity": "ENUM('near_miss','minor','moderate','severe','sentinel_event') NULL",
+        "reported_by": "UUID NULL REFERENCES users(id) - NULL اگر ناشناس",
+        "department": "VARCHAR(255) NULL",
+        "status": "ENUM('new','investigating','action_taken','closed') DEFAULT 'new'",
+        "created_at": "TIMESTAMP DEFAULT now()"
+      },
+      "notes": "کار باز: لیست دقیق ۲۸/۲۹ مورد رسمی خطای پزشکی باید تأیید و در enum قطعی شود (بخش ۸.۵ PROJECT_SPEC.md)"
+    },
+
+    "patient_satisfaction_surveys": {
+      "description": "رضایت‌سنجی بیمار - پوشش فیچر طراحی اولیه حسن",
+      "columns": {
+        "id": "UUID PRIMARY KEY",
+        "hospital_id": "UUID NOT NULL REFERENCES hospitals(id)",
+        "department": "VARCHAR(255) NULL",
+        "questions_and_answers": "JSONB",
+        "overall_score": "DECIMAL(3,1) NULL",
+        "submitted_at": "TIMESTAMP DEFAULT now()"
+      }
+    }
+  },
+
+  "indexes_notes": "روی تمام ستون‌های hospital_id، measure_id، activity_type_id، و status ها ایندکس گذاشته شود؛ روی audit_log.created_at و activity_records.occurred_at هم ایندکس زمانی برای گزارش‌گیری سریع لازم است",
+
+  "open_questions_for_next_step": [
+    "آیا measure_status باید تاریخچه/نسخه‌بندی داشته باشد (برای مقایسه وضعیت در طول زمان) یا فقط آخرین وضعیت کافی است؟",
+    "دقیق‌سازی form_schema در activity_types - باید یک فرمت استاندارد JSON Schema برای فرم‌ساز پویا تعریف شود",
+    "دقیق‌سازی structured_data در nursing_shift_reports - نیاز به جلسه جداگانه با کاربر درباره فیلدهای دقیق شرح‌حال/گزارش پرستاری",
+    "لیست دقیق ۲۸/۲۹ مورد رسمی خطای پزشکی (کار باز قدیمی، هنوز حل نشده)"
+  ]
+}

@@ -1,0 +1,1346 @@
+==================== SLIDE 1 ====================
+Slide Texts: بيمارستان اميد دريك نگاه | سالهای 1405-1404
+
+==================== SLIDE 2 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای تعدادبیماران پذیرش شده سالهای 1405-1404 [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (17 rows) ---
+      Row 1: A1= , B1=تعدادبیماران پذیرش شده 1404, C1=تعدادبیماران پذیرش شده 1405
+      Row 2: A2=فروردین, B2=294
+      Row 3: A3=اردیبهشت , B3=455
+      Row 4: A4=خرداد, B4=368
+      Row 5: A5=سه ماهه اول, B5=1117
+      Row 6: A6=تیر, B6=283
+      Row 7: A7=مرداد, B7=371
+      Row 8: A8=شهریور, B8=402
+      Row 9: A9=سه ماهه دوم , B9=1056
+      Row 10: A10=مهر, B10=385
+      Row 11: A11=آبان, B11=333
+      Row 12: A12=آذر, B12=328
+      Row 13: A13=سه ماهه سوم , B13=1046
+      Row 14: A14=دی , B14=474
+      Row 15: A15=بهمن , B15=433
+
+==================== SLIDE 3 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای تعداد بیماران پذیرش شده سالهای 1405-1404(شش ماهه)
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet1.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (4 rows) ---
+      Row 1: A1= , B1=تعدادبیماران پذیرش شده 1404, C1=تعدادبیماران پذیرش شده 1405
+      Row 2: A2=شش ماهه اول, B2=2173
+      Row 3: A3=شش ماهه دوم , B3=2302
+      Row 4: A4=کل بیماران , B4=4475
+
+==================== SLIDE 4 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای تعداداعزام بیماران به  سایرمراکزدرمانی سالهای 1405-1404 [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet2.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (18 rows) ---
+      Row 1: A1= , B1=تعداداعزام 1404, C1=تعداداعزام 1405
+      Row 2: A2=فروردین, B2=10
+      Row 3: A3=اردیبهشت , B3=10, G3=29, J3=11
+      Row 4: A4=خرداد, B4=9, G4=33, J4=9
+      Row 5: A5=سه ماهه اول, B5=29, G5=22, J5=8
+      Row 6: A6=تیر, B6=12, G6=28, J6=28
+      Row 7: A7=مرداد, B7=10, G7=112
+      Row 8: A8=شهریور, B8=11
+      Row 9: A9=سه ماهه دوم , B9=33
+      Row 10: A10=مهر, B10=6
+      Row 11: A11=آبان, B11=9
+      Row 12: A12=آذر, B12=7
+      Row 13: A13=سه ماهه سوم , B13=22
+      Row 14: A14=دی , B14=11
+      Row 15: A15=بهمن , B15=9
+
+==================== SLIDE 5 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای درصد اعزام بیماران به  سایرمراکزدرمانی    سالهای 1405-1404 [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet3.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (18 rows) ---
+      Row 1: A1= , B1=درصداعزام 1404, C1=درصداعزام 1405
+      Row 2: A2=فروردین, B2=0.04
+      Row 3: A3=اردیبهشت , B3=0.03
+      Row 4: A4=خرداد, B4=0.03
+      Row 5: A5=سه ماهه اول, B5=3.3000000000000002E-2
+      Row 6: A6=تیر, B6=0.05
+      Row 7: A7=مرداد, B7=0.03
+      Row 8: A8=شهریور, B8=0.03
+      Row 9: A9=سه ماهه دوم , B9=0.04
+      Row 10: A10=مهر, B10=0.02
+      Row 11: A11=آبان, B11=0.03
+      Row 12: A12=آذر, B12=2.1000000000000001E-2
+      Row 13: A13=سه ماهه سوم , B13=0.02
+      Row 14: A14=دی , B14=2.3E-2
+      Row 15: A15=بهمن , B15=0.02
+
+==================== SLIDE 6 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای تعدادبیماران ارجاع شده به  سایرمراکز درمانی سالهای 1405-1404 [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet4.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (18 rows) ---
+      Row 1: A1= , B1=تعدادارجاع 1404, C1=تعدادارجاع 1405
+      Row 2: A2=فروردین, B2=5
+      Row 3: A3=اردیبهشت , B3=0
+      Row 4: A4=خرداد, B4=1
+      Row 5: A5=سه ماهه اول, B5=6
+      Row 6: A6=تیر, B6=2
+      Row 7: A7=مرداد, B7=4
+      Row 8: A8=شهریور, B8=0
+      Row 9: A9=سه ماهه دوم , B9=6
+      Row 10: A10=مهر, B10=2
+      Row 11: A11=آبان, B11=2
+      Row 12: A12=آذر, B12=0
+      Row 13: A13=سه ماهه سوم , B13=4
+      Row 14: A14=دی , B14=0
+      Row 15: A15=بهمن , B15=1
+
+==================== SLIDE 7 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای درصدبیماران  ارجاع  شده به  سایرمراکز درمانی سالهای 1405-1404 [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet5.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (20 rows) ---
+      Row 1: A1= , B1=تعدادارجاع 1404, C1=تعدادارجاع 1405
+      Row 2: A2=فروردین, B2=1.7000000000000001E-2, H2=0.7
+      Row 3: A3=اردیبهشت , B3=0, H3=0.6
+      Row 4: A4=خرداد, B4=2.8E-3, H4=0.4
+      Row 5: A5=سه ماهه اول, B5=6.6000000000000008E-3, H5=0.4
+      Row 6: A6=تیر, B6=7.1000000000000004E-3, H6=0.52499999999999991
+      Row 7: A7=مرداد, B7=1.0800000000000001E-2
+      Row 8: A8=شهریور, B8=0
+      Row 9: A9=سه ماهه دوم , B9=5.9666666666666661E-3
+      Row 10: A10=مهر, B10=5.1999999999999998E-3
+      Row 11: A11=آبان, B11=6.0000000000000001E-3
+      Row 12: A12=آذر, B12=0
+      Row 13: A13=سه ماهه سوم , B13=3.7333333333333333E-3
+      Row 14: A14=دی , B14=0
+      Row 15: A15=بهمن , B15=2E-3
+
+==================== SLIDE 8 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای  تعدادمرگ ومیربیماران سالهای 1405-1404 [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet6.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (18 rows) ---
+      Row 1: A1= , B1=تعدادمرگ ومير1404, C1=تعدادمرگ ومير1405
+      Row 2: A2=فروردین, B2=16
+      Row 3: A3=اردیبهشت , B3=23
+      Row 4: A4=خرداد, B4=22
+      Row 5: A5=سه ماهه اول, B5=61
+      Row 6: A6=تیر, B6=16, I6=0, K6=0
+      Row 7: A7=مرداد, B7=14
+      Row 8: A8=شهریور, B8=23
+      Row 9: A9=سه ماهه دوم , B9=53
+      Row 10: A10=مهر, B10=17
+      Row 11: A11=آبان, B11=23
+      Row 12: A12=آذر, B12=20
+      Row 13: A13=سه ماهه سوم , B13=60
+      Row 14: A14=دی , B14=29
+      Row 15: A15=بهمن , B15=16
+
+==================== SLIDE 9 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  اي تعدادمرگ ومير(شش ماهه ) سالهای 1405-1404
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet7.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (4 rows) ---
+      Row 1: A1= , B1=مرگ ومير1404, C1=مرگ ومير1405
+      Row 2: A2=شش ماهه اول, B2=114
+      Row 3: A3=شش ماهه دوم , B3=111
+      Row 4: A4=کل بیماران , B4=225
+
+==================== SLIDE 10 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای تعدادبیماران پذیرش شده بخش اورژانس سالهای 1404-1405 [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet8.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (17 rows) ---
+      Row 1: A1= , B1=تعدادبیماران پذیرش شده 1404, C1=تعدادبیماران پذیرش شده 1405
+      Row 2: A2=فروردین, B2=386
+      Row 3: A3=اردیبهشت , B3=333
+      Row 4: A4=خرداد, B4=332, G4=1433
+      Row 5: A5=سه ماهه اول, B5=1051, G5=1350
+      Row 6: A6=تیر, B6=271, G6=2783
+      Row 7: A7=مرداد, B7=375
+      Row 8: A8=شهریور, B8=385
+      Row 9: A9=سه ماهه دوم , B9=1031
+      Row 10: A10=مهر, B10=373
+      Row 11: A11=آبان, B11=420
+      Row 12: A12=آذر, B12=565
+      Row 13: A13=سه ماهه سوم , B13=1358
+      Row 14: A14=دی , B14=603
+      Row 15: A15=بهمن , B15=425
+
+==================== SLIDE 11 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای تعداد بیماران پذیرش شده بخش اورژانس سالهای 1405-1404(شش ماهه)
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet9.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (4 rows) ---
+      Row 1: A1= , B1=تعدادبیماران پذیرش شده 1404, C1=تعدادبیماران پذیرش شده 1405
+      Row 2: A2=شش ماهه اول, B2=2082
+      Row 3: A3=شش ماهه دوم , B3=2868
+      Row 4: A4=کل بیماران , B4=4950
+
+==================== SLIDE 12 ====================
+Slide Texts: اورژانس
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای تعدادترک بامسئولیت شخصی اورژانس وسایربخشهای درمانی سال 1405-1404 [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet10.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (17 rows) ---
+      Row 1: A1= , B1=تعدادترک بامسئولیت شخصی اورژانس1404, C1=تعدادترک بامسئولیت شخصی سایربخشها 1404, D1=تعدادترک بامسئولیت شخصی اورژانس1405, E1=تعدادترک بامسئولیت شخصی سایربخشها 1405
+      Row 2: A2=فروردین, B2=35, C2=28
+      Row 3: A3=اردیبهشت , B3=36, C3=17
+      Row 4: A4=خرداد, B4=29, C4=15, H4=100
+      Row 5: A5=سه ماهه اول, B5=100, C5=60, H5=74
+      Row 6: A6=تیر, B6=29, C6=34, H6=174
+      Row 7: A7=مرداد, B7=42, C7=32
+      Row 8: A8=شهریور, B8=36, C8=18
+      Row 9: A9=سه ماهه دوم , B9=107, C9=84
+      Row 10: A10=مهر, B10=29, C10=24
+      Row 11: A11=آبان, B11=38, C11=46
+      Row 12: A12=آذر, B12=28, C12=30
+      Row 13: A13=سه ماهه سوم , B13=95, C13=100
+      Row 14: A14=دی , B14=50, C14=22
+      Row 15: A15=بهمن , B15=35, C15=23
+
+==================== SLIDE 13 ====================
+Slide Texts: اورژانس 1404
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای تعداد ترک بامسئولیت شخصی اورژانس ،بیمارستان سالهای 1405-1404(شش ماهه) [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet11.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (4 rows) ---
+      Row 1: A1= , B1=اورژانس 1404, C1=بیمارستان 1404, D1=اورژانس 1405, E1=بیمارستان 1405
+      Row 2: A2=شش ماهه اول, B2=207, C2=144
+      Row 3: A3=شش ماهه دوم , B3=205, C3=174
+      Row 4: A4=کل بیماران , B4=412, C4=318
+
+==================== SLIDE 14 ====================
+Slide Texts: اورژانس 1404
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای درصد ترک بامسئولیت شخصی اورژانس ،بیمارستان سالهای 1405-1404(شش ماهه) [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet12.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (4 rows) ---
+      Row 1: A1= , B1=اورژانس 1404, C1=بیمارستان 1404, D1=اورژانس 1405, E1=بیمارستان 1405
+      Row 2: A2=شش ماهه اول, B2=9.5000000000000001E-2, C2=7.0000000000000007E-2, H2=8
+      Row 3: A3=شش ماهه دوم , B3=7.0999999999999994E-2, C3=6.9000000000000006E-2, H3=5.8
+      Row 4: A4=کل بیماران , B4=8.299999999999999E-2, C4=6.9500000000000006E-2, H4=6.9
+
+==================== SLIDE 15 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای درصدترک بامسئولیت شخصی بخشهای درمانی بیمارستان امید  سالهاي 1405-1404-1403 [VALUE] [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet13.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (24 rows) ---
+      Row 1: A1= , B1=درصدترک بامسئولیت شخصی 1403, C1=درصدترک بامسئولیت شخصی 1404, D1=درصدترک بامسئولیت شخصی 1405
+      Row 2: A2=فروردین, B2=1.9E-2, C2=8.3000000000000004E-2
+      Row 3: A3=اردیبهشت , B3=3.4000000000000002E-2, C3=3.5999999999999997E-2
+      Row 4: A4=خرداد, B4=2.1999999999999999E-2, C4=0.04, H4=6, J4=4.5999999999999999E-2
+      Row 5: A5=سه ماهه اول, B5=2.5000000000000001E-2, C5=0.06, H5=8, J5=4.7E-2
+      Row 6: A6=تیر, B6=1.2E-2, C6=0.114, H6=8, J6=0.08
+      Row 7: A7=مرداد, B7=1.2E-2, C7=8.5000000000000006E-2, H7=8, J7=5.7666666666666665E-2
+      Row 8: A8=شهریور, B8=0.02, C8=4.3999999999999997E-2, H8=7.5
+      Row 9: A9=سه ماهه دوم , B9=1.4E-2, C9=0.06
+      Row 10: A10=مهر, B10=2.1999999999999999E-2, C10=7.0000000000000007E-2, I10=0.06
+      Row 11: A11=آبان, B11=5.8000000000000003E-2, C11=0.12, I11=0.06
+      Row 12: A12=آذر, B12=4.2999999999999997E-2, C12=8.1000000000000003E-2, I12=0.08
+      Row 13: A13=سه ماهه سوم , B13=0.04, C13=0.08, I13=5.7700000000000001E-2
+      Row 14: A14=دی , B14=5.3999999999999999E-2, C14=4.5999999999999999E-2, I14=6.442500000000001E-2
+      Row 15: A15=بهمن , B15=7.7499999999999999E-2, C15=4.7E-2
+
+==================== SLIDE 16 ====================
+Slide Texts: مالی | مالی | سایرموارد
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای دلایل ترک بامسئولیت شخصی در بخشهای درمانی سال 1405-1404
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet14.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (6 rows) ---
+      Row 1: A1= , B1=مشكلات مالي 1404, C1=مشكلات مالي 1405, D1=ادامه درمان درمنزل 1404, E1=ادامه درمان درمنزل 1405, F1=ادامه درمان درمراكز دولتي 1404, G1=ادامه درمان درمراكز دولتي 1405, H1=سايرموارد1404, I1=سايرموارد1405
+      Row 2: A2=سه ماهه اول, B2=0.5, D2=0.31, F2=0.13, H2=0.08
+      Row 3: A3=سه ماهه دوم , B3=0.35, D3=0.32, F3=0.23, H3=0.12
+      Row 4: A4=سه ماهه سوم , B4=0.56000000000000005, D4=0.26, F4=0.13, H4=0.04
+      Row 5: A5=سه ماهه چهارم, B5=0.34, D5=0.35499999999999998, F5=0.21, H5=0.21
+      Row 6: A6=ميانگين كل, B6=0.43750000000000006, D6=0.31125000000000003, F6=0.17499999999999999, H6=0.1125
+
+==================== SLIDE 17 ====================
+Slide Texts: درمان منزل | مالی | مالی
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای دلایل ترک بامسئولیت شخصی در بخش اورژانس سال 1405-1404 [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet15.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (14 rows) ---
+      Row 1: A1= , B1=مشكلات مالي 1404, C1=مشكلات مالي 1405, D1=ادامه درمان درمنزل 1404, E1=ادامه درمان درمنزل 1405, F1=ادامه درمان درمراکزدولتي 1404, G1=ادامه درمان درمراکزدولتي 1405, H1=سايرموارد1404, I1=سايرموارد1405
+      Row 2: A2=سه ماهه اول, B2=0.59, D2=0.21, F2=0.17, H2=0.04
+      Row 3: A3=سه ماهه دوم , B3=0.49, D3=0.34, F3=0.23, H3=0.02
+      Row 4: A4=سه ماهه سوم , B4=0.53, D4=0.23, F4=0.2, H4=0.05
+      Row 5: A5=سه ماهه چهارم, B5=0.51, D5=0.253, F5=0.157, H5=0.03
+      Row 6: A6=ميانگين كل, B6=0.53, D6=0.25824999999999998, F6=0.18925000000000003, H6=3.5000000000000003E-2
+      Row 7: 
+      Row 9: 
+      Row 10: 
+      Row 11: 
+      Row 12: 
+      Row 13: 
+      Row 14: 
+      Row 15: 
+
+==================== SLIDE 18 ====================
+Slide Texts: پذیرش 1404 | اعزام  1404 | اعزام1404
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای تعدادبیماران پذیرش شده،ترک بامسئولیت شخصی،اعزام  سالهای 1405-1404
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet16.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (9 rows) ---
+      Row 1: A1= , B1=تعداد بیماران پذیرش شده 1404, C1=تعداد بیماران پذیرش شده 1405, D1=تعدادترک بامسئولیت شخصی 1404, E1=تعدادترک بامسئولیت شخصی 1405, F1=تعداداعزام 1404, G1=تعداداعزام 1405
+      Row 2: A2=سه ماهه اول, B2=1117, D2=60, F2=29
+      Row 3: A3=سه ماهه دوم , B3=1056, D3=84, F3=33
+      Row 4: A4=سه ماهه سوم , B4=1046, D4=100, F4=22
+      Row 5: A5=سه ماهه چهارم, B5=1256, D5=22, F5=28
+      Row 9: 
+      Row 10: 
+      Row 11: 
+      Row 12: 
+
+==================== SLIDE 19 ====================
+Slide Texts: شاخص توصیفی بیمارستان امید دريك نگاه | سالهای 1405-1404
+
+==================== SLIDE 20 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای اعمال جراحی 1404-1405 [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet17.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (18 rows) ---
+      Row 1: A1= , B1=تعداداعمال جراحی 1404, C1=تعداداعمال جراحی 1405
+      Row 2: A2=فروردین, B2=123
+      Row 3: A3=اردیبهشت , B3=176
+      Row 4: A4=خرداد, B4=138, I4=0
+      Row 5: A5=سه ماهه اول, B5=437
+      Row 6: A6=تیر, B6=122
+      Row 7: A7=مرداد, B7=146
+      Row 8: A8=شهریور, B8=159
+      Row 9: A9=سه ماهه دوم , B9=427
+      Row 10: A10=مهر, B10=116
+      Row 11: A11=آبان, B11=128
+      Row 12: A12=آذر, B12=117, F12=361
+      Row 13: A13=سه ماهه سوم , B13=361, F13=731
+      Row 14: A14=دی , B14=254, F14=1092
+      Row 15: A15=بهمن , B15=309
+
+==================== SLIDE 21 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای تعداد اعمال جراحی(شش ماهه)1405-1404
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet18.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (4 rows) ---
+      Row 1: A1= , B1=تعداداعمال جراحی 1404, C1=تعداداعمال جراحی 1405
+      Row 2: A2=شش ماهه اول, B2=864
+      Row 3: A3=شش ماهه دوم , B3=1092
+      Row 4: A4=کل بیماران , B4=1956
+
+==================== SLIDE 22 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای تعدادکنسلی اعمال جراحی 1405-1404 [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet19.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (18 rows) ---
+      Row 1: A1= , B1=تعدادکنسلی 1404, C1=تعدادکنسلی 1405
+      Row 2: A2=فروردین, B2=0
+      Row 3: A3=اردیبهشت , B3=1
+      Row 4: A4=خرداد, B4=0
+      Row 5: A5=سه ماهه اول, B5=1, H5=14
+      Row 6: A6=تیر, B6=2, H6=11
+      Row 7: A7=مرداد, B7=0, H7=7
+      Row 8: A8=شهریور, B8=2, H8=4
+      Row 9: A9=سه ماهه دوم , B9=4, H9=36
+      Row 10: A10=مهر, B10=0
+      Row 11: A11=آبان, B11=0
+      Row 12: A12=آذر, B12=2
+      Row 13: A13=سه ماهه سوم , B13=2
+      Row 14: A14=دی , B14=0
+      Row 15: A15=بهمن , B15=1
+
+==================== SLIDE 23 ====================
+Slide Texts: سایر: عدم وجودیا آماده شدن خون درخواستی ،حساسیت دارویی، عدم خریدتجهیزات توسط بیمار و...
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای دلایل کنسل اعمال جراحی سالهای 1405-1404
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet20.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (10 rows) ---
+      Row 1: A1= , B1=دارو1404, C1=دارو1405, D1=بیمه 1404, E1=بیمه 1405, F1=بیماری مزمن قلبی ودیابت1404, G1=بیماری مزمن قلبی ودیابت1405, H1=اختلالات آزمایشات1404, I1=اختلالات آزمایشات1405, J1=های ریسک1404, K1=های ریسک1405, L1=پنومونی1404, M1=پنومونی1405, N1=عدم رضایت 1404, O1=عدم رضایت 1405, P1=سایر1404, Q1=سایر1405
+      Row 2: A2=سه ماهه اول, J2=1
+      Row 3: A3=سه ماهه دوم , H3=2, J3=1, P3=1
+      Row 4: A4=سه ماهه سوم , H4=1
+      Row 5: A5=سه ماهه چهارم, P5=1
+      Row 6: A6=جمع کل , F6=0, H6=3, J6=2, L6=0, N6=0, P6=2
+      Row 9: 
+      Row 10: 
+      Row 11: 
+      Row 12: 
+
+==================== SLIDE 24 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای اعمال جراحی (جراحی اعصاب وارتوپدی)1405-1404 [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet21.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (17 rows) ---
+      Row 1: A1= , B1=تعدادجراحی اعصاب 1404, C1=تعدادجراحی اعصاب 1405
+      Row 2: A2=فروردین, B2=52
+      Row 3: A3=اردیبهشت , B3=85
+      Row 4: A4=خرداد, B4=53
+      Row 5: A5=سه ماهه اول, B5=190
+      Row 6: A6=تیر, B6=78
+      Row 7: A7=مرداد, B7=73
+      Row 8: A8=شهریور, B8=74
+      Row 9: A9=سه ماهه دوم , B9=225
+      Row 10: A10=مهر, B10=56
+      Row 11: A11=آبان, B11=24
+      Row 12: A12=آذر, B12=42
+      Row 13: A13=سه ماهه سوم , B13=122
+      Row 14: A14=دی , B14=102
+      Row 15: A15=بهمن , B15=101
+
+==================== SLIDE 25 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای اعمال جراحی (جراحی عمومی)1405-1404 [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet22.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (17 rows) ---
+      Row 1: A1= , B1=تعدادجراحی عمومی 1404, C1=تعدادجراحی عمومی 1405
+      Row 2: A2=فروردین, B2=8
+      Row 3: A3=اردیبهشت , B3=26
+      Row 4: A4=خرداد, B4=17
+      Row 5: A5=سه ماهه اول, B5=51
+      Row 6: A6=تیر, B6=12
+      Row 7: A7=مرداد, B7=23
+      Row 8: A8=شهریور, B8=21
+      Row 9: A9=سه ماهه دوم , B9=56
+      Row 10: A10=مهر, B10=18
+      Row 11: A11=آبان, B11=14
+      Row 12: A12=آذر, B12=17
+      Row 13: A13=سه ماهه سوم , B13=49
+      Row 14: A14=دی , B14=41
+      Row 15: A15=بهمن , B15=81
+
+==================== SLIDE 26 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای اعمال جراحی (جراحی زیبایی)1405-1404 [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet23.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (17 rows) ---
+      Row 1: A1= , B1=تعدادجراحی زیبایی 1404, C1=تعدادجراحی زیبایی 1405
+      Row 2: A2=فروردین, B2=23
+      Row 3: A3=اردیبهشت , B3=20
+      Row 4: A4=خرداد, B4=30
+      Row 5: A5=سه ماهه اول, B5=73
+      Row 6: A6=تیر, B6=12
+      Row 7: A7=مرداد, B7=18
+      Row 8: A8=شهریور, B8=31
+      Row 9: A9=سه ماهه دوم , B9=61
+      Row 10: A10=مهر, B10=20
+      Row 11: A11=آبان, B11=43
+      Row 12: A12=آذر, B12=39
+      Row 13: A13=سه ماهه سوم , B13=102
+      Row 14: A14=دی , B14=70
+      Row 15: A15=بهمن , B15=93
+
+==================== SLIDE 27 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای اعمال جراحی (زنان)1405-1404 [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet24.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (17 rows) ---
+      Row 1: A1= , B1=تعدادجراحی زنان 1404, C1=تعدادجراحی زنان 1405
+      Row 2: A2=فروردین, B2=7
+      Row 3: A3=اردیبهشت , B3=3
+      Row 4: A4=خرداد, B4=30
+      Row 5: A5=سه ماهه اول, B5=40
+      Row 6: A6=تیر, B6=16
+      Row 7: A7=مرداد, B7=26
+      Row 8: A8=شهریور, B8=30
+      Row 9: A9=سه ماهه دوم , B9=72
+      Row 10: A10=مهر, B10=19
+      Row 11: A11=آبان, B11=8
+      Row 12: A12=آذر, B12=19
+      Row 13: A13=سه ماهه سوم , B13=46
+      Row 14: A14=دی , B14=7
+      Row 15: A15=بهمن , B15=3
+
+==================== SLIDE 28 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای اعمال جراحی (ارولوژی)1405-1404 [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet25.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (17 rows) ---
+      Row 1: A1= , B1=تعدادجراحی ارولوژی1404, C1=تعدادجراحی ارولوژی1405
+      Row 2: A2=فروردین, B2=6
+      Row 3: A3=اردیبهشت , B3=6
+      Row 4: A4=خرداد, B4=4
+      Row 5: A5=سه ماهه اول, B5=16
+      Row 6: A6=تیر, B6=4
+      Row 7: A7=مرداد, B7=2
+      Row 8: A8=شهریور, B8=1
+      Row 9: A9=سه ماهه دوم , B9=7
+      Row 10: A10=مهر, B10=1
+      Row 11: A11=آبان, B11=0
+      Row 12: A12=آذر, B12=0
+      Row 13: A13=سه ماهه سوم , B13=1
+      Row 14: A14=دی , B14=0
+      Row 15: A15=بهمن , B15=1
+
+==================== SLIDE 29 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای اعمال جراحی ( ENT )  1405-1404 [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet26.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (17 rows) ---
+      Row 1: A1= , B1=تعدادجراحی ENT1404, C1=تعدادجراحی ENT1405
+      Row 2: A2=فروردین, B2=0
+      Row 3: A3=اردیبهشت , B3=0
+      Row 4: A4=خرداد, B4=4
+      Row 5: A5=سه ماهه اول, B5=4
+      Row 6: A6=تیر, B6=0
+      Row 7: A7=مرداد, B7=3
+      Row 8: A8=شهریور, B8=0
+      Row 9: A9=سه ماهه دوم , B9=3
+      Row 10: A10=مهر, B10=2
+      Row 11: A11=آبان, B11=0
+      Row 12: A12=آذر, B12=0
+      Row 13: A13=سه ماهه سوم , B13=2
+      Row 14: A14=دی , B14=0
+      Row 15: A15=بهمن , B15=0
+
+==================== SLIDE 30 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای اعمال جراحی (اورژانسی)1405-1404 [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet27.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (17 rows) ---
+      Row 1: A1= , B1=تعدادجراحی اورژانسی1404, C1=تعدادجراحی اورژانسی1405
+      Row 2: A2=فروردین, B2=13
+      Row 3: A3=اردیبهشت , B3=12
+      Row 4: A4=خرداد, B4=10
+      Row 5: A5=سه ماهه اول, B5=35
+      Row 6: A6=تیر, B6=1
+      Row 7: A7=مرداد, B7=7
+      Row 8: A8=شهریور, B8=5
+      Row 9: A9=سه ماهه دوم , B9=13
+      Row 10: A10=مهر, B10=2
+      Row 11: A11=آبان, B11=3
+      Row 12: A12=آذر, B12=2
+      Row 13: A13=سه ماهه سوم , B13=7
+      Row 14: A14=دی , B14=7
+      Row 15: A15=بهمن , B15=4
+
+==================== SLIDE 31 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای تعدادپروسیجرهای آندوسکوپی 1405-1404 [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet28.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (17 rows) ---
+      Row 1: A1= , B1=تعدادآندوسکوپی 1404, C1=تعدادآندوسکوپی 1405
+      Row 2: A2=فروردین, B2=93
+      Row 3: A3=اردیبهشت , B3=198
+      Row 4: A4=خرداد, B4=133
+      Row 5: A5=سه ماهه اول, B5=424
+      Row 6: A6=تیر, B6=133
+      Row 7: A7=مرداد, B7=91
+      Row 8: A8=شهریور, B8=3
+      Row 9: A9=سه ماهه دوم , B9=227
+      Row 10: A10=مهر, B10=34
+      Row 11: A11=آبان, B11=41
+      Row 12: A12=آذر, B12=10
+      Row 13: A13=سه ماهه سوم , B13=85
+      Row 14: A14=دی 
+      Row 15: A15=بهمن 
+
+==================== SLIDE 32 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای تعدادپروسیجرهای فیزیوتراپی 1405-1404 [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet29.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (17 rows) ---
+      Row 1: A1= , B1=پروسیجرها 1404, C1=پروسیجرها 1405
+      Row 2: A2=فروردین, B2=506
+      Row 3: A3=اردیبهشت , B3=608
+      Row 4: A4=خرداد, B4=553
+      Row 5: A5=سه ماهه اول, B5=1667
+      Row 6: A6=تیر, B6=391
+      Row 7: A7=مرداد, B7=619
+      Row 8: A8=شهریور, B8=621
+      Row 9: A9=سه ماهه دوم , B9=1631
+      Row 10: A10=مهر, B10=627
+      Row 11: A11=آبان, B11=711
+      Row 12: A12=آذر
+      Row 13: A13=سه ماهه سوم 
+      Row 14: A14=دی 
+      Row 15: A15=بهمن 
+
+==================== SLIDE 33 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای تعداد مراجعین کلینیک قلب 1405-1404 [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet30.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (17 rows) ---
+      Row 1: A1= , B1=مراجعین 1404, C1=مراجعین 1405
+      Row 2: A2=فروردین, B2=27
+      Row 3: A3=اردیبهشت , B3=216
+      Row 4: A4=خرداد, B4=93
+      Row 5: A5=سه ماهه اول, B5=336
+      Row 6: A6=تیر, B6=143
+      Row 7: A7=مرداد, B7=167
+      Row 8: A8=شهریور, B8=232
+      Row 9: A9=سه ماهه دوم , B9=542
+      Row 10: A10=مهر, B10=339
+      Row 11: A11=آبان, B11=297
+      Row 12: A12=آذر, B12=160
+      Row 13: A13=سه ماهه سوم , B13=796
+      Row 14: A14=دی , B14=415
+      Row 15: A15=بهمن , B15=425
+
+==================== SLIDE 34 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای تعداد مراجعین کلینیک جنرال 1405-1404 [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet31.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (17 rows) ---
+      Row 1: A1= , B1=مراجعین 1404, C1=مراجعین 1405
+      Row 2: A2=فروردین, B2=446
+      Row 3: A3=اردیبهشت , B3=791
+      Row 4: A4=خرداد, B4=484
+      Row 5: A5=سه ماهه اول, B5=1721
+      Row 6: A6=تیر, B6=491
+      Row 7: A7=مرداد, B7=806
+      Row 8: A8=شهریور, B8=628
+      Row 9: A9=سه ماهه دوم , B9=1925
+      Row 10: A10=مهر, B10=569
+      Row 11: A11=آبان, B11=573
+      Row 12: A12=آذر, B12=560
+      Row 13: A13=سه ماهه سوم , B13=1702
+      Row 14: A14=دی , B14=478
+      Row 15: A15=بهمن , B15=585
+
+==================== SLIDE 35 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای عملکرد گروه قلب درسال 1404 - 1405 [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet32.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (17 rows) ---
+      Row 1: A1= , B1=تعداد جراحی قلب 1404, C1=تعداد جراحی قلب 1405
+      Row 2: A2=فروردین, B2=3
+      Row 3: A3=اردیبهشت , B3=5
+      Row 4: A4=خرداد, B4=0
+      Row 5: A5=سه ماهه اول, B5=8
+      Row 6: A6=تیر, B6=2
+      Row 7: A7=مرداد, B7=0
+      Row 8: A8=شهریور, B8=2
+      Row 9: A9=سه ماهه دوم , B9=4
+      Row 10: A10=مهر, B10=1
+      Row 11: A11=آبان, B11=1
+      Row 12: A12=آذر, B12=1
+      Row 13: A13=سه ماهه سوم , B13=3
+      Row 14: A14=دی , B14=1
+      Row 15: A15=بهمن , B15=3
+
+==================== SLIDE 36 ====================
+Slide Texts: کل زایمان ها 1404
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای تعدادکل زایمانها1405-1404 [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet33.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (18 rows) ---
+      Row 1: A1= , B1=تعدادزایمان1404, C1=تعدادزایمان1405
+      Row 2: A2=فروردین, B2=40
+      Row 3: A3=اردیبهشت , B3=33
+      Row 4: A4=خرداد, B4=31, G4=104
+      Row 5: A5=سه ماهه اول, B5=104, G5=83
+      Row 6: A6=تیر, B6=41, G6=51
+      Row 7: A7=مرداد, B7=25, G7=62
+      Row 8: A8=شهریور, B8=17, G8=300
+      Row 9: A9=سه ماهه دوم , B9=83
+      Row 10: A10=مهر, B10=25
+      Row 11: A11=آبان, B11=13
+      Row 12: A12=آذر, B12=13
+      Row 13: A13=سه ماهه سوم , B13=51
+      Row 14: A14=دی , B14=30
+      Row 15: A15=بهمن , B15=32
+
+==================== SLIDE 37 ====================
+Slide Texts: کل زایمان طبیعی 1404
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای تعدادزایمان طبیعی 1405-1404 [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet34.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (18 rows) ---
+      Row 1: A1= , B1=تعدادزایمان طبیعی1404, C1=تعدادزایمان طبیعی1405
+      Row 2: A2=فروردین, B2=14
+      Row 3: A3=اردیبهشت , B3=8
+      Row 4: A4=خرداد, B4=6, G4=28
+      Row 5: A5=سه ماهه اول, B5=28, G5=23
+      Row 6: A6=تیر, B6=4, G6=13
+      Row 7: A7=مرداد, B7=2, G7=9
+      Row 8: A8=شهریور, B8=17, G8=73
+      Row 9: A9=سه ماهه دوم , B9=23
+      Row 10: A10=مهر, B10=10
+      Row 11: A11=آبان, B11=1
+      Row 12: A12=آذر, B12=2
+      Row 13: A13=سه ماهه سوم , B13=13
+      Row 14: A14=دی , B14=3
+      Row 15: A15=بهمن , B15=5
+
+==================== SLIDE 38 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای تعدادزایمان طبیعی ونخست زا 1405-1404
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet35.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (8 rows) ---
+      Row 1: A1= , B1=تعدادزایمان طبیعی 1404, C1=تعدادزایمان طبیعی 1405, D1=تعدادزایمان نخست زا 1404, E1=تعدادزایمان نخست زا 1405
+      Row 2: A2=سه ماهه اول, B2=32, D2=8
+      Row 3: A3=سه ماهه دوم , B3=23, D3=3
+      Row 4: A4=شش ماهه اول , B4=55, D4=11
+      Row 5: A5=سه ماهه سوم , B5=13, D5=2
+      Row 6: A6=سه ماهه چهارم, B6=9, D6=3
+      Row 7: A7=شش ماهه دوم, B7=22, D7=5
+      Row 8: A8=تعدادکل, B8=77, D8=16
+
+==================== SLIDE 39 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای تعدادزایمان سزارین 1405-1404 [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet36.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (18 rows) ---
+      Row 1: A1= , B1=تعدادسزارین 1404, C1=تعدادسزارین 1405
+      Row 2: A2=فروردین, B2=26
+      Row 3: A3=اردیبهشت , B3=25
+      Row 4: A4=خرداد, B4=25
+      Row 5: A5=سه ماهه اول, B5=76, H5=76
+      Row 6: A6=تیر, B6=13, H6=60
+      Row 7: A7=مرداد, B7=23, H7=38
+      Row 8: A8=شهریور, B8=24, H8=63
+      Row 9: A9=سه ماهه دوم , B9=60, H9=237
+      Row 10: A10=مهر, B10=15
+      Row 11: A11=آبان, B11=12
+      Row 12: A12=آذر, B12=11
+      Row 13: A13=سه ماهه سوم , B13=38
+      Row 14: A14=دی , B14=27
+      Row 15: A15=بهمن , B15=27
+
+==================== SLIDE 40 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای تعدادزایمان سزارین ونخست زا 1405-1404
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet37.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (8 rows) ---
+      Row 1: A1= , B1=تعدادسزارین 1404, C1=تعدادسزارین 1405, D1=تعدادسزارین نخست زا 1404, E1=تعدادسزارین نخست زا 1405
+      Row 2: A2=سه ماهه اول, B2=76, D2=8, J2=62
+      Row 3: A3=سه ماهه دوم , B3=60, D3=3, J3=11
+      Row 4: A4=شش ماهه اول , B4=136, D4=11, J4=73
+      Row 5: A5=سه ماهه سوم , B5=38, D5=26
+      Row 6: A6=سه ماهه چهارم, B6=63, D6=36
+      Row 7: A7=شش ماهه دوم, B7=101, D7=62
+      Row 8: A8=تعدادکل, B8=237, D8=73
+
+==================== SLIDE 41 ====================
+Slide Texts: شاخصهای عملکردی دفترپرستاری دريك نگاه | سالهای 1405-1404
+
+==================== SLIDE 42 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای چگونگی ثبت صحیح گزارش پرستاری درپرونده بیماران سالهای 1405-1404 [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet38.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (18 rows) ---
+      Row 1: A1= , B1=ثبت گزارش 1404, C1=ثبت گزارش 1405
+      Row 2: A2=فروردین, B2=0.7
+      Row 3: A3=اردیبهشت , B3=0.77
+      Row 4: A4=خرداد, B4=0.8
+      Row 5: A5=سه ماهه اول, B5=0.75666666666666671, I5=76
+      Row 6: A6=تیر, B6=0.78, I6=77
+      Row 7: A7=مرداد, B7=0.79, I7=75
+      Row 8: A8=شهریور, B8=0.74, I8=80
+      Row 9: A9=سه ماهه دوم , B9=0.77, I9=77
+      Row 10: A10=مهر, B10=0.7
+      Row 11: A11=آبان, B11=0.75
+      Row 12: A12=آذر, B12=0.8
+      Row 13: A13=سه ماهه سوم , B13=0.75
+      Row 14: A14=دی , B14=0.85
+      Row 15: A15=بهمن , B15=0.79
+
+==================== SLIDE 43 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای چگونگی ثبت صحیح ارزيابي اوليه درپرونده بیماران سالهای 1405-1404 [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet39.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (18 rows) ---
+      Row 1: A1= , B1=ثبت ارزیابی اولیه 1404, C1=ثبت ارزیابی اولیه 1405
+      Row 2: A2=فروردین, B2=1
+      Row 3: A3=اردیبهشت , B3=0.87
+      Row 4: A4=خرداد, B4=0.67, H4=85
+      Row 5: A5=سه ماهه اول, B5=0.84666666666666668, H5=87
+      Row 6: A6=تیر, B6=0.8, H6=90
+      Row 7: A7=مرداد, B7=0.91, H7=86
+      Row 8: A8=شهریور, B8=0.91, H8=87
+      Row 9: A9=سه ماهه دوم , B9=0.87333333333333341
+      Row 10: A10=مهر, B10=0.86
+      Row 11: A11=آبان, B11=0.95
+      Row 12: A12=آذر, B12=0.89
+      Row 13: A13=سه ماهه سوم , B13=0.9
+      Row 14: A14=دی , B14=0.9
+      Row 15: A15=بهمن , B15=0.91
+
+==================== SLIDE 44 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای چگونگی ثبت صحیح كاردكس دارويي  بیماران سالهای 1405-1404 [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet40.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (18 rows) ---
+      Row 1: A1= , B1=ثبت کاردکس دارویی 1404, C1=ثبت کاردکس دارویی 1405
+      Row 2: A2=فروردین, B2=0.82
+      Row 3: A3=اردیبهشت , B3=0.87
+      Row 4: A4=خرداد, B4=0.7, H4=80
+      Row 5: A5=سه ماهه اول, B5=0.79666666666666652, H5=84
+      Row 6: A6=تیر, B6=0.83, H6=81
+      Row 7: A7=مرداد, B7=0.86, H7=67
+      Row 8: A8=شهریور, B8=0.82, H8=78
+      Row 9: A9=سه ماهه دوم , B9=0.83666666666666656
+      Row 10: A10=مهر, B10=0.81
+      Row 11: A11=آبان, B11=0.82
+      Row 12: A12=آذر, B12=0.79
+      Row 13: A13=سه ماهه سوم , B13=0.80666666666666664
+      Row 14: A14=دی , B14=0.62
+      Row 15: A15=بهمن , B15=0.64
+
+==================== SLIDE 45 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای چگونگی ثبت صحیح مستندات پرستاران درپرونده بیماران سالهای 1405-1404 [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet41.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (18 rows) ---
+      Row 1: A1= , B1=ثبت مستندات 1404, C1=ثبت مستندات 1405
+      Row 2: A2=فروردین, B2=0.84
+      Row 3: A3=اردیبهشت , B3=0.84, H3=78
+      Row 4: A4=خرداد, B4=0.73, H4=80
+      Row 5: A5=سه ماهه اول, B5=0.80333333333333334, H5=82
+      Row 6: A6=تیر, B6=0.81, H6=81
+      Row 7: A7=مرداد, B7=0.86, H7=80.25
+      Row 8: A8=شهریور, B8=0.78
+      Row 9: A9=سه ماهه دوم , B9=0.81666666666666676
+      Row 10: A10=مهر, B10=0.79
+      Row 11: A11=آبان, B11=0.84
+      Row 12: A12=آذر, B12=0.8
+      Row 13: A13=سه ماهه سوم , B13=0.80999999999999994
+      Row 14: A14=دی , B14=0.79
+      Row 15: A15=بهمن , B15=0.78
+
+==================== SLIDE 46 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای چگونگی تزريق خون وفرآورده هاي آن سالهای 1405-1404 [VALUE] [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet42.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (18 rows) ---
+      Row 1: A1= , B1=تزریق خون 1404, C1=تزریق خون 1405
+      Row 2: A2=فروردین, B2=0.93
+      Row 3: A3=اردیبهشت , B3=0.86, H3=88
+      Row 4: A4=خرداد, B4=0.84, H4=86
+      Row 5: A5=سه ماهه اول, B5=0.87666666666666659, H5=93
+      Row 6: A6=تیر, B6=0.75, H6=97
+      Row 7: A7=مرداد, B7=0.91, H7=91
+      Row 8: A8=شهریور, B8=0.92
+      Row 9: A9=سه ماهه دوم , B9=0.86
+      Row 10: A10=مهر, B10=0.94
+      Row 11: A11=آبان, B11=0.96
+      Row 12: A12=آذر, B12=0.88
+      Row 13: A13=سه ماهه سوم , B13=0.92666666666666664
+      Row 14: A14=دی , B14=0.94
+      Row 15: A15=بهمن , B15=1
+
+==================== SLIDE 47 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای عملكردصحيح دارودهي وسرم تراپي سالهای 1405-1404 [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet43.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (18 rows) ---
+      Row 1: A1= , B1=دارودهي وسرم تراپي 1404, C1=دارودهي وسرم تراپي 1405
+      Row 2: A2=فروردین, B2=0.86
+      Row 3: A3=اردیبهشت , B3=0.63
+      Row 4: A4=خرداد, B4=0.69, G4=73
+      Row 5: A5=سه ماهه اول, B5=0.72666666666666657, G5=77
+      Row 6: A6=تیر, B6=0.83, G6=78
+      Row 7: A7=مرداد, B7=0.65, G7=78
+      Row 8: A8=شهریور, B8=0.83, G8=76.5
+      Row 9: A9=سه ماهه دوم , B9=0.77
+      Row 10: A10=مهر, B10=0.78
+      Row 11: A11=آبان, B11=0.75
+      Row 12: A12=آذر, B12=0.8
+      Row 13: A13=سه ماهه سوم , B13=0.77666666666666673
+      Row 14: A14=دی , B14=1
+      Row 15: A15=بهمن , B15=0.7
+
+==================== SLIDE 48 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای عملكردصحيح مراقبتهاي بعدازاعمال جراحي سالهای 1405-1404 [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet44.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (18 rows) ---
+      Row 1: A1= , B1=مراقبت بعدازجراحي  1404, C1=مراقبت بعدازجراحي  1405
+      Row 2: A2=فروردین, B2=0.73, I2=77
+      Row 3: A3=اردیبهشت , B3=0.8, I3=92
+      Row 4: A4=خرداد, B4=0.77, I4=86
+      Row 5: A5=سه ماهه اول, B5=0.76666666666666661, I5=86
+      Row 6: A6=تیر, B6=0.89, I6=85.25
+      Row 7: A7=مرداد, B7=0.98
+      Row 8: A8=شهریور, B8=0.88
+      Row 9: A9=سه ماهه دوم , B9=0.91666666666666663
+      Row 10: A10=مهر, B10=0.87
+      Row 11: A11=آبان, B11=0.87
+      Row 12: A12=آذر, B12=0.83
+      Row 13: A13=سه ماهه سوم , B13=0.85666666666666658
+      Row 14: A14=دی , B14=0.92
+      Row 15: A15=بهمن , B15=0.83499999999999996
+
+==================== SLIDE 49 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای  رعایت نظام تحویل وتحول بالینی ( Hand  Off/Hand  Over )سالهای 1405-1404 [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet45.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (18 rows) ---
+      Row 1: A1= , B1=تحویل وتحول بالینی   1404, C1=تحویل وتحول بالینی   1405
+      Row 2: A2=فروردین, B2=0.87, J2=83
+      Row 3: A3=اردیبهشت , B3=0.82, J3=76
+      Row 4: A4=خرداد, B4=0.79, J4=78
+      Row 5: A5=سه ماهه اول, B5=0.82666666666666666, J5=90
+      Row 6: A6=تیر, B6=0.8, J6=81.75
+      Row 7: A7=مرداد, B7=0.7
+      Row 8: A8=شهریور, B8=0.78
+      Row 9: A9=سه ماهه دوم , B9=0.76000000000000012
+      Row 10: A10=مهر, B10=0.78
+      Row 11: A11=آبان, B11=0.76
+      Row 12: A12=آذر, B12=0.8
+      Row 13: A13=سه ماهه سوم , B13=0.77999999999999992
+      Row 14: A14=دی , B14=0.96
+      Row 15: A15=بهمن , B15=0.9
+
+==================== SLIDE 50 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای  عملکرد پرستاران درمراقبتهای پرستاری  سالهای 1405-1404 [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet46.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (18 rows) ---
+      Row 1: A1= , B1=عملکرد پرستاران    1404, C1=عملکرد پرستاران    1405
+      Row 2: A2=فروردین, B2=0.87
+      Row 3: A3=اردیبهشت , B3=0.76
+      Row 4: A4=خرداد, B4=0.78, I4=80
+      Row 5: A5=سه ماهه اول, B5=0.80333333333333334, I5=83
+      Row 6: A6=تیر, B6=0.82, I6=84
+      Row 7: A7=مرداد, B7=0.81, I7=85
+      Row 8: A8=شهریور, B8=0.86, I8=83
+      Row 9: A9=سه ماهه دوم , B9=0.83
+      Row 10: A10=مهر, B10=0.85
+      Row 11: A11=آبان, B11=0.85
+      Row 12: A12=آذر, B12=0.83
+      Row 13: A13=سه ماهه سوم , B13=0.84333333333333327
+      Row 14: A14=دی , B14=0.96
+      Row 15: A15=بهمن , B15=0.81
+
+==================== SLIDE 51 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای ثبت مستندات وعملکردپرستاران سال 1405-1404 [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet47.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (7 rows) ---
+      Row 1: A1= , B1=ثبت مستندات درپرونده1404, C1=عملکرد پرستاری 1404, D1=ثبت مستندات درپرونده1405, E1=عملکرد پرستاری 1405
+      Row 2: A2=سه ماهه اول, B2=0.81, C2=0.81
+      Row 3: A3=سه ماهه دوم , B3=0.82, C3=0.83
+      Row 4: A4=سه ماهه سوم , B4=0.81, C4=0.84
+      Row 5: A5=سه ماهه چهارم, B5=0.78, C5=0.85
+      Row 6: A6=ميانگين كل, B6=0.80499999999999994, C6=0.83250000000000002
+      Row 7: 
+
+==================== SLIDE 52 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای تعداد مواردجدید   زخم بستر    سالهای 1405-1404 [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet48.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (18 rows) ---
+      Row 1: A1= , B1=مواردجدیدزخم بستر1404, C1=مواردجدیدزخم بستر1405
+      Row 2: A2=فروردین, B2=4
+      Row 3: A3=اردیبهشت , B3=9
+      Row 4: A4=خرداد, B4=6, I4=13
+      Row 5: A5=سه ماهه اول, B5=19, I5=11
+      Row 6: A6=تیر, B6=3, I6=12
+      Row 7: A7=مرداد, B7=10, I7=16
+      Row 8: A8=شهریور, B8=6, I8=52
+      Row 9: A9=سه ماهه دوم , B9=19
+      Row 10: A10=مهر, B10=11
+      Row 11: A11=آبان, B11=11
+      Row 12: A12=آذر, B12=3
+      Row 13: A13=سه ماهه سوم , B13=25
+      Row 14: A14=دی , B14=6
+      Row 15: A15=بهمن , B15=7
+
+==================== SLIDE 53 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای میزان بروز زخم بسترجدیدسالهای 1405-1404 [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet49.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (18 rows) ---
+      Row 1: A1= , B1=درصدبروززخم بستر1404, C1=درصدبروززخم بستر1405
+      Row 2: A2=فروردین, B2=1.2999999999999999E-2
+      Row 3: A3=اردیبهشت , B3=1.9E-2
+      Row 4: A4=خرداد, B4=1.6E-2, I4=1.6
+      Row 5: A5=سه ماهه اول, B5=1.6E-2, I5=1.8
+      Row 6: A6=تیر, B6=1.06E-2, I6=1.6
+      Row 7: A7=مرداد, B7=2.7E-2, I7=1.4
+      Row 8: A8=شهریور, B8=1.4999999999999999E-2, I8=1.6
+      Row 9: A9=سه ماهه دوم , B9=1.7533333333333335E-2
+      Row 10: A10=مهر, B10=2.8000000000000001E-2
+      Row 11: A11=آبان, B11=3.3000000000000002E-2
+      Row 12: A12=آذر, B12=4.0000000000000001E-3
+      Row 13: A13=سه ماهه سوم , B13=1.6E-2
+      Row 14: A14=دی , B14=1.2E-2
+      Row 15: A15=بهمن , B15=1.6E-2
+
+==================== SLIDE 54 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای تعداد    CPR   سالهای 1405-1404 [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet50.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (18 rows) ---
+      Row 1: A1= , B1=تعدادCPR1404, C1=تعدادCPR1405
+      Row 2: A2=فروردین, B2=19
+      Row 3: A3=اردیبهشت , B3=29, G3=37
+      Row 4: A4=خرداد, B4=30, G4=40
+      Row 5: A5=سه ماهه اول, B5=78, G5=68
+      Row 6: A6=تیر, B6=16, G6=112
+      Row 7: A7=مرداد, B7=19, G7=257
+      Row 8: A8=شهریور, B8=27
+      Row 9: A9=سه ماهه دوم , B9=62
+      Row 10: A10=مهر, B10=22
+      Row 11: A11=آبان, B11=35
+      Row 12: A12=آذر, B12=29
+      Row 13: A13=سه ماهه سوم , B13=86
+      Row 14: A14=دی , B14=40
+      Row 15: A15=بهمن , B15=20
+
+==================== SLIDE 55 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای میزان احیای موفق سالهای 1405-1404 [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet51.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (18 rows) ---
+      Row 1: A1= , B1=درصدااحیا موفق 1404, C1=درصدااحیا موفق 1405
+      Row 2: A2=فروردین, B2=0.16
+      Row 3: A3=اردیبهشت , B3=0.21
+      Row 4: A4=خرداد, B4=0.27, I4=21
+      Row 5: A5=سه ماهه اول, B5=0.21333333333333335, I5=20
+      Row 6: A6=تیر, B6=0.19, I6=26
+      Row 7: A7=مرداد, B7=0.27, I7=22.333333333333332
+      Row 8: A8=شهریور, B8=0.15
+      Row 9: A9=سه ماهه دوم , B9=0.20333333333333334
+      Row 10: A10=مهر, B10=0.23
+      Row 11: A11=آبان, B11=0.23
+      Row 12: A12=آذر, B12=0.31
+      Row 13: A13=سه ماهه سوم , B13=0.25666666666666665
+      Row 14: A14=دی , B14=0.25
+      Row 15: A15=بهمن , B15=0.2
+
+==================== SLIDE 56 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  اعلام بیماران باسطح هوشیاری زیر5  GCS<5 (شش ماهه)1405-1404
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet52.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (4 rows) ---
+      Row 1: A1= , B1=GCS<51404, C1=GCS<51405
+      Row 2: A2=شش ماهه اول, B2=6
+      Row 3: A3=شش ماهه دوم , B3=3
+      Row 4: A4=کل بیماران , B4=9
+
+==================== SLIDE 57 ====================
+Slide Texts: شاخصهای عملکردی رعایت ایمنی بیمار | دريك نگاه | سالهای 1405-1404
+
+==================== SLIDE 58 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای رعایت دستورالعمل اطمینان از اتصالات صحیح سالهای 1405-1404 [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet53.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (18 rows) ---
+      Row 1: A1= , B1=رعایت اتصالات   1404, C1=رعایت اتصالات   1405
+      Row 2: A2=فروردین, B2=0.79
+      Row 3: A3=اردیبهشت , B3=0.71, I3=78
+      Row 4: A4=خرداد, B4=0.83, I4=78
+      Row 5: A5=سه ماهه اول, B5=0.77666666666666673, I5=77
+      Row 6: A6=تیر, B6=0.75, I6=71
+      Row 7: A7=مرداد, B7=0.83, I7=76
+      Row 8: A8=شهریور, B8=0.76
+      Row 9: A9=سه ماهه دوم , B9=0.77999999999999992
+      Row 10: A10=مهر, B10=0.8
+      Row 11: A11=آبان, B11=0.76
+      Row 12: A12=آذر, B12=0.74
+      Row 13: A13=سه ماهه سوم , B13=0.76666666666666661
+      Row 14: A14=دی , B14=0.69
+      Row 15: A15=بهمن , B15=0.78
+
+==================== SLIDE 59 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای گزارش  تعدادعوارض ناخواسته فرآورده های خونی  سالهای 1405-1404 [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet54.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (18 rows) ---
+      Row 1: A1= , B1=تعدادعوارض خون 1404, C1=تعدادعوارض خون 1405
+      Row 2: A2=فروردین, B2=0
+      Row 3: A3=اردیبهشت , B3=0
+      Row 4: A4=خرداد, B4=0
+      Row 5: A5=سه ماهه اول, B5=0
+      Row 6: A6=تیر, B6=1
+      Row 7: A7=مرداد, B7=0
+      Row 8: A8=شهریور, B8=0
+      Row 9: A9=سه ماهه دوم , B9=1
+      Row 10: A10=مهر, B10=0
+      Row 11: A11=آبان, B11=0
+      Row 12: A12=آذر, B12=0
+      Row 13: A13=سه ماهه سوم , B13=0
+      Row 14: A14=دی , B14=1
+      Row 15: A15=بهمن , B15=1
+
+==================== SLIDE 60 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای گزارش  تعدادعوارض ناخواسته دارویی   ADR سالهای 1405-1404 [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet55.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (18 rows) ---
+      Row 1: A1= , B1=تعدادعوارض ناخواسته دارویی1404, C1=تعدادعوارض ناخواسته دارویی1405
+      Row 2: A2=فروردین, B2=1
+      Row 3: A3=اردیبهشت , B3=0
+      Row 4: A4=خرداد, B4=0
+      Row 5: A5=سه ماهه اول, B5=1
+      Row 6: A6=تیر, B6=1
+      Row 7: A7=مرداد, B7=0
+      Row 8: A8=شهریور, B8=0
+      Row 9: A9=سه ماهه دوم , B9=1
+      Row 10: A10=مهر, B10=0
+      Row 11: A11=آبان, B11=1
+      Row 12: A12=آذر, B12=1
+      Row 13: A13=سه ماهه سوم , B13=2
+      Row 14: A14=دی , B14=1
+      Row 15: A15=بهمن , B15=1
+
+==================== SLIDE 61 ====================
+Slide Texts: شاخصهای عملکردی کنترل عفونت | دريك نگاه | سالهای 1405-1404
+
+==================== SLIDE 62 ====================
+Slide Texts: سه ماهه دوم 1404 | ميانگين كل 1404
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای نرخ عفونت بیمارستانی سالهای 1405-1404 [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet56.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (18 rows) ---
+      Row 1: A1= , B1=نرخ عفونت 1404, C1=نرخ عفونت 1405
+      Row 2: A2=فروردین, B2=0.1404
+      Row 3: A3=اردیبهشت , B3=6.0100000000000001E-2, G3=9
+      Row 4: A4=خرداد, B4=7.7299999999999994E-2, G4=5.0599999999999996
+      Row 5: A5=سه ماهه اول, B5=9.2600000000000002E-2, G5=8.4700000000000006
+      Row 6: A6=تیر, B6=0.1179, G6=6.49
+      Row 7: A7=مرداد, B7=0, G7=7.2550000000000008
+      Row 8: A8=شهریور, B8=3.4000000000000002E-2
+      Row 9: A9=سه ماهه دوم , B9=5.0633333333333336E-2
+      Row 10: A10=مهر, B10=0.12540000000000001
+      Row 11: A11=آبان, B11=7.3400000000000007E-2
+      Row 12: A12=آذر, B12=5.5300000000000002E-2
+      Row 13: A13=سه ماهه سوم , B13=8.4700000000000011E-2
+      Row 14: A14=دی , B14=3.4799999999999998E-2
+      Row 15: A15=بهمن , B15=6.8400000000000002E-2
+
+==================== SLIDE 63 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای ميانگين رعايت بهداشت دست 1405-1404(شش ماهه)
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet57.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (5 rows) ---
+      Row 1: A1= , B1=رعايت بهداشت دست 1404, C1=رعايت بهداشت دست 1405
+      Row 2: A2=شش ماهه اول, B2=0.31
+      Row 3: A3=شش ماهه دوم , B3=0.36520000000000002
+      Row 4: A4=ميانگين كل , B4=0.33760000000000001
+      Row 5: 
+
+==================== SLIDE 64 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای پذيرش رعايت بهداشت دست به تفكيك گروهها 1405-1404(شش ماهه)
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet58.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (7 rows) ---
+      Row 1: A1= , B1=رعايت بهداشت دست 1404 شش ماهه اول , C1=رعايت بهداشت دست 1404 شش ماهه دوم , D1=رعايت بهداشت دست 1405 شش ماهه اول , E1=رعايت بهداشت دست 1405 شش ماهه دوم 
+      Row 2: A2=گروه پزشكان , B2=0.25, C2=0.36820000000000003
+      Row 3: A3=گروه برستاري , B3=0.42, C3=0.34460000000000002
+      Row 4: A4=گروه پيراپزشكي, B4=0.24, C4=0.24
+      Row 5: A5=گروه خدمات وتاسيساتي 44%, B5=0.32, C5=0.38279999999999997
+      Row 6: A6=ميانگين كل , B6=0.3075, C6=0.33390000000000003
+      Row 7: 
+
+==================== SLIDE 65 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای رعایت احتیاطهای استاندارد سالهای 1405-1404 [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet59.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (19 rows) ---
+      Row 1: A1= , B1=رعایت احتیاطهای استاندارد 11404, C1=رعایت احتیاطهای استاندارد 1405
+      Row 2: A2=فروردین, B2=0.86
+      Row 3: A3=اردیبهشت , B3=0.85
+      Row 4: A4=خرداد, B4=0.86, F4=86
+      Row 5: A5=سه ماهه اول, B5=0.85666666666666658, F5=91
+      Row 6: A6=تیر, B6=0.83, F6=88
+      Row 7: A7=مرداد, B7=0.96, F7=85
+      Row 8: A8=شهریور, B8=0.93, F8=87.5
+      Row 9: A9=سه ماهه دوم , B9=0.90666666666666673
+      Row 10: A10=مهر, B10=0.93
+      Row 11: A11=آبان, B11=0.93
+      Row 12: A12=آذر, B12=0.79
+      Row 13: A13=سه ماهه سوم , B13=0.88333333333333341
+      Row 14: A14=دی , B14=0.76
+      Row 15: A15=بهمن , B15=0.87
+
+==================== SLIDE 66 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای رعایت تزریقات ایمن سالهای 1405-1404 [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet60.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (19 rows) ---
+      Row 1: A1= , B1=تزریقات ایمن 1404, C1=تزریقات ایمن 1405
+      Row 2: A2=فروردین, B2=0.84
+      Row 3: A3=اردیبهشت , B3=0.85, G3=84
+      Row 4: A4=خرداد, B4=0.84, G4=81
+      Row 5: A5=سه ماهه اول, B5=0.84333333333333327, G5=88
+      Row 6: A6=تیر, B6=0.74, G6=91
+      Row 7: A7=مرداد, B7=0.93700000000000006, G7=86
+      Row 8: A8=شهریور, B8=0.75
+      Row 9: A9=سه ماهه دوم , B9=0.80900000000000005
+      Row 10: A10=مهر, B10=0.88
+      Row 11: A11=آبان, B11=0.93
+      Row 12: A12=آذر, B12=0.84
+      Row 13: A13=سه ماهه سوم , B13=0.8833333333333333
+      Row 14: A14=دی , B14=0.87
+      Row 15: A15=بهمن , B15=0.95
+
+==================== SLIDE 67 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای  تعدادمواجهه شغلی (کارکنان) سالهای 1405-1404 [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet61.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (18 rows) ---
+      Row 1: A1= , B1=تعدادمواجهه شغلی 1404, C1=تعدادمواجهه شغلی 1405
+      Row 2: A2=فروردین, B2=0
+      Row 3: A3=اردیبهشت , B3=1
+      Row 4: A4=خرداد, B4=2
+      Row 5: A5=سه ماهه اول, B5=3
+      Row 6: A6=تیر, B6=1
+      Row 7: A7=مرداد, B7=1, G7=3
+      Row 8: A8=شهریور, B8=0, G8=2
+      Row 9: A9=سه ماهه دوم , B9=2, G9=5
+      Row 10: A10=مهر, B10=3, G10=6
+      Row 11: A11=آبان, B11=1, G11=16
+      Row 12: A12=آذر, B12=1
+      Row 13: A13=سه ماهه سوم , B13=5
+      Row 14: A14=دی , B14=1
+      Row 15: A15=بهمن , B15=1
+
+==================== SLIDE 68 ====================
+Slide Texts: اقدامات اصلاحی جهت کاهش مواجهه شغلی کارکنان | هدف : | کاهش | 0/2% | درصد | موارد مواجهات | شغلی | 1-آموزش گروهی وچهره به چهره چگونگی | جمع | آوری | اجسام | تیز و برنده | وتزریقات ایمن | 2-ارزیابی ونظارت مستمرکارکنان توسط مسئولین وسوپروایزران براساس چک لیست تزریقات ایمن
+
+==================== SLIDE 69 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای درصدمواجهه شغلی کارکنان سالهای 1405-1404 [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet62.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (18 rows) ---
+      Row 1: A1= , B1=درصدمواجهه شغلی 1404, C1=درصدمواجهه شغلی 1405
+      Row 2: A2=فروردین, B2=0
+      Row 3: A3=اردیبهشت , B3=2E-3
+      Row 4: A4=خرداد, B4=5.0000000000000001E-3, G4=0.3
+      Row 5: A5=سه ماهه اول, B5=3.0000000000000001E-3, F5=0.7, G5=0.2
+      Row 6: A6=تیر, B6=2E-3, F6=0.2, G6=0.4
+      Row 7: A7=مرداد, B7=2E-3, F7=0.2, G7=0.8
+      Row 8: A8=شهریور, B8=0, F8=0.36666666666666664, G8=0.42500000000000004
+      Row 9: A9=سه ماهه دوم , B9=2E-3
+      Row 10: A10=مهر, B10=7.0000000000000001E-3
+      Row 11: A11=آبان, B11=2E-3
+      Row 12: A12=آذر, B12=2E-3
+      Row 13: A13=سه ماهه سوم , B13=3.5999999999999999E-3
+      Row 14: A14=دی , B14=4.0000000000000001E-3
+      Row 15: A15=بهمن , B15=4.0000000000000001E-3
+
+==================== SLIDE 70 ====================
+Slide Texts: شاخصهای عملکردی آموزش به بیمار | دريك نگاه | سالهای 1405-1404
+
+==================== SLIDE 71 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای میزان اثربخشی آموزش به بیماران (فالوآپ تلفنی وحضوری)سوپروایزرسالهای 1405-1404 [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet63.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (21 rows) ---
+      Row 1: A1= , B1=اثربخشی آموزش به بیمار1404, C1=اثربخشی آموزش به بیمار1405
+      Row 2: A2=فروردین, B2=0.75
+      Row 3: A3=اردیبهشت , B3=0.78, G3=0.75
+      Row 4: A4=خرداد, B4=0.77, G4=0.71
+      Row 5: A5=سه ماهه اول, B5=0.76666666666666661, G5=0.74
+      Row 6: A6=تیر, B6=0.76, G6=0.76
+      Row 7: A7=مرداد, B7=0.7, G7=0.74
+      Row 8: A8=شهریور, B8=0.76
+      Row 9: A9=سه ماهه دوم , B9=0.73999999999999988
+      Row 10: A10=مهر, B10=0.79
+      Row 11: A11=آبان, B11=0.7
+      Row 12: A12=آذر, B12=0.76
+      Row 13: A13=سه ماهه سوم , B13=0.75
+      Row 14: A14=دی , B14=0.85
+      Row 15: A15=بهمن , B15=0.72
+
+==================== SLIDE 72 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودار گزارش برگزاری کلاسهای گروهی  آموزش به بیمار(برگزاری میز خدمت ) سال 1405-1404
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet64.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (6 rows) ---
+      Row 1: A1= , B1=تعدادکلاسهای گروهی 1404, C1=تعدادکلاسهای گروهی 1405
+      Row 2: A2=سه ماهه اول, B2=4
+      Row 3: A3=سه ماهه دوم , B3=8
+      Row 4: A4=سه ماهه سوم , B4=8
+      Row 5: A5=سه ماهه چهارم, B5=5
+      Row 6: A6=جمع کل , B6=25
+
+==================== SLIDE 73 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای  تعدادموارد سقوط بيماران  سالهای 1405-1404 [VALUE]
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet65.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (18 rows) ---
+      Row 1: A1= , B1=تعدادمواردسقوط 1404, C1=تعدادمواردسقوط 1405
+      Row 2: A2=فروردین, B2=0
+      Row 3: A3=اردیبهشت , B3=0
+      Row 4: A4=خرداد, B4=0
+      Row 5: A5=سه ماهه اول, B5=0
+      Row 6: A6=تیر, B6=0
+      Row 7: A7=مرداد, B7=0
+      Row 8: A8=شهریور, B8=0
+      Row 9: A9=سه ماهه دوم , B9=0
+      Row 10: A10=مهر, B10=0
+      Row 11: A11=آبان, B11=0
+      Row 12: A12=آذر, B12=0
+      Row 13: A13=سه ماهه سوم , B13=0
+      Row 14: A14=دی , B14=0
+      Row 15: A15=بهمن , B15=0
+
+==================== SLIDE 74 ====================
+Slide Texts: شاخصهای آموزش کارکنان دريك نگاه | سالهای 1405-1404
+
+==================== SLIDE 75 ====================
+Slide Texts: 
+  Chart Type: barChart
+  Chart Titles: نمودارمقایسه  ای گزارش آموزش کارکنان سال 1405-1404
+  Excel File: ppt/embeddings/Microsoft_Excel_Worksheet66.xlsx
+    --- Sheet: xl/worksheets/sheet1.xml (7 rows) ---
+      Row 1: A1= , B1=سرانه آموزش 1404, C1=تعدادکلاسهای یرگزارشده 1404, D1=تعدادشرکت کنندگان درکلاس برون سازمانی1404, E1=سرانه آموزش 1405, F1=تعدادکلاسهای یرگزارشده 1405, G1=تعدادشرکت کنندگان درکلاس برون سازمانی1405
+      Row 2: A2=سه ماهه اول, B2=1.7999999999999999E-2, C2=6, D2=4
+      Row 3: A3=سه ماهه دوم , B3=2.9000000000000001E-2, C3=14, D3=10
+      Row 4: A4=سه ماهه سوم , B4=3.3000000000000002E-2, C4=14, D4=36
+      Row 5: A5=سه ماهه چهارم, B5=1.4999999999999999E-2, C5=11, D5=13
+      Row 6: A6=جمع کل , B6=9.5000000000000001E-2, C6=45, D6=63
+      Row 7: 
+
+==================== SLIDE 76 ====================
+Slide Texts: ازتوجه شما عزیزان سپاسگزاریم | به امیدارتقاء شاخصها درسالهای آتی
+

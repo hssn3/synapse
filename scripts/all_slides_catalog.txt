@@ -1,0 +1,76 @@
+Slide 01: Type= | ChartTitle= | SlideTexts=بيمارستان اميد دريك نگاه | سالهای 1405-1404
+Slide 02: Type=barChart | ChartTitle=نمودارمقایسه  ای تعدادبیماران پذیرش شده سالهای 1405-1404 [VALUE] | SlideTexts=
+Slide 03: Type=barChart | ChartTitle=نمودارمقایسه  ای تعداد بیماران پذیرش شده سالهای 1405-1404(شش ماهه) | SlideTexts=
+Slide 04: Type=barChart | ChartTitle=نمودارمقایسه  ای تعداداعزام بیماران به  سایرمراکزدرمانی سالهای 1405-1404 [VALUE] | SlideTexts=
+Slide 05: Type=barChart | ChartTitle=نمودارمقایسه  ای درصد اعزام بیماران به  سایرمراکزدرمانی    سالهای 1405-1404 [VALUE] | SlideTexts=
+Slide 06: Type=barChart | ChartTitle=نمودارمقایسه  ای تعدادبیماران ارجاع شده به  سایرمراکز درمانی سالهای 1405-1404 [VALUE] | SlideTexts=
+Slide 07: Type=barChart | ChartTitle=نمودارمقایسه  ای درصدبیماران  ارجاع  شده به  سایرمراکز درمانی سالهای 1405-1404 [VALUE] | SlideTexts=
+Slide 08: Type=barChart | ChartTitle=نمودارمقایسه  ای  تعدادمرگ ومیربیماران سالهای 1405-1404 [VALUE] | SlideTexts=
+Slide 09: Type=barChart | ChartTitle=نمودارمقایسه  اي تعدادمرگ ومير(شش ماهه ) سالهای 1405-1404 | SlideTexts=
+Slide 10: Type=barChart | ChartTitle=نمودارمقایسه  ای تعدادبیماران پذیرش شده بخش اورژانس سالهای 1404-1405 [VALUE] | SlideTexts=
+Slide 11: Type=barChart | ChartTitle=نمودارمقایسه  ای تعداد بیماران پذیرش شده بخش اورژانس سالهای 1405-1404(شش ماهه) | SlideTexts=
+Slide 12: Type=barChart | ChartTitle=نمودارمقایسه  ای تعدادترک بامسئولیت شخصی اورژانس وسایربخشهای درمانی سال 1405-1404 [VALUE] | SlideTexts=اورژانس
+Slide 13: Type=barChart | ChartTitle=نمودارمقایسه  ای تعداد ترک بامسئولیت شخصی اورژانس ،بیمارستان سالهای 1405-1404(شش ماهه) [VALUE] | SlideTexts=اورژانس 1404
+Slide 14: Type=barChart | ChartTitle=نمودارمقایسه  ای درصد ترک بامسئولیت شخصی اورژانس ،بیمارستان سالهای 1405-1404(شش ماهه) [VALUE] | SlideTexts=اورژانس 1404
+Slide 15: Type=barChart | ChartTitle=نمودارمقایسه  ای درصدترک بامسئولیت شخصی بخشهای درمانی بیمارستان امید  سالهاي 1405-1404-1403 [VALUE] [VALUE] | SlideTexts=
+Slide 16: Type=barChart | ChartTitle=نمودارمقایسه  ای دلایل ترک بامسئولیت شخصی در بخشهای درمانی سال 1405-1404 | SlideTexts=مالی | مالی | سایرموارد
+Slide 17: Type=barChart | ChartTitle=نمودارمقایسه  ای دلایل ترک بامسئولیت شخصی در بخش اورژانس سال 1405-1404 [VALUE] | SlideTexts=درمان منزل | مالی | مالی
+Slide 18: Type=barChart | ChartTitle=نمودارمقایسه  ای تعدادبیماران پذیرش شده،ترک بامسئولیت شخصی،اعزام  سالهای 1405-1404 | SlideTexts=پذیرش 1404 | اعزام  1404 | اعزام1404
+Slide 19: Type= | ChartTitle= | SlideTexts=شاخص توصیفی بیمارستان امید دريك نگاه | سالهای 1405-1404
+Slide 20: Type=barChart | ChartTitle=نمودارمقایسه  ای اعمال جراحی 1404-1405 [VALUE] | SlideTexts=
+Slide 21: Type=barChart | ChartTitle=نمودارمقایسه  ای تعداد اعمال جراحی(شش ماهه)1405-1404 | SlideTexts=
+Slide 22: Type=barChart | ChartTitle=نمودارمقایسه  ای تعدادکنسلی اعمال جراحی 1405-1404 [VALUE] | SlideTexts=
+Slide 23: Type=barChart | ChartTitle=نمودارمقایسه  ای دلایل کنسل اعمال جراحی سالهای 1405-1404 | SlideTexts=سایر: عدم وجودیا آماده شدن خون درخواستی ،حساسیت دارویی، عدم خریدتجهیزات توسط بیمار و...
+Slide 24: Type=barChart | ChartTitle=نمودارمقایسه  ای اعمال جراحی (جراحی اعصاب وارتوپدی)1405-1404 [VALUE] | SlideTexts=
+Slide 25: Type=barChart | ChartTitle=نمودارمقایسه  ای اعمال جراحی (جراحی عمومی)1405-1404 [VALUE] | SlideTexts=
+Slide 26: Type=barChart | ChartTitle=نمودارمقایسه  ای اعمال جراحی (جراحی زیبایی)1405-1404 [VALUE] | SlideTexts=
+Slide 27: Type=barChart | ChartTitle=نمودارمقایسه  ای اعمال جراحی (زنان)1405-1404 [VALUE] | SlideTexts=
+Slide 28: Type=barChart | ChartTitle=نمودارمقایسه  ای اعمال جراحی (ارولوژی)1405-1404 [VALUE] | SlideTexts=
+Slide 29: Type=barChart | ChartTitle=نمودارمقایسه  ای اعمال جراحی ( ENT )  1405-1404 [VALUE] | SlideTexts=
+Slide 30: Type=barChart | ChartTitle=نمودارمقایسه  ای اعمال جراحی (اورژانسی)1405-1404 [VALUE] | SlideTexts=
+Slide 31: Type=barChart | ChartTitle=نمودارمقایسه  ای تعدادپروسیجرهای آندوسکوپی 1405-1404 [VALUE] | SlideTexts=
+Slide 32: Type=barChart | ChartTitle=نمودارمقایسه  ای تعدادپروسیجرهای فیزیوتراپی 1405-1404 [VALUE] | SlideTexts=
+Slide 33: Type=barChart | ChartTitle=نمودارمقایسه  ای تعداد مراجعین کلینیک قلب 1405-1404 [VALUE] | SlideTexts=
+Slide 34: Type=barChart | ChartTitle=نمودارمقایسه  ای تعداد مراجعین کلینیک جنرال 1405-1404 [VALUE] | SlideTexts=
+Slide 35: Type=barChart | ChartTitle=نمودارمقایسه  ای عملکرد گروه قلب درسال 1404 - 1405 [VALUE] | SlideTexts=
+Slide 36: Type=barChart | ChartTitle=نمودارمقایسه  ای تعدادکل زایمانها1405-1404 [VALUE] | SlideTexts=کل زایمان ها 1404
+Slide 37: Type=barChart | ChartTitle=نمودارمقایسه  ای تعدادزایمان طبیعی 1405-1404 [VALUE] | SlideTexts=کل زایمان طبیعی 1404
+Slide 38: Type=barChart | ChartTitle=نمودارمقایسه  ای تعدادزایمان طبیعی ونخست زا 1405-1404 | SlideTexts=
+Slide 39: Type=barChart | ChartTitle=نمودارمقایسه  ای تعدادزایمان سزارین 1405-1404 [VALUE] | SlideTexts=
+Slide 40: Type=barChart | ChartTitle=نمودارمقایسه  ای تعدادزایمان سزارین ونخست زا 1405-1404 | SlideTexts=
+Slide 41: Type= | ChartTitle= | SlideTexts=شاخصهای عملکردی دفترپرستاری دريك نگاه | سالهای 1405-1404
+Slide 42: Type=barChart | ChartTitle=نمودارمقایسه  ای چگونگی ثبت صحیح گزارش پرستاری درپرونده بیماران سالهای 1405-1404 [VALUE] | SlideTexts=
+Slide 43: Type=barChart | ChartTitle=نمودارمقایسه  ای چگونگی ثبت صحیح ارزيابي اوليه درپرونده بیماران سالهای 1405-1404 [VALUE] | SlideTexts=
+Slide 44: Type=barChart | ChartTitle=نمودارمقایسه  ای چگونگی ثبت صحیح كاردكس دارويي  بیماران سالهای 1405-1404 [VALUE] | SlideTexts=
+Slide 45: Type=barChart | ChartTitle=نمودارمقایسه  ای چگونگی ثبت صحیح مستندات پرستاران درپرونده بیماران سالهای 1405-1404 [VALUE] | SlideTexts=
+Slide 46: Type=barChart | ChartTitle=نمودارمقایسه  ای چگونگی تزريق خون وفرآورده هاي آن سالهای 1405-1404 [VALUE] [VALUE] | SlideTexts=
+Slide 47: Type=barChart | ChartTitle=نمودارمقایسه  ای عملكردصحيح دارودهي وسرم تراپي سالهای 1405-1404 [VALUE] | SlideTexts=
+Slide 48: Type=barChart | ChartTitle=نمودارمقایسه  ای عملكردصحيح مراقبتهاي بعدازاعمال جراحي سالهای 1405-1404 [VALUE] | SlideTexts=
+Slide 49: Type=barChart | ChartTitle=نمودارمقایسه  ای  رعایت نظام تحویل وتحول بالینی ( Hand  Off/Hand  Over )سالهای 1405-1404 [VALUE] | SlideTexts=
+Slide 50: Type=barChart | ChartTitle=نمودارمقایسه  ای  عملکرد پرستاران درمراقبتهای پرستاری  سالهای 1405-1404 [VALUE] | SlideTexts=
+Slide 51: Type=barChart | ChartTitle=نمودارمقایسه  ای ثبت مستندات وعملکردپرستاران سال 1405-1404 [VALUE] | SlideTexts=
+Slide 52: Type=barChart | ChartTitle=نمودارمقایسه  ای تعداد مواردجدید   زخم بستر    سالهای 1405-1404 [VALUE] | SlideTexts=
+Slide 53: Type=barChart | ChartTitle=نمودارمقایسه  ای میزان بروز زخم بسترجدیدسالهای 1405-1404 [VALUE] | SlideTexts=
+Slide 54: Type=barChart | ChartTitle=نمودارمقایسه  ای تعداد    CPR   سالهای 1405-1404 [VALUE] | SlideTexts=
+Slide 55: Type=barChart | ChartTitle=نمودارمقایسه  ای میزان احیای موفق سالهای 1405-1404 [VALUE] | SlideTexts=
+Slide 56: Type=barChart | ChartTitle=نمودارمقایسه  اعلام بیماران باسطح هوشیاری زیر5  GCS<5 (شش ماهه)1405-1404 | SlideTexts=
+Slide 57: Type= | ChartTitle= | SlideTexts=شاخصهای عملکردی رعایت ایمنی بیمار | دريك نگاه | سالهای 1405-1404
+Slide 58: Type=barChart | ChartTitle=نمودارمقایسه  ای رعایت دستورالعمل اطمینان از اتصالات صحیح سالهای 1405-1404 [VALUE] | SlideTexts=
+Slide 59: Type=barChart | ChartTitle=نمودارمقایسه  ای گزارش  تعدادعوارض ناخواسته فرآورده های خونی  سالهای 1405-1404 [VALUE] | SlideTexts=
+Slide 60: Type=barChart | ChartTitle=نمودارمقایسه  ای گزارش  تعدادعوارض ناخواسته دارویی   ADR سالهای 1405-1404 [VALUE] | SlideTexts=
+Slide 61: Type= | ChartTitle= | SlideTexts=شاخصهای عملکردی کنترل عفونت | دريك نگاه | سالهای 1405-1404
+Slide 62: Type=barChart | ChartTitle=نمودارمقایسه  ای نرخ عفونت بیمارستانی سالهای 1405-1404 [VALUE] | SlideTexts=سه ماهه دوم 1404 | ميانگين كل 1404
+Slide 63: Type=barChart | ChartTitle=نمودارمقایسه  ای ميانگين رعايت بهداشت دست 1405-1404(شش ماهه) | SlideTexts=
+Slide 64: Type=barChart | ChartTitle=نمودارمقایسه  ای پذيرش رعايت بهداشت دست به تفكيك گروهها 1405-1404(شش ماهه) | SlideTexts=
+Slide 65: Type=barChart | ChartTitle=نمودارمقایسه  ای رعایت احتیاطهای استاندارد سالهای 1405-1404 [VALUE] | SlideTexts=
+Slide 66: Type=barChart | ChartTitle=نمودارمقایسه  ای رعایت تزریقات ایمن سالهای 1405-1404 [VALUE] | SlideTexts=
+Slide 67: Type=barChart | ChartTitle=نمودارمقایسه  ای  تعدادمواجهه شغلی (کارکنان) سالهای 1405-1404 [VALUE] | SlideTexts=
+Slide 68: Type= | ChartTitle= | SlideTexts=اقدامات اصلاحی جهت کاهش مواجهه شغلی کارکنان | هدف : | کاهش | 0/2% | درصد | موارد مواجهات | شغلی | 1-آموزش گروهی وچهره به چهره چگونگی | جمع | آوری | اجسام | تیز و برنده | وتزریقات ایمن | 2-ارزیابی ونظارت مستمرکارکنان توسط مسئولین وسوپروایزران براساس چک لیست تزریقات ایمن
+Slide 69: Type=barChart | ChartTitle=نمودارمقایسه  ای درصدمواجهه شغلی کارکنان سالهای 1405-1404 [VALUE] | SlideTexts=
+Slide 70: Type= | ChartTitle= | SlideTexts=شاخصهای عملکردی آموزش به بیمار | دريك نگاه | سالهای 1405-1404
+Slide 71: Type=barChart | ChartTitle=نمودارمقایسه  ای میزان اثربخشی آموزش به بیماران (فالوآپ تلفنی وحضوری)سوپروایزرسالهای 1405-1404 [VALUE] | SlideTexts=
+Slide 72: Type=barChart | ChartTitle=نمودار گزارش برگزاری کلاسهای گروهی  آموزش به بیمار(برگزاری میز خدمت ) سال 1405-1404 | SlideTexts=
+Slide 73: Type=barChart | ChartTitle=نمودارمقایسه  ای  تعدادموارد سقوط بيماران  سالهای 1405-1404 [VALUE] | SlideTexts=
+Slide 74: Type= | ChartTitle= | SlideTexts=شاخصهای آموزش کارکنان دريك نگاه | سالهای 1405-1404
+Slide 75: Type=barChart | ChartTitle=نمودارمقایسه  ای گزارش آموزش کارکنان سال 1405-1404 | SlideTexts=
+Slide 76: Type= | ChartTitle= | SlideTexts=ازتوجه شما عزیزان سپاسگزاریم | به امیدارتقاء شاخصها درسالهای آتی

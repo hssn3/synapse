@@ -1,0 +1,1284 @@
+[
+  {
+    "slide_num": 1,
+    "slide_path": "ppt/slides/slide1.xml",
+    "slide_texts": [
+      "بيمارستان اميد دريك نگاه",
+      "سالهای 1405-1404"
+    ],
+    "charts": []
+  },
+  {
+    "slide_num": 2,
+    "slide_path": "ppt/slides/slide2.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart1.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای تعدادبیماران پذیرش شده سالهای 1405-1404",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 3,
+    "slide_path": "ppt/slides/slide3.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart2.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای تعداد بیماران پذیرش شده سالهای 1405-1404(شش ماهه)"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet1.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 4,
+    "slide_path": "ppt/slides/slide4.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart3.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای تعداداعزام بیماران به ",
+          "سایرمراکزدرمانی سالهای 1405-1404",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet2.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 5,
+    "slide_path": "ppt/slides/slide5.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart4.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای درصد اعزام بیماران به ",
+          "سایرمراکزدرمانی",
+          "  ",
+          "سالهای 1405-1404",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet3.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 6,
+    "slide_path": "ppt/slides/slide6.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart5.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای تعدادبیماران ارجاع شده به ",
+          "سایرمراکز درمانی سالهای 1405-1404",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet4.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 7,
+    "slide_path": "ppt/slides/slide7.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart6.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای درصدبیماران ",
+          "ارجاع",
+          " شده به ",
+          "سایرمراکز درمانی سالهای 1405-1404",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet5.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 8,
+    "slide_path": "ppt/slides/slide8.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart7.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای ",
+          "تعدادمرگ ومیربیماران سالهای 1405-1404",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet6.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 9,
+    "slide_path": "ppt/slides/slide9.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart8.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " اي تعدادمرگ ومير(شش ماهه",
+          ") سالهای 1405-1404"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet7.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 10,
+    "slide_path": "ppt/slides/slide10.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart9.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای تعدادبیماران پذیرش شده بخش اورژانس سالهای 1404-1405",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet8.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 11,
+    "slide_path": "ppt/slides/slide11.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart10.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای تعداد بیماران پذیرش شده بخش اورژانس سالهای 1405-1404(شش ماهه)"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet9.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 12,
+    "slide_path": "ppt/slides/slide12.xml",
+    "slide_texts": [
+      "اورژانس"
+    ],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart11.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای تعدادترک بامسئولیت شخصی اورژانس وسایربخشهای درمانی سال 1405-1404",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet10.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 13,
+    "slide_path": "ppt/slides/slide13.xml",
+    "slide_texts": [
+      "اورژانس 1404"
+    ],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart12.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای تعداد ترک بامسئولیت شخصی اورژانس ،بیمارستان سالهای 1405-1404(شش ماهه)",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet11.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 14,
+    "slide_path": "ppt/slides/slide14.xml",
+    "slide_texts": [
+      "اورژانس 1404"
+    ],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart13.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای درصد ترک بامسئولیت شخصی اورژانس ،بیمارستان سالهای 1405-1404(شش ماهه)",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet12.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 15,
+    "slide_path": "ppt/slides/slide15.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart14.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای درصدترک بامسئولیت شخصی بخشهای درمانی بیمارستان امید  سالهاي 1405-1404-1403",
+          "[VALUE]",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet13.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 16,
+    "slide_path": "ppt/slides/slide16.xml",
+    "slide_texts": [
+      "مالی",
+      "مالی",
+      "سایرموارد"
+    ],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart15.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای دلایل ترک بامسئولیت شخصی در بخشهای درمانی سال 1405-1404"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet14.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 17,
+    "slide_path": "ppt/slides/slide17.xml",
+    "slide_texts": [
+      "درمان منزل",
+      "مالی",
+      "مالی"
+    ],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart16.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای دلایل ترک بامسئولیت شخصی در بخش اورژانس سال 1405-1404",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet15.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 18,
+    "slide_path": "ppt/slides/slide18.xml",
+    "slide_texts": [
+      "پذیرش 1404",
+      "اعزام  1404",
+      "اعزام1404"
+    ],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart17.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای تعدادبیماران پذیرش شده،ترک بامسئولیت شخصی،اعزام  سالهای 1405-1404"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet16.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 19,
+    "slide_path": "ppt/slides/slide19.xml",
+    "slide_texts": [
+      "شاخص توصیفی بیمارستان امید دريك نگاه",
+      "سالهای 1405-1404"
+    ],
+    "charts": []
+  },
+  {
+    "slide_num": 20,
+    "slide_path": "ppt/slides/slide20.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart18.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای اعمال جراحی 1404-1405",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet17.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 21,
+    "slide_path": "ppt/slides/slide21.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart19.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای تعداد اعمال جراحی(شش ماهه)1405-1404"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet18.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 22,
+    "slide_path": "ppt/slides/slide22.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart20.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای تعدادکنسلی اعمال جراحی 1405-1404",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet19.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 23,
+    "slide_path": "ppt/slides/slide23.xml",
+    "slide_texts": [
+      "سایر: عدم وجودیا آماده شدن خون درخواستی ،حساسیت دارویی، عدم خریدتجهیزات توسط بیمار و..."
+    ],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart21.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای دلایل کنسل اعمال جراحی سالهای 1405-1404"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet20.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 24,
+    "slide_path": "ppt/slides/slide24.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart22.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای اعمال جراحی (جراحی اعصاب وارتوپدی)1405-1404",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet21.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 25,
+    "slide_path": "ppt/slides/slide25.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart23.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای اعمال جراحی (جراحی عمومی)1405-1404",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet22.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 26,
+    "slide_path": "ppt/slides/slide26.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart24.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای اعمال جراحی (جراحی زیبایی)1405-1404",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet23.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 27,
+    "slide_path": "ppt/slides/slide27.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart25.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای اعمال جراحی (زنان)1405-1404",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet24.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 28,
+    "slide_path": "ppt/slides/slide28.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart26.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای اعمال جراحی (ارولوژی)1405-1404",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet25.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 29,
+    "slide_path": "ppt/slides/slide29.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart27.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای اعمال جراحی (",
+          "ENT",
+          ")  1405-1404",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet26.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 30,
+    "slide_path": "ppt/slides/slide30.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart28.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای اعمال جراحی (اورژانسی)1405-1404",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet27.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 31,
+    "slide_path": "ppt/slides/slide31.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart29.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای تعدادپروسیجرهای آندوسکوپی 1405-1404",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet28.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 32,
+    "slide_path": "ppt/slides/slide32.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart30.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای تعدادپروسیجرهای فیزیوتراپی 1405-1404",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet29.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 33,
+    "slide_path": "ppt/slides/slide33.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart31.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای تعداد مراجعین کلینیک قلب 1405-1404",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet30.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 34,
+    "slide_path": "ppt/slides/slide34.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart32.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای تعداد مراجعین کلینیک جنرال 1405-1404",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet31.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 35,
+    "slide_path": "ppt/slides/slide35.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart33.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای عملکرد گروه قلب درسال 1404",
+          "-",
+          "1405",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet32.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 36,
+    "slide_path": "ppt/slides/slide36.xml",
+    "slide_texts": [
+      "کل زایمان ها 1404"
+    ],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart34.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای تعدادکل زایمانها1405-1404",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet33.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 37,
+    "slide_path": "ppt/slides/slide37.xml",
+    "slide_texts": [
+      "کل زایمان طبیعی 1404"
+    ],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart35.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای تعدادزایمان طبیعی 1405-1404",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet34.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 38,
+    "slide_path": "ppt/slides/slide38.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart36.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای تعدادزایمان طبیعی ونخست زا 1405-1404"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet35.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 39,
+    "slide_path": "ppt/slides/slide39.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart37.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای تعدادزایمان سزارین 1405-1404",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet36.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 40,
+    "slide_path": "ppt/slides/slide40.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart38.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای تعدادزایمان سزارین ونخست زا 1405-1404"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet37.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 41,
+    "slide_path": "ppt/slides/slide41.xml",
+    "slide_texts": [
+      "شاخصهای عملکردی دفترپرستاری دريك نگاه",
+      "سالهای 1405-1404"
+    ],
+    "charts": []
+  },
+  {
+    "slide_num": 42,
+    "slide_path": "ppt/slides/slide42.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart39.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای چگونگی ثبت صحیح گزارش پرستاری درپرونده بیماران سالهای 1405-1404",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet38.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 43,
+    "slide_path": "ppt/slides/slide43.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart40.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای چگونگی ثبت صحیح ارزيابي اوليه درپرونده بیماران سالهای 1405-1404",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet39.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 44,
+    "slide_path": "ppt/slides/slide44.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart41.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای چگونگی ثبت صحیح كاردكس دارويي  بیماران سالهای 1405-1404",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet40.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 45,
+    "slide_path": "ppt/slides/slide45.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart42.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای چگونگی ثبت صحیح مستندات پرستاران درپرونده بیماران سالهای 1405-1404",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet41.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 46,
+    "slide_path": "ppt/slides/slide46.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart43.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای چگونگی تزريق خون وفرآورده هاي آن سالهای 1405-1404",
+          "[VALUE]",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet42.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 47,
+    "slide_path": "ppt/slides/slide47.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart44.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای عملكردصحيح دارودهي وسرم تراپي سالهای 1405-1404",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet43.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 48,
+    "slide_path": "ppt/slides/slide48.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart45.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای عملكردصحيح مراقبتهاي بعدازاعمال جراحي سالهای 1405-1404",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet44.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 49,
+    "slide_path": "ppt/slides/slide49.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart46.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای  رعایت نظام تحویل وتحول بالینی (",
+          "Hand  Off/Hand  Over",
+          ")سالهای 1405-1404",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet45.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 50,
+    "slide_path": "ppt/slides/slide50.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart47.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای  عملکرد پرستاران درمراقبتهای پرستاری  سالهای 1405-1404",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet46.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 51,
+    "slide_path": "ppt/slides/slide51.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart48.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای ثبت مستندات وعملکردپرستاران سال 1405-1404",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet47.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 52,
+    "slide_path": "ppt/slides/slide52.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart49.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای تعداد مواردجدید",
+          " ",
+          "زخم بستر ",
+          " ",
+          "سالهای 1405-1404",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet48.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 53,
+    "slide_path": "ppt/slides/slide53.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart50.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای میزان بروز زخم بسترجدیدسالهای 1405-1404",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet49.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 54,
+    "slide_path": "ppt/slides/slide54.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart51.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای تعداد ",
+          " ",
+          "CPR",
+          " ",
+          "سالهای 1405-1404",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet50.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 55,
+    "slide_path": "ppt/slides/slide55.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart52.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای میزان احیای موفق سالهای 1405-1404",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet51.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 56,
+    "slide_path": "ppt/slides/slide56.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart53.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " اعلام بیماران باسطح هوشیاری زیر5",
+          " GCS<5",
+          "(شش ماهه)1405-1404"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet52.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 57,
+    "slide_path": "ppt/slides/slide57.xml",
+    "slide_texts": [
+      "شاخصهای عملکردی رعایت ایمنی بیمار",
+      "دريك نگاه",
+      "سالهای 1405-1404"
+    ],
+    "charts": []
+  },
+  {
+    "slide_num": 58,
+    "slide_path": "ppt/slides/slide58.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart54.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای رعایت دستورالعمل اطمینان از اتصالات صحیح سالهای 1405-1404",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet53.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 59,
+    "slide_path": "ppt/slides/slide59.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart55.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای گزارش ",
+          "تعدادعوارض ناخواسته فرآورده های خونی  سالهای 1405-1404",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet54.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 60,
+    "slide_path": "ppt/slides/slide60.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart56.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای گزارش ",
+          "تعدادعوارض ناخواسته دارویی  ",
+          "ADR",
+          "سالهای 1405-1404",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet55.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 61,
+    "slide_path": "ppt/slides/slide61.xml",
+    "slide_texts": [
+      "شاخصهای عملکردی کنترل عفونت",
+      "دريك نگاه",
+      "سالهای 1405-1404"
+    ],
+    "charts": []
+  },
+  {
+    "slide_num": 62,
+    "slide_path": "ppt/slides/slide62.xml",
+    "slide_texts": [
+      "سه ماهه دوم 1404",
+      "ميانگين كل 1404"
+    ],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart57.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای نرخ عفونت بیمارستانی سالهای 1405-1404",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet56.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 63,
+    "slide_path": "ppt/slides/slide63.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart58.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای ميانگين رعايت بهداشت دست 1405-1404(شش ماهه)"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet57.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 64,
+    "slide_path": "ppt/slides/slide64.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart59.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای پذيرش رعايت بهداشت دست به تفكيك گروهها 1405-1404(شش ماهه)"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet58.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 65,
+    "slide_path": "ppt/slides/slide65.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart60.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای رعایت احتیاطهای استاندارد سالهای 1405-1404",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet59.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 66,
+    "slide_path": "ppt/slides/slide66.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart61.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای رعایت تزریقات ایمن سالهای 1405-1404",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet60.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 67,
+    "slide_path": "ppt/slides/slide67.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart62.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای ",
+          "تعدادمواجهه شغلی (کارکنان) سالهای 1405-1404",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet61.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 68,
+    "slide_path": "ppt/slides/slide68.xml",
+    "slide_texts": [
+      "اقدامات اصلاحی جهت کاهش مواجهه شغلی کارکنان",
+      "هدف :",
+      "کاهش",
+      "0/2%",
+      "درصد",
+      "موارد مواجهات",
+      "شغلی",
+      "1-آموزش گروهی وچهره به چهره چگونگی",
+      "جمع",
+      "آوری",
+      "اجسام",
+      "تیز و برنده",
+      "وتزریقات ایمن",
+      "2-ارزیابی ونظارت مستمرکارکنان توسط مسئولین وسوپروایزران براساس چک لیست تزریقات ایمن"
+    ],
+    "charts": []
+  },
+  {
+    "slide_num": 69,
+    "slide_path": "ppt/slides/slide69.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart63.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای درصدمواجهه شغلی کارکنان سالهای 1405-1404",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet62.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 70,
+    "slide_path": "ppt/slides/slide70.xml",
+    "slide_texts": [
+      "شاخصهای عملکردی آموزش به بیمار",
+      "دريك نگاه",
+      "سالهای 1405-1404"
+    ],
+    "charts": []
+  },
+  {
+    "slide_num": 71,
+    "slide_path": "ppt/slides/slide71.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart64.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای میزان اثربخشی آموزش به بیماران (فالوآپ تلفنی وحضوری)سوپروایزرسالهای 1405-1404",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet63.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 72,
+    "slide_path": "ppt/slides/slide72.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart65.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودار",
+          "گزارش برگزاری کلاسهای گروهی  آموزش به بیمار(برگزاری میز خدمت ) سال 1405-1404"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet64.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 73,
+    "slide_path": "ppt/slides/slide73.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart66.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای ",
+          "تعدادموارد سقوط بيماران  سالهای 1405-1404",
+          "[VALUE]"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet65.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 74,
+    "slide_path": "ppt/slides/slide74.xml",
+    "slide_texts": [
+      "شاخصهای آموزش کارکنان دريك نگاه",
+      "سالهای 1405-1404"
+    ],
+    "charts": []
+  },
+  {
+    "slide_num": 75,
+    "slide_path": "ppt/slides/slide75.xml",
+    "slide_texts": [],
+    "charts": [
+      {
+        "chart_path": "ppt/charts/chart67.xml",
+        "chart_type": "barChart",
+        "chart_titles": [
+          "نمودارمقایسه",
+          " ای گزارش آموزش کارکنان سال 1405-1404"
+        ],
+        "excel_file": "ppt/embeddings/Microsoft_Excel_Worksheet66.xlsx"
+      }
+    ]
+  },
+  {
+    "slide_num": 76,
+    "slide_path": "ppt/slides/slide76.xml",
+    "slide_texts": [
+      "ازتوجه شما عزیزان سپاسگزاریم",
+      "به امیدارتقاء شاخصها درسالهای آتی"
+    ],
+    "charts": []
+  }
+]

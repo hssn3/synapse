@@ -1,0 +1,620 @@
+/* ============================================================================
+   bg-theme.css — لایهٔ پس‌زمینهٔ زنده، تم محیطی و بافت شیشه
+   سامانهٔ جامع مدیریت و اعتباربخشی بیمارستان
+   ----------------------------------------------------------------------------
+   قواعد:
+   - همهٔ کلاس‌ها با پیشوند bgx- هستند تا با کلاس‌های فعلی اپ تداخل نکنند.
+   - هیچ کلاس موجودی بازنویسی نمی‌شود؛ فقط توکن و لایهٔ افزوده.
+   - انیمیشن‌ها فقط transform/opacity.
+   - این فایل باید پیش از css اختصاصی صفحات لود شود (توکن‌ها را تعریف می‌کند).
+   ============================================================================ */
+
+/* ---------------------------------------------------------------- ۱. توکن‌ها */
+:root {
+  /* پالت پایه — برگرفته از خودِ ویدیو: جوهر فیروزه‌ای، مه، آب دریاچه */
+  --bgx-ink-900: #04161b; /* عمق دریاچه — تیره‌ترین */
+  --bgx-ink-800: #072229;
+  --bgx-ink-700: #0b2f38;
+  --bgx-ink-600: #10454f;
+  --bgx-teal-500: #12707a; /* جوهر اصلی */
+  --bgx-teal-400: #1a9aa0;
+  --bgx-jade-300: #4fc9bd; /* درخشش سطح آب */
+  --bgx-mist-200: #b9dedd; /* مه کوهستان */
+  --bgx-mist-100: #e2f2f0;
+  --bgx-paper: #f3fbfa;
+
+  /* رنگ‌های وضعیت — لحن «مرکب و شنگرف» ایرانی، نه پالت هشدار پیش‌فرض */
+  --bgx-ok: #57c58f; /* منطبق */
+  --bgx-warn: #d9a441; /* در حال اقدام — زرد زعفران */
+  --bgx-risk: #d2624f; /* غیرمنطبق — شنگرف */
+  --bgx-info: #6aa9d8; /* اطلاع */
+  --bgx-idle: #7f9ea4; /* بررسی‌نشده */
+
+  /* متن روی شیشهٔ تیره */
+  --bgx-fg: #eaf7f5;
+  --bgx-fg-soft: #b7d3d3;
+  --bgx-fg-mute: #86a6a9;
+
+  /* بافت شیشه */
+  --bgx-glass-tint: 8, 34, 40; /* rgb پایهٔ شیشه */
+  --bgx-glass-alpha: 0.56; /* در حالت سینمایی */
+  --bgx-glass-blur: 20px;
+  --bgx-glass-sat: 1.35;
+  --bgx-glass-line: rgba(180, 232, 228, 0.16);
+  --bgx-glass-line-top: rgba(233, 255, 252, 0.32);
+  --bgx-glass-shadow: 0 18px 44px -22px rgba(2, 14, 18, 0.85),
+    0 2px 10px -6px rgba(2, 14, 18, 0.6);
+
+  /* هالهٔ رنگی پشت کارت‌ها */
+  --bgx-halo-a: rgba(26, 154, 160, 0.5);
+  --bgx-halo-b: rgba(79, 201, 189, 0.32);
+
+  /* پس‌زمینهٔ ویدیو */
+  --bgx-video-opacity: 0.9;
+  --bgx-video-filter: saturate(1.06) contrast(1.03);
+  --bgx-scrim-alpha: 0.5;
+
+  /* شعاع و فاصله */
+  --bgx-r-sm: 10px;
+  --bgx-r-md: 16px;
+  --bgx-r-lg: 22px;
+  --bgx-r-xl: 28px;
+
+  /* تایپ — فقط فونت‌های نصب‌شده/محلی، بدون CDN و بدون build step */
+  --bgx-font: "IRANSansX", "IRANSans", "Vazirmatn", "Shabnam", "Segoe UI",
+    "Tahoma", system-ui, sans-serif;
+  --bgx-font-num: "IRANSansX", "Vazirmatn", "Segoe UI", Tahoma, sans-serif;
+}
+
+/* ---------------------------------------------- ۲. تم‌های محیطی (چهار حالت) */
+/* همان یک ویدیو، فقط فیلتر GPU و توکن‌های رنگ عوض می‌شود. */
+
+:root[data-bgx-scene="ink"] {
+  --bgx-video-filter: saturate(1.06) contrast(1.03);
+  --bgx-halo-a: rgba(26, 154, 160, 0.5);
+  --bgx-halo-b: rgba(79, 201, 189, 0.32);
+}
+
+:root[data-bgx-scene="sunset"] {
+  --bgx-ink-900: #1a0f0a;
+  --bgx-ink-800: #24160e;
+  --bgx-ink-700: #33200f;
+  --bgx-teal-400: #d99a3c;
+  --bgx-jade-300: #f2c46b;
+  --bgx-mist-200: #f0dcc0;
+  --bgx-glass-tint: 38, 22, 14;
+  --bgx-video-filter: sepia(0.42) saturate(1.75) hue-rotate(-24deg)
+    brightness(1.04) contrast(1.02);
+  --bgx-halo-a: rgba(217, 154, 60, 0.42);
+  --bgx-halo-b: rgba(210, 98, 79, 0.3);
+  --bgx-fg: #fdf1e2;
+  --bgx-fg-soft: #e2cbb1;
+  --bgx-fg-mute: #b09781;
+}
+
+:root[data-bgx-scene="frost"] {
+  --bgx-ink-900: #0a1622;
+  --bgx-ink-800: #10202f;
+  --bgx-ink-700: #172c3d;
+  --bgx-teal-400: #7fb6d8;
+  --bgx-jade-300: #b6dcf0;
+  --bgx-mist-200: #d8ecf7;
+  --bgx-glass-tint: 16, 34, 48;
+  --bgx-video-filter: saturate(0.5) hue-rotate(26deg) brightness(1.1)
+    contrast(0.97);
+  --bgx-halo-a: rgba(127, 182, 216, 0.4);
+  --bgx-halo-b: rgba(182, 220, 240, 0.26);
+  --bgx-fg: #eef7fd;
+  --bgx-fg-soft: #c2d8e6;
+  --bgx-fg-mute: #8ea6b6;
+}
+
+/* تیرهٔ کلاسیک: ویدیو کاملاً خاموش، فقط گرادیان جوهری ثابت */
+:root[data-bgx-scene="noir"] {
+  --bgx-ink-900: #05090b;
+  --bgx-ink-800: #0a1114;
+  --bgx-ink-700: #101a1e;
+  --bgx-glass-tint: 10, 18, 21;
+  --bgx-glass-alpha: 0.72;
+  --bgx-halo-a: rgba(26, 154, 160, 0.26);
+  --bgx-halo-b: rgba(79, 201, 189, 0.14);
+  --bgx-scrim-alpha: 0.2;
+}
+
+/* ------------------------------------------------ ۳. حالت نمایش: کاری/سینمایی */
+:root[data-bgx-mode="work"] {
+  --bgx-video-opacity: 0.35;
+  --bgx-glass-alpha: 0.82;
+  --bgx-scrim-alpha: 0.72;
+  --bgx-halo-a: rgba(26, 154, 160, 0.22);
+  --bgx-halo-b: rgba(79, 201, 189, 0.14);
+}
+
+/* --------------------------------------------------------- ۴. صحنهٔ پس‌زمینه */
+/* .bgx-stage یک بار در ابتدای <body> توسط bg-theme.js ساخته می‌شود.
+   هیچ فضایی اشغال نمی‌کند و هیچ layout-shift ایجاد نمی‌کند. */
+
+html,
+body {
+  background-color: var(--bgx-ink-900);
+}
+
+.bgx-stage {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  contain: strict;
+  background: radial-gradient(
+      120% 90% at 78% 8%,
+      var(--bgx-ink-700) 0%,
+      var(--bgx-ink-900) 62%
+    ),
+    var(--bgx-ink-900);
+}
+
+/* ریشهٔ اپ باید بالای صحنه بنشیند؛ این کلاس به ریشهٔ فعلی اپ افزوده می‌شود */
+.bgx-above {
+  position: relative;
+  z-index: 1;
+}
+
+.bgx-video,
+.bgx-poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 42%;
+  pointer-events: none;
+  will-change: opacity, transform;
+  transform: scale(1.06); /* حاشیهٔ امن برای پارالاکس و جلوگیری از لبهٔ خالی */
+}
+
+.bgx-video {
+  opacity: 0;
+  filter: var(--bgx-video-filter);
+  transition: opacity 900ms ease, filter 700ms ease;
+}
+
+.bgx-stage[data-bgx-video="on"] .bgx-video {
+  opacity: var(--bgx-video-opacity);
+}
+
+.bgx-poster {
+  opacity: var(--bgx-video-opacity);
+  filter: var(--bgx-video-filter);
+  transition: opacity 600ms ease;
+}
+
+/* وقتی ویدیو آمادهٔ پخش شد، پوستر محو می‌شود (بدون پرش) */
+.bgx-stage[data-bgx-video="on"][data-bgx-ready="1"] .bgx-poster {
+  opacity: 0;
+}
+
+:root[data-bgx-scene="noir"] .bgx-video,
+:root[data-bgx-scene="noir"] .bgx-poster {
+  opacity: 0 !important;
+}
+
+/* پردهٔ خوانایی: بدون آن، متن روی مه روشن ویدیو خوانا نیست */
+.bgx-scrim {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: var(--bgx-scrim-alpha);
+  transition: opacity 500ms ease;
+  background: linear-gradient(
+      to bottom,
+      rgba(4, 22, 27, 0.92) 0%,
+      rgba(4, 22, 27, 0.44) 28%,
+      rgba(4, 22, 27, 0.5) 62%,
+      rgba(4, 22, 27, 0.95) 100%
+    ),
+    radial-gradient(
+      75% 60% at 50% 55%,
+      rgba(4, 22, 27, 0) 0%,
+      rgba(4, 22, 27, 0.72) 100%
+    );
+}
+
+/* هاله‌های شناور — دو لکهٔ جوهر که آرام نفس می‌کشند */
+.bgx-halo {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.75;
+  will-change: transform;
+}
+
+.bgx-halo--a {
+  width: 46vw;
+  height: 46vw;
+  inset-inline-start: -8vw;
+  top: -10vh;
+  background: var(--bgx-halo-a);
+  animation: bgx-drift-a 46s ease-in-out infinite alternate;
+}
+
+.bgx-halo--b {
+  width: 38vw;
+  height: 38vw;
+  inset-inline-end: -6vw;
+  bottom: -12vh;
+  background: var(--bgx-halo-b);
+  animation: bgx-drift-b 58s ease-in-out infinite alternate;
+}
+
+@keyframes bgx-drift-a {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(4vw, 5vh, 0) scale(1.14);
+  }
+}
+
+@keyframes bgx-drift-b {
+  from {
+    transform: translate3d(0, 0, 0) scale(1.08);
+  }
+  to {
+    transform: translate3d(-5vw, -4vh, 0) scale(0.95);
+  }
+}
+
+/* ذرات: قطره‌های جوهر که مثل بخار از سطح دریاچه بالا می‌روند */
+.bgx-motes {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.bgx-mote {
+  position: absolute;
+  bottom: -6vh;
+  width: 6px;
+  height: 6px;
+  border-radius: 60% 40% 55% 45% / 45% 55% 40% 60%; /* قطرهٔ نامنظم، نه دایرهٔ صاف */
+  background: radial-gradient(
+    circle at 32% 30%,
+    rgba(233, 255, 252, 0.95),
+    var(--bgx-jade-300) 55%,
+    rgba(26, 154, 160, 0) 100%
+  );
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: bgx-rise linear infinite;
+}
+
+@keyframes bgx-rise {
+  0% {
+    transform: translate3d(0, 0, 0) scale(0.6);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.85;
+  }
+  70% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate3d(2.5vw, -108vh, 0) scale(1.25);
+    opacity: 0;
+  }
+}
+
+/* دانه‌بندی (grain) — بافت کاغذ جوهری، ثابت و بسیار کم‌رنگ */
+.bgx-grain {
+  position: absolute;
+  inset: -50%;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/></filter><rect width='160' height='160' filter='url(%23n)' opacity='0.6'/></svg>");
+}
+
+/* وینیت نرم برای جمع‌کردن نگاه به مرکز کار */
+.bgx-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    100% 78% at 50% 46%,
+    rgba(0, 0, 0, 0) 55%,
+    rgba(0, 0, 0, 0.42) 100%
+  );
+}
+
+/* ------------------------------------------------------- ۵. بافت شیشه (glass) */
+.bgx-glass {
+  position: relative;
+  background: linear-gradient(
+    155deg,
+    rgba(var(--bgx-glass-tint), calc(var(--bgx-glass-alpha) + 0.06)) 0%,
+    rgba(var(--bgx-glass-tint), var(--bgx-glass-alpha)) 46%,
+    rgba(var(--bgx-glass-tint), calc(var(--bgx-glass-alpha) + 0.1)) 100%
+  );
+  -webkit-backdrop-filter: blur(var(--bgx-glass-blur))
+    saturate(var(--bgx-glass-sat));
+  backdrop-filter: blur(var(--bgx-glass-blur)) saturate(var(--bgx-glass-sat));
+  border: 1px solid var(--bgx-glass-line);
+  border-radius: var(--bgx-r-lg);
+  box-shadow: var(--bgx-glass-shadow);
+  color: var(--bgx-fg);
+}
+
+/* خطِ نور لبهٔ بالا — همان چیزی که شیشه را «شیشه» می‌کند */
+.bgx-glass::before {
+  content: "";
+  position: absolute;
+  inset-inline: 12%;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(
+    to left,
+    transparent,
+    var(--bgx-glass-line-top),
+    transparent
+  );
+  pointer-events: none;
+}
+
+.bgx-glass--raised {
+  --bgx-glass-alpha: 0.78;
+  box-shadow: 0 30px 70px -30px rgba(2, 14, 18, 0.92),
+    0 4px 14px -8px rgba(2, 14, 18, 0.7);
+}
+
+/* شیشهٔ دادهٔ متراکم: برای جدول‌های ۱۰۰+ ردیفی، خوانایی بر جلوه مقدم است */
+.bgx-glass--data {
+  --bgx-glass-alpha: 0.9;
+  --bgx-glass-blur: 10px;
+}
+
+/* لبهٔ فلزی نازک برای عناصر کنشی */
+.bgx-edge {
+  box-shadow: inset 0 0 0 1px rgba(233, 255, 252, 0.1),
+    var(--bgx-glass-shadow);
+}
+
+/* ------------------------------------------------------- ۶. کنترل سوییچر تم */
+.bgx-switcher {
+  display: grid;
+  gap: 14px;
+  font-family: var(--bgx-font);
+  color: var(--bgx-fg);
+}
+
+.bgx-switcher__title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--bgx-fg-soft);
+  margin: 0;
+}
+
+.bgx-scenes {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.bgx-scene-btn {
+  position: relative;
+  display: grid;
+  gap: 6px;
+  justify-items: center;
+  padding: 8px 4px 7px;
+  border: 1px solid var(--bgx-glass-line);
+  border-radius: var(--bgx-r-md);
+  background: rgba(var(--bgx-glass-tint), 0.5);
+  color: var(--bgx-fg-soft);
+  font: inherit;
+  font-size: 0.7rem;
+  cursor: pointer;
+  transition: transform 220ms cubic-bezier(0.2, 0.7, 0.3, 1),
+    border-color 220ms ease, color 220ms ease;
+}
+
+.bgx-scene-btn:hover {
+  transform: translateY(-2px);
+  color: var(--bgx-fg);
+  border-color: rgba(180, 232, 228, 0.4);
+}
+
+.bgx-scene-btn:focus-visible {
+  outline: 2px solid var(--bgx-jade-300);
+  outline-offset: 2px;
+}
+
+.bgx-scene-btn[aria-pressed="true"] {
+  color: var(--bgx-fg);
+  border-color: var(--bgx-jade-300);
+  box-shadow: 0 0 0 1px var(--bgx-jade-300), 0 8px 22px -14px var(--bgx-jade-300);
+}
+
+.bgx-swatch {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.25);
+}
+
+.bgx-swatch--ink {
+  background: linear-gradient(160deg, #0b2f38, #1a9aa0 55%, #b9dedd);
+}
+.bgx-swatch--sunset {
+  background: linear-gradient(160deg, #33200f, #d99a3c 55%, #f0dcc0);
+}
+.bgx-swatch--frost {
+  background: linear-gradient(160deg, #172c3d, #7fb6d8 55%, #e6f4fb);
+}
+.bgx-swatch--noir {
+  background: linear-gradient(160deg, #05090b, #101a1e 60%, #24343a);
+}
+
+.bgx-toggle-row {
+  display: grid;
+  gap: 8px;
+}
+
+.bgx-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border: 1px solid var(--bgx-glass-line);
+  border-radius: var(--bgx-r-md);
+  background: rgba(var(--bgx-glass-tint), 0.42);
+  cursor: pointer;
+  font-size: 0.82rem;
+  transition: border-color 200ms ease, transform 200ms ease;
+}
+
+.bgx-toggle:hover {
+  transform: translateX(-2px); /* RTL: حرکت به سمت شروع خط */
+  border-color: rgba(180, 232, 228, 0.36);
+}
+
+.bgx-toggle input {
+  inline-size: 16px;
+  block-size: 16px;
+  accent-color: var(--bgx-jade-300);
+  cursor: pointer;
+}
+
+.bgx-toggle__hint {
+  margin-inline-start: auto;
+  font-size: 0.7rem;
+  color: var(--bgx-fg-mute);
+}
+
+/* کنترل جمع‌وجور صفحهٔ ورود: چهار نقطهٔ رنگی */
+.bgx-mini {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 9px;
+  border-radius: 999px;
+  border: 1px solid var(--bgx-glass-line);
+  background: rgba(var(--bgx-glass-tint), 0.55);
+  -webkit-backdrop-filter: blur(14px) saturate(1.3);
+  backdrop-filter: blur(14px) saturate(1.3);
+}
+
+.bgx-mini__dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  padding: 0;
+  transition: transform 200ms cubic-bezier(0.2, 0.7, 0.3, 1),
+    box-shadow 200ms ease;
+}
+
+.bgx-mini__dot:hover {
+  transform: scale(1.18);
+}
+
+.bgx-mini__dot[aria-pressed="true"] {
+  box-shadow: 0 0 0 2px rgba(233, 255, 252, 0.85);
+  transform: scale(1.12);
+}
+
+.bgx-mini__dot:focus-visible {
+  outline: 2px solid var(--bgx-jade-300);
+  outline-offset: 2px;
+}
+
+/* ------------------------------------------------------------- ۷. حالت آرام */
+/* «حالت آرام» = پوستر ثابت، بدون هیچ حرکت محیطی. */
+:root[data-bgx-calm="on"] .bgx-halo,
+:root[data-bgx-calm="on"] .bgx-mote,
+:root[data-bgx-calm="on"] .bgx-video {
+  animation: none !important;
+}
+
+:root[data-bgx-calm="on"] .bgx-motes {
+  display: none;
+}
+
+:root[data-bgx-calm="on"] .bgx-grain {
+  opacity: 0.03;
+}
+
+/* ------------------------------------- ۸. موبایل: پوستر ثابت به‌جای ویدیو */
+@media (max-width: 767.98px) {
+  .bgx-motes {
+    display: none;
+  }
+  .bgx-halo {
+    filter: blur(52px);
+    animation: none;
+  }
+  .bgx-video,
+  .bgx-poster {
+    object-position: center 38%;
+    transform: scale(1.02); /* جلوگیری از کراپ زشت روی نسبت‌های بلند */
+  }
+  :root {
+    --bgx-glass-blur: 14px;
+    --bgx-glass-alpha: 0.8;
+  }
+  .bgx-scenes {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ------------------------------------------- ۹. احترام به کاهش حرکت سیستمی */
+@media (prefers-reduced-motion: reduce) {
+  .bgx-halo,
+  .bgx-mote,
+  .bgx-video,
+  .bgx-poster,
+  .bgx-scrim {
+    animation: none !important;
+    transition: none !important;
+  }
+  .bgx-motes {
+    display: none;
+  }
+}
+
+/* ------------------------------------------------ ۱۰. چاپ: بدون پس‌زمینه */
+@media print {
+  .bgx-stage {
+    display: none !important;
+  }
+  .bgx-glass {
+    background: #fff;
+    color: #000;
+    box-shadow: none;
+    border-color: #999;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+/* --------------------------- ۱۱. پشتیبان برای نبود backdrop-filter (نادر) */
+@supports not (backdrop-filter: blur(4px)) {
+  .bgx-glass {
+    --bgx-glass-alpha: 0.94;
+  }
+}
+
+/* ==== ادغام میزبان: پل به پنلهای موجود + صحنههای افزوده ==== */
+body > #root{position:relative;z-index:1}
+:root[data-bgx-scene] #app .panel.g{
+  background:rgba(var(--bgx-glass-tint),calc(var(--bgx-glass-alpha) * 0.92));
+  backdrop-filter:blur(var(--bgx-glass-blur)) saturate(var(--bgx-glass-sat));
+  -webkit-backdrop-filter:blur(var(--bgx-glass-blur)) saturate(var(--bgx-glass-sat));
+  border:1px solid var(--bgx-glass-line);
+  border-top-color:var(--bgx-glass-line-top);
+  box-shadow:var(--bgx-glass-shadow);
+}
+:root[data-bgx-scene="night"]{--bgx-ink-900:#05060a;--bgx-ink-800:#0a0d14;--bgx-ink-700:#11161f;--bgx-glass-tint:8,10,16;--bgx-video-filter:saturate(.9) brightness(.85)}
+:root[data-bgx-scene="mist"]{--bgx-ink-900:#0b1116;--bgx-ink-800:#141c24;--bgx-ink-700:#1c2833;--bgx-glass-tint:18,28,38;--bgx-video-filter:saturate(.85) brightness(1.02)}
+:root[data-bgx-scene="sky"]{--bgx-ink-900:#071422;--bgx-ink-800:#0c1e30;--bgx-ink-700:#122a42;--bgx-glass-tint:10,30,52;--bgx-video-filter:saturate(1.12) brightness(1.04)}
+:root[data-bgx-scene="grove"]{--bgx-ink-900:#0b1210;--bgx-ink-800:#121b18;--bgx-ink-700:#1a2622;--bgx-glass-tint:14,24,20;--bgx-video-filter:saturate(.95) brightness(.92)}

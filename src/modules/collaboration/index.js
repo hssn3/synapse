@@ -1,0 +1,10 @@
+const express = require('express');
+const router = express.Router();
+router.use(require('./activities.routes'));
+router.use(require('./tasks.routes'));
+router.use(require('./committees.routes'));
+router.use(require('./committee-minutes.routes'));
+router.use(require('./meetings.routes'));
+router.use(require('./inbox-messages.routes'));
+router.use(require('./reminders.routes'));
+module.exports = router;

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>خدمات همگانی بدون احراز هویت</title>
+<link rel="stylesheet" href="/css/app.css">
+<link rel="stylesheet" href="/css/design-system.css">
+<link rel="stylesheet" href="/css/public-form.css">
+<script src="/js/public-letterhead.js"></script>
+<script src="/js/public-chrome.js"></script>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <div class="pub-letterhead" id="pubLetterhead"></div>
+    <div class="pubtop">
+      <h1>خدمات بدون احراز هویت</h1>
+      <a class="closebtn" id="closeTop" href="/">✕ بستن</a>
+    </div>
+    <div class="sub" id="sub">فرم‌های زیر بدون ورود به سامانه قابل تکمیل‌اند و مستقیماً برای واحد بهبود کیفیت
+      <b id="hname"></b> ثبت می‌شوند. تکمیل هر فرم می‌تواند ناشناس باشد.</div>
+    <div class="svcs" id="svcs"></div>
+    <div class="msg" id="msg"></div>
+  </div>
+</div>
+<script>
+// شناسه بیمارستان از مسیر تمیز /public/services/:hospital_id یا از ?hospital=<id>
+(function(){
+  var m = location.pathname.match(/\/public\/services\/([^/?#]+)/);
+  var hospital = m ? decodeURIComponent(m[1]) : new URLSearchParams(location.search).get('hospital');
+  var msg = document.getElementById('msg');
+  function show(cls, text){ msg.className = 'msg ' + cls; msg.textContent = text; }
+  if (!hospital) { show('err', 'شناسه بیمارستان در نشانی صفحه وجود ندارد. لطفاً از لینک/کد QR رسمی بیمارستان استفاده کنید.'); return; }
+  document.getElementById('closeTop').href = '/?hospital=' + encodeURIComponent(hospital);
+  initPubLetterhead(hospital);
+
+  // فهرست خدمات — هر مورد یک صفحه‌ی عمومی موجود با همان قرارداد /public/<type>/:hospital_id
+  var SERVICES = [
+    { path: 'error-report', ic: '⚠', title: 'گزارش خطا و وقایع ناخواسته',
+      desc: 'ثبت خطای پزشکی، وقایع ناخواسته و خوداظهاری — با کد رهگیری و به‌صورت محرمانه.' },
+    { path: 'fmea', ic: '⚑', title: 'عوامل تهدید کننده ایمنی بیمار (FMEA)',
+      desc: 'شناسایی حالات بالقوه خطا، علل ریشه‌ای، اثرات و کنترل‌های موجود پیش از وقوع حادثه.' },
+    { path: 'complaint', ic: '✉', title: 'انتقادات، پیشنهادها و تقدیر',
+      desc: 'ثبت شکایت، پیشنهاد یا تقدیر توسط بیمار و همراه — ناشناس یا با اطلاعات تماس.' },
+    { path: 'satisfaction', ic: '★', title: 'نظرسنجی رضایت بیمار',
+      desc: 'پرسشنامه رسمی رضایت‌سنجی — پذیرش، کادر پزشکی و پرستاری، تغذیه، ترخیص و امکانات رفاهی.' }
+  ];
+  document.getElementById('svcs').innerHTML = SERVICES.map(function(s){
+    return '<a class="svc" href="/public/' + s.path + '/' + encodeURIComponent(hospital) + '">' +
+      '<div class="svc-ic">' + s.ic + '</div>' +
+      '<div class="svc-t">' + s.title + '</div>' +
+      '<div class="svc-d">' + s.desc + '</div></a>';
+  }).join('');
+
+  // نام بیمارستان صرفاً برای سرصفحه؛ اگر شناسه نامعتبر بود، هشدار روشن داده می‌شود
+  fetch('/api/public/hospital/' + encodeURIComponent(hospital))
+    .then(function(r){ return r.json().then(function(d){ return { ok: r.ok, d: d }; }); })
+    .then(function(res){
+      if (!res.ok) { document.getElementById('svcs').innerHTML = ''; show('err', res.d.error || 'بیمارستان نامعتبر است'); return; }
+      document.getElementById('hname').textContent = res.d.hospital.name;
+    })
+    .catch(function(){ /* نام اختیاری است؛ نبودش صفحه را از کار نمی‌اندازد */ });
+})();
+</script>
+</body>
+</html>

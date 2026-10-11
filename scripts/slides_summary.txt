@@ -1,0 +1,658 @@
+=== SLIDE 1 ===
+Charts: []
+Images: ['../media/image2.png', '../media/image1.jpg']
+Tables count: 0
+Texts:
+  - بيمارستان اميد دريك نگاه
+  - سالهای 1405-1404
+
+==================================================
+
+=== SLIDE 2 ===
+Charts: ['../charts/chart1.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 3 ===
+Charts: ['../charts/chart2.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 4 ===
+Charts: ['../charts/chart3.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 5 ===
+Charts: ['../charts/chart4.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 6 ===
+Charts: ['../charts/chart5.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 7 ===
+Charts: ['../charts/chart6.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 8 ===
+Charts: ['../charts/chart7.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 9 ===
+Charts: ['../charts/chart8.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 10 ===
+Charts: ['../charts/chart9.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 11 ===
+Charts: ['../charts/chart10.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 12 ===
+Charts: ['../charts/chart11.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+  - اورژانس
+
+==================================================
+
+=== SLIDE 13 ===
+Charts: ['../charts/chart12.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+  - اورژانس 1404
+
+==================================================
+
+=== SLIDE 14 ===
+Charts: ['../charts/chart13.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+  - اورژانس 1404
+
+==================================================
+
+=== SLIDE 15 ===
+Charts: ['../charts/chart14.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 16 ===
+Charts: ['../charts/chart15.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+  - مالی
+  - مالی
+  - سایرموارد
+
+==================================================
+
+=== SLIDE 17 ===
+Charts: ['../charts/chart16.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+  - درمان منزل
+  - مالی
+  - مالی
+
+==================================================
+
+=== SLIDE 18 ===
+Charts: ['../charts/chart17.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+  - پذیرش 1404
+  - اعزام  1404
+  - اعزام1404
+
+==================================================
+
+=== SLIDE 19 ===
+Charts: []
+Images: ['../media/image2.png', '../media/image8.jpg']
+Tables count: 0
+Texts:
+  - شاخص توصیفی بیمارستان امید دريك نگاه
+  - سالهای 1405-1404
+
+==================================================
+
+=== SLIDE 20 ===
+Charts: ['../charts/chart18.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 21 ===
+Charts: ['../charts/chart19.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 22 ===
+Charts: ['../charts/chart20.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 23 ===
+Charts: ['../charts/chart21.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+  - سایر: عدم وجودیا آماده شدن خون درخواستی ،حساسیت دارویی، عدم خریدتجهیزات توسط بیمار و...
+
+==================================================
+
+=== SLIDE 24 ===
+Charts: ['../charts/chart22.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 25 ===
+Charts: ['../charts/chart23.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 26 ===
+Charts: ['../charts/chart24.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 27 ===
+Charts: ['../charts/chart25.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 28 ===
+Charts: ['../charts/chart26.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 29 ===
+Charts: ['../charts/chart27.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 30 ===
+Charts: ['../charts/chart28.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 31 ===
+Charts: ['../charts/chart29.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 32 ===
+Charts: ['../charts/chart30.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 33 ===
+Charts: ['../charts/chart31.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 34 ===
+Charts: ['../charts/chart32.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 35 ===
+Charts: ['../charts/chart33.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 36 ===
+Charts: ['../charts/chart34.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+  - کل زایمان ها 1404
+
+==================================================
+
+=== SLIDE 37 ===
+Charts: ['../charts/chart35.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+  - کل زایمان طبیعی 1404
+
+==================================================
+
+=== SLIDE 38 ===
+Charts: ['../charts/chart36.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 39 ===
+Charts: ['../charts/chart37.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 40 ===
+Charts: ['../charts/chart38.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 41 ===
+Charts: []
+Images: ['../media/image2.png', '../media/image9.jpg']
+Tables count: 0
+Texts:
+  - شاخصهای عملکردی دفترپرستاری دريك نگاه
+  - سالهای 1405-1404
+
+==================================================
+
+=== SLIDE 42 ===
+Charts: ['../charts/chart39.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 43 ===
+Charts: ['../charts/chart40.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 44 ===
+Charts: ['../charts/chart41.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 45 ===
+Charts: ['../charts/chart42.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 46 ===
+Charts: ['../charts/chart43.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 47 ===
+Charts: ['../charts/chart44.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 48 ===
+Charts: ['../charts/chart45.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 49 ===
+Charts: ['../charts/chart46.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 50 ===
+Charts: ['../charts/chart47.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 51 ===
+Charts: ['../charts/chart48.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 52 ===
+Charts: ['../charts/chart49.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 53 ===
+Charts: ['../charts/chart50.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 54 ===
+Charts: ['../charts/chart51.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 55 ===
+Charts: ['../charts/chart52.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 56 ===
+Charts: ['../charts/chart53.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 57 ===
+Charts: []
+Images: ['../media/image2.png', '../media/image10.jpg']
+Tables count: 0
+Texts:
+  - شاخصهای عملکردی رعایت ایمنی بیمار
+  - دريك نگاه
+  - سالهای 1405-1404
+
+==================================================
+
+=== SLIDE 58 ===
+Charts: ['../charts/chart54.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 59 ===
+Charts: ['../charts/chart55.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 60 ===
+Charts: ['../charts/chart56.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 61 ===
+Charts: []
+Images: ['../media/image2.png', '../media/image11.jpg']
+Tables count: 0
+Texts:
+  - شاخصهای عملکردی کنترل عفونت
+  - دريك نگاه
+  - سالهای 1405-1404
+
+==================================================
+
+=== SLIDE 62 ===
+Charts: ['../charts/chart57.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+  - سه ماهه دوم 1404
+  - ميانگين كل 1404
+
+==================================================
+
+=== SLIDE 63 ===
+Charts: ['../charts/chart58.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 64 ===
+Charts: ['../charts/chart59.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 65 ===
+Charts: ['../charts/chart60.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 66 ===
+Charts: ['../charts/chart61.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 67 ===
+Charts: ['../charts/chart62.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 68 ===
+Charts: []
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+  - اقدامات اصلاحی جهت کاهش مواجهه شغلی کارکنان
+  - هدف :
+  - کاهش
+  - 0/2%
+  - درصد
+  - موارد مواجهات
+  - شغلی
+  - 1-آموزش گروهی وچهره به چهره چگونگی
+  - جمع
+  - آوری
+  - اجسام
+  - تیز و برنده
+  - وتزریقات ایمن
+  - 2-ارزیابی ونظارت مستمرکارکنان توسط مسئولین وسوپروایزران براساس چک لیست تزریقات ایمن
+
+==================================================
+
+=== SLIDE 69 ===
+Charts: ['../charts/chart63.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 70 ===
+Charts: []
+Images: ['../media/image2.png', '../media/image12.jfif']
+Tables count: 0
+Texts:
+  - شاخصهای عملکردی آموزش به بیمار
+  - دريك نگاه
+  - سالهای 1405-1404
+
+==================================================
+
+=== SLIDE 71 ===
+Charts: ['../charts/chart64.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 72 ===
+Charts: ['../charts/chart65.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 73 ===
+Charts: ['../charts/chart66.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 74 ===
+Charts: []
+Images: ['../media/image2.png', '../media/image13.jpg']
+Tables count: 0
+Texts:
+  - شاخصهای آموزش کارکنان دريك نگاه
+  - سالهای 1405-1404
+
+==================================================
+
+=== SLIDE 75 ===
+Charts: ['../charts/chart67.xml']
+Images: ['../media/image2.png']
+Tables count: 0
+Texts:
+
+==================================================
+
+=== SLIDE 76 ===
+Charts: []
+Images: ['../media/image2.png', '../media/image14.jpg']
+Tables count: 0
+Texts:
+  - ازتوجه شما عزیزان سپاسگزاریم
+  - به امیدارتقاء شاخصها درسالهای آتی
+
+==================================================
+

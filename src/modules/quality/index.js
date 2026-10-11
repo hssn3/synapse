@@ -1,0 +1,14 @@
+const express = require('express');
+const router = express.Router();
+router.use(require('./checklists.routes'));
+router.use(require('./checklists-submissions.routes'));
+router.use(require('./certifications.routes'));
+router.use(require('./audits.routes'));
+router.use(require('./walkarounds.routes'));
+router.use(require('./programs.routes'));
+router.use(require('./bsc.routes'));
+router.use(require('./indicators-part1.routes'));
+router.use(require('./indicators-part2.routes'));
+router.use(require('./indicator-slides.routes'));
+router.use(require('./fmea-errors.routes'));
+module.exports = router;

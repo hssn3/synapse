@@ -1,0 +1,642 @@
+/**
+ * موتور بافت‌سازی دانا — لایه‌ی ۱
+ *
+ * چرا این فایل جدا شد: تا پیش از این، کلِ «دانستنِ» دانا یک تابعِ ۷۰ خطی داخل
+ * assistant-chat.js بود که فقط دو جا را می‌گشت (متنِ ۵۲۰ سنجه و
+ * assistant_knowledge) و آن هم با یک قاعده‌ی «اولین کلمه‌ی نایاب برنده است».
+ * نتیجه‌اش این بود که دانا به سه دسته سؤالِ کاملاً طبیعی هیچ جوابی نداشت:
+ *
+ *   ۱. «چطور فلان کار را در این سامانه انجام بدهم؟» — چون هیچ‌جا نوشته نشده بود
+ *      که این سامانه اصلاً چه ماژول‌هایی دارد و هرکدام کجاست.
+ *   ۲. «وضعیت ما چطور است؟ چند سنجه مانده؟» — چون هیچ عددِ زنده‌ای از خودِ
+ *      دیتابیس به مدل داده نمی‌شد.
+ *   ۳. سؤالِ چندکلمه‌ای — چون فقط hit های *یک* کلمه وارد نتیجه می‌شد و بقیه‌ی
+ *      کلماتِ سؤال دور ریخته می‌شدند.
+ *
+ * حالا سه منبع مستقل بافت می‌سازند و امتیازشان با هم جمع می‌شود:
+ *   A) راهنمای ماژول‌های سامانه (ثابت، بدون کوئری)
+ *   B) کتابِ سنجه‌های اعتباربخشی (امتیازدهی IDF روی همه‌ی کلمات)
+ *   C) دانشِ تأییدشده‌ی همان بیمارستان + آمارِ زنده‌ی همان بیمارستان
+ *
+ * مرزها عوض نشده‌اند و عمداً همان‌جا مانده‌اند: هر کوئری با hospital_id بسته
+ * می‌شود و دامنه‌ی محورِ نقش از role-axes.js می‌آید — همان منبعِ حقیقتی که رابط
+ * اصلی سنجه‌ها هم با آن فیلتر می‌کند.
+ */
+const { query } = require('../config/database-sqlite');
+const { axisCodeOf } = require('../config/role-axes');
+
+// ---------- نرمال‌سازی و کلمه‌سازی ----------
+
+function normalize(s) {
+  return (s || '').toString().trim().toLowerCase()
+    .replace(/[یي]/g, 'ی').replace(/[کك]/g, 'ک').replace(/[ةه]/g, 'ه')
+    // ارقام فارسی/عربی به لاتین: کاربر «سنجه ۱۲۳» تایپ میکند و کد در دیتابیس لاتین است
+    .replace(/[۰-۹]/g, d => String('۰۱۲۳۴۵۶۷۸۹'.indexOf(d)))
+    .replace(/[٠-٩]/g, d => String('٠١٢٣٤٥٦٧٨٩'.indexOf(d)))
+    .replace(/‌/g, ' ');   // نیم‌فاصله = مرزِ کلمه، وگرنه «خط‌مشی» هرگز با «خط مشی» مچ نمی‌شود
+}
+
+// حروفِ ربط/اضافه و فعل‌های کمکیِ رایج. اگر اینها در LIKE شرکت کنند، چون به‌عنوان
+// substring داخل ده‌ها کلمه‌ی دیگر هم می‌نشینند («این» داخل «بالینی»)، عملاً هر
+// جمله‌ای با هر سنجه‌ای مچ می‌شود.
+const STOPWORDS = new Set(['این', 'آن', 'است', 'هست', 'یا', 'به', 'در', 'از', 'که', 'را', 'با',
+  'هم', 'تا', 'بر', 'نیز', 'شود', 'شده', 'می', 'برای', 'چه', 'چطور', 'چگونه', 'کدام', 'چند',
+  'چیست', 'کجا', 'کی', 'اند', 'بود', 'باشد', 'دارد', 'کند', 'های', 'ها', 'یک', 'دو', 'سه',
+  'باید', 'کنم', 'کنیم', 'کند', 'کسی', 'بدهم', 'بگو', 'لطفا', 'لطفاً', 'خودم', 'ما', 'من', 'شما',
+  'روی', 'کار', 'مورد', 'درباره', 'همه', 'وجود', 'دیگر', 'بیشتر', 'بهتر',
+  // واژه‌های ارجاعیِ پرسشِ پیگیرانه. اینها موضوع را مشخص نمی‌کنند، ولی چون در
+  // متنِ سنجه‌ها هم می‌آیند، اگر وزن بگیرند سنجه‌های کاملاً تصادفی را بالا
+  // می‌آورند — در تست، «برای همان موضوع، اولین قدم عملی چیست؟» به‌خاطر همین‌ها
+  // چهار سنجه‌ی بی‌ربط می‌گرفت و مدل را از موضوعِ واقعی دور می‌کرد.
+  'همان', 'موضوع', 'اولین', 'قبلی', 'قبل', 'مثال', 'ادامه', 'توضیح', 'دقیق']);
+
+// نشانه‌های پرسشِ ارجاعی: پرسشی که موضوعش در نوبتِ قبلیِ همان گفت‌وگوست.
+const ANAPHORA = ['همان', 'همون', 'همین', 'آن مورد', 'اون', 'قبلی', 'قبل', 'مثال',
+  'ادامه', 'بیشتر توضیح', 'دقیق‌تر', 'دقیقتر', 'چرا', 'یعنی چه', 'یعنی چی'];
+
+/** آیا برای فهمِ این پرسش باید پرسشِ قبلی را هم به بازیابی داد؟
+ *  یا نشانه‌ی ارجاعی دارد، یا آن‌قدر کوتاه است که به‌تنهایی موضوعی ندارد. */
+function needsHistoryContext(text) {
+  const t = normalize(text);
+  if (ANAPHORA.some(a => t.includes(normalize(a)))) return true;
+  return words(text).length <= 2;
+}
+
+function words(text) {
+  return normalize(text).split(/\s+/)
+    .map(w => w.replace(/[؟!،.؛:()«»"'\-–—]/g, ''))
+    // حداقل ۳ حرف: کلمه‌ی دوحرفی («حل»، «آب») به‌عنوان substring داخل کلمات
+    // بی‌ربط می‌نشیند («حل» داخل «محلول») و بیشتر از آنکه نشانه باشد، نویز است.
+    .filter(w => w.length >= 3 && !STOPWORDS.has(w));
+}
+
+// ---------- A) راهنمای ماژول‌های سامانه ----------
+//
+// این فهرست عمداً دستی و کوتاه است، نه تولیدشده از روی کد: چیزی که کاربر باید
+// بشنود «این کار را از کجا انجام بده» است، نه نامِ تابع. منبعش همان کارت‌های
+// واقعیِ رابط (CARD_DESC/ACC_ORDER در public/js/app.js) و صفحات همگانیِ سرور
+// است — ماژولِ نداشته اضافه نشده، چون دانا نباید کاربر را دنبالِ نخود سیاه بفرستد.
+//
+// where = همان مسیری که کاربر در منو می‌بیند. اگر روزی کارتی جابه‌جا شد، اینجا
+// هم باید به‌روز شود؛ غلط‌بودنِ مسیر بدتر از نبودنش است.
+const PLATFORM_GUIDE = [
+  { key: 'measures', title: 'خودارزیابی سنجه‌ها', where: 'اعتباربخشی › خودارزیابی سنجه‌ها',
+    what: 'درختِ کاملِ ۵۲۰ سنجه‌ی ویرایش پنجم. برای هر سنجه وضعیت (برقرار / نسبتاً برقرار / برقرار نیست / غیرقابل ارزیابی) ثبت می‌شود، شواهد پیوست می‌شود و نمره‌ی خودارزیابی جدا از نمره‌ی ممیزِ داخلی و ارزیابِ بیرونی نگه داشته می‌شود.',
+    kw: ['سنجه', 'خودارزیابی', 'ارزیابی', 'برقرار', 'نمره', 'امتیاز', 'شواهد', 'مستند', 'محور', 'استاندارد', 'اعتباربخشی', 'غیرقابل ارزیابی'] },
+  { key: 'reviewgaps', title: 'اختلاف نمره', where: 'اعتباربخشی › اختلاف نمره',
+    what: 'سنجه‌هایی که نمره‌ی خودارزیابیِ بیمارستان با نمره‌ی ارزیابِ بیرونی فرق دارد، برای ریشه‌یابی و اعتراض.',
+    kw: ['اختلاف', 'مغایرت', 'ارزیاب', 'ممیز بیرونی', 'اعتراض'] },
+  { key: 'corrective', title: 'اقدام اصلاحی سنجه', where: 'اعتباربخشی › خودارزیابی سنجه‌ها › داخل هر سنجه',
+    what: 'برای سنجه‌ای که برقرار نیست، چرخه‌ی عدم انطباق باز می‌شود: علت ریشه‌ای، اقدام، مسئول، مهلت، درصد پیشرفت، راستی‌آزمایی و بستن. گذر از هر وضعیت به وضعیت بعدی قاعده‌ی مشخص دارد و راستی‌آزمایی فقط با نقشِ تأییدکننده انجام می‌شود.',
+    kw: ['اقدام اصلاحی', 'عدم انطباق', 'علت ریشه', 'ریشه‌ای', 'راستی‌آزمایی', 'پیگیری سنجه', 'رفع نقص'] },
+  { key: 'committees', title: 'کمیته‌ها و صورت‌جلسه', where: 'اعتباربخشی › کمیته‌ها',
+    what: 'کمیته‌های الزامی، اعضا، زمان‌بندی جلسه با تشخیص تداخل اتاق، و صورت‌جلسه‌ی رسمی با مصوبات و پیگیری آن‌ها.',
+    kw: ['کمیته', 'جلسه', 'صورت‌جلسه', 'صورتجلسه', 'مصوبه', 'اعضا', 'رئیس کمیته', 'دبیر'] },
+  { key: 'indicators', title: 'شاخص‌ها', where: 'اعتباربخشی › شاخص‌ها',
+    what: '۶۱ شاخصِ استانداردِ وزارت با شناسنامه‌ی کامل (صورت، مخرج، هدف، دوره‌ی سنجش، مسئول جمع‌آوری) و ثبتِ داده‌ی دوره‌ای با تأیید.',
+    kw: ['شاخص', 'صورت کسر', 'مخرج', 'هدف کمی', 'تارگت', 'جمع‌آوری داده', 'پایش'] },
+  { key: 'bsc', title: 'کارت امتیازی متوازن', where: 'اعتباربخشی › کارت امتیازی متوازن',
+    what: 'شاخص‌های راهبردی به تفکیک وجه (مالی، مشتری، فرآیند داخلی، رشد و یادگیری) با مقدار ماهانه و جهت مطلوب.',
+    kw: ['bsc', 'کارت امتیازی', 'متوازن', 'وجه', 'راهبرد', 'استراتژی'] },
+  { key: 'documents', title: 'مدارک کنترل‌شده', where: 'اعتباربخشی › مدارک کنترل‌شده',
+    what: 'خط‌مشی، روش اجرایی و دستورالعمل با شماره‌ی نسخه، تاریخ بازنگری، گردش امضای الکترونیکی و تاریخچه‌ی نسخه‌ها.',
+    kw: ['خط مشی', 'خطمشی', 'روش اجرایی', 'دستورالعمل', 'مدرک', 'سند', 'امضا', 'نسخه', 'بازنگری', 'ابلاغ'] },
+  { key: 'doccodes', title: 'دفتر کد مدارک', where: 'اعتباربخشی › دفتر کد مدارک',
+    what: 'ثبت و رزروِ کدِ یکتای هر مدرک بیمارستان تا دو مدرک کد تکراری نگیرند.',
+    kw: ['کد مدرک', 'دفتر کد', 'کدگذاری'] },
+  { key: 'programs', title: 'برنامه‌های بهبود کیفیت', where: 'اعتباربخشی › برنامه‌های بهبود',
+    what: 'تعریف برنامه‌ی بهبود مستمر با هدف راهبردی، مسئول، مهلت و درصد پیشرفت، و تأیید مدیریتی.',
+    kw: ['بهبود', 'بهبود مستمر', 'برنامه بهبود', 'کیفیت', 'پیشرفت برنامه'] },
+  { key: 'checklists', title: 'چک‌لیست‌ها', where: 'اعتباربخشی › چک‌لیست‌ها',
+    what: 'بانک چک‌لیست‌ها با زمان‌بندی دوره‌ای، برگه‌ی پاسخِ قابل چاپ و بستنِ حلقه‌ی عدم انطباق.',
+    kw: ['چک لیست', 'چک‌لیست', 'ممیزی دوره', 'برگه پاسخ'] },
+  { key: 'audits', title: 'حسابرسی داخلی', where: 'اعتباربخشی › حسابرسی داخلی',
+    what: 'برنامه و گزارشِ ممیزی داخلی، یافته‌ها و اقدامات.',
+    kw: ['حسابرسی', 'ممیزی داخلی', 'ممیز', 'یافته'] },
+  { key: 'walkarounds', title: 'بازدید میدانی مدیریتی', where: 'اعتباربخشی › بازدید میدانی',
+    what: 'ثبت بازدید مدیران از بخش‌ها، مشاهدات، مصوبات و داشبورد پیگیری آن‌ها.',
+    kw: ['بازدید', 'میدانی', 'راند', 'گشت مدیریتی'] },
+  { key: 'errors', title: 'گزارش خطا و وقایع ناخواسته', where: 'اعتباربخشی › گزارش خطا — و همچنین بدون ورود از صفحه‌ی همان مرکز',
+    what: 'ثبت محرمانه یا ناشناسِ خطای پزشکی با کد رهگیری، تعیین شدت، ارجاع به دبیرخانه و در صورت نیاز تحلیل ریشه‌ای (RCA).',
+    kw: ['خطا', 'وقایع ناخواسته', 'حادثه', 'گزارش دهی', 'کد رهگیری', 'rca', 'ریشه یابی', 'ناشناس', 'محرمانه'] },
+  { key: 'fmea', title: 'شناسایی عوامل تهدید ایمنی بیمار (FMEA)', where: 'اعتباربخشی › FMEA — و همچنین بدون ورود از صفحه‌ی همان مرکز',
+    what: 'شناسایی خطر پیش از وقوع حادثه: حالت‌های شکست، علل، اثرات، کنترل‌های موجود و اقدامات پیشنهادی.',
+    kw: ['fmea', 'تهدید', 'خطر', 'ایمنی بیمار', 'حالت شکست', 'پیشگیری'] },
+  { key: 'satisfaction', title: 'نظرسنجی رضایت گیرنده خدمت', where: 'اعتباربخشی › رضایت‌سنجی — فرم عمومی بدون ورود',
+    what: 'پرسشنامه‌ی رسمی رضایت بیمار و گزارش نتایج آن.',
+    kw: ['رضایت', 'نظرسنجی', 'پرسشنامه', 'گیرنده خدمت'] },
+  { key: 'complaint', title: 'انتقادات، پیشنهادها و تقدیر', where: 'فرم عمومی بدون ورود، از صفحه‌ی همان مرکز',
+    what: 'ثبت شکایت/پیشنهاد/تقدیر به‌صورت ناشناس یا با اطلاعات تماس، و رسیدگی و پاسخ.',
+    kw: ['شکایت', 'انتقاد', 'پیشنهاد', 'تقدیر', 'رسیدگی'] },
+  { key: 'followup', title: 'پیگیری بیمار', where: 'اعتباربخشی › پیگیری',
+    what: 'پرونده‌ی پیگیریِ بیمار و مادر باردار: مراجعه‌ی بعدی، تماس‌های انجام‌شده و نتیجه.',
+    kw: ['پیگیری', 'مادر باردار', 'مراجعه بعدی', 'تماس با بیمار'] },
+  { key: 'processes', title: 'فرآیندها و فلوچارت', where: 'اعتباربخشی › فرآیندها',
+    what: 'ترسیم فرآیند با نمادهای استاندارد، شاخه و حلقه، تأیید و چاپ.',
+    kw: ['فرآیند', 'فرایند', 'فلوچارت', 'نمودار جریان'] },
+  { key: 'training', title: 'آموزش کارکنان', where: 'اعتباربخشی › آموزش',
+    what: 'نیازسنجی آموزشی هر کارمند، تأیید سرپرست و تصمیم واحد آموزش.',
+    kw: ['آموزش', 'نیازسنجی', 'دوره', 'کارکنان'] },
+  { key: 'orgchart', title: 'نمودار و ساختار سازمانی', where: 'اعتباربخشی › نمودار سازمانی / ساختار سازمانی',
+    what: 'حوزه‌های مدیریت، پرستاری و پشتیبانی، واحدها، پست‌های سازمانی، گروه شغلی و ساختمان‌ها.',
+    kw: ['سازمانی', 'چارت', 'نمودار', 'پست', 'واحد', 'گروه شغلی', 'ساختمان'] },
+  { key: 'nursing', title: 'سلسله‌مراتب پرستاری', where: 'اعتباربخشی › پرستاری',
+    what: 'سوپروایزرها، بخش‌ها و سرپرستاران؛ داشبورد سرپرستار برای حضور و غیاب، مرخصی، شیفت و وظایف شیفت.',
+    kw: ['پرستاری', 'سوپروایزر', 'سرپرستار', 'شیفت', 'مرخصی', 'حضور و غیاب', 'بخش'] },
+  { key: 'tenures', title: 'تصدی سمت‌ها', where: 'اعتباربخشی › تصدی سمت‌ها',
+    what: 'سابقه‌ی اینکه هر سمت در هر بازه دستِ چه کسی بوده، تا کارِ متصدیِ قبلی گم نشود.',
+    kw: ['تصدی', 'سابقه سمت', 'جانشین', 'تحویل سمت'] },
+  { key: 'users', title: 'کاربران و دسترسی‌ها', where: 'اعتباربخشی › کاربران',
+    what: 'تعریف کاربر، تخصیص نقش و مجوز، و دسترسی موردی به سنجه‌ی خاص.',
+    kw: ['کاربر', 'دسترسی', 'مجوز', 'نقش', 'رمز عبور', 'ورود'] },
+  { key: 'inbox', title: 'کارتابل', where: 'وظایف من › کارتابل',
+    what: 'کارهای ارجاع‌شده به شما، یادآورهای خودکار و مهلت‌ها.',
+    kw: ['کارتابل', 'وظیفه', 'وظایف', 'یادآور', 'مهلت', 'ارجاع'] },
+  { key: 'messages', title: 'پیام داخلی', where: 'وظایف من › پیام‌ها',
+    what: 'پیام‌رسانی داخلی بین کاربران همین مرکز.',
+    kw: ['پیام', 'پیغام', 'مکاتبه', 'اطلاع رسانی'] },
+  { key: 'calendar', title: 'تقویم', where: 'وظایف من › تقویم',
+    what: 'جلسات، مهلت‌ها و رویدادهای دوره‌ای روی تقویم شمسی.',
+    kw: ['تقویم', 'زمان بندی', 'رویداد', 'سررسید'] },
+  { key: 'ocr', title: 'خواندن متن از عکس و PDF', where: 'داخل فرم‌ها، دکمه‌ی خواندن از فایل',
+    what: 'متن یک عکس یا فایل PDF با کمکِ سرویس هوش مصنوعی خوانده و مستقیم داخل فیلد فرم گذاشته می‌شود.',
+    kw: ['عکس', 'تصویر', 'اسکن', 'pdf', 'ocr', 'خواندن متن'] },
+  { key: 'dana', title: 'دستیار هوشمند دانا', where: 'دکمه‌ی شناور دستیار، گوشه‌ی صفحه',
+    what: 'سه بخش دارد: «الان چه کار کنم؟» (کارِ بعدیِ خودِ شما از روی داده‌ی واقعی)، «بررسی وظایف»، و «بپرس» (گفت‌وگوی آزاد). گفت‌وگوی آزاد را سوپرادمین روشن/خاموش می‌کند و سقف مصرف ماهانه دارد.',
+    kw: ['دانا', 'دستیار', 'چت', 'هوش مصنوعی', 'سقف توکن'] },
+  { key: 'pharmacy', title: 'مدیریت دارویی', where: 'درمان و ایمنی › مدیریت دارویی — تبها: فرمولاری، یخچالها و پایش دما، فراخوان، انهدام، عوارض دارویی، خارج از فرمولاری، کمبود دارو',
+    what: 'فرمولاری محلی، پایش دمای یخچالها با تشخیص سرورِ در/خارج محدوده، فراخوان، صورتجلسه انهدام، عوارض و خطای دارویی، تجویز خارج از فهرست (تأییدش در نبود IDL ممنوع) و کمبود دارو.',
+    kw: ['دارو', 'داروخانه', 'فرمولاری', 'یخچال', 'دما', 'فراخوان', 'انهدام', 'کمبود دارو', 'عوارض دارویی', 'idl'] },
+  { key: 'disaster', title: 'حوادث و بلایا', where: 'درمان و ایمنی › حوادث و بلایا — تبها: ارزیابی ایمنی، عوامل خطرآفرین، مانور و تمرین، حوادث داخلی',
+    what: 'ارزیابی ایمنی بیمارستان در برابر مخاطرات، مانورهای تمرینی و ثبت حوادث داخلی با پیگیری.',
+    kw: ['بلایا', 'حادثه', 'مانور', 'تخلیه', 'خطرآفرین', 'ارزیابی ایمنی'] },
+  { key: 'infection', title: 'پیشگیری و کنترل عفونت', where: 'درمان و ایمنی › کنترل عفونت — تبها: دستگاههای استریل، آزمونهای استریل، بستههای استریل، بهداشت دست، عفونت بیمارستانی، آنتیبیوگرام',
+    what: 'چرخهی استریلیزاسیون، پایش بهداشت دست، موارد عفونت بیمارستانی (HAI) و گزارش مقاومت میکروبی.',
+    kw: ['عفونت', 'استریل', 'استریلیزاسیون', 'بهداشت دست', 'hai', 'آنتیبیوگرام', 'مقاومت میکروبی'] },
+  { key: 'blood', title: 'طب انتقال خون', where: 'درمان و ایمنی › طب انتقال خون — تبها: محل نگهداری، تحویل فرآورده، موجودی کیسهها، کنترل نمونه، کنترل کیفیت، عوارض تزریق',
+    what: 'موجودی و انقضای کیسهها، کنترل نمونه و کراس‌مچ، کنترل کیفیت، عوارض تزریق و هموویژیلانس.',
+    kw: ['خون', 'انتقال خون', 'کیسه خون', 'کراس مچ', 'هموویژیلانس', 'فرآورده'] },
+  { key: 'lab', title: 'خدمات آزمایشگاه', where: 'درمان و ایمنی › آزمایشگاه — تبها: کنترل نمونه، کنترل کیفیت، مقادیر بحرانی، گزارش بحرانی، جدولهای ابلاغی، پایش زمان پاسخ',
+    what: 'کنترل نمونه و کیفیت دستگاهها، مقادیر بحرانی و اطلاع رسانی آنها و پایش TAT.',
+    kw: ['آزمایشگاه', 'کنترل کیفیت', 'مقدار بحرانی', 'tat', 'زمان پاسخ'] },
+  { key: 'imaging', title: 'تصویربرداری و ایمنی پرتو', where: 'درمان و ایمنی › تصویربرداری — تبها: دستگاهها، کنترل کیفی، دزیمتری، فرم آمادگی بیمار، یافتهی بحرانی، بازبینی کیفیت',
+    what: 'دستگاههای تصویربرداری، کنترل کیفی و دزیمتری، آمادگی بیمار و پیگیری یافتههای بحرانی.',
+    kw: ['تصویربرداری', 'رادیولوژی', 'پرتو', 'دزیمتری', 'سونوگرافی', 'ct', 'mri'] },
+  { key: 'assets', title: 'اقلام و نگهداشت دورهای', where: 'پشتیبانی › اقلام و نگهداشت — تبها: اقلام، برنامههای دورهای، سوابق نگهداشت',
+    what: 'اقلام و تجهیزات با برنامهی نگهداشت دورهای (الف-۶ و الف-۷) و سابقهی نگهداشت هر قلم.',
+    kw: ['تجهیزات', 'نگهداشت', 'کالیبراسیون', 'اقلام مصرفی', 'سلامت محیط'] },
+  { key: 'occhealth', title: 'سلامت حرفهای و بهداشت کار', where: 'پشتیبانی › سلامت حرفهای — تبها: عوامل زیانآور، اندازهگیری، حوادث و شبهحوادث، معاینات شغلی',
+    what: 'عوامل زیانآور محیط کار، اندازهگیریهای دورهای، حوادث شغلی و معاینات دورهی کارکنان.',
+    kw: ['بهداشت حرفهای', 'معاینات شغلی', 'عوامل زیانآور', 'شبه حادثه'] },
+  { key: 'hrdev', title: 'ارزیابی و توسعهی کارکنان', where: 'پشتیبانی › توسعهی کارکنان — تبها: شرح شغل، احراز بدو بکارگیری، صلاحیتها، ارزشیابی سالیانه',
+    what: 'شرح شغل، احراز صلاحیت بدو استخدام، فهرست صلاحیتها، ارزشیابی سالیانه و مسیر جانشینپروری.',
+    kw: ['ارزیابی کارکنان', 'شرح شغل', 'بدو استخدام', 'ارزشیابی', 'جانشین پروری', 'صلاحیت'] },
+  { key: 'vendors', title: 'پیمانکاران و تأمینکنندگان', where: 'پشتیبانی › پیمانکاران — تبها: پیمانکار و تأمینکننده، ارزیابی و انتخاب، پایش دورهای عملکرد، ذینفعان',
+    what: 'پیمانکاران و تأمینکنندگان، ارزیابی و انتخاب، پایش دورهای عملکرد و تحلیل ذینفعان (الف-۱-۱-۲).',
+    kw: ['پیمانکار', 'تأمینکننده', 'ذینفع', 'خرید'] },
+  { key: 'finance', title: 'منابع مالی و مشارکت مردمی', where: 'پشتیبانی › منابع مالی — تبها: بودجه و هزینه، گزارش ماهانه، کمک خیرین، هدفگذاری جذب، گلوبال و هتلینگ، اختلال خدمت',
+    what: 'بودجه به تفکیک برنامه با انحراف محاسبهشدهی سرور، گزارش ماهانه به تیم رهبری، کمک خیرین و اختلال خدمت.',
+    kw: ['مالی', 'بودجه', 'هزینه', 'خیرین', 'هتلینگ', 'اختلال خدمت'] },
+  { key: 'patientfocus', title: 'بیمارمحوری و علتکاوی', where: 'کیفیت و ایمنی › بیمارمحوری — تبها: تعارض منافع، بستری مجدد، ترخیص با میل شخصی',
+    what: 'تعارض منافع از فهرست، بستری مجدد با محاسبهی فاصله در سرور، و ترخیص با میل شخصی با علتِ ساختاریافته.',
+    kw: ['بستری مجدد', 'ترخیص', 'تعارض منافع', 'علتکاوی'] },
+  { key: 'education', title: 'آموزش و اثربخشی', where: 'کیفیت و ایمنی › آموزش و اثربخشی — تبها: سیاست آموزشی، برنامههای برگزارشده، ارزیابی اثربخشی',
+    what: 'سیاست آموزش، دورههای برگزارشده و سنجش اثربخشی با پیشآزمون/پسآزمون (الف-۳-۲-۴).',
+    kw: ['اثربخشی آموزش', 'سیاست آموزش', 'پس آزمون', 'پیش آزمون'] },
+  { key: 'nsupervision', title: 'نظارت مدیریت پرستاری', where: 'پرستاری › نظارت مدیریت پرستاری — تبها: برآورد نیرو، پایش مراقبت، نظارت بر پرونده، اعزام و ارجاع',
+    what: 'برآورد نیروی پرستاری، پایش مراقبت، نظارت بر پرونده و اعزام/ارجاع بیمار (الف-۴-۱-۴/۵).',
+    kw: ['نظارت پرستاری', 'برآورد نیرو', 'پایش مراقبت', 'پرونده پرستاری'] },
+
+];
+
+// راهنما را با هم‌پوشانیِ کلیدواژه امتیاز می‌دهد. عمداً ساده است: تعداد
+// کلیدواژه‌های مچ‌شده، با وزنِ بیشتر برای کلیدواژه‌ی چندکلمه‌ای (که تصادفی مچ نمی‌شود).
+function searchGuide(text, limit = 3) {
+  const t = normalize(text);
+  const ts = t.replace(/\s+/g, '');   // همان مقایسهی فضابهرسم — اینبار در اسکوپ تابع
+  const scored = PLATFORM_GUIDE.map(g => {
+    let s = 0;
+    for (const k of g.kw) {
+      const nk = normalize(k);
+      if (ts.includes(nk.replace(/\s+/g, ''))) s += nk.includes(' ') ? 3 : 2;
+    }
+    if (ts.includes(normalize(g.title).replace(/\s+/g, ''))) s += 4;
+    return { g, s };
+  }).filter(x => x.s > 0).sort((a, b) => b.s - a.s);
+  return scored.slice(0, limit).map(x => x.g);
+}
+
+// ---------- B) کتاب سنجه‌ها، با امتیازدهی روی همه‌ی کلمات ----------
+//
+// طراحی قبلی: کلمات از نایاب به رایج مرتب می‌شدند و *اولین* کلمه‌ای که چیزی
+// پیدا می‌کرد، کلِ نتیجه را تعیین می‌کرد و بقیه‌ی کلماتِ سؤال دور ریخته می‌شدند.
+// یعنی «سنجه‌ی مربوط به رضایت کارکنان» عملاً فقط «رضایت» را می‌دید.
+//
+// حالا هر کلمه یک وزنِ IDF می‌گیرد (کلمه‌ی نایاب وزنِ بالا)، همه‌ی کلمات کوئری
+// می‌شوند، و امتیازِ هر سنجه جمعِ وزنِ کلماتی است که در آن سنجه هستند. سنجه‌ای
+// که دو کلمه‌ی سؤال را با هم دارد، طبیعتاً بالاتر از سنجه‌ای می‌نشیند که فقط یکی
+// را دارد — همان چیزی که یک آدم هم انتظار دارد.
+const MAX_WORD_SHARE = 0.30;   // کلمه‌ای که در بیش از ۳۰٪ سنجه‌هاست، موضوع را مشخص نمی‌کند
+// سقفِ ردیفِ خوانده‌شده برای هر کلمه. عمداً بزرگ‌تر از کلِ ۵۲۰ سنجه است تا هرگز
+// قیدِ فعال نشود: اگر LIMIT کوچک بود، df ای که برای IDF می‌شماریم همان LIMIT
+// می‌شد و صافیِ «کلمه‌ی خیلی رایج» عملاً از کار می‌افتاد. ۵۲۰ ردیفِ کوتاه در
+// حافظه، هزینه‌ای ندارد.
+const MEASURE_POOL = 600;
+
+// LIKE در SQLite فقط substring می‌بیند و مرزِ کلمه نمی‌شناسد. در فارسی این فاجعه
+// است: «دست» داخل «دستورالعمل» و «دسترسی» هم هست. در تست، سؤالِ «بهداشت دست چطور
+// پایش می‌شود؟» به‌خاطر همین، سنجه‌ی وقایع ناخواسته را بالاتر از سنجه‌های واقعیِ
+// بهداشت دست نشاند و دانا گفت «چیزی پیدا نشد».
+//
+// قاعده: کلمه باید از *ابتدای* یک کلمه در متن شروع شود و حداکثر سه حرف دنباله
+// داشته باشد. سه حرف عمدی است — پسوندهای صرفیِ فارسی کوتاه‌اند («بهداشتی»،
+// «سنجه‌ها»، «بیماران») ولی «دستورالعمل» هفت حرف دنباله دارد و رد می‌شود.
+const boundaryCache = new Map();
+function wordRe(w) {
+  let re = boundaryCache.get(w);
+  if (!re) {
+    const esc = w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    re = new RegExp(`(^|[^\\p{L}])${esc}\\p{L}{0,3}([^\\p{L}]|$)`, 'u');
+    boundaryCache.set(w, re);
+  }
+  return re;
+}
+function wordMatches(haystack, w) {
+  return wordRe(w).test(normalize(haystack));
+}
+
+function searchMeasures(text, roleScope) {
+  const ws = words(text);
+  if (!ws.length) return { measures: [], blocked: false };
+
+  const total = query(
+    `SELECT COUNT(*) c FROM accreditation_sections WHERE level_type = 'measure'`).rows[0].c || 1;
+
+  const hitsByMeasure = new Map();     // code -> {code, statement, page, score}
+  let anyWordMatched = false;
+
+  for (const w of ws) {
+    const like = `%${w}%`;
+    // LIKE فقط برای کم‌کردنِ حجمِ اسکن است؛ تصمیمِ نهایی با wordMatches گرفته
+    // می‌شود، وگرنه «دست» با «دستورالعمل» مچ می‌ماند.
+    const rows = query(
+      `SELECT code, title, statement, page FROM accreditation_sections
+       WHERE level_type = 'measure' AND (statement LIKE ? OR title LIKE ?)
+       LIMIT ?`, [like, like, MEASURE_POOL]).rows
+      .filter(r => wordMatches(`${r.statement || ''} ${r.title || ''}`, w));
+    const df = rows.length;
+    if (df === 0) continue;
+    anyWordMatched = true;
+    if (df / total > MAX_WORD_SHARE) continue;   // خیلی رایج: نویز است، وزنش نده
+    // IDF ساده. کلمه‌ای که در ۲ سنجه است وزنی چند برابرِ کلمه‌ای می‌گیرد که در ۱۰۰ سنجه است.
+    const idf = Math.log(total / df);
+    for (const r of rows) {
+      const cur = hitsByMeasure.get(r.code) || { ...r, score: 0, matched: 0 };
+      cur.score += idf;
+      cur.matched += 1;
+      hitsByMeasure.set(r.code, cur);
+    }
+  }
+
+  if (!hitsByMeasure.size) return { measures: [], blocked: false, anyWordMatched };
+
+  const all = [...hitsByMeasure.values()]
+    // چند کلمه‌ی مشترک، نشانه‌ی قوی‌تری از یک کلمه‌ی نایابِ تصادفی است
+    .sort((a, b) => (b.matched - a.matched) || (b.score - a.score));
+
+  // بریدنِ دنباله. بدون این دو صافی، پنج جای خالیِ نتیجه همیشه با سنجه‌هایی پر
+  // می‌شد که فقط یک کلمه‌ی حاشیه‌ایِ سؤال («ثبت»، «گزارش») را داشتند — در تست
+  // دیده شد که سه سنجه‌ی یکسان زیرِ چند سؤالِ کاملاً بی‌ربط تکرار می‌شوند. بافتِ
+  // نامرتبط بی‌ضرر نیست: مدل را به سمتِ موضوعِ اشتباه هل می‌دهد.
+  const best = all[0];
+  // اینجا یک قاعده‌ی سخت‌گیرانه‌تر امتحان شد («اگر سؤال سه کلمه دارد، تک‌کلمه‌ای
+  // قبول نیست») و کنار گذاشته شد: اندازه‌گیری روی همین دیتابیس نشان داد متنِ
+  // سنجه‌ها بسیار پراکنده است — «رضایت» فقط در ۱ سنجه هست و «کارکنان» در ۴۱ —
+  // پس تقریباً هیچ سؤالی دو کلمه‌اش در یک سنجه با هم نمی‌آید و آن قاعده سؤال‌های
+  // کاملاً درست را هم دست‌خالی برمی‌گرداند. دو صافیِ زیر کافی‌اند، و دستورِ
+  // سیستمی هم صریح به مدل می‌گوید بافتِ نامرتبط را نادیده بگیرد.
+  const ranked = all.filter(m =>
+    m.matched === best.matched &&          // اگر سنجه‌ای دو کلمه را دارد، تک‌کلمه‌ای‌ها بیرون
+    m.score >= best.score * 0.5);          // و هرچه امتیازش نصفِ بهترین هم نمی‌شود، حاشیه است
+
+  // مرزِ نقش — همان دامنه‌ای که رابط اصلی سنجه‌ها اعمال می‌کند. تفاوتِ «موضوع در
+  // کتاب نیست» با «هست ولی مالِ این سمت نیست» عمدی است: اولی می‌تواند به لایه‌ی ۲
+  // برود، دومی هرگز.
+  const inScope = roleScope === '*'
+    ? ranked
+    : ranked.filter(m => roleScope.includes(axisCodeOf(m.code)));
+  if (!inScope.length) return { measures: [], blocked: true };
+
+  return { measures: inScope.slice(0, 5), blocked: false };
+}
+
+// ---------- C) دانشِ تأییدشده‌ی همین بیمارستان ----------
+//
+// فقط confirmed. هر پاسخِ لایه‌ی ۲ اینجا به‌شکل draft می‌نشیند؛ اگر draft هم سرو
+// شود، دستیار حرفِ بازبینی‌نشده‌ی خودش را به‌عنوان دانشِ رسمیِ بیمارستان به کاربرِ
+// بعدی پس می‌دهد — در یک سامانه‌ی اعتباربخشی خطرناک است، نه فقط بی‌کیفیت.
+function searchKnowledge(hospitalId, text, limit = 3) {
+  const ws = words(text);
+  if (!ws.length) return [];
+  const like = w => `%${w}%`;
+  const rows = query(
+    `SELECT title, content FROM assistant_knowledge
+     WHERE hospital_id = ? AND status = 'confirmed'
+       AND (${ws.map(() => '(title LIKE ? OR content LIKE ?)').join(' OR ')})
+     ORDER BY created_at DESC LIMIT 20`,
+    [hospitalId, ...ws.flatMap(w => [like(w), like(w)])]).rows;
+
+  if (!rows.length) return [];
+
+  // امتیازدهی: عنوان تطبیق داشته باشد یا در پرسش‌های چندکلمه‌ای بیش از یک کلمه در متن بیاید
+  const scored = rows.map(r => {
+    const tNorm = normalize(r.title);
+    const cNorm = normalize(r.content);
+    let score = 0;
+    let matchCount = 0;
+    for (const w of ws) {
+      if (tNorm.includes(w)) { score += 5; matchCount++; }
+      else if (cNorm.includes(w)) { score += 1; matchCount++; }
+    }
+    // اگر پرسش حداقل ۳ واژه داشت، حداقل ۲ واژه باید در عنوان یا متن تطبیق داشته باشند تا تطابق‌های تصادفی حذف شوند
+    if (ws.length >= 3 && matchCount < 2) {
+      score = 0;
+    }
+    return { r, score };
+  }).filter(x => x.score > 0).sort((a, b) => b.score - a.score);
+
+  return scored.slice(0, limit).map(x => x.r);
+}
+
+// ---------- آمار زنده‌ی همین بیمارستان ----------
+//
+// چرا لازم بود: سؤالِ «چند سنجه‌مان مانده؟» یا «چند اقدام اصلاحیِ باز داریم؟»
+// یکی از طبیعی‌ترین سؤال‌هایی است که یک مدیر از دستیارش می‌پرسد، و دانا تا امروز
+// هیچ راهی برای دانستنش نداشت — پس یا سکوت می‌کرد یا بدتر، حدس می‌زد.
+//
+// فقط وقتی محاسبه می‌شود که سؤال واقعاً بوی «وضعیت/عدد» بدهد؛ وگرنه هر گفت‌وگوی
+// ساده هم چند کوئری و چند صد توکنِ اضافه خرج می‌کرد.
+// همه‌ی کوئری‌ها با hospital_id بسته‌اند و شمارشِ سنجه‌ها به محورهای همان نقش
+// محدود می‌شود، تا دانا عددی نگوید که کاربر اجازه‌ی دیدنش را ندارد.
+const STATE_SIGNALS = ['چند', 'تعداد', 'وضعیت', 'آمار', 'درصد', 'چقدر', 'مانده', 'باقی',
+  'باز ', 'بسته', 'تکمیل', 'پیشرفت', 'کارتابل', 'خوانده‌نشده', 'خوانده نشده', 'عقب',
+  'گزارش بده', 'خلاصه', 'الان', 'فعلا', 'فعلاً'];
+
+function wantsFacts(text) {
+  const t = normalize(text);
+  return STATE_SIGNALS.some(s => t.includes(normalize(s)));
+}
+
+function num(sql, params) {
+  try { return query(sql, params).rows[0].c || 0; } catch (e) { return null; }
+}
+
+function liveFacts(hospitalId, userId, roleScope) {
+  const f = [];
+
+  // ۱) خودارزیابی سنجه‌ها، محدود به محورهای همین نقش
+  const scopeSql = roleScope === '*'
+    ? ''
+    : ` AND (${(roleScope.length ? roleScope : ['__none__']).map(() => `s.code LIKE ?`).join(' OR ')})`;
+  const scopeParams = roleScope === '*' ? [] : (roleScope.length ? roleScope.map(a => a + '-%') : ['__none__']);
+
+  const totalM = num(
+    `SELECT COUNT(*) c FROM accreditation_sections s WHERE s.level_type = 'measure'${scopeSql}`,
+    scopeParams);
+  if (totalM) {
+    const byStatus = query(
+      `SELECT ms.status st, COUNT(*) c
+       FROM measure_status ms JOIN accreditation_sections s ON s.id = ms.measure_id
+       WHERE ms.hospital_id = ? AND s.level_type = 'measure'${scopeSql}
+       GROUP BY ms.status`, [hospitalId, ...scopeParams]).rows;
+    const g = k => (byStatus.find(r => r.st === k) || {}).c || 0;
+    const recorded = byStatus.reduce((a, r) => a + r.c, 0);
+    const label = roleScope === '*' ? 'کل سنجه‌ها' : 'سنجه‌های حوزه‌ی سمت شما';
+    f.push(`${label}: ${totalM} سنجه؛ ثبت‌شده ${recorded}، برقرار ${g('full_compliant')}، `
+      + `نسبتاً برقرار ${g('partial')}، برقرار نیست ${g('non_compliant')}، `
+      + `هنوز ثبت‌نشده ${Math.max(0, totalM - recorded)}.`);
+  }
+
+  // ۲) اقدامات اصلاحیِ باز
+  const openMca = num(
+    `SELECT COUNT(*) c FROM measure_corrective_actions
+     WHERE hospital_id = ? AND status NOT IN ('بسته‌شده','تأییدشده')`, [hospitalId]);
+  if (openMca !== null) f.push(`اقدام اصلاحیِ هنوز بسته‌نشده: ${openMca}`);
+
+  // ۳) کارتابلِ خودِ کاربر
+  const myTasks = num(
+    `SELECT COUNT(*) c FROM tasks WHERE hospital_id = ? AND assigned_to = ? AND status <> 'completed'`,
+    [hospitalId, userId]);
+  if (myTasks !== null) f.push(`کارِ باز در کارتابلِ خودِ شما: ${myTasks}`);
+
+  const unread = num(
+    `SELECT COUNT(*) c FROM internal_messages
+     WHERE hospital_id = ? AND recipient_id = ? AND is_read = 0 AND is_draft = 0`,
+    [hospitalId, userId]);
+  if (unread !== null) f.push(`پیام داخلیِ خوانده‌نشده‌ی شما: ${unread}`);
+
+  // ۴) بقیه‌ی ماژول‌ها — عددِ کلانِ مرکز، بدون هیچ محتوای شخصی
+  const add = (label, sql, params) => { const n = num(sql, params); if (n !== null) f.push(`${label}: ${n}`); };
+  add('کمیته‌های تعریف‌شده', `SELECT COUNT(*) c FROM committees WHERE hospital_id = ?`, [hospitalId]);
+  add('شاخصِ فعال', `SELECT COUNT(*) c FROM hospital_kpis WHERE hospital_id = ? AND is_active = 1`, [hospitalId]);
+  add('مدرکِ کنترل‌شده‌ی تأییدشده',
+    `SELECT COUNT(*) c FROM controlled_documents WHERE hospital_id = ? AND status IN ('approved','active')`, [hospitalId]);
+  add('مدرکِ پیش‌نویس (هنوز تأیید نشده)',
+    `SELECT COUNT(*) c FROM controlled_documents WHERE hospital_id = ? AND status = 'draft'`, [hospitalId]);
+  add('گزارش خطای رسیدگی‌نشده',
+    `SELECT COUNT(*) c FROM medical_error_reports WHERE hospital_id = ? AND status = 'new'`, [hospitalId]);
+  add('برنامه‌ی بهبودِ در حال اجرا',
+    `SELECT COUNT(*) c FROM improvement_programs WHERE hospital_id = ? AND status = 'در_حال_اجرا'`, [hospitalId]);
+
+  return f;
+}
+
+// ---------- سرهم‌کردن بافت ----------
+
+/**
+ * همه‌ی منابع را می‌گردد و یک شیءِ بافت برمی‌گرداند.
+ * @returns {{blocked:boolean, guide:Array, measures:Array, knowledge:Array, facts:string[], empty:boolean}}
+ */
+/* رکوردهای واقعیِ همین بیمارستان (سند، فرآیند، چک‌لیست، شاخص، کمیته، …).
+   تا امروز دانا فقط «دانش» و «سنجه» و «آمار» می‌دید و نمی‌توانست بگوید
+   «خط‌مشی پذیرش و ترخیص بیمار با کد PL-05 در بخش مدارک هست» — یعنی برای
+   سؤالی که کاربر واقعاً می‌پرسد (کجاست؟ داریمش؟) جوابِ مشخص نداشت و
+   کلی‌گویی می‌کرد. حالا همان منابعی را می‌بیند که جست‌وجوی سراسری می‌بیند.
+   عمداً فقط عنوان و کد برمی‌گردد نه محتوای کامل: هدف، نشان‌دادنِ «این هست و
+   اسمش این است» است، نه پرکردنِ پنجره‌ی مدل. */
+const ENTITY_SOURCES = [
+  { fa: 'سند کنترل‌شده', where: 'مدارک و فرآیندها ← مدارک کنترل‌شده',
+    sql: `SELECT doc_code AS code, title, COALESCE(doc_type,'') AS kind FROM controlled_documents
+          WHERE hospital_id = ? AND (title LIKE ? OR doc_code LIKE ?) ORDER BY title LIMIT 5` },
+  { fa: 'فرآیند', where: 'مدارک و فرآیندها ← فرآیندها و فلوچارت',
+    sql: `SELECT process_code AS code, title, '' AS kind FROM processes
+          WHERE hospital_id = ? AND (title LIKE ? OR process_code LIKE ?) ORDER BY title LIMIT 4` },
+  { fa: 'چک‌لیست', where: 'کیفیت و ایمنی ← بانک چک‌لیست‌ها',
+    sql: `SELECT checklist_code AS code, title, '' AS kind FROM checklists
+          WHERE hospital_id = ? AND (title LIKE ? OR checklist_code LIKE ?) ORDER BY title LIMIT 4` },
+  { fa: 'شاخص', where: 'اعتباربخشی ← شاخص‌ها',
+    sql: `SELECT code, title, COALESCE(indicator_type,'') AS kind FROM hospital_kpis
+          WHERE hospital_id = ? AND (title LIKE ? OR code LIKE ?) ORDER BY title LIMIT 4` },
+  { fa: 'کمیته', where: 'ساختار سازمانی ← کمیته‌ها',
+    sql: `SELECT '' AS code, name AS title, COALESCE(committee_type,'') AS kind FROM committees
+          WHERE hospital_id = ? AND (name LIKE ? OR name LIKE ?) ORDER BY name LIMIT 3` },
+  { fa: 'گزارش خطا', where: 'ایمنی بیمار ← وقایع ۲۸گانه',
+    sql: `SELECT tracking_code AS code, error_category AS title, description AS kind FROM medical_error_reports
+          WHERE hospital_id = ? AND (error_category LIKE ? OR description LIKE ?) ORDER BY created_at DESC LIMIT 3` },
+  { fa: 'ارزیابی FMEA', where: 'ایمنی بیمار ← مدیریت خطر (FMEA)',
+    sql: `SELECT '' AS code, subject AS title, hazard_type AS kind FROM fmea_records
+          WHERE hospital_id = ? AND (subject LIKE ? OR failure_modes LIKE ?) ORDER BY submitted_at DESC LIMIT 3` },
+  { fa: 'صورتجلسه کمیته', where: 'ساختار سازمانی ← کمیته‌ها ← صورتجلسات',
+    sql: `SELECT m.minutes_code AS code, c.name AS title, m.meeting_date AS kind
+          FROM committee_meeting_minutes m JOIN committees c ON c.id = m.committee_id
+          WHERE c.hospital_id = ? AND (c.name LIKE ? OR m.agenda_items LIKE ?) ORDER BY m.meeting_date DESC LIMIT 3` },
+  { fa: 'شیفت پرستاری', where: 'پرستاری ← برنامه‌ریزی شیفت‌ها',
+    sql: `SELECT ward AS code, jalali_year || '/' || jalali_month AS title, note AS kind FROM shift_schedules
+          WHERE hospital_id = ? AND (ward LIKE ? OR note LIKE ?) ORDER BY created_at DESC LIMIT 3` }
+];
+
+function searchEntities(hospitalId, text, perms) {
+  // مجوز هر منبع بهترتیبِ تعریف — همان قاعدهی جستوجوی سراسری: هر گروه نتیجه مجوز
+  // خودش را دارد. بدون این فیلتر، دانا دورِ مدلِ دسترسی را باز میکرد
+  // (بازتولید واقعی: مسئول دفتر پرستاری عناوین اسناد را از راه دانا میدید).
+  const ENTITY_PERMS = ['view_documents', 'view_processes', 'view_checklists', 'view_indicators', 'view_committees', 'manage_medical_error_reports', 'submit_fmea', 'view_committee_minutes', 'view_nursing_hierarchy'];
+  const allowed = ENTITY_SOURCES
+    .map((x, i) => ({ ...x, perm: ENTITY_PERMS[i] }))
+    .filter(x => !x.perm || (perms || []).includes(x.perm));
+  const ws = words(text).filter(w => w.length >= 3).slice(0, 4);
+  if (!ws.length) return [];
+  const out = [];
+  for (const src of allowed) {
+    for (const w of ws) {
+      let rows = [];
+      const like = '%' + w + '%';
+      try { rows = query(src.sql, [hospitalId, like, like]).rows; } catch (e) { break; }
+      for (const r of rows) {
+        if (out.length >= 12) break;
+        if (out.some(x => x.title === r.title && x.fa === src.fa)) continue;
+        out.push({ fa: src.fa, where: src.where, code: r.code || '', title: r.title, kind: r.kind || '' });
+      }
+      if (rows.length) break;   // اولین واژه‌ای که جواب داد کافی است
+    }
+  }
+  return out;
+}
+
+// ---------- کارهای بازِ خودِ کاربر ----------
+// آمارِ زنده فقط «تعداد» میدهد؛ وقتی کاربر میپرسد «الان چه کاری مانده؟»
+// انتظارش فهرستِ خودش است، نه یک عدد. این منبع فقط ردیفهای خودِ همان کاربر
+// را میبیند (assigned_to / responsible_user_id = userId) — نه چیز تازهای
+// نشت میکند نه به مجوزِ تازهای نیاز دارد. بدونِ نشانهی شخصی هم اجرا
+// نمیشود تا هر گفتوگوی ساده دو کوئری اضافه نگیرد.
+const MY_SIGNALS = ['کارهای من', 'وظایف من', 'کارتابل من', 'الان چه کار', 'الان باید',
+  'چه کاری مانده', 'باید انجام بدهم', 'مانده', 'برای من', 'مهلت من', 'عقب افتاده', 'سررسید', 'کار من', 'مسئولیت من'];
+function wantsMine(text) { const t = normalize(text); return MY_SIGNALS.some(x => t.includes(normalize(x))); }
+function myOpenItems(hospitalId, userId) {
+  const items = [];
+  try {
+    const tasks = query(
+      `SELECT title, status, due_date FROM tasks
+        WHERE hospital_id = ? AND assigned_to = ? AND status <> 'completed'
+        ORDER BY (due_date IS NULL), due_date LIMIT 5`, [hospitalId, userId]).rows;
+    for (const t of tasks) items.push(`کارتابل — ${t.title}${t.due_date ? ` (مهلت ${t.due_date})` : ' (بدون مهلت)'} — وضعیت: ${t.status}`);
+  } catch (e) { /* جدول ممکن است هنوز مهاجرت نشده باشد؛ فهرست خالی میماند */ }
+  try {
+    const mcas = query(
+      `SELECT a.title, a.status, a.due_date, m.code AS measure_code
+         FROM measure_corrective_actions a JOIN accreditation_sections m ON m.id = a.measure_id
+        WHERE a.hospital_id = ? AND a.responsible_user_id = ? AND a.status NOT IN ('بستهشده','تأییدشده')
+        ORDER BY (a.due_date IS NULL), a.due_date LIMIT 5`, [hospitalId, userId]).rows;
+    for (const a of mcas) items.push(`اقدام اصلاحی سنجهی ${a.measure_code} — ${a.title} (وضعیت: ${a.status}${a.due_date ? '، مهلت ' + a.due_date : ''})`);
+  } catch (e) { /* همان بالا */ }
+  return items;
+}
+
+function buildContext({ hospitalId, userId, text, roleScope, perms }) {
+  const m = searchMeasures(text, roleScope);
+  // مرزِ نقش کوتاه‌مدار می‌کند، ولی فقط وقتی هیچ منبعِ دیگری هم چیزی ندارد —
+  // وگرنه سؤالِ «کمیته‌ها کجاست؟» از یک پرستار، صرفاً به‌خاطر اینکه یک سنجه‌ی
+  // بیرونِ محورش مچ شده، به‌غلط «خارج از حوزه‌ی شماست» می‌گرفت.
+  const guide = searchGuide(text);
+  const knowledge = searchKnowledge(hospitalId, text);
+  const entities = searchEntities(hospitalId, text, perms);
+  const mine = wantsMine(text) ? myOpenItems(hospitalId, userId) : [];
+  if (m.blocked && !guide.length && !knowledge.length && !entities.length) {
+    return { blocked: true, guide: [], measures: [], knowledge: [], entities: [], mine: [], facts: [], empty: false };
+  }
+  const facts = wantsFacts(text) ? liveFacts(hospitalId, userId, roleScope) : [];
+  const empty = !guide.length && !m.measures.length && !knowledge.length && !entities.length && !facts.length && !mine.length;
+  return { blocked: false, guide, measures: m.measures, knowledge, entities, mine, facts, empty };
+}
+
+/** بافت را به متنی تبدیل می‌کند که به مدل داده می‌شود. برچسبِ صریح دارد تا مدل
+ *  بداند این داده‌ی همین بیمارستان است، نه دانشِ عمومیِ خودش. */
+function contextBlock(ctx) {
+  const parts = [];
+  if (ctx.guide.length) {
+    parts.push('امکاناتِ مرتبطِ همین سامانه (برای راهنماییِ مسیر، عیناً همین مسیرها را بگو و مسیرِ من‌درآوردی نساز):\n'
+      + ctx.guide.map(g => `- ${g.title} — جای آن: ${g.where}\n  ${g.what}`).join('\n'));
+  }
+  if (ctx.measures.length) {
+    parts.push('سنجه‌های مرتبط از کتاب استاندارد اعتباربخشی:\n'
+      + ctx.measures.map(m => `- سنجه‌ی ${m.code}: ${m.statement || m.title}`).join('\n'));
+  }
+  if (ctx.knowledge.length) {
+    parts.push('اسناد و دانشِ تأییدشده‌ی همین بیمارستان:\n'
+      + ctx.knowledge.map(k => `- ${k.title}: ${String(k.content).slice(0, 1200)}`).join('\n'));
+  }
+  if ((ctx.entities || []).length) {
+    parts.push('مواردِ واقعیِ ثبت‌شده در همین بیمارستان که به سؤال می‌خورند '
+      + '(اگر کاربر پرسید «داریم؟» یا «کجاست؟»، عیناً همین‌ها را با کد و مسیرشان نام ببر):\n'
+      + ctx.entities.map(x => `- [${x.fa}] ${x.title}${x.code ? ` (کد ${x.code})` : ''}`
+        + `${x.kind ? ` — ${x.kind}` : ''} — جای آن: ${x.where}`).join('\n'));
+  }
+    if ((ctx.mine || []).length) {
+    parts.push('کارهای بازِ خودِ همین کاربر (از دادهی واقعی؛ همینها را با مهلتشان بگو و اگر دو کار مهلت نزدیک دارند اولویت را بگو):\n'
+      + ctx.mine.map(x => `- ${x}`).join('\n'));
+  }
+if (ctx.facts.length) {
+    parts.push('آمارِ زنده‌ی همین بیمارستان در همین لحظه (اعداد واقعی‌اند؛ عددی از خودت نساز):\n'
+      + ctx.facts.map(x => `- ${x}`).join('\n'));
+  }
+  return parts.join('\n\n');
+}
+
+/** پس‌افتِ بدونِ مدل: وقتی لایه‌ی ۲ در دسترس نیست، دستِ‌کم همین بافت را
+ *  به‌شکلِ خوانا بدهیم. صریح می‌گوید چرا جوابِ کامل نداده. */
+function fallbackFromContext(ctx, why) {
+  const lines = [];
+  if ((ctx.entities || []).length) {
+    lines.push('این موارد در همین مرکز ثبت شده‌اند و به سؤال شما می‌خورند:');
+    ctx.entities.forEach(x => lines.push(`— [${x.fa}] ${x.title}${x.code ? ` (کد ${x.code})` : ''} — ${x.where}`));
+    lines.push('');
+  }
+  if (ctx.guide.length) {
+    lines.push('در خودِ سامانه، این بخش‌ها به سؤال شما مربوط‌اند:');
+    ctx.guide.forEach(g => lines.push(`— ${g.title} (${g.where}): ${g.what}`));
+  }
+  if (ctx.facts.length) {
+    lines.push('', 'آمارِ فعلیِ این مرکز:');
+    ctx.facts.forEach(x => lines.push(`— ${x}`));
+  }
+  if (ctx.measures.length) {
+    lines.push('', 'نزدیک‌ترین سنجه‌های اعتباربخشی:');
+    ctx.measures.slice(0, 3).forEach(m => lines.push(`— سنجه‌ی ${m.code}: ${m.statement || m.title}`));
+  }
+  if (ctx.knowledge.length) {
+    lines.push('', `از اسناد تأییدشده‌ی بیمارستان — «${ctx.knowledge[0].title}»:`);
+    lines.push(String(ctx.knowledge[0].content).slice(0, 1500));
+  if ((ctx.mine || []).length) {
+    lines.push('', 'کارهای بازِ خودِ شما (از دادهی واقعی):');
+    ctx.mine.slice(0, 3).forEach(x => lines.push('— ' + x));
+  }
+
+  }
+  if (why) lines.push('', why);
+  return lines.join('\n');
+}
+
+module.exports = {
+  PLATFORM_GUIDE, buildContext, contextBlock, fallbackFromContext,
+  normalize, words, searchGuide, searchMeasures, searchKnowledge, liveFacts, wantsFacts, wantsMine, myOpenItems,
+  needsHistoryContext,
+};

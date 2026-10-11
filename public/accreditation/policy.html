@@ -1,0 +1,2212 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>میزکار جامع مدارک و استانداردهای اعتباربخشی بیمارستان</title>
+  <link rel="preload" href="/fonts/Vazirmatn-Variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/app.css?v=20260910a">
+  <link rel="stylesheet" href="/css/bg-theme.css?v=20260910a">
+  <link rel="stylesheet" href="/css/design-system.css?v=20260910a">
+  <link rel="stylesheet" href="/css/stitch-luxury.css?v=20260914">
+  <link rel="stylesheet" href="/css/hassan-clean.css?v=20260917-3">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    :root {
+      --ghdrh: 0px;
+    }
+    body {
+      background: radial-gradient(ellipse at 50% 10%, rgba(16, 185, 129, 0.12) 0%, rgba(10, 20, 16, 0.98) 70%), #07130e;
+      color: #f1f5f9;
+      font-family: var(--sn-font, 'Vazirmatn', Tahoma, sans-serif);
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    #app {
+      display: flex;
+      height: 100vh;
+      min-height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .main {
+      flex: 1;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 16px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    /* هدر بالای سامانه درون صفحه */
+    .top.g {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 20px;
+      border-radius: 14px;
+      background: rgba(10, 24, 18, 0.85);
+      border: 1px solid rgba(212, 175, 90, 0.28);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+      flex-shrink: 0;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    /* نوار ابزار میزکار سنجه و مدرک */
+    .policy-workspace-toolbar {
+      background: rgba(8, 20, 15, 0.82);
+      border: 1px solid rgba(212, 175, 90, 0.25);
+      border-radius: 12px;
+      padding: 10px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+      backdrop-filter: blur(12px);
+      flex-shrink: 0;
+    }
+
+    /* سوئیچر سریع انواع اسناد سنجه */
+    .doc-type-switcher {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(4, 12, 9, 0.88);
+      padding: 4px;
+      border-radius: 10px;
+      border: 1px solid rgba(212, 175, 90, 0.22);
+    }
+
+    .doc-type-btn {
+      padding: 6px 14px;
+      border-radius: 7px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #cbd5e1;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+    .doc-type-btn:hover {
+      background: rgba(212, 175, 90, 0.12);
+      color: #fff;
+    }
+    .doc-type-btn.active {
+      background: linear-gradient(135deg, #ecd599 0%, #d4af5a 100%);
+      color: #06150f !important;
+      font-weight: 800;
+      box-shadow: 0 3px 12px rgba(212, 175, 90, 0.35);
+    }
+
+    .policy-header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    /* پیش‌نمایش چاپ A4 */
+    .a4-preview-outer {
+      background: rgba(4, 10, 8, 0.9);
+      border: 1px solid rgba(212, 175, 90, 0.25);
+      padding: 30px;
+      border-radius: 14px;
+      box-shadow: inset 0 2px 10px rgba(0,0,0,0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .a4-paper {
+      background: #ffffff;
+      color: #0f172a;
+      width: 100%;
+      max-width: 840px;
+      min-height: 1120px;
+      padding: 36px 42px;
+      border-radius: 4px;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+      box-sizing: border-box;
+      direction: rtl;
+      font-size: 11.5px;
+      line-height: 1.85;
+    }
+
+    /* =========================================================
+       استایل‌های لوکس کارت‌های ممیزی، چک‌لیست و کلیدهای امتیازدهی
+       بدون هیچ دکمه یا کارت سفید - منطبق بر تم زمردی تیره و طلایی
+       ========================================================= */
+    .chk-item-row {
+      background: linear-gradient(135deg, rgba(12, 28, 22, 0.9) 0%, rgba(8, 20, 16, 0.85) 100%);
+      border: 1px solid rgba(212, 175, 90, 0.25);
+      border-radius: 12px;
+      padding: 16px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 14px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .chk-item-row:hover {
+      border-color: rgba(212, 175, 90, 0.55);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 16px rgba(212, 175, 90, 0.12);
+      transform: translateY(-1px);
+    }
+
+    .chk-item-main {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .chk-item-title-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .chk-item-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: rgba(212, 175, 90, 0.15);
+      border: 1px solid rgba(212, 175, 90, 0.38);
+      color: var(--sn-gold-light, #fde68a);
+      font-weight: 800;
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+
+    .chk-item-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #f8fafc;
+      line-height: 1.6;
+    }
+
+    .chk-item-weight {
+      font-size: 11px;
+      font-weight: 700;
+      background: rgba(212, 175, 90, 0.12);
+      color: #fde68a;
+      border: 1px solid rgba(212, 175, 90, 0.3);
+      padding: 2px 8px;
+      border-radius: 6px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      margin-right: 8px;
+    }
+
+    /* نوار کلیدهای ۴ سطحی امتیازدهی */
+    .score-badges-group {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(4, 12, 9, 0.88);
+      padding: 4px;
+      border-radius: 10px;
+      border: 1px solid rgba(212, 175, 90, 0.22);
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
+    }
+
+    .score-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      padding: 6px 14px;
+      border-radius: 7px;
+      font-size: 12px;
+      font-weight: 700;
+      font-family: inherit;
+      color: #94a3b8;
+      background: transparent;
+      border: 1px solid transparent;
+      cursor: pointer;
+      outline: none;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .score-badge:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+    }
+
+    .score-badge-full {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.35) 0%, rgba(5, 150, 105, 0.5) 100%) !important;
+      color: #6ee7b7 !important;
+      border: 1.5px solid #10b981 !important;
+      font-weight: 800 !important;
+      box-shadow: 0 0 12px rgba(16, 185, 129, 0.35) !important;
+    }
+
+    .score-badge-partial {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.35) 0%, rgba(217, 119, 6, 0.5) 100%) !important;
+      color: #fde68a !important;
+      border: 1.5px solid #f59e0b !important;
+      font-weight: 800 !important;
+      box-shadow: 0 0 12px rgba(245, 158, 11, 0.35) !important;
+    }
+
+    .score-badge-zero {
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.35) 0%, rgba(185, 28, 28, 0.5) 100%) !important;
+      color: #fca5a5 !important;
+      border: 1.5px solid #ef4444 !important;
+      font-weight: 800 !important;
+      box-shadow: 0 0 12px rgba(239, 68, 68, 0.35) !important;
+    }
+
+    .score-badge-na {
+      background: linear-gradient(135deg, rgba(100, 116, 139, 0.35) 0%, rgba(71, 85, 105, 0.5) 100%) !important;
+      color: #e2e8f0 !important;
+      border: 1.5px solid #94a3b8 !important;
+      font-weight: 800 !important;
+      box-shadow: 0 0 10px rgba(148, 163, 184, 0.25) !important;
+    }
+
+    /* فلوچارت SVG */
+    .flowchart-canvas-container {
+      background: rgba(8, 18, 14, 0.95);
+      border: 1px solid rgba(212, 175, 90, 0.3);
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 480px;
+      overflow-x: auto;
+    }
+
+    /* =========================================================
+       استایل‌های تاریک و لوکس فرم‌ها و پنل‌های خط‌مشی سنجه (Dark Emerald & Gold)
+       عدم وجود هرگونه فیلد یا کارت سفید طبق دستور صریح کاربر
+       ========================================================= */
+    .sn-section-panel {
+      background: rgba(10, 24, 18, 0.88);
+      border: 1px solid rgba(212, 175, 90, 0.32);
+      border-radius: 14px;
+      padding: 22px 24px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      margin-bottom: 20px;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .sn-section-panel:hover {
+      border-color: rgba(212, 175, 90, 0.55);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 15px rgba(212, 175, 90, 0.12);
+    }
+
+    .sn-section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--sn-gold-light, #fde68a);
+      margin-bottom: 18px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(212, 175, 90, 0.2);
+    }
+
+    .sn-section-title span:first-child {
+      font-size: 18px;
+    }
+
+    .sn-form-label {
+      display: block;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #cbd5e1;
+      margin-bottom: 8px;
+    }
+
+    .sn-form-input,
+    .sn-form-textarea,
+    .sn-form-select {
+      width: 100%;
+      box-sizing: border-box;
+      background: rgba(6, 16, 12, 0.92) !important;
+      border: 1.5px solid rgba(212, 175, 90, 0.32) !important;
+      border-radius: 9px;
+      padding: 10px 14px;
+      color: #f8fafc !important;
+      font-family: inherit;
+      font-size: 13px;
+      line-height: 1.6;
+      outline: none;
+      transition: all 0.2s ease;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .sn-form-input:focus,
+    .sn-form-textarea:focus,
+    .sn-form-select:focus {
+      border-color: var(--sn-gold, #d4af5a) !important;
+      background: rgba(8, 20, 15, 0.98) !important;
+      box-shadow: 0 0 0 3px rgba(212, 175, 90, 0.2), inset 0 2px 4px rgba(0,0,0,0.3) !important;
+      color: #ffffff !important;
+    }
+
+    .sn-form-input::placeholder,
+    .sn-form-textarea::placeholder {
+      color: #64748b;
+      font-size: 12px;
+    }
+
+    .sn-form-textarea {
+      resize: vertical;
+      min-height: 95px;
+    }
+
+    .sn-form-select {
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23d4af5a' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") !important;
+      background-repeat: no-repeat !important;
+      background-position: left 12px center !important;
+      padding-left: 32px;
+    }
+
+    .sn-form-select option {
+      background: #081611;
+      color: #f1f5f9;
+      padding: 8px;
+    }
+
+    /* خوانایی و کنتراست بالای پیش‌نمایش چاپی کاغذ A4 */
+    .a4-paper {
+      color: #0f172a !important;
+    }
+    .a4-paper table,
+    .a4-paper th,
+    .a4-paper td {
+      border-color: #64748b !important;
+    }
+    .a4-paper td {
+      color: #0f172a !important;
+    }
+    .a4-paper th {
+      color: #020617 !important;
+      font-weight: 800 !important;
+    }
+    .sn-print-article {
+      color: #0f172a !important;
+      line-height: 1.85 !important;
+      margin-bottom: 8px;
+    }
+
+    /* چاپ رسمی A4 */
+    @media print {
+      body, html {
+        background: #fff !important;
+        color: #000 !important;
+      }
+      #side, .top, .policy-workspace-toolbar, .sn-policy-nav-cards, .sn-policy-footer-actions, .noprint, .floatdock, #floatDock {
+        display: none !important;
+      }
+      .main {
+        padding: 0 !important;
+        margin: 0 !important;
+        overflow: visible !important;
+        height: auto !important;
+      }
+      #app {
+        height: auto !important;
+        min-height: 0 !important;
+      }
+      .a4-preview-outer {
+        background: transparent !important;
+        border: none !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+      }
+      .a4-paper {
+        box-shadow: none !important;
+        padding: 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div id="app">
+  <div class="soverlay" id="soverlay" onclick="closeSidebar()"></div>
+
+  <!-- منو سمت راست سامانه (Right Sidebar) -->
+  <aside class="side g noprint" id="side">
+    <div class="shead">
+      <div class="brand">
+        <div class="bmark shine anim">✦</div>
+        <div class="brand-info">
+          <h1>مدیریت بیمارستان</h1>
+          <p>سازمان، پرستاری، کیفیت و اعتباربخشی</p>
+        </div>
+        <button type="button" id="sideCollapseBtn" class="side-collapse-toggle" onclick="toggleSidebarCollapse()" title="جمع کردن منو">⇤</button>
+      </div>
+
+      <div class="hosp-chip" id="hospChip">
+        <span class="hosp-fallback">⌂</span>
+        <b id="hospName">بیمارستان نمونه</b>
+      </div>
+
+      <div class="side-actions">
+        <button type="button" class="side-act" onclick="location.href='/#profile'" title="پروفایل من">
+          <span class="ic">👤</span>
+          <span class="act-txt">پروفایل من</span>
+        </button>
+        <button type="button" class="side-act out" onclick="location.href='/#logout'" title="خروج">
+          <span class="ic">🚪</span>
+          <span class="act-txt">خروج</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="snav">
+      <div class="nitem on" onclick="handleExitOrBack()" title="اعتباربخشی">
+        <span class="ic">📋</span>
+        <span class="ntxt">اعتباربخشی</span>
+      </div>
+      <div class="nitem" onclick="location.href='/#duties'" title="وظایف و کارتابل من">
+        <span class="ic">🎖️</span>
+        <span class="ntxt">مسئولیت من</span>
+      </div>
+      <div class="nitem" onclick="location.href='/#staffshift'" title="مدیریت پرسنل و شیفت">
+        <span class="ic">📅</span>
+        <span class="ntxt">مدیریت پرسنل و شیفت</span>
+      </div>
+      <div class="navfoot">
+        <div class="nitem" onclick="location.href='/#guide'" title="راهنمای نقش من">
+          <span class="ic">❓</span>
+          <span class="ntxt">راهنمای نقش من</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- محتوای اصلی با هدر بالای سامانه -->
+  <main class="main" id="mainContent">
+
+    <!-- هدر بالای سامانه (Top Header) -->
+    <div class="top g noprint" id="appTopBar">
+      <button class="mbtn" onclick="toggleSidebarOrCollapse()" aria-label="منو" title="منوی ناوبری">☰</button>
+      
+      <!-- عنوان سنجه و مدرک جاری -->
+      <div style="display:flex;align-items:center;gap:10px;flex:1;min-width:0;">
+        <span id="headerTypeIcon" style="font-size:22px;display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:10px;background:rgba(212,175,90,0.18);border:1px solid rgba(212,175,90,0.35);">📜</span>
+        <div style="min-width:0;">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <h2 id="headerDocTypeTitle" style="font-size:15px;color:var(--sn-gold-light,#fde68a);margin:0;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+              خط‌مشی استاندارد بیمارستان
+            </h2>
+            <span class="policy-brand-badge" id="headerMeasureCode" style="font-size:11.5px;background:rgba(212,175,90,0.22);border:1px solid rgba(212,175,90,0.45);padding:3px 10px;border-radius:6px;color:#fff;font-weight:800;">
+              سنجه ملی: ج-۱-۲-۱
+            </span>
+          </div>
+          <div id="headerMeasureStmt" style="font-size:11px;color:#94a3b8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:550px;">
+            حقوق گیرنده خدمت و حفظ حریم خصوصی بیمار
+          </div>
+        </div>
+      </div>
+
+      <div class="gsearch">
+        <input id="gsq" type="search" autocomplete="off" placeholder="جست‌وجو در همه‌ی سنجه‌ها… (Ctrl+K)"
+          oninput="handleGlobalSearch(this.value)" onkeydown="if(event.key==='Enter'){location.href='/#acc';}">
+      </div>
+
+      <div class="scut" id="scut">
+        <button type="button" class="scut-i" onclick="location.href='/#acc'" title="درخت سنجه‌ها">
+          <span class="ic">📋</span>
+          <span>درخت سنجه‌ها</span>
+        </button>
+        <button type="button" class="scut-i" onclick="location.href='/#duties'" title="وظایف من">
+          <span class="ic">🎖️</span>
+          <span>کارتابل وظایف</span>
+        </button>
+      </div>
+
+      <div class="ysel">
+        <label>سال</label>
+        <select id="workYearSel">
+          <option value="1405" selected>۱۴۰۵</option>
+          <option value="1404">۱۴۰۴</option>
+        </select>
+      </div>
+
+      <div class="uchip">
+        <div>
+          <div class="un" id="userDisplayName">کاربر سامانه</div>
+          <div class="ur" id="userRoleTitle">مسئول بهبود کیفیت</div>
+        </div>
+        <div class="av" id="userAvatar">ک</div>
+      </div>
+    </div>
+
+    <!-- تولبار سوئیچر مدارک و دکمه‌های ناوبری -->
+    <div class="policy-workspace-toolbar noprint">
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+        <span style="font-size:12.5px;font-weight:700;color:var(--sn-gold,#d4af37);">انواع مدارک سنجه:</span>
+        <nav class="doc-type-switcher" id="docTypeSwitcherNav">
+          <!-- داینامیک توسط JS رندر می‌شود -->
+        </nav>
+      </div>
+
+      <div class="policy-header-actions">
+        <button type="button" class="sn-btn-act" id="btnLoadStandardTemplate" style="background:rgba(16,185,129,0.2);border:1px solid rgba(16,185,129,0.5);color:#6ee7b7;padding:8px 16px;border-radius:9px;font-size:12px;font-weight:700;display:inline-flex;align-items:center;gap:7px;cursor:pointer;">
+          <span>✨</span> <span>درج محتوای استاندارد سنجه</span>
+        </button>
+
+        <button type="button" class="sn-btn-act" id="btnTriggerPrint" style="background:var(--sn-gold, #d4af37);color:#061a12;border:none;padding:8px 18px;border-radius:9px;font-size:12px;font-weight:800;display:inline-flex;align-items:center;gap:7px;cursor:pointer;box-shadow:0 4px 14px rgba(212,175,90,0.35);">
+          <span>🖨️</span> <span>ارسال به چاپگر / خروجی PDF (A4)</span>
+        </button>
+
+        <!-- دکمه صریح بازگشت به کارت و صفحه قبل -->
+        <button type="button" class="sn-btn-act" onclick="handleExitOrBack()" style="background:rgba(255,255,255,0.08);color:#cbd5e1;border:1px solid rgba(255,255,255,0.18);padding:8px 16px;border-radius:9px;font-size:12px;font-weight:700;display:inline-flex;align-items:center;gap:6px;cursor:pointer;" title="بازگشت به صفحه سنجه">
+          <span>◂</span> <span>بازگشت</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- کانتینر اصلی صفحه مستقل -->
+    <div class="sn-policy-page-wrapper">
+
+      <!-- نوار کارت‌های بزرگ بالای صفحه (Horizontal RTL Flow) طبق قاعده ۱۱ -->
+      <div id="readOnlyNoticeContainer" class="noprint"></div>
+      <div class="sn-policy-nav-cards noprint" id="navCardsContainer">
+        <!-- بر اساس نوع مدرک (docType) با جاوااسکریپت داینامیک رندر می‌شود -->
+      </div>
+
+      <!-- بدنه تعاملی فرم‌ها و پیش‌نمایش -->
+      <main class="sn-policy-body" id="policyBodyContent">
+        <!-- با جاوااسکریپت بارگذاری می‌شود -->
+      </main>
+
+      <!-- فوتر ذخیره و پایش -->
+      <footer class="sn-policy-footer-actions noprint" style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(212,175,90,0.25);padding-top:18px;margin-top:16px;flex-wrap:wrap;gap:14px;">
+        <div style="font-size:13px;color:#94a3b8;display:flex;align-items:center;gap:8px;">
+          <span style="color:#10b981;font-size:16px;">●</span>
+          <span>سامانه مدیریت مدارک کنترل‌شده اعتباربخشی (ISO / Ministry of Health Standards)</span>
+        </div>
+
+        <div style="display:flex;gap:12px;">
+          <button type="button" class="sn-btn-act" id="btnSaveDocumentData" style="background:var(--sn-gold, #d4af37);color:#061a12;font-weight:800;padding:11px 28px;border-radius:9px;font-size:13.5px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;box-shadow:0 4px 16px rgba(212,175,90,0.35);border:none;">
+            <span>💾</span> <span>ثبت و تصویب نهایی در سامانه</span>
+          </button>
+
+          <!-- دکمه انصراف و خروج -->
+          <button type="button" class="sn-btn-act" onclick="handleExitOrBack()" style="background:rgba(255,255,255,0.08);color:#cbd5e1;padding:11px 22px;border-radius:9px;font-size:13.5px;cursor:pointer;border:1px solid rgba(255,255,255,0.15);">
+            ✕ انصراف و خروج
+          </button>
+        </div>
+      </footer>
+
+    </div>
+
+  </main>
+</div>
+
+<!-- منوی شناور گوشه صفحه (Floating Menu) -->
+<div class="floatdock noprint" id="floatDock" style="position:fixed;bottom:24px;left:24px;display:flex;flex-direction:column;gap:10px;z-index:900;">
+  <!-- دکمه دستیار هوشمند دانا با هاله و پالس طلایی -->
+  <button type="button" class="dock-btn gold" id="guideDockBtn" title="دستیار هوشمند دانا" onclick="toggleDanaWidget()" style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#ecd599 0%,#d4af5a 60%,#b4892c 100%);border:1.5px solid #fff5d1;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 6px 20px rgba(212,175,90,0.45);transition:transform 0.2s ease;">
+    <span class="asst-mark" style="position:relative;display:flex;align-items:center;justify-content:center;">
+      <svg class="asst-svg" viewBox="0 0 32 32" style="width:26px;height:26px;" focusable="false">
+        <path fill="#061a12" d="M10.5 6H22a5.5 5.5 0 0 1 5.5 5.5v5A5.5 5.5 0 0 1 22 22h-8.2l-4.6 4.1V22H10.5A5.5 5.5 0 0 1 5 16.5v-5A5.5 5.5 0 0 1 10.5 6Z"/>
+        <path fill="#d4af5a" d="M16.2 9.9l1.3 3.1 3.1 1.3-3.1 1.3-1.3 3.1-1.3-3.1-3.1-1.3 3.1-1.3 1.3-3.1Z"/>
+      </svg>
+    </span>
+  </button>
+
+  <!-- دکمه منوی پاپ‌آپ شناور -->
+  <button type="button" class="dock-btn" id="dockMenuBtn" title="منوی سریع" onclick="toggleQuickMenuPopup()" style="width:42px;height:42px;border-radius:50%;background:rgba(8,20,15,0.85);border:1px solid rgba(212,175,90,0.3);color:#d4af5a;display:flex;align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(10px);box-shadow:0 4px 15px rgba(0,0,0,0.4);">
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+      <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+    </svg>
+  </button>
+
+  <div id="quickMenuPop" style="display:none;position:absolute;bottom:105px;left:0;background:rgba(8,20,15,0.96);border:1px solid rgba(212,175,90,0.35);border-radius:12px;padding:8px;box-shadow:0 10px 30px rgba(0,0,0,0.6);backdrop-filter:blur(16px);min-width:180px;flex-direction:column;gap:4px;">
+    <button type="button" onclick="location.href='/'" style="background:none;border:none;color:#fff;padding:8px 12px;text-align:right;border-radius:8px;font-size:12.5px;cursor:pointer;display:flex;align-items:center;gap:8px;width:100%;"><span style="color:#d4af5a;">⌂</span> صفحه اصلی</button>
+    <button type="button" onclick="location.href='/#acc'" style="background:none;border:none;color:#fff;padding:8px 12px;text-align:right;border-radius:8px;font-size:12.5px;cursor:pointer;display:flex;align-items:center;gap:8px;width:100%;"><span style="color:#10b981;">📋</span> درخت سنجه‌ها</button>
+    <button type="button" onclick="location.href='/catalog.html'" style="background:none;border:none;color:#fff;padding:8px 12px;text-align:right;border-radius:8px;font-size:12.5px;cursor:pointer;display:flex;align-items:center;gap:8px;width:100%;"><span style="color:#d4af5a;">📖</span> کاتالوگ دیجیتال</button>
+    <button type="button" onclick="location.href='/#duties'" style="background:none;border:none;color:#fff;padding:8px 12px;text-align:right;border-radius:8px;font-size:12.5px;cursor:pointer;display:flex;align-items:center;gap:8px;width:100%;"><span style="color:#f59e0b;">🎖️</span> وظایف من</button>
+  </div>
+</div>
+
+<script src="data.js"></script>
+<script src="jalali.js"></script>
+<script src="../js/accreditation-standards-registry.js"></script>
+<script src="../js/accreditation-measures-registry.js"></script>
+<script src="../js/flowchart.js"></script>
+<script src="../js/hassan-hubs.js"></script>
+
+<script>
+  // بازگشت هوشمند به همان کارت و صفحه‌ای که کاربر از آن وارد میزکار شده است
+  function getAccReturnUrl() {
+    const params = new URLSearchParams(window.location.search);
+    const returnUrl = params.get('returnUrl') || params.get('from');
+    if (returnUrl) return returnUrl;
+
+    const code = params.get('code') || '';
+    if (code.startsWith('الف-')) {
+      const parts = code.split('-');
+      const axis = parts[0] + '-' + (parts[1] || '6');
+      return '/#acc/management/axis/' + encodeURIComponent(axis);
+    } else if (code.startsWith('ب-')) {
+      const parts = code.split('-');
+      const axis = parts[0] + '-' + (parts[1] || '1');
+      return '/#acc/care/axis/' + encodeURIComponent(axis);
+    } else if (code.startsWith('ج-')) {
+      const parts = code.split('-');
+      const axis = parts[0] + '-' + (parts[1] || '1');
+      return '/#acc/support/axis/' + encodeURIComponent(axis);
+    }
+
+    if (document.referrer && document.referrer.includes('/#')) {
+      return document.referrer;
+    }
+    return '/#acc';
+  }
+
+  window.navigateToAccTree = function() {
+    window.location.href = getAccReturnUrl();
+  };
+
+  // مدیریت خروج هوشمند: بستن تب یا بازگشت دقیق به همان کارت و سنجه
+  window.handleExitOrBack = function() {
+    if (window.opener && !window.opener.closed) {
+      window.close();
+      return;
+    }
+    window.location.href = getAccReturnUrl();
+  };
+
+  // تاگل سایدبار
+  window.toggleSidebarCollapse = function() {
+    const s = document.getElementById('side');
+    if (!s) return;
+    s.classList.toggle('collapsed');
+    const btn = document.getElementById('sideCollapseBtn');
+    if (btn) {
+      btn.innerHTML = s.classList.contains('collapsed') ? '⇥' : '⇤';
+    }
+  };
+
+  window.toggleSidebarOrCollapse = function() {
+    const s = document.getElementById('side');
+    if (!s) return;
+    if (window.innerWidth <= 1100) {
+      s.classList.toggle('mo');
+      const ovl = document.getElementById('soverlay');
+      if (ovl) ovl.classList.toggle('on');
+    } else {
+      window.toggleSidebarCollapse();
+    }
+  };
+
+  window.closeSidebar = function() {
+    const s = document.getElementById('side');
+    if (s) s.classList.remove('mo');
+    const ovl = document.getElementById('soverlay');
+    if (ovl) ovl.classList.remove('on');
+  };
+
+  // تاگل منوی شناور پاپ‌آپ
+  window.toggleQuickMenuPopup = function() {
+    const pop = document.getElementById('quickMenuPop');
+    if (!pop) return;
+    pop.style.display = (pop.style.display === 'flex' ? 'none' : 'flex');
+  };
+
+  // کلیک روی دکمه دانا
+  window.toggleDanaWidget = function() {
+    window.location.href = '/#acc';
+  };
+
+  // واکشی مشخصات کاربر و بیمارستان
+  (function initAppShell() {
+    fetch('/api/auth/me').then(r => r.ok ? r.json() : null).then(u => {
+      if (!u) return;
+      const un = document.getElementById('userDisplayName');
+      const ur = document.getElementById('userRoleTitle');
+      const av = document.getElementById('userAvatar');
+      const hosp = document.getElementById('hospName');
+      if (un && u.full_name) un.textContent = u.full_name;
+      if (ur && u.role_title) ur.textContent = u.role_title;
+      if (av && u.full_name) av.textContent = u.full_name.replace(/^(دکتر|خانم|آقای|مهندس)\s+/, '').charAt(0);
+      if (hosp && u.hospital_name) hosp.textContent = u.hospital_name;
+    }).catch(() => {});
+  })();
+
+  // رندر درخت سنجه‌ها در سایدبار
+  function initSidebarTree() {
+    const treeEl = document.getElementById('tree');
+    if (!treeEl) return;
+    const measures = window.ALL_ACCREDITATION_MEASURES || [];
+    if (!measures.length) return;
+
+    // گروه‌بندی بر اساس ۳ محور الف، ب، ج
+    const groups = {
+      'الف': { title: 'رهبری و مدیریت کیفیت', count: 0, items: [] },
+      'ب': { title: 'مراقبت و درمان بالینی', count: 0, items: [] },
+      'ج': { title: 'حقوق گیرنده خدمت', count: 0, items: [] }
+    };
+
+    measures.forEach(m => {
+      const pfx = (m.code || '').charAt(0);
+      if (groups[pfx]) {
+        groups[pfx].count++;
+        if (groups[pfx].items.length < 30) groups[pfx].items.push(m);
+      }
+    });
+
+    const activeCode = (new URLSearchParams(window.location.search).get('code') || 'ج-۱-۲-۱');
+
+    let html = '';
+    for (const [key, grp] of Object.entries(groups)) {
+      html += '<div class="sec" style="margin-bottom:6px;">' +
+        '<div class="sechd on" onclick="this.nextElementSibling.classList.toggle(\'on\')" style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:rgba(255,255,255,0.04);border-radius:8px;cursor:pointer;font-size:12.5px;font-weight:700;">' +
+          '<div style="display:flex;align-items:center;gap:6px;">' +
+            '<span class="secl" style="color:var(--gd);background:rgba(212,175,90,0.15);padding:2px 7px;border-radius:5px;">' + key + '</span>' +
+            '<span style="color:#fff;">' + grp.title + '</span>' +
+          '</div>' +
+          '<span style="font-size:11px;color:#94a3b8;">' + grp.count + ' سنجه</span>' +
+        '</div>' +
+        '<div class="axl on" style="display:flex;flex-direction:column;gap:2px;padding:4px 6px;">' +
+          grp.items.map(it => {
+            const isSel = it.code === activeCode;
+            return '<div class="axi ' + (isSel ? 'on' : '') + '" onclick="switchMeasure(\'' + it.code + '\')" style="padding:6px 10px;border-radius:6px;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;' + (isSel ? 'background:rgba(212,175,90,0.2);color:#ecd599;font-weight:bold;' : 'color:#cbd5e1;') + '">' +
+              '<span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:190px;">' + it.code + ' ' + (it.title || '') + '</span>' +
+              (it.patient_safety_flag ? '<span style="color:#ef4444;font-size:10px;">🛡️</span>' : '') +
+            '</div>';
+          }).join('') +
+        '</div>' +
+      '</div>';
+    }
+    treeEl.innerHTML = html;
+  }
+
+  window.switchMeasure = function(code) {
+    const url = new URL(window.location.href);
+    url.searchParams.set('code', code);
+    window.location.href = url.toString();
+  };
+
+  window.filterSidebarTree = function(q) {
+    q = (q || '').trim().toLowerCase();
+    const treeEl = document.getElementById('tree');
+    if (!treeEl) return;
+    if (!q) {
+      initSidebarTree();
+      return;
+    }
+    const measures = (window.ALL_ACCREDITATION_MEASURES || []).filter(m => 
+      (m.code || '').toLowerCase().includes(q) || (m.title || '').toLowerCase().includes(q)
+    ).slice(0, 40);
+
+    treeEl.innerHTML = '<div style="padding:6px;display:flex;flex-direction:column;gap:3px;">' +
+      (measures.length ? measures.map(m => 
+        '<div class="axi" onclick="switchMeasure(\'' + m.code + '\')" style="padding:6px 10px;border-radius:6px;font-size:12px;cursor:pointer;background:rgba(255,255,255,0.05);color:#cbd5e1;display:flex;align-items:center;justify-content:space-between;">' +
+          '<span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:210px;">' + m.code + ' ' + (m.title || '') + '</span>' +
+        '</div>'
+      ).join('') : '<div style="color:#94a3b8;font-size:12px;text-align:center;padding:12px;">موردی یافت نشد</div>') +
+    '</div>';
+  };
+
+  window.handleGlobalSearch = function(q) {
+    filterSidebarTree(q);
+  };
+
+  document.addEventListener('DOMContentLoaded', () => {
+    initSidebarTree();
+  });
+
+  const urlParams = new URLSearchParams(window.location.search);
+    const docCode = urlParams.get('code') || urlParams.get('measure') || 'ج-۱-۲-۱';
+    let docType = urlParams.get('type') || 'policy';
+    if (docType === 'instruction') docType = 'procedure';
+
+    let activeTab = urlParams.get('tab') || 'profile';
+    let hospitalUsers = [];
+
+    const J_MONTH_NAMES = ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'];
+
+    function normDigit(s) {
+      return String(s || '').replace(/[۰-۹]/g, d => "0123456789"["۰۱۲۳۴۵۶۷۸۹".indexOf(d)]).trim();
+    }
+
+    function getPersianMonthName(m) {
+      if (!m) return '';
+      const num = parseInt(normDigit(m), 10);
+      if (!isNaN(num) && num >= 1 && num <= 12) {
+        return J_MONTH_NAMES[num - 1];
+      }
+      return String(m);
+    }
+
+    // انواع مدارک قابل مدیریت برای هر سنجه
+    const DOC_TYPES_CONFIG = {
+      policy: { title: 'خط‌مشی استاندارد بیمارستان', icon: '📜', prefix: 'POL' },
+      checklist: { title: 'چک‌لیست ممیزی و ارزیابی استاندارد', icon: '📋', prefix: 'CHK' },
+      flowchart: { title: 'شناسنامه و فلوچارت فرآیند', icon: '🔄', prefix: 'PRC' },
+      procedure: { title: 'روش اجرایی و دستورالعمل مصوب (SOP)', icon: '⚙️', prefix: 'SOP' },
+      form: { title: 'کاربرگ و فرم رسمی ثبت داده‌ها', icon: '📝', prefix: 'FRM' }
+    };
+
+    // پایگاه داده محلی مدرک جاری
+    let docStore = {
+      // مشخصات مشترک
+      title: '',
+      doc_code: '',
+      version_no: '۱ (۱۴۰۵)',
+      dept: 'دفتر بهبود کیفیت / بخش‌های بالینی',
+      responsible: 'مسئول بهبود کیفیت / سرپرستار بخش',
+      issue_year: '۱۴۰۵', issue_month: '۱', issue_day: '۱',
+      rev_year: '۱۴۰۶', rev_month: '۱', rev_day: '۱',
+      author_id: '', author_name: '',
+      reviewer_id: '', reviewer_name: '',
+      approver_id: '', approver_name: '',
+
+      // فیلدهای خط‌مشی و روش اجرایی
+      purpose: '',
+      scope: '',
+      legal: '',
+      policy_stmt: '',
+      definitions: '',
+      responsibilities: '',
+      work_method: '',
+      monitoring: '',
+      related_docs: '',
+
+      // فیلدهای چک‌لیست
+      audit_cadence: 'monthly',
+      audit_method: 'مشاهده و ممیزی پرونده',
+      checklist_items: [],
+
+      // فیلدهای فرآیند و فلوچارت
+      process_category: 'اصلی بالینی',
+      sipoc_suppliers: '',
+      sipoc_inputs: '',
+      sipoc_outputs: '',
+      sipoc_customers: '',
+      flowchart_steps: [],
+      flowchart_links: [],
+
+      // فیلدهای فرم
+      form_retention: '۵ سال در بایگانی راکد / دائمی در پرونده الکترونیک',
+      form_purpose: '',
+      form_instructions: ''
+    };
+
+    const fallbackDemoUsers = [
+      { id: 'hosp3_pres', full_name: 'دکتر امیر رضایی', department: 'ریاست', role_code: 'hospital_president', role_title: 'ریاست بیمارستان' },
+      { id: 'hosp3_admin', full_name: 'مهندس حسین حسنی', department: 'مدیریت', role_code: 'admin', role_title: 'مدیر داخلی' },
+      { id: 'hosp3_nurse_dir', full_name: 'زهرا رضایی', department: 'دفتر پرستاری', role_code: 'nursing_director', role_title: 'مدیر پرستاری (مترون)' },
+      { id: 'hosp3_accred', full_name: 'مریم قاسمی', department: 'اعتباربخشی', role_code: 'accreditation_manager', role_title: 'مدیر اعتباربخشی' },
+      { id: 'hosp3_qc', full_name: 'کارشناس دفتر بهبود کیفیت و ایمنی', department: 'بهبود کیفیت', role_code: 'quality_control_manager', role_title: 'مدیر کنترل کیفیت' },
+      { id: 'hosp3_tech', full_name: 'دکتر کیوان صادقی', department: 'مسئول فنی', role_code: 'technical_officer', role_title: 'مسئول فنی بیمارستان' },
+      { id: 'hosp3_edu', full_name: 'سوپروایزر آموزشی مرکز', department: 'دفتر پرستاری', role_code: 'education_supervisor', role_title: 'سوپروایزر آموزشی' },
+      { id: 'hosp3_clin', full_name: 'سوپروایزر بالینی شیفت', department: 'دفتر پرستاری', role_code: 'clinical_supervisor', role_title: 'سوپروایزر بالینی' }
+    ];
+
+    async function loadHospitalSigners() {
+      try {
+        const res = await fetch('/api/users/signers');
+        if (res.ok) {
+          const json = await res.json();
+          if (json && json.users && json.users.length) {
+            hospitalUsers = json.users;
+            return;
+          }
+        }
+      } catch (err) {}
+      hospitalUsers = fallbackDemoUsers;
+    }
+
+    function esc(s) {
+      if (!s) return '';
+      return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    function buildUserOptions(selectedId) {
+      return hospitalUsers.map(u => {
+        const isSel = (String(u.id) === String(selectedId)) ? 'selected' : '';
+        const rolePart = u.role_title ? (' — ' + u.role_title) : '';
+        const deptPart = u.department ? (' (' + u.department + ')') : '';
+        return '<option value="' + u.id + '" ' + isSel + '>' + u.full_name + rolePart + deptPart + '</option>';
+      }).join('');
+    }
+
+    // تولید نمونه‌های استاندارد وزارت بهداشت برای انواع مدارک سنجه
+    function getStandardContentForType(code, type) {
+      const isAccess = code.includes('ج-1-2') || code.includes('ج-۱-۲');
+      const prefix = (DOC_TYPES_CONFIG[type] && DOC_TYPES_CONFIG[type].prefix) || 'DOC';
+
+      if (type === 'checklist') {
+        return {
+          title: isAccess 
+            ? 'چک‌لیست ممیزی و نظارت بر مناسب‌سازی تردد و دسترسی بیماران کم‌توان جسمی'
+            : 'چک‌لیست ممیزی و ارزیابی استقرار الزامات سنجه ' + code,
+          doc_code: prefix + '-' + code,
+          dept: 'دفتر بهبود کیفیت / ایمنی بیمار / سرپرستاری',
+          responsible: 'کارشناس ممیزی بالینی / سوپروایزر',
+          audit_cadence: 'monthly',
+          audit_method: 'مشاهده میدانی و مصاحبه با پرسنل و بیماران',
+          checklist_items: isAccess ? [
+            { id: 1, title: 'استقرار حداقل ۲ دستگاه صندلی چرخدار سالم و تمیز در ورودی اصلی و تریاژ بیمارستان', method: 'مشاهده', weight: 2, score: 2, note: 'صندلی‌ها با نشان بیمارستان در بدو ورود مستقرند.' },
+            { id: 2, title: 'مناسب‌سازی شیب کلیه رمپ‌های ورودی و خروجی (حداکثر ۸٪) به همراه دستگیره کمکی دوطرفه', method: 'مشاهده', weight: 3, score: 2, note: 'رمپ ورودی اورژانس و لابی کاملاً استاندارد و ایمن است.' },
+            { id: 3, title: 'تجهیز سرویس‌های بهداشتی به توالت‌فرنگی مناسب‌سازی‌شده، دستگیره‌های اتکا و زنگ اخبار احضار', method: 'مشاهده', weight: 3, score: 2, note: 'زنگ اخبار با اتاق ایستگاه پرستاری تست شده و سالم است.' },
+            { id: 4, title: 'آگاهی و آموزش نیروهای انتظامات و خدمات از نحوه مشایعت و اولویت‌دهی به مراجعین کم‌توان', method: 'مصاحبه', weight: 2, score: 2, note: 'پرسنل شیفت آموزش‌های تکریم و جابجایی را گذرانده‌اند.' },
+            { id: 5, title: 'تعبیه دکمه‌های آسانسور با خط بریل و ارتفاع استاندارد به همراه سیستم اعلام صوتی طبقات', method: 'مشاهده', weight: 2, score: 1, note: 'اعلام صوتی آسانسور شماره ۲ نیازمند تنظیم مجدد است.' },
+            { id: 6, title: 'ثبت و پایش دوره‌ای فرم‌های گزارش خرابی و سنجش رضایت بیماران کم‌توان', method: 'بررسی مستندات', weight: 1, score: 2, note: 'شاخص رضایت بالای ۹۲٪ ثبت گردیده است.' }
+          ] : [
+            { id: 1, title: 'وجود خط‌مشی و دستورالعمل مصوب و ابلاغ‌شده سنجه ' + code + ' در بخش', method: 'بررسی مستندات', weight: 2, score: 2, note: 'سند مصوب در زونکن مستندات موجود است.' },
+            { id: 2, title: 'آگاهی کارکنان بخش از الزامات اجرایی و گام‌های عملیاتی سنجه', method: 'مصاحبه', weight: 3, score: 2, note: 'پرسنل مصاحبه‌شده به فرآیند مسلط بودند.' },
+            { id: 3, title: 'رعایت دقیق پروتکل‌های ایمنی و استانداردهای اعتباربخشی حین ارائه خدمت', method: 'مشاهده', weight: 3, score: 2, note: 'اقدامات مطابق چک‌لیست اجرایی گردید.' },
+            { id: 4, title: 'ثبت منظم شواهد، لاگ‌ها و کاربرگ‌های مربوطه در پرونده بیمار', method: 'بررسی مستندات', weight: 2, score: 1, note: 'برخی کاردکس‌ها نیاز به مهر پزشک دارند.' },
+            { id: 5, title: 'تحلیل داده‌های پایش ماهانه و ارسال اقدامات اصلاحی به کمیته مربوطه', method: 'بررسی مستندات', weight: 2, score: 2, note: 'گزارش فصلی به دبیرخانه کیفیت ارسال شده است.' }
+          ]
+        };
+      }
+
+      if (type === 'flowchart' || type === 'process') {
+        return {
+          title: isAccess 
+            ? 'شناسنامه و فلوچارت فرآیند پذیرش، انتقال و ارائه خدمات به بیماران کم‌توان'
+            : 'شناسنامه و فلوچارت فرآیند اجرای الزامات سنجه ' + code,
+          doc_code: prefix + '-' + code,
+          dept: 'مدیریت خدمات بالینی / بهبود کیفیت / پذیرش و ترخیص',
+          responsible: 'سوپروایزر بالینی / مسئول پذیرش',
+          process_category: 'فرآیند اصلی بالینی و خدمت‌رسانی',
+          sipoc_suppliers: 'اورژانس پیش‌بیمارستانی ۱۱۵، همراهان بیمار، مراجعین سرپایی، خدمات عمومی',
+          sipoc_inputs: 'بیمار دارای محدودیت حرکتی، نسخه ارجاع، مدارک شناسایی و بستری',
+          sipoc_outputs: 'بیمار پذیرش‌شده در تخت مناسب، گزارش انتقال ایمن، پرونده الکترونیک تکمیل‌شده',
+          sipoc_customers: 'بیمار و همراهان، پزشک معالج، بخش بستری، واحد مددکاری و ترخیص',
+          flowchart_steps: isAccess ? [
+            { id: 's1', text: 'ورود مراجع کم‌توان جسمی به محوطه بیمارستان', label: 'ورود مراجع کم‌توان جسمی به محوطه بیمارستان', step_type: 'start', type: 'start', owner: 'انتظامات و نگهبانی', role: 'انتظامات و نگهبانی', time: 'بدون وقفه' },
+            { id: 's2', text: 'تحویل صندلی چرخدار و راهنمایی همراه به باجه پذیرش ویژه', label: 'تحویل صندلی چرخدار و راهنمایی همراه به باجه پذیرش ویژه', step_type: 'action', type: 'action', owner: 'خدمات عمومی / تریاژ', role: 'خدمات عمومی / تریاژ', time: 'کمتر از ۲ دقیقه' },
+            { id: 's3', text: 'آیا وضعیت بیمار حاد، بحرانی یا اورژانسی است؟', label: 'آیا وضعیت بیمار حاد، بحرانی یا اورژانسی است؟', step_type: 'decision', type: 'decision', owner: 'پرستار تریاژ', role: 'پرستار تریاژ', time: 'فوری' },
+            { id: 's4_yes', text: 'انتقال اضطراری به اتاق احیا (CPR) یا تریاژ سطح ۱ و ۲', label: 'انتقال اضطراری به اتاق احیا (CPR) یا تریاژ سطح ۱ و ۲', step_type: 'action', type: 'action', owner: 'تیم احیا / پزشک طب اورژانس', role: 'تیم احیا / پزشک طب اورژانس', time: 'فوری' },
+            { id: 's4_no', text: 'صدور قبض پذیرش و تشکیل پرونده در باجه بدون صف', label: 'صدور قبض پذیرش و تشکیل پرونده در باجه بدون صف', step_type: 'document', type: 'document', owner: 'منشی پذیرش', role: 'منشی پذیرش', time: '۵ دقیقه' },
+            { id: 's5', text: 'مشایعت بیمار با آسانسور ویژه به بخش بالینی مقصد', label: 'مشایعت بیمار با آسانسور ویژه به بخش بالینی مقصد', step_type: 'action', type: 'action', owner: 'کمک‌بهیار / بیماربر', role: 'کمک‌بهیار / بیماربر', time: '۱۰ دقیقه' },
+            { id: 's6', text: 'تحویل بیمار به سرپرستار و استقرار در تخت مجهز به هندریل', label: 'تحویل بیمار به سرپرستار و استقرار در تخت مجهز به هندریل', step_type: 'end', type: 'end', owner: 'سرپرستار بخش', role: 'سرپرستار بخش', time: 'تکمیل خدمت' }
+          ] : [
+            { id: 's1', text: 'آغاز فرآیند اجرایی سنجه ' + code, label: 'آغاز فرآیند اجرایی سنجه ' + code, step_type: 'start', type: 'start', owner: 'کادر درمان', role: 'کادر درمان', time: 'شروع' },
+            { id: 's2', text: 'ارزیابی اولیه نیازهای بیمار و بررسی مستندات بالادستی', label: 'ارزیابی اولیه نیازهای بیمار و بررسی مستندات بالادستی', step_type: 'action', type: 'action', owner: 'پرستار مسئول', role: 'پرستار مسئول', time: '۱۵ دقیقه' },
+            { id: 's3', text: 'آیا شرایط انطباق با استاندارد ایمنی محقق است؟', label: 'آیا شرایط انطباق با استاندارد ایمنی محقق است؟', step_type: 'decision', type: 'decision', owner: 'پزشک / سرپرستار', role: 'پزشک / سرپرستار', time: 'مرحله پایش' },
+            { id: 's4_yes', text: 'ثبت کاربرگ رسمی و اجرای کامل پروتکل مصوب', label: 'ثبت کاربرگ رسمی و اجرای کامل پروتکل مصوب', step_type: 'document', type: 'document', owner: 'کادر بخش', role: 'کادر بخش', time: 'مطابق راهنما' },
+            { id: 's4_no', text: 'ثبت واقعه در فرم عدم انطباق و اقدام اصلاحی فوری', label: 'ثبت واقعه در فرم عدم انطباق و اقدام اصلاحی فوری', step_type: 'action', type: 'action', owner: 'مدیر کیفیت', role: 'مدیر کیفیت', time: 'ظرف ۲۴ ساعت' },
+            { id: 's5', text: 'ثبت در پرونده الکترونیک و ارسال شواهد به بهبود کیفیت', label: 'ثبت در پرونده الکترونیک و ارسال شواهد به بهبود کیفیت', step_type: 'end', type: 'end', owner: 'مسئول اعتباربخشی', role: 'مسئول اعتباربخشی', time: 'پایان چرخه' }
+          ],
+          flowchart_links: isAccess ? [
+            { from: 's1', to: 's2' },
+            { from: 's2', to: 's3' },
+            { from: 's3', to: 's4_yes', label: 'بله' },
+            { from: 's3', to: 's4_no', label: 'خیر' },
+            { from: 's4_yes', to: 's5' },
+            { from: 's4_no', to: 's5' },
+            { from: 's5', to: 's6' }
+          ] : [
+            { from: 's1', to: 's2' },
+            { from: 's2', to: 's3' },
+            { from: 's3', to: 's4_yes', label: 'بله' },
+            { from: 's3', to: 's4_no', label: 'خیر' },
+            { from: 's4_yes', to: 's5' },
+            { from: 's4_no', to: 's5' }
+          ]
+        };
+      }
+
+      if (type === 'form') {
+        return {
+          title: isAccess 
+            ? 'کاربرگ ثبت ممیزی، مناسب‌سازی و پایش دسترسی مراجعین کم‌توان'
+            : 'فرم رسمی ثبت و گزارش‌دهی شواهد سنجه ' + code,
+          doc_code: prefix + '-' + code,
+          dept: 'واحد حقوق گیرنده خدمت / دفتر بهبود کیفیت',
+          responsible: 'کارشناس حقوق گیرنده خدمت / سرپرستار',
+          form_retention: '۳ سال در بایگانی جاری / ۵ سال در بایگانی راکد',
+          form_purpose: 'ثبت سیستماتیک مشاهدات، نیازها، امکانات تحویل‌شده به مراجعین و اقدامات اصلاحی فیزیکی و ساختمانی.',
+          form_instructions: 'این فرم در هنگام پذیرش بیمار کم‌توان تکمیل و پس از پایان فرآیند درمان به دبیرخانه کیفیت ارسال می‌گردد.'
+        };
+      }
+
+      // خط‌مشی یا SOP
+      return {
+        title: isAccess 
+          ? (type === 'procedure' ? 'دستورالعمل و روش اجرایی تردد و ارائه خدمات به بیماران کم‌توان' : 'خط‌مشی تسهیل دسترسی، تردد و ارائه خدمات به بیماران و مراجعین کم‌توان جسمی')
+          : (type === 'procedure' ? 'روش اجرایی استاندارد استقرار الزامات سنجه ' + code : 'خط‌مشی استاندارد استقرار الزامات سنجه ' + code),
+        doc_code: prefix + '-' + code,
+        dept: 'دفتر بهبود کیفیت / واحد حقوق گیرنده خدمت / خدمات عمومی',
+        responsible: 'مسئول حقوق گیرنده خدمت / سوپروایزر بالینی',
+        purpose: 'تضمین دسترسی ایمن، سریع، کرامت‌محور و بدون مانع کلیه بیماران و مراجعین کم‌توان جسمی، سالمندان و افراد دارای معلولیت به تمامی بخش‌های درمانی و تشخیصی مطابق با استانداردهای ملی اعتباربخشی.',
+        scope: 'کلیه ورودی‌ها، تریاژ، اورژانس، درمانگاه‌های تخصصی، بخش‌های بستری و پاراکلینیک بیمارستان',
+        legal: 'کتاب استانداردهای ملی اعتباربخشی بیمارستان‌های ایران (ویرایش پنجم - سنجه ' + code + ')، قانون جامع حمایت از حقوق معلولان، منشور حقوق بیمار مصوب وزارت بهداشت.',
+        policy_stmt: 'بیمارستان متعهد است کلیه خدمات درمانی و مشاوره‌ای را بدون کوچک‌ترین تاخیر ناشی از موانع ساختمانی یا فیزیکی به مراجعین کم‌توان ارائه نماید. اختصاص صندلی چرخدار، حضور راهنما در بدو ورود و اولویت در پذیرش و بستری این بیماران الزامی و غیرقابل اغماض است.',
+        definitions: '• کم‌توان جسمی: هر فردی که به دلایل مادرزادی، بیماری حاد، شکستگی یا کهولت سن برای حرکت یا ارتباط نیازمند وسایل کمکی باشد.\n• مسیر دسترسی هموار: رمپ‌های استاندارد با شیب حداکثر ۸٪ و دستگیره کمکی دوطرفه.',
+        responsibilities: '• انتظامات و خدمات: تحویل ویلچر و راهنمایی همراه و بیمار از بدو ورود به تریاژ.\n• منشی پذیرش: اخذ مشخصات و صدور قبض بدون معطلی بیمار در صف و اعزام سریع.\n• سرپرستار بخش: اختصاص اتاق‌های نزدیک به ایستگاه پرستاری و سرویس بهداشتی مناسب‌سازی‌شده.\n• خدمات پشتیبانی: بازرسی روزانه رمپ‌ها، دستگیره‌ها، بالابرها و زنگ اخبار سرویس‌ها.',
+        work_method: 'گام ۱: استقرار همیشگی حداقل ۲ دستگاه صندلی چرخدار سالم و تمیز در ورودی اصلی بیمارستان.\nگام ۲: راهنمایی و مشایعت بیمار توسط پرسنل خدمات یا پذیرش تا بخش مورد نظر بدون توقف در صف‌های طولانی.\nگام ۳: استفاده از تخت‌های برقی قابل تنظیم با هندریل‌های حفاظتی و تعبیه زنگ هشدار احضار پرستار در دسترس بیمار.\nگام ۴: ایجاد دسترسی مناسب‌سازی‌شده در آسانسورها (دکمه‌های دارای خط بریل و ارتفاع مناسب).\nگام ۵: ثبت گزارش‌های دوره‌ای از میزان رضایت بیماران کم‌توان و رفع فوری نواقص فیزیکی ظرف ۴۸ ساعت.',
+        monitoring: 'ممیزی ماهانه مسیرهای تردد توسط کارشناس بهبود کیفیت با چک‌لیست مناسب‌سازی فیزیکی — سنجش شاخص رضایت مراجعین کم‌توان (هدف: بالای ۹۰٪).',
+        related_docs: 'چک‌لیست ممیزی دسترسی فیزیکی، فرم گزارش خرابی تاسیسات، صورت‌جلسات کمیته حقوق گیرنده خدمت.'
+      };
+    }
+
+    function initDocData() {
+      const localKey = 'hassan_doc_' + docType + '_' + docCode;
+      let saved = null;
+      try { saved = JSON.parse(localStorage.getItem(localKey)); } catch(e){}
+
+      const base = getStandardContentForType(docCode, docType);
+      Object.assign(docStore, base, saved || {});
+
+      // انتصاب هوشمند پرسنل امضا در صورتی که خالی باشد
+      if (!docStore.author_id) {
+        const qcUser = hospitalUsers.find(u => u.role_code === 'quality_control_manager' || u.role_code === 'accreditation_manager') || hospitalUsers[0];
+        if (qcUser) {
+          docStore.author_id = qcUser.id;
+          docStore.author_name = qcUser.full_name + ' (' + qcUser.role_title + ')';
+        }
+      }
+
+      if (!docStore.reviewer_id) {
+        const revUser = hospitalUsers.find(u => u.role_code === 'nursing_director' || u.role_code === 'accreditation_manager') || hospitalUsers[1] || hospitalUsers[0];
+        if (revUser) {
+          docStore.reviewer_id = revUser.id;
+          docStore.reviewer_name = revUser.full_name + ' (' + revUser.role_title + ')';
+        }
+      }
+
+      if (!docStore.approver_id) {
+        const presUser = hospitalUsers.find(u => u.role_code === 'hospital_president') || hospitalUsers[0];
+        if (presUser) {
+          docStore.approver_id = presUser.id;
+          docStore.approver_name = presUser.full_name + ' (' + presUser.role_title + ')';
+        }
+      }
+
+      // به‌روزرسانی عناوین هدر
+      const cfg = DOC_TYPES_CONFIG[docType] || DOC_TYPES_CONFIG.policy;
+      document.getElementById('headerTypeIcon').textContent = cfg.icon;
+      document.getElementById('headerDocTypeTitle').textContent = cfg.title;
+      document.getElementById('headerMeasureCode').textContent = 'سنجه ملی: ' + docCode;
+      document.getElementById('headerMeasureStmt').textContent = docStore.title;
+
+      renderDocTypeSwitcher();
+      renderNavCards();
+    }
+
+    // رندر سوئیچر سریع انواع مدارک در هدر
+    function renderDocTypeSwitcher() {
+      const nav = document.getElementById('docTypeSwitcherNav');
+      const types = [
+        { key: 'policy', label: '📜 خط‌مشی' },
+        { key: 'checklist', label: '📋 چک‌لیست ممیزی' },
+        { key: 'flowchart', label: '🔄 فلوچارت فرآیند' },
+        { key: 'procedure', label: '⚙️ دستورالعمل SOP' },
+        { key: 'form', label: '📝 فرم ثبت داده' }
+      ];
+
+      nav.innerHTML = types.map(t => {
+        const isActive = docType === t.key;
+        return '<button type="button" class="doc-type-btn ' + (isActive ? 'active' : '') + '" onclick="switchDocType(\'' + t.key + '\')">' + t.label + '</button>';
+      }).join('');
+    }
+
+    function switchDocType(newType) {
+      if (newType === docType) return;
+      syncCurrentInputs();
+      saveToLocalStore();
+      docType = newType;
+      activeTab = 'profile';
+
+      // به‌روزرسانی آدرس مرورگر بدون رفرش سنگین
+      const url = new URL(window.location.href);
+      url.searchParams.set('type', newType);
+      url.searchParams.set('tab', 'profile');
+      window.history.pushState({}, '', url);
+
+      initDocData();
+      renderTabContent();
+    }
+
+    // تولید کارت‌های بزرگ متصل بالای صفحه (RTL Flow) بر اساس نوع مدرک
+    function renderNavCards() {
+      const container = document.getElementById('navCardsContainer');
+      let cards = [];
+
+      if (docType === 'checklist') {
+        cards = [
+          { tab: 'profile', step: 'گام ۱', title: '۱. شناسنامه چک‌لیست', desc: 'کد، دوره پایش و واحد ممیزی', icon: '📌' },
+          { tab: 'questions', step: 'گام ۲', title: '۲. گویه‌های ارزیابی', desc: 'اقلام بازرسی، متد و ضرایب', icon: '📋' },
+          { tab: 'scoring', step: 'گام ۳', title: '۳. سنجش و امتیازدهی', desc: 'محاسبه درصد تحقق و مغایرت‌ها', icon: '📊' },
+          { tab: 'signers', step: 'گام ۴', title: '۴. ارکان ممیزی', desc: 'ارزیاب و مسئول بخش واقعی', icon: '🛡️' },
+          { tab: 'a4', step: 'چاپ رسمی', title: 'پیش‌نمایش چاپ A4', desc: 'سربرگ مصوب وزارت بهداشت', icon: '🖨️', isPrint: true }
+        ];
+      } else if (docType === 'flowchart' || docType === 'process') {
+        cards = [
+          { tab: 'profile', step: 'گام ۱', title: '۱. شناسنامه فرآیند', desc: 'کد، متولی، اهداف و دسته‌بندی', icon: '📌' },
+          { tab: 'sipoc', step: 'گام ۲', title: '۲. ماتریس SIPOC', desc: 'تامین‌کنندگان، ورودی و خروجی', icon: '🔄' },
+          { tab: 'steps', step: 'گام ۳', title: '۳. گام‌های فرآیند', desc: 'توالی اقدامات و شرایط تصمیم', icon: '📝' },
+          { tab: 'diagram', step: 'گام ۴', title: '۴. فلوچارت گرافیکی', desc: 'ترسیم وکتوری و شارپ SVG', icon: '🗺️' },
+          { tab: 'signers', step: 'گام ۵', title: '۵. ارکان تایید', desc: 'صاحب فرآیند و تصویب‌کننده', icon: '🛡️' },
+          { tab: 'a4', step: 'چاپ رسمی', title: 'پیش‌نمایش چاپ A4', desc: 'پوستر فرآیند بدون برش', icon: '🖨️', isPrint: true }
+        ];
+      } else if (docType === 'form') {
+        cards = [
+          { tab: 'profile', step: 'گام ۱', title: '۱. شناسنامه فرم', desc: 'کد، نسخه و بایگانی استاندارد', icon: '📌' },
+          { tab: 'guide', step: 'گام ۲', title: '۲. هدف و راهنما', desc: 'کاربرد و نحوه تکمیل فرم', icon: '📖' },
+          { tab: 'signers', step: 'گام ۳', title: '۳. ارکان تصویب', desc: 'کمیته و مقامات مصوب فرم', icon: '🛡️' },
+          { tab: 'a4', step: 'چاپ رسمی', title: 'پیش‌نمایش چاپ A4', desc: 'سربرگ و جدول خام فرم', icon: '🖨️', isPrint: true }
+        ];
+      } else {
+        // خط‌مشی یا روش اجرایی (SOP)
+        cards = [
+          { tab: 'profile', step: 'گام ۱', title: '۱. شناسنامه سند', desc: 'کد شناسایی، نسخه و تاریخ‌ها', icon: '📌' },
+          { tab: 'purpose', step: 'گام ۲', title: '۲. هدف و دامنه', desc: 'اهداف عملیاتی و مراجع سنجه', icon: '🎯' },
+          { tab: 'policy', step: 'گام ۳', title: '۳. بیانیه و تعاریف', desc: 'گزاره حاکمیتی و اصطلاحات', icon: '📜' },
+          { tab: 'workflow', step: 'گام ۴', title: '۴. شرح وظایف و اجرا', desc: 'تفکیک وظایف و گام‌های اقدام', icon: '⚙️' },
+          { tab: 'monitoring', step: 'گام ۵', title: '۵. پایش و امضاها', desc: 'شاخص‌ها و ارکان واقعی تایید', icon: '📊' },
+          { tab: 'a4', step: 'چاپ رسمی', title: 'پیش‌نمایش چاپ A4', desc: 'سربرگ مصوب وزارت بهداشت', icon: '🖨️', isPrint: true }
+        ];
+      }
+
+      let html = '';
+      cards.forEach((c, idx) => {
+        const isActive = activeTab === c.tab;
+        const extraStyle = c.isPrint ? 'border-color:rgba(59,130,246,0.4);' : '';
+        const badgeStyle = c.isPrint ? 'background:rgba(59,130,246,0.2);color:#93c5fd;border-color:rgba(59,130,246,0.4);' : '';
+
+        html += `
+          <div class="sn-policy-nav-card ${isActive ? 'active' : ''}" data-tab="${c.tab}" onclick="switchPolicyTab('${c.tab}')" style="${extraStyle}">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <span class="sn-card-step-badge" style="${badgeStyle}">${c.step}</span>
+              <span style="font-size:11px;color:#94a3b8;">${c.tab === 'a4' ? 'قطع A4' : 'الزام سنجه'}</span>
+            </div>
+            <div class="sn-card-top">
+              <div class="sn-card-icon">${c.icon}</div>
+              <div>
+                <div class="sn-card-title">${c.title}</div>
+                <div class="sn-card-desc">${c.desc}</div>
+              </div>
+            </div>
+          </div>
+        `;
+
+        if (idx < cards.length - 1) {
+          html += '<div class="sn-card-connector">◂</div>';
+        }
+      });
+
+      container.innerHTML = html;
+    }
+
+    function switchPolicyTab(tabKey) {
+      syncCurrentInputs();
+      activeTab = tabKey;
+      renderNavCards();
+      renderTabContent();
+    }
+
+    function syncCurrentInputs() {
+      const getVal = id => { const el = document.getElementById(id); return el ? el.value.trim() : null; };
+
+      // شناسنامه مشترک
+      if (document.getElementById('inp_title')) docStore.title = getVal('inp_title') || docStore.title;
+      if (document.getElementById('inp_doc_code')) docStore.doc_code = getVal('inp_doc_code') || docStore.doc_code;
+      if (document.getElementById('inp_version_no')) docStore.version_no = getVal('inp_version_no') || docStore.version_no;
+      if (document.getElementById('inp_dept')) docStore.dept = getVal('inp_dept') || docStore.dept;
+      if (document.getElementById('inp_responsible')) docStore.responsible = getVal('inp_responsible') || docStore.responsible;
+
+      // خط‌مشی / روش اجرایی
+      if (document.getElementById('inp_purpose')) docStore.purpose = getVal('inp_purpose') || docStore.purpose;
+      if (document.getElementById('inp_scope')) docStore.scope = getVal('inp_scope') || docStore.scope;
+      if (document.getElementById('inp_legal')) docStore.legal = getVal('inp_legal') || docStore.legal;
+      if (document.getElementById('inp_policy_stmt')) docStore.policy_stmt = getVal('inp_policy_stmt') || docStore.policy_stmt;
+      if (document.getElementById('inp_definitions')) docStore.definitions = getVal('inp_definitions') || docStore.definitions;
+      if (document.getElementById('inp_responsibilities')) docStore.responsibilities = getVal('inp_responsibilities') || docStore.responsibilities;
+      if (document.getElementById('inp_work_method')) docStore.work_method = getVal('inp_work_method') || docStore.work_method;
+      if (document.getElementById('inp_monitoring')) docStore.monitoring = getVal('inp_monitoring') || docStore.monitoring;
+      if (document.getElementById('inp_related_docs')) docStore.related_docs = getVal('inp_related_docs') || docStore.related_docs;
+
+      // SIPOC
+      if (document.getElementById('inp_sipoc_s')) docStore.sipoc_suppliers = getVal('inp_sipoc_s') || docStore.sipoc_suppliers;
+      if (document.getElementById('inp_sipoc_i')) docStore.sipoc_inputs = getVal('inp_sipoc_i') || docStore.sipoc_inputs;
+      if (document.getElementById('inp_sipoc_o')) docStore.sipoc_outputs = getVal('inp_sipoc_o') || docStore.sipoc_outputs;
+      if (document.getElementById('inp_sipoc_c')) docStore.sipoc_customers = getVal('inp_sipoc_c') || docStore.sipoc_customers;
+
+      // تاریخ‌ها
+      if (document.getElementById('sel_issue_day')) docStore.issue_day = getVal('sel_issue_day') || docStore.issue_day;
+      if (document.getElementById('sel_issue_month')) docStore.issue_month = getVal('sel_issue_month') || docStore.issue_month;
+      if (document.getElementById('sel_issue_year')) docStore.issue_year = getVal('sel_issue_year') || docStore.issue_year;
+      if (document.getElementById('sel_rev_day')) docStore.rev_day = getVal('sel_rev_day') || docStore.rev_day;
+      if (document.getElementById('sel_rev_month')) docStore.rev_month = getVal('sel_rev_month') || docStore.rev_month;
+      if (document.getElementById('sel_rev_year')) docStore.rev_year = getVal('sel_rev_year') || docStore.rev_year;
+    }
+
+    function saveToLocalStore() {
+      const localKey = 'hassan_doc_' + docType + '_' + docCode;
+      localStorage.setItem(localKey, JSON.stringify(docStore));
+    }
+
+    function renderFlowchartSvg(steps, links, title) {
+      if (!window.Flowchart || !steps || !steps.length) return '<div style="color:#94a3b8;padding:20px;text-align:center;">اطلاعات گام‌های فرآیند موجود نیست.</div>';
+      try {
+        const normSteps = steps.map(s => ({
+          id: s.id,
+          text: s.text || s.label || '',
+          step_type: s.step_type || s.type || 'action',
+          owner: s.owner || s.role || '',
+          time: s.time || ''
+        }));
+        const normLinks = (links || []).map(l => ({
+          from: l.from || l.from_step_id,
+          to: l.to || l.to_step_id,
+          label: l.label || ''
+        }));
+        return Flowchart.render(normSteps, normLinks, { title: title || 'فلوچارت فرآیند' });
+      } catch (err) {
+        console.error('Flowchart render error:', err);
+        return '<div style="color:#f87171;padding:20px;text-align:center;">خطا در ترسیم فلوچارت: ' + esc(err.message) + '</div>';
+      }
+    }
+
+    // رندر محتوای تب فعال بر اساس docType
+    
+    // متغیرهای وضعیت مجوز و دسترسی سمتی
+    window.IS_READONLY_MODE = false;
+    window.CURRENT_AUTH_USER = null;
+
+    function evaluateEditPermission(user, code) {
+      if (!user) return { canEdit: false, roleTitle: "مهمان", responsibleTitle: "مسئول مربوطه" };
+      const perms = user.permissions || [];
+      const roleCode = user.role_code || "";
+      const roleTitle = user.role_title || roleCode || "کاربر";
+
+      // ۱. مدیران ارشد با دسترسی کامل به کلیه سنجه‌ها و خط‌مشی‌ها
+      if (roleCode === "admin" || roleCode === "hospital_president" || roleCode === "quality_control_manager" || roleCode === "accreditation_manager" || perms.includes("view_all_dashboards")) {
+        return { canEdit: true, roleTitle, isManager: true };
+      }
+
+      // ۲. استخراج محور سنجه یا مدرک
+      const norm = (s) => String(s || "").replace(/[۰-۹]/g, d=>"0123456789"["۰۱۲۳۴۵۶۷۸۹".indexOf(d)]).trim();
+      const clean = norm(code);
+      let axisCode = "";
+      if (clean.startsWith("الف-") || clean.startsWith("ب-") || clean.startsWith("ج-")) {
+        const parts = clean.split("-");
+        if (parts.length >= 2) axisCode = parts[0] + "-" + parts[1];
+      } else {
+        const m = clean.match(/([الفبج]-\d+)/);
+        if (m) axisCode = m[1];
+      }
+
+      // ۳. نگاشت اختیارات سمتی به محورها (منطبق بر کتاب سنجه‌های ملی)
+      const ROLE_AXES_MAP = {
+        environmental_health_officer: { axes: ["الف-6", "ج-1"], title: "مسئول بهداشت محیط" },
+        occupational_health_officer: { axes: ["الف-2", "الف-3"], title: "مسئول بهداشت حرفه‌ای" },
+        technical_officer: { axes: ["الف-6", "الف-7", "ب-1", "ب-3", "ب-6", "ب-7", "ب-8"], title: "مسئول فنی و تجهیزات پزشکی" },
+        hr_manager: { axes: ["الف-3"], title: "مدیر منابع انسانی" },
+        nursing_director: { axes: ["الف-1", "الف-3", "الف-4", "ب-1", "ب-2", "ب-3", "ب-4", "ب-5", "ب-10", "ج-1", "ج-2"], title: "مدیر خدمات پرستاری (مترون)" },
+        clinical_supervisor: { axes: ["ب-1", "ب-2", "ب-3", "ب-9", "ب-10"], title: "سوپروایزر بالینی" },
+        education_supervisor: { axes: ["الف-1", "الف-3", "الف-4", "ب-1"], title: "سوپروایزر آموزشی" },
+        infection_control_supervisor: { axes: ["الف-6", "ب-1", "ب-5"], title: "سوپروایزر کنترل عفونت" },
+        breastfeeding_specialist: { axes: ["ب-4"], title: "کارشناس ترویج تغذیه با شیر مادر" },
+        nutrition_manager: { axes: ["ب-1"], title: "مدیر تغذیه بالینی" },
+        financial_manager: { axes: ["الف-1"], title: "مدیر مالی" },
+        accounting_manager: { axes: ["الف-1"], title: "مدیر حسابداری" }
+      };
+
+      let responsibleTitle = "مسئول تخصصی این محور یا مدیر بهبود کیفیت";
+      for (const [rCode, rInfo] of Object.entries(ROLE_AXES_MAP)) {
+        if (rInfo.axes.includes(axisCode)) {
+          responsibleTitle = rInfo.title;
+          break;
+        }
+      }
+
+      const userRoleInfo = ROLE_AXES_MAP[roleCode];
+      if (userRoleInfo && userRoleInfo.axes.includes(axisCode)) {
+        return { canEdit: true, roleTitle, axisCode };
+      }
+
+      return { canEdit: false, roleTitle, axisCode, responsibleTitle };
+    }
+
+    async function checkAuthAndPermissions() {
+      try {
+        const token = localStorage.getItem('p_token');
+        const headers = token ? { 'Authorization': 'Bearer ' + token } : {};
+        const res = await fetch('/api/auth/session', { credentials: 'same-origin', headers });
+        if (res.ok) {
+          const data = await res.json();
+          if (data.authenticated && data.user) {
+            window.CURRENT_AUTH_USER = data.user;
+          }
+        }
+      } catch (e) {
+        console.error('Session check error:', e);
+      }
+      const perm = evaluateEditPermission(window.CURRENT_AUTH_USER, docCode);
+      if (!perm.canEdit) {
+        window.IS_READONLY_MODE = true;
+        applyReadOnlyUI(perm);
+      }
+    }
+
+    function applyReadOnlyUI(permResult) {
+      const banner = document.getElementById("readOnlyNoticeContainer");
+      if (banner) {
+        banner.innerHTML = `
+          <div style="background:rgba(212,175,90,0.1);border:1px solid rgba(212,175,90,0.32);border-radius:12px;padding:12px 18px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;gap:14px;color:#ecd599;box-shadow:0 4px 14px rgba(0,0,0,0.25);">
+            <div style="display:flex;align-items:center;gap:10px;font-size:13.5px;font-weight:700;">
+              <span style="font-size:20px;">🔒</span>
+              <span>حالت رسمی فقط‌خواندنی — شما در حال مشاهده این سند هستید. ویرایش، ثبت و تصویب نهایی در صلاحیت <b>${permResult.responsibleTitle}</b> یا مدیریت بهبود کیفیت بیمارستان می‌باشد.</span>
+            </div>
+            <span style="font-size:12px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,175,90,0.2);padding:4px 12px;border-radius:20px;white-space:nowrap;color:#fff;">سمت شما: ${permResult.roleTitle}</span>
+          </div>
+        `;
+      }
+
+      const btnSave = document.getElementById("btnSaveDocumentData");
+      if (btnSave) {
+        btnSave.disabled = true;
+        btnSave.style.opacity = "0.45";
+        btnSave.style.cursor = "not-allowed";
+        btnSave.innerHTML = "<span>🔒</span> <span>فقط‌خواندنی (بدون حق ویرایش)</span>";
+      }
+
+      const btnTpl = document.getElementById("btnLoadStandardTemplate");
+      if (btnTpl) {
+        btnTpl.style.display = "none";
+      }
+
+      // قفل فیلدهای فرم
+      setTimeout(() => {
+        const bodyEl = document.getElementById("policyBodyContent");
+        if (bodyEl) {
+          bodyEl.querySelectorAll("input, textarea, select").forEach(el => {
+            el.disabled = true;
+            el.readOnly = true;
+            el.style.opacity = "0.85";
+          });
+          // مخفی کردن دکمه‌های افزودن و حذف در فلوچارت
+          bodyEl.querySelectorAll(".btn-flow-add, .btn-flow-del, button[onclick*='deleteStep'], button[onclick*='openStepModal']").forEach(btn => {
+            btn.style.display = "none";
+          });
+        }
+      }, 50);
+    }
+
+    function renderTabContent() {
+      const container = document.getElementById('policyBodyContent');
+
+      // تب مشترک: شناسنامه سند
+      if (activeTab === 'profile') {
+        const daysOpts = Array.from({length:31}, (_,i)=>'<option value="'+(i+1)+'" '+(normDigit(docStore.issue_day)===String(i+1)?'selected':'')+'>'+(i+1)+'</option>').join('');
+        const monthsOpts = J_MONTH_NAMES.map((m,idx)=>'<option value="'+(idx+1)+'" '+(normDigit(docStore.issue_month)===String(idx+1)?'selected':'')+'>'+m+'</option>').join('');
+        const yearsOpts = ['۱۴۰۴', '۱۴۰۵', '۱۴۰۶', '۱۴۰۷'].map(y=>'<option value="'+y+'" '+(normDigit(docStore.issue_year)===normDigit(y)?'selected':'')+'>'+y+'</option>').join('');
+
+        const revDaysOpts = Array.from({length:31}, (_,i)=>'<option value="'+(i+1)+'" '+(normDigit(docStore.rev_day)===String(i+1)?'selected':'')+'>'+(i+1)+'</option>').join('');
+        const revMonthsOpts = J_MONTH_NAMES.map((m,idx)=>'<option value="'+(idx+1)+'" '+(normDigit(docStore.rev_month)===String(idx+1)?'selected':'')+'>'+m+'</option>').join('');
+        const revYearsOpts = ['۱۴۰۵', '۱۴۰۶', '۱۴۰۷', '۱۴۰۸'].map(y=>'<option value="'+y+'" '+(normDigit(docStore.rev_year)===normDigit(y)?'selected':'')+'>'+y+'</option>').join('');
+
+        container.innerHTML = `
+          <div style="display:flex;flex-direction:column;gap:20px;">
+            <div class="sn-section-panel">
+              <div class="sn-section-title">
+                <span>📌</span> <span>مشخصات شناسنامه‌ای و کدگذاری سند کنترل‌شده اعتباربخشی</span>
+              </div>
+              
+              <div style="display:grid;grid-template-columns:2fr 1fr;gap:16px;margin-bottom:16px;">
+                <div>
+                  <label class="sn-form-label">عنوان رسمی سند / فرم *</label>
+                  <input type="text" id="inp_title" class="sn-form-input" value="${esc(docStore.title)}">
+                </div>
+                <div>
+                  <label class="sn-form-label">کد شناسایی دبیرخانه کیفیت *</label>
+                  <input type="text" id="inp_doc_code" class="sn-form-input" style="direction:ltr;font-weight:700;" value="${esc(docStore.doc_code)}">
+                </div>
+              </div>
+
+              <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;">
+                <div>
+                  <label class="sn-form-label">شماره ویرایش / نسخه</label>
+                  <input type="text" id="inp_version_no" class="sn-form-input" value="${esc(docStore.version_no)}">
+                </div>
+                <div>
+                  <label class="sn-form-label">واحد متولی / تدوین‌کننده</label>
+                  <input type="text" id="inp_dept" class="sn-form-input" value="${esc(docStore.dept)}">
+                </div>
+                <div>
+                  <label class="sn-form-label">مسئول نظارت / ممیزی</label>
+                  <input type="text" id="inp_responsible" class="sn-form-input" value="${esc(docStore.responsible)}">
+                </div>
+              </div>
+            </div>
+
+            <div class="sn-section-panel">
+              <div class="sn-section-title">
+                <span>📅</span> <span>چرخه زمانی، تاریخ ابلاغ و موعد بازنگری (تقویم جلالی)</span>
+              </div>
+
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+                <div style="background:rgba(18,36,30,0.6);padding:14px;border-radius:10px;border:1px solid rgba(212,175,90,0.2);">
+                  <label class="sn-form-label">📅 تاریخ تصویب و ابلاغ (شمسی)</label>
+                  <div style="display:flex;gap:8px;margin-top:6px;">
+                    <select id="sel_issue_day" class="sn-form-select">${daysOpts}</select>
+                    <select id="sel_issue_month" class="sn-form-select">${monthsOpts}</select>
+                    <select id="sel_issue_year" class="sn-form-select">${yearsOpts}</select>
+                  </div>
+                </div>
+
+                <div style="background:rgba(18,36,30,0.6);padding:14px;border-radius:10px;border:1px solid rgba(212,175,90,0.2);">
+                  <label class="sn-form-label">⏰ موعد بازنگری دوره‌ای (۱ سال پس از ابلاغ)</label>
+                  <div style="display:flex;gap:8px;margin-top:6px;">
+                    <select id="sel_rev_day" class="sn-form-select">${revDaysOpts}</select>
+                    <select id="sel_rev_month" class="sn-form-select">${revMonthsOpts}</select>
+                    <select id="sel_rev_year" class="sn-form-select">${revYearsOpts}</select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      // ==========================================
+      // رندر چک‌لیست: گویه‌ها و امتیازدهی
+      // ==========================================
+      if (docType === 'checklist') {
+        if (activeTab === 'questions') {
+          const itemsHtml = docStore.checklist_items.map((item, idx) => `
+            <div class="chk-item-row" id="chkItemRow_${idx}">
+              <div class="chk-item-main">
+                <div class="chk-item-title-box">
+                  <span class="chk-item-num">${idx + 1}</span>
+                  <div style="flex:1;">
+                    <span class="chk-item-title">گویه ${idx + 1}: ${esc(item.title)}</span>
+                  </div>
+                </div>
+                <div style="display:flex;gap:8px;align-items:center;">
+                  <span class="chk-item-weight">ضریب: ${item.weight || 1}</span>
+                  <span style="font-size:11px;background:rgba(59,130,246,0.15);color:#93c5fd;padding:3px 9px;border-radius:6px;border:1px solid rgba(59,130,246,0.3);font-weight:700;">روش: ${esc(item.method || 'مشاهده')}</span>
+                  <button type="button" onclick="removeChecklistItem(${idx})" style="background:rgba(239,68,68,0.2);color:#fca5a5;border:1px solid rgba(239,68,68,0.4);border-radius:6px;padding:3px 10px;font-size:11px;cursor:pointer;font-family:inherit;font-weight:700;">حذف</button>
+                </div>
+              </div>
+              <div style="font-size:12px;color:#94a3b8;margin-top:2px;">شواهد و توضیحات ممیزی: ${esc(item.note || 'ثبت شده')}</div>
+            </div>
+          `).join('');
+
+          container.innerHTML = `
+            <div class="sn-section-panel">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+                <div class="sn-section-title" style="margin-bottom:0;">
+                  <span>📋</span> <span>گویه‌های ارزیابی و استانداردهای بازرسی بالینی سنجه ${docCode}</span>
+                </div>
+                <button type="button" onclick="addChecklistItemPrompt()" style="background:var(--sn-gold);color:#061a12;border:none;padding:6px 14px;border-radius:7px;font-weight:800;font-size:12px;cursor:pointer;">+ افزودن گویه جدید</button>
+              </div>
+
+              ${itemsHtml}
+            </div>
+          `;
+          return;
+        }
+
+        if (activeTab === 'scoring') {
+          // محاسبه امتیاز
+          let totalPossible = 0;
+          let totalScored = 0;
+          docStore.checklist_items.forEach(it => {
+            const w = it.weight || 1;
+            if (it.score !== 'NA' && it.score !== 'عدم شمول') {
+              totalPossible += w * 2;
+              totalScored += w * (Number(it.score) || 0);
+            }
+          });
+          const percent = totalPossible > 0 ? Math.round((totalScored / totalPossible) * 100) : 100;
+          const statusLevel = percent >= 85 ? 'عالی (انطباق کامل با سنجه)' : (percent >= 60 ? 'مطلوب (انطباق مشروط)' : 'نیازمند اقدام فوری و اصلاحی');
+          const statusColor = percent >= 85 ? '#10b981' : (percent >= 60 ? '#f59e0b' : '#ef4444');
+
+          const scoringRows = docStore.checklist_items.map((it, idx) => {
+            const isFull = it.score === 2;
+            const isPart = it.score === 1;
+            const isZero = it.score === 0;
+            const isNa = it.score === 'NA' || it.score === 'عدم شمول';
+
+            return `
+            <div class="chk-item-row">
+              <div class="chk-item-main">
+                <div class="chk-item-title-box">
+                  <span class="chk-item-num">${idx + 1}</span>
+                  <div style="flex:1;">
+                    <span class="chk-item-title">${esc(it.title)}</span>
+                    <span class="chk-item-weight">ضریب: ${it.weight || 1}</span>
+                  </div>
+                </div>
+                <div class="score-badges-group" role="group" aria-label="گزینه‌های امتیازدهی">
+                  <button type="button" class="score-badge ${isFull ? 'score-badge-full' : ''}" onclick="setChecklistScore(${idx}, 2)">کامل (۲)</button>
+                  <button type="button" class="score-badge ${isPart ? 'score-badge-partial' : ''}" onclick="setChecklistScore(${idx}, 1)">نسبی (۱)</button>
+                  <button type="button" class="score-badge ${isZero ? 'score-badge-zero' : ''}" onclick="setChecklistScore(${idx}, 0)">عدم انطباق (۰)</button>
+                  <button type="button" class="score-badge ${isNa ? 'score-badge-na' : ''}" onclick="setChecklistScore(${idx}, 'عدم شمول')">عدم شمول</button>
+                </div>
+              </div>
+            </div>
+            `;
+          }).join('');
+
+
+          container.innerHTML = `
+            <div style="display:flex;flex-direction:column;gap:20px;">
+              <!-- داشبورد نمره -->
+              <div class="sn-section-panel" style="background:rgba(18,36,30,0.9);display:flex;justify-content:space-between;align-items:center;border-color:${statusColor};">
+                <div>
+                  <div style="font-size:12px;color:#94a3b8;">درصد تحقق سنجه ملی ${docCode}:</div>
+                  <div style="font-size:32px;font-weight:900;color:${statusColor};">${percent}٪</div>
+                  <div style="font-size:12px;font-weight:700;color:${statusColor};">${statusLevel}</div>
+                </div>
+                <div style="text-align:left;font-size:13px;color:#cbd5e1;line-height:2;">
+                  <div>امتیاز مکتسبه: <b>${totalScored}</b> از <b>${totalPossible}</b></div>
+                  <div>تعداد کل گویه‌ها: <b>${docStore.checklist_items.length}</b> قلم ممیزی</div>
+                </div>
+              </div>
+
+              <div class="sn-section-panel">
+                <div class="sn-section-title">
+                  <span>📊</span> <span>ثبت نمرات و نتایج ممیزی میدانی</span>
+                </div>
+                ${scoringRows}
+              </div>
+            </div>
+          `;
+          return;
+        }
+      }
+
+      // ==========================================
+      // رندر فرآیند و فلوچارت: SIPOC، گام‌ها و دیاگرام
+      // ==========================================
+      if (docType === 'flowchart' || docType === 'process') {
+        if (activeTab === 'sipoc') {
+          container.innerHTML = `
+            <div class="sn-section-panel" style="display:flex;flex-direction:column;gap:18px;">
+              <div class="sn-section-title">
+                <span>🔄</span> <span>ماتریس SIPOC فرآیند مصوب استاندارد اعتباربخشی</span>
+              </div>
+
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+                <div>
+                  <label class="sn-form-label">۱. تامین‌کنندگان فرآیند (Suppliers) *</label>
+                  <textarea id="inp_sipoc_s" class="sn-form-textarea" rows="4">${esc(docStore.sipoc_suppliers)}</textarea>
+                </div>
+                <div>
+                  <label class="sn-form-label">۲. ورودی‌های فرآیند (Inputs) *</label>
+                  <textarea id="inp_sipoc_i" class="sn-form-textarea" rows="4">${esc(docStore.sipoc_inputs)}</textarea>
+                </div>
+              </div>
+
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+                <div>
+                  <label class="sn-form-label">۳. خروجی‌ها و دستاوردها (Outputs) *</label>
+                  <textarea id="inp_sipoc_o" class="sn-form-textarea" rows="4">${esc(docStore.sipoc_outputs)}</textarea>
+                </div>
+                <div>
+                  <label class="sn-form-label">۴. مشتریان و گیرندگان خدمت (Customers) *</label>
+                  <textarea id="inp_sipoc_c" class="sn-form-textarea" rows="4">${esc(docStore.sipoc_customers)}</textarea>
+                </div>
+              </div>
+            </div>
+          `;
+          return;
+        }
+
+        if (activeTab === 'steps') {
+          const stepRows = docStore.flowchart_steps.map((st, idx) => `
+            <div class="chk-item-row">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <span style="font-weight:800;color:var(--sn-gold-light);font-size:13px;">گام ${idx + 1}: ${esc(st.label)}</span>
+                <div style="display:flex;gap:8px;align-items:center;">
+                  <span style="font-size:11px;background:rgba(16,185,129,0.2);color:#6ee7b7;padding:2px 8px;border-radius:4px;">نوع: ${st.type || 'action'}</span>
+                  <span style="font-size:11px;background:rgba(59,130,246,0.2);color:#93c5fd;padding:2px 8px;border-radius:4px;">مسئول: ${esc(st.role || '')}</span>
+                  <button type="button" onclick="removeProcessStep(${idx})" style="background:rgba(239,68,68,0.2);color:#fca5a5;border:1px solid rgba(239,68,68,0.4);border-radius:4px;padding:2px 8px;font-size:11px;cursor:pointer;">حذف</button>
+                </div>
+              </div>
+              <div style="font-size:11.5px;color:#94a3b8;">زمان استاندارد: ${esc(st.time || 'معین')}</div>
+            </div>
+          `).join('');
+
+          container.innerHTML = `
+            <div class="sn-section-panel">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+                <div class="sn-section-title" style="margin-bottom:0;">
+                  <span>📝</span> <span>تعریف توالی گام‌ها و الگوریتم اجرایی فرآیند</span>
+                </div>
+                <button type="button" onclick="addProcessStepPrompt()" style="background:var(--sn-gold);color:#061a12;border:none;padding:6px 14px;border-radius:7px;font-weight:800;font-size:12px;cursor:pointer;">+ افزودن گام عملیاتی</button>
+              </div>
+
+              ${stepRows}
+            </div>
+          `;
+          return;
+        }
+
+        if (activeTab === 'diagram') {
+          const svgOutput = renderFlowchartSvg(docStore.flowchart_steps, docStore.flowchart_links, docStore.title);
+          container.innerHTML = `
+            <div class="sn-section-panel">
+              <div class="sn-section-title">
+                <span>🗺️</span> <span>نمای گرافیکی وکتوری (SVG) فلوچارت فرآیند جهت چاپ پوستر A4</span>
+              </div>
+              
+              <div class="flowchart-canvas-container" id="flowchartSvgTarget">
+                ${svgOutput}
+              </div>
+            </div>
+          `;
+          return;
+        }
+      }
+
+      // ==========================================
+      // رندر خط‌مشی و روش اجرایی (SOP)
+      // ==========================================
+      if (activeTab === 'purpose') {
+        container.innerHTML = `
+          <div class="sn-section-panel" style="display:flex;flex-direction:column;gap:18px;">
+            <div>
+              <label class="sn-form-label">۱. هدف از تدوین و اجرای سند (Purpose) *</label>
+              <textarea id="inp_purpose" class="sn-form-textarea" rows="4">${esc(docStore.purpose)}</textarea>
+            </div>
+            <div>
+              <label class="sn-form-label">۲. دامنه شمول و کاربرد در بخش‌های بیمارستان (Scope) *</label>
+              <textarea id="inp_scope" class="sn-form-textarea" rows="3">${esc(docStore.scope)}</textarea>
+            </div>
+            <div>
+              <label class="sn-form-label">۳. مراجع قانونی، اسناد بالادستی و الزامات سنجه اعتباربخشی (Legal References) *</label>
+              <textarea id="inp_legal" class="sn-form-textarea" rows="3">${esc(docStore.legal)}</textarea>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      if (activeTab === 'policy') {
+        container.innerHTML = `
+          <div class="sn-section-panel" style="display:flex;flex-direction:column;gap:18px;">
+            <div>
+              <label class="sn-form-label" style="font-size:13.5px;">۴. بیانیه و گزاره خط‌مشی قطعی بیمارستان (Policy Statement) *</label>
+              <div style="font-size:12px;color:#94a3b8;margin-bottom:8px;">
+                گزاره قطعی، تعهدآور و الزام‌آور حاکمیت بالینی و ریاست بیمارستان در پایبندی به الزامات سنجه:
+              </div>
+              <textarea id="inp_policy_stmt" class="sn-form-textarea" rows="5" style="border-color:var(--sn-gold, #d4af37);color:var(--sn-gold-light, #fde68a);font-weight:600;font-size:13.5px;background:rgba(18,36,30,0.95);">${esc(docStore.policy_stmt)}</textarea>
+            </div>
+            <div>
+              <label class="sn-form-label">۵. تعاریف، اصطلاحات و واژگان تخصصی (Definitions)</label>
+              <textarea id="inp_definitions" class="sn-form-textarea" rows="4">${esc(docStore.definitions)}</textarea>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      if (activeTab === 'workflow') {
+        container.innerHTML = `
+          <div class="sn-section-panel" style="display:flex;flex-direction:column;gap:18px;">
+            <div>
+              <label class="sn-form-label">۶. شرح وظایف و تفکیک مسئولیت‌های رده‌های شغلی (Responsibilities) *</label>
+              <div style="font-size:12px;color:#94a3b8;margin-bottom:8px;">
+                تعیین صریح وظایف انتظامات، پذیرش، سرپرستاران، سوپروایزرها و کادر پشتیبانی:
+              </div>
+              <textarea id="inp_responsibilities" class="sn-form-textarea" rows="6">${esc(docStore.responsibilities)}</textarea>
+            </div>
+            <div>
+              <label class="sn-form-label">۷. روش اجرا و گام‌های عملیاتی اقدام (Step-by-Step Procedure) *</label>
+              <div style="font-size:12px;color:#94a3b8;margin-bottom:8px;">
+                مراحل پی‌درپی و گام‌به‌گام عملیاتی از ورود بیمار تا ترخیص و ثبت شواهد:
+              </div>
+              <textarea id="inp_work_method" class="sn-form-textarea" rows="7">${esc(docStore.work_method)}</textarea>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      if (activeTab === 'monitoring') {
+        container.innerHTML = `
+          <div style="display:flex;flex-direction:column;gap:20px;">
+            <div class="sn-section-panel">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+                <div>
+                  <label class="sn-form-label">۸. روش پایش، نظارت و شاخص‌های سنجش اثربخشی (Monitoring & KPIs)</label>
+                  <textarea id="inp_monitoring" class="sn-form-textarea" rows="4">${esc(docStore.monitoring)}</textarea>
+                </div>
+                <div>
+                  <label class="sn-form-label">۹. فرم‌ها، چک‌لیست‌ها و مدارک پیوست مرتبط (Related Records)</label>
+                  <textarea id="inp_related_docs" class="sn-form-textarea" rows="4">${esc(docStore.related_docs)}</textarea>
+                </div>
+              </div>
+            </div>
+            ${renderSignersPanelHtml()}
+          </div>
+        `;
+        return;
+      }
+
+      // ==========================================
+      // تب امضاها (مشترک در چک‌لیست و فرآیند و فرم)
+      // ==========================================
+      if (activeTab === 'signers') {
+        container.innerHTML = renderSignersPanelHtml();
+        return;
+      }
+
+      // ==========================================
+      // تب خروجی چاپ رسمی استاندارد A4
+      // ==========================================
+      if (activeTab === 'a4') {
+        container.innerHTML = renderA4PrintPreviewHtml();
+        return;
+      }
+    }
+
+    // تولید کادر ۳ امضای رسمی با کاربران واقعی دیتابیس
+    function renderSignersPanelHtml() {
+      return `
+        <div class="sn-section-panel">
+          <div class="sn-section-title">
+            <span>🛡️</span> <span>ارکان سه‌گانه تایید، تصویب و ابلاغ سند (انتخاب از پرسنل واقعی بیمارستان)</span>
+          </div>
+          
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;">
+            <div class="sn-signer-box" style="background:rgba(18,36,30,0.8);border:1px solid rgba(212,175,90,0.3);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:8px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <span style="font-size:12px;font-weight:800;color:var(--sn-gold-light, #fde68a);">۱. تدوین‌کننده / ممیز</span>
+                <span style="font-size:10px;background:rgba(16,185,129,0.2);color:#6ee7b7;padding:2px 6px;border-radius:4px;">کادر کیفیت / ممیز</span>
+              </div>
+              <div style="font-size:11px;color:#94a3b8;">انتخاب پرسنل مجری تدوین:</div>
+              <select id="sel_author" class="sn-signer-select" onchange="onSignerChanged('author', this)" style="background:rgba(8,18,14,0.95);border:1px solid rgba(212,175,90,0.4);color:#fff;padding:8px;border-radius:6px;font-family:inherit;font-size:12px;">
+                ${buildUserOptions(docStore.author_id)}
+              </select>
+              <div style="font-size:11px;color:#10b981;margin-top:2px;">✓ دارای دسترسی تدوین مستندات</div>
+            </div>
+
+            <div class="sn-signer-box" style="background:rgba(18,36,30,0.8);border:1px solid rgba(212,175,90,0.3);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:8px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <span style="font-size:12px;font-weight:800;color:var(--sn-gold-light, #fde68a);">۲. تاییدکننده انطباق</span>
+                <span style="font-size:10px;background:rgba(59,130,246,0.2);color:#93c5fd;padding:2px 6px;border-radius:4px;">مدیر کیفیت / مترون</span>
+              </div>
+              <div style="font-size:11px;color:#94a3b8;">تایید تطابق با سنجه‌های ملی:</div>
+              <select id="sel_reviewer" class="sn-signer-select" onchange="onSignerChanged('reviewer', this)" style="background:rgba(8,18,14,0.95);border:1px solid rgba(212,175,90,0.4);color:#fff;padding:8px;border-radius:6px;font-family:inherit;font-size:12px;">
+                ${buildUserOptions(docStore.reviewer_id)}
+              </select>
+              <div style="font-size:11px;color:#10b981;margin-top:2px;">✓ دارای صلاحیت نظارت بالینی</div>
+            </div>
+
+            <div class="sn-signer-box" style="background:rgba(18,36,30,0.8);border:1px solid rgba(212,175,90,0.3);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:8px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <span style="font-size:12px;font-weight:800;color:var(--sn-gold-light, #fde68a);">۳. تصویب‌کننده و ابلاغ</span>
+                <span style="font-size:10px;background:rgba(212,175,90,0.2);color:var(--sn-gold-light);padding:2px 6px;border-radius:4px;">ریاست بیمارستان</span>
+              </div>
+              <div style="font-size:11px;color:#94a3b8;">ابلاغ رسمی به کلیه بخش‌ها:</div>
+              <select id="sel_approver" class="sn-signer-select" onchange="onSignerChanged('approver', this)" style="background:rgba(8,18,14,0.95);border:1px solid rgba(212,175,90,0.4);color:#fff;padding:8px;border-radius:6px;font-family:inherit;font-size:12px;">
+                ${buildUserOptions(docStore.approver_id)}
+              </select>
+              <div style="font-size:11px;color:#10b981;margin-top:2px;">✓ مقام ارشد تصویب و ابلاغ</div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function onSignerChanged(type, selectEl) {
+      const userId = selectEl.value;
+      const opt = selectEl.options[selectEl.selectedIndex];
+      const optText = opt ? opt.text : '';
+
+      if (type === 'author') {
+        docStore.author_id = userId;
+        docStore.author_name = optText;
+      } else if (type === 'reviewer') {
+        docStore.reviewer_id = userId;
+        docStore.reviewer_name = optText;
+      } else if (type === 'approver') {
+        docStore.approver_id = userId;
+        docStore.approver_name = optText;
+      }
+    }
+
+    // اقدامات چک‌لیست
+    function setChecklistScore(idx, score) {
+      if (docStore.checklist_items[idx]) {
+        docStore.checklist_items[idx].score = score;
+        renderTabContent();
+      }
+    }
+
+    function addChecklistItemPrompt() {
+      const title = prompt('عنوان گویه یا سوال ممیزی جدید را وارد کنید:');
+      if (title && title.trim()) {
+        docStore.checklist_items.push({
+          id: docStore.checklist_items.length + 1,
+          title: title.trim(),
+          method: 'مشاهده',
+          weight: 2,
+          score: 2,
+          note: 'در بازدید ممیزی بررسی شد.'
+        });
+        renderTabContent();
+      }
+    }
+
+    function removeChecklistItem(idx) {
+      if (confirm('آیا از حذف این گویه اطمینان دارید؟')) {
+        docStore.checklist_items.splice(idx, 1);
+        renderTabContent();
+      }
+    }
+
+    // اقدامات فلوچارت
+    function addProcessStepPrompt() {
+      const label = prompt('عنوان گام عملیاتی را وارد کنید:');
+      if (label && label.trim()) {
+        const role = prompt('نقش یا سمت مسئول اجرای این گام:', 'کادر بخش');
+        const id = 's_' + Date.now();
+        docStore.flowchart_steps.push({
+          id: id,
+          label: label.trim(),
+          type: 'action',
+          role: role || 'کادر بخش',
+          time: 'معین'
+        });
+        // پیوند خودکار به گام قبلی
+        if (docStore.flowchart_steps.length > 1) {
+          const prev = docStore.flowchart_steps[docStore.flowchart_steps.length - 2];
+          docStore.flowchart_links.push({ from: prev.id, to: id });
+        }
+        renderTabContent();
+      }
+    }
+
+    function removeProcessStep(idx) {
+      if (confirm('آیا از حذف این گام فرآیند اطمینان دارید؟')) {
+        const removed = docStore.flowchart_steps.splice(idx, 1)[0];
+        docStore.flowchart_links = docStore.flowchart_links.filter(l => l.from !== removed.id && l.to !== removed.id);
+        renderTabContent();
+      }
+    }
+
+    // ==========================================
+    // رندر پیش‌نمایش چاپی کاغذ استاندارد A4
+    // ==========================================
+    function renderA4PrintPreviewHtml() {
+      const isChecklist = docType === 'checklist';
+      const isFlowchart = docType === 'flowchart' || docType === 'process';
+
+      // هدر رسمی ۳بخشی
+      let printContentBody = '';
+
+      if (isChecklist) {
+        let totalPossible = 0;
+        let totalScored = 0;
+        const rows = docStore.checklist_items.map((it, idx) => {
+          const w = it.weight || 1;
+          if (it.score !== 'NA' && it.score !== 'عدم شمول') {
+            totalPossible += w * 2;
+            totalScored += w * (Number(it.score) || 0);
+          }
+          const resText = it.score === 2 ? 'کامل (۲)' : (it.score === 1 ? 'نسبی (۱)' : (it.score === 0 ? 'عدم انطباق (۰)' : 'عدم شمول'));
+          return `
+            <tr style="border-bottom:1px solid #e2e8f0;background:${idx%2===0?'#ffffff':'#f8fafc'};">
+              <td style="padding:6px;border:1px solid #cbd5e1;text-align:center;">${idx + 1}</td>
+              <td style="padding:6px;border:1px solid #cbd5e1;text-align:right;">${esc(it.title)}</td>
+              <td style="padding:6px;border:1px solid #cbd5e1;text-align:center;">${esc(it.method || 'مشاهده')}</td>
+              <td style="padding:6px;border:1px solid #cbd5e1;text-align:center;">${w}</td>
+              <td style="padding:6px;border:1px solid #cbd5e1;text-align:center;font-weight:700;">${resText}</td>
+              <td style="padding:6px;border:1px solid #cbd5e1;text-align:right;font-size:10.5px;">${esc(it.note || '')}</td>
+            </tr>
+          `;
+        }).join('');
+
+        const percent = totalPossible > 0 ? Math.round((totalScored / totalPossible) * 100) : 100;
+
+        printContentBody = `
+          <table style="width:100%;border-collapse:collapse;margin-bottom:14px;font-size:11px;">
+            <thead>
+              <tr style="background:#f1f5f9;font-weight:800;color:#0f172a;">
+                <th style="padding:7px;border:1px solid #94a3b8;width:5%;">ردیف</th>
+                <th style="padding:7px;border:1px solid #94a3b8;width:45%;">گویه و استاندارد مورد ارزیابی</th>
+                <th style="padding:7px;border:1px solid #94a3b8;width:12%;">روش ارزیابی</th>
+                <th style="padding:7px;border:1px solid #94a3b8;width:8%;">ضریب</th>
+                <th style="padding:7px;border:1px solid #94a3b8;width:12%;">نتیجه ممیزی</th>
+                <th style="padding:7px;border:1px solid #94a3b8;width:18%;">شواهد و توضیحات</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${rows}
+            </tbody>
+          </table>
+
+          <!-- کادر خلاصه امتیاز چک‌لیست -->
+          <div style="background:#f8fafc;border:1px solid #cbd5e1;border-radius:4px;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;font-size:11.5px;">
+            <div>مجموع امتیاز مکتسبه: <b>${totalScored}</b> از <b>${totalPossible}</b></div>
+            <div>درصد انطباق با استاندارد: <b style="color:#0e7490;font-size:14px;">${percent}٪</b></div>
+            <div>نتیجه ارزیابی: <b>${percent >= 85 ? 'تایید انطباق کامل' : 'مشروط به اقدام اصلاحی'}</b></div>
+          </div>
+        `;
+      } else if (isFlowchart) {
+        const svgPoster = renderFlowchartSvg(docStore.flowchart_steps, docStore.flowchart_links, docStore.title);
+
+        printContentBody = `
+          <!-- ماتریس SIPOC خلاصه -->
+          <div style="margin-bottom:14px;border:1px solid #cbd5e1;border-radius:4px;overflow:hidden;">
+            <div style="background:#f1f5f9;font-weight:800;padding:5px 10px;font-size:11.5px;color:#0e7490;border-bottom:1px solid #cbd5e1;">
+              ماتریس SIPOC (شناسنامه کلان فرآیند)
+            </div>
+            <table style="width:100%;border-collapse:collapse;font-size:10.5px;text-align:right;">
+              <tr>
+                <td style="padding:6px;border:1px solid #cbd5e1;width:25%;background:#fafafa;"><b>تامین‌کنندگان:</b> ${esc(docStore.sipoc_suppliers)}</td>
+                <td style="padding:6px;border:1px solid #cbd5e1;width:25%;background:#ffffff;"><b>ورودی‌ها:</b> ${esc(docStore.sipoc_inputs)}</td>
+                <td style="padding:6px;border:1px solid #cbd5e1;width:25%;background:#fafafa;"><b>خروجی‌ها:</b> ${esc(docStore.sipoc_outputs)}</td>
+                <td style="padding:6px;border:1px solid #cbd5e1;width:25%;background:#ffffff;"><b>مشتریان:</b> ${esc(docStore.sipoc_customers)}</td>
+              </tr>
+            </table>
+          </div>
+
+          <!-- دیاگرام وکتور SVG فلوچارت -->
+          <div style="border:1px solid #94a3b8;border-radius:4px;padding:12px;background:#ffffff;display:flex;justify-content:center;margin-bottom:14px;">
+            ${svgPoster}
+          </div>
+        `;
+      } else {
+        // خط‌مشی / روش اجرایی
+        printContentBody = `
+          <div style="font-size:11.5px;color:#1e293b;">
+            <div class="sn-print-article"><b style="color:#0e7490;">۱. هدف از تدوین و اجرا:</b> ${esc(docStore.purpose)}</div>
+            <div class="sn-print-article"><b style="color:#0e7490;">۲. دامنه کاربرد و شمول:</b> ${esc(docStore.scope)}</div>
+            <div class="sn-print-article"><b style="color:#0e7490;">۳. مراجع قانونی و اسناد بالادستی:</b> ${esc(docStore.legal)}</div>
+            <div class="sn-print-article" style="background:#f0fdf4;border-right:3px solid #16a34a;padding:8px 12px;border-radius:4px;margin:8px 0;">
+              <b style="color:#15803d;">۴. بیانیه خط‌مشی الزام‌آور:</b> ${esc(docStore.policy_stmt)}
+            </div>
+            <div class="sn-print-article"><b style="color:#0e7490;">۵. تعاریف و اصطلاحات:</b> <span style="white-space:pre-wrap;">${esc(docStore.definitions)}</span></div>
+            <div class="sn-print-article">
+              <b style="color:#0e7490;">۶. شرح وظایف رده‌های شغلی:</b>
+              <div style="white-space:pre-wrap;background:#f8fafc;padding:6px 10px;border-radius:4px;margin-top:4px;border:1px solid #e2e8f0;">${esc(docStore.responsibilities)}</div>
+            </div>
+            <div class="sn-print-article">
+              <b style="color:#0e7490;">۷. روش اجرا و گام‌های اقدام:</b>
+              <div style="white-space:pre-wrap;background:#f8fafc;padding:6px 10px;border-radius:4px;margin-top:4px;border:1px solid #e2e8f0;">${esc(docStore.work_method)}</div>
+            </div>
+            <div class="sn-print-article"><b style="color:#0e7490;">۸. پایش و شاخص‌های سنجش اثربخشی:</b> ${esc(docStore.monitoring)}</div>
+            <div class="sn-print-article"><b style="color:#0e7490;">۹. فرم‌ها و مستندات پیوست:</b> ${esc(docStore.related_docs)}</div>
+          </div>
+        `;
+      }
+
+      return `
+        <div class="a4-preview-wrapper" id="snPrintContainer">
+          
+          <div class="noprint" style="width:100%;max-width:840px;display:flex;justify-content:space-between;align-items:center;background:rgba(18,36,30,0.9);padding:12px 18px;border-radius:8px;border:1px solid rgba(212,175,90,0.3);">
+            <div style="font-size:12.5px;color:#f1f5f9;display:flex;align-items:center;gap:6px;">
+              <span>📄</span> <span>پیش‌نمایش چاپ رسمی A4 (مطابق فرمت ابلاغی وزارت بهداشت، درمان و آموزش پزشکی)</span>
+            </div>
+            <button type="button" class="sn-btn-act" onclick="window.print()" style="background:#0e7490;color:#fff;font-weight:800;padding:8px 20px;border-radius:6px;cursor:pointer;border:none;display:inline-flex;align-items:center;gap:6px;">
+              <span>🖨️</span> <span>چاپ مستقیم این سند</span>
+            </button>
+          </div>
+
+          <div class="a4-paper" id="snPrintableArea">
+            
+            <!-- سربرگ رسمی وزارت بهداشت و بیمارستان -->
+            <div style="border:2px solid #0f172a;border-radius:4px;padding:12px;margin-bottom:14px;">
+              <table style="width:100%;border-collapse:collapse;text-align:center;">
+                <tr>
+                  <td style="width:20%;text-align:center;vertical-align:middle;">
+                    <div style="font-size:30px;line-height:1;">🏥</div>
+                    <div style="font-size:11px;font-weight:800;color:#334155;margin-top:2px;">معاونت درمان</div>
+                  </td>
+                  <td style="width:52%;text-align:center;vertical-align:middle;">
+                    <div style="font-size:13px;font-weight:900;color:#0f172a;margin-bottom:3px;">جمهوری اسلامی ایران — وزارت بهداشت، درمان و آموزش پزشکی</div>
+                    <div style="font-size:15px;font-weight:900;color:#0e7490;margin-bottom:3px;">بیمارستان تخصصی و فوق تخصصی</div>
+                    <div style="font-size:12.5px;font-weight:800;color:#0f172a;background:#f1f5f9;padding:4px 12px;border-radius:4px;display:inline-block;border:1px solid #e2e8f0;">
+                      ${esc(docStore.title)}
+                    </div>
+                  </td>
+                  <td style="width:28%;text-align:left;vertical-align:middle;font-size:10.5px;font-weight:700;line-height:1.8;color:#334155;direction:rtl;padding-left:6px;">
+                    <div>کد سند: <b style="direction:ltr;display:inline-block;">${esc(docStore.doc_code)}</b></div>
+                    <div>سنجه: <b style="direction:ltr;display:inline-block;">${docCode}</b></div>
+                    <div>نسخه: <b>${esc(docStore.version_no)}</b></div>
+                    <div>صفحه: <b>۱ از ۱</b></div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+
+            <!-- جدول شناسنامه اداری ۴ستونه -->
+            <table style="width:100%;border-collapse:collapse;margin-bottom:14px;font-size:10.5px;border:1px solid #cbd5e1;">
+              <tr style="background:#f8fafc;">
+                <td style="padding:5px 8px;border:1px solid #cbd5e1;font-weight:800;width:18%;">واحد متولی:</td>
+                <td style="padding:5px 8px;border:1px solid #cbd5e1;">${esc(docStore.dept)}</td>
+                <td style="padding:5px 8px;border:1px solid #cbd5e1;font-weight:800;width:18%;">مسئول نظارت:</td>
+                <td style="padding:5px 8px;border:1px solid #cbd5e1;">${esc(docStore.responsible)}</td>
+              </tr>
+              <tr style="background:#ffffff;">
+                <td style="padding:5px 8px;border:1px solid #cbd5e1;font-weight:800;">تاریخ ابلاغ:</td>
+                <td style="padding:5px 8px;border:1px solid #cbd5e1;">${docStore.issue_day} ${getPersianMonthName(docStore.issue_month)} ${docStore.issue_year}</td>
+                <td style="padding:5px 8px;border:1px solid #cbd5e1;font-weight:800;">موعد بازنگری:</td>
+                <td style="padding:5px 8px;border:1px solid #cbd5e1;">${docStore.rev_day} ${getPersianMonthName(docStore.rev_month)} ${docStore.rev_year}</td>
+              </tr>
+            </table>
+
+            <!-- بدنه محتوای سند بر اساس نوع مدرک -->
+            ${printContentBody}
+
+            <!-- جدول امضای رسمی تایید و تصویب ۳ سطحی با کاربران واقعی -->
+            <div class="sn-print-signatures">
+              <table style="width:100%;border-collapse:collapse;margin-top:16px;border:1px solid #94a3b8;text-align:center;font-size:10.5px;">
+                <tr style="background:#f1f5f9;font-weight:800;color:#0f172a;">
+                  <td style="padding:6px;border:1px solid #94a3b8;width:33.3%;">۱. تهیه‌کننده و تدوین</td>
+                  <td style="padding:6px;border:1px solid #94a3b8;width:33.3%;">۲. بررسی و تایید انطباق</td>
+                  <td style="padding:6px;border:1px solid #94a3b8;width:33.3%;">۳. تصویب و ابلاغ نهایی</td>
+                </tr>
+                <tr style="height:65px;vertical-align:bottom;">
+                  <td style="padding:6px;border:1px solid #94a3b8;">
+                    <div style="font-weight:800;color:#0f172a;">${esc(docStore.author_name)}</div>
+                    <div style="font-size:9.5px;color:#64748b;margin-top:2px;">امضای الکترونیکی ثبت شد</div>
+                  </td>
+                  <td style="padding:6px;border:1px solid #94a3b8;">
+                    <div style="font-weight:800;color:#0f172a;">${esc(docStore.reviewer_name)}</div>
+                    <div style="font-size:9.5px;color:#64748b;margin-top:2px;">تایید انطباق اعتباربخشی</div>
+                  </td>
+                  <td style="padding:6px;border:1px solid #94a3b8;">
+                    <div style="font-weight:800;color:#0f172a;">${esc(docStore.approver_name)}</div>
+                    <div style="font-size:9.5px;color:#16a34a;font-weight:800;margin-top:2px;">✓ مصوب و لازم‌الاجرا</div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      `;
+
+      if (window.IS_READONLY_MODE) {
+        setTimeout(() => {
+          if (container) {
+            container.querySelectorAll("input, textarea, select").forEach(el => {
+              el.disabled = true;
+              el.readOnly = true;
+              el.style.opacity = "0.85";
+            });
+            container.querySelectorAll(".btn-flow-add, .btn-flow-del, button[onclick*='deleteStep'], button[onclick*='openStepModal']").forEach(btn => {
+              btn.style.display = "none";
+            });
+          }
+        }, 30);
+      }
+    }
+
+    // ذخیره‌سازی داده‌های سند در سرور و لوکال‌استوریج
+    async function saveDocument() {
+      if (window.IS_READONLY_MODE) {
+        alert("شما در حالت فقط‌خواندنی هستید و صلاحیت ویرایش یا ذخیره این سند را ندارید.");
+        return;
+      }
+      syncCurrentInputs();
+      saveToLocalStore();
+
+      if (window.HassanHub && window.HassanHub._docStore) {
+        window.HassanHub._docStore[docType + '_' + docCode] = docStore;
+      }
+
+      try {
+        const payload = {
+          doc_type: docType,
+          title: docStore.title,
+          doc_code: docStore.doc_code,
+          purpose: docStore.purpose || docStore.form_purpose,
+          scope: docStore.scope,
+          legal_references: docStore.legal,
+          definitions: docStore.definitions,
+          work_method: docStore.work_method,
+          related_staff: docStore.responsibilities,
+          responsible_person: docStore.responsible,
+          monitoring_method: docStore.monitoring,
+          related_documents: docStore.related_docs,
+          status: 'approved',
+          issue_date: docStore.issue_year + '-' + String(docStore.issue_month).padStart(2,'0') + '-' + String(docStore.issue_day).padStart(2,'0'),
+          review_date: docStore.rev_year + '-' + String(docStore.rev_month).padStart(2,'0') + '-' + String(docStore.rev_day).padStart(2,'0')
+        };
+
+        const res = await fetch('/api/documents', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        if (res.ok) {
+          alert('سند با موفقیت در سامانه ذخیره و ثبت رسمی شد.');
+        } else {
+          alert('سند به صورت محلی در مرورگر ذخیره گردید.');
+        }
+      } catch (err) {
+        alert('سند به صورت محلی در مرورگر ذخیره گردید.');
+      }
+    }
+
+    // مقداردهی اولیه پس از بارگذاری صفحه
+    window.addEventListener('DOMContentLoaded', async () => {
+      await loadHospitalSigners();
+      initDocData();
+      await checkAuthAndPermissions();
+      renderTabContent();
+
+      // رویداد کلید درج نمونه استاندارد
+      document.getElementById('btnLoadStandardTemplate').addEventListener('click', () => {
+        const tpl = getStandardContentForType(docCode, docType);
+        Object.assign(docStore, tpl);
+        renderTabContent();
+        alert('محتوای استاندارد و الزامات اعتباربخشی سنجه ' + docCode + ' بارگذاری شد.');
+      });
+
+      // رویداد کلید پرینت
+      document.getElementById('btnTriggerPrint').addEventListener('click', () => {
+        switchPolicyTab('a4');
+        setTimeout(() => {
+          window.print();
+        }, 300);
+      });
+
+      // رویداد کلید ذخیره
+      document.getElementById('btnSaveDocumentData').addEventListener('click', saveDocument);
+    });
+  
+</script>
+</body>
+</html>

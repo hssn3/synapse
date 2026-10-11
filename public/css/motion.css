@@ -1,0 +1,519 @@
+/* ============================================================================
+   motion.css — سیستم حرکت
+   سامانهٔ جامع مدیریت و اعتباربخشی بیمارستان
+   ----------------------------------------------------------------------------
+   - همهٔ کلاس‌ها با پیشوند mx- ؛ هیچ کلاس موجودی بازنویسی نمی‌شود.
+   - فقط transform و opacity (به‌جز stroke-dashoffset در دونات‌ها که
+     خاصیت «رنگ‌آمیزی» است و باعث layout یا reflow نمی‌شود).
+   - همهٔ حرکت‌ها زیر حالت آرام / prefers-reduced-motion خاموش می‌شوند.
+   - RTL: جهت حرکت‌های افقی با متغیر --mx-dir کنترل می‌شود (۱- برای RTL).
+   ============================================================================ */
+
+:root {
+  --mx-dir: -1; /* RTL */
+  --mx-fast: 160ms;
+  --mx-base: 260ms;
+  --mx-slow: 520ms;
+  --mx-enter: 640ms;
+  /* شتاب‌گیری «جوهری»: شروع سریع، نشستِ نرم */
+  --mx-ease: cubic-bezier(0.22, 0.72, 0.24, 1);
+  --mx-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --mx-step: 55ms; /* فاصلهٔ پلکانی */
+}
+
+html[dir="ltr"] {
+  --mx-dir: 1;
+}
+
+/* ------------------------------------------------------- ۱. ورود پلکانی */
+/* استفاده: <div class="mx-stagger"> ... </div>
+   فرزندان مستقیم به‌ترتیب وارد می‌شوند. برای بیش از ۱۲ فرزند، تأخیر تکرار می‌شود. */
+
+.mx-stagger > * {
+  animation: mx-rise-in var(--mx-enter) var(--mx-ease-out) both;
+}
+
+.mx-stagger > *:nth-child(1) { animation-delay: calc(var(--mx-step) * 0); }
+.mx-stagger > *:nth-child(2) { animation-delay: calc(var(--mx-step) * 1); }
+.mx-stagger > *:nth-child(3) { animation-delay: calc(var(--mx-step) * 2); }
+.mx-stagger > *:nth-child(4) { animation-delay: calc(var(--mx-step) * 3); }
+.mx-stagger > *:nth-child(5) { animation-delay: calc(var(--mx-step) * 4); }
+.mx-stagger > *:nth-child(6) { animation-delay: calc(var(--mx-step) * 5); }
+.mx-stagger > *:nth-child(7) { animation-delay: calc(var(--mx-step) * 6); }
+.mx-stagger > *:nth-child(8) { animation-delay: calc(var(--mx-step) * 7); }
+.mx-stagger > *:nth-child(9) { animation-delay: calc(var(--mx-step) * 8); }
+.mx-stagger > *:nth-child(10) { animation-delay: calc(var(--mx-step) * 9); }
+.mx-stagger > *:nth-child(11) { animation-delay: calc(var(--mx-step) * 10); }
+.mx-stagger > *:nth-child(n + 12) { animation-delay: calc(var(--mx-step) * 11); }
+
+/* تأخیر ناحیه‌ای: ناوبری زودتر، محتوا دیرتر */
+.mx-delay-1 { animation-delay: 120ms !important; }
+.mx-delay-2 { animation-delay: 240ms !important; }
+.mx-delay-3 { animation-delay: 380ms !important; }
+
+@keyframes mx-rise-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+/* ورود از لبهٔ راست (RTL) — برای ریل ناوبری و کشوها */
+.mx-slide-side {
+  animation: mx-slide-side var(--mx-enter) var(--mx-ease-out) both;
+}
+
+@keyframes mx-slide-side {
+  from {
+    opacity: 0;
+    transform: translate3d(calc(var(--mx-dir) * -22px), 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* ورود سربرگ: پرده‌ای که از بالا می‌نشیند */
+.mx-drop {
+  animation: mx-drop var(--mx-slow) var(--mx-ease-out) both;
+}
+
+@keyframes mx-drop {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -12px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* محو سادهٔ بدون جابه‌جایی — برای متن‌های طولانی و جدول‌ها */
+.mx-fade {
+  animation: mx-fade var(--mx-slow) ease both;
+}
+
+@keyframes mx-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ------------------------------------------------------------- ۲. hover */
+
+.mx-lift {
+  transition: transform var(--mx-base) var(--mx-ease),
+    box-shadow var(--mx-base) var(--mx-ease),
+    border-color var(--mx-base) ease;
+  will-change: transform;
+}
+
+.mx-lift:hover {
+  transform: translate3d(0, -3px, 0);
+}
+
+.mx-lift:active {
+  transform: translate3d(0, -1px, 0) scale(0.997);
+}
+
+/* فشار دکمه — بازخورد فیزیکی کوتاه */
+.mx-press {
+  transition: transform var(--mx-fast) var(--mx-ease);
+}
+
+.mx-press:active {
+  transform: scale(0.96);
+}
+
+/* درخشش لبه‌ای که با hover از راست به چپ عبور می‌کند (فقط transform) */
+.mx-sheen {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.mx-sheen::after {
+  content: "";
+  position: absolute;
+  inset: -40% -60%;
+  z-index: -1;
+  background: linear-gradient(
+    75deg,
+    transparent 42%,
+    rgba(233, 255, 252, 0.14) 50%,
+    transparent 58%
+  );
+  transform: translate3d(calc(var(--mx-dir) * 70%), 0, 0);
+  opacity: 0;
+  transition: transform 720ms var(--mx-ease-out), opacity 320ms ease;
+  pointer-events: none;
+}
+
+.mx-sheen:hover::after,
+.mx-sheen:focus-visible::after {
+  transform: translate3d(calc(var(--mx-dir) * -70%), 0, 0);
+  opacity: 1;
+}
+
+/* هالهٔ زیر کارت که با hover باز می‌شود */
+.mx-glow {
+  position: relative;
+}
+
+.mx-glow::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(
+    60% 60% at 50% 40%,
+    var(--bgx-halo-a, rgba(26, 154, 160, 0.5)),
+    transparent 70%
+  );
+  filter: blur(18px);
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity var(--mx-slow) ease, transform var(--mx-slow) var(--mx-ease);
+  pointer-events: none;
+}
+
+.mx-glow:hover::before,
+.mx-glow:focus-within::before {
+  opacity: 0.75;
+  transform: scale(1);
+}
+
+/* فوکوس صفحه‌کلید — همیشه دیده شود */
+.mx-lift:focus-visible,
+.mx-press:focus-visible,
+.mx-sheen:focus-visible {
+  outline: 2px solid var(--bgx-jade-300, #4fc9bd);
+  outline-offset: 3px;
+}
+
+/* --------------------------------------------------------- ۳. آیکون‌ها */
+/* آیکون‌های SVG درون کاشی نقش‌ها؛ هر بخش حرکت میکروی مخصوص خودش را دارد. */
+
+.mx-icon {
+  transition: transform var(--mx-slow) var(--mx-ease);
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+/* تپش قلب — کاشی «پرستاری» و KPI بیمار */
+.mx-tile:hover .mx-icon--pulse,
+.mx-icon--pulse.is-live {
+  animation: mx-pulse 1.6s var(--mx-ease) infinite;
+}
+
+@keyframes mx-pulse {
+  0%, 100% { transform: scale(1); }
+  18% { transform: scale(1.12); }
+  32% { transform: scale(1); }
+  46% { transform: scale(1.07); }
+}
+
+/* چرخش آرام — «مسئول فنی» و چرخ‌دنده‌ها */
+.mx-tile:hover .mx-icon--spin {
+  animation: mx-spin 6s linear infinite;
+}
+
+@keyframes mx-spin {
+  to { transform: rotate(-360deg); } /* خلاف عقربه، هم‌جهت با RTL */
+}
+
+/* بالا و پایین رفتن — «داروخانه»، قطرهٔ دارو */
+.mx-tile:hover .mx-icon--drip {
+  animation: mx-drip 2.2s var(--mx-ease) infinite;
+}
+
+@keyframes mx-drip {
+  0% { transform: translateY(-3px); opacity: 0.5; }
+  55% { transform: translateY(4px); opacity: 1; }
+  100% { transform: translateY(-3px); opacity: 0.5; }
+}
+
+/* موج آرام — «آزمایشگاه»/«خون» */
+.mx-tile:hover .mx-icon--wave {
+  animation: mx-wave 3.4s ease-in-out infinite;
+}
+
+@keyframes mx-wave {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(calc(var(--mx-dir) * 4px)); }
+}
+
+/* نوسان لطیف — «اعتباربخشی»، مهر و سند */
+.mx-tile:hover .mx-icon--tilt {
+  animation: mx-tilt 2.8s var(--mx-ease) infinite;
+}
+
+@keyframes mx-tilt {
+  0%, 100% { transform: rotate(0deg); }
+  35% { transform: rotate(-7deg); }
+  70% { transform: rotate(5deg); }
+}
+
+/* --------------------------------------------- ۴. نمودارها و شاخص‌ها */
+
+/* نوار پیشرفت: از سمت راست پر می‌شود (RTL) */
+.mx-bar__fill {
+  transform-origin: right center;
+  transform: scaleX(var(--mx-p, 0));
+  transition: transform 900ms var(--mx-ease-out);
+}
+
+html[dir="ltr"] .mx-bar__fill {
+  transform-origin: left center;
+}
+
+/* اجرای ورودی: کلاس is-in را پس از mount اضافه کنید تا از صفر پر شود */
+.mx-bar__fill:not(.is-in) {
+  transform: scaleX(0);
+}
+
+/* دونات وضعیت: کشیدن قوس با dashoffset + چرخش ظرف */
+.mx-donut {
+  transform: rotate(-90deg);
+}
+
+.mx-donut__arc {
+  stroke-dasharray: var(--mx-c, 314);
+  stroke-dashoffset: var(--mx-c, 314);
+  transition: stroke-dashoffset 1100ms var(--mx-ease-out);
+}
+
+.mx-donut.is-in .mx-donut__arc {
+  stroke-dashoffset: calc(var(--mx-c, 314) * (1 - var(--mx-p, 0)));
+}
+
+/* شمارندهٔ عددی — پرش کوچک هنگام تغییر مقدار */
+.mx-count.is-bump {
+  animation: mx-bump 420ms var(--mx-ease);
+}
+
+@keyframes mx-bump {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.09); }
+  100% { transform: scale(1); }
+}
+
+/* ستون‌های نمودار میله‌ای BSC */
+.mx-col {
+  transform-origin: bottom center;
+  transform: scaleY(0);
+  animation: mx-grow 760ms var(--mx-ease-out) both;
+}
+
+@keyframes mx-grow {
+  to { transform: scaleY(1); }
+}
+
+/* ------------------------------------------------ ۵. باز و بسته شدن‌ها */
+
+/* آکاردئون گروه‌های اعتباربخشی و استانداردهای سنجه */
+.mx-collapse {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--mx-slow) var(--mx-ease);
+}
+
+.mx-collapse > .mx-collapse__inner {
+  overflow: hidden;
+  min-height: 0;
+  opacity: 0;
+  transform: translate3d(0, -6px, 0);
+  transition: opacity var(--mx-base) ease var(--mx-fast),
+    transform var(--mx-base) var(--mx-ease) var(--mx-fast);
+}
+
+.mx-collapse.is-open {
+  grid-template-rows: 1fr;
+}
+
+.mx-collapse.is-open > .mx-collapse__inner {
+  opacity: 1;
+  transform: none;
+}
+
+.mx-chevron {
+  transition: transform var(--mx-base) var(--mx-ease);
+}
+
+[aria-expanded="true"] .mx-chevron {
+  transform: rotate(-180deg);
+}
+
+/* مودال: پس‌زمینه محو، کارت از پایین می‌نشیند */
+.mx-modal-backdrop {
+  animation: mx-fade var(--mx-base) ease both;
+}
+
+.mx-modal-card {
+  animation: mx-modal-in 340ms var(--mx-ease-out) both;
+}
+
+@keyframes mx-modal-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.mx-modal-card.is-closing {
+  animation: mx-modal-out 200ms var(--mx-ease) both;
+}
+
+@keyframes mx-modal-out {
+  to {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0) scale(0.98);
+  }
+}
+
+/* لرزش کوتاه برای رمز اشتباه — کوتاه و غیرآزاردهنده */
+.mx-shake {
+  animation: mx-shake 380ms var(--mx-ease);
+}
+
+@keyframes mx-shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  45% { transform: translateX(5px); }
+  70% { transform: translateX(-3px); }
+}
+
+/* Toast: از پایین‌راست وارد می‌شود (RTL) */
+.mx-toast {
+  animation: mx-toast-in 320ms var(--mx-ease-out) both;
+}
+
+@keyframes mx-toast-in {
+  from {
+    opacity: 0;
+    transform: translate3d(calc(var(--mx-dir) * -18px), 10px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.mx-toast.is-out {
+  animation: mx-toast-out 240ms var(--mx-ease) both;
+}
+
+@keyframes mx-toast-out {
+  to {
+    opacity: 0;
+    transform: translate3d(0, 8px, 0) scale(0.98);
+  }
+}
+
+/* کشوی تنظیمات — از راست باز می‌شود */
+.mx-drawer {
+  transform: translate3d(100%, 0, 0);
+  transition: transform 380ms var(--mx-ease-out), opacity 240ms ease;
+  opacity: 0;
+}
+
+.mx-drawer.is-open {
+  transform: none;
+  opacity: 1;
+}
+
+html[dir="ltr"] .mx-drawer {
+  transform: translate3d(-100%, 0, 0);
+}
+
+/* --------------------------------------------------- ۶. حالت بارگذاری */
+
+/* اسکلتون شیشه‌ای: نوار نور که عبور می‌کند (transform) */
+.mx-skeleton {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--bgx-r-md, 16px);
+  background: rgba(var(--bgx-glass-tint, 8 34 40), 0.5);
+}
+
+.mx-skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    transparent 30%,
+    rgba(233, 255, 252, 0.12) 50%,
+    transparent 70%
+  );
+  transform: translate3d(calc(var(--mx-dir) * 100%), 0, 0);
+  animation: mx-shimmer 1.5s linear infinite;
+}
+
+@keyframes mx-shimmer {
+  to {
+    transform: translate3d(calc(var(--mx-dir) * -100%), 0, 0);
+  }
+}
+
+/* نقطه‌های در حال بارگذاری */
+.mx-dots > span {
+  display: inline-block;
+  animation: mx-dot 1.1s var(--mx-ease) infinite;
+}
+.mx-dots > span:nth-child(2) { animation-delay: 0.14s; }
+.mx-dots > span:nth-child(3) { animation-delay: 0.28s; }
+
+@keyframes mx-dot {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.45; }
+  30% { transform: translateY(-4px); opacity: 1; }
+}
+
+/* ------------------------------------------ ۷. تور و راهنمای اولین ورود */
+
+.mx-spotlight {
+  animation: mx-spot 2.4s var(--mx-ease) infinite;
+}
+
+@keyframes mx-spot {
+  0%, 100% { transform: scale(1); opacity: 0.55; }
+  50% { transform: scale(1.06); opacity: 0.9; }
+}
+
+/* ---------------------------------------------------- ۸. خاموشی حرکت */
+/* «حالت آرام» یا تنظیم سیستمی: هیچ حرکتی نمی‌ماند، ولی چیزی نامرئی نمی‌شود. */
+
+:root[data-bgx-calm="on"] *,
+:root[data-bgx-calm="on"] *::before,
+:root[data-bgx-calm="on"] *::after {
+  animation-duration: 1ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 1ms !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+  .mx-bar__fill:not(.is-in) {
+    transform: scaleX(var(--mx-p, 0));
+  }
+  .mx-donut__arc {
+    stroke-dashoffset: calc(var(--mx-c, 314) * (1 - var(--mx-p, 0)));
+  }
+}

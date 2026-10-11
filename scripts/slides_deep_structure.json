@@ -1,0 +1,976 @@
+[
+  {
+    "slide_num": 1,
+    "slide_path": "ppt/slides/slide1.xml",
+    "texts": [
+      "بيمارستان اميد دريك نگاه",
+      "سالهای 1405-1404"
+    ],
+    "tables": [],
+    "charts": [],
+    "images": [
+      "../media/image2.png",
+      "../media/image1.jpg"
+    ]
+  },
+  {
+    "slide_num": 2,
+    "slide_path": "ppt/slides/slide2.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart1.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 3,
+    "slide_path": "ppt/slides/slide3.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart2.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 4,
+    "slide_path": "ppt/slides/slide4.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart3.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 5,
+    "slide_path": "ppt/slides/slide5.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart4.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 6,
+    "slide_path": "ppt/slides/slide6.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart5.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 7,
+    "slide_path": "ppt/slides/slide7.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart6.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 8,
+    "slide_path": "ppt/slides/slide8.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart7.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 9,
+    "slide_path": "ppt/slides/slide9.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart8.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 10,
+    "slide_path": "ppt/slides/slide10.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart9.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 11,
+    "slide_path": "ppt/slides/slide11.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart10.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 12,
+    "slide_path": "ppt/slides/slide12.xml",
+    "texts": [
+      "اورژانس"
+    ],
+    "tables": [],
+    "charts": [
+      "../charts/chart11.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 13,
+    "slide_path": "ppt/slides/slide13.xml",
+    "texts": [
+      "اورژانس 1404"
+    ],
+    "tables": [],
+    "charts": [
+      "../charts/chart12.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 14,
+    "slide_path": "ppt/slides/slide14.xml",
+    "texts": [
+      "اورژانس 1404"
+    ],
+    "tables": [],
+    "charts": [
+      "../charts/chart13.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 15,
+    "slide_path": "ppt/slides/slide15.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart14.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 16,
+    "slide_path": "ppt/slides/slide16.xml",
+    "texts": [
+      "مالی",
+      "مالی",
+      "سایرموارد"
+    ],
+    "tables": [],
+    "charts": [
+      "../charts/chart15.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 17,
+    "slide_path": "ppt/slides/slide17.xml",
+    "texts": [
+      "درمان منزل",
+      "مالی",
+      "مالی"
+    ],
+    "tables": [],
+    "charts": [
+      "../charts/chart16.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 18,
+    "slide_path": "ppt/slides/slide18.xml",
+    "texts": [
+      "پذیرش 1404",
+      "اعزام  1404",
+      "اعزام1404"
+    ],
+    "tables": [],
+    "charts": [
+      "../charts/chart17.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 19,
+    "slide_path": "ppt/slides/slide19.xml",
+    "texts": [
+      "شاخص توصیفی بیمارستان امید دريك نگاه",
+      "سالهای 1405-1404"
+    ],
+    "tables": [],
+    "charts": [],
+    "images": [
+      "../media/image2.png",
+      "../media/image8.jpg"
+    ]
+  },
+  {
+    "slide_num": 20,
+    "slide_path": "ppt/slides/slide20.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart18.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 21,
+    "slide_path": "ppt/slides/slide21.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart19.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 22,
+    "slide_path": "ppt/slides/slide22.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart20.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 23,
+    "slide_path": "ppt/slides/slide23.xml",
+    "texts": [
+      "سایر: عدم وجودیا آماده شدن خون درخواستی ،حساسیت دارویی، عدم خریدتجهیزات توسط بیمار و..."
+    ],
+    "tables": [],
+    "charts": [
+      "../charts/chart21.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 24,
+    "slide_path": "ppt/slides/slide24.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart22.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 25,
+    "slide_path": "ppt/slides/slide25.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart23.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 26,
+    "slide_path": "ppt/slides/slide26.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart24.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 27,
+    "slide_path": "ppt/slides/slide27.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart25.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 28,
+    "slide_path": "ppt/slides/slide28.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart26.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 29,
+    "slide_path": "ppt/slides/slide29.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart27.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 30,
+    "slide_path": "ppt/slides/slide30.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart28.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 31,
+    "slide_path": "ppt/slides/slide31.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart29.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 32,
+    "slide_path": "ppt/slides/slide32.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart30.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 33,
+    "slide_path": "ppt/slides/slide33.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart31.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 34,
+    "slide_path": "ppt/slides/slide34.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart32.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 35,
+    "slide_path": "ppt/slides/slide35.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart33.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 36,
+    "slide_path": "ppt/slides/slide36.xml",
+    "texts": [
+      "کل زایمان ها 1404"
+    ],
+    "tables": [],
+    "charts": [
+      "../charts/chart34.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 37,
+    "slide_path": "ppt/slides/slide37.xml",
+    "texts": [
+      "کل زایمان طبیعی 1404"
+    ],
+    "tables": [],
+    "charts": [
+      "../charts/chart35.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 38,
+    "slide_path": "ppt/slides/slide38.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart36.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 39,
+    "slide_path": "ppt/slides/slide39.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart37.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 40,
+    "slide_path": "ppt/slides/slide40.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart38.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 41,
+    "slide_path": "ppt/slides/slide41.xml",
+    "texts": [
+      "شاخصهای عملکردی دفترپرستاری دريك نگاه",
+      "سالهای 1405-1404"
+    ],
+    "tables": [],
+    "charts": [],
+    "images": [
+      "../media/image2.png",
+      "../media/image9.jpg"
+    ]
+  },
+  {
+    "slide_num": 42,
+    "slide_path": "ppt/slides/slide42.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart39.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 43,
+    "slide_path": "ppt/slides/slide43.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart40.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 44,
+    "slide_path": "ppt/slides/slide44.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart41.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 45,
+    "slide_path": "ppt/slides/slide45.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart42.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 46,
+    "slide_path": "ppt/slides/slide46.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart43.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 47,
+    "slide_path": "ppt/slides/slide47.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart44.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 48,
+    "slide_path": "ppt/slides/slide48.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart45.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 49,
+    "slide_path": "ppt/slides/slide49.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart46.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 50,
+    "slide_path": "ppt/slides/slide50.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart47.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 51,
+    "slide_path": "ppt/slides/slide51.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart48.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 52,
+    "slide_path": "ppt/slides/slide52.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart49.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 53,
+    "slide_path": "ppt/slides/slide53.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart50.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 54,
+    "slide_path": "ppt/slides/slide54.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart51.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 55,
+    "slide_path": "ppt/slides/slide55.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart52.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 56,
+    "slide_path": "ppt/slides/slide56.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart53.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 57,
+    "slide_path": "ppt/slides/slide57.xml",
+    "texts": [
+      "شاخصهای عملکردی رعایت ایمنی بیمار",
+      "دريك نگاه",
+      "سالهای 1405-1404"
+    ],
+    "tables": [],
+    "charts": [],
+    "images": [
+      "../media/image2.png",
+      "../media/image10.jpg"
+    ]
+  },
+  {
+    "slide_num": 58,
+    "slide_path": "ppt/slides/slide58.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart54.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 59,
+    "slide_path": "ppt/slides/slide59.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart55.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 60,
+    "slide_path": "ppt/slides/slide60.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart56.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 61,
+    "slide_path": "ppt/slides/slide61.xml",
+    "texts": [
+      "شاخصهای عملکردی کنترل عفونت",
+      "دريك نگاه",
+      "سالهای 1405-1404"
+    ],
+    "tables": [],
+    "charts": [],
+    "images": [
+      "../media/image2.png",
+      "../media/image11.jpg"
+    ]
+  },
+  {
+    "slide_num": 62,
+    "slide_path": "ppt/slides/slide62.xml",
+    "texts": [
+      "سه ماهه دوم 1404",
+      "ميانگين كل 1404"
+    ],
+    "tables": [],
+    "charts": [
+      "../charts/chart57.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 63,
+    "slide_path": "ppt/slides/slide63.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart58.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 64,
+    "slide_path": "ppt/slides/slide64.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart59.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 65,
+    "slide_path": "ppt/slides/slide65.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart60.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 66,
+    "slide_path": "ppt/slides/slide66.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart61.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 67,
+    "slide_path": "ppt/slides/slide67.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart62.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 68,
+    "slide_path": "ppt/slides/slide68.xml",
+    "texts": [
+      "اقدامات اصلاحی جهت کاهش مواجهه شغلی کارکنان",
+      "هدف :",
+      "کاهش",
+      "",
+      "0/2%",
+      "درصد",
+      "موارد مواجهات",
+      "شغلی",
+      "1-آموزش گروهی وچهره به چهره چگونگی",
+      "جمع",
+      "آوری",
+      "اجسام",
+      "تیز و برنده",
+      "وتزریقات ایمن",
+      "",
+      "2-ارزیابی ونظارت مستمرکارکنان توسط مسئولین وسوپروایزران براساس چک لیست تزریقات ایمن"
+    ],
+    "tables": [],
+    "charts": [],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 69,
+    "slide_path": "ppt/slides/slide69.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart63.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 70,
+    "slide_path": "ppt/slides/slide70.xml",
+    "texts": [
+      "شاخصهای عملکردی آموزش به بیمار",
+      "",
+      "دريك نگاه",
+      "سالهای 1405-1404"
+    ],
+    "tables": [],
+    "charts": [],
+    "images": [
+      "../media/image2.png",
+      "../media/image12.jfif"
+    ]
+  },
+  {
+    "slide_num": 71,
+    "slide_path": "ppt/slides/slide71.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart64.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 72,
+    "slide_path": "ppt/slides/slide72.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart65.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 73,
+    "slide_path": "ppt/slides/slide73.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart66.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 74,
+    "slide_path": "ppt/slides/slide74.xml",
+    "texts": [
+      "شاخصهای آموزش کارکنان دريك نگاه",
+      "سالهای 1405-1404"
+    ],
+    "tables": [],
+    "charts": [],
+    "images": [
+      "../media/image2.png",
+      "../media/image13.jpg"
+    ]
+  },
+  {
+    "slide_num": 75,
+    "slide_path": "ppt/slides/slide75.xml",
+    "texts": [],
+    "tables": [],
+    "charts": [
+      "../charts/chart67.xml"
+    ],
+    "images": [
+      "../media/image2.png"
+    ]
+  },
+  {
+    "slide_num": 76,
+    "slide_path": "ppt/slides/slide76.xml",
+    "texts": [
+      "ازتوجه شما عزیزان سپاسگزاریم",
+      "به امیدارتقاء شاخصها درسالهای آتی"
+    ],
+    "tables": [],
+    "charts": [],
+    "images": [
+      "../media/image2.png",
+      "../media/image14.jpg"
+    ]
+  }
+]

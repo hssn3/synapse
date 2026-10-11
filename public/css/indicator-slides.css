@@ -1,0 +1,1273 @@
+/**
+ * Indicator Presentation Slides & Hospital KPIs Stylesheet (1404-1405)
+ * Project 313 — Zero Vertical Stacking, High-Fidelity Presentation
+ * Luxury Health-Tech Theme (Emerald, Gold, Cyan, Sapphire, Coral, Purple, Amber)
+ */
+
+:root {
+  --islide-bg-glass: rgba(10, 24, 18, 0.78);
+  --islide-card-bg: linear-gradient(145deg, rgba(12, 31, 23, 0.88) 0%, rgba(6, 17, 12, 0.96) 100%);
+  --islide-border-gold: rgba(212, 175, 90, 0.28);
+  --islide-border-emerald: rgba(16, 185, 129, 0.35);
+  --islide-glow-cyan: rgba(56, 189, 248, 0.35);
+}
+
+.islide-container {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: 100%;
+}
+
+/* ==========================================================================
+   ۱. کارت‌های کلان مدیریتی ۶‌گانه (Executive KPI Cards Deck)
+   ========================================================================== */
+.islide-kpi-summary-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 14px;
+  width: 100%;
+}
+
+.islide-kpi-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(14, 34, 25, 0.82) 0%, rgba(8, 20, 15, 0.95) 100%);
+  border: 1.5px solid var(--kpi-border, rgba(212, 175, 90, 0.25));
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45), 0 0 20px var(--kpi-glow, rgba(16, 185, 129, 0.12));
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.islide-kpi-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--kpi-col, #38bdf8), transparent);
+  opacity: 0.8;
+}
+
+.islide-kpi-card:hover {
+  transform: translateY(-3px) scale(1.01);
+  border-color: var(--kpi-col, #38bdf8);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6), 0 0 30px var(--kpi-glow, rgba(56, 189, 248, 0.3));
+}
+
+.islide-kpi-card .kpi-icon {
+  font-size: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.12), rgba(0, 0, 0, 0.5));
+  border: 1px solid var(--kpi-col, #38bdf8);
+  box-shadow: 0 0 16px var(--kpi-glow, rgba(56, 189, 248, 0.35));
+  flex-shrink: 0;
+}
+
+.islide-kpi-card .kpi-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.islide-kpi-card .kpi-title {
+  font-size: 12px;
+  color: #94a3b8;
+  font-weight: 700;
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.islide-kpi-card .kpi-val {
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--kpi-col, #f8fafc);
+  line-height: 1.2;
+  font-feature-settings: 'ss01', 'ss02';
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.islide-kpi-card .kpi-unit {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #94a3b8;
+}
+
+.islide-kpi-card .kpi-sub {
+  font-size: 11px;
+  color: #cbd5e1;
+  margin-top: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.islide-kpi-card .kpi-trend-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 1px 7px;
+  border-radius: 6px;
+  font-size: 10.5px;
+  font-weight: 800;
+  background: rgba(16, 185, 129, 0.18);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.35);
+}
+
+/* ==========================================================================
+   ۲. نوار کنترل و تب‌های ابزار (Toolbar & Topbar)
+   ========================================================================== */
+.islide-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 18px 24px;
+  border-radius: 20px;
+  border: 1.5px solid var(--islide-border-gold);
+  background: linear-gradient(145deg, rgba(14, 36, 27, 0.9) 0%, rgba(7, 18, 14, 0.96) 100%);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.islide-header-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.islide-badge-chip {
+  align-self: flex-start;
+  font-size: 11.5px;
+  font-weight: 800;
+  padding: 3px 12px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(212, 175, 90, 0.2), rgba(16, 185, 129, 0.18));
+  color: #fce7b0;
+  border: 1px solid rgba(212, 175, 90, 0.45);
+  box-shadow: 0 0 12px rgba(212, 175, 90, 0.25);
+}
+
+.islide-page-title {
+  font-size: 21px;
+  font-weight: 900;
+  color: #ffffff;
+  margin: 2px 0 0 0;
+  letter-spacing: -0.3px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.islide-page-sub {
+  font-size: 12.5px;
+  color: #94b2a5;
+  line-height: 1.6;
+}
+
+.islide-top-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.islide-search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.islide-search-box input {
+  padding: 8px 16px 8px 36px;
+  border-radius: 12px;
+  background: rgba(6, 17, 12, 0.85);
+  border: 1.5px solid rgba(212, 175, 90, 0.3);
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 13px;
+  width: 200px;
+  transition: all 0.25s ease;
+  outline: none;
+}
+
+.islide-search-box input:focus {
+  border-color: #d4af5a;
+  width: 260px;
+  box-shadow: 0 0 16px rgba(212, 175, 90, 0.35);
+  background: rgba(10, 26, 18, 0.95);
+}
+
+.islide-search-box .search-icon-hint {
+  position: absolute;
+  left: 12px;
+  color: #d4af5a;
+  font-size: 14px;
+  pointer-events: none;
+}
+
+.btn-group {
+  display: inline-flex;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(212, 175, 90, 0.3);
+  background: rgba(8, 20, 15, 0.8);
+  padding: 2px;
+  gap: 2px;
+}
+
+.btn-group .btn {
+  border-radius: 9px !important;
+  border: none !important;
+  padding: 7px 13px !important;
+  font-size: 12.5px !important;
+  font-weight: 700 !important;
+  color: #cbd5e1 !important;
+  background: transparent !important;
+  transition: all 0.2s ease !important;
+}
+
+.btn-group .btn:hover {
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+.btn-group .btn.btn-active {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 10px rgba(16, 185, 129, 0.45) !important;
+}
+
+/* ==========================================================================
+   ۳. نوار فیلتر سرفصل‌های هفت‌گانه (Horizontal RTL Flow)
+   ========================================================================== */
+.islide-sections-bar {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 4px 4px 10px 4px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(212, 175, 90, 0.4) rgba(10, 26, 18, 0.6);
+  -webkit-overflow-scrolling: touch;
+}
+
+.islide-sec-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 18px;
+  border-radius: 14px;
+  border: 1.5px solid rgba(148, 163, 184, 0.18);
+  background: rgba(12, 28, 21, 0.75);
+  color: #cbd5e1;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+
+.islide-sec-tab:hover {
+  background: rgba(18, 44, 33, 0.9);
+  color: #ffffff;
+  border-color: var(--theme-col, #38bdf8);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45), 0 0 15px var(--theme-col, rgba(56, 189, 248, 0.25));
+}
+
+.islide-sec-tab.on {
+  background: linear-gradient(135deg, rgba(16, 38, 29, 0.98), rgba(9, 22, 17, 0.98));
+  color: #ffffff;
+  border-color: var(--theme-col, #38bdf8);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55), 0 0 20px var(--theme-col, rgba(56, 189, 248, 0.4));
+  transform: translateY(-1px);
+}
+
+.islide-sec-tab .sec-cnt {
+  font-size: 11.5px;
+  padding: 2px 7px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.35);
+  color: var(--theme-col, #38bdf8);
+  font-weight: 800;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ==========================================================================
+   ۴. کارت پرزنتیشن اسلایدر (The Presentation Card)
+   ========================================================================== */
+.islide-player-card {
+  padding: 24px 28px;
+  border-radius: 22px;
+  border: 1.5px solid var(--card-border, rgba(56, 189, 248, 0.4));
+  background: linear-gradient(150deg, rgba(14, 36, 27, 0.94) 0%, rgba(6, 17, 12, 0.98) 100%);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), 0 0 35px var(--card-glow, rgba(56, 189, 248, 0.15));
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.islide-player-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 20%;
+  right: 20%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--card-border, #38bdf8), transparent);
+}
+
+.islide-nav-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(212, 175, 90, 0.2);
+}
+
+.islide-meta-tags {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.islide-sec-tag {
+  font-size: 12px;
+  font-weight: 800;
+  padding: 4px 12px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.islide-num-tag {
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff0c7;
+  background: rgba(212, 175, 90, 0.15);
+  border: 1px solid rgba(212, 175, 90, 0.35);
+  padding: 4px 10px;
+  border-radius: 8px;
+}
+
+.islide-unit-tag {
+  font-size: 12px;
+  color: #6ee7b7;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-weight: 700;
+}
+
+.islide-accred-badge {
+  font-size: 12px;
+  font-weight: 800;
+  padding: 4px 12px;
+  border-radius: 8px;
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #fca5a5;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.islide-nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: nowrap;
+}
+
+.islide-progress-pill {
+  width: 140px;
+  display: flex;
+  align-items: center;
+}
+
+.islide-progress-pill input[type="range"] {
+  width: 100%;
+  accent-color: #10b981;
+  cursor: pointer;
+  height: 6px;
+  border-radius: 4px;
+}
+
+.islide-play-btn.on {
+  background: linear-gradient(135deg, #f59e0b, #d97706) !important;
+  color: #050d09 !important;
+  border-color: #f59e0b !important;
+  box-shadow: 0 0 16px rgba(245, 158, 11, 0.5) !important;
+  font-weight: 900 !important;
+}
+
+/* ==========================================================================
+   ۵. عنوان و نوار متری‌های اجرایی اسلاید (Executive Indicator Strip)
+   ========================================================================== */
+.islide-title-box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.islide-title-badge {
+  align-self: flex-start;
+  font-size: 11.5px;
+  font-weight: 800;
+  color: #d4af5a;
+  background: rgba(212, 175, 90, 0.15);
+  padding: 2px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(212, 175, 90, 0.3);
+}
+
+.islide-main-title {
+  font-size: 20px;
+  font-weight: 900;
+  margin: 0;
+  line-height: 1.45;
+  letter-spacing: -0.3px;
+}
+
+.islide-text-banner {
+  padding: 10px 16px;
+  border-radius: 10px;
+  background: rgba(8, 20, 15, 0.7);
+  border-right: 4px solid var(--card-border, #38bdf8);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  color: #cbd5e1;
+  font-size: 13.5px;
+  line-height: 1.7;
+}
+
+/* نوار متری‌های ۴‌گانه خلاصه عملکرد این شاخص */
+.islide-exec-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin: 4px 0 6px 0;
+}
+
+.islide-metric-pill {
+  padding: 12px 16px;
+  border-radius: 14px;
+  background: rgba(8, 22, 16, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  position: relative;
+  overflow: hidden;
+}
+
+.islide-metric-pill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--m-color, #10b981);
+}
+
+.islide-metric-pill .m-label {
+  font-size: 11.5px;
+  color: #94b2a5;
+  font-weight: 700;
+}
+
+.islide-metric-pill .m-value {
+  font-size: 18px;
+  font-weight: 900;
+  color: #ffffff;
+  font-feature-settings: 'ss01', 'ss02';
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.islide-metric-pill .m-value span.sub {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--m-color, #10b981);
+}
+
+.islide-metric-pill .m-detail {
+  font-size: 11px;
+  color: #cbd5e1;
+}
+
+/* ==========================================================================
+   ۶. نمودار SVG مقایسه‌ای و پالت رنگی (Visual SVG Chart)
+   ========================================================================== */
+.islide-chart-viewport {
+  width: 100%;
+  background: radial-gradient(circle at 50% 0%, rgba(16, 44, 32, 0.6), rgba(6, 17, 12, 0.95));
+  border-radius: 18px;
+  border: 1px solid rgba(212, 175, 90, 0.22);
+  padding: 18px 24px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 10px 30px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+.islide-chart-controls-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.islide-legend-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.islide-legend-bar .leg-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #e2e8f0;
+}
+
+.islide-legend-bar .leg-dot {
+  width: 13px;
+  height: 13px;
+  border-radius: 4px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+}
+
+.islide-chart-filter-pills {
+  display: flex;
+  gap: 6px;
+}
+
+.islide-chart-filter-btn {
+  padding: 4px 11px;
+  border-radius: 8px;
+  font-size: 11.5px;
+  font-weight: 700;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  background: rgba(15, 33, 24, 0.7);
+  color: #94b2a5;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.islide-chart-filter-btn:hover {
+  color: #ffffff;
+  border-color: #38bdf8;
+}
+
+.islide-chart-filter-btn.active {
+  background: rgba(56, 189, 248, 0.2);
+  border-color: #38bdf8;
+  color: #38bdf8;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.25);
+}
+
+.islide-svg-wrap {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.islide-svg {
+  width: 100%;
+  height: auto;
+  min-height: 330px;
+  max-height: 440px;
+  display: block;
+}
+
+.chart-bar {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+
+.chart-bar:hover {
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.6)) brightness(1.15);
+  transform: translateY(-2px);
+}
+
+.chart-target-line {
+  stroke-dasharray: 5, 4;
+  animation: laserTrack 20s linear infinite;
+}
+
+/* ==========================================================================
+   ۷. کارت‌های تحلیل بالینی، اقدامات اصلاحی و اعتباربخشی
+   ========================================================================== */
+.islide-insights-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 14px;
+  margin-top: 4px;
+  width: 100%;
+}
+
+.islide-insight-card {
+  padding: 16px 20px;
+  border-radius: 16px;
+  border: 1px solid rgba(212, 175, 90, 0.2);
+  background: rgba(10, 26, 19, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.islide-insight-card.analysis {
+  border-right: 4px solid #38bdf8;
+  background: linear-gradient(135deg, rgba(8, 28, 38, 0.8) 0%, rgba(6, 18, 14, 0.9) 100%);
+}
+
+.islide-insight-card.corrective {
+  border-right: 4px solid #f59e0b;
+  background: linear-gradient(135deg, rgba(38, 28, 8, 0.8) 0%, rgba(6, 18, 14, 0.9) 100%);
+}
+
+.islide-insight-card.strategic {
+  border-right: 4px solid #10b981;
+  background: linear-gradient(135deg, rgba(10, 36, 24, 0.8) 0%, rgba(6, 18, 14, 0.9) 100%);
+}
+
+.islide-insight-card.accreditation {
+  border-right: 4px solid #a855f7;
+  background: linear-gradient(135deg, rgba(30, 16, 44, 0.8) 0%, rgba(6, 18, 14, 0.9) 100%);
+}
+
+.islide-insight-card .ins-title {
+  font-size: 13.5px;
+  font-weight: 800;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.islide-insight-card .ins-body {
+  font-size: 13px;
+  line-height: 1.8;
+  color: #c7dbd2;
+}
+
+/* ==========================================================================
+   ۸. جدول مقایسه‌ای عددی و بج‌های انحراف (Table & Delta Badges)
+   ========================================================================== */
+.islide-table-section {
+  margin-top: 6px;
+  background: rgba(8, 20, 15, 0.75);
+  border-radius: 18px;
+  border: 1px solid rgba(212, 175, 90, 0.22);
+  padding: 18px 22px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.islide-table-hd {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.islide-table-hd .hd-title {
+  font-size: 14.5px;
+  font-weight: 800;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.islide-table-wrap {
+  overflow-x: auto;
+  border-radius: 14px;
+  border: 1px solid rgba(212, 175, 90, 0.2);
+  -webkit-overflow-scrolling: touch;
+}
+
+.islide-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: right;
+  font-size: 13px;
+}
+
+.islide-table th {
+  padding: 12px 16px;
+  background: rgba(14, 36, 27, 0.95);
+  color: #cbd5e1;
+  font-weight: 800;
+  border-bottom: 2px solid rgba(212, 175, 90, 0.35);
+}
+
+.islide-table th.th-1404 {
+  color: #38bdf8;
+}
+
+.islide-table th.th-1405 {
+  color: #f59e0b;
+}
+
+.islide-table th.th-diff {
+  color: #34d399;
+}
+
+.islide-table td {
+  padding: 10px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  color: #f1f5f9;
+}
+
+.islide-table tr:hover td {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* سطرهای فصول سه‌ماهه */
+.islide-table .tr-summary td {
+  background: rgba(16, 185, 129, 0.12) !important;
+  font-weight: 800 !important;
+  color: #34d399 !important;
+  border-top: 1.5px solid rgba(16, 185, 129, 0.35);
+  border-bottom: 1.5px solid rgba(16, 185, 129, 0.35);
+}
+
+/* سطر جمع کل سالانه */
+.islide-table .tr-annual td {
+  background: linear-gradient(90deg, rgba(212, 175, 90, 0.2), rgba(16, 185, 129, 0.15)) !important;
+  font-weight: 900 !important;
+  color: #fff0c7 !important;
+  border-top: 2px solid var(--islide-border-gold);
+  border-bottom: 2px solid var(--islide-border-gold);
+  font-size: 14px;
+}
+
+.islide-table .td-period {
+  font-weight: 700;
+}
+
+.islide-table .td-val {
+  font-family: inherit;
+  font-size: 13.5px;
+  font-feature-settings: 'ss01', 'ss02';
+  font-weight: 700;
+}
+
+.islide-table .val-1404 {
+  color: #38bdf8;
+}
+
+.islide-table .val-1405 {
+  color: #f59e0b;
+}
+
+/* بج‌های انحراف و تغییرات عملکرد */
+.diff-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 800;
+  font-feature-settings: 'ss01', 'ss02';
+}
+
+.diff-good {
+  background: rgba(16, 185, 129, 0.18);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
+}
+
+.diff-warn {
+  background: rgba(239, 68, 68, 0.18);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.2);
+}
+
+.diff-stable {
+  background: rgba(56, 189, 248, 0.15);
+  color: #7dd3fc;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+}
+
+.diff-neutral {
+  background: rgba(148, 163, 184, 0.12);
+  color: #94a3b8;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+}
+
+/* ==========================================================================
+   ۹. نمای اسلاید شماره ۱ (Cover Slide 1)
+   ========================================================================== */
+.islide-cover-hero {
+  padding: 40px 32px;
+  text-align: center;
+  background: radial-gradient(circle at center top, rgba(16, 185, 129, 0.15) 0%, rgba(6, 17, 12, 0.8) 70%);
+  border-radius: 18px;
+}
+
+.cover-badge {
+  display: inline-block;
+  padding: 5px 18px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(212, 175, 90, 0.22), rgba(16, 185, 129, 0.2));
+  color: #fff0c7;
+  font-size: 13px;
+  font-weight: 800;
+  margin-bottom: 14px;
+  border: 1px solid rgba(212, 175, 90, 0.4);
+  box-shadow: 0 0 16px rgba(212, 175, 90, 0.25);
+}
+
+.cover-title {
+  font-size: 32px;
+  font-weight: 900;
+  color: #ffffff;
+  margin: 0 0 8px 0;
+  letter-spacing: -0.5px;
+}
+
+.cover-years {
+  font-size: 18px;
+  font-weight: 700;
+  color: #d4af5a;
+  margin: 0 0 14px 0;
+}
+
+.cover-desc {
+  max-width: 740px;
+  margin: 0 auto 30px;
+  font-size: 14px;
+  line-height: 1.85;
+  color: #c7dbd2;
+}
+
+.cover-sections-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 14px;
+  max-width: 980px;
+  margin: 0 auto 32px;
+}
+
+.cover-sec-item {
+  padding: 18px;
+  border-radius: 16px;
+  background: rgba(12, 28, 20, 0.85);
+  border: 1.5px solid var(--c-col, #38bdf8);
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.cover-sec-item:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.6), 0 0 25px var(--c-col, rgba(56, 189, 248, 0.35));
+}
+
+.cover-sec-item .cs-icon {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.cover-sec-item .cs-title {
+  font-size: 13.5px;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.cover-sec-item .cs-count {
+  font-size: 12px;
+  color: var(--c-col, #38bdf8);
+  font-weight: 700;
+}
+
+.cover-action-bar {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* ==========================================================================
+   ۱۰. گالری شاخص‌ها (Grid Gallery View - 76 Cards)
+   ========================================================================== */
+.islide-grid-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.islide-grid-hd {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14.5px;
+  font-weight: 800;
+  color: #ffffff;
+  padding: 4px 6px;
+}
+
+.islide-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.islide-grid-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 18px 20px;
+  border-radius: 16px;
+  background: linear-gradient(145deg, rgba(14, 34, 25, 0.85) 0%, rgba(7, 18, 14, 0.95) 100%);
+  border: 1.5px solid var(--card-border, rgba(56, 189, 248, 0.3));
+  cursor: pointer;
+  min-height: 160px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.islide-grid-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--card-border, #38bdf8);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6), 0 0 24px var(--card-border, rgba(56, 189, 248, 0.25));
+}
+
+.islide-grid-card .card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.islide-grid-card .card-sec-badge {
+  font-size: 11px;
+  font-weight: 800;
+  padding: 3px 9px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.islide-grid-card .card-num-badge {
+  font-size: 12px;
+  color: #d4af5a;
+  font-weight: 800;
+  background: rgba(212, 175, 90, 0.14);
+  padding: 2px 7px;
+  border-radius: 6px;
+  border: 1px solid rgba(212, 175, 90, 0.25);
+}
+
+.islide-grid-card .card-title {
+  font-size: 14px;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.5;
+  margin: 0 0 8px 0;
+  flex: 1;
+}
+
+.islide-grid-card .card-sub {
+  font-size: 12px;
+  color: #94b2a5;
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.islide-grid-card .card-metrics-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0 10px 0;
+  font-size: 12px;
+}
+
+.islide-grid-card .card-metrics-row .cm-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.islide-grid-card .card-metrics-row .cm-lbl {
+  font-size: 10.5px;
+  color: #94a3b8;
+}
+
+.islide-grid-card .card-metrics-row .cm-val {
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.islide-grid-card .card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 10px;
+}
+
+/* ==========================================================================
+   ۱۱. ابزار ورود داده و ویرایش اکسل (Excel Editor Mode)
+   ========================================================================== */
+.islide-editor-container {
+  padding: 24px 28px;
+  border-radius: 20px;
+  border: 1.5px solid var(--islide-border-gold);
+  background: linear-gradient(150deg, rgba(14, 36, 27, 0.94) 0%, rgba(7, 18, 14, 0.98) 100%);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+}
+
+.editor-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(212, 175, 90, 0.2);
+}
+
+.editor-select-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.editor-select-box select {
+  max-width: 460px;
+  padding: 9px 16px;
+  border-radius: 12px;
+  background: rgba(6, 17, 12, 0.9);
+  border: 1.5px solid rgba(212, 175, 90, 0.35);
+  color: #ffffff;
+  font-size: 13.5px;
+  font-weight: 700;
+  outline: none;
+}
+
+.editor-quick-helpers {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: rgba(6, 18, 13, 0.7);
+  border: 1px dashed rgba(212, 175, 90, 0.25);
+  align-items: center;
+}
+
+.editor-helper-btn {
+  padding: 5px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  background: rgba(16, 185, 129, 0.15);
+  color: #6ee7b7;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.editor-helper-btn:hover {
+  background: rgba(16, 185, 129, 0.3);
+  color: #ffffff;
+}
+
+.islide-editor-table input.form-ctrl {
+  padding: 7px 12px;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-family: inherit;
+  font-weight: 700;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.islide-editor-table .input-readonly {
+  background: rgba(6, 18, 13, 0.6);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  color: #38bdf8;
+}
+
+.islide-editor-table .input-editable {
+  background: rgba(12, 28, 20, 0.9);
+  border: 1.5px solid rgba(245, 158, 11, 0.5);
+  color: #fbbf24;
+}
+
+.islide-editor-table .input-editable:focus {
+  border-color: #f59e0b;
+  box-shadow: 0 0 14px rgba(245, 158, 11, 0.4);
+  background: rgba(20, 44, 30, 0.95);
+  outline: none;
+}
+
+.editor-actions-row {
+  display: flex;
+  gap: 14px;
+  margin-top: 24px;
+  justify-content: flex-start;
+}
+
+/* ==========================================================================
+   ۱۲. واکنش‌گرایی در نسخه موبایل و تبلت (Responsive Breakpoints)
+   ========================================================================== */
+@media (max-width: 768px) {
+  .islide-kpi-summary-row {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .islide-kpi-card {
+    padding: 12px 14px;
+    border-radius: 14px;
+  }
+  .islide-kpi-card .kpi-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+  .islide-kpi-card .kpi-val {
+    font-size: 18px;
+  }
+  .islide-topbar {
+    padding: 14px 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .islide-page-title {
+    font-size: 17px;
+  }
+  .islide-top-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .islide-search-box {
+    width: 100%;
+  }
+  .islide-search-box input {
+    width: 100% !important;
+  }
+  .btn-group {
+    width: 100%;
+    overflow-x: auto;
+  }
+  .islide-player-card {
+    padding: 16px 14px;
+    border-radius: 16px;
+  }
+  .islide-main-title {
+    font-size: 16px;
+  }
+  .islide-exec-strip {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  .islide-metric-pill {
+    padding: 10px 12px;
+  }
+  .islide-metric-pill .m-value {
+    font-size: 15px;
+  }
+  .islide-chart-viewport {
+    padding: 12px 14px;
+  }
+  .islide-insights-row {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .islide-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  .cover-title {
+    font-size: 24px;
+  }
+}
+
+@media print {
+  @page {
+    size: landscape;
+  }
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+  
+  body, .content-wrapper, main {
+    background: #070d19 !important;
+  }
+  
+  .side, .top, .islide-topbar, .islide-sections-bar, #ghdr, #gftr, .floatdock, .assist-btn,
+  .islide-kpi-summary-row, .islide-nav-controls, .islide-chart-filter-pills, .btn, .btn-group {
+    display: none !important;
+  }
+  
+  .islide-container { display: block !important; }
+  
+  .islide-player-card { 
+    page-break-after: always; 
+    break-after: page; 
+    margin-bottom: 0; 
+  }
+  
+  .islide-svg { min-height: 260px !important; }
+}
+
+#islideContainer:fullscreen {
+  overflow-y: auto;
+  height: 100vh;
+  background: #070d19;
+  padding: 24px;
+  box-sizing: border-box;
+}

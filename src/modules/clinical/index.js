@@ -1,0 +1,10 @@
+const express = require('express');
+const router = express.Router();
+router.use(require('./nursing-hierarchy.routes'));
+router.use(require('./head-nurse.routes'));
+router.use(require('./shift-staff.routes'));
+router.use(require('./shift-schedule.routes'));
+router.use(require('./shift-attendance.routes'));
+router.use(require('./training-needs.routes'));
+router.use(require('./clinical-safety.routes'));
+module.exports = router;
