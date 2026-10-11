@@ -2093,6 +2093,10 @@ html[data-theme="light"] .dock-btn.gold{
   .rep-paper .cmp-svg-wrap{overflow:visible!important}
   .rep-paper .cmp-pie{display:block}
   .rep-paper .cmp-pie .cmp-svg-wrap{flex:none;max-width:320px;margin:0 auto}
+  /* متنِ محورهای نمودار با fill="var(--td)" می‌آید که در تم تیره روشن است و روی
+     کاغذ سفید کم‌رنگ می‌افتد — همان خانواده‌ی باگ فلوچارت. فقط در چاپ تیره می‌شود؛
+     برچسب‌های رنگی داده (fill صریح) دست‌نخورده می‌مانند. */
+  .rep-paper text[fill="var(--td)"]{fill:#334155!important}
 }
 
 /* ---------- ۴۳. کنترل‌های پنل مقایسه ---------- */
