@@ -34,15 +34,20 @@
 - JWT guard → دو تست دستی بالا (ضعیف رد شد؛ قوی قبول شد).
 - integrity اسنپ‌شات جدید → باز شد؛ 1 بیمارستان / 62 کاربر / 520 سنجه؛ کلید صفر.
 
+## کارهای انجام‌شده — دسته دوم (کامیت `c80c018`)
+- [x] سند `docs/HANDOVER-COMPLETE.md` جدید از وضعیت واقعی مخزن + `docs/AUDIT.md` + `docs/DECISIONS.md` + `docs/REQUIREMENTS.md`.
+- [x] AGENTS.md: ارجاعات اسناد گمشده اصلاح شد؛ اعداد مقیاس به‌روز شد؛ بخش «وضعیت جاری» بازنویسی شد؛ سیاست push مطابق مجوز جدید.
+- [x] `public/sw.js` نسخه v13 + پیام `CLEAR_SHELL`: کش پوسته هنگام logout پاک می‌شود (دستگاه مشترک بیمارستانی).
+- [x] `scripts/split_backend_monolith.js` → `scripts/archive/` + README توضیحی (ابزار شکسته/بی‌مصرف).
+- [x] `.freebuff/` از مخزن حذف و به `.gitignore` اضافه شد.
+- [x] تست logout در مرورگر واقعی برای ۳ نقش: `logout-ok`، تب‌بار و app-shell هر دو پاک می‌شوند.
+
 ## کارهای بعدی (به ترتیب)
-1. [ ] commit این دسته امنیتی + تست‌های دوباره (smoke/eval) → push.
-2. [ ] رسیدگی به `scripts/split_backend_monolith.js` (ابزار یک‌بارمصرف با requireهای شکسته — تصمیم: حذف یا فرستادن به `scripts/archive/`).
-3. [ ] مستندات گمشده‌ی AGENTS.md: تصمیم بین «به‌روزرسانی مسیرها به اسناد موجود» یا «احیای خلاصهdocs/HANDOVER-COMPLETE.md» — تصمیم در docs/DECISIONS.md.
-4. [ ] `.freebuff/project-id` — حذف از مخزن (بی‌مصرف).
-5. [ ] LICENSE — افزودن متن مجوز (نیاز تصمیم کارفرما: کدام مجوز).
-6. [ ] endpoint `reports/dashboard` → 404 (مشکوک؛ بررسی اینکه رابط به آن نیاز دارد یا نه).
-7. [ ] تست‌های ماجراجویانه Master Prompt: IDOR، privilege escalation، revoked-mid-session (بخشی هست؛ افزودن تست‌های صریح).
-8. [ ] PWA: بازبینی `sw.js` (کش استاتیک ok؛ clear on logout اضافه شود).
+1. [ ] revoke کلید Gemini توسط مالک (اقدام انسانی خارج از محیط).
+2. [ ] تست خودکار ماتریس per-endpoint مجاز/ممنوع بدون UI (IDOR/privilege escalation صریح) — افزودن به tests/.
+3. [ ] تصمیم دیپلوی production (provider) + چک‌لیست سخت‌سازی استقرار.
+4. [ ] LICENSE (تصمیم کارفرما).
+5. [ ] Lighthouse/a11y عددی در محیطی با Chromium کامل.
 
 ## Blockers / Notes
 - تونل‌های Quick موقتی‌اند؛ با هر restart آدرس عوض می‌شود.
