@@ -1,0 +1,81 @@
+# =====================================================================
+# CI — اجرای خودکار تست‌ها روی هر push/PR
+# ---------------------------------------------------------------------
+# چرا این فایل: مخزن تا ۱۴۰۵/۰۷/۲۰ هیچ CI نداشت و هر تغییر دستی تست می‌شد.
+# این workflow همان مجموعه‌ای را اجرا می‌کند که توسعه‌دهنده محلی اجرا می‌کند:
+#  ۱) تست‌های آفلاین (unit, integration, rbac-matrix, form-engine, guardrails)
+#  ۲) بوت سرور روی دیتابیس دموی مخزن (demo-restore)
+#  ۳) smoke + ماتریس per-endpoint RBAC + evalهای دستیار
+#
+# نکته امنیتی: هیچ رازی لازم نیست — دیتابیس دموی ساختگی داخل خود مخزن است
+# و JWT_SECRET فقط برای همین اجرای موقت CI ساخته می‌شود (نه، در لاگ چاپ نمی‌شود).
+# =====================================================================
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch: {}
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Tests (Node 22)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    env:
+      NODE_ENV: development
+      PORT: 3311
+      SMOKE_BASE_URL: http://127.0.0.1:3311
+      # راز موقتِ CI — فقط برای این اجرا؛ نه در لاگ چاپ می‌شود نه کامیت.
+      JWT_SECRET: ci-only-secret-6f2a1c0d94b7e358a1f6c2d50e9b4a77
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --omit=dev=false
+
+      - name: Restore demo snapshot (synthetic data)
+        run: npm run demo-restore -- --force
+
+      - name: Offline test suites (unit/integration/rbac/forms/guardrails)
+        run: |
+          node --test tests/unit.test.js tests/integration.test.js tests/rbac-matrix.test.js tests/form-engine.test.js tests/assistant-guardrails.test.js
+
+      - name: Start server (background)
+        run: |
+          nohup node src/app.js > server.log 2>&1 &
+          for i in $(seq 1 45); do
+            if curl -fsS "$SMOKE_BASE_URL/healthz" >/dev/null 2>&1; then echo "server up after ${i}s"; break; fi
+            sleep 1
+          done
+          curl -fsS "$SMOKE_BASE_URL/healthz"
+
+      - name: Smoke test (6 probes)
+        run: node scripts/smoke-test.js
+
+      - name: RBAC endpoint matrix (no UI)
+        run: node --test tests/rbac-endpoint-matrix.test.js
+
+      - name: Assistant evals (retrieval 21 + response 10)
+        run: |
+          node tests/assistant-retrieval-eval.js
+          node tests/assistant-response-eval.js
+
+      - name: Server log on failure
+        if: failure()
+        run: tail -n 120 server.log
