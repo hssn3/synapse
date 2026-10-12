@@ -54,16 +54,23 @@
   (rotation کلید، retention، بکاپ، ناشناسی گزارش‌دهنده).
 - [x] **docs/DEPLOYMENT-CHECKLIST.md**: چک‌لیست کامل استقرار/بازگردانی برای provider آینده.
 
+## کارهای انجام‌شده — دسته چهارم (کامیت‌های `7306257` → `e55d1d2`)
+- [x] **CI راه افتاد (GitHub Actions):** `.github/workflows/ci.yml` — روی هر push/PR:
+  نصب → demo-restore → بوت سرور (زنجیره seed) → ۵ سوئیت آفلاین → smoke → ماتریس RBAC → evalهای دانا.
+  اجرای اول با باگ ترتیب شکست خورد (`no such table: forms`)؛ ریشه: اسنپ‌شات دمو جداول جدیدتر را
+  ندارد و فقط بوت سرور می‌سازد → ترتیب اصلاح شد (بوت قبل از تست‌ها) → **اجرای دوم: تمام مراحل سبز**
+  (Run ID 38239943115، commit `e55d1d2`).
+
 ## کارهای بعدی (به ترتیب)
 1. [ ] **revoke کلید Gemini توسط مالک** (اقدام انسانی خارج از محیط — بالاترین اولویت).
 2. [ ] تصمیم دیپلوی production (provider) — چک‌لیست آماده در `docs/DEPLOYMENT-CHECKLIST.md`.
 3. [ ] LICENSE — نیاز به تصمیم کارفرما (سند SECURITY توضیح داده).
 4. [ ] Lighthouse/a11y عددی در محیطی با Chromium کامل (اینجا ابزار نبود → not measured).
-5. [ ] (اختیاری) GitHub Actions برای اجرای harness در هر push — مخزن فعلاً CI ندارد.
-6. [ ] (اختیاری) حذف تدریجی `unsafe-inline` از CSP (مهاجرت onclick → addEventListener).
+5. [ ] (اختیاری/بلندمدت) حذف تدریجی `unsafe-inline` از CSP (مهاجرت onclick → addEventListener).
 
 ## آخرین وضعیت تأییدشده (1405/07/20)
 - harness ۷/۷ سوئیت سبز: rbac-matrix 14/14 · form-engine 6/6 · guardrails 6/6 ·
   retrieval 21/21 · response 10/10 · smoke 6/6 · endpoint-matrix 15/15.
 - `npm audit --omit=dev`: **0 vulnerabilities**.
-- HEAD: `90bee32` (origin/main همگام).
+- **CI سبز روی GitHub Actions** (اجرای دوم بعد از اصلاح ترتیب — Run 38239943115).
+- HEAD: `e55d1d2` (origin/main همگام؛ پس از این فقط همین به‌روزرسانی PROGRESS).
