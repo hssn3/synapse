@@ -2,13 +2,17 @@
 # CI — اجرای خودکار تست‌ها روی هر push/PR
 # ---------------------------------------------------------------------
 # چرا این فایل: مخزن تا ۱۴۰۵/۰۷/۲۰ هیچ CI نداشت و هر تغییر دستی تست می‌شد.
-# این workflow همان مجموعه‌ای را اجرا می‌کند که توسعه‌دهنده محلی اجرا می‌کند:
-#  ۱) تست‌های آفلاین (unit, integration, rbac-matrix, form-engine, guardrails)
-#  ۲) بوت سرور روی دیتابیس دموی مخزن (demo-restore)
-#  ۳) smoke + ماتریس per-endpoint RBAC + evalهای دستیار
 #
-# نکته امنیتی: هیچ رازی لازم نیست — دیتابیس دموی ساختگی داخل خود مخزن است
-# و JWT_SECRET فقط برای همین اجرای موقت CI ساخته می‌شود (نه، در لاگ چاپ نمی‌شود).
+# نکته مهم ترتیب (باگ واقعی در اجرای اول CI — ۱۴۰۵/۰۷/۲۰):
+# اسنپ‌شات دموی مخزن «جداول پایه» را دارد ولی جدول‌های جدیدتر (forms،
+# assistant_personas، assistant_audit_log و…) فقط با زنجیره‌ی seed داخلِ بوتِ
+# سرور ساخته می‌شوند. پس اول باید سرور یک‌بار بالا بیاید (و healthz بدهد)،
+# بعد تست‌های آفلاین فرم/گاردریل اجرا شوند — وگرنه «no such table: forms»
+# می‌خورند. در نسخه‌ی اول CI، تست‌ها قبل از بوت اجرا می‌شدند و به همین دلیل
+# شکست خوردند؛ این نسخه ترتیب را درست کرده است.
+#
+# امنیت: هیچ رازی لازم نیست — دیتابیس دموی ساختگی داخل خود مخزن است
+# و JWT_SECRET فقط برای همین اجرای موقت CI ساخته می‌شود (در لاگ چاپ نمی‌شود).
 # =====================================================================
 name: CI
 
@@ -27,7 +31,7 @@ jobs:
   test:
     name: Tests (Node 22)
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
 
     env:
       NODE_ENV: development
@@ -52,18 +56,19 @@ jobs:
       - name: Restore demo snapshot (synthetic data)
         run: npm run demo-restore -- --force
 
-      - name: Offline test suites (unit/integration/rbac/forms/guardrails)
-        run: |
-          node --test tests/unit.test.js tests/integration.test.js tests/rbac-matrix.test.js tests/form-engine.test.js tests/assistant-guardrails.test.js
-
-      - name: Start server (background)
+      # ---- بوت اول: جداول جدیدتر (forms/assistant/*) را می‌سازد ----
+      - name: Boot server (builds schema via seed chain)
         run: |
           nohup node src/app.js > server.log 2>&1 &
-          for i in $(seq 1 45); do
+          for i in $(seq 1 60); do
             if curl -fsS "$SMOKE_BASE_URL/healthz" >/dev/null 2>&1; then echo "server up after ${i}s"; break; fi
             sleep 1
           done
           curl -fsS "$SMOKE_BASE_URL/healthz"
+
+      - name: Offline test suites (unit/integration/rbac/forms/guardrails)
+        run: |
+          node --test tests/unit.test.js tests/integration.test.js tests/rbac-matrix.test.js tests/form-engine.test.js tests/assistant-guardrails.test.js
 
       - name: Smoke test (6 probes)
         run: node scripts/smoke-test.js
@@ -78,4 +83,4 @@ jobs:
 
       - name: Server log on failure
         if: failure()
-        run: tail -n 120 server.log
+        run: tail -n 150 server.log
