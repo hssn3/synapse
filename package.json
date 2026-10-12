@@ -63,7 +63,9 @@
     "lint": "eslint src/ database/seed-*.js scripts/",
     "backup:gdrive": "node scripts/archive-gdrive.js",
     "assistant:key": "node database/seed-assistant-key.js",
-    "seed-form-acl": "node database/seed-form-permissions.js"
+    "seed-form-acl": "node database/seed-form-permissions.js",
+    "test:rbac-matrix": "node --test tests/rbac-endpoint-matrix.test.js",
+    "test:all": "node --test tests/unit.test.js tests/integration.test.js tests/rbac-matrix.test.js tests/form-engine.test.js tests/assistant-guardrails.test.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.122.0",

@@ -20,7 +20,9 @@ const SUITES = [
   { name: '3. AI Assistant Guardrails Test', cmd: 'node --test tests/assistant-guardrails.test.js' },
   { name: '4. Assistant Retrieval Eval (21 Claims)', cmd: 'node tests/assistant-retrieval-eval.js' },
   { name: '5. Assistant Response Eval (10 Claims)', cmd: 'node tests/assistant-response-eval.js' },
-  { name: '6. Server Smoke Health Check (6 Probes)', cmd: 'node scripts/smoke-test.js' }
+  { name: '6. Server Smoke Health Check (6 Probes)', cmd: 'node scripts/smoke-test.js' },
+  // ماتریس per-endpoint بدون UI (نیاز به سرور بالا) — افزوده ۱۴۰۵/۰۷/۲۰
+  { name: '7. RBAC Endpoint Matrix (HTTP, no UI)', cmd: 'node --test tests/rbac-endpoint-matrix.test.js' }
 ];
 
 let allPassed = true;
