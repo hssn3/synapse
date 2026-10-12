@@ -1,0 +1,605 @@
+/* =====================================================================
+   APP-NAV.CSS — پوسته‌ی اپلیکیشن‌مانند (App Shell)
+   ---------------------------------------------------------------------
+   خواسته‌ی کارفرما (۱۴۰۵-۰۷-۲۰): «کل صفحات ری‌دیزاین بشه؛ یه منو با
+   آیکون‌های زیبا؛ از حالت وب‌سایتی خارج بشه؛ موبایل و تبلت: منوی اصلی
+   زیر صفحه ثابت + کلید دستیار هوشمند توی همون زیرمنو؛ دسکتاپ: منو کلا
+   سمت راست و کلیدها اونجا باشند؛ هدر و فوتر بعد از ورود نباشند.»
+
+   معماری: این فایل فقط «پوسته» است — هیچ محتوایی را حذف نمی‌کند.
+   ・موبایل/تبلت (≤1024px): نوار تب پایین ثابت (#appTabbar) + شیت منوی
+     کامل (#appSheet). سایدبار کلاسیک پنهان می‌شود (جایش را بار+شیت
+     می‌گیرد) تا فضای بیشتری آزاد شود.
+   ・دسکتاپ (>1024px): سایدبار راست تمام‌قد می‌شود و داک شناور (دانا/
+     منو/تنظیمات ظاهری) به داخل پایین سایدبار منتقل می‌شود.
+   ・هدر/فوتر سراسری وقتی کاربر وارد شده (body.app-shell) کاملاً حذف
+     می‌شوند تا حس «ورود به نرم‌افزار» بدهد.
+   ===================================================================== */
+
+/* --------------------------------------------------------------------------
+   ۰) حذف کامل هدر/فوتر سراسری برای کاربر واردشده
+   -------------------------------------------------------------------------- */
+body.app-shell #ghdr,
+body.app-shell #gftr {
+  display: none !important;
+}
+
+body.app-shell {
+  --ghdrh: 0px;
+}
+
+/* نوار تب فقط در حالت واردشده و فقط موبایل/تبلت نمایش داده می‌شود */
+.app-tabbar {
+  display: none;
+}
+
+body:not(.app-shell) .app-tabbar {
+  display: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   ۱) نوار تب پایین — موبایل و تبلت
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  /* سایدبار کلاسیک در موبایل کاری نمی‌کند؛ بار + شیت جایگزینش شده‌اند */
+  body.app-shell #side {
+    display: none !important;
+  }
+  body.app-shell .soverlay {
+    display: none !important;
+  }
+  /* همبرگر نوار بالا دیگر لازم نیست (منو در پایین است) */
+  body.app-shell .top .mbtn {
+    display: none !important;
+  }
+
+  .app-tabbar {
+    display: flex;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1200;
+    display: flex;
+    align-items: stretch;
+    justify-content: space-around;
+    gap: 2px;
+    height: calc(62px + env(safe-area-inset-bottom, 0px));
+    padding: 4px 6px calc(4px + env(safe-area-inset-bottom, 0px));
+    margin: 0;
+    background: rgba(9, 18, 15, 0.94);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border-top: 1px solid rgba(212, 175, 90, 0.22);
+    box-shadow: 0 -12px 34px -18px rgba(0, 0, 0, 0.9);
+    box-sizing: border-box;
+  }
+
+  .app-tabbar .app-tab {
+    flex: 1 1 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    padding: 6px 2px 4px;
+    margin: 0;
+    border: 0;
+    background: none;
+    color: #8fa39b;
+    font-family: inherit;
+    font-size: 10.5px;
+    cursor: pointer;
+    border-radius: 12px;
+    transition: color .18s ease, background .18s ease, transform .18s ease;
+    -webkit-tap-highlight-color: transparent;
+    position: relative;
+  }
+
+  .app-tabbar .app-tab .app-tab-ic {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+  }
+
+  .app-tabbar .app-tab .app-tab-ic svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .app-tabbar .app-tab .app-tab-t {
+    line-height: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+
+  .app-tabbar .app-tab:active {
+    transform: scale(.94);
+  }
+
+  .app-tabbar .app-tab.on {
+    color: #ecd599;
+    background: radial-gradient(circle at 50% 18%, rgba(212, 175, 90, 0.18), transparent 68%);
+  }
+
+  .app-tabbar .app-tab.on .app-tab-ic svg {
+    stroke: #ecd599;
+    filter: drop-shadow(0 0 7px rgba(236, 213, 153, 0.5));
+  }
+
+  /* نشان بج روی تب‌ها (اگر جاهایی بج بگذارند) */
+  .app-tabbar .app-tab .app-tab-badge {
+    position: absolute;
+    top: 2px;
+    left: 50%;
+    transform: translateX(10px);
+    min-width: 16px;
+    height: 16px;
+    border-radius: 99px;
+    background: #e05a5a;
+    color: #fff;
+    font-size: 9.5px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+    box-shadow: 0 2px 6px rgba(224, 90, 90, 0.5);
+  }
+
+  /* ـ دکمه‌ی مرکزی «دانا» — آیکون ویژه‌ی طلایی با حلقه‌ی مداری ـ */
+  .app-tabbar .app-tab.app-tab-dana {
+    flex: 1.15 1 0;
+    color: #f7e9c4;
+  }
+
+  .app-tabbar .app-tab.app-tab-dana .app-tab-ic {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    margin-top: -16px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #f3d98b 0%, #d4af5a 45%, #a4791f 100%);
+    box-shadow:
+      0 6px 18px -6px rgba(212, 175, 90, 0.65),
+      0 0 0 4px rgba(9, 18, 15, 0.94),
+      0 0 22px rgba(212, 175, 90, 0.35);
+    color: #241a02;
+  }
+
+  .app-tabbar .app-tab.app-tab-dana .app-tab-ic svg {
+    width: 21px;
+    height: 21px;
+    stroke: #241a02;
+  }
+
+  /* حلقه‌ی مداری چرخان دور آیکون دانا */
+  .app-tabbar .app-tab.app-tab-dana .dana-orbit {
+    position: absolute;
+    inset: -5px;
+    border-radius: 50%;
+    border: 1.4px dashed rgba(236, 213, 153, 0.75);
+    animation: danaOrbitSpin 9s linear infinite;
+    pointer-events: none;
+  }
+
+  .app-tabbar .app-tab.app-tab-dana .dana-orbit::after {
+    content: '';
+    position: absolute;
+    top: -3px;
+    right: 50%;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #fff3cf;
+    box-shadow: 0 0 8px 2px rgba(255, 243, 207, 0.85);
+  }
+
+  @keyframes danaOrbitSpin {
+    to { transform: rotate(360deg); }
+  }
+
+  html[data-anim="off"] .app-tabbar .app-tab.app-tab-dana .dana-orbit {
+    animation: none;
+  }
+
+  .app-tabbar .app-tab.app-tab-dana .app-tab-t {
+    color: #ecd599;
+    font-weight: 700;
+  }
+
+  .app-tabbar .app-tab.app-tab-dana:active .app-tab-ic {
+    transform: scale(.93);
+  }
+
+  /* فضای امن پایین محتوا: تا انتهای صفحه زیر نوار تب پنهان نماند */
+  body.app-shell .main {
+    padding-bottom: calc(90px + env(safe-area-inset-bottom, 0px)) !important;
+    height: calc(100dvh - var(--ghdrh, 0px)) !important;
+  }
+
+  body.app-shell .floatdock,
+  body.app-shell #floatDock,
+  body.app-shell #floatDock .dock-btn:not(.in-side) {
+    display: none !important;
+  }
+
+  /* کشوی تنظیمات ظاهری بالای نوار تب بنشیند */
+  body.app-shell .settdrawer {
+    bottom: calc(74px + env(safe-area-inset-bottom, 0px)) !important;
+    z-index: 1210;
+  }
+
+  /* کشوی دستیار دانا هم بالای نوار تب */
+  body.app-shell .ent-assistant-drawer {
+    bottom: calc(74px + env(safe-area-inset-bottom, 0px)) !important;
+    z-index: 1210;
+    height: min(72vh, calc(100dvh - 165px)) !important;
+  }
+}
+
+/* نوار تب فقط در حالت واردشده معنا دارد */
+
+/* دسکتاپ: داک داخل سایدبار به شکل نوار افقی با فاصله‌ی کم */
+body.app-shell .side .snav { flex: 1 1 auto; overflow-y: auto; }
+body.app-shell .side .floatdock.in-side { flex: 0 0 auto; z-index: 6; }
+
+/* --------------------------------------------------------------------------
+   ۲) شیت «همه‌ی منو» — Bottom Sheet موبایل
+   -------------------------------------------------------------------------- */
+.app-sheet {
+  position: fixed;
+  inset: 0;
+  z-index: 1250;
+  display: none;
+}
+
+.app-sheet.open {
+  display: block;
+}
+
+.app-sheet .app-sheet-ov {
+  position: absolute;
+  inset: 0;
+  background: rgba(2, 8, 6, 0.66);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.app-sheet .app-sheet-bd {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  max-height: min(84dvh, 780px);
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, rgba(15, 28, 24, 0.99), rgba(8, 17, 14, 0.99));
+  border-top: 1px solid rgba(212, 175, 90, 0.3);
+  border-radius: 22px 22px 0 0;
+  box-shadow: 0 -18px 48px -22px rgba(0, 0, 0, 0.95);
+  transform: translateY(100%);
+  transition: transform .28s cubic-bezier(.22, .9, .3, 1);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.app-sheet.open .app-sheet-bd {
+  transform: translateY(0);
+}
+
+.app-sheet .app-sheet-grip {
+  width: 44px;
+  height: 4.5px;
+  border-radius: 99px;
+  background: rgba(236, 213, 153, 0.35);
+  margin: 9px auto 4px;
+  flex: 0 0 auto;
+}
+
+.app-sheet .app-sheet-hd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 18px 4px;
+  flex: 0 0 auto;
+}
+
+.app-sheet .app-sheet-ttl {
+  font-size: 14.5px;
+  font-weight: 800;
+  color: #f1e8d2;
+}
+
+.app-sheet .app-sheet-x {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.05);
+  color: #cbd5e1;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+/* کارت کاربر داخل شیت */
+.app-sheet .app-sheet-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 8px 16px 4px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(212, 175, 90, 0.08);
+  border: 1px solid rgba(212, 175, 90, 0.22);
+  flex: 0 0 auto;
+}
+
+.app-sheet .as-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #e7cd86, #b88615);
+  color: #201803;
+  font-weight: 800;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+}
+
+.app-sheet .as-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  flex: 1;
+}
+
+.app-sheet .as-info b {
+  color: #f1e8d2;
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.app-sheet .as-info i {
+  font-style: normal;
+  color: #9fb5aa;
+  font-size: 11.5px;
+}
+
+.app-sheet .as-act {
+  width: 36px;
+  height: 36px;
+  border-radius: 11px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.05);
+  color: #d7c9a4;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex: 0 0 auto;
+}
+
+.app-sheet .as-act svg { width: 17px; height: 17px; }
+
+.app-sheet .as-act.out {
+  color: #f2b8b8;
+  border-color: rgba(224, 90, 90, 0.35);
+  background: rgba(224, 90, 90, 0.1);
+}
+
+/* اسکرول آیتم‌های منو */
+.app-sheet .app-sheet-scroll {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 6px 14px 18px;
+}
+
+.app-sheet .app-sheet-grp {
+  margin-top: 12px;
+}
+
+.app-sheet .app-sheet-grp-t {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 800;
+  color: #d9c58c;
+  margin: 2px 4px 8px;
+}
+
+.app-sheet .app-sheet-grp-t .ic svg { width: 15px; height: 15px; }
+
+.app-sheet .app-sheet-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.app-sheet .app-nitem {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  text-align: start;
+  padding: 12px 12px;
+  border-radius: 13px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.035);
+  color: #e6ede9;
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+  min-height: 46px;
+  box-sizing: border-box;
+}
+
+.app-sheet .app-nitem .ic {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 9px;
+  background: rgba(212, 175, 90, 0.12);
+  color: #e7cd86;
+  flex: 0 0 auto;
+}
+
+.app-sheet .app-nitem .ic svg { width: 16px; height: 16px; }
+
+.app-sheet .app-nitem .ntxt {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.app-sheet .app-nitem .nbadge {
+  margin-inline-start: auto;
+  min-width: 17px;
+  height: 17px;
+  border-radius: 99px;
+  background: #e05a5a;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 800;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+}
+
+.app-sheet .app-nitem .nbadge.on { display: inline-flex; }
+
+.app-sheet .app-nitem.on {
+  border-color: rgba(212, 175, 90, 0.55);
+  background: rgba(212, 175, 90, 0.14);
+  color: #f4e8c8;
+}
+
+.app-sheet .app-nitem:active {
+  transform: scale(.985);
+}
+
+/* --------------------------------------------------------------------------
+   ۳) دسکتاپ — سایدبار تمام‌قد راست + انتقال کلیدهای شناور به داخل آن
+   -------------------------------------------------------------------------- */
+@media (min-width: 1025px) {
+  body.app-shell #app {
+    height: 100dvh;
+    min-height: 100dvh;
+  }
+
+  body.app-shell .side {
+    height: 100dvh;
+    margin: 0;
+    border-radius: 0;
+    border-left: 1px solid rgba(212, 175, 90, 0.18);
+  }
+
+  body.app-shell .main {
+    height: 100dvh;
+    padding-top: 14px;
+  }
+
+  /* داک (دانا/منو/تنظیمات ظاهری) در پایین-راست، چسبیده به محدوده‌ی سایدبار،
+     به شکل یک نوار افقی — «کلیدها سمت راست». فضای پایین سایدبار هم رزرو
+     می‌شود تا محتوایش زیر داک نرود. */
+  body.app-shell .side {
+    padding-bottom: 74px;
+  }
+
+  /* حالت جمع‌شده: داک عمودی می‌شود و بلندتر، پس فضای بیشتری رزرو شود */
+  body.app-shell .side.collapsed {
+    padding-bottom: 178px;
+  }
+
+  body.app-shell .floatdock.in-side {
+    left: auto;
+    right: 18px;
+    bottom: 18px;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border-radius: 16px;
+    background: rgba(212, 175, 90, 0.07);
+    border: 1px solid rgba(212, 175, 90, 0.2);
+    z-index: 990;
+  }
+
+  body.app-shell .floatdock.in-side .dockmenu {
+    bottom: calc(100% + 10px);
+    left: auto;
+    right: 0;
+    transform: translateY(8px) scale(.96);
+  }
+
+  body.app-shell .floatdock.in-side .dockmenu.open {
+    transform: translateY(0) scale(1);
+  }
+
+  /* سایدبار جمع‌شده (۷۶px): داک بصورت ستونی تا در عرض کم جا شود */
+  body.app-shell #floatDock.in-side.side-narrow {
+    flex-direction: column;
+    padding: 8px;
+    gap: 8px;
+    right: 13px;
+  }
+
+  /* کشوی دستیار دانا در دسکتاپ: پایین-راست بالای داک (نه پایین‌چپ) */
+  body.app-shell .ent-assistant-drawer {
+    left: auto;
+    right: 18px;
+    bottom: 104px;
+    max-width: calc(100vw - 36px);
+  }
+
+  body.app-shell #floatDock.in-side.side-narrow .ent-assistant-drawer {
+    right: 13px;
+  }
+
+  /* کشوی تنظیمات ظاهری کنار سایدبار باز شود، نه پایین‌چپ دور از دسترس */
+  body.app-shell .settdrawer {
+    left: auto;
+    right: calc(var(--side-w, 326px) + 18px);
+    bottom: 22px;
+    transform-origin: bottom right;
+  }
+}
+
+/* موبایل: داک شناور دیگر لازم نیست چون «دانا» در نوار تب و بقیه در شیت است */
+@media (max-width: 1024px) {
+  .floatdock,
+  #floatDock {
+    display: none !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   ۴) پولیش ریز موبایل (متن ریزِ نوار بالا و مسیر)
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  body.app-shell .top .ysel label,
+  body.app-shell .top .ysel select {
+    font-size: 11.5px !important;
+  }
+
+  body.app-shell #navcrumb .pathlvl,
+  body.app-shell #navcrumb .crumbs {
+    font-size: 11px !important;
+  }
+}
