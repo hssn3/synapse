@@ -8,7 +8,14 @@ dotenv.config();
 const paths = require('./paths');
 
 const isProduction = process.env.NODE_ENV === 'production';
-const WEAK_JWT_SECRETS = new Set(['dev_secret_change_in_production', 'changeme', 'secret']);
+const WEAK_JWT_SECRETS = new Set([
+  'dev_secret_change_in_production',
+  'changeme',
+  'secret',
+  // پلیس‌هولدر پیشنهادی داخل docker-compose.yml — قبلاً از چک رد می‌شد و
+  // سرور production می‌توانست با یک مقدارِ عمومیِ معلوم بالا بیاید (ممیزی ۱۴۰۵-۰۷-۲۰).
+  'change_this_to_a_random_long_string_at_least_32_chars',
+]);
 
 // جلوگیری از اجرای production با JWT_SECRET غایب/ضعیف/پیش‌فرض (این مقدار پیش‌فرض در سورس عمومی قابل مشاهده است)
 if (isProduction) {

@@ -12,6 +12,8 @@ services:
       PORT: 3000
       # ⚠️ حتماً قبل از اجرای واقعی جایگزین کنید — با:
       # node -e "console.log(require('crypto').randomBytes(48).toString('hex'))"
+      # توجه: این پلیس‌هولدر از ۱۴۰۵-۰۷-۲۰ در لیست مقادیر ضعیف است و در NODE_ENV=production
+      # باعث توقف عمدی سرور می‌شود تا استقرار با یک راز عمومیِ معلوم بالا نیاید.
       JWT_SECRET: change_this_to_a_random_long_string_at_least_32_chars
       JWT_EXPIRES_IN: 8h
       SESSION_COOKIE_NAME: sid

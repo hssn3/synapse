@@ -22,7 +22,16 @@ const dotenv = require('dotenv');
 dotenv.config({ path: path.join(__dirname, '..', '.env') });
 
 const { db } = require('../src/config/database-sqlite');
-const { maskKey } = require('../agents/config'); // همان الگوی ماسک پروژه: '.' + چهار کاراکتر آخر
+
+// maskKey — ماسکِ کلید طبق الگوی مستندشده‌ی پروژه: '.' + چهار کاراکتر آخر.
+// چرا اینجا inline شد: این اسکریپت قبلاً از '../agents/config' import می‌کرد که
+// هیچ‌وقت به مخزن نیامده بود و اجرای «npm run assistant:key» را با MODULE_NOT_FOUND
+// می‌شکست (دیده‌شده در ممیزی ۱۴۰۵-۰۷-۲۰). همان تابع ساده اینجا تعریف می‌شود تا
+// اسکریپت خودبسنده باشد؛ هیچ کلیدی هرگز کامل چاپ نمی‌شود.
+function maskKey(k) {
+  const s = String(k == null ? '' : k);
+  return s ? '.' + s.slice(-4) : '';
+}
 
 const PROVIDER = 'gemini';
 const MODEL = 'gemini-3.5-flash';

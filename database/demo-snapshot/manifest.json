@@ -43,6 +43,7 @@
     "stakeholders": 6
   },
   "scrubbedColumns": [
+    "assistant_hospital_settings.api_key",
     "superadmin_dev_settings.github_token"
   ],
   "purgedTables": [
@@ -55,5 +56,7 @@
   ],
   "uploads": [
     "logo-sample-hospital.webp"
-  ]
+  ],
+  "scrubbedAt": "2026-10-12T10:31:30.708Z",
+  "scrubNote": "api_key scrubbed 1405-07-20 — repo became public; secrets must never live in the repo"
 }
