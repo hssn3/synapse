@@ -42,18 +42,28 @@
 - [x] `.freebuff/` از مخزن حذف و به `.gitignore` اضافه شد.
 - [x] تست logout در مرورگر واقعی برای ۳ نقش: `logout-ok`، تب‌بار و app-shell هر دو پاک می‌شوند.
 
+## کارهای انجام‌شده — دسته سوم (کامیت‌های `758b220`, `ad1b7a0`, `90bee32`)
+- [x] **ماتریس per-endpoint RBAC بدون UI** (`tests/rbac-endpoint-matrix.test.js`): ۱۵ تست —
+  anonymous 401، deny نقش‌ها (users/audit/export)، scope دریافت‌کنندگان ابلاغیه،
+  privilege escalation، سنجه‌نویسی nurse ممنوع، کوکی جعلی، جداسازی /api/super/*،
+  **لغو mid-session** (غیرفعال‌سازی → 401 در درخواست بعدی)، سلف‌سرویس پروفایل، sweep نقش‌ها.
+  → در harness (سوئیت ۷) و `package.json` (`test:rbac-matrix`، `test:all`) سیم‌کشی شد.
+- [x] **رفع آسیب‌پذیری uuid**: override به `^11.1.1` (exceljs فقط v4 مصرف می‌کند) →
+  `npm audit` حالا **۰ آسیب‌پذیری**؛ تست واقعی: xlsx export از دو endpoint 200 + PK header.
+- [x] **docs/SECURITY.md**: جدول کنترل‌های فنی اجراشده + تصمیم‌های سازمانی لازم برای کارفرما
+  (rotation کلید، retention، بکاپ، ناشناسی گزارش‌دهنده).
+- [x] **docs/DEPLOYMENT-CHECKLIST.md**: چک‌لیست کامل استقرار/بازگردانی برای provider آینده.
+
 ## کارهای بعدی (به ترتیب)
-1. [ ] revoke کلید Gemini توسط مالک (اقدام انسانی خارج از محیط).
-2. [ ] تست خودکار ماتریس per-endpoint مجاز/ممنوع بدون UI (IDOR/privilege escalation صریح) — افزودن به tests/.
-3. [ ] تصمیم دیپلوی production (provider) + چک‌لیست سخت‌سازی استقرار.
-4. [ ] LICENSE (تصمیم کارفرما).
-5. [ ] Lighthouse/a11y عددی در محیطی با Chromium کامل.
+1. [ ] **revoke کلید Gemini توسط مالک** (اقدام انسانی خارج از محیط — بالاترین اولویت).
+2. [ ] تصمیم دیپلوی production (provider) — چک‌لیست آماده در `docs/DEPLOYMENT-CHECKLIST.md`.
+3. [ ] LICENSE — نیاز به تصمیم کارفرما (سند SECURITY توضیح داده).
+4. [ ] Lighthouse/a11y عددی در محیطی با Chromium کامل (اینجا ابزار نبود → not measured).
+5. [ ] (اختیاری) GitHub Actions برای اجرای harness در هر push — مخزن فعلاً CI ندارد.
+6. [ ] (اختیاری) حذف تدریجی `unsafe-inline` از CSP (مهاجرت onclick → addEventListener).
 
-## Blockers / Notes
-- تونل‌های Quick موقتی‌اند؛ با هر restart آدرس عوض می‌شود.
-- برای دیپلوی production: هیچ provider در دسترس این محیط نیست؛ نیاز به تصمیم کارفرما (Railway سابق از کار افتاده).
-- کلید API حذف‌شده باید توسط مالک revoke/rotate شود (خارج از توان این محیط — فقط گزارش).
-
-## Last verified commit hash (copy from git)
-- local HEAD: `49c78fe9db797283265d954393d7ce210383c1b1` (بدون تغییرات جدید کامیت‌نشده هنوز)
-- origin/main: `49c78fe9db797283265d954393d7ce210383c1b1`
+## آخرین وضعیت تأییدشده (1405/07/20)
+- harness ۷/۷ سوئیت سبز: rbac-matrix 14/14 · form-engine 6/6 · guardrails 6/6 ·
+  retrieval 21/21 · response 10/10 · smoke 6/6 · endpoint-matrix 15/15.
+- `npm audit --omit=dev`: **0 vulnerabilities**.
+- HEAD: `90bee32` (origin/main همگام).
