@@ -1,7 +1,7 @@
 'use strict';
 // Service Worker حداقلی PWA
 // فقط پوسته و استاتیک را کش می‌کند؛ API هرگز کش نمی‌شود.
-const CACHE = 'hosp-v12';  // با هر انتشار استاتیک bump کنید تا پوسته به‌روز شود
+const CACHE = 'hosp-v13';  // با هر انتشار استاتیک bump کنید تا پوسته به‌روز شود
 const SHELL = ['/', '/index.html', '/manifest.json', '/css/app.css', '/css/ui-polish.css', '/css/mobile-system.css', '/js/ui-polish.js'];
 const NETWORK_FIRST = [/^\/$/, /^\/index\.html$/];
 
@@ -19,6 +19,17 @@ self.addEventListener('activate', (e) => {
       .then((keys) => Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k))))
       .then(() => self.clients.claim())
   );
+});
+
+// پیام از اپ: هنگام خروج کاربر، پوسته‌ی کش‌شده را پاک کن (دستگاه مشترک).
+// چرا: کش فقط پوسته/استاتیک است و API هرگز کش نمی‌شود؛ ولی تمیزکاری صریح
+// در logout مانع هر نشتِ احتمالی به کاربر بعدی روی دستگاه مشترک می‌شود.
+self.addEventListener('message', (e) => {
+  if (e && e.data && e.data.type === 'CLEAR_SHELL') {
+    e.waitUntil(
+      caches.keys().then((keys) => Promise.all(keys.map((k) => caches.delete(k))))
+    );
+  }
 });
 
 self.addEventListener('fetch', (e) => {

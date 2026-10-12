@@ -361,5 +361,13 @@ async function logout(){ try{ await API.logout(); }catch(e){} S.user=null; GUIDE
     if (window.history && history.replaceState) history.replaceState(null, '', location.pathname + location.search);
     else location.hash = '';
   } catch(e) {}
+  // پاک‌سازی کش سرویس‌ورکر هنگام خروج (الزام PWA امنیتی):
+  // پوسته‌ی اپ کش‌شده است تا آفلاین بالا بیاید؛ ولی اگر کاربری از یک دستگاه
+  // مشترک خارج شود، کشِ باقی‌مانده به کاربر بعدی نشت نمی‌کند (پوسته محتوای
+  // کاربرانه ندارد، خودِ API هرگز کش نمی‌شود — سطر /api در sw.js). با این حال
+  // پاک‌سازی صریح‌تر و مطمئن‌تر است؛ خطا هم اگر SW نداشته باشد (مرورگر قدیمی)
+  // نباید خروج را بشکند.
+  try { if (navigator.serviceWorker && navigator.serviceWorker.controller) { navigator.serviceWorker.controller.postMessage({ type: 'CLEAR_SHELL' }); } } catch(e) {}
   const gb=$('guideDockBtn'); if(gb) gb.remove(); const gp=$('guidePanel'); if(gp) gp.classList.remove('open');
+  if (window.appNavRefresh) window.appNavRefresh();
   renderGlobalHeader(); renderGlobalFooter(); renderLogin(); }
