@@ -209,3 +209,30 @@
     flex-wrap: wrap !important;
   }
 }
+
+/* --------------------------------------------------------------------------
+   ۹) کنترل‌های ناوبری اسلاید شاخص (islide-nav-controls) — موبایل: چند خطی
+   ---------------------------------------------------------------------
+   `.islide-nav-controls` با flex-wrap:nowrap ساخته شده و در 390px دکمه‌های
+   «تمام‌صفحه» و «ورود/ویرایش» را از لبه بیرون می‌برد (اندازه‌گیری: overL تا
+   171px). در موبایل اجازه شکستن خط می‌دهیم و دکمه‌ها را خردتر می‌کنیم.
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .islide-nav-controls {
+    flex-wrap: wrap !important;
+    row-gap: 8px !important;
+    width: 100% !important;
+  }
+
+  .islide-nav-controls .btn {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    font-size: 12px !important;
+    padding: 7px 10px !important;
+    justify-content: center !important;
+  }
+
+  .islide-progress-pill {
+    width: 100% !important;
+  }
+}
