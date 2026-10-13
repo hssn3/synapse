@@ -213,6 +213,16 @@ function pageCrumbs(p){
 function renderPageCrumbs(p){
   const box=$('navcrumb'); if(!box) return;
   box.innerHTML=pageCrumbs(p);
+  // در موبایل نوار مسیر افقی اسکرول می‌شود؛ بدون این خط، کارتِ صفحهٔ جاری
+  // («صفحه ...») در ابتدا بیرون از دید می‌ماند و کاربر فکر می‌کند «نصفه» است.
+  // بعد از رندر، همان کارتِ روشن را با اسکرولِ افقی در دید می‌آوریم؛ فقط همین
+  // کانتینر اسکرول می‌خورد (block:'nearest' از اسکرول عمودی صفحه جلوگیری می‌کند).
+  try{
+    const on=box.querySelector('.pathcard.on');
+    if(on && typeof on.scrollIntoView==='function'){
+      on.scrollIntoView({block:'nearest', inline:'center'});
+    }
+  }catch(e){ /* تزئینی؛ خطا نباید ناوبری را بشکند */ }
 }
 
 // ترتیب کارت‌ها = ترتیب اهمیت، از بالا به پایین. کارفرما صریح خواست مهم‌ترین‌ها اول بیایند.
