@@ -127,7 +127,46 @@
 - W3: ایمنی seed (`seed-measure-status-year.js` بدون ازدست‌رفتن ستون + idempotent)، پاک‌سازی ارجاع‌های یتیم، نمایان‌کردن seedهای ناموفق در بوت.
 - قرارداد هر سه در `docs/IMPLEMENTATION_PLAN.md` (واحدهای W1–W3) ثبت است.
 
-## قدم بعدی
-- بازبینی دیف زیرعامل‌ها توسط من، اجرای تست‌های همان لایه، سپس **یک کامیت کوچک برای هر واحد** (بدون push).
-- سپس W4 (مسیر استقرار)، W5 (شکاف تست‌ها)، W6 (دسترس‌پذیری/RTL)، W7 (حریم خصوصی دستیار) به ترتیب ظرفیت.
+## نتیجهٔ نهایی نشست ۱۴۰۵/۰۷/۲۵
+
+### کامیت‌های این نشست (hash کپی‌شده از `git log`، همه محلی و **پوش‌نشده** — تصمیم مالک)
+| hash | موضوع |
+|---|---|
+| `cdf4379` | `fix(xss)`: اسکیپ عنوان اسلاید + دکمه‌های بخش با ایندکس |
+| `1fc856c` | `harden(entry)`: حذف `username` از فهرست بی‌احراز + کمینه‌سازی نام + هشدار توت production |
+| `965849e` | `harden(assistant)`: سقف ورودی ۴۰۰۰ + پاسخ امن در تایم‌اوت provider |
+| `212f8de` | `fix(seed)`: مایگریشن `measure_status` غیرتخریبی + جاروی ارجاع یتیم + جمع‌بندی seedهای ناموفق بوت |
+| `cb77b82` | `fix(deploy)`: مسیر compose قابل‌بوت (اجبار `JWT_SECRET`) |
+| `c04d747` | `privacy(assistant)`: متن رکورد محرمانه به provider بیرونی نمی‌رود |
+| `84b8de6` | `test(w5)`: تثبیت انقضای نشست + مستندسازی حفرهٔ باز ارسال تکراری |
+| `f83f252` | `docs`: حسابرسی فاز ۱ + قرارداد ماژول‌ها |
+| `dd92bb6` | `docs`: PRIVACY + DECISIONS + REQUIREMENTS |
+
+وضعیت گیت: `main` = `dd92bb6`، **ahead ۱۲** از `origin/main`؛ درخت کاری پس از کامیت نهایی این سند تمیز است.
+
+### تست‌های اجراشدهٔ پایانی (شاهد دست‌اول)
+| دستور | نتیجه |
+|---|---|
+| `npm run test:all` | **35/35** ✅ |
+| `npm run test:rbac-matrix` | **15/15** ✅ |
+| `npm run smoke-test` (`SMOKE_BASE_URL=:3311`) | **6/6** ✅ |
+| دانا: `test:assistant` / `test:assistant-response` | همهٔ ادعاها سبز (۲۱ + ۱۰) ✅ |
+| `node --test tests/assistant-privacy-confidential.test.js` | **4/4** ✅ |
+| `node --test tests/w5-session-and-duplicate.test.js` | **3/3** ✅ |
+| `npm audit --omit=dev` | **۰ آسیب‌پذیری** ✅ |
+| axe-core (WCAG A/AA) — لندینگ ۱۲۸۰/۳۹۰ و داشبورد ۱۲۸۰/۳۹۰ | **۰ نقض** در چهار اسکن ✅ |
+| رندر E2E ورود کاشی‌ای (Edge headless) | ورود موفق روی `#acc`، صفر `pageerror` ✅ |
+| مایگریشن seed روی دیتابیس زنده پس از بوت | `measure_status cols=18 rows=520 quick_check=ok`، ارجاع یتیم **۰** ✅ |
+| تایم‌اوت ۳۰ ثانیه‌ای provider (شبیه‌سازی) | **اجرا نشد** ⚠️ (در REQUIREMENTS به‌عنوان NOT run ثبت شد) |
+| `docker compose up` کانتینری | **اجرا نشد** ⚠️ (daemon در دسترس نبود؛ فقط `compose config` و بوت production محلی) |
+
+### کارهای باز (برای نشست بعدی)
+1. **تصمیم مالک: push.** ۱۲ کامیت روی `main` پوش نشده؛ ورود امن با `gh auth login` یا Git Credential Manager (توکن در چت پاس نشود).
+2. **ارسال تکراری فرم:** حفره باز است (شاهد: ۲۰۱/۲۰۱ و حتی بی‌اثر بودن `Idempotency-Key`)؛ رفع درست = ستون `client_token` + قید `UNIQUE` → نیازمند تصمیم schema.
+3. **دو منبع حقیقت مجوز:** `roles.permissions` (JSON) در برابر `role_permissions` (جدول) — ۶ نقش در جدول کلید را دارند، ۰ از ۴۷ کاربر در JSON → مهاجرت/هم‌راستاسازی لازم است. (به همین دلیل گارد `requirePermission` روی چت اضافه **نشد** — متناقض با «deny by default» ولی تنها گزینه‌ی بدون شکستن دسترسی.)
+4. بازبینی خط‌به‌خط ۱۶۶ مسیر «authRequired بدون requirePermission»؛ حذف تدریجی `unsafe-inline` از CSP؛ مدل Card Docking با `activeCardId` (در کد فعلی وجود ندارد).
+5. اقدام انسانی خارج از محیط: revoke کلید قدیمی Gemini در کنسول Google.
+
+### قدم بعدی (اولین کار نشست بعد)
+- خواندن همین بخش، سپس `git status` و `git log` و آشتی، بعد بند ۱ تا ۵ به ترتیب تصمیم مالک.
 - **ادامه‌ی خودکار وجود ندارد**؛ اگر نشست قطع شد، با فرستادن «ادامه» از همین نقطه ادامه می‌دهم.
