@@ -221,3 +221,14 @@
 3. پاس per-route روی کاندیدهای بخش ۹ AUDIT (assistant chat، KPI/export، چند read) — سپس استانداردسازی نگهبان‌ها.
 4. revoke کلید قدیمی Gemini (اقدام انسان)، provider استقرار production، LICENSE.
 
+
+
+### تکمیل گیت (پایان نشست)
+- کامیت‌ها روی شاخهٔ `feature/hospital-platform` (hash کپی‌شده از `git log`):
+  - `b2e2119` — docs: add ARCHITECTURE.md
+  - `38a38f7` — docs: add API_CONTRACTS.md
+  - `5302ca1` — docs: log session 1405-07-23b (PROGRESS/DECISIONS/AUDIT/AGENTS/IMPLEMENTATION_PLAN)
+  - [کامیتِ گزارش نشست — بعد از این سند]
+- پوش: شاخهٔ `feature/hospital-platform` → گیت‌هاب انجام شد؛ **PR #1**: https://github.com/hssn3/new313/pull/1 ; `main` دست‌نخورده (merge = تصمیم مالک).
+- CI: روی PR اجرا شد → **سبز** (run `38761906321`، conclusion=success؛ شامل نصب/بوت/سوئیت‌ها/smoke/ماتریس/evalها). پس از پوش کامیت گزارش، یک ران تازه روی آخرین کامیت شروع می‌شود.
+
