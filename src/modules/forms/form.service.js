@@ -5,6 +5,54 @@ const formRepo = require('./form.repository');
 const Ajv = require('ajv');
 const ajv = new Ajv({ allErrors: true, coerceTypes: true });
 
+// ---------------------------------------------------------------------------
+// گاردِ «ارسالِ تکراری فرم» — شناسه‌ی یکتای سمتِ کلاینت (client_token)
+// ---------------------------------------------------------------------------
+// چرا این‌جاست: آزمونِ W5 (tests/w5-session-and-duplicate.test.js) با شاهدِ اجرایی نشان
+// داد دو POSTِ یکسان به /api/forms/<slug>/submit دو رکورد می‌سازد (هر دو ۲۰۱) و هدرِ
+// Idempotency-Key هیچ‌جا خوانده نمی‌شد. گارد opt-in است: کلاینت اگر بخواهد برای هر
+// «تلاشِ ارسال» یک توکن یکتا می‌فرستد؛ بارِ دوم به‌جای رکوردِ تازه همان رکوردِ اول
+// برمی‌گردد (۲۰۰ + duplicate:true). کلاینتِ بدونِ توکن عیناً رفتار امروز را می‌بیند.
+// تکیه‌گاهِ نهایی ایندکسِ یکتای جزئی در دیتابیس است (مهاجرت:
+// database/migrate-form-submission-client-token.js) تا مسابقه‌ی دو درخواستِ همزمان هم
+// رکوردِ دوم نسازد — یعنی گارد فقط سمتِ کلاینت نیست (قاعده‌ی ۶).
+const CLIENT_TOKEN_KEY = 'client_token';
+// قالب عمداً باریک است: UUID و شناسه‌های تولیدی جاوااسکریپت را می‌پذیرد و هر چیزِ دیگر
+// (متن آزاد/طولِ زیاد) را رد می‌کند تا از ستون برای محتوای دلخواه استفاده نشود.
+const CLIENT_TOKEN_RE = /^[A-Za-z0-9._:-]{1,64}$/;
+
+function invalidClientTokenError() {
+  const err = new Error('شناسه‌ی یکتای ارسال (client_token) نامعتبر است: باید رشته‌ی ۱ تا ۶۴ کاراکتری و فقط شامل حروف/ارقام انگلیسی و − . _ : باشد.');
+  err.status = 400;   // میان‌افزارِ خطای انتهای src/app.js همین status را ۴۰۰ می‌کند
+  return err;
+}
+
+/** undefined/null = «توکنی نیامده» → مسیرِ امروز. هر مقدارِ دیگر باید رشته‌ی مجاز باشد. */
+function normalizeClientToken(raw) {
+  if (raw === undefined || raw === null) return null;
+  if (typeof raw !== 'string' || !CLIENT_TOKEN_RE.test(raw)) throw invalidClientTokenError();
+  return raw;
+}
+
+/** آیا خطای INSERT از قیدِ یکتای client_token آمده (مسابقه‌ی همزمان)؟ */
+function isClientTokenConflict(err) {
+  if (!err) return false;
+  // SQLite نامِ ایندکس را در متنِ خطا می‌آورد؛ به همان تکیه می‌کنیم نه به پیامِ کلی.
+  return /uq_form_submissions_client_token/i.test(String(err.message || ''));
+}
+
+/** پاسخِ «این ارسال قبلاً ثبت شده است» — همان شکلِ پاسخِ ثبت + duplicate:true. */
+function duplicateResult(row, formId) {
+  return {
+    id: row.id,
+    submissionId: row.id,
+    form_id: formId,
+    version: row.version_number || null,
+    status: row.status || 'submitted',
+    duplicate: true,
+  };
+}
+
 class FormService {
   async listForms(hospitalId) {
     return formRepo.findFormsByHospital(hospitalId);
@@ -100,8 +148,35 @@ class FormService {
   }
 
   async submitForm(hospitalId, formIdOrSlug, user, submissionData) {
+    // تفکیکِ «لفافِ درخواست» از «داده‌ی فرم» پیش از هر اعتبارسنجی: client_token بخشی از
+    // پاسخِ فرم نیست و نباید در data_json ذخیره شود — و اگر روزی فرمی فیلدی به همین نام
+    // داشته باشد، توکن جای داده‌ی واقعی را نمی‌گیرد. این کلید فقط در سطحِ بدنه‌ی درخواست
+    // معنا دارد (بدونِ توکن، هیچ‌چیزِ این مسیر تغییر نمی‌کند).
+    let data = submissionData;
+    let clientToken = null;
+    if (data && typeof data === 'object' && !Array.isArray(data) &&
+        Object.prototype.hasOwnProperty.call(data, CLIENT_TOKEN_KEY)) {
+      clientToken = normalizeClientToken(data[CLIENT_TOKEN_KEY]);
+      data = { ...data };
+      delete data[CLIENT_TOKEN_KEY];
+    }
+    if (clientToken && !formRepo.hasClientTokenColumn()) {
+      // به‌جای خطای مبهمِ «no such column: client_token»: یعنی مهاجرت اجرا نشده و بدونِ آن
+      // توکن هیچ تضمینی در سطحِ داده ندارد (خطرِ بازگشتِ همان باگِ تکراری‌شدنِ w5).
+      throw new Error('ستون client_token روی این دیتابیس ساخته نشده است؛ مهاجرت database/migrate-form-submission-client-token.js اجرا نشده.');
+    }
+
     const form = formRepo.findFormByIdOrSlug(hospitalId, formIdOrSlug);
     if (!form) throw new Error('فرم مورد نظر یافت نشد.');
+
+    // گاردِ تکرار عمداً *پیش از* اعتبارسنجی Ajv است: بازفرستِ شبکه همان بدنه را دارد و اگر
+    // اسکیمای فعال در فاصله‌ی دو تلاش عوض شده باشد نباید ۴۰۰ بگیرد؛ پاسخِ ثبت‌شده مرجع است.
+    // توکن یک «قابلیت» در محدوده‌ی همین فرم است: هر کس مجوزِ fill این فرم را دارد (همان
+    // میان‌افزارِ مسیر) می‌تواند پاسخِ ثبت‌شده‌ی همان فرم را با توکنش ببیند.
+    if (clientToken) {
+      const existing = formRepo.findSubmissionByClientToken(hospitalId, form.id, clientToken);
+      if (existing) return duplicateResult(existing, form.id);
+    }
 
     const activeVersion = formRepo.getLatestPublishedVersion(form.id);
     if (!activeVersion) throw new Error('این فرم هنوز هیچ نسخه منتشرشده‌ای ندارد.');
@@ -110,7 +185,7 @@ class FormService {
 
     // ۲. اعتبارسنجی داده ورودی در برابر اسکیمای نسخه فعال
     const validate = ajv.compile(schema);
-    const valid = validate(submissionData);
+    const valid = validate(data);
     if (!valid) {
       const errorMsg = validate.errors.map(e => `${e.instancePath || 'ریشه'}: ${e.message}`).join('، ');
       throw new Error(`داده‌های ارسالی با ساختار استاندارد فرم همخوانی ندارند: ${errorMsg}`);
@@ -124,20 +199,33 @@ class FormService {
     if (userFormAcl && userFormAcl.field_rules_json) {
       const fieldRules = JSON.parse(userFormAcl.field_rules_json || '{}');
       for (const [fieldName, rule] of Object.entries(fieldRules)) {
-        if (rule === 'read_only' && submissionData[fieldName] !== undefined) {
+        if (rule === 'read_only' && data[fieldName] !== undefined) {
           // اگر فیلد فقط خواندنی است نباید توسط این نقش ویرایش شود
-          delete submissionData[fieldName];
+          delete data[fieldName];
         }
       }
     }
 
-    const submissionId = formRepo.createSubmission({
-      hospitalId,
-      formId: form.id,
-      formVersionId: activeVersion.id,
-      userId: user.id,
-      data: submissionData
-    });
+    let submissionId;
+    try {
+      submissionId = formRepo.createSubmission({
+        hospitalId,
+        formId: form.id,
+        formVersionId: activeVersion.id,
+        userId: user.id,
+        data,
+        clientToken
+      });
+    } catch (err) {
+      // مسابقه: بین بررسیِ بالا و همین INSERT، درخواستِ همزمانِ دیگری همان توکن را ثبت کرد
+      // و ایندکسِ یکتا جلوی این یکی را گرفت. اینجا هم باید پاسخِ «قبلاً ثبت شده» برگردد، نه
+      // ۵۰۰ — یعنی گارد واقعاً در سطحِ داده است، نه یک SELECTِ خوش‌بینانه.
+      if (clientToken && isClientTokenConflict(err)) {
+        const existing = formRepo.findSubmissionByClientToken(hospitalId, form.id, clientToken);
+        if (existing) return duplicateResult(existing, form.id);
+      }
+      throw err;
+    }
 
     return {
       id: submissionId,

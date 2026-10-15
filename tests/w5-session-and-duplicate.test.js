@@ -265,6 +265,54 @@ describe('W5 — نشستِ منقضی، ارسالِ تکراریِ فرم، و
   });
 
   // =========================================================================
+  // ۲ب) همان مشکل، این بار با گاردِ واقعی: client_token (واحد W9)
+  // =========================================================================
+  it('۲ب) گاردِ client_token: ارسالِ دومِ همان توکن رکوردِ تازه نمی‌سازد و duplicate می‌دهد', async () => {
+    const form = db().prepare("SELECT id, slug FROM forms WHERE slug = 'monthly-program'").get();
+    assert.ok(form, 'فرمِ monthly-program باید در کپیِ دمو باشد');
+    const published = db().prepare(
+      "SELECT schema_json FROM form_versions WHERE form_id = ? AND status = 'published' ORDER BY version_number DESC LIMIT 1"
+    ).get(form.id);
+    const schema = JSON.parse(published.schema_json);
+    const marker = `W9-TOKEN-${Date.now()}`;
+    // توکنِ شبیه‌سازِ کلاینت: الگوی مجازِ سرویس (حروف/ارقام انگلیسی و - . _ :)
+    const token = `w9-${Date.now().toString(36)}-a1b2`;
+    const body = {
+      client_token: token,
+      ward_name: schema.properties.ward_name.enum[0],
+      month_jalali: schema.properties.month_jalali.enum[0],
+      head_nurse_notes: marker,
+    };
+    const count = () => db().prepare(
+      'SELECT COUNT(*) AS n FROM form_submissions WHERE form_id = ? AND data_json LIKE ?'
+    ).get(form.id, `%${marker}%`).n;
+    const before = count();
+
+    const first = await req('POST', `/api/forms/${form.slug}/submit`, { cookie: sid, body });
+    assert.equal(first.status, 201, 'ثبتِ اولِ توکندار باید ۲۰۱ بدهد');
+    assert.equal(first.json.duplicate, undefined, 'پاسخِ اول نباید duplicate داشته باشد');
+
+    const second = await req('POST', `/api/forms/${form.slug}/submit`, { cookie: sid, body });
+    assert.equal(second.status, 200, 'ثبتِ دومِ همان توکن باید ۲۰۰ بدهد (نه ۲۰۱)');
+    assert.equal(second.json.duplicate, true, 'پاسخِ دوم باید duplicate:true داشته باشد');
+    assert.equal(second.json.submissionId, first.json.submissionId, 'همان رکوردِ اول برگردانده می‌شود');
+    assert.equal(count(), before + 1, 'گارد کار کرد: فقط یک رکورد ساخته شد');
+
+    // جدا نگه‌داشتنِ توکن از داده‌ی فرم: کلیدِ لفاف نباید داخل data_json برود.
+    const row = db().prepare('SELECT data_json, client_token FROM form_submissions WHERE id = ?')
+      .get(first.json.submissionId);
+    assert.equal(row.client_token, token, 'توکن باید در ستونِ خودش ثبت شود');
+    assert.ok(!String(row.data_json).includes('client_token'), 'توکن نباید در data_json ذخیره شود');
+
+    // توکنِ نامعتبر (فاصله/کاراکترِ غیرمجاز) باید ۴۰۰ بگیرد، نه اینکه بی‌صدا نادیده گرفته شود.
+    const bad = await req('POST', `/api/forms/${form.slug}/submit`, {
+      cookie: sid,
+      body: { ...body, client_token: 'bad token!', head_nurse_notes: `${marker}-bad` },
+    });
+    assert.equal(bad.status, 400, 'توکنِ نامعتبر باید ۴۰۰ بدهد');
+    assert.equal(count(), before + 1, 'درخواستِ نامعتبرِ توکن نباید رکورد بسازد');
+  });
+  // =========================================================================
   // ۳) ویرایشِ همزمان — آخرین‌نویسنده برنده، بدون هیچ گاردِ نسخه
   // =========================================================================
   it('۳) ویرایشِ همزمان: مقدارِ نوشته‌ی دوم می‌ماند و گاردِ نسخه (If-Match) وجود ندارد', async () => {

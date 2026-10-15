@@ -5,6 +5,9 @@
 const { db } = require('../../config/database-sqlite');
 const crypto = require('crypto');
 
+// کشِ وجودِ ستون client_token — پایین‌تر (hasClientTokenColumn) توضیح داده شده.
+let clientTokenColumnCache = null;
+
 class FormRepository {
   findFormsByHospital(hospitalId) {
     return db.prepare(`
@@ -88,13 +91,58 @@ class FormRepository {
     return id;
   }
 
-  createSubmission({ hospitalId, formId, formVersionId, userId, data }) {
+  createSubmission({ hospitalId, formId, formVersionId, userId, data, clientToken }) {
     const id = crypto.randomUUID();
+    // چرا دو شکلِ INSERT: ستون client_token تازه و اختیاری است و مهاجرتِ آن
+    // (database/migrate-form-submission-client-token.js) در زنجیره‌ی بوت اجرا می‌شود.
+    // اگر این کوئری در همه‌ی حالت‌ها به آن ستون اشاره می‌کرد، روی دیتابیسی که مهاجرت رویش
+    // اجرا نشده (مثلاً اجرای مستقیم tests/form-engine.test.js روی database/hospital.db
+    // بدونِ بوتِ src/app.js) مسیرِ امروزِ ثبت فرم با «no such column: client_token»
+    // می‌شکست. شاخه‌ی بدونِ توکن عیناً همان کوئریِ قبلی است.
+    if (clientToken) {
+      db.prepare(`
+        INSERT INTO form_submissions (id, hospital_id, form_id, form_version_id, user_id, data_json, status, client_token)
+        VALUES (?, ?, ?, ?, ?, ?, 'submitted', ?)
+      `).run(id, hospitalId, formId, formVersionId, userId, JSON.stringify(data), clientToken);
+      return id;
+    }
     db.prepare(`
       INSERT INTO form_submissions (id, hospital_id, form_id, form_version_id, user_id, data_json, status)
       VALUES (?, ?, ?, ?, ?, ?, 'submitted')
     `).run(id, hospitalId, formId, formVersionId, userId, JSON.stringify(data));
     return id;
+  }
+
+  /**
+   * پاسخِ همان فرم و همان بیمارستان با همان شناسه‌ی یکتای ارسال (گاردِ ارسالِ تکراری).
+   * محدود به hospital_id است تا توکنِ یک بیمارستان هرگز به پاسخِ بیمارستانِ دیگر نخورد
+   * (قاعده‌ی ۴: هر کوئری داده بیمارستانی hospital_id می‌گیرد).
+   */
+  findSubmissionByClientToken(hospitalId, formId, clientToken) {
+    return db.prepare(`
+      SELECT s.*, v.version_number
+      FROM form_submissions s
+      LEFT JOIN form_versions v ON s.form_version_id = v.id
+      WHERE s.hospital_id = ? AND s.form_id = ? AND s.client_token = ?
+    `).get(hospitalId, formId, clientToken);
+  }
+
+  /**
+   * آیا مهاجرتِ client_token روی این دیتابیس اجرا شده است؟
+   * چرا: اگر کلاینتِ تازه توکن بفرستد ولی مهاجرت اجرا نشده باشد، خطای خامِ «no such column:
+   * client_token» می‌آمد و از پیامِ ۵۰۰ علتش فهمیده نمی‌شد. این بررسی فقط در مسیرِ توکندار
+   * صدا زده می‌شود (پس هیچ درخواستِ موجودی هزینه‌ای ندارد) و نتیجه‌اش کش می‌شود، چون اسکیمای
+   * جدول در عمرِ یک process عوض نمی‌شود.
+   */
+  hasClientTokenColumn() {
+    if (clientTokenColumnCache !== null) return clientTokenColumnCache;
+    try {
+      clientTokenColumnCache = db.prepare('PRAGMA table_info(form_submissions)').all()
+        .some((r) => r.name === 'client_token');
+    } catch (e) {
+      clientTokenColumnCache = false;
+    }
+    return clientTokenColumnCache;
   }
 
   findSubmissions(hospitalId, formId) {

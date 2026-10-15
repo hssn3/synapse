@@ -65,7 +65,10 @@ class FormController {
       submissionData = submissionData.data;
     }
     const result = await formService.submitForm(hospitalId, id, req.user, submissionData);
-    res.status(201).json(result);
+    // ۲۰۱ = ثبتِ تازه؛ ۲۰۰ + duplicate:true = «همین ارسال قبلاً ثبت شده بود». دومی خطا
+    // نیست: بازفرستِ شبکه/دوبار کلیک باید موفق دیده شود تا کلاینت رکوردِ تکراری نسازد و
+    // کاربر پیامِ خطا نگیرد. (قرارداد رسمی در docs/API_CONTRACTS.md نزد مالک نوشته می‌شود.)
+    res.status(result && result.duplicate ? 200 : 201).json(result);
   }
 
   async getSubmissions(req, res) {

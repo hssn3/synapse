@@ -696,6 +696,13 @@ catch (err) { seedFail('Indicator slides migration failed:', err); }
 try { require('../database/migrate-313-audit').runMigration(); }
 catch (err) { seedFail('Audit-313 migrations failed:', err); }
 
+// شناسه‌ی یکتای ارسالِ فرم (client_token) + ایندکس یکتای جزئی — گاردِ «ارسال تکراری» روی
+// POST /api/forms/:id/submit. چرا در بوت: مهاجرت idempotent است (ستون/ایندکس پیش از ساخت
+// بررسی می‌شوند) و باید پیش از اولین درخواستِ فرم ساخته شده باشد، وگرنه مسیرِ توکندار با
+// «no such column» می‌شکند. رفتار امروزِ کلاینتِ بدونِ توکن دست‌نخورده می‌ماند.
+try { require('../database/migrate-form-submission-client-token').runMigration(); }
+catch (err) { seedFail('Form submission client-token migration failed:', err); }
+
 // زمان‌بند فقط برای کانال‌های خروجی (ایمیل/پیامک). بدون پیکربندی، خودش اجرا نمی‌شود و
 // هرگز throw نمی‌کند — اقلام درون‌برنامه‌ای در کارتابل محاسبه می‌شوند و مستقل از این‌اند.
 try { require('./services/reminder-cron').startCron(); }
