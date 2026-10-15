@@ -93,3 +93,7 @@
 - **axe-core (WCAG 2.x A/AA): صفر نقض** در داشبورد (۱۲۸۰/۳۶۰) و سه فرم عمومی
   (error-report / fmea / complaint) — اندازه‌گیری قبل/بعد در همین فایل.
 - HEAD پس از کامیت فیکس‌های a11y این نشست: `22fe02e` (کپی از `git rev-parse HEAD`؛ کامیت docs بعد از همین می‌آید).
+- **پوش نشده** (۱۴۰۵/۰۷/۲۳): `22fe02e` (a11y) و `15991ab` (docs) — `git push` با خطای
+  «could not read Username for https://github.com» شکست خورد؛ روی این ماشین اعتبارنامه‌ی گیت‌هاب
+  تنظیم نشده. راه امن برای مالک: یک‌بارinteractive پوش با Git Credential Manager یا `gh auth login`.
+  توکن هرگز در چت پاس نشود.
