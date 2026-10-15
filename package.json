@@ -1,7 +1,7 @@
 {
-  "name": "hospital-accreditation-platform",
+  "name": "synapse",
   "version": "1.0.0",
-  "description": "پلتفرم یکپارچه مدیریت پرستاری و اعتباربخشی بیمارستانی",
+  "description": "سیناپس — سامانه یکپارچه نظارت، اعتباربخشی و پایش سلامت (مدیریت، کیفیت و اعتباربخشی بیمارستان)",
   "main": "src/app.js",
   "scripts": {
     "start": "node src/app.js",
