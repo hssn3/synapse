@@ -1,6 +1,6 @@
 # PROGRESS — Hospital Platform Hardening & Completion
 
-> آخرین به‌روزرسانی: 2026-10-12 (نشست ۱۴۰۵/۰۷/۲۰)
+> آخرین به‌روزرسانی: 2026-10-15 (نشست ۱۴۰۵/۰۷/۲۳ — ماشین ویندوزی جدید)
 > این فایل منبعِ حقیقتِ پیشرفت است. در شروع هر نشست: PROGRESS.md را بخوان، سپس `git status` و `git log` را با hash انتهای این فایل مقایسه کن.
 > HEAD محلی به‌عنوان مبنای — از روی حافظه تایپ نشود، همیشه از `git rev-parse HEAD` کپی شود.
 
@@ -61,16 +61,35 @@
   ندارد و فقط بوت سرور می‌سازد → ترتیب اصلاح شد (بوت قبل از تست‌ها) → **اجرای دوم: تمام مراحل سبز**
   (Run ID 38239943115، commit `e55d1d2`).
 
+## کارهای انجام‌شده — دسته پنجم (نشست ۱۴۰۵/۰۷/۲۳ — ماشین ویندوزی)
+- [x] **تأیید بیسلاین روی ماشین ویندوزی جدید** (قبلاً فقط لینوکس/CI): demo-restore → بوت :3311 →
+  ۵ سوئیت ۳۵/۳۵ · smoke ۶/۶ · endpoint-matrix ۱۵/۱۵ · دانا ۲۱+۱۰ ادعا همه سبز ·
+  lint 0 error (13498 warning ازپیش‌موجود — استایل) · `npm audit --omit=dev` 0.
+- [x] **اولین سنجش عددی دسترس‌پذیری با axe-core 4.x (WCAG 2.x A/AA)** — تا حالا «not measured» بود:
+  - قبل از فیکس: داشبورد ۱۲۸۰=۲۷ pass/۲ violation · ۷۶۸=۲۵/۱ · ۳۶۰=۲۵/۱ ·
+    error-report=۱۳/۲ قانون · fmea=۱۲/۲ · complaint=۱۳/۲.
+- [x] **رفع تمام نقض‌های اندازه‌گیری‌شده → صفر** (روش: axe تزریقی در Chromium از node_modules):
+  - `select-name` (critical): اتصال for/id در error-report (۳ سلکت) و complaint (۱)؛
+    `aria-label="سال ارزشیابی"` روی کمبوی سال در `02-visual-theme.js`.
+  - `label` ×۱۰ (critical) در fmea: اتصال for/id همه ورودی/متن‌ها.
+  - `image-alt` (critical): `img.alt = نام مرکز` در `public-letterhead.js` — روی هر ۵ فرم عمومی اثر می‌گذارد.
+  - `scrollable-region-focusable` (serious): `snav` در `08-router-routes.js` → `role="region"` + `aria-label` + `tabindex="0"`.
+  - سنجه مجدد: داشبورد ۱۲۸۰=۲۸/۰ · ۳۶۰=۲۶/۰ · error-report=۱۶/۰ · fmea=۱۵/۰ · complaint=۱۶/۰.
+  - رگرسیون بعد از فیکس: ۵ سوئیت ۳۵/۳۵ + smoke ۶/۶ سبز.
+- [x] نکته ابزار: دکمه‌های لندینگ با انیمیشن بی‌پایان (`shine anim`) کلیک خودکار Playwright را
+  ناپایدار می‌کنند (timeout روی actionability) — در تست خودکار UI باید force/evaluate به کار رود.
+  نقض a11y نیست: `prefers-reduced-motion` در `motion.css:504` همه انیمیشن‌ها را خاموش می‌کند.
+
 ## کارهای بعدی (به ترتیب)
 1. [ ] **revoke کلید Gemini توسط مالک** (اقدام انسانی خارج از محیط — بالاترین اولویت).
 2. [ ] تصمیم دیپلوی production (provider) — چک‌لیست آماده در `docs/DEPLOYMENT-CHECKLIST.md`.
 3. [ ] LICENSE — نیاز به تصمیم کارفرما (سند SECURITY توضیح داده).
-4. [ ] Lighthouse/a11y عددی در محیطی با Chromium کامل (اینجا ابزار نبود → not measured).
+4. [x] a11y عددی با axe-core اندازه‌گیری و صفر شد (۱۴۰۵/۰۷/۲۳) — Lighthouse/performance هنوز «not measured» (ابزار در محیط نیست).
 5. [ ] (اختیاری/بلندمدت) حذف تدریجی `unsafe-inline` از CSP (مهاجرت onclick → addEventListener).
 
-## آخرین وضعیت تأییدشده (1405/07/20)
-- harness ۷/۷ سوئیت سبز: rbac-matrix 14/14 · form-engine 6/6 · guardrails 6/6 ·
-  retrieval 21/21 · response 10/10 · smoke 6/6 · endpoint-matrix 15/15.
-- `npm audit --omit=dev`: **0 vulnerabilities**.
-- **CI سبز روی GitHub Actions** (اجرای دوم بعد از اصلاح ترتیب — Run 38239943115).
-- HEAD: `e55d1d2` (origin/main همگام؛ پس از این فقط همین به‌روزرسانی PROGRESS).
+## آخرین وضعیت تأییدشده (1405/07/23)
+- روی ماشین ویندوزی (Node v22.23.3): ۵ سوئیت ۳۵/۳۵ · smoke 6/6 · endpoint-matrix 15/15 ·
+  دانا retrieval 21 + response 10 همه سبز · `npm audit --omit=dev` 0 · lint 0 error.
+- **axe-core (WCAG 2.x A/AA): صفر نقض** در داشبورد (۱۲۸۰/۳۶۰) و سه فرم عمومی
+  (error-report / fmea / complaint) — اندازه‌گیری قبل/بعد در همین فایل.
+- HEAD پس از کامیت فیکس‌های a11y این نشست: `22fe02e` (کپی از `git rev-parse HEAD`؛ کامیت docs بعد از همین می‌آید).
