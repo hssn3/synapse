@@ -1068,6 +1068,10 @@ function renderExcelEditor() {
   const theme = ISLIDE_THEMES[slide.section_id] || { primary: '#38bdf8', icon: '📊' };
   const rows = slide.data || [];
 
+  // عنوان اسلاید از دیتابیس می‌آید (مسیر نوشتن: src/modules/quality/indicator-slides.routes.js
+  // → PUT /indicator-slides/:slideNumber/values ستون title را از body می‌نویسد). پس داخل
+  // <option> هم باید مثل ۹ جای دیگر همین فایل با esc() بیاید؛ cleanSlideTitle فقط نرمال‌سازِ
+  // متن است (جانشینی نام بیمارستان)، نه اسکیپر — بدون esc عنوانِ آلوده از <select> بیرون می‌زند.
   return `
     <div class="islide-editor-container panel g">
       <div class="editor-top-bar">
@@ -1076,7 +1080,7 @@ function renderExcelEditor() {
           <select class="form-ctrl" onchange="onEditorSlideSelect(this.value)">
             ${ISLIDE_STATE.slides.filter(s => s.slide_number > 1 && s.slide_number <= 76).map(s => `
               <option value="${s.slide_number}" ${s.slide_number === slide.slide_number ? 'selected' : ''}>
-                اسلاید ${s.slide_number}: ${cleanSlideTitle(s.title)}
+                اسلاید ${s.slide_number}: ${esc(cleanSlideTitle(s.title))}
               </option>
             `).join('')}
           </select>

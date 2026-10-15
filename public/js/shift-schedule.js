@@ -19,7 +19,13 @@
    ===================================================================== */
 (function (global) {
   'use strict';
-  const e = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  // `'` هم به نگاشت اضافه شد (&#39;) — مثل بقیه‌ی اسکیپرهای پروژه، خروجی باید هم برای متن و
+  // هم برای اتریبیوت کامل باشد. اما توجه: همین خروجی در onclick="ssSelectWard('…')" (خط ۱۳۱)
+  // رشته‌ی تک‌کوتیشنیِ JS را نجات نمی‌دهد؛ HTML واکشیِ «&#39;» را پیش از کامپایلِ رشته به «'»
+  // برمی‌گرداند و آپاستروفِ عنوان همچنان رشته را می‌شکند (شاهد عملی: scratch/xss-probe2.cjs،
+  // خطای «missing ) after argument list» روی کلیک). رفع ریشه‌ای باید در محلِ استفاده باشد:
+  // پاس‌دادن شناسه/ایندکس یا خواندن از data-attribute، به‌جای درج عنوان داخل رشته‌ی onclick.
+  const e = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const I = (n, c) => (typeof ic === 'function' ? ic(n, c) : '');
   const F = n => (typeof fa === 'function' ? fa(n) : String(n));
   const JM = ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'];
@@ -103,6 +109,14 @@
   };
 
   global.ssSelectWard = async function (title) { SS.wardTitle = title; await ssLoadAll(); };
+  // چرا ایندکس و نه عنوان: `onclick="ssSelectWard('عنوان')"` عنوان را داخل یک رشتهٔ JS می‌گذاشت
+  // و آپاستروفِ عنوان (یا هر کاراکترِ کنترلی) رشته را می‌شکست — esc() این را حل نمی‌کند، چون HTML
+  // خودش «&#39;» را پیش از تجزیهٔ JS به «'» برمی‌گرداند (شاهد: scratch/xss-probe2.cjs — «missing )
+  // after argument list»). حالا فقط یک عدد به رشته می‌رود و نام از خودِ state خوانده می‌شود.
+  global.ssSelectWardByIndex = async function (i) {
+    const w = SS.wards[i];
+    if (w) { SS.wardTitle = w.title; await ssLoadAll(); }
+  };
   global.ssSelectTab = function (t) { SS.tab = t; ssDraw(); };
   global.ssChangeMonth = async function (delta) {
     let m = SS.month + delta, y = SS.year;
@@ -128,7 +142,7 @@
     <div class="panel g noprint" style="margin-bottom:16px">
       <div class="phd">${I('users', 'lg')}<div><h3>بخش‌ها</h3><div class="sub">پرسنل و برنامه‌ی شیفت بخش انتخابی</div></div></div>
       <div class="pbody" style="display:flex;gap:8px;flex-wrap:wrap">
-        ${SS.wards.map(w => `<button class="btn ${w.title === SS.wardTitle ? 'btn-g' : 'btn-o'} btn-sm" onclick="ssSelectWard('${e(w.title)}')">${e(w.title)}</button>`).join('')}
+        ${SS.wards.map((w, wi) => `<button class="btn ${w.title === SS.wardTitle ? 'btn-g' : 'btn-o'} btn-sm" onclick="ssSelectWardByIndex(${wi})">${e(w.title)}</button>`).join('')}
       </div>
       <div class="pbody" style="padding-top:0;display:flex;gap:8px">
         <button class="btn ${SS.tab === 'staff' ? 'btn-g' : 'btn-o'} btn-sm" onclick="ssSelectTab('staff')">${I('user')} پرسنل</button>
