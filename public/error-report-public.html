@@ -28,16 +28,16 @@
       </div>
       <div class="grid2">
         <div><label>دسته‌بندی خطا</label><input name="error_category" maxlength="120" placeholder="مثال: دارویی / تشخیصی / تجهیزات"></div>
-        <div><label>شدت خطا</label><select name="severity">
+        <div><label for="severity">شدت خطا</label><select name="severity" id="severity">
           <option value="">—</option><option>خفیف</option><option>متوسط</option><option>شدید</option><option>بحرانی</option>
         </select></div>
       </div>
       <label class="req">شرح خطا و اقدامات انجام‌شده</label>
       <textarea name="description" required placeholder="آنچه رخ داد، عوارض ایجادشده و اقداماتی که انجام شد"></textarea>
       <div class="grid2">
-        <div><label>آیا این گزارش خوداظهاری است؟</label><select name="is_self_declaration">
+        <div><label for="is_self_declaration">آیا این گزارش خوداظهاری است؟</label><select name="is_self_declaration" id="is_self_declaration">
           <option value="0">خیر</option><option value="1">بله</option></select></div>
-        <div><label>آیا نیاز به تحلیل ریشه‌ای (RCA) دارد؟</label><select name="needs_rca" id="nr">
+        <div><label for="nr">آیا نیاز به تحلیل ریشه‌ای (RCA) دارد؟</label><select name="needs_rca" id="nr">
           <option value="0">خیر</option><option value="1">بله</option></select></div>
       </div>
       <div id="rcaw" style="display:none">

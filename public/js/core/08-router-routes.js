@@ -144,7 +144,7 @@ function renderApp(){
           </div>
         </div>
       </div>
-      <div class="snav">
+      <div class="snav" role="region" aria-label="ناوبری اصلی سامانه" tabindex="0">
         ${navGroups.map(grp=>{
           // جای بج خالی از ابتدا در DOM هست تا refreshNavBadges فقط متن را عوض کند
           const items=grp.items.map(n=>{

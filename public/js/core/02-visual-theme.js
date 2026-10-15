@@ -431,7 +431,8 @@ function yearSelectHtml(){
   const cur=todayJalali().jy;
   let opts='';
   for(let y=cur+1; y>=MIN_JYEAR; y--) opts+=`<option value="${y}" ${y===S.year?'selected':''}>${fa(y)}</option>`;
-  return `<select onchange="setYear(this.value)">${opts}</select>`;
+  // برچسب «سال» کنار کمبو است، ولی aria-label خودِ کنترل را نام‌دار می‌کند (axe: select-name)
+  return `<select aria-label="سال ارزشیابی" onchange="setYear(this.value)">${opts}</select>`;
 }
 // وضعیت سنجه‌ها دوره‌ای است، پس با عوض شدن سال باید دوباره از سرور خوانده
 // شود — وگرنه نقشه‌ی وضعیتِ سالِ قبلی روی صفحه‌ی سال جدید می‌ماند و کاربر

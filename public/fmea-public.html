@@ -24,19 +24,19 @@
       درج نام گزارش‌دهنده اختیاری است.</div>
     <form id="f">
       <div class="grid2">
-        <div><label>نام گزارش‌دهنده (اختیاری)</label><input name="reporter_name" maxlength="120"></div>
-        <div><label class="req">واحد/بخش گزارش‌دهنده</label><input name="reporting_department" maxlength="120" required></div>
+        <div><label for="f_rep_name">نام گزارش‌دهنده (اختیاری)</label><input name="reporter_name" id="f_rep_name" maxlength="120"></div>
+        <div><label class="req" for="f_rep_dep">واحد/بخش گزارش‌دهنده</label><input name="reporting_department" id="f_rep_dep" maxlength="120" required></div>
       </div>
-      <label class="req">موضوع</label><input name="subject" maxlength="200" required>
+      <label class="req" for="f_subject">موضوع</label><input name="subject" id="f_subject" maxlength="200" required>
       <div class="grid2">
-        <div><label>حیطه‌ی خطر مرتبط</label><input name="related_hazard_area" maxlength="120"></div>
-        <div><label>نوع خطر</label><input name="hazard_type" maxlength="120"></div>
+        <div><label for="f_hazard_area">حیطه‌ی خطر مرتبط</label><input name="related_hazard_area" id="f_hazard_area" maxlength="120"></div>
+        <div><label for="f_hazard_type">نوع خطر</label><input name="hazard_type" id="f_hazard_type" maxlength="120"></div>
       </div>
-      <label class="req">حالات بالقوه خطا</label><textarea name="failure_modes" required></textarea>
-      <label class="req">علل بالقوه (ریشه‌ای)</label><textarea name="root_causes" required></textarea>
-      <label class="req">اثرات بالقوه خطا</label><textarea name="effects" required></textarea>
-      <label class="req">کنترل‌های موجود</label><textarea name="existing_controls" required></textarea>
-      <label>اقدامات پیشنهادی</label><textarea name="recommended_actions"></textarea>
+      <label class="req" for="f_failure_modes">حالات بالقوه خطا</label><textarea name="failure_modes" id="f_failure_modes" required></textarea>
+      <label class="req" for="f_root_causes">علل بالقوه (ریشه‌ای)</label><textarea name="root_causes" id="f_root_causes" required></textarea>
+      <label class="req" for="f_effects">اثرات بالقوه خطا</label><textarea name="effects" id="f_effects" required></textarea>
+      <label class="req" for="f_existing_controls">کنترل‌های موجود</label><textarea name="existing_controls" id="f_existing_controls" required></textarea>
+      <label for="f_recommended_actions">اقدامات پیشنهادی</label><textarea name="recommended_actions" id="f_recommended_actions"></textarea>
       <button type="submit" id="sb">ثبت فرم</button>
     </form>
     <div class="msg" id="msg"></div>

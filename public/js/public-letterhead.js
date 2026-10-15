@@ -20,6 +20,8 @@ function initPubLetterhead(hospitalId, mountEl) {
       if (!d.hospital.has_logo) return; // لوگو ثبت نشده — آیکن پیش‌فرض می‌ماند
       var logoEl = document.getElementById('pllLogo');
       var img = new Image();
+      // متن جایگزین = نام مرکز — صفحه‌خوان‌ها لوگو را «بیمارستان …» اعلام کنند (WCAG 1.1.1)
+      img.alt = (d.hospital && d.hospital.name) ? d.hospital.name : 'لوگوی مرکز درمانی';
       img.onload = function () { logoEl.innerHTML = ''; logoEl.appendChild(img); img.className = 'pll-img'; };
       img.onerror = function () { /* لوگو ثبت شده ولی فایل روی سرور نیست — آیکن پیش‌فرض باقی می‌ماند */ };
       img.src = '/api/public/hospital/' + encodeURIComponent(hospitalId) + '/logo';
