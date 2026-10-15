@@ -95,3 +95,72 @@ node tests/assistant-response-eval.js                             → همه‌�
 3. بازبینی CSP و حذف تدریجی `unsafe-inline` (onclick → addEventListener) — بدهی بزرگ ولی ارزشمند.
 4. اندازه‌گیری Lighthouse در محیط دارای Chromium کامل (اینجا ممکن نبود).
 5. آرشیو ابزارهای تاریخی و تمیزکاری ریشه‌ی مخزن (LICENSE، .freebuff).
+
+---
+
+## ۸) حسابرسی موازی (۱۴۰۵/۰۷/۲۵) — موج ۵ زیرعامل
+
+> ستون «تأیید»: ✅ = خودم در کد یا اجرا دیدم · 🟡 = گزارش زیرعامل، من بازبینی خط‌به‌خط نکرده‌ام.
+> گزارش‌های خام روی دیسک: `audit/02-db.md`، `audit/03-frontend.md`، `audit/04-tests-devops.md` (دو گزارش دیگر به‌دلیل تمام‌شدن بودجه‌ی ابزار زیرعامل نوشته نشد؛ یافته‌هایشان در همین سند ثبت است).
+
+### ۸.۱ API و RBAC (زیرعامل ۱)
+| یافته | عدد | شاهد | تأیید |
+|---|---|---|---|
+| مسیرها (استاتیک + تولیدی mountCrud) | ~۸۴۲ (۴۷۰ + ۳۷۲) | شمارش `router.*` | 🟡 |
+| مسیر بی‌احراز | ۶۸ (شامل عمومی‌های عمدی) | فهرست زیرعامل | 🟡 |
+| `authRequired` بدون `requirePermission` | ۱۶۶ | sweep | 🟡 |
+| بدون `hospitalScope` | ۳۴ | sweep | 🟡 |
+| `UPDATE`/`DELETE` بدون `hospital_id` | ۷۴ | sweep | 🟡 |
+| افشای فهرست کاربران فعال + `username` بدون احراز در `GET /api/entry/hospital/:id/roles` | — | `src/routes/entry.js:40` | ✅ |
+| `dev-users`/`dev-login` بدون احراز (فقط غیر-production) | — | `src/routes/auth.js:167,182` گیتِ `config.isProduction \|\| DISABLE_DEV_LOGIN` | ✅ |
+
+### ۸.۲ داده و schema (زیرعامل ۲ — `audit/02-db.md`)
+| یافته | شاهد | تأیید |
+|---|---|---|
+| ۲۲۰ جدول در دیتابیس دمو (AGENTS.md: ۲۲۱) | کوئری `sqlite_master` | 🟡 |
+| `quick_check=ok`، صفر نقض FK؛ ۴۷ جدول بدون FK؛ ۳۴ جدول با `hospital_id` بدون ایندکس | کوئری | 🟡 |
+| ارجاع یتیم: `reminder_rules`(۱) + `example_seed_log`(۶) → بیمارستان حذف‌شده | ریشه: `seed-hospital-three-scenario.js:504` | 🟡 (در W3 بررسی می‌شود) |
+| `document_signoffs`: ۶۰۲/۶۰۲ ردیف با `user_id=NULL` | کوئری | 🟡 |
+| `accreditation_sections`: ۵۲۰ سنجه با `title=NULL` (متن در `statement`) | کوئری | 🟡 |
+| `seed-measure-status-year.js:65` → `DROP TABLE measure_status` و کپی فقط ۱۰ ستون (خطر ازدست‌رفتن ستون) | بازرسی کد | 🟡 (در W3 اصلاح) |
+| خطای seed در بوت فقط لاگ می‌شود | `src/app.js` ~۱۱۰-۱۱۱ | 🟡 (در W3 نمایان می‌شود) |
+| بکاپ/restore بدون راست‌آزمایی پس از بازگردانی (فقط `demo-restore` راست‌آزمایی می‌کند) | بازرسی اسکریپت‌ها | 🟡 |
+
+### ۸.۳ فرانت‌اند (زیرعامل ۳ — `audit/03-frontend.md`)
+| یافته | عدد/شاهد | تأیید |
+|---|---|---|
+| فایل‌های `public` | ۱۳۷ فایل · JS ۹۲ فایل/۴۵٬۱۱۴ خط · CSS ۲۴ فایل/۱۴٬۴۴۱ خط | 🟡 |
+| `index.html`: اسکریپت‌ها | ۸۹ اسکریپت، صفر `defer`، صفر `module` | 🟡 |
+| `innerHTML` / `esc()` | ۵۵۱ مورد در ۷۲ فایل / ۱٬۳۹۲ فراخوان | 🟡 |
+| برچسب فرم | ۶۱۸ `label` با فقط ۲۱ `for` | 🟡 |
+| 🔴 XSS ذخیره‌شده: درج خام `title` اسلاید (نویسنده: `indicator-slides.routes.js:134`) | `public/js/views/quality/indicator-slides-view.js:1079` — تنها جای فایل که `esc()` ندارد | ✅ (خودم خواندم) |
+| 🔴 اسکیپر ناقص: `'` اسکیپ نمی‌شود ولی داخل `onclick='…'` تزریق می‌شود | `public/js/shift-schedule.js:22` + مصرف در `:131` | ✅ (خودم خواندم) |
+| CSP با `unsafe-inline` در `script-src` و `script-src-attr` | `src/middleware/security.js:25-26` | 🟡 |
+| `aria-current` در ناوبری | صفر مورد | 🟡 |
+| `alt` گمشده | `reports-kartabl.js:270` | 🟡 |
+| `activeCardId` (Card Docking پرامت فاز ۴) | صفر نتیجه در کد | 🟡 |
+| SW: کش نکردن `/api` + پاک‌سازی در logout | `public/sw.js:24-37` | 🟡 |
+
+### ۸.۴ تست، CI و استقرار (زیرعامل ۴ — `audit/04-tests-devops.md`)
+| یافته | شاهد | تأیید |
+|---|---|---|
+| بیس‌لاین همین نشست | `test:all` ۳۵/۳۵ · smoke ۶/۶ · endpoint-matrix ۱۵/۱۵ · دانا ۲۱+۱۰ · `npm audit` ۰ | ✅ (اجرای من) |
+| lint | ۳۲۷ فایل، ۰ error / ۱۳٬۴۹۸ warning (quotes + no-unused-vars) | 🟡 |
+| CI | ۵ ران؛ ران اول مردود، آخرین سبز روی `2b9c489`؛ سه کامیت آخر بدون ران CI | 🟡 |
+| مسیر compose در production بالا نمی‌آید (پلیس‌هولدر JWT در لیست ضعیف‌ها) | بررسی ترکیب env + محافظ | 🟡 (W4) |
+| ارسال تکراری و ویرایش همزمان: نه گارد، نه تست | بازرسی مسیرها/تست‌ها | 🟡 (W5) |
+| انقضای نشست و مایگریشن down: بدون پوشش تست | بازرسی | 🟡 (W5) |
+
+### ۸.۵ دستیار (M7) و جست‌وجو (زیرعامل ۵)
+| یافته | شاهد | تأیید |
+|---|---|---|
+| مسیر چت قدیمی فقط `authRequired`+`hospitalScope` بدون مجوز | `src/modules/assistant/assistant-legacy.routes.js:218` | 🟡 (W2) |
+| مسیر چت سازمانی بدون سقف طول ورودی | `src/modules/assistant/assistant.routes.js:12` | 🟡 (W2) |
+| نبود تایم‌اوت برای provider | مسیر فراخوانی | 🟡 (W2) |
+| شرح گزارش‌های `is_confidential=1` بدون فیلتر به provider بیرونی | `src/services/assistant-context.js:484` → `:573` | 🟡 (W7) |
+| باگ تودرتویی «کارهای باز من» و اعمال‌نشدن override سطح کاربر | `assistant-context.js:628-631` | 🟡 (Backlog) |
+| evalهای دانا | retrieval ۲۱/۲۱ · response ۱۰/۱۰ (بدون کلید provider) | ✅ (اجرای من) |
+
+### ۸.۶ نتیجه‌ی فاز ۱
+- از میان یافته‌ها، **شش مورد بحرانی/بالا** انتخاب و به واحدهای اجرایی W1–W3 سپرده شد؛ بقیه در `docs/IMPLEMENTATION_PLAN.md` با شرط ورود/خروج ثبت‌اند.
+- مواردی که با شاهد کافی به «کم‌ریسک/خارج از دامنه» طبقه‌بندی شدند: دسترسی عمومی‌های عمدی (فرم‌های بی‌ورود، پالیسی تم)، `dev-*` (production-gated) و موارد Backlog.
