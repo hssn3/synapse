@@ -468,6 +468,61 @@ function seedMeasureStatuses(hospitalId, adminUserId) {
 //   ۲) فقط وقتی بیمارستان نمونه واقعاً موجود است، تا هرگز به صفر بیمارستان نرسیم،
 //   ۳) فقط وقتی هیچ داده‌ی واقعی‌ای در آن ثبت نشده — اگر کسی روی همان بیمارستان کار
 //      کرده باشد (سنجه/سند/صورت‌جلسه)، دست‌نخورده می‌ماند و فقط هشدار داده می‌شود.
+// ---------- ۸.۵) جاروی ارجاع‌های معلقِ بیمارستانی ----------
+// تاریخچه‌ی حادثه (چرا این تابع وجود دارد): نسخه‌ی پیشینِ همین فایل بیمارستانِ بوت‌استرپ را
+// با «DELETE FROM hospitals» حذف می‌کرد، ولی SQLite فقط برای جدول‌هایی که کلید خارجیِ
+// «ON DELETE CASCADE» به hospitals دارند وابسته‌ها را خودکار می‌برد. از ۲۲۱ جدول، ۳۴ جدول
+// فقط ستون hospital_id دارند و هیچ FK ندارند؛ نتیجه اینکه روی دیتابیس دمو ردیف‌هایی با
+// hospital_id = '7a8c6616-2c77-4176-8219-f8ec522ff35b' (شناسه‌ی بیمارستانی که دیگر در
+// hospitals نیست) جا ماندند — اندازه‌گیری واقعی: reminder_rules = ۱ ردیف،
+// example_seed_log = ۶ ردیف. این ردیف‌ها چون همه‌ی کوئری‌های واقعی با hospitalScope فیلتر
+// می‌شوند در UI نامرئی‌اند، ولی در هر گزارشِ بدون فیلتر یا بررسی یکپارچگی به‌شکل «یتیم»
+// بیرون می‌زنند و به شناسه‌ی مرده اشاره می‌کنند.
+// راه‌حل عمومی (نه فهرست دستی جدول‌ها): اسکیما را می‌پرسیم و هر جدولی که ستون hospital_id
+// دارد و وابستگی‌اش با CASCADE پاک نمی‌شود را جارو می‌کنیم؛ این‌طور اگر فردا جدول تازه‌ای
+// بدون FK اضافه شود، همین تابع پوشش می‌دهد و فهرست کهنه نمی‌شود.
+function hospitalIdTablesWithoutCascade() {
+  const tables = db.prepare(`SELECT name FROM sqlite_master
+    WHERE type = 'table' AND name NOT LIKE 'sqlite_%' AND name <> 'hospitals'`).all();
+  const out = [];
+  for (const t of tables) {
+    const hasCol = db.prepare(`PRAGMA table_info("${t.name}")`).all().some(c => c.name === 'hospital_id');
+    if (!hasCol) continue;
+    const cascade = db.prepare(`PRAGMA foreign_key_list("${t.name}")`).all()
+      .some(fk => fk.table === 'hospitals' && fk.from === 'hospital_id' && String(fk.on_delete || '').toUpperCase() === 'CASCADE');
+    if (!cascade) out.push(t.name);
+  }
+  return out;
+}
+
+function purgeDanglingHospitalRefs() {
+  // محافظ: اگر hospitals خالی است (پایگاه‌داده‌ی نیمه‌ساخته یا بوت نیمه‌کاره)، «نبودِ بیمارستان»
+  // معنای واقعی ندارد و اجرای جارو می‌توانست کلِ داده‌ی بیمارستانی را پاک کند — دست‌نخورده برمی‌گردیم.
+  const hospitalCount = db.prepare('SELECT COUNT(*) c FROM hospitals').get().c;
+  if (hospitalCount === 0) {
+    console.log('[Seed HospitalThreeScenario] 🧹 جاروی ارجاع معلق: هیچ بیمارستانی ثبت نشده — رد شد');
+    return 0;
+  }
+  const counts = {};
+  let total = 0;
+  // یک تراکنش برای همه‌ی جدول‌ها: یا کل پاک‌سازی ثبت می‌شود یا هیچ‌کدام (شکست نیمه‌کاره نداریم).
+  db.transaction(() => {
+    for (const table of hospitalIdTablesWithoutCascade()) {
+      const info = db.prepare(`DELETE FROM "${table}"
+        WHERE hospital_id IS NOT NULL AND TRIM(hospital_id) <> ''
+          AND NOT EXISTS (SELECT 1 FROM hospitals h WHERE h.id = "${table}".hospital_id)`).run();
+      if (info.changes > 0) { counts[table] = info.changes; total += info.changes; }
+    }
+  })();
+  if (total === 0) {
+    console.log('[Seed HospitalThreeScenario] 🧹 ارجاع معلقِ بیمارستانی پیدا نشد (idempotent)');
+  } else {
+    const parts = Object.entries(counts).map(([t, n]) => `${t}=${n}`).join('، ');
+    console.log(`[Seed HospitalThreeScenario] 🧹 ${total} ردیفِ یتیمِ بیمارستانی پاک شد — ${parts}`);
+  }
+  return total;
+}
+
 function dropPlaceholderHospital(sampleHospitalId) {
   const config = require('../src/config/app');
   // نامِ بیمارستانِ بوت‌استرپ ثابت نیست: هم به DEFAULT_HOSPITAL_NAME بستگی دارد (که روی
@@ -501,6 +556,9 @@ function dropPlaceholderHospital(sampleHospitalId) {
   // کلیدهای خارجی با ON DELETE CASCADE تعریف شده‌اند، ولی SQLite فقط وقتی اعمالشان
   // می‌کند که foreign_keys روشن باشد (در database-sqlite.js روشن است) — پس یک DELETE
   // روی خودِ بیمارستان، کاربران و داده‌های وابسته‌اش را هم پاک می‌کند.
+  // توجه: جدول‌های بدون FK (۳۴ جدول — مانند reminder_rules و example_seed_log) با این
+  // DELETE پاک نمی‌شوند؛ به همین دلیل بلافاصله بعد از این تابع، purgeDanglingHospitalRefs
+  // صدا زده می‌شود (همان تابع ردیف‌های یتیمِ جامانده از نسخه‌های قدیمی را هم جارو می‌کند).
   db.prepare('DELETE FROM hospitals WHERE id = ?').run(target.id);
   console.log(`[Seed HospitalThreeScenario] ✅ بیمارستان خالیِ «${target.name}» حذف شد — فقط «${HOSPITAL_NAME}» می‌ماند`);
 }
@@ -531,6 +589,7 @@ function runMigration() {
     console.log(`[Seed HospitalThreeScenario] management filled: ${mgmtFilled} | supervisors filled: ${supFilled} | wards head/deputy filled: ${wardResult.filledHead}/${wardResult.filledDep} (total ${wardResult.total})`);
     console.log(`[Seed HospitalThreeScenario] profile: ${profileIns} | accreditation period: ${periodIns} (۱ فروردین ${PERIOD_JYEAR} تا امروز) | documents: ${docsIns} | meeting minutes: ${meetingsIns} | measure statuses: ${measuresIns}`);
     dropPlaceholderHospital(hospitalId);
+    purgeDanglingHospitalRefs();
     console.log('[Seed HospitalThreeScenario] ✅ done');
   } catch (err) {
     console.error('[Seed HospitalThreeScenario] ❌ Failed:', err);
