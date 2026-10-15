@@ -170,3 +170,30 @@
 ### قدم بعدی (اولین کار نشست بعد)
 - خواندن همین بخش، سپس `git status` و `git log` و آشتی، بعد بند ۱ تا ۵ به ترتیب تصمیم مالک.
 - **ادامه‌ی خودکار وجود ندارد**؛ اگر نشست قطع شد، با فرستادن «ادامه» از همین نقطه ادامه می‌دهم.
+
+---
+
+## نشست ۱۴۰۵/۰۷/۲۳ (ادامه) — بستنِ حفرهٔ ارسال تکراری فرم (W9) + push
+
+> این بخش پس از نشست بالا نوشته شده؛ بند ۲ فهرست «کارهای باز» همان نشست (ارسال تکراری فرم) بسته شد.
+
+### آنچه تغییر کرد
+- گارد ارسال تکراری در لایهٔ داده: ستون `form_submissions.client_token` + ایندکس یکتای جزئی
+  `(hospital_id, form_id, client_token) WHERE client_token IS NOT NULL` — مهاجرت idempotent در
+  `database/migrate-form-submission-client-token.js` و در زنجیرهٔ بوت `src/app.js`.
+- قرارداد HTTP: ثبت تازه ۲۰۱؛ بازفرستِ همان توکن ۲۰۰ + `duplicate:true` با `submissionId` اصلی؛
+  کلاینت بدون توکن عیناً رفتار قبل؛ توکن نامعتبر یا مهاجرت اجرانشده → خطای روشن (۴۰۰)، نه نادیده‌گرفتن.
+- دانا: سقف ورودی روی طول خام پیام اندازه‌گیری می‌شود (پدِ فاصله دیگر بدنهٔ بزرگ‌تر از ۴۰۰۰ را عبور نمی‌دهد).
+
+### شاهد اجراشدهٔ همین نشست (Node v22.23.3)
+| دستور | نتیجه |
+|---|---|
+| `node --test` روی هفت سوئیت (unit, integration, rbac-matrix, form-engine, guardrails, privacy, endpoint-matrix) | **54/54** ✅ |
+| `node --test tests/w5-session-and-duplicate.test.js` | **4/4** ✅ (آزمون تازهٔ «۲ب» گارد را قفل می‌کند؛ قبلاً ۳/۳) |
+| `test:assistant` / `test:assistant-response` | ۲۱ + ۱۰ ادعا سبز ✅ |
+| `SMOKE_BASE_URL=:3322 node scripts/smoke-test.js` | **6/6** ✅ |
+| بوت واقعی سرور روی :3322 | `[Migrate FormClientToken] ✅` + `[Boot] ✅ همهٔ مراحل seed بدون خطا` ✅ |
+
+### وضعیت git
+- کامیت‌ها: `56edfe9` (گارد فرم) · `0585dc8` (سقف خام ورودی دانا) — **پوش‌شده روی `origin/main`** (`9661bd7..0585dc8`).
+- تأیید پس از push: `git rev-parse main` = `git ls-remote origin refs/heads/main` = `0585dc8…` و `ahead/behind = 0/0`.
