@@ -480,8 +480,14 @@ const ENTITY_SOURCES = [
   { fa: 'کمیته', where: 'ساختار سازمانی ← کمیته‌ها',
     sql: `SELECT '' AS code, name AS title, COALESCE(committee_type,'') AS kind FROM committees
           WHERE hospital_id = ? AND (name LIKE ? OR name LIKE ?) ORDER BY name LIMIT 3` },
-  { fa: 'گزارش خطا', where: 'ایمنی بیمار ← وقایع ۲۸گانه',
-    sql: `SELECT tracking_code AS code, error_category AS title, description AS kind FROM medical_error_reports
+  // گزارش خطا: رکوردهای محرمانه. ستونِ is_confidential این جدول پیش‌فرض ۱ دارد،
+  // یعنی «محرمانه» حالتِ عادی است نه استثنا — و description شرحِ واقعه‌ی بیمار است،
+  // نه یک برچسب. پرچم کنارِ خودِ پرس‌وجو اعلام می‌شود (conf): هر منبعی که جدولش
+  // ستونِ محرمانگی دارد باید اعلامش کند، وگرنه متنش بی‌پرچم می‌ماند و دروازه‌ی
+  // خروج در contextBlock نمی‌تواند بازش دارد. چرا دروازه آن‌جاست نه اینجا: در
+  // contextBlock توضیح داده شده.
+  { fa: 'گزارش خطا', conf: 'is_confidential', where: 'ایمنی بیمار ← وقایع ۲۸گانه',
+    sql: `SELECT tracking_code AS code, error_category AS title, description AS kind, is_confidential FROM medical_error_reports
           WHERE hospital_id = ? AND (error_category LIKE ? OR description LIKE ?) ORDER BY created_at DESC LIMIT 3` },
   { fa: 'ارزیابی FMEA', where: 'ایمنی بیمار ← مدیریت خطر (FMEA)',
     sql: `SELECT '' AS code, subject AS title, hazard_type AS kind FROM fmea_records
@@ -514,7 +520,19 @@ function searchEntities(hospitalId, text, perms) {
       for (const r of rows) {
         if (out.length >= 12) break;
         if (out.some(x => x.title === r.title && x.fa === src.fa)) continue;
-        out.push({ fa: src.fa, where: src.where, code: r.code || '', title: r.title, kind: r.kind || '' });
+        // پیش‌فرضِ محرمانگی «رد» است، نه «قبول»: فقط مقدارِ صریحِ ۰ یعنی رکورد آزاد.
+        // اگر ستون در ردیف نبود یا تهی بود (SELECTی که روزی ستون را جا بیندازد)،
+        // رکورد *محرمانه* حساب می‌شود و متنش بیرون نمی‌رود؛ با !!r[conf] نتیجه
+        // برعکس می‌شد — ستونِ تهی = رکوردِ آزاد — یعنی یک فراموشی خودش نشت می‌ساخت.
+        const conf = src.conf ? !(r[src.conf] === 0 || r[src.conf] === '0') : false;
+        // متنِ آزادِ شرحِ واقعه (kind) برای رکوردِ محرمانه حتی وارد شیءِ بافت هم
+        // نمی‌شود: هیچ مصرف‌کننده‌ی داخلی این فیلد را نمایش نمی‌دهد
+        // (fallbackFromContext فقط fa/title/code/where را چاپ می‌کند)، پس ماندنش
+        // در حافظه صرفاً ریسکِ نشت است. عنوان و کدِ رهگیری می‌مانند تا نمایشِ
+        // داخلی به کاربرِ مجاز — همان پاسخِ آفلاین — مو‌به‌مو مثل قبل بماند، و
+        // طولِ entities هم عوض نشود تا تصمیمِ empty/blocked دست‌نخورده بماند.
+        out.push({ fa: src.fa, where: src.where, code: r.code || '', title: r.title,
+          kind: conf ? '' : (r.kind || ''), conf });
       }
       if (rows.length) break;   // اولین واژه‌ای که جواب داد کافی است
     }
@@ -585,10 +603,34 @@ function contextBlock(ctx) {
       + ctx.knowledge.map(k => `- ${k.title}: ${String(k.content).slice(0, 1200)}`).join('\n'));
   }
   if ((ctx.entities || []).length) {
-    parts.push('مواردِ واقعیِ ثبت‌شده در همین بیمارستان که به سؤال می‌خورند '
-      + '(اگر کاربر پرسید «داریم؟» یا «کجاست؟»، عیناً همین‌ها را با کد و مسیرشان نام ببر):\n'
-      + ctx.entities.map(x => `- [${x.fa}] ${x.title}${x.code ? ` (کد ${x.code})` : ''}`
-        + `${x.kind ? ` — ${x.kind}` : ''} — جای آن: ${x.where}`).join('\n'));
+    // مرزِ حریم خصوصی — اینجا و فقط اینجا.
+    // چرا همین نقطه: این تابع تنها جایی است که متنِ رکوردها از سامانه بیرون
+    // می‌رود؛ خروجی‌اش داخلِ دستورِ سیستمیِ provider می‌نشیند
+    // (assistant-chat.js:224 → buildSystemPrompt → chatComplete) و شیءِ بافت
+    // هیچ راهِ بیرون‌روی دیگری ندارد. پس منعِ «متنِ محرمانه به بیرون» را همین‌جا
+    // اعمال می‌کنیم، نه در بازیابی: پاسخِ داخلی (fallbackFromContext، وقتی کلید
+    // یا provider نیست) و مرزهای RBAC دست‌نخورده می‌مانند. حریم خصوصی درباره‌ی
+    // «ارسال به بیرون» است، نه پنهان‌کاری از کاربرِ مجازی که مجوزِ دیدنِ همان
+    // رکورد را دارد.
+    const open = ctx.entities.filter(x => !x.conf);
+    const held = ctx.entities.length - open.length;
+    if (open.length) {
+      parts.push('مواردِ واقعیِ ثبت‌شده در همین بیمارستان که به سؤال می‌خورند '
+        + '(اگر کاربر پرسید «داریم؟» یا «کجاست؟»، عیناً همین‌ها را با کد و مسیرشان نام ببر):\n'
+        + open.map(x => `- [${x.fa}] ${x.title}${x.code ? ` (کد ${x.code})` : ''}`
+          + `${x.kind ? ` — ${x.kind}` : ''} — جای آن: ${x.where}`).join('\n'));
+    }
+    if (held) {
+      // شکلِ بی‌خطر به‌جای حذفِ کامل: اگر رکورد کامل حذف شود، مدل نمی‌فهمد
+      // «چنین چیزی هست ولی محرمانه است» و کاربرِ مجاز جوابِ ناقص می‌گیرد. پس
+      // فقط «چند مورد» گفته می‌شود — بی کد، بی دسته‌بندی، بی متن — به‌همراهِ
+      // همان کاری که باید بکند. شمارش عمدی است: خودش چیزی از محتوای واقعه را لو
+      // نمی‌دهد؛ همان شکلی که liveFacts از ابتدا دارد.
+      parts.push(`${held} رکوردِ محرمانه‌ی مرتبط هم در همین مرکز ثبت شده است، ولی متنِ `
+        + 'آن‌ها در اختیارِ تو گذاشته نمی‌شود. نه خلاصه‌شان کن، نه حدس بزن، نه بگو '
+        + 'موضوعشان چیست؛ فقط بگو این موارد در سامانه هست ولی محرمانه‌اند و از مسیرِ '
+        + '«ایمنی بیمار ← وقایع ۲۸گانه» با مجوزِ مربوطه دیده می‌شوند.');
+    }
   }
     if ((ctx.mine || []).length) {
     parts.push('کارهای بازِ خودِ همین کاربر (از دادهی واقعی؛ همینها را با مهلتشان بگو و اگر دو کار مهلت نزدیک دارند اولویت را بگو):\n'
