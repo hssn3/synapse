@@ -30,11 +30,15 @@ router.post('/chat', authRequired, async (req, res) => {
       return res.status(400).json({ error: 'متن پیام الزامی است.' });
     }
     // اعتبارسنجی سمت سرور (قاعده ۶): فرانت هم می‌تواند بشمارد، ولی مرزِ واقعی همین‌جاست.
-    if (typeof message !== 'string' || message.trim().length > MAX_MESSAGE_CHARS) {
+    // سقف روی طولِ **خام** است، نه trim‌شده: بازبین مستقل نشان داد با چسباندن فاصله در ابتدا/انتها
+// می‌شد بدنه‌ی بزرگ‌تر از سقف را از این گارد عبور داد (trim کوتاهش می‌کرد ولی بدنه واقعاً بزرگ
+// بود و همان به لایه‌ی بازیابی/provider می‌رفت). max_chars در پاسخ هم سقف خام است تا سنجش
+// خام و قابل‌قیاس بماند.
+if (typeof message !== 'string' || message.length > MAX_MESSAGE_CHARS) {
       return res.status(400).json({
         error: `متن پیام بیش از حد مجاز است — حداکثر ${MAX_MESSAGE_CHARS} کاراکتر`,
         max_chars: MAX_MESSAGE_CHARS,
-        message_chars: typeof message === 'string' ? message.trim().length : -1,
+        message_chars: typeof message === 'string' ? message.length : -1,
       });
     }
 
