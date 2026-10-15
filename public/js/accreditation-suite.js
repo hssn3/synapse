@@ -1,5 +1,5 @@
 /**
- * accreditation-suite.js — سامانه جامع ابزارها و اسناد استاندارد اعتباربخشی بیمارستان
+ * accreditation-suite.js — سیناپس — ابزارها و اسناد استاندارد اعتباربخشی بیمارستان
  * برگرفته از ساختار سامانه طراحی اولیه حسن و دستاوردهای چندعاملی
  */
 
@@ -253,7 +253,7 @@
                 <div><strong>کد سنجه:</strong> ${code}</div>
               </div>
               <div class="sheet-letterhead-center">
-                <h2>سامانه جامع مدیریت، کیفیت و اعتباربخشی بیمارستان</h2>
+                <h2>سیناپس — سامانه یکپارچه نظارت، اعتباربخشی و پایش سلامت</h2>
                 <p>سند مصوب منطبق بر کتاب استانداردهای اعتباربخشی ملی (وزارت بهداشت، درمان و آموزش پزشکی)</p>
               </div>
               <div class="sheet-meta-box" style="text-align:left;">
@@ -270,7 +270,7 @@
             💡 این سند پس از ثبت در پایگاه داده اسناد کنترل‌شده بیمارستان ماندگار خواهد شد.
           </div>
           <div style="display:flex; gap:10px;">
-            <button type="button" class="btn btn-primary" onclick="saveAccStandardDoc('${docType}', '${code}')" style="background:#059669;color:#fff;border:none;padding:8px 18px;border-radius:8px;font-weight:700;cursor:pointer;">
+            <button type="button" class="btn btn-primary" onclick="saveAccStandardDoc('${docType}', '${code}')" style="background:#1b6580;color:#fff;border:none;padding:8px 18px;border-radius:8px;font-weight:700;cursor:pointer;">
               💾 ثبت در اسناد کنترل‌شده
             </button>
             <button type="button" class="btn" onclick="printAccStandardDoc()" style="background:#2563eb;color:#fff;border:none;padding:8px 18px;border-radius:8px;font-weight:700;cursor:pointer;">
@@ -362,7 +362,7 @@
                   <h4 style="font-size:14.5px; font-weight:800; color:var(--th); margin:6px 0 2px 0;">${ind.name}</h4>
                   <span style="font-size:12px; color:var(--td);">نوع شاخص: ${ind.type}</span>
                 </div>
-                <span style="font-size:11px; background:rgba(63,191,143,0.15); color:var(--ok); padding:4px 8px; border-radius:6px; font-weight:700;">دوره: ${ind.period}</span>
+                <span style="font-size:11px; background:rgba(63,172,191,0.15); color:var(--ok); padding:4px 8px; border-radius:6px; font-weight:700;">دوره: ${ind.period}</span>
               </div>
               <div class="indicator-formula-box">
                 <div style="font-weight:700; color:var(--tm); margin-bottom:6px;">فرمول محاسباتی شاخص:</div>

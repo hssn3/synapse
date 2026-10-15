@@ -27,8 +27,8 @@
     hdr.innerHTML =
       '<div class="ghdr-in">' +
         '<a class="ghdr-brand" href="/" title="بازگشت به صفحه‌ی اصلی سامانه" style="text-decoration:none">' +
-          '<div class="lmark sm shine anim">✦</div>' +
-          '<b>سامانه جامع مدیریت بیمارستانی</b>' +
+          '<div class="lmark sm shine anim"><img class="syn-ico" src="/img/synapse-mark-64.png" alt="سیناپس" width="22" height="22"></div>' +
+          '<b>سیناپس</b>' +
         '</a>' +
         '<div class="ghdr-cta"><a class="btn btn-o btn-sm" href="/">ورود به سامانه</a></div>' +
       '</div>';
@@ -38,8 +38,8 @@
     ftr.id = 'gftr';
     ftr.innerHTML =
       '<div class="gftr-in">' +
-        '<div class="gftr-brand"><div class="lmark sm shine">✦</div>' +
-          '<div><b>سامانه جامع مدیریت بیمارستانی</b>' +
+        '<div class="gftr-brand"><div class="lmark sm shine"><img class="syn-ico" src="/img/synapse-mark-64.png" alt="سیناپس" width="22" height="22"></div>' +
+          '<div><b>سیناپس</b>' +
           '<span>این فرم بدون ورود به سامانه تکمیل می‌شود و مستقیماً برای واحد بهبود کیفیت همان مرکز ثبت می‌گردد.</span></div>' +
         '</div>' +
         // راهنما به‌ازای هر فرم فرق می‌کند و متنِ ثابت روی بعضی‌شان دروغ بود:
@@ -55,7 +55,7 @@
         '</div>' +
       '</div>' +
       '<div class="gftr-cr">© ' + esc(new Date().toLocaleDateString('fa-IR', { year: 'numeric' })) +
-        ' سامانه جامع مدیریت بیمارستانی — تمام حقوق محفوظ است.</div>';
+        ' سیناپس — سامانه یکپارچه نظارت، اعتباربخشی و پایش سلامت — تمام حقوق محفوظ است.</div>';
     document.body.appendChild(ftr);
   }
 

@@ -81,7 +81,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 10px 18px;
-  background: rgba(20, 32, 28, 0.85);
+  background: rgba(21,25,31,0.85);
   border: 1px solid rgba(212, 175, 90, 0.35);
   border-radius: 12px;
   color: var(--gd);
@@ -95,7 +95,7 @@
 }
 
 .acc-back-card:hover {
-  background: rgba(30, 48, 42, 0.95);
+  background: rgba(31,37,47,0.95);
   border-color: var(--gd);
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(212, 175, 90, 0.2);
@@ -132,7 +132,7 @@
   display: flex;
   flex-direction: column;
   padding: 22px 20px;
-  background: linear-gradient(145deg, rgba(24, 38, 32, 0.9), rgba(16, 26, 22, 0.95));
+  background: linear-gradient(145deg, rgba(25,30,37,0.9), rgba(17,20,26,0.95));
   border: 1px solid rgba(212, 175, 90, 0.22);
   border-radius: 16px;
   cursor: pointer;
@@ -166,7 +166,7 @@
 
 .acc-root-card.selected {
   border-color: var(--gd);
-  background: linear-gradient(145deg, rgba(34, 54, 45, 0.95), rgba(20, 34, 28, 0.98));
+  background: linear-gradient(145deg, rgba(34,49,54,0.95), rgba(21,26,33,0.98));
   box-shadow: 0 0 25px rgba(212, 175, 90, 0.25);
 }
 
@@ -238,7 +238,7 @@
 .acc-root-progress > i {
   display: block;
   height: 100%;
-  background: linear-gradient(90deg, #3fbf8f, #d4af5a);
+  background: linear-gradient(90deg, #3facbf, #d4af5a);
   border-radius: 4px;
   transition: width 0.6s ease;
 }
@@ -258,7 +258,7 @@
   align-items: flex-start;
   gap: 14px;
   padding: 16px 18px;
-  background: rgba(22, 34, 29, 0.85);
+  background: rgba(23,27,33,0.85);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 14px;
   cursor: pointer;
@@ -268,14 +268,14 @@
 
 .acc-subaxis-card:hover {
   border-color: var(--gd);
-  background: rgba(30, 48, 40, 0.95);
+  background: rgba(31,37,47,0.95);
   transform: translateY(-3px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 }
 
 .acc-subaxis-card.selected {
   border-color: var(--gd);
-  background: linear-gradient(135deg, rgba(38, 60, 50, 0.95), rgba(24, 40, 32, 0.95));
+  background: linear-gradient(135deg, rgba(38,54,60,0.95), rgba(25,30,39,0.95));
   box-shadow: 0 0 20px rgba(212, 175, 90, 0.2);
 }
 
@@ -343,7 +343,7 @@
 
 .acc-book-page-pill {
   background: var(--gd);
-  color: #0d1a14;
+  color: #0e1219;
   font-weight: 800;
   padding: 1px 7px;
   border-radius: 6px;
@@ -375,9 +375,9 @@
 }
 
 .acc-doc-type-badge.policy {
-  background: rgba(63, 191, 143, 0.15);
-  color: #4ee0aa;
-  border: 1px solid rgba(63, 191, 143, 0.3);
+  background: rgba(63,172,191,0.15);
+  color: #4ecae0;
+  border: 1px solid rgba(63,172,191,0.3);
 }
 
 .acc-doc-type-badge.procedure {
@@ -410,7 +410,7 @@
 
 
 /* ==========================================================================
-   بخش‌های تکمیلی سامانه جامع اعتباربخشی (برگرفته از طراحی اولیه حسن و بازسازی جامع)
+   بخش‌های تکمیلی سیناپس (برگرفته از طراحی اولیه حسن و بازسازی جامع)
    ========================================================================== */
 
 /* ۱. نوار ابزار و تب‌های بالایی سامانه اعتباربخشی */
@@ -429,7 +429,7 @@
   align-items: center;
   gap: 8px;
   padding: 9px 18px;
-  background: rgba(25, 38, 33, 0.7);
+  background: rgba(26,30,37,0.7);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   color: #cbd5e1;
@@ -442,14 +442,14 @@
 }
 
 .acc-tab-btn:hover {
-  background: rgba(35, 55, 48, 0.9);
+  background: rgba(35,50,55,0.9);
   color: #fff;
   border-color: rgba(212, 175, 90, 0.4);
   transform: translateY(-2px);
 }
 
 .acc-tab-btn.active {
-  background: linear-gradient(135deg, rgba(212, 175, 90, 0.25), rgba(63, 191, 143, 0.25));
+  background: linear-gradient(135deg, rgba(212, 175, 90, 0.25), rgba(63,172,191,0.25));
   border-color: var(--gd);
   color: #fff;
   box-shadow: 0 4px 16px rgba(212, 175, 90, 0.2);
@@ -487,12 +487,12 @@
 }
 
 .btn-doc-gen.policy {
-  background: rgba(63, 191, 143, 0.12);
-  color: #4ee0aa;
-  border-color: rgba(63, 191, 143, 0.35);
+  background: rgba(63,172,191,0.12);
+  color: #4ecae0;
+  border-color: rgba(63,172,191,0.35);
 }
 .btn-doc-gen.policy:hover {
-  background: rgba(63, 191, 143, 0.25);
+  background: rgba(63,172,191,0.25);
   transform: translateY(-1px);
 }
 
@@ -520,7 +520,7 @@
 .standard-form-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(10, 16, 14, 0.85);
+  background: rgba(12,15,18,0.85);
   backdrop-filter: blur(8px);
   z-index: 9999;
   display: flex;
@@ -673,7 +673,7 @@
 }
 
 .indicator-card {
-  background: linear-gradient(145deg, rgba(24, 38, 32, 0.9), rgba(16, 26, 22, 0.95));
+  background: linear-gradient(145deg, rgba(25,30,37,0.9), rgba(17,20,26,0.95));
   border: 1px solid rgba(212, 175, 90, 0.22);
   border-radius: 14px;
   padding: 18px;
@@ -702,7 +702,7 @@
 .fraction-top {
   border-bottom: 1.5px solid var(--gd);
   padding-bottom: 3px;
-  color: #4ee0aa;
+  color: #4ecae0;
   font-weight: 700;
 }
 .fraction-bottom {
@@ -720,7 +720,7 @@
 }
 
 .committee-card {
-  background: linear-gradient(145deg, rgba(24, 38, 32, 0.9), rgba(16, 26, 22, 0.95));
+  background: linear-gradient(145deg, rgba(25,30,37,0.9), rgba(17,20,26,0.95));
   border: 1px solid rgba(212, 175, 90, 0.22);
   border-radius: 14px;
   padding: 18px;
@@ -745,7 +745,7 @@
 }
 
 .error-item-card {
-  background: rgba(24, 38, 32, 0.85);
+  background: rgba(25,30,37,0.85);
   border: 1px solid rgba(239, 68, 68, 0.25);
   border-radius: 12px;
   padding: 16px 20px;
@@ -782,7 +782,7 @@
 }
 
 .checklist-card {
-  background: linear-gradient(145deg, rgba(24, 38, 32, 0.9), rgba(16, 26, 22, 0.95));
+  background: linear-gradient(145deg, rgba(25,30,37,0.9), rgba(17,20,26,0.95));
   border: 1px solid rgba(212, 175, 90, 0.22);
   border-radius: 14px;
   padding: 18px;
@@ -989,8 +989,8 @@
   display: block !important;
   height: 100% !important;
   border-radius: 999px !important;
-  background: linear-gradient(90deg, #38bdf8, #2fd39a 50%, #eab308 100%) !important;
-  box-shadow: 0 0 12px rgba(47, 211, 154, 0.5) !important;
+  background: linear-gradient(90deg, #38bdf8, #2fbad3 50%, #eab308 100%) !important;
+  box-shadow: 0 0 12px rgba(47,186,211,0.5) !important;
   transition: width .8s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
@@ -1117,10 +1117,10 @@
   display: grid !important;
   place-items: center !important;
   border-radius: 12px !important;
-  background: linear-gradient(135deg, rgba(47, 211, 154, 0.2), rgba(56, 189, 248, 0.15)) !important;
-  color: #2fd39a !important;
-  border: 1px solid rgba(47, 211, 154, 0.35) !important;
-  box-shadow: 0 0 14px rgba(47, 211, 154, 0.2) !important;
+  background: linear-gradient(135deg, rgba(47,186,211,0.2), rgba(56, 189, 248, 0.15)) !important;
+  color: #2fbad3 !important;
+  border: 1px solid rgba(47,186,211,0.35) !important;
+  box-shadow: 0 0 14px rgba(47,186,211,0.2) !important;
 }
 
 .hub-branch-icon-box svg {
@@ -1206,10 +1206,10 @@
   display: grid !important;
   place-items: center !important;
   border-radius: 14px !important;
-  background: linear-gradient(135deg, rgba(47, 211, 154, 0.18), rgba(56, 189, 248, 0.14)) !important;
-  color: #2fd39a !important;
-  border: 1px solid rgba(47, 211, 154, 0.35) !important;
-  box-shadow: 0 0 16px rgba(47, 211, 154, 0.25) !important;
+  background: linear-gradient(135deg, rgba(47,186,211,0.18), rgba(56, 189, 248, 0.14)) !important;
+  color: #2fbad3 !important;
+  border: 1px solid rgba(47,186,211,0.35) !important;
+  box-shadow: 0 0 16px rgba(47,186,211,0.25) !important;
 }
 
 .hcard-lg-ic svg {
@@ -1245,7 +1245,7 @@
 .hcard-lg-d {
   font-size: 0.88rem !important;
   line-height: 1.7 !important;
-  color: #b7c7be !important;
+  color: #b7c5c7 !important;
 }
 
 .hcard-lg-footer {
@@ -1285,7 +1285,7 @@
 .hub-branch-connector-line {
   flex: 1 !important;
   height: 2px !important;
-  background: linear-gradient(90deg, transparent, rgba(201, 168, 76, 0.4), rgba(47, 211, 154, 0.6), transparent) !important;
+  background: linear-gradient(90deg, transparent, rgba(201, 168, 76, 0.4), rgba(47,186,211,0.6), transparent) !important;
 }
 
 .hub-branch-connector-dot {
@@ -1309,7 +1309,7 @@
   padding: 24px 26px;
   margin-bottom: 22px;
   border-radius: 16px;
-  background: linear-gradient(145deg, rgba(22, 36, 30, 0.88), rgba(13, 22, 19, 0.96));
+  background: linear-gradient(145deg, rgba(23,28,35,0.88), rgba(13,17,22,0.96));
   border: 1px solid rgba(212, 175, 90, 0.25);
   box-shadow: 0 10px 32px rgba(0, 0, 0, 0.4);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
@@ -1431,7 +1431,7 @@
   font-size: 13.5px;
   font-weight: 700;
   min-width: 180px;
-  background-color: rgba(14, 26, 22, 0.95);
+  background-color: rgba(15,19,25,0.95);
   border: 1.5px solid var(--bd);
   color: var(--th);
   cursor: pointer;
@@ -1539,15 +1539,15 @@
 }
 
 .btn-doc-gen.policy {
-  background: rgba(63, 191, 143, 0.16);
-  color: #4ee0aa;
-  border-color: rgba(63, 191, 143, 0.45);
+  background: rgba(63,172,191,0.16);
+  color: #4ecae0;
+  border-color: rgba(63,172,191,0.45);
 }
 .btn-doc-gen.policy:hover {
-  background: rgba(63, 191, 143, 0.3);
+  background: rgba(63,172,191,0.3);
   border-color: var(--ok);
   color: #fff;
-  box-shadow: 0 6px 20px rgba(63, 191, 143, 0.3);
+  box-shadow: 0 6px 20px rgba(63,172,191,0.3);
   transform: translateY(-2px);
 }
 
@@ -1609,7 +1609,7 @@
 }
 .btn-mcard-ref.guide:hover {
   border-color: var(--ok);
-  color: #5be0ab;
+  color: #5bcce0;
 }
 .btn-mcard-ref.book:hover {
   border-color: var(--gd);

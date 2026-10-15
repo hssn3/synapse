@@ -128,22 +128,22 @@ RPG.define({
     const c = (n, l, clr, tab) => RPG.card(key, n, l, clr, tab);
     return `
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px">
-        ${c(d.coi_total, 'موردِ تعارض منافع', d.coi_total ? '#0b7a3e' : '#9a6b00', 'coi')}
-        ${c(d.coi_open, 'پرونده‌ی باز', d.coi_open ? '#c02626' : '#0b7a3e', 'coi')}
-        ${c(d.coi_violations, 'موردِ نقض حقوق بیمار', d.coi_violations ? '#c02626' : '#0b7a3e', 'coi')}
-        ${c(d.coi_not_informed, 'بدون اطلاع‌رسانی به کارکنان', d.coi_not_informed ? '#9a6b00' : '#0b7a3e', 'coi')}
+        ${c(d.coi_total, 'موردِ تعارض منافع', d.coi_total ? '#17576e' : '#9a6b00', 'coi')}
+        ${c(d.coi_open, 'پرونده‌ی باز', d.coi_open ? '#c02626' : '#17576e', 'coi')}
+        ${c(d.coi_violations, 'موردِ نقض حقوق بیمار', d.coi_violations ? '#c02626' : '#17576e', 'coi')}
+        ${c(d.coi_not_informed, 'بدون اطلاع‌رسانی به کارکنان', d.coi_not_informed ? '#9a6b00' : '#17576e', 'coi')}
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px">
-        ${c(d.readmits_year, 'بستری مجددِ ۱۲ ماه گذشته', d.readmits_year ? '#9a6b00' : '#0b7a3e', 'readmissions')}
-        ${c(d.readmits_no_rca, 'بدون تحلیل ریشه‌ای', d.readmits_no_rca ? '#c02626' : '#0b7a3e', 'readmissions')}
-        ${c(d.readmits_discharge_related, 'مرتبط با ایمنیِ ترخیص', d.readmits_discharge_related ? '#c02626' : '#0b7a3e', 'readmissions')}
+        ${c(d.readmits_year, 'بستری مجددِ ۱۲ ماه گذشته', d.readmits_year ? '#9a6b00' : '#17576e', 'readmissions')}
+        ${c(d.readmits_no_rca, 'بدون تحلیل ریشه‌ای', d.readmits_no_rca ? '#c02626' : '#17576e', 'readmissions')}
+        ${c(d.readmits_discharge_related, 'مرتبط با ایمنیِ ترخیص', d.readmits_discharge_related ? '#c02626' : '#17576e', 'readmissions')}
         ${c(d.readmits_excluded, 'خارج از تعریفِ سنجه', '#6b7280', 'readmissions')}
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap">
-        ${c(d.ama_year, 'ترخیص با میل شخصیِ ۱۲ ماه', d.ama_year ? '#9a6b00' : '#0b7a3e', 'ama')}
-        ${c(d.ama_preventable, 'قابل پیشگیری', d.ama_preventable ? '#c02626' : '#0b7a3e', 'ama')}
-        ${c(d.ama_no_action, 'قابل پیشگیری و بدون اقدام', d.ama_no_action ? '#c02626' : '#0b7a3e', 'ama')}
-        ${c(d.ama_no_consent, 'بدون فرم رضایت', d.ama_no_consent ? '#c02626' : '#0b7a3e', 'ama')}
+        ${c(d.ama_year, 'ترخیص با میل شخصیِ ۱۲ ماه', d.ama_year ? '#9a6b00' : '#17576e', 'ama')}
+        ${c(d.ama_preventable, 'قابل پیشگیری', d.ama_preventable ? '#c02626' : '#17576e', 'ama')}
+        ${c(d.ama_no_action, 'قابل پیشگیری و بدون اقدام', d.ama_no_action ? '#c02626' : '#17576e', 'ama')}
+        ${c(d.ama_no_consent, 'بدون فرم رضایت', d.ama_no_consent ? '#c02626' : '#17576e', 'ama')}
       </div>
       ${pfBars(d.ama_top_causes, 'پرتکرارترین علل ترخیص با میل شخصی')}
       ${pfBars(d.coi_top_kinds, 'پرتکرارترین مصادیق تعارض منافع')}

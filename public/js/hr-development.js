@@ -19,7 +19,7 @@ const hrdSurveyComplianceHtml = (rows) => {
         <b style="min-width:52px">${fa(r.year)}</b>
         <span style="min-width:96px">${fa(r.rounds)} نوبت</span>
         <span style="min-width:130px;color:var(--mut)">بیشترین فاصله: ${fa(r.max_gap_days)} روز</span>
-        <b style="color:${r.compliant ? '#0b7a3e' : '#c02626'}">${r.compliant ? '✔ برآورده شد' : '✘ برآورده نشد'}</b>
+        <b style="color:${r.compliant ? '#17576e' : '#c02626'}">${r.compliant ? '✔ برآورده شد' : '✘ برآورده نشد'}</b>
       </div>`).join('')}
   </div>`;
 };
@@ -241,7 +241,7 @@ RPG.define({
           render: (r) => {
             if (r.trend == null) return '<span style="color:var(--td)">—</span>';
             const t = Number(r.trend);
-            const clr = t > 0 ? '#0b7a3e' : (t < 0 ? '#c02626' : 'inherit');
+            const clr = t > 0 ? '#17576e' : (t < 0 ? '#c02626' : 'inherit');
             return `<b style="color:${clr}">${t > 0 ? '▲ +' : (t < 0 ? '▼ ' : '')}${fa(Math.abs(t))}</b>`;
           } },
         { k: 'action_owner', l: 'مسئول اقدام', t: 'text' },
@@ -256,27 +256,27 @@ RPG.define({
     const c = (n, l, clr, tab) => RPG.card(key, n, l, clr, tab);
     return `
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px">
-        ${c(d.profiles, 'شرح شغل تعریف‌شده', d.profiles ? '#0b7a3e' : '#c02626', 'profiles')}
-        ${c(d.hiring_pending, 'احرازِ بدو بکارگیریِ ناتمام', d.hiring_pending ? '#9a6b00' : '#0b7a3e', 'hiring')}
+        ${c(d.profiles, 'شرح شغل تعریف‌شده', d.profiles ? '#17576e' : '#c02626', 'profiles')}
+        ${c(d.hiring_pending, 'احرازِ بدو بکارگیریِ ناتمام', d.hiring_pending ? '#9a6b00' : '#17576e', 'hiring')}
         ${c(d.hiring_year, 'بکارگیری در ۱۲ ماه گذشته', '#1550b8', 'hiring')}
-        ${c(d.competencies, 'مهارتِ تعریف‌شده', d.competencies ? '#0b7a3e' : '#c02626', 'competencies')}
+        ${c(d.competencies, 'مهارتِ تعریف‌شده', d.competencies ? '#17576e' : '#c02626', 'competencies')}
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px">
-        ${c(d.competency_expired, 'احرازِ منقضی‌شده', d.competency_expired ? '#c02626' : '#0b7a3e', 'records')}
-        ${c(d.competency_failed, 'صلاحیتِ احرازنشده', d.competency_failed ? '#9a6b00' : '#0b7a3e', 'records')}
-        ${c(d.appraisals_year, 'ارزشیابی در ۱۲ ماه گذشته', d.appraisals_year ? '#0b7a3e' : '#c02626', 'appraisals')}
-        ${c(d.appraisals_low, 'رتبه‌ی «نیازمند بهبود»', d.appraisals_low ? '#9a6b00' : '#0b7a3e', 'appraisals')}
+        ${c(d.competency_expired, 'احرازِ منقضی‌شده', d.competency_expired ? '#c02626' : '#17576e', 'records')}
+        ${c(d.competency_failed, 'صلاحیتِ احرازنشده', d.competency_failed ? '#9a6b00' : '#17576e', 'records')}
+        ${c(d.appraisals_year, 'ارزشیابی در ۱۲ ماه گذشته', d.appraisals_year ? '#17576e' : '#c02626', 'appraisals')}
+        ${c(d.appraisals_low, 'رتبه‌ی «نیازمند بهبود»', d.appraisals_low ? '#9a6b00' : '#17576e', 'appraisals')}
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap">
         ${c(d.disciplinary_year, 'اقدام انضباطی در ۱۲ ماه', '#1550b8', 'disciplinary')}
-        ${c(d.exemplary_year, 'کارمند نمونه در ۱۲ ماه', d.exemplary_year ? '#0b7a3e' : '#9a6b00', 'exemplary')}
-        ${c(d.succession_gaps, 'سمتِ بدون جانشین', d.succession_gaps ? '#c02626' : '#0b7a3e', 'succession')}
+        ${c(d.exemplary_year, 'کارمند نمونه در ۱۲ ماه', d.exemplary_year ? '#17576e' : '#9a6b00', 'exemplary')}
+        ${c(d.succession_gaps, 'سمتِ بدون جانشین', d.succession_gaps ? '#c02626' : '#17576e', 'succession')}
         ${c(d.leaves_month, 'مرخصی در ۳۰ روز گذشته', '#1550b8', 'leaves')}
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px">
-        ${c(d.surveys_total, 'نظرسنجیِ کارکنان', d.surveys_total ? '#0b7a3e' : '#c02626', 'surveys')}
-        ${c(d.survey_years_short, 'سالِ با کمتر از دو نوبت', d.survey_years_short ? '#c02626' : '#0b7a3e', 'surveys')}
-        ${c(d.surveys_no_action, 'مشکلِ ثبت‌شده بدون اقدام', d.surveys_no_action ? '#c02626' : '#0b7a3e', 'surveys')}
+        ${c(d.surveys_total, 'نظرسنجیِ کارکنان', d.surveys_total ? '#17576e' : '#c02626', 'surveys')}
+        ${c(d.survey_years_short, 'سالِ با کمتر از دو نوبت', d.survey_years_short ? '#c02626' : '#17576e', 'surveys')}
+        ${c(d.surveys_no_action, 'مشکلِ ثبت‌شده بدون اقدام', d.surveys_no_action ? '#c02626' : '#17576e', 'surveys')}
         ${c(d.survey_last_recommend == null ? '—' : fa(d.survey_last_recommend),
     'آخرین امتیازِ توصیه‌ی اشتغال', d.survey_last_recommend == null ? '#9a6b00' : '#1550b8', 'surveys')}
       </div>

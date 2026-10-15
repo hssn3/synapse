@@ -33,14 +33,14 @@ html:not([data-theme="light"]) .acc-decision-tab:hover{
   box-shadow:0 10px 24px rgba(0,0,0,.32), inset 0 1px 0 rgba(255,255,255,.06);
 }
 html:not([data-theme="light"]) .acc-decision-tab.active{
-  color:#d9fbe9;
-  background:linear-gradient(180deg, rgba(16,185,129,.32), rgba(16,185,129,.10));
-  border-color:rgba(52,211,153,.75);
-  box-shadow:0 10px 26px rgba(16,185,129,.26), inset 0 1px 0 rgba(255,255,255,.10);
+  color:#d9f6fb;
+  background:linear-gradient(180deg, rgba(16,160,185,.32), rgba(16,160,185,.10));
+  border-color:rgba(52,187,211,.75);
+  box-shadow:0 10px 26px rgba(16,160,185,.26), inset 0 1px 0 rgba(255,255,255,.10);
 }
 .acc-decision-tab:focus-visible{
-  outline:none !important; border-color:#34d399 !important;
-  box-shadow:0 0 0 3px rgba(16,185,129,.35) !important;
+  outline:none !important; border-color:#34bbd3 !important;
+  box-shadow:0 0 0 3px rgba(16,160,185,.35) !important;
 }
 .acc-decision-tab .dt-count{
   display:inline-flex; align-items:center; justify-content:center;
@@ -52,7 +52,7 @@ html:not([data-theme="light"]) .acc-decision-tab .dt-count{
 }
 html:not([data-theme="light"]) .acc-decision-tab:hover .dt-count{ border-color:rgba(212,175,90,.5); }
 html:not([data-theme="light"]) .acc-decision-tab.active .dt-count{
-  background:rgba(6,66,49,.55); border-color:rgba(94,234,212,.5); color:#d1fae5;
+  background:rgba(14,31,58,.55); border-color:rgba(94,213,234,.5); color:#d1f4fa;
 }
 @media (max-width:768px){
   .acc-decision-tabs{ gap:10px; }
@@ -96,8 +96,8 @@ html:not([data-theme="light"]) .modal-box .fg > label{ color:#dae2f0; }
 /* ۲-۴) فوکوس واضح روی همهٔ فیلدهای فرم */
 .pbody .fg input:focus, .pbody .fg select:focus, .pbody .fg textarea:focus,
 .modal-box .fg input:focus, .modal-box .fg select:focus, .modal-box .fg textarea:focus{
-  border-color:#10b981 !important;
-  box-shadow:0 0 0 3px rgba(16,185,129,.22);
+  border-color:#10a0b9 !important;
+  box-shadow:0 0 0 3px rgba(16,160,185,.22);
 }
 html:not([data-theme="light"]) .pbody .fg input:focus,
 html:not([data-theme="light"]) .pbody .fg select:focus,
@@ -201,7 +201,7 @@ table.ss-grid thead tr:first-child th[style*="font-size:9.5px"]{ font-size:11px 
   left: -12px;
   width: 12px;
   height: 2px;
-  background: linear-gradient(270deg, rgba(212,175,90,.6), rgba(16,185,129,.4));
+  background: linear-gradient(270deg, rgba(212,175,90,.6), rgba(16,160,185,.4));
   transform: translateY(-50%);
   pointer-events: none;
   z-index: 10;
@@ -252,7 +252,7 @@ table.ss-grid thead tr:first-child th[style*="font-size:9.5px"]{ font-size:11px 
   flex: 0 0 240px !important;
   min-width: 240px !important;
   position: relative;
-  background: rgba(20, 32, 27, 0.88);
+  background: rgba(21,25,31,0.88);
   border: 1px solid rgba(212, 175, 90, 0.25);
   border-radius: 14px;
   padding: 18px;

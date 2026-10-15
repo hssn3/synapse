@@ -5,11 +5,11 @@
 
 const safetyStatusBadge = (r) => {
   const map = {
-    completed: '<span class="chip" style="background:rgba(0,229,153,.15);color:#00e599">تکمیل و تأیید شد ✓</span>',
+    completed: '<span class="chip" style="background:rgba(0,195,229,.15);color:#00c3e5">تکمیل و تأیید شد ✓</span>',
     in_progress: '<span class="chip" style="background:rgba(212,175,90,.15);color:#d4af5a">در حال اجرا</span>',
     flagged: '<span class="chip" style="background:rgba(255,56,96,.15);color:#ff3860">نیازمند مداخله ⚠️</span>',
-    approved: '<span class="chip" style="background:rgba(0,229,153,.15);color:#00e599">تأیید پزشک معالج</span>',
-    negative: '<span class="chip" style="background:rgba(0,229,153,.15);color:#00e599">منفی (پاس استاندارد) ✓</span>',
+    approved: '<span class="chip" style="background:rgba(0,195,229,.15);color:#00c3e5">تأیید پزشک معالج</span>',
+    negative: '<span class="chip" style="background:rgba(0,195,229,.15);color:#00c3e5">منفی (پاس استاندارد) ✓</span>',
     positive: '<span class="chip" style="background:rgba(255,56,96,.15);color:#ff3860">مثبت (آلوده - اخطار) ⚠️</span>'
   };
   return map[r.overall_status || r.status || r.spore_test_status] || esc(r.overall_status || r.status);
@@ -18,7 +18,7 @@ const safetyStatusBadge = (r) => {
 const safetyDiscBadge = (r) => {
   return r.discrepancy_found
     ? '<span class="chip" style="background:rgba(255,56,96,.15);color:#ff3860;font-weight:700">مغایرت شناسایی شد (' + esc(r.discrepancy_type||'عدم انطباق') + ')</span>'
-    : '<span class="chip" style="color:#00e599">بدون مغایرت دارویی</span>';
+    : '<span class="chip" style="color:#00c3e5">بدون مغایرت دارویی</span>';
 };
 
 RPG.define({
@@ -46,7 +46,7 @@ RPG.define({
             <span class="chip" style="background:rgba(255,56,96,.15);color:#ff3860">${fa(d.sentinel_events_count)} وقایع سنتینل</span>
           </div>
           <div style="font-size:12px;color:var(--td);margin-top:10px">
-            تحلیل ریشه‌ای (RCA) انجام‌شده: <b style="color:#00e599">${fa(d.rca_done_count)}</b> / در حال اقدام: <b style="color:#e08f3c">${fa(d.rca_pending_count)}</b>
+            تحلیل ریشه‌ای (RCA) انجام‌شده: <b style="color:#00c3e5">${fa(d.rca_done_count)}</b> / در حال اقدام: <b style="color:#e08f3c">${fa(d.rca_pending_count)}</b>
           </div>
         </div>
 
@@ -75,11 +75,11 @@ RPG.define({
         </div>
 
         <!-- Waste & Sterilization -->
-        <div class="panel g" style="padding:18px;border-radius:14px;background:rgba(18,24,38,0.7);backdrop-filter:blur(10px);border:1px solid rgba(0,229,153,0.2)">
+        <div class="panel g" style="padding:18px;border-radius:14px;background:rgba(18,24,38,0.7);backdrop-filter:blur(10px);border:1px solid rgba(0,195,229,0.2)">
           <div style="font-size:12px;color:var(--td);margin-bottom:6px">پسماند عفونی و بی‌خطرسازی</div>
           <div style="display:flex;align-items:baseline;justify-content:space-between">
-            <span style="font-size:32px;font-weight:900;color:#00e599">${fa(d.autoclaved_waste_kg)} <span style="font-size:14px;color:var(--mut)">کیلوگرم</span></span>
-            <span class="chip" style="background:rgba(0,229,153,.12);color:#00e599">اسپور منفی: ${fa(d.spore_pass_rate)}٪</span>
+            <span style="font-size:32px;font-weight:900;color:#00c3e5">${fa(d.autoclaved_waste_kg)} <span style="font-size:14px;color:var(--mut)">کیلوگرم</span></span>
+            <span class="chip" style="background:rgba(0,195,229,.12);color:#00c3e5">اسپور منفی: ${fa(d.spore_pass_rate)}٪</span>
           </div>
           <div style="font-size:12px;color:var(--td);margin-top:10px">
             انطباق بهداشت دست بخش‌ها: <b style="color:#00f0ff">${fa(d.hand_hygiene_compliance)}٪</b>
@@ -108,7 +108,7 @@ RPG.define({
                   <div style="padding:10px 14px;background:rgba(255,255,255,0.03);border-radius:10px;border-right:3px solid #00f0ff">
                     <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px">
                       <b style="color:var(--th)">${esc(s.patient_name)} (${esc(s.surgery_type)})</b>
-                      <span class="chip" style="background:rgba(0,229,153,.15);color:#00e599">Sign In/Out ✓</span>
+                      <span class="chip" style="background:rgba(0,195,229,.15);color:#00c3e5">Sign In/Out ✓</span>
                     </div>
                     <div style="font-size:11.5px;color:var(--mut)">اتاق عمل: ${esc(s.operating_room)} | جراح: ${esc(s.surgeon_name)} | تاریخ: ${esc(s.surgery_date)}</div>
                   </div>

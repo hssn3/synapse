@@ -132,7 +132,7 @@ function getDocBranch(d){
     return { key: 'infection', code: 'ب-5', title: 'پیشگیری و کنترل عفونت‌های بیمارستانی', icon: '🛡️', color: '#0284c7' };
   }
   if (code.includes('-LAB-') || code.startsWith('LAB-') || title.includes('آزمایشگاه') || title.includes('پاتولوژی') || title.includes('کشت') || title.includes('بیوشیمی') || title.includes('هماتولوژی')) {
-    return { key: 'lab', code: 'ب-8', title: 'خدمات آزمایشگاه تشخیص طبی و آسیب‌شناسی', icon: '🧪', color: '#059669' };
+    return { key: 'lab', code: 'ب-8', title: 'خدمات آزمایشگاه تشخیص طبی و آسیب‌شناسی', icon: '🧪', color: '#1b6580' };
   }
   if (code.includes('-BT-') || code.startsWith('BT-') || title.includes('انتقال خون') || title.includes('بانک خون') || title.includes('هموویژیلانس')) {
     return { key: 'blood', code: 'ب-9', title: 'بانک خون و طب انتقال خون', icon: '🩸', color: '#e11d48' };
@@ -156,7 +156,7 @@ function getDocBranch(d){
     return { key: 'outpatient', code: 'ب-10', title: 'خدمات سرپایی و کلینیک‌های تخصصی', icon: '🏥', color: '#0891b2' };
   }
   if (code.includes('-NUT-') || code.startsWith('NUT-') || title.includes('تغذیه') || title.includes('رژیم') || title.includes('آشپزخانه')) {
-    return { key: 'nutrition', code: 'ب-1', title: 'تغذیه بالینی و خدمات رژیم‌درمانی', icon: '🥗', color: '#16a34a' };
+    return { key: 'nutrition', code: 'ب-1', title: 'تغذیه بالینی و خدمات رژیم‌درمانی', icon: '🥗', color: '#168ea3' };
   }
   if (code.includes('-CLN-') || code.startsWith('CLN-') || title.includes('دارو') || title.includes('سقوط') || title.includes('زخم') || title.includes('بستری') || title.includes('پرستار') || title.includes('پرونده') || title.includes('مراقبت')) {
     return { key: 'clinical', code: 'ب-1', title: 'مراقبت‌های عمومی بالینی و خدمات درمانی', icon: '🩺', color: '#4f46e5' };

@@ -91,10 +91,10 @@ const RPG = {
   },
 
   CLR: { open: '#c02626', announced: '#c02626', pending: '#9a6b00', active: '#c02626', planned: '#9a6b00',
-    analyzed: '#0b7a3e', notified: '#9a6b00', collected: '#9a6b00', in_progress: '#9a6b00',
+    analyzed: '#17576e', notified: '#9a6b00', collected: '#9a6b00', in_progress: '#9a6b00',
     investigated: '#9a6b00', quarantined: '#9a6b00', recalled: '#c02626', fail: '#c02626',
-    closed: '#0b7a3e', resolved: '#0b7a3e', approved: '#0b7a3e', rejected: '#6b7280',
-    done: '#0b7a3e', pass: '#0b7a3e', released: '#0b7a3e', controlled: '#9a6b00', used: '#6b7280' },
+    closed: '#17576e', resolved: '#17576e', approved: '#17576e', rejected: '#6b7280',
+    done: '#17576e', pass: '#17576e', released: '#17576e', controlled: '#9a6b00', used: '#6b7280' },
   chip(v, map) {
     return `<span style="display:inline-block;padding:2px 9px;border-radius:20px;font-size:12px;font-weight:700;
       color:#fff;background:${this.CLR[v] || '#6b7280'}">${(map && map[v]) || v || '—'}</span>`;

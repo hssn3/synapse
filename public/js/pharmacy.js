@@ -24,7 +24,7 @@ const PH_FA = {
 };
 const PH_CLR = { open: '#c02626', announced: '#c02626', pending: '#9a6b00', active: '#c02626',
   analyzed: '#9a6b00', notified: '#9a6b00', collected: '#9a6b00',
-  closed: '#0b7a3e', resolved: '#0b7a3e', approved: '#0b7a3e', rejected: '#6b7280' };
+  closed: '#17576e', resolved: '#17576e', approved: '#17576e', rejected: '#6b7280' };
 
 function phChip(key, map) {
   return `<span style="display:inline-block;padding:2px 9px;border-radius:20px;font-size:12px;font-weight:700;
@@ -205,16 +205,16 @@ function phDrawDash() {
     ${phTabs()}</div>
     <div class="pbody">
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px">
-        ${card(d.formulary_total, 'قلم فعال فرمولاری', '#0b7a3e', 'formulary')}
+        ${card(d.formulary_total, 'قلم فعال فرمولاری', '#17576e', 'formulary')}
         ${card(d.vital, 'داروی حیاتی', '#1550b8', 'formulary')}
         ${card(d.high_alert, 'داروی هشدار بالا', '#c02626', 'formulary')}
-        ${card(d.temp_out_30d, 'انحراف دما (۳۰ روز)', d.temp_out_30d ? '#c02626' : '#0b7a3e', 'fridges')}
+        ${card(d.temp_out_30d, 'انحراف دما (۳۰ روز)', d.temp_out_30d ? '#c02626' : '#17576e', 'fridges')}
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap">
-        ${card(d.active_shortages, 'کمبود در جریان', d.active_shortages ? '#9a6b00' : '#0b7a3e', 'shortages')}
-        ${card(d.open_recalls, 'فراخوان باز', d.open_recalls ? '#c02626' : '#0b7a3e', 'recalls')}
-        ${card(d.open_events, 'عارضه/خطای باز', d.open_events ? '#c02626' : '#0b7a3e', 'events')}
-        ${card(d.pending_off_formulary, 'درخواست خارج از فرمولاری', d.pending_off_formulary ? '#9a6b00' : '#0b7a3e', 'offformulary')}
+        ${card(d.active_shortages, 'کمبود در جریان', d.active_shortages ? '#9a6b00' : '#17576e', 'shortages')}
+        ${card(d.open_recalls, 'فراخوان باز', d.open_recalls ? '#c02626' : '#17576e', 'recalls')}
+        ${card(d.open_events, 'عارضه/خطای باز', d.open_events ? '#c02626' : '#17576e', 'events')}
+        ${card(d.pending_off_formulary, 'درخواست خارج از فرمولاری', d.pending_off_formulary ? '#9a6b00' : '#17576e', 'offformulary')}
       </div>
       <div style="margin-top:16px;color:var(--mut);font-size:13px;line-height:2">
         هر کارت به تبِ مربوطش می‌رود. «انحراف دما» شمارشِ ثبت‌هایی است که خارج از محدوده‌ی
@@ -400,9 +400,9 @@ function phDrawTemps() {
   const f = PH.fridge, t = PH.temps || { logs: [] };
   const rows = (t.logs || []).map(l => `<tr>
     <td>${faDateISO(l.log_date)}</td><td>${esc(l.slot)}</td>
-    <td style="color:${l.in_range ? '#0b7a3e' : '#c02626'};font-weight:700">${fa(l.temperature)} °C</td>
+    <td style="color:${l.in_range ? '#17576e' : '#c02626'};font-weight:700">${fa(l.temperature)} °C</td>
     <td>${l.humidity == null ? '—' : fa(l.humidity) + '٪'}</td>
-    <td>${l.in_range ? '<span style="color:#0b7a3e">در محدوده</span>' : '<span style="color:#c02626;font-weight:700">خارج از محدوده</span>'}</td>
+    <td>${l.in_range ? '<span style="color:#17576e">در محدوده</span>' : '<span style="color:#c02626;font-weight:700">خارج از محدوده</span>'}</td>
     <td style="text-align:right">${esc(l.action_taken || '—')}</td>
     <td>${esc(l.recorded_by || '—')}</td></tr>`).join('');
   $('ptitle').textContent = 'پایش دما — ' + f.title;

@@ -152,7 +152,7 @@ tr:hover td {
 }
 
 .toast {
-  background: rgba(20, 35, 29, 0.95) !important;
+  background: rgba(21,26,34,0.95) !important;
   backdrop-filter: blur(8px);
   border-right: 4px solid var(--accent-emerald) !important;
   border-radius: var(--radius-sm);

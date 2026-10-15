@@ -18,20 +18,20 @@
   --bgx-ink-600: #10454f;
   --bgx-teal-500: #12707a; /* جوهر اصلی */
   --bgx-teal-400: #1a9aa0;
-  --bgx-jade-300: #4fc9bd; /* درخشش سطح آب */
+  --bgx-jade-300: #4fb7c9; /* درخشش سطح آب */
   --bgx-mist-200: #b9dedd; /* مه کوهستان */
-  --bgx-mist-100: #e2f2f0;
-  --bgx-paper: #f3fbfa;
+  --bgx-mist-100: #e2f0f2;
+  --bgx-paper: #f3fafb;
 
   /* رنگ‌های وضعیت — لحن «مرکب و شنگرف» ایرانی، نه پالت هشدار پیش‌فرض */
-  --bgx-ok: #57c58f; /* منطبق */
+  --bgx-ok: #57b5c5; /* منطبق */
   --bgx-warn: #d9a441; /* در حال اقدام — زرد زعفران */
   --bgx-risk: #d2624f; /* غیرمنطبق — شنگرف */
   --bgx-info: #6aa9d8; /* اطلاع */
   --bgx-idle: #7f9ea4; /* بررسی‌نشده */
 
   /* متن روی شیشهٔ تیره */
-  --bgx-fg: #eaf7f5;
+  --bgx-fg: #eaf5f7;
   --bgx-fg-soft: #b7d3d3;
   --bgx-fg-mute: #86a6a9;
 
@@ -41,13 +41,13 @@
   --bgx-glass-blur: 20px;
   --bgx-glass-sat: 1.35;
   --bgx-glass-line: rgba(180, 232, 228, 0.16);
-  --bgx-glass-line-top: rgba(233, 255, 252, 0.32);
+  --bgx-glass-line-top: rgba(233,252,255,0.32);
   --bgx-glass-shadow: 0 18px 44px -22px rgba(2, 14, 18, 0.85),
     0 2px 10px -6px rgba(2, 14, 18, 0.6);
 
   /* هالهٔ رنگی پشت کارت‌ها */
   --bgx-halo-a: rgba(26, 154, 160, 0.5);
-  --bgx-halo-b: rgba(79, 201, 189, 0.32);
+  --bgx-halo-b: rgba(79,183,201,0.32);
 
   /* پس‌زمینهٔ ویدیو */
   --bgx-video-opacity: 0.9;
@@ -72,7 +72,7 @@
 :root[data-bgx-scene="ink"] {
   --bgx-video-filter: saturate(1.06) contrast(1.03);
   --bgx-halo-a: rgba(26, 154, 160, 0.5);
-  --bgx-halo-b: rgba(79, 201, 189, 0.32);
+  --bgx-halo-b: rgba(79,183,201,0.32);
 }
 
 :root[data-bgx-scene="sunset"] {
@@ -117,7 +117,7 @@
   --bgx-glass-tint: 10, 18, 21;
   --bgx-glass-alpha: 0.72;
   --bgx-halo-a: rgba(26, 154, 160, 0.26);
-  --bgx-halo-b: rgba(79, 201, 189, 0.14);
+  --bgx-halo-b: rgba(79,183,201,0.14);
   --bgx-scrim-alpha: 0.2;
 }
 
@@ -127,7 +127,7 @@
   --bgx-glass-alpha: 0.82;
   --bgx-scrim-alpha: 0.72;
   --bgx-halo-a: rgba(26, 154, 160, 0.22);
-  --bgx-halo-b: rgba(79, 201, 189, 0.14);
+  --bgx-halo-b: rgba(79,183,201,0.14);
 }
 
 /* --------------------------------------------------------- ۴. صحنهٔ پس‌زمینه */
@@ -280,7 +280,7 @@ body {
   border-radius: 60% 40% 55% 45% / 45% 55% 40% 60%; /* قطرهٔ نامنظم، نه دایرهٔ صاف */
   background: radial-gradient(
     circle at 32% 30%,
-    rgba(233, 255, 252, 0.95),
+    rgba(233,252,255,0.95),
     var(--bgx-jade-300) 55%,
     rgba(26, 154, 160, 0) 100%
   );
@@ -374,7 +374,7 @@ body {
 
 /* لبهٔ فلزی نازک برای عناصر کنشی */
 .bgx-edge {
-  box-shadow: inset 0 0 0 1px rgba(233, 255, 252, 0.1),
+  box-shadow: inset 0 0 0 1px rgba(233,252,255,0.1),
     var(--bgx-glass-shadow);
 }
 
@@ -519,7 +519,7 @@ body {
 }
 
 .bgx-mini__dot[aria-pressed="true"] {
-  box-shadow: 0 0 0 2px rgba(233, 255, 252, 0.85);
+  box-shadow: 0 0 0 2px rgba(233,252,255,0.85);
   transform: scale(1.12);
 }
 
@@ -617,4 +617,4 @@ body > #root{position:relative;z-index:1}
 :root[data-bgx-scene="night"]{--bgx-ink-900:#05060a;--bgx-ink-800:#0a0d14;--bgx-ink-700:#11161f;--bgx-glass-tint:8,10,16;--bgx-video-filter:saturate(.9) brightness(.85)}
 :root[data-bgx-scene="mist"]{--bgx-ink-900:#0b1116;--bgx-ink-800:#141c24;--bgx-ink-700:#1c2833;--bgx-glass-tint:18,28,38;--bgx-video-filter:saturate(.85) brightness(1.02)}
 :root[data-bgx-scene="sky"]{--bgx-ink-900:#071422;--bgx-ink-800:#0c1e30;--bgx-ink-700:#122a42;--bgx-glass-tint:10,30,52;--bgx-video-filter:saturate(1.12) brightness(1.04)}
-:root[data-bgx-scene="grove"]{--bgx-ink-900:#0b1210;--bgx-ink-800:#121b18;--bgx-ink-700:#1a2622;--bgx-glass-tint:14,24,20;--bgx-video-filter:saturate(.95) brightness(.92)}
+:root[data-bgx-scene="grove"]{--bgx-ink-900:#0c0f13;--bgx-ink-800:#12161b;--bgx-ink-700:#1b1f25;--bgx-glass-tint:14,24,20;--bgx-video-filter:saturate(.95) brightness(.92)}

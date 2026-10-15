@@ -44,7 +44,7 @@ RPG.define({
         { k: 'likelihood', l: 'احتمال (۱ تا ۵) *', t: 'num', def: 3, list: 1 },
         { k: 'severity', l: 'شدت (۱ تا ۵) *', t: 'num', def: 3, list: 1 },
         { k: 'risk_score', l: 'امتیاز خطر', t: 'num', computed: 1, list: 1,
-          render: (r) => `<b style="color:${r.risk_score >= 15 ? '#c02626' : (r.risk_score >= 8 ? '#9a6b00' : '#0b7a3e')}">${fa(r.risk_score || 0)}</b>` },
+          render: (r) => `<b style="color:${r.risk_score >= 15 ? '#c02626' : (r.risk_score >= 8 ? '#9a6b00' : '#17576e')}">${fa(r.risk_score || 0)}</b>` },
         { k: 'is_priority', l: 'جزو مخاطرات اولویت‌دار', t: 'bool', list: 1 },
         { k: 'status', l: 'وضعیت', t: 'select', opts: ['planned', 'in_progress', 'done'], fa: 'hz_status', list: 1, chip: 1 },
         { k: 'responsible', l: 'مسئول', t: 'text' },
@@ -104,14 +104,14 @@ RPG.define({
     return `
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px">
         ${c(a ? a.total_score : null, a ? `نمره‌ی HSI (سال ${fa(a.jalali_year)})` : 'ارزیابی ایمنی ثبت نشده',
-          a ? '#0b7a3e' : '#c02626', 'assessments')}
+          a ? '#17576e' : '#c02626', 'assessments')}
         ${c(d.hazards_priority, 'مخاطره‌ی اولویت‌دار', '#c02626', 'hazards')}
-        ${c(d.hazards_open, 'برنامه‌ی کاهش خطرِ ناتمام', d.hazards_open ? '#9a6b00' : '#0b7a3e', 'hazards')}
-        ${c(d.drills_year, 'مانور در ۱۲ ماه گذشته', d.drills_year ? '#0b7a3e' : '#c02626', 'drills')}
+        ${c(d.hazards_open, 'برنامه‌ی کاهش خطرِ ناتمام', d.hazards_open ? '#9a6b00' : '#17576e', 'hazards')}
+        ${c(d.drills_year, 'مانور در ۱۲ ماه گذشته', d.drills_year ? '#17576e' : '#c02626', 'drills')}
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap">
-        ${c(d.drills_unanalyzed, 'مانورِ بدون تحلیل عملکرد', d.drills_unanalyzed ? '#c02626' : '#0b7a3e', 'drills')}
-        ${c(d.incidents_open, 'حادثه‌ی باز', d.incidents_open ? '#c02626' : '#0b7a3e', 'incidents')}
+        ${c(d.drills_unanalyzed, 'مانورِ بدون تحلیل عملکرد', d.drills_unanalyzed ? '#c02626' : '#17576e', 'drills')}
+        ${c(d.incidents_open, 'حادثه‌ی باز', d.incidents_open ? '#c02626' : '#17576e', 'incidents')}
         ${c(d.incidents_year, 'حادثه در ۱۲ ماه گذشته', '#1550b8', 'incidents')}
         ${c(d.hazards_total, 'کل عوامل خطرآفرین شناسایی‌شده', '#1550b8', 'hazards')}
       </div>

@@ -297,8 +297,8 @@ function renderGlobalHeader(){
   el.innerHTML=`
   <div class="ghdr-in">
     <div class="ghdr-brand" onclick="goHome()" role="button" tabindex="0">
-      <div class="lmark sm shine anim">✦</div>
-      <b>سامانه جامع مدیریت بیمارستانی</b>
+      <div class="lmark sm shine anim"><img class="syn-ico" src="/img/synapse-mark-64.png" alt="سیناپس" width="22" height="22"></div>
+      <b>سیناپس</b>
     </div>
     <nav class="ghdr-nav">
       <a href="javascript:void(0)" onclick="goHome()">خانه</a>
@@ -371,9 +371,9 @@ function renderGlobalFooter(){
   const yr=new Date().toLocaleDateString('fa-IR', { year: 'numeric' });
   el.innerHTML=`
   <div class="gftr-in">
-    <div class="gftr-brand"><div class="lmark sm shine">✦</div>
-      <div><b>سامانه جامع مدیریت بیمارستانی</b>
-      <span>ساختار سازمانی، پرستاری، کیفیت، ایمنی بیمار و اعتباربخشی برای مراکز درمانی عضو، در یک بستر ابری یکپارچه.</span></div></div>
+    <div class="gftr-brand"><div class="lmark sm shine"><img class="syn-ico" src="/img/synapse-mark-64.png" alt="سیناپس" width="22" height="22"></div>
+      <div><b>سیناپس</b>
+      <span>سامانه یکپارچه نظارت، اعتباربخشی و پایش سلامت — بستری ابری و یکپارچه برای مراکز درمانی عضو.</span></div></div>
     <div class="gftr-col"><b>محصول</b>
       <a href="javascript:void(0)" onclick="goFeaturesPublic()">ماژول‌های سامانه</a>
       <a href="javascript:void(0)" onclick="goProcessPublic()">فرآیند استقرار</a>
@@ -385,7 +385,7 @@ function renderGlobalFooter(){
     </div>
   </div>
   <div class="gftr-cr">
-    <span>© ${fa(yr)} سامانه جامع مدیریت بیمارستانی — تمام حقوق محفوظ است.</span>
+    <span>© ${fa(yr)} سیناپس — سامانه یکپارچه نظارت، اعتباربخشی و پایش سلامت — تمام حقوق محفوظ است.</span>
   </div>`;
 }
 // ناوبری صفحات عمومی (پیش/پس از ورود هر دو) — همیشه داخل #root رندر می‌شود،

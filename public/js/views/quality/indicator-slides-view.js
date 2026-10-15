@@ -48,11 +48,11 @@ let ISLIDE_STATE = {
 const ISLIDE_THEMES = {
   hospital_macro: { primary: '#38bdf8', secondary: '#f59e0b', bg: 'rgba(56, 189, 248, 0.1)', border: '#0284c7', label: 'کلان و اورژانس', icon: '🏥' },
   surgical_maternity: { primary: '#a855f7', secondary: '#ec4899', bg: 'rgba(168, 85, 247, 0.1)', border: '#7e22ce', label: 'جراحی، زایمان و پاراکلینیک', icon: '🩺' },
-  nursing_office: { primary: '#10b981', secondary: '#06b6d4', bg: 'rgba(16, 185, 129, 0.1)', border: '#059669', label: 'دفتر پرستاری', icon: '👩‍⚕️' },
+  nursing_office: { primary: '#10a0b9', secondary: '#06b6d4', bg: 'rgba(16,160,185,0.1)', border: '#1b6580', label: 'دفتر پرستاری', icon: '👩‍⚕️' },
   patient_safety: { primary: '#ef4444', secondary: '#f97316', bg: 'rgba(239, 68, 68, 0.1)', border: '#dc2626', label: 'ایمنی بیمار', icon: '🛡️' },
-  infection_control: { primary: '#14b8a6', secondary: '#84cc16', bg: 'rgba(20, 184, 166, 0.1)', border: '#0d9488', label: 'کنترل عفونت', icon: '🦠' },
+  infection_control: { primary: '#149fb8', secondary: '#16b1cc', bg: 'rgba(20,159,184,0.1)', border: '#1c6985', label: 'کنترل عفونت', icon: '🦠' },
   patient_education: { primary: '#0ea5e9', secondary: '#8b5cf6', bg: 'rgba(14, 165, 233, 0.1)', border: '#0284c7', label: 'آموزش بیمار', icon: '📖' },
-  staff_education: { primary: '#f59e0b', secondary: '#10b981', bg: 'rgba(245, 158, 11, 0.1)', border: '#d97706', label: 'آموزش کارکنان', icon: '🎓' }
+  staff_education: { primary: '#f59e0b', secondary: '#10a0b9', bg: 'rgba(245, 158, 11, 0.1)', border: '#d97706', label: 'آموزش کارکنان', icon: '🎓' }
 };
 
 // نگاشت دقیق به سنجه‌ها و فصول اعتباربخشی ملی بیمارستان‌های ایران
@@ -322,7 +322,7 @@ function drawIndicatorSlidesView() {
           </div>
         </div>
 
-        <div class="islide-kpi-card" style="--kpi-col:#10b981;--kpi-glow:rgba(16,185,129,0.25)">
+        <div class="islide-kpi-card" style="--kpi-col:#10a0b9;--kpi-glow:rgba(16,160,185,0.25)">
           <div class="kpi-icon">👶</div>
           <div class="kpi-body">
             <div class="kpi-title">ترویج زایمان طبیعی و ایمن</div>
@@ -346,7 +346,7 @@ function drawIndicatorSlidesView() {
           </div>
         </div>
 
-        <div class="islide-kpi-card" style="--kpi-col:#14b8a6;--kpi-glow:rgba(20,184,166,0.25)">
+        <div class="islide-kpi-card" style="--kpi-col:#149fb8;--kpi-glow:rgba(20,159,184,0.25)">
           <div class="kpi-icon">🧼</div>
           <div class="kpi-body">
             <div class="kpi-title">کنترل عفونت و بهداشت دست</div>
@@ -536,7 +536,7 @@ function renderSlidePlayer(slide, list) {
               <span class="m-detail">ماه اوج فعالیت و بار مراجعات بیمارستان</span>
             </div>
 
-            <div class="islide-metric-pill" style="--m-color:#10b981">
+            <div class="islide-metric-pill" style="--m-color:#10a0b9">
               <span class="m-label">${metrics.isRate ? 'هدف میانگین سال ۱۴۰۵' : 'مجموع هدف‌گذاری سال ۱۴۰۵'}</span>
               <span class="m-value">
                 ${fa(metrics.total1405)}
@@ -545,7 +545,7 @@ function renderSlidePlayer(slide, list) {
               <span class="m-detail">پایه ۱۴۰۴: ${fa(metrics.total1404)} ${esc(slide.unit || '')}</span>
             </div>
 
-            <div class="islide-metric-pill" style="--m-color:${metrics.deltaPct >= 0 ? '#34d399' : '#f87171'}">
+            <div class="islide-metric-pill" style="--m-color:${metrics.deltaPct >= 0 ? '#34bbd3' : '#f87171'}">
               <span class="m-label">نرخ رشد / تغییر هدف (Δ٪)</span>
               <span class="m-value">
                 ${metrics.deltaPct >= 0 ? '+' + fa(metrics.deltaPct) + '٪' : fa(metrics.deltaPct) + '٪'}
@@ -600,7 +600,7 @@ function renderSlidePlayer(slide, list) {
           <div class="islide-table-hd">
             <span class="hd-title">📋 جدول داده‌های عددی و مقایسه عملکرد سال‌های ۱۴۰۴ و ۱۴۰۵</span>
             <div class="hd-actions">
-              <span class="sub-txt" style="color:#94b2a5;font-size:12.5px;margin-left:12px">واحد سنجش: <strong>${esc(slide.unit || 'عدد')}</strong></span>
+              <span class="sub-txt" style="color:#94adb2;font-size:12.5px;margin-left:12px">واحد سنجش: <strong>${esc(slide.unit || 'عدد')}</strong></span>
               ${canEdit ? `<button class="btn btn-o btn-sm" onclick="openDirectEditorForSlide(${slide.slide_number})">✏️ ویرایش مقادیر جدول</button>` : ''}
             </div>
           </div>
@@ -673,7 +673,7 @@ function renderSlide1Cover(slide, theme, list) {
         <div class="islide-table-section" style="margin-top:22px">
           <div class="islide-table-hd">
             <span class="hd-title">📋 ماتریس مقایسه‌ای شاخص‌های کلان بیمارستان</span>
-            <span class="sub-txt" style="color:#94b2a5">عملکرد پایه ۱۴۰۴ و اهداف استراتژیک ۱۴۰۵</span>
+            <span class="sub-txt" style="color:#94adb2">عملکرد پایه ۱۴۰۴ و اهداف استراتژیک ۱۴۰۵</span>
           </div>
           <div class="islide-table-wrap">
             ${renderSlideDataTable(slide)}
@@ -805,8 +805,8 @@ function renderSvgChart(slide, theme) {
     const fill1404 = isYear ? 'url(#gradY1404)' : isQuarter ? 'url(#gradQ1404)' : 'url(#grad1404)';
     const fill1405 = isYear ? 'url(#gradY1405)' : isQuarter ? 'url(#gradQ1405)' : 'url(#grad1405)';
 
-    const textCol1404 = isYear ? '#c084fc' : isQuarter ? '#34d399' : '#38bdf8';
-    const textCol1405 = isYear ? '#a855f7' : isQuarter ? '#10b981' : '#f59e0b';
+    const textCol1404 = isYear ? '#c084fc' : isQuarter ? '#34bbd3' : '#38bdf8';
+    const textCol1405 = isYear ? '#a855f7' : isQuarter ? '#10a0b9' : '#f59e0b';
 
     if (has1405 && v1405 !== null) {
       const h1405 = (v1405 / maxVal) * chartH;
@@ -886,12 +886,12 @@ function renderSvgChart(slide, theme) {
           </linearGradient>
           
           <linearGradient id="gradQ1404" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#34d399" stop-opacity="1" />
-            <stop offset="100%" stop-color="#059669" stop-opacity="0.85" />
+            <stop offset="0%" stop-color="#34bbd3" stop-opacity="1" />
+            <stop offset="100%" stop-color="#1b6580" stop-opacity="0.85" />
           </linearGradient>
           <linearGradient id="gradQ1405" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#10b981" stop-opacity="1" />
-            <stop offset="100%" stop-color="#047857" stop-opacity="0.85" />
+            <stop offset="0%" stop-color="#10a0b9" stop-opacity="1" />
+            <stop offset="100%" stop-color="#165166" stop-opacity="0.85" />
           </linearGradient>
           
           <linearGradient id="gradY1404" x1="0" y1="0" x2="0" y2="1">
@@ -1142,7 +1142,7 @@ function renderExcelEditor() {
                       <input type="number" step="any" class="form-ctrl input-readonly" name="val1404_${idx}" id="val1404_${idx}" value="${v1404}" readonly title="مقدار ثبت‌شده ۱۴۰۴">
                     </td>
                     <td>
-                      <input type="number" step="any" class="form-ctrl input-editable" name="val1405_${idx}" id="val1405_${idx}" value="${v1405}" placeholder="مقدار ۱۴۰۵…" oninput="onEditorInputChanged(${idx})" ${isSum ? 'style="border-color:#10b981;font-weight:900"' : ''}>
+                      <input type="number" step="any" class="form-ctrl input-editable" name="val1405_${idx}" id="val1405_${idx}" value="${v1405}" placeholder="مقدار ۱۴۰۵…" oninput="onEditorInputChanged(${idx})" ${isSum ? 'style="border-color:#10a0b9;font-weight:900"' : ''}>
                     </td>
                     <td class="td-calc" id="calcDiff_${idx}">
                       ${getDeltaBadge(v1404, v1405, slide.title)}

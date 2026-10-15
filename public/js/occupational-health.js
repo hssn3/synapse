@@ -60,7 +60,7 @@ RPG.define({
         { k: 'within_limit', l: 'داخل حد مجاز', t: 'bool', computed: 1, list: 1,
           render: (r) => r.within_limit === null || r.within_limit === undefined
             ? '<span style="color:var(--td)">—</span>'
-            : (r.within_limit ? '<b style="color:#0b7a3e">داخل حد</b>' : '<b style="color:#c02626">خارج از حد</b>') },
+            : (r.within_limit ? '<b style="color:#17576e">داخل حد</b>' : '<b style="color:#c02626">خارج از حد</b>') },
         { k: 'method', l: 'روش اندازه‌گیری', t: 'text' },
         { k: 'lab_name', l: 'آزمایشگاه مجری', t: 'text' },
         { k: 'action_taken', l: 'اقدام انجام‌شده', t: 'area' },
@@ -127,26 +127,26 @@ RPG.define({
     // صفر یعنی یکی از چهار سنجه‌ی الف‑۳‑۵ هیچ مدرکی ندارد، پس قرمز است نه خاکستری.
     return `
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px">
-        ${c(k['شیمیایی'], 'عامل شیمیایی (الف-۳-۵-۲)', k['شیمیایی'] ? '#0b7a3e' : '#c02626', 'hazards')}
-        ${c(k['فیزیکی'], 'عامل فیزیکی (الف-۳-۵-۳)', k['فیزیکی'] ? '#0b7a3e' : '#c02626', 'hazards')}
-        ${c(k['بیولوژیکی'], 'عامل بیولوژیکی (الف-۳-۵-۴)', k['بیولوژیکی'] ? '#0b7a3e' : '#c02626', 'hazards')}
-        ${c(k['ارگونومیک'], 'عامل ارگونومیک (الف-۳-۵-۵)', k['ارگونومیک'] ? '#0b7a3e' : '#c02626', 'hazards')}
+        ${c(k['شیمیایی'], 'عامل شیمیایی (الف-۳-۵-۲)', k['شیمیایی'] ? '#17576e' : '#c02626', 'hazards')}
+        ${c(k['فیزیکی'], 'عامل فیزیکی (الف-۳-۵-۳)', k['فیزیکی'] ? '#17576e' : '#c02626', 'hazards')}
+        ${c(k['بیولوژیکی'], 'عامل بیولوژیکی (الف-۳-۵-۴)', k['بیولوژیکی'] ? '#17576e' : '#c02626', 'hazards')}
+        ${c(k['ارگونومیک'], 'عامل ارگونومیک (الف-۳-۵-۵)', k['ارگونومیک'] ? '#17576e' : '#c02626', 'hazards')}
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px">
-        ${c(d.hazards_unmeasured, 'عاملِ بدون هیچ اندازه‌گیری', d.hazards_unmeasured ? '#c02626' : '#0b7a3e', 'measurements')}
-        ${c(d.measurements_year, 'اندازه‌گیری در ۱۲ ماه گذشته', d.measurements_year ? '#0b7a3e' : '#c02626', 'measurements')}
-        ${c(d.measurements_out_of_limit, 'موردِ خارج از حد مجاز', d.measurements_out_of_limit ? '#c02626' : '#0b7a3e', 'measurements')}
+        ${c(d.hazards_unmeasured, 'عاملِ بدون هیچ اندازه‌گیری', d.hazards_unmeasured ? '#c02626' : '#17576e', 'measurements')}
+        ${c(d.measurements_year, 'اندازه‌گیری در ۱۲ ماه گذشته', d.measurements_year ? '#17576e' : '#c02626', 'measurements')}
+        ${c(d.measurements_out_of_limit, 'موردِ خارج از حد مجاز', d.measurements_out_of_limit ? '#c02626' : '#17576e', 'measurements')}
         ${c(d.hazards_total, 'کل عوامل فعال', '#1550b8', 'hazards')}
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px">
-        ${c(d.incidents_open, 'رخدادِ باز', d.incidents_open ? '#c02626' : '#0b7a3e', 'incidents')}
+        ${c(d.incidents_open, 'رخدادِ باز', d.incidents_open ? '#c02626' : '#17576e', 'incidents')}
         ${c(d.incidents_year, 'رخداد در ۱۲ ماه گذشته', '#1550b8', 'incidents')}
-        ${c(d.near_miss_year, 'شبه‌حادثه در ۱۲ ماه گذشته', d.near_miss_year ? '#0b7a3e' : '#9a6b00', 'incidents')}
-        ${c(d.occupational_disease, 'بیماری شغلی شناسایی‌شده', d.occupational_disease ? '#9a6b00' : '#0b7a3e', 'exams')}
+        ${c(d.near_miss_year, 'شبه‌حادثه در ۱۲ ماه گذشته', d.near_miss_year ? '#17576e' : '#9a6b00', 'incidents')}
+        ${c(d.occupational_disease, 'بیماری شغلی شناسایی‌شده', d.occupational_disease ? '#9a6b00' : '#17576e', 'exams')}
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap">
-        ${c(d.exams_overdue, 'معاینه‌ی سررسیدگذشته', d.exams_overdue ? '#c02626' : '#0b7a3e', 'exams')}
-        ${c(d.exams_due_soon, 'معاینه‌ی سررسید تا ۳۰ روز آینده', d.exams_due_soon ? '#9a6b00' : '#0b7a3e', 'exams')}
+        ${c(d.exams_overdue, 'معاینه‌ی سررسیدگذشته', d.exams_overdue ? '#c02626' : '#17576e', 'exams')}
+        ${c(d.exams_due_soon, 'معاینه‌ی سررسید تا ۳۰ روز آینده', d.exams_due_soon ? '#9a6b00' : '#17576e', 'exams')}
       </div>
       <div style="margin-top:16px;color:var(--mut);font-size:13px;line-height:2">
         شبه‌حادثه‌ی صفر خبرِ خوبی نیست: الف‑۳‑۶‑۳ صراحتاً پیش‌گیری از <b>شبه‌حوادث</b> را

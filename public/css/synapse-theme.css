@@ -1,0 +1,79 @@
+/* ============================================================
+   synapse-theme.css — لایهٔ برند «سیناپس»
+   پالت: سرمهٔ نوی عمیق + فیروزه‌ای درخشان + طلایی گرم
+   این فایل باید آخرین استایل صفحه باشد تا روی تم پایه بنشیند.
+   ============================================================ */
+
+:root{
+  --syn-navy-0:#081222;
+  --syn-navy-1:#0b1830;
+  --syn-navy-2:#12233f;
+  --syn-cyan:#3ec6d8;
+  --syn-cyan-bright:#5fd9ea;
+  --syn-cyan-dim:rgba(62,198,216,.14);
+  --syn-gold:#e2b56d;
+  --syn-gold-bright:#f2cd8a;
+  --syn-glow:0 0 22px rgba(62,198,216,.28);
+}
+
+/* --- نشان برند (تصویر گلی که داخل lmark نشسته) --- */
+.lmark .syn-ico,
+.bmark .syn-ico,
+.shead .bmark img,
+img.syn-ico{
+  width:22px;height:22px;display:block;object-fit:contain;
+  filter:drop-shadow(0 0 7px rgba(95,217,234,.55)) drop-shadow(0 0 14px rgba(95,217,234,.25));
+}
+.lmark.shine::after{ /* درخشش طلایی قبلی روی نشان جدید ملایم‌تر شود */
+  background:linear-gradient(115deg,transparent 35%,rgba(95,217,234,.28) 50%,transparent 65%);
+}
+.ghdr-brand b,.gftr-brand b{letter-spacing:.2px}
+.ghdr-brand .syn-ico{width:23px;height:23px}
+
+/* --- انتخاب متن و فوکوس --- */
+::selection{background:rgba(62,198,216,.35);color:#fff}
+:focus-visible{outline-color:rgba(95,217,234,.7)!important}
+
+/* --- اسکرول‌بار --- */
+*::-webkit-scrollbar-thumb{background:rgba(62,198,216,.30)!important;border-radius:8px}
+*::-webkit-scrollbar-thumb:hover{background:rgba(62,198,216,.48)!important}
+
+/* --- تیترهای گرادیانی برند --- */
+.gold-gradient-text{
+  background:linear-gradient(135deg,#f2cd8a 0%,#e2b56d 55%,#8fd3e2 130%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+.emerald-gradient-text{
+  background:linear-gradient(135deg,#8ce8f5 0%,#3ec6d8 55%,#2b8fb0 120%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+
+/* --- هالهٔ لطیف برند در هدر و فوتر عمومی --- */
+.ghdr-in{border-bottom:1px solid rgba(62,198,216,.10)}
+.gftr-in{border-top:1px solid rgba(62,198,216,.10)}
+.gftr-cr{border-top:1px solid rgba(62,198,216,.08)}
+
+/* --- لندیگ: هالهٔ فیروزه‌ای ملایم پشت هیرو --- */
+.lhero{position:relative}
+.lhero::before{
+  content:"";position:absolute;inset:-40px -60px auto -60px;height:340px;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(46% 60% at 50% 8%,rgba(62,198,216,.14),transparent 70%),
+    radial-gradient(30% 45% at 82% 0%,rgba(226,181,109,.08),transparent 70%);
+}
+.lhero>*{position:relative;z-index:1}
+
+/* --- دکمهٔ اصلی: گرادیان فیروزه‌ای درخشان --- */
+.btn.btn-syn{
+  background:linear-gradient(135deg,#39b7cd,#1f86a6);border:none;color:#f2fbff;font-weight:800;
+  box-shadow:0 0 22px rgba(62,198,216,.35),inset 0 1px 0 rgba(255,255,255,.15);
+}
+.btn.btn-syn:hover{box-shadow:0 0 30px rgba(62,198,216,.55)}
+
+/* --- موبایل: نوار پایین — خط بالای فیروزه‌ای --- */
+@media (max-width:768px){
+  body.app-shell .app-nav,.app-tabbar,.bnav{border-top-color:rgba(62,198,216,.22)!important}
+}
+
+/* --- اسپینر بارگذاری (index.html) هماهنگ شد؛ اینجا برای اطمینان --- */
+@keyframes syn-spin{to{transform:rotate(360deg)}}

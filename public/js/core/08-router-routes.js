@@ -116,7 +116,7 @@ function renderApp(){
             ${(S.user&&S.user.hospital_has_logo)?`<img src="/api/hospital/logo" alt="" class="hosp-logo" onerror="this.src='/img/hospital-logo-sample.svg'">`:'<img src="/img/hospital-logo-sample.svg" alt="" class="hosp-logo">'}
           </div>
           <div class="brand-info">
-            <h1>${esc(S.user.hospital_name||'سامانه جامع بیمارستانی')}</h1>
+            <h1>${esc(S.user.hospital_name||'سیناپس')}</h1>
             <p>سازمان، کیفیت و اعتباربخشی</p>
           </div>
           <button type="button" id="sideCollapseBtn" class="side-collapse-toggle" onclick="toggleSidebarCollapse()" title="جمع کردن منو">⇤</button>

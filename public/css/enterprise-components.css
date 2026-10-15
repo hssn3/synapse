@@ -5,7 +5,7 @@
 
 /* ---------- ۱. موتور فرم‌ساز (Enterprise Form Engine) ---------- */
 .enterprise-form-root {
-  background: rgba(15, 27, 22, 0.92);
+  background: rgba(16,20,26,0.92);
   border: 1px solid rgba(212, 175, 90, 0.25);
   border-radius: 16px;
   padding: 24px;
@@ -72,8 +72,8 @@
 
 .ef-input:focus, .ef-select:focus, .ef-textarea:focus {
   outline: none;
-  border-color: #10b981 !important;
-  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25);
+  border-color: #10a0b9 !important;
+  box-shadow: 0 0 0 3px rgba(16,160,185,0.25);
 }
 
 .ef-input.ef-readonly, .ef-select:disabled, .ef-textarea:disabled {
@@ -105,7 +105,7 @@
   justify-content: center;
   width: 50px;
   height: 50px;
-  background: linear-gradient(135deg, rgba(20, 36, 29, 0.95), rgba(12, 22, 18, 0.98));
+  background: linear-gradient(135deg, rgba(21,26,35,0.95), rgba(13,16,22,0.98));
   border: 1px solid rgba(212, 175, 90, 0.45);
   border-radius: 50%;
   color: #f5eedc;
@@ -132,7 +132,7 @@
   max-width: calc(100vw - 36px);
   height: 520px;
   max-height: calc(100vh - 145px);
-  background: #0f1e18;
+  background: #10151d;
   border: 1px solid rgba(212, 175, 90, 0.4);
   border-radius: 18px;
   z-index: 9992;
@@ -145,7 +145,7 @@
 
 .drawer-header {
   padding: 14px 18px;
-  background: rgba(24, 42, 34, 0.95);
+  background: rgba(25,31,41,0.95);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   align-items: center;
@@ -159,8 +159,8 @@
 }
 
 .drawer-badge {
-  background: linear-gradient(135deg, #10b981, #d4af5a);
-  color: #051a12;
+  background: linear-gradient(135deg, #10a0b9, #d4af5a);
+  color: #060d19;
   font-size: 11px;
   font-weight: 900;
   padding: 3px 8px;
@@ -237,9 +237,9 @@
 
 .cite-pill {
   font-size: 10.5px;
-  background: rgba(16, 185, 129, 0.12);
-  border: 1px solid rgba(16, 185, 129, 0.3);
-  color: #a7f3d0;
+  background: rgba(16,160,185,0.12);
+  border: 1px solid rgba(16,160,185,0.3);
+  color: #a7e8f3;
   padding: 2px 7px;
   border-radius: 6px;
 }
@@ -257,7 +257,7 @@
 
 .drawer-input-row {
   padding: 12px;
-  background: rgba(16, 28, 23, 0.95);
+  background: rgba(17,21,27,0.95);
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   gap: 8px;
@@ -276,7 +276,7 @@
 
 .drawer-input:focus {
   outline: none;
-  border-color: #10b981;
+  border-color: #10a0b9;
 }
 
 /* ---------- افزونه‌های دستیار سازمانی (Enterprise Assistant Enhancements) ---------- */
@@ -333,7 +333,7 @@
   display: flex;
   gap: 6px;
   padding: 10px 14px;
-  background: rgba(14, 27, 21, 0.9);
+  background: rgba(15,19,26,0.9);
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   overflow-x: auto;
   white-space: nowrap;

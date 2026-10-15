@@ -347,7 +347,7 @@ function drawSatisfactionResults(){
   const distTotal=dist.reduce((a,b)=>a+b,0);
   const SAT_LABELS=['خیلی کم','کم','متوسط','زیاد','خیلی زیاد'];
   // از قرمز به سبز: رتبه‌ای است، پس رنگ هم باید رتبه‌ای باشد نه دلبخواه.
-  const SAT_COLORS=['#c0392b','#e07a3a','#e0ab2e','#7fbf5a','#2f9e63'];
+  const SAT_COLORS=['#c0392b','#e07a3a','#e0ab2e','#5ab0bf','#2f8d9e'];
   const chartHtml = !distTotal ? '<div class="empty" style="padding:22px">داده‌ای برای نمودار نیست</div>'
     : SATR.kind==='pie' ? satrPie(dist, distTotal, SAT_LABELS, SAT_COLORS)
     : SATR.kind==='dot' ? satrDots(d.surveys||[])
@@ -410,7 +410,7 @@ function satrPie(dist, total, labels, colors){
     return `<g><path d="M${cx} ${cy} L${x1.toFixed(1)} ${y1.toFixed(1)} A${R} ${R} 0 ${big} 1 ${x2.toFixed(1)} ${y2.toFixed(1)} Z"
         fill="${colors[i]}" opacity=".9"><title>${esc(labels[i])}: ${fa(v)} (${fa(pct)}٪)</title></path>
       ${pct>=6?`<text x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" text-anchor="middle" font-size="12"
-        font-weight="700" fill="#0d1a14">${fa(pct)}٪</text>`:''}</g>`;
+        font-weight="700" fill="#0e1219">${fa(pct)}٪</text>`:''}</g>`;
   }).join('');
   const rows=dist.map((v,i)=>!v?'':`<div class="cmp-pierow"><i style="background:${colors[i]}"></i>
     <span>${esc(labels[i])}</span><b>${fa(Math.round(v/total*1000)/10)}٪</b><u>${fa(v)} پاسخ</u></div>`).join('');
@@ -435,7 +435,7 @@ function satrDots(surveys){
     stroke="var(--bd)" stroke-width="1" opacity=".4"/>
     <text x="${PADX-8}" y="${y(v)+4}" text-anchor="end" font-size="11" fill="var(--td)">${fa(v)}</text>`).join('');
   const dots=pts.map(p=>{
-    const c = p.v>=4 ? '#2f9e63' : p.v>=3 ? '#e0ab2e' : '#c0392b';
+    const c = p.v>=4 ? '#2f8d9e' : p.v>=3 ? '#e0ab2e' : '#c0392b';
     return `<circle cx="${x(p.t).toFixed(1)}" cy="${y(p.v).toFixed(1)}" r="4.5" fill="${c}" opacity=".75">
       <title>${faDateISO(new Date(p.t).toISOString())}: ${fa(Math.round(p.v*10)/10)} از ۵</title></circle>`;
   }).join('');

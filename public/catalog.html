@@ -3,7 +3,7 @@
 <html dir="rtl" lang="fa"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>سامانه جامع مدیریت کیفیت، ایمنی بیمار و اعتباربخشی بیمارستان</title>
+<title>سیناپس — کاتالوگ دیجیتال | سامانه یکپارچه نظارت، اعتباربخشی و پایش سلامت</title>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
@@ -25,7 +25,7 @@
       top: 0;
       z-index: 1000;
       width: 100%;
-      background: rgba(4, 11, 8, 0.92);
+      background: rgba(9,14,22,0.92);
       backdrop-filter: blur(22px);
       -webkit-backdrop-filter: blur(22px);
       border-bottom: 1px solid rgba(212, 175, 90, 0.25);
@@ -121,19 +121,19 @@
     }
 
     :root {
-      --bg-dark-900: #040907;
-      --bg-dark-850: #060f0b;
-      --bg-dark-800: #081611;
-      --bg-dark-700: #0e241c;
-      --surface-glass: rgba(10, 26, 19, 0.72);
-      --surface-glass-card: rgba(12, 31, 23, 0.68);
-      --surface-glass-hover: rgba(18, 44, 33, 0.88);
+      --bg-dark-900: #0a0e15;
+      --bg-dark-850: #090e15;
+      --bg-dark-800: #090e16;
+      --bg-dark-700: #0f1723;
+      --surface-glass: rgba(11,16,25,0.72);
+      --surface-glass-card: rgba(13,20,30,0.68);
+      --surface-glass-hover: rgba(19,28,43,0.88);
       --border-gold: rgba(212, 175, 90, 0.24);
       --border-gold-strong: rgba(212, 175, 90, 0.75);
-      --border-emerald: rgba(16, 185, 129, 0.35);
-      --emerald-500: #10b981;
-      --emerald-400: #34d399;
-      --emerald-glow: rgba(16, 185, 129, 0.45);
+      --border-emerald: rgba(16,160,185,0.35);
+      --emerald-500: #10a0b9;
+      --emerald-400: #34bbd3;
+      --emerald-glow: rgba(16,160,185,0.45);
       --gold-500: #d4af5a;
       --gold-400: #ecd599;
       --gold-300: #fff0c7;
@@ -141,10 +141,10 @@
       --navy-900: #071626;
       --navy-800: #0c2844;
       --navy-700: #0f3962;
-      --text-main: #f5f9f7;
-      --text-muted: #96b2a5;
-      --text-sub: #c7dbd2;
-      --shadow-lux: 0 25px 55px rgba(0, 0, 0, 0.65), 0 0 35px rgba(16, 185, 129, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      --text-main: #f5f8f9;
+      --text-muted: #96aeb2;
+      --text-sub: #c7d8db;
+      --shadow-lux: 0 25px 55px rgba(0, 0, 0, 0.65), 0 0 35px rgba(16,160,185,0.06), inset 0 1px 0 rgba(255, 255, 255, 0.08);
       --transition-smooth: all 0.38s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
@@ -163,7 +163,7 @@
     body {
       font-family: 'Vazirmatn', -apple-system, BlinkMacSystemFont, Tahoma, sans-serif;
       font-feature-settings: 'ss01', 'ss02';
-      background: radial-gradient(circle at 85% 5%, #102e21 0%, #071510 38%, #030806 100%);
+      background: radial-gradient(circle at 85% 5%, #111c2d 0%, #080e16 38%, #090e16 100%);
       background-attachment: fixed;
       color: var(--text-main);
       line-height: 1.75;
@@ -179,7 +179,7 @@
       bottom: 0;
       background-image: 
         radial-gradient(circle at 15% 20%, rgba(212, 175, 90, 0.08) 0%, transparent 42%),
-        radial-gradient(circle at 88% 50%, rgba(16, 185, 129, 0.1) 0%, transparent 48%),
+        radial-gradient(circle at 88% 50%, rgba(16,160,185,0.1) 0%, transparent 48%),
         radial-gradient(circle at 50% 85%, rgba(15, 57, 98, 0.16) 0%, transparent 55%),
         repeating-linear-gradient(115deg, rgba(212, 175, 90, 0.012) 0px, rgba(212, 175, 90, 0.012) 1px, transparent 1px, transparent 60px);
       pointer-events: none;
@@ -204,7 +204,7 @@
     }
 
     .emerald-gradient-text {
-      background: linear-gradient(135deg, #bbf7d0 0%, #34d399 45%, #10b981 75%, #059669 100%);
+      background: linear-gradient(135deg, #bbeef7 0%, #34bbd3 45%, #10a0b9 75%, #1b6580 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       display: inline-block;
@@ -283,7 +283,7 @@
       height: 0;
       border-style: solid;
       border-width: 0 0 32px 32px;
-      border-color: transparent transparent #050f0b transparent;
+      border-color: transparent transparent #080e16 transparent;
       z-index: 3;
     }
 
@@ -304,14 +304,14 @@
       align-items: center;
       gap: 12px;
       padding: 8px 22px;
-      background: radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.18), rgba(6, 22, 15, 0.7));
-      border: 1px solid rgba(16, 185, 129, 0.5);
+      background: radial-gradient(circle at 50% 50%, rgba(16,160,185,0.18), rgba(7,13,23,0.7));
+      border: 1px solid rgba(16,160,185,0.5);
       border-radius: 100px;
-      color: #6ee7b7;
+      color: #6ed5e7;
       font-size: 0.88rem;
       font-weight: 600;
       margin-bottom: 26px;
-      box-shadow: 0 0 25px rgba(16, 185, 129, 0.22);
+      box-shadow: 0 0 25px rgba(16,160,185,0.22);
     }
 
     .hero-pill-badge .pulse-dot-wrap {
@@ -368,7 +368,7 @@
     }
 
     .btn-hero-primary {
-      background: linear-gradient(135deg, #10b981 0%, #059669 60%, #047857 100%);
+      background: linear-gradient(135deg, #10a0b9 0%, #1b6580 60%, #165166 100%);
       color: #ffffff;
       font-weight: 800;
       font-size: 1rem;
@@ -378,20 +378,20 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      border: 1px solid rgba(167, 243, 208, 0.5);
-      box-shadow: 0 10px 28px rgba(16, 185, 129, 0.42);
+      border: 1px solid rgba(167,232,243,0.5);
+      box-shadow: 0 10px 28px rgba(16,160,185,0.42);
       transition: var(--transition-smooth);
       cursor: pointer;
     }
 
     .btn-hero-primary:hover {
       transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 14px 38px rgba(16, 185, 129, 0.6);
-      background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+      box-shadow: 0 14px 38px rgba(16,160,185,0.6);
+      background: linear-gradient(135deg, #34bbd3 0%, #10a0b9 100%);
     }
 
     .btn-hero-secondary {
-      background: rgba(14, 34, 25, 0.85);
+      background: rgba(15,22,33,0.85);
       color: var(--gold-300);
       font-weight: 800;
       font-size: 1rem;
@@ -423,7 +423,7 @@
     }
 
     .stat-counter-card {
-      background: linear-gradient(145deg, rgba(16, 36, 28, 0.75), rgba(7, 19, 14, 0.85));
+      background: linear-gradient(145deg, rgba(17,24,35,0.75), rgba(9,14,22,0.85));
       backdrop-filter: blur(18px);
       border: 1px solid var(--border-gold);
       border-radius: 20px;
@@ -442,7 +442,7 @@
     .stat-counter-card:hover {
       border-color: var(--gold-400);
       transform: translateY(-6px) scale(1.01);
-      background: linear-gradient(145deg, rgba(22, 52, 40, 0.9), rgba(11, 28, 20, 0.95));
+      background: linear-gradient(145deg, rgba(23,34,50,0.9), rgba(12,18,27,0.95));
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.65), 0 0 25px rgba(212, 175, 90, 0.2);
     }
 
@@ -532,15 +532,15 @@
     }
 
     .section-badge-right {
-      background: linear-gradient(135deg, rgba(13, 59, 102, 0.45), rgba(16, 185, 129, 0.15));
-      border: 1px solid rgba(52, 211, 153, 0.4);
+      background: linear-gradient(135deg, rgba(13, 59, 102, 0.45), rgba(16,160,185,0.15));
+      border: 1px solid rgba(52,187,211,0.4);
       padding: 8px 18px;
       border-radius: 12px;
       font-size: 0.85rem;
       color: var(--emerald-400);
       font-weight: 700;
       white-space: nowrap;
-      box-shadow: 0 0 16px rgba(16, 185, 129, 0.15);
+      box-shadow: 0 0 16px rgba(16,160,185,0.15);
     }
 
     /* Hubs (Chapter 1) with Luxury Crest Graphics */
@@ -559,7 +559,7 @@
       justify-content: space-between;
       min-height: 480px;
       height: 100%;
-      background: linear-gradient(170deg, rgba(15, 36, 27, 0.75) 0%, rgba(8, 20, 15, 0.9) 100%);
+      background: linear-gradient(170deg, rgba(16,23,35,0.75) 0%, rgba(9,14,21,0.9) 100%);
     }
 
     .hub-header {
@@ -593,7 +593,7 @@
       height: 44px;
       border-radius: 12px;
       background: linear-gradient(135deg, #ecd599 0%, #d4af5a 60%, #997828 100%);
-      color: #050d09;
+      color: #090e15;
       font-weight: 900;
       font-size: 1.35rem;
       display: flex;
@@ -618,14 +618,14 @@
     }
 
     .hub-micro-badge {
-      background: rgba(16, 185, 129, 0.12);
-      border: 1px solid rgba(16, 185, 129, 0.35);
+      background: rgba(16,160,185,0.12);
+      border: 1px solid rgba(16,160,185,0.35);
       padding: 5px 12px;
       border-radius: 8px;
       font-size: 0.85rem;
       color: var(--emerald-400);
       font-weight: 700;
-      box-shadow: 0 0 10px rgba(16, 185, 129, 0.12);
+      box-shadow: 0 0 10px rgba(16,160,185,0.12);
     }
 
     .hub-features-list {
@@ -661,7 +661,7 @@
       padding: 16px 6px 26px 6px;
       scroll-snap-type: x mandatory;
       scrollbar-width: thin;
-      scrollbar-color: var(--gold-500) rgba(15, 33, 26, 0.6);
+      scrollbar-color: var(--gold-500) rgba(16,22,32,0.6);
       position: relative;
     }
 
@@ -670,7 +670,7 @@
     }
 
     .horizontal-scroll-flow::-webkit-scrollbar-track {
-      background: rgba(10, 26, 19, 0.85);
+      background: rgba(11,16,25,0.85);
       border-radius: 10px;
     }
 
@@ -694,7 +694,7 @@
       height: 3px;
       background: linear-gradient(to left, var(--emerald-400), var(--gold-500));
       z-index: 10;
-      box-shadow: 0 0 10px rgba(16, 185, 129, 0.7);
+      box-shadow: 0 0 10px rgba(16,160,185,0.7);
       overflow: hidden;
     }
 
@@ -711,7 +711,7 @@
     }
 
     .navigation-flow-container {
-      background: radial-gradient(circle at 50% 0%, rgba(16, 44, 32, 0.65), rgba(7, 18, 13, 0.85));
+      background: radial-gradient(circle at 50% 0%, rgba(17,27,43,0.65), rgba(9,14,21,0.85));
       border: 1px solid var(--border-gold);
       border-radius: 22px;
       padding: 1.85rem;
@@ -720,7 +720,7 @@
     }
 
     .flow-level-card {
-      background: rgba(14, 36, 27, 0.85);
+      background: rgba(15,23,35,0.85);
       border: 1px solid rgba(212, 175, 90, 0.28);
       border-radius: 18px;
       padding: 1.35rem 1.4rem;
@@ -734,8 +734,8 @@
 
     .flow-level-card:hover {
       border-color: var(--emerald-400);
-      box-shadow: 0 14px 35px rgba(16, 185, 129, 0.25), 0 0 20px rgba(16, 185, 129, 0.15);
-      background: rgba(20, 48, 37, 0.95);
+      box-shadow: 0 14px 35px rgba(16,160,185,0.25), 0 0 20px rgba(16,160,185,0.15);
+      background: rgba(21,31,47,0.95);
       transform: translateY(-4px);
     }
 
@@ -767,7 +767,7 @@
       grid-template-columns: 1fr 1fr;
       gap: 10px;
       margin-top: 16px;
-      background: rgba(6, 16, 12, 0.75);
+      background: rgba(9,14,22,0.75);
       padding: 8px 10px;
       border-radius: 12px;
       border: 1px solid rgba(212, 175, 90, 0.2);
@@ -788,10 +788,10 @@
     }
 
     .pill-upload {
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(6, 95, 70, 0.35));
-      color: #6ee7b7;
-      border: 1px solid rgba(16, 185, 129, 0.5);
-      box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
+      background: linear-gradient(135deg, rgba(16,160,185,0.25), rgba(18,66,83,0.35));
+      color: #6ed5e7;
+      border: 1px solid rgba(16,160,185,0.5);
+      box-shadow: 0 0 10px rgba(16,160,185,0.2);
     }
 
     .pill-checklist {
@@ -810,7 +810,7 @@
     }
 
     .axis-pill-chip {
-      background: rgba(14, 34, 25, 0.85);
+      background: rgba(15,22,33,0.85);
       border: 1px solid var(--border-gold);
       padding: 9px 16px;
       border-radius: 12px;
@@ -826,10 +826,10 @@
     }
 
     .axis-pill-chip.active, .axis-pill-chip:hover {
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.3), rgba(15, 57, 98, 0.5));
+      background: linear-gradient(135deg, rgba(16,160,185,0.3), rgba(15, 57, 98, 0.5));
       border-color: var(--emerald-400);
       color: #ffffff;
-      box-shadow: 0 0 20px rgba(16, 185, 129, 0.35);
+      box-shadow: 0 0 20px rgba(16,160,185,0.35);
       transform: translateY(-2px);
     }
 
@@ -844,7 +844,7 @@
     }
 
     .sop-card-horizontal {
-      background: linear-gradient(170deg, rgba(16, 38, 29, 0.85), rgba(8, 20, 15, 0.95));
+      background: linear-gradient(170deg, rgba(17,25,37,0.85), rgba(9,14,21,0.95));
       border: 1px solid var(--border-gold);
       border-radius: 20px;
       padding: 1.35rem 1.4rem;
@@ -859,7 +859,7 @@
     .sop-card-horizontal:hover {
       border-color: var(--gold-400);
       transform: translateY(-4px);
-      background: linear-gradient(170deg, rgba(22, 52, 40, 0.95), rgba(11, 28, 20, 0.98));
+      background: linear-gradient(170deg, rgba(23,34,50,0.95), rgba(12,18,27,0.98));
       box-shadow: 0 16px 36px rgba(0, 0, 0, 0.65), 0 0 24px rgba(212, 175, 90, 0.24);
     }
 
@@ -917,7 +917,7 @@
 
     /* Chapter 3: Safety & Never Events */
     .safety-highlight-banner {
-      background: linear-gradient(135deg, rgba(239, 68, 68, 0.16) 0%, rgba(168, 85, 247, 0.14) 50%, rgba(14, 34, 25, 0.9) 100%);
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.16) 0%, rgba(168, 85, 247, 0.14) 50%, rgba(15,22,33,0.9) 100%);
       border: 1.5px solid rgba(239, 68, 68, 0.5);
       border-radius: 22px;
       padding: 1.75rem 2.25rem;
@@ -986,7 +986,7 @@
 
     .safety-stats-badge {
       text-align: center;
-      background: rgba(10, 24, 18, 0.9);
+      background: rgba(11,16,23,0.9);
       border: 1.5px solid var(--gold-500);
       padding: 14px 26px;
       border-radius: 16px;
@@ -1033,7 +1033,7 @@
       align-items: center;
       justify-content: center;
       margin-bottom: 16px;
-      box-shadow: 0 0 18px rgba(16, 185, 129, 0.35);
+      box-shadow: 0 0 18px rgba(16,160,185,0.35);
       flex-shrink: 0;
     }
 
@@ -1054,7 +1054,7 @@
     }
 
     .bsc-panel {
-      background: linear-gradient(165deg, rgba(15, 36, 27, 0.9) 0%, rgba(8, 20, 15, 0.95) 100%);
+      background: linear-gradient(165deg, rgba(16,23,35,0.9) 0%, rgba(9,14,21,0.95) 100%);
       border: 1px solid var(--border-gold);
       border-radius: 22px;
       padding: 1.85rem 2rem;
@@ -1081,7 +1081,7 @@
     }
 
     .perspective-box {
-      background: rgba(8, 20, 15, 0.75);
+      background: rgba(9,14,21,0.75);
       border: 1px solid rgba(212, 175, 90, 0.16);
       border-radius: 16px;
       padding: 1.25rem 1.35rem;
@@ -1090,9 +1090,9 @@
 
     .perspective-box:hover {
       border-color: var(--emerald-400);
-      background: rgba(14, 34, 25, 0.95);
+      background: rgba(15,22,33,0.95);
       transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 15px rgba(16, 185, 129, 0.15);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 15px rgba(16,160,185,0.15);
     }
 
     .persp-title {
@@ -1144,7 +1144,7 @@
     }
 
     .sup-item {
-      background: rgba(9, 22, 17, 0.8);
+      background: rgba(10,14,21,0.8);
       border: 1px solid rgba(212, 175, 90, 0.22);
       padding: 12px 16px;
       border-radius: 14px;
@@ -1156,7 +1156,7 @@
 
     .sup-item:hover {
       border-color: var(--emerald-400);
-      background: rgba(14, 32, 24, 0.95);
+      background: rgba(15,21,31,0.95);
     }
 
     .sup-dept {
@@ -1176,10 +1176,10 @@
     }
 
     .status-done {
-      background: rgba(16, 185, 129, 0.22);
-      color: #6ee7b7;
+      background: rgba(16,160,185,0.22);
+      color: #6ed5e7;
       border: 1px solid var(--emerald-500);
-      box-shadow: 0 0 10px rgba(16, 185, 129, 0.25);
+      box-shadow: 0 0 10px rgba(16,160,185,0.25);
     }
 
     .status-progress {
@@ -1191,7 +1191,7 @@
 
     /* Chapter 5: Dana AI Copilot with Sleek Holographic Core */
     .copilot-container {
-      background: radial-gradient(circle at 100% 0%, rgba(15, 57, 98, 0.45) 0%, rgba(14, 36, 27, 0.9) 60%, rgba(6, 17, 12, 0.98) 100%);
+      background: radial-gradient(circle at 100% 0%, rgba(15, 57, 98, 0.45) 0%, rgba(15,23,35,0.9) 60%, rgba(9,14,22,0.98) 100%);
       border: 1.5px solid var(--border-gold-strong);
       border-radius: 26px;
       padding: 2.25rem;
@@ -1244,7 +1244,7 @@
     }
 
     .chat-mock-window {
-      background: rgba(8, 19, 14, 0.94);
+      background: rgba(10,14,21,0.94);
       border: 1px solid rgba(212, 175, 90, 0.3);
       border-radius: 20px;
       padding: 1.5rem;
@@ -1269,12 +1269,12 @@
     }
 
     .chat-ai {
-      background: rgba(16, 44, 32, 0.9);
-      border: 1px solid rgba(16, 185, 129, 0.45);
+      background: rgba(17,27,43,0.9);
+      border: 1px solid rgba(16,160,185,0.45);
       color: #ffffff;
       margin-right: 28px;
       position: relative;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 15px rgba(16, 185, 129, 0.15);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 15px rgba(16,160,185,0.15);
     }
 
     .chat-ai::before {
@@ -1307,7 +1307,7 @@
       padding: 1.1rem 1.35rem;
       font-size: 0.95rem;
       font-weight: 900;
-      background: rgba(10, 24, 18, 0.98);
+      background: rgba(11,16,23,0.98);
       border-bottom: 2px solid var(--border-gold);
     }
 
@@ -1319,13 +1319,13 @@
     .comp-table th.col-legacy {
       width: 31%;
       color: #94a3b8;
-      background: rgba(7, 18, 14, 0.98);
+      background: rgba(9,14,21,0.98);
     }
 
     .comp-table th.col-dana {
       width: 31%;
       color: var(--gold-300);
-      background: rgba(18, 44, 33, 0.98);
+      background: rgba(19,28,43,0.98);
       border-right: 2px solid var(--border-gold);
       border-left: 2px solid var(--border-gold);
     }
@@ -1343,7 +1343,7 @@
     }
 
     .comp-table td.dana-cell {
-      background: rgba(16, 44, 32, 0.45);
+      background: rgba(17,27,43,0.45);
       color: #ffffff;
       font-weight: 700;
       border-right: 2px solid var(--border-gold);
@@ -1354,7 +1354,7 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      color: #6ee7b7;
+      color: #6ed5e7;
       font-weight: 800;
     }
 
@@ -1367,7 +1367,7 @@
 
     /* CTA Section */
     .cta-final-card {
-      background: linear-gradient(135deg, rgba(14, 34, 25, 0.96), rgba(6, 17, 12, 0.98));
+      background: linear-gradient(135deg, rgba(15,22,33,0.96), rgba(9,14,22,0.98));
       border: 2px solid var(--gold-500);
       border-radius: 26px;
       padding: 2.25rem 2.5rem;
@@ -1386,7 +1386,7 @@
     }
 
     .form-input-lux {
-      background: rgba(6, 16, 11, 0.85);
+      background: rgba(9,14,22,0.85);
       border: 1px solid rgba(212, 175, 90, 0.35);
       border-radius: 14px;
       padding: 13px 18px;
@@ -1400,12 +1400,12 @@
     .form-input-lux:focus {
       border-color: var(--gold-400);
       box-shadow: 0 0 16px rgba(212, 175, 90, 0.4);
-      background: rgba(10, 24, 18, 0.98);
+      background: rgba(11,16,23,0.98);
     }
 
     .form-btn-submit {
       background: linear-gradient(135deg, #ecd599 0%, #d4af5a 50%, #997828 100%);
-      color: #050d09;
+      color: #090e15;
       font-weight: 900;
       padding: 14px;
       border-radius: 14px;
@@ -1455,11 +1455,11 @@
       position: fixed;
       bottom: 26px;
       left: 26px;
-      background: rgba(10, 26, 18, 0.96);
+      background: rgba(11,16,25,0.96);
       border: 1.5px solid var(--emerald-500);
       padding: 14px 22px;
       border-radius: 16px;
-      box-shadow: 0 14px 38px rgba(0, 0, 0, 0.8), 0 0 25px rgba(16, 185, 129, 0.3);
+      box-shadow: 0 14px 38px rgba(0, 0, 0, 0.8), 0 0 25px rgba(16,160,185,0.3);
       display: flex;
       align-items: center;
       gap: 14px;
@@ -1558,7 +1558,7 @@
         width: 36px;
         height: 36px;
         border-radius: 10px;
-        background: rgba(14, 36, 27, 0.85);
+        background: rgba(15,23,35,0.85);
         border: 1px solid var(--border-gold);
         color: var(--gold-300);
         cursor: pointer;
@@ -1579,7 +1579,7 @@
         top: calc(100% + 10px) !important;
         left: 0 !important;
         right: 0 !important;
-        background: rgba(4, 12, 9, 0.98) !important;
+        background: rgba(8,14,22,0.98) !important;
         backdrop-filter: blur(28px) !important;
         -webkit-backdrop-filter: blur(28px) !important;
         border: 1.5px solid var(--border-gold) !important;
@@ -1596,7 +1596,7 @@
         font-size: 0.9rem !important;
         font-weight: 700 !important;
         border-radius: 10px !important;
-        background: rgba(16, 36, 27, 0.55) !important;
+        background: rgba(17,24,35,0.55) !important;
         border: 1px solid rgba(255, 255, 255, 0.05) !important;
         color: var(--text-main) !important;
         display: block !important;
@@ -1604,7 +1604,7 @@
       }
       .nav-links.mob-open .nav-link-item:hover,
       .nav-links.mob-open .nav-link-item:active {
-        background: rgba(16, 185, 129, 0.25) !important;
+        background: rgba(16,160,185,0.25) !important;
         border-color: var(--emerald-400) !important;
         color: var(--gold-300) !important;
       }
@@ -1964,6 +1964,7 @@
       }
     }
   </style>
+<link rel="stylesheet" href="/css/synapse-theme.css?v=1">
 </head>
 <body>
 <!-- Ambient Glow overlay -->
@@ -1975,7 +1976,7 @@
 <div class="brand-icon-box">
 <svg fill="none" viewbox="0 0 24 24">
 <path d="M12 2L3 7v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z" stroke="url(#goldGradBrand)" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path>
-<path d="M12 7v10M7 12h10" stroke="#34d399" stroke-linecap="round" stroke-width="2.2"></path>
+<path d="M12 7v10M7 12h10" stroke="#34bbd3" stroke-linecap="round" stroke-width="2.2"></path>
 <defs>
 <lineargradient id="goldGradBrand" x1="3" x2="21" y1="2" y2="22">
 <stop stop-color="#fff0c7"></stop>
@@ -1987,10 +1988,10 @@
 </div>
 <div>
 <div class="brand-text-title">
-<span>سامانه ملی کیفیت و اعتباربخشی بالینی</span>
+<span>سیناپس — کیفیت و اعتباربخشی بالینی</span>
 <span class="brand-badge-v5">ویرایش ۵</span>
 </div>
-<div class="brand-subtitle">سیستم جامع ایمنی، انطباق با سنجهها و مدیریت هوشمند بیمارستانی</div>
+<div class="brand-subtitle">سامانه یکپارچه نظارت، اعتباربخشی و پایش سلامت</div>
 </div>
 </a>
 <nav class="nav-links" id="catNavLinks">
@@ -2006,7 +2007,7 @@
 </nav>
 
 <div class="nav-actions-group">
-  <a class="nav-cta-btn" href="/" title="ورود به سامانه بیمارستان" style="background:linear-gradient(135deg,#10b981,#059669);color:#fff">
+  <a class="nav-cta-btn" href="/" title="ورود به سامانه بیمارستان" style="background:linear-gradient(135deg,#10a0b9,#1b6580);color:#fff">
     <span>ورود به سامانه</span>
   </a>
   <a class="nav-cta-btn desk-only" href="/accreditation/policy.html" title="مشاهده پورتال مستقل خط‌مشی‌ها و سنجه‌ها" style="background:rgba(212,175,90,0.15);border-color:var(--gold-500);color:var(--gold-300)">
@@ -2038,7 +2039,7 @@
 <span>مطابق با ویرایش پنجم استاندارد ملی اعتباربخشی بیمارستانهای ایران</span>
 </div>
 <h1 class="hero-title">
-        سامانه جامع مدیریت <span class="gold-gradient-text">کیفیت، ایمنی بیمار</span> و <span class="emerald-gradient-text">اعتباربخشی پیشرفته</span> بیمارستانی
+        سیناپس — <span class="gold-gradient-text">کیفیت، ایمنی بیمار</span> و <span class="emerald-gradient-text">اعتباربخشی پیشرفته</span>
       </h1>
 <p class="hero-description">
         پلتفرم هوشمند انطباق یکپارچه با ۵۲۰ سنجه کشوری وزارت بهداشت، درمان و آموزش پزشکی. معماری دیجیتال جهت حذف کامل اسناد کاغذی، نظارت بیدرنگ بر ۲۸ واقعه ناخواسته، پیادهسازی گامبهگام ۲۳ فرآیند SOP بالینی و شبیهسازی دقیق ممیزی ارزیابان کشوری.
@@ -2081,7 +2082,7 @@
 <div class="stat-icon-halo">
 <svg fill="none" height="36" viewbox="0 0 24 24" width="36">
 <rect height="16" rx="4" stroke="var(--emerald-400)" stroke-width="1.8" width="16" x="4" y="4"></rect>
-<path d="M9 12h6M12 9v6" stroke="#bbf7d0" stroke-linecap="round" stroke-width="2"></path>
+<path d="M9 12h6M12 9v6" stroke="#bbeef7" stroke-linecap="round" stroke-width="2"></path>
 </svg>
 </div>
 <div class="stat-number emerald-gradient-text">۱۹</div>
@@ -2147,12 +2148,12 @@
           </button>
 </div>
 <!-- Hub B -->
-<div class="lux-card folded-corner hub-card" style="border-color: rgba(16, 185, 129, 0.45);">
+<div class="lux-card folded-corner hub-card" style="border-color: rgba(16,160,185,0.45);">
 <div>
 <div class="hub-header">
 <div class="hub-crest-wrap">
 <div class="hub-crest-halo" style="border-color: var(--emerald-400);"></div>
-<div class="hub-letter-badge" style="background: linear-gradient(135deg, #34d399, #10b981 60%, #065f46); color: #fff;">ب</div>
+<div class="hub-letter-badge" style="background: linear-gradient(135deg, #34bbd3, #10a0b9 60%, #124253); color: #fff;">ب</div>
 </div>
 <div>
 <div class="hub-title-text">مراقبت و درمان</div>
@@ -2230,7 +2231,7 @@
 <h4 class="level-title">هاب محورهای سهگانه</h4>
 <p class="level-desc">انتخاب میان هابهای الف (مدیریت)، ب (درمان) یا ج (حقوق گیرنده خدمت) با نمایش درصد آمادگی و انطباق زنده کل بیمارستان.</p>
 </div>
-<div style="font-size: 0.8rem; color: var(--emerald-400); background: rgba(16,185,129,0.12); padding: 10px; border-radius: 10px; border: 1px solid rgba(16,185,129,0.25); text-align: center;">
+<div style="font-size: 0.8rem; color: var(--emerald-400); background: rgba(16,160,185,0.12); padding: 10px; border-radius: 10px; border: 1px solid rgba(16,160,185,0.25); text-align: center;">
                 نمایشگر ضریب آمادگی ارزیابی نهایی: ۹۱.۴٪
               </div>
 </div>
@@ -2283,7 +2284,7 @@
 <h4 class="level-title">مدیریت چکلیست و ممیزی</h4>
 <p class="level-desc">ثبت امتیازات ۴ گزینهای (کامل، نسبی، ضعیف، عدم انطباق)، مهر زمانی، ثبت بارکد پرونده بیمار و امضای دیجیتال سوپروایزر مربوطه.</p>
 </div>
-<div style="font-size: 0.8rem; color: var(--emerald-400); background: rgba(16,185,129,0.18); padding: 10px; border-radius: 10px; border: 1px solid rgba(16,185,129,0.3); text-align: center;">
+<div style="font-size: 0.8rem; color: var(--emerald-400); background: rgba(16,160,185,0.18); padding: 10px; border-radius: 10px; border: 1px solid rgba(16,160,185,0.3); text-align: center;">
                 تولید خودکار کارنامه نهایی و گزارش مغایرت
               </div>
 </div>
@@ -2349,13 +2350,13 @@
 </div>
 </div>
 <!-- MANDATORY HORIZONTAL RTL FLOW: 23 Approved Clinical SOPs -->
-<div style="background: radial-gradient(circle at 50% 0%, rgba(14, 38, 28, 0.7), rgba(6, 17, 12, 0.9)); border: 1px solid var(--border-gold); border-radius: 22px; padding: 1.85rem; box-shadow: var(--shadow-lux);">
+<div style="background: radial-gradient(circle at 50% 0%, rgba(15,23,37,0.7), rgba(9,14,22,0.9)); border: 1px solid var(--border-gold); border-radius: 22px; padding: 1.85rem; box-shadow: var(--shadow-lux);">
 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px;">
 <div>
 <h3 style="font-size: 1.15rem; font-weight: 800; color: #ffffff;">مسیر افقی فرآیندهای بالینی تصویبشده (Connected Clinical SOP Matrix)</h3>
 <p style="font-size: 0.84rem; color: var(--text-muted); margin-top: 4px;">جریان افقی متصل به منظور پیگیری لحظهای اجرای پروتکلها در بخشهای بستری و ویژه</p>
 </div>
-<span style="font-size: 0.8rem; color: var(--emerald-400); background: rgba(16,185,129,0.18); padding: 6px 14px; border-radius: 8px; border: 1px solid rgba(16,185,129,0.3);">
+<span style="font-size: 0.8rem; color: var(--emerald-400); background: rgba(16,160,185,0.18); padding: 6px 14px; border-radius: 8px; border: 1px solid rgba(16,160,185,0.3);">
             پایش آنلاین زمان پاسخدهی (TAT)
           </span>
 </div>
@@ -2530,7 +2531,7 @@
             ابزار دیجیتال رسم نمودار استخوان ماهی (ایشیکاوا)، تکنیک ۵ چرا (5-Whys) و تشکیل خودکار جلسات کمیته مرگومیر و آسیبهای شدید بالینی.
           </p>
 </div>
-<div style="font-size: 0.82rem; color: var(--emerald-400); background: rgba(16,185,129,0.14); padding: 10px 14px; border-radius: 10px; border: 1px solid rgba(16,185,129,0.25); text-align: center;">
+<div style="font-size: 0.82rem; color: var(--emerald-400); background: rgba(16,160,185,0.14); padding: 10px 14px; border-radius: 10px; border: 1px solid rgba(16,160,185,0.25); text-align: center;">
             تولید CAPA هوشمند (اقدامات اصلاحی و پیشگیرانه)
           </div>
 </div>
@@ -2572,7 +2573,7 @@
 <h3 style="font-size: 1.15rem; font-weight: 800; color: #ffffff;">کارت امتیازی متوازن بیمارستان (Balanced Scorecard)</h3>
 <p style="font-size: 0.84rem; color: var(--text-muted); margin-top: 4px;">انطباق اهداف استراتژیک با عملکرد واقعی بخشها در سال جاری</p>
 </div>
-<div style="font-size: 0.88rem; font-weight: 800; color: var(--emerald-400); background: rgba(16,185,129,0.18); padding: 7px 16px; border-radius: 12px; border: 1px solid rgba(16,185,129,0.35);">
+<div style="font-size: 0.88rem; font-weight: 800; color: var(--emerald-400); background: rgba(16,160,185,0.18); padding: 7px 16px; border-radius: 12px; border: 1px solid rgba(16,160,185,0.35);">
               شاخص کل بیمارستان: ۹۳.۲٪
             </div>
 </div>
@@ -2653,7 +2654,7 @@
 </div>
 </div>
 </div>
-<div style="margin-top: 20px; background: rgba(6, 18, 13, 0.85); border: 1px dashed var(--border-gold); padding: 14px 18px; border-radius: 14px; display: flex; align-items: center; justify-content: space-between;">
+<div style="margin-top: 20px; background: rgba(8,14,22,0.85); border: 1px dashed var(--border-gold); padding: 14px 18px; border-radius: 14px; display: flex; align-items: center; justify-content: space-between;">
 <div>
 <div style="font-size: 0.88rem; font-weight: 800; color: #ffffff;">ماژول اسناد کنترلشده و مستندات</div>
 <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">نسخهبندی خودکار، تاییدیه مسئول فنی و امضای دیجیتال</div>
@@ -2690,7 +2691,7 @@
             دانا با بازیابی معنایی سریع (Semantic Search) در ثانیه به پرستاران، سرپرستاران و مدیران کیفیت پاسخ میدهد؛ از آخرین الزامات سنجه ب-۶-۳ داروهای با هشدار بالا (High-Alert) تا تدوین فرمهای تحلیل خطا.
           </p>
 <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-<div style="background: rgba(16,185,129,0.18); border: 1px solid var(--emerald-500); padding: 10px 16px; border-radius: 12px; font-size: 0.84rem; color: #6ee7b7; font-weight: 700;">
+<div style="background: rgba(16,160,185,0.18); border: 1px solid var(--emerald-500); padding: 10px 16px; border-radius: 12px; font-size: 0.84rem; color: #6ed5e7; font-weight: 700;">
               ✓ سازگار با شبکه بسته محلی (Intranet)
             </div>
 <div style="background: rgba(212,175,90,0.18); border: 1px solid var(--gold-500); padding: 10px 16px; border-radius: 12px; font-size: 0.84rem; color: #fff0c7; font-weight: 700;">
@@ -2738,7 +2739,7 @@
 <tr>
 <th class="col-feature">قابلیت و معیار ارزیابی بیمارستانی</th>
 <th class="col-legacy">روش سنتی و پروندههای کاغذی زونکن</th>
-<th class="col-dana">سامانه جامع مدیریت کیفیت دانا</th>
+<th class="col-dana">سیناپس — مدیریت کیفیت با دانا</th>
 </tr>
 </thead>
 <tbody>

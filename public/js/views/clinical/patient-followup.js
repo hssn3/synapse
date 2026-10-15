@@ -418,17 +418,17 @@ const CMP = { mode:'year', year:null, month:1, years:3,
 // کارفرما خواست بتواند رنگِ نمودارها را خودش تعریف کند. انتخابش در همین مرورگر
 // می‌ماند (per-viewer)، چون سلیقه‌ی رنگ شخصی است و به داده‌ی بیمارستان ربطی ندارد.
 const CMP_PALETTES = {
-  classic: { name:'کلاسیک', colors:['#e0ab2e','#38bdf8','#4ade80','#f472b6','#a78bfa','#fb923c','#22d3ee','#facc15'] },
-  season:  { name:'فصلی', colors:['#4ade80','#facc15','#fb923c','#38bdf8','#a78bfa','#f472b6','#22d3ee','#e0ab2e'] },
-  calm:    { name:'ملایم', colors:['#7dd3fc','#86efac','#fcd34d','#fda4af','#c4b5fd','#5eead4','#fdba74','#a5b4fc'] },
-  bold:    { name:'پررنگ', colors:['#dc2626','#2563eb','#16a34a','#d97706','#7c3aed','#0891b2','#db2777','#65a30d'] },
-  print:   { name:'مناسبِ چاپ', colors:['#1d4ed8','#b91c1c','#15803d','#a16207','#6d28d9','#0e7490','#be185d','#3f6212'] },
+  classic: { name:'کلاسیک', colors:['#e0ab2e','#38bdf8','#4ac8de','#f472b6','#a78bfa','#fb923c','#22d3ee','#facc15'] },
+  season:  { name:'فصلی', colors:['#4ac8de','#facc15','#fb923c','#38bdf8','#a78bfa','#f472b6','#22d3ee','#e0ab2e'] },
+  calm:    { name:'ملایم', colors:['#7dd3fc','#86dfef','#fcd34d','#fda4af','#c4b5fd','#5ed5ea','#fdba74','#a5b4fc'] },
+  bold:    { name:'پررنگ', colors:['#dc2626','#2563eb','#168ea3','#d97706','#7c3aed','#0891b2','#db2777','#0d8da3'] },
+  print:   { name:'مناسبِ چاپ', colors:['#1d4ed8','#b91c1c','#1a617b','#a16207','#6d28d9','#0e7490','#be185d','#144c60'] },
 };
 // رنگِ چهار فصل، برای وقتی محورِ افقی فصل است. خواسته‌ی صریحِ کارفرما بود که
 // «رنگ فصل‌های نموداری با هم فرق داشته باشد» — سبزِ بهار، زردِ تابستان،
 // نارنجیِ پاییز، آبیِ زمستان.
-const CMP_SEASON_COLORS = ['#4ade80','#facc15','#fb923c','#38bdf8'];
-const CMP_HALF_COLORS = ['#4ade80','#38bdf8'];
+const CMP_SEASON_COLORS = ['#4ac8de','#facc15','#fb923c','#38bdf8'];
+const CMP_HALF_COLORS = ['#4ac8de','#38bdf8'];
 
 function cmpPaletteKey(){
   try{ return localStorage.getItem('cmp_palette') || 'classic'; }catch(e){ return 'classic'; }

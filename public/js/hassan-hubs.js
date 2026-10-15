@@ -98,14 +98,14 @@
     navCalendar: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>`,
 
     // آیکون‌های وکتور ۸ کارت سفید رهبری و مدیریت
-    mgmtQuality: `<svg viewBox="0 0 64 64" fill="none" stroke="#d4af5a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="18" r="8"/><path d="M20 38c0-6.6 5.4-12 12-12s12 5.4 12 12"/><circle cx="14" cy="24" r="5"/><path d="M6 40c0-4.4 3.6-8 8-8s8 3.6 8 8"/><circle cx="50" cy="24" r="5"/><path d="M42 40c0-4.4 3.6-8 8-8s8 3.6 8 8"/><circle cx="32" cy="46" r="9" fill="rgba(16, 185, 129, 0.2)" stroke="#d4af5a"/><path d="M32 41l2 4 4.5.7-3.3 3.2.8 4.5-4-2.1-4 2.1.8-4.5-3.3-3.2 4.5-.7z" fill="#d4af5a"/><path d="M28 54l-3 7 7-3 7 3-3-7"/></svg>`,
-    mgmtError: `<svg viewBox="0 0 64 64" fill="none" stroke="#d4af5a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="18" r="9" fill="rgba(16, 185, 129, 0.2)"/><path d="M16 46c0-8.8 7.2-16 16-16s16 7.2 16 16"/><path d="M38 32l16 26H22L38 32z" fill="rgba(24, 48, 40, 0.8)" stroke="#d4af5a" stroke-width="2.5"/><line x1="38" y1="42" x2="38" y2="48" stroke="#d4af5a" stroke-width="3"/><circle cx="38" cy="53" r="1.5" fill="#d4af5a"/></svg>`,
-    mgmtDisaster: `<svg viewBox="0 0 64 64" fill="none" stroke="#d4af5a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="28" cy="16" r="5" fill="rgba(16, 185, 129, 0.2)"/><path d="M22 26l6 6-4 14"/><path d="M28 32l8-4 5 7"/><path d="M41 35l6-2"/><path d="M18 42l4-8 6-2"/><path d="M36 12l18 36H36z" stroke="#d4af5a" stroke-dasharray="3 3"/><path d="M42 22l6 14"/><path d="M46 36l3 6"/></svg>`,
-    mgmtHR: `<svg viewBox="0 0 64 64" fill="none" stroke="#d4af5a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="14" r="6"/><circle cx="16" cy="20" r="4.5"/><circle cx="48" cy="20" r="4.5"/><path d="M9 34c0-3.9 3.1-7 7-7h2"/><path d="M46 27h2c3.9 0 7 3.1 7 7"/><path d="M32 23c-5 0-9 4-9 9v9l9 5 9-5v-9c0-5-4-9-9-9z" fill="rgba(16, 185, 129, 0.2)"/><path d="M32 28v10M27 33h10" stroke="#d4af5a" stroke-width="2.5"/><path d="M14 44c4 6 11 10 18 10s14-4 18-10"/></svg>`,
-    mgmtNursing: `<svg viewBox="0 0 64 64" fill="none" stroke="#d4af5a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="20" cy="16" r="5"/><path d="M15 13h10v3H15z" fill="#d4af5a"/><path d="M13 32c0-4 3-7 7-7s7 3 7 7v14H13V32z"/><path d="M28 36h28v10H28z" fill="rgba(16, 185, 129, 0.2)"/><circle cx="36" cy="31" r="4"/><path d="M26 46v6M58 46v6"/><path d="M52 16v30M49 20h6"/></svg>`,
-    mgmtIT: `<svg viewBox="0 0 64 64" fill="none" stroke="#d4af5a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="10" width="44" height="30" rx="4" fill="rgba(24, 48, 40, 0.7)"/><line x1="26" y1="40" x2="22" y2="48"/><line x1="38" y1="40" x2="42" y2="48"/><line x1="18" y1="48" x2="46" y2="48"/><line x1="18" y1="32" x2="18" y2="24" stroke-width="3"/><line x1="24" y1="32" x2="24" y2="18" stroke-width="3"/><line x1="30" y1="32" x2="30" y2="28" stroke-width="3"/><circle cx="40" cy="22" r="5"/><path d="M40 17v5h5"/><circle cx="48" cy="42" r="6" stroke-width="2"/><path d="M48 34v2M48 48v2M40 42h2M54 42h2"/></svg>`,
-    mgmtEnv: `<svg viewBox="0 0 64 64" fill="none" stroke="#d4af5a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="32" r="18" fill="rgba(24, 48, 40, 0.7)"/><path d="M14 32h36M32 14c4.5 5 7 11 7 18s-2.5 13-7 18c-4.5-5-7-11-7-18s2.5-13 7-18z"/><path d="M36 28c0-3 3-6 7-6s5 5 2 9-9 3-9-3z" fill="rgba(16, 185, 129, 0.2)" stroke="#d4af5a"/><path d="M32 32c-4 0-7 3-7 7v6l7 4 7-4v-6c0-4-3-7-7-7z" fill="rgba(18, 36, 30, 0.9)" stroke="#d4af5a"/><path d="M32 36v6M29 39h6" stroke="#d4af5a"/></svg>`,
-    mgmtEquip: `<svg viewBox="0 0 64 64" fill="none" stroke="#d4af5a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="32" r="12" fill="rgba(16, 185, 129, 0.2)"/><path d="M32 14v4M32 46v4M14 32h4M46 32h4M19 19l3 3M42 42l3 3M19 45l3-3M42 22l3-3" stroke-width="4"/><circle cx="32" cy="32" r="7" fill="rgba(24, 48, 40, 0.8)"/><path d="M32 28v8M28 32h8" stroke="#d4af5a" stroke-width="3"/><path d="M40 40l8 8-4 4-8-8z" fill="#d4af5a"/></svg>`,
+    mgmtQuality: `<svg viewBox="0 0 64 64" fill="none" stroke="#d4af5a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="18" r="8"/><path d="M20 38c0-6.6 5.4-12 12-12s12 5.4 12 12"/><circle cx="14" cy="24" r="5"/><path d="M6 40c0-4.4 3.6-8 8-8s8 3.6 8 8"/><circle cx="50" cy="24" r="5"/><path d="M42 40c0-4.4 3.6-8 8-8s8 3.6 8 8"/><circle cx="32" cy="46" r="9" fill="rgba(16,160,185,0.2)" stroke="#d4af5a"/><path d="M32 41l2 4 4.5.7-3.3 3.2.8 4.5-4-2.1-4 2.1.8-4.5-3.3-3.2 4.5-.7z" fill="#d4af5a"/><path d="M28 54l-3 7 7-3 7 3-3-7"/></svg>`,
+    mgmtError: `<svg viewBox="0 0 64 64" fill="none" stroke="#d4af5a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="18" r="9" fill="rgba(16,160,185,0.2)"/><path d="M16 46c0-8.8 7.2-16 16-16s16 7.2 16 16"/><path d="M38 32l16 26H22L38 32z" fill="rgba(25,33,47,0.8)" stroke="#d4af5a" stroke-width="2.5"/><line x1="38" y1="42" x2="38" y2="48" stroke="#d4af5a" stroke-width="3"/><circle cx="38" cy="53" r="1.5" fill="#d4af5a"/></svg>`,
+    mgmtDisaster: `<svg viewBox="0 0 64 64" fill="none" stroke="#d4af5a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="28" cy="16" r="5" fill="rgba(16,160,185,0.2)"/><path d="M22 26l6 6-4 14"/><path d="M28 32l8-4 5 7"/><path d="M41 35l6-2"/><path d="M18 42l4-8 6-2"/><path d="M36 12l18 36H36z" stroke="#d4af5a" stroke-dasharray="3 3"/><path d="M42 22l6 14"/><path d="M46 36l3 6"/></svg>`,
+    mgmtHR: `<svg viewBox="0 0 64 64" fill="none" stroke="#d4af5a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="14" r="6"/><circle cx="16" cy="20" r="4.5"/><circle cx="48" cy="20" r="4.5"/><path d="M9 34c0-3.9 3.1-7 7-7h2"/><path d="M46 27h2c3.9 0 7 3.1 7 7"/><path d="M32 23c-5 0-9 4-9 9v9l9 5 9-5v-9c0-5-4-9-9-9z" fill="rgba(16,160,185,0.2)"/><path d="M32 28v10M27 33h10" stroke="#d4af5a" stroke-width="2.5"/><path d="M14 44c4 6 11 10 18 10s14-4 18-10"/></svg>`,
+    mgmtNursing: `<svg viewBox="0 0 64 64" fill="none" stroke="#d4af5a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="20" cy="16" r="5"/><path d="M15 13h10v3H15z" fill="#d4af5a"/><path d="M13 32c0-4 3-7 7-7s7 3 7 7v14H13V32z"/><path d="M28 36h28v10H28z" fill="rgba(16,160,185,0.2)"/><circle cx="36" cy="31" r="4"/><path d="M26 46v6M58 46v6"/><path d="M52 16v30M49 20h6"/></svg>`,
+    mgmtIT: `<svg viewBox="0 0 64 64" fill="none" stroke="#d4af5a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="10" y="10" width="44" height="30" rx="4" fill="rgba(25,33,47,0.7)"/><line x1="26" y1="40" x2="22" y2="48"/><line x1="38" y1="40" x2="42" y2="48"/><line x1="18" y1="48" x2="46" y2="48"/><line x1="18" y1="32" x2="18" y2="24" stroke-width="3"/><line x1="24" y1="32" x2="24" y2="18" stroke-width="3"/><line x1="30" y1="32" x2="30" y2="28" stroke-width="3"/><circle cx="40" cy="22" r="5"/><path d="M40 17v5h5"/><circle cx="48" cy="42" r="6" stroke-width="2"/><path d="M48 34v2M48 48v2M40 42h2M54 42h2"/></svg>`,
+    mgmtEnv: `<svg viewBox="0 0 64 64" fill="none" stroke="#d4af5a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="32" r="18" fill="rgba(25,33,47,0.7)"/><path d="M14 32h36M32 14c4.5 5 7 11 7 18s-2.5 13-7 18c-4.5-5-7-11-7-18s2.5-13 7-18z"/><path d="M36 28c0-3 3-6 7-6s5 5 2 9-9 3-9-3z" fill="rgba(16,160,185,0.2)" stroke="#d4af5a"/><path d="M32 32c-4 0-7 3-7 7v6l7 4 7-4v-6c0-4-3-7-7-7z" fill="rgba(19,25,35,0.9)" stroke="#d4af5a"/><path d="M32 36v6M29 39h6" stroke="#d4af5a"/></svg>`,
+    mgmtEquip: `<svg viewBox="0 0 64 64" fill="none" stroke="#d4af5a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="32" r="12" fill="rgba(16,160,185,0.2)"/><path d="M32 14v4M32 46v4M14 32h4M46 32h4M19 19l3 3M42 42l3 3M19 45l3-3M42 22l3-3" stroke-width="4"/><circle cx="32" cy="32" r="7" fill="rgba(25,33,47,0.8)"/><path d="M32 28v8M28 32h8" stroke="#d4af5a" stroke-width="3"/><path d="M40 40l8 8-4 4-8-8z" fill="#d4af5a"/></svg>`,
 
     // آیکون‌های وکتور ۱۰ کارت زیرمجموعه (دایره سرمه‌ای با محتوای سفید)
     subEnvPrinciples: `<svg viewBox="0 0 24 24" fill="none" stroke="#ecd599" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a15.3 15.3 0 0 1 4 9 15.3 15.3 0 0 1-4 9 15.3 15.3 0 0 1-4-9 15.3 15.3 0 0 1 4-9z"/><path d="M9 12l2 2 4-4"/></svg>`,
@@ -155,27 +155,27 @@
     officialSeal: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>`,
     viewEye: `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`,
     // ۱۰ محور مراقبت و درمان
-    careGen: `<svg viewBox="0 0 24 24" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 3v5a4.5 4.5 0 0 0 9 0V3"/><path d="M9 12.5v4a4.5 4.5 0 0 0 9 0v-2"/><circle cx="18" cy="12.5" r="2.5" fill="rgba(16,185,129,0.2)"/></svg>`,
-    emergency: `<svg viewBox="0 0 24 24" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="5" width="15" height="12" rx="2"/><polygon points="16 8 20 8 23 11 23 17 16 17 16 8"/><circle cx="5.5" cy="18.5" r="2.5" fill="rgba(16,185,129,0.2)"/><circle cx="18.5" cy="18.5" r="2.5" fill="rgba(16,185,129,0.2)"/><path d="M8 9v4M6 11h4"/></svg>`,
-    surgery: `<svg viewBox="0 0 24 24" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4l5 5L7 21.5 2 16.5 14.5 4z"/><line x1="13" y1="7.5" x2="16.5" y2="11"/><circle cx="18.5" cy="18.5" r="2.5" fill="rgba(16,185,129,0.2)"/><line x1="17" y1="17" x2="13" y2="13"/></svg>`,
-    maternal: `<svg viewBox="0 0 24 24" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4" fill="rgba(16,185,129,0.2)"/><path d="M6 21v-2a6 6 0 0 1 12 0v2"/><circle cx="18" cy="14" r="2.5"/><path d="M16 21a4 4 0 0 1 4-3.5"/></svg>`,
-    infection: `<svg viewBox="0 0 24 24" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="6" fill="rgba(16,185,129,0.2)"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="5" y1="5" x2="7.5" y2="7.5"/><line x1="16.5" y1="16.5" x2="19" y2="19"/><line x1="5" y1="19" x2="7.5" y2="16.5"/><line x1="16.5" y1="7.5" x2="19" y2="5"/></svg>`,
+    careGen: `<svg viewBox="0 0 24 24" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 3v5a4.5 4.5 0 0 0 9 0V3"/><path d="M9 12.5v4a4.5 4.5 0 0 0 9 0v-2"/><circle cx="18" cy="12.5" r="2.5" fill="rgba(16,160,185,0.2)"/></svg>`,
+    emergency: `<svg viewBox="0 0 24 24" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="5" width="15" height="12" rx="2"/><polygon points="16 8 20 8 23 11 23 17 16 17 16 8"/><circle cx="5.5" cy="18.5" r="2.5" fill="rgba(16,160,185,0.2)"/><circle cx="18.5" cy="18.5" r="2.5" fill="rgba(16,160,185,0.2)"/><path d="M8 9v4M6 11h4"/></svg>`,
+    surgery: `<svg viewBox="0 0 24 24" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4l5 5L7 21.5 2 16.5 14.5 4z"/><line x1="13" y1="7.5" x2="16.5" y2="11"/><circle cx="18.5" cy="18.5" r="2.5" fill="rgba(16,160,185,0.2)"/><line x1="17" y1="17" x2="13" y2="13"/></svg>`,
+    maternal: `<svg viewBox="0 0 24 24" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4" fill="rgba(16,160,185,0.2)"/><path d="M6 21v-2a6 6 0 0 1 12 0v2"/><circle cx="18" cy="14" r="2.5"/><path d="M16 21a4 4 0 0 1 4-3.5"/></svg>`,
+    infection: `<svg viewBox="0 0 24 24" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="6" fill="rgba(16,160,185,0.2)"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/><line x1="5" y1="5" x2="7.5" y2="7.5"/><line x1="16.5" y1="16.5" x2="19" y2="19"/><line x1="5" y1="19" x2="7.5" y2="16.5"/><line x1="16.5" y1="7.5" x2="19" y2="5"/></svg>`,
     pharmacy: `<svg viewBox="0 0 24 24" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 20.5l10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7z"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/><circle cx="7" cy="17" r="1" fill="#d4af5a"/></svg>`,
-    imaging: `<svg viewBox="0 0 24 24" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2" fill="rgba(16,185,129,0.2)"/><path d="M21 15l-5-5L5 21"/><line x1="3" y1="12" x2="21" y2="12"/></svg>`,
-    laboratory: `<svg viewBox="0 0 24 24" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31L4.1 19.46A2 2 0 0 0 5.8 22h12.4a2 2 0 0 0 1.7-2.54L14 9.31V2h-4z"/><line x1="8.5" y1="2" x2="15.5" y2="2"/><circle cx="12" cy="16" r="1.5" fill="rgba(16,185,129,0.2)"/></svg>`,
-    bloodTrans: `<svg viewBox="0 0 24 24" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" fill="rgba(16,185,129,0.15)"/><path d="M12 11v6M9 14h6"/></svg>`,
-    outpatient: `<svg viewBox="0 0 24 24" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4" fill="rgba(16,185,129,0.2)"/><path d="M18 8v6M15 11h6"/></svg>`,
+    imaging: `<svg viewBox="0 0 24 24" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2" fill="rgba(16,160,185,0.2)"/><path d="M21 15l-5-5L5 21"/><line x1="3" y1="12" x2="21" y2="12"/></svg>`,
+    laboratory: `<svg viewBox="0 0 24 24" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31L4.1 19.46A2 2 0 0 0 5.8 22h12.4a2 2 0 0 0 1.7-2.54L14 9.31V2h-4z"/><line x1="8.5" y1="2" x2="15.5" y2="2"/><circle cx="12" cy="16" r="1.5" fill="rgba(16,160,185,0.2)"/></svg>`,
+    bloodTrans: `<svg viewBox="0 0 24 24" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" fill="rgba(16,160,185,0.15)"/><path d="M12 11v6M9 14h6"/></svg>`,
+    outpatient: `<svg viewBox="0 0 24 24" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4" fill="rgba(16,160,185,0.2)"/><path d="M18 8v6M15 11h6"/></svg>`,
 
     // زیرشاخه‌های مراقبت عمومی بالینی
-    idPatient: `<svg viewBox="0 0 24 24" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2" fill="rgba(16,185,129,0.2)"/><line x1="15" y1="8" x2="17" y2="8"/><line x1="15" y1="12" x2="17" y2="12"/><line x1="7" y1="16" x2="17" y2="16"/></svg>`,
+    idPatient: `<svg viewBox="0 0 24 24" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2" fill="rgba(16,160,185,0.2)"/><line x1="15" y1="8" x2="17" y2="8"/><line x1="15" y1="12" x2="17" y2="12"/><line x1="7" y1="16" x2="17" y2="16"/></svg>`,
     assessInit: `<svg viewBox="0 0 24 24" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/><polyline points="9 14 11 16 15 11"/></svg>`,
     nurseCare: `<svg viewBox="0 0 24 24" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/><path d="M12 6v5M9.5 8.5h5"/></svg>`,
     highRisk: `<svg viewBox="0 0 24 24" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`,
-    doctorCare: `<svg viewBox="0 0 24 24" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4" fill="rgba(16,185,129,0.2)"/><path d="M5.5 21v-2a6.5 6.5 0 0 1 13 0v2"/><path d="M12 11v6M9 14h6"/></svg>`,
+    doctorCare: `<svg viewBox="0 0 24 24" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4" fill="rgba(16,160,185,0.2)"/><path d="M5.5 21v-2a6.5 6.5 0 0 1 13 0v2"/><path d="M12 11v6M9 14h6"/></svg>`,
     medDose: `<svg viewBox="0 0 24 24" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="10" width="18" height="8" rx="4"/><line x1="12" y1="10" x2="12" y2="18"/><line x1="7" y1="14" x2="9" y2="14"/><line x1="15" y1="14" x2="17" y2="14"/></svg>`,
     nutrition1: `<svg viewBox="0 0 24 24" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>`,
     nutrition2: `<svg viewBox="0 0 24 24" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a9 9 0 0 0-9 9c0 4.97 4.03 9 9 9s9-4.03 9-9a9 9 0 0 0-9-9z"/><path d="M12 7v5l3 3"/></svg>`,
-    rehab: `<svg viewBox="0 0 24 24" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4" r="2" fill="rgba(16,185,129,0.2)"/><path d="M15 7h-6l-2 5 3 1v7h4v-5l2-3z"/></svg>`,
+    rehab: `<svg viewBox="0 0 24 24" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4" r="2" fill="rgba(16,160,185,0.2)"/><path d="M15 7h-6l-2 5 3 1v7h4v-5l2-3z"/></svg>`,
     patientEdu: `<svg viewBox="0 0 24 24" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>`,
     careBalance: `<svg viewBox="0 0 24 24" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><path d="M4 8l8-4 8 4"/><polygon points="4 8 1 14 7 14 4 8"/><polygon points="20 8 17 14 23 14 20 8"/></svg>`,
     discharge: `<svg viewBox="0 0 24 24" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>`,
@@ -183,17 +183,17 @@
     // مستندات چهارگانه
     guidelines: `<svg viewBox="0 0 24 24" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>`,
     sopWorkflows: `<svg viewBox="0 0 24 24" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="6" height="6" rx="1"/><rect x="15" y="15" width="6" height="6" rx="1"/><path d="M9 6h6a3 3 0 0 1 3 3v6"/><path d="M15 18H9a3 3 0 0 1-3-3V9"/></svg>`,
-    policies: `<svg viewBox="0 0 24 24" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><circle cx="12" cy="18" r="3" fill="rgba(16,185,129,0.2)"/></svg>`,
+    policies: `<svg viewBox="0 0 24 24" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><circle cx="12" cy="18" r="3" fill="rgba(16,160,185,0.2)"/></svg>`,
     library: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 10v7M15 10v7"/></svg>`,
 
     // رهبری و مدیریت
     qualityLeader: `<svg viewBox="0 0 24 24" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
     errorManage: `<svg viewBox="0 0 24 24" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>`,
     disasterEop: `<svg viewBox="0 0 24 24" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>`,
-    hrDev: `<svg viewBox="0 0 24 24" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4" fill="rgba(16,185,129,0.2)"/></svg>`,
+    hrDev: `<svg viewBox="0 0 24 24" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4" fill="rgba(16,160,185,0.2)"/></svg>`,
     nurseDirector: `<svg viewBox="0 0 24 24" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>`,
     itHealth: `<svg viewBox="0 0 24 24" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/><polyline points="6 10 10 7 14 11 18 8"/></svg>`,
-    envHealth: `<svg viewBox="0 0 24 24" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><circle cx="12" cy="11" r="3" fill="rgba(16,185,129,0.2)"/></svg>`,
+    envHealth: `<svg viewBox="0 0 24 24" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><circle cx="12" cy="11" r="3" fill="rgba(16,160,185,0.2)"/></svg>`,
     medEquipment: `<svg viewBox="0 0 24 24" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>`,
 
     // حمایت از گیرنده خدمت
@@ -838,7 +838,7 @@
     label = label || code;
     return `
       <!-- بخش جامع کارتابل اقلام و سوابق ثبت‌شده (به صورت جدول سوابق) -->
-      <section class="sn-measure-artifacts-section" id="measure_artifacts_section_${code}" style="margin-top:28px;background:rgba(18,36,30,0.88);border:1px solid rgba(212,175,90,0.32);border-radius:22px;padding:26px 28px;box-shadow:0 16px 40px rgba(0,0,0,0.45);backdrop-filter:blur(12px);direction:rtl;">
+      <section class="sn-measure-artifacts-section" id="measure_artifacts_section_${code}" style="margin-top:28px;background:rgba(19,25,35,0.88);border:1px solid rgba(212,175,90,0.32);border-radius:22px;padding:26px 28px;box-shadow:0 16px 40px rgba(0,0,0,0.45);backdrop-filter:blur(12px);direction:rtl;">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;border-bottom:1px solid rgba(212,175,90,0.22);padding-bottom:16px;flex-wrap:wrap;gap:14px;">
           <div style="display:flex;align-items:center;gap:14px;">
             <div style="width:48px;height:48px;border-radius:12px;background:rgba(212,175,90,0.18);border:1px solid rgba(212,175,90,0.42);display:flex;align-items:center;justify-content:center;color:var(--sn-gold-light);font-size:24px;">
@@ -848,7 +848,7 @@
               <h3 style="font-size:18px;font-weight:800;color:var(--sn-gold-light);margin:0;display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
                 <span>جدول سوابق و اقلام ثبت‌شده</span>
                 <span class="sn-hero-code-badge" style="font-size:12px;padding:3px 10px;" id="artifacts_total_badge_${code}">در حال بارگذاری…</span>
-                <span id="artifacts_sort_badge_${code}" style="font-size:11.5px;padding:3px 10px;border-radius:8px;background:rgba(16,185,129,0.18);border:1px solid rgba(16,185,129,0.35);color:#6ee7b7;font-weight:700;">
+                <span id="artifacts_sort_badge_${code}" style="font-size:11.5px;padding:3px 10px;border-radius:8px;background:rgba(16,160,185,0.18);border:1px solid rgba(16,160,185,0.35);color:#6ed5e7;font-weight:700;">
                   ⬇ جدیدترین در صدر جدول
                 </span>
               </h3>
@@ -1008,7 +1008,7 @@
         </article>
       `;
     }).join('') : `
-      <div style="text-align:center;padding:50px 20px;background:rgba(18,36,30,0.6);border-radius:16px;border:1px solid rgba(212,175,90,0.2)">
+      <div style="text-align:center;padding:50px 20px;background:rgba(19,25,35,0.6);border-radius:16px;border:1px solid rgba(212,175,90,0.2)">
         <div style="display:flex;justify-content:center;margin-bottom:12px">${ICONS.emptyBox}</div>
         <div style="font-size:15px;font-weight:700;color:var(--sn-gold-light);margin-bottom:8px">سنجه‌های استاندارد <bdi dir="ltr">${code}</bdi></div>
         <div style="font-size:13px;color:var(--sn-text-muted);line-height:1.8">اطلاعات سنجه‌ها در دیتابیس سامانه ثبت شده و در دسترس است.</div>
@@ -1108,7 +1108,7 @@
           <div class="sn-measure-two-col-layout" style="display:flex;direction:rtl;gap:26px;align-items:flex-start;">
             
             <!-- ستون سمت راست: کارت اصلی سنجه (Main Measure Card) -->
-            <div class="sn-measure-main-col" style="flex:1;min-width:0;background:rgba(18,36,30,0.82);border:1px solid rgba(212,175,90,0.28);border-radius:20px;padding:30px;box-shadow:0 14px 34px rgba(0,0,0,0.42);backdrop-filter:blur(10px);">
+            <div class="sn-measure-main-col" style="flex:1;min-width:0;background:rgba(19,25,35,0.82);border:1px solid rgba(212,175,90,0.28);border-radius:20px;padding:30px;box-shadow:0 14px 34px rgba(0,0,0,0.42);backdrop-filter:blur(10px);">
               
               <!-- ردیف نشان‌ها با آیکون‌های وکتور SVG دقیق -->
               <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;flex-wrap:wrap;">
@@ -1153,8 +1153,8 @@
                   </div>
                 </button>
 
-                <button type="button" class="sn-hero-btn sn-hero-btn-checklist" style="border-color:rgba(16,185,129,0.35);" onclick="HassanHub.openGenericForm('checklist', '${measureCode}', '${escapeHtml(stmt)}')">
-                  <div class="sn-hero-btn-icon" style="background:rgba(16,185,129,0.15);color:#6ee7b7;">${ICONS.actionChecklist}</div>
+                <button type="button" class="sn-hero-btn sn-hero-btn-checklist" style="border-color:rgba(16,160,185,0.35);" onclick="HassanHub.openGenericForm('checklist', '${measureCode}', '${escapeHtml(stmt)}')">
+                  <div class="sn-hero-btn-icon" style="background:rgba(16,160,185,0.15);color:#6ed5e7;">${ICONS.actionChecklist}</div>
                   <div class="sn-hero-btn-text">
                     <span class="sn-hero-btn-title">چک‌لیست ممیزی</span>
                     <span class="sn-hero-btn-sub">پایش و سنجش</span>
@@ -1252,7 +1252,7 @@
           </div>
 
           <!-- بخش جامع کارتابل اقلام و سوابق ثبت‌شده سنجه (به صورت جدول سوابق) -->
-          <section class="sn-measure-artifacts-section" id="measure_artifacts_section_${measureCode}" style="margin-top:28px;background:rgba(18,36,30,0.88);border:1px solid rgba(212,175,90,0.32);border-radius:22px;padding:26px 28px;box-shadow:0 16px 40px rgba(0,0,0,0.45);backdrop-filter:blur(12px);direction:rtl;">
+          <section class="sn-measure-artifacts-section" id="measure_artifacts_section_${measureCode}" style="margin-top:28px;background:rgba(19,25,35,0.88);border:1px solid rgba(212,175,90,0.32);border-radius:22px;padding:26px 28px;box-shadow:0 16px 40px rgba(0,0,0,0.45);backdrop-filter:blur(12px);direction:rtl;">
             <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;border-bottom:1px solid rgba(212,175,90,0.22);padding-bottom:16px;flex-wrap:wrap;gap:14px;">
               <div style="display:flex;align-items:center;gap:14px;">
                 <div style="width:48px;height:48px;border-radius:12px;background:rgba(212,175,90,0.18);border:1px solid rgba(212,175,90,0.42);display:flex;align-items:center;justify-content:center;color:var(--sn-gold-light);font-size:24px;">
@@ -1262,7 +1262,7 @@
                   <h3 style="font-size:18px;font-weight:800;color:var(--sn-gold-light);margin:0;display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
                     <span>جدول سوابق و اقلام ثبت‌شده سنجه</span>
                     <span class="sn-hero-code-badge" style="font-size:12px;padding:3px 10px;" id="artifacts_total_badge_${measureCode}">در حال بارگذاری…</span>
-                    <span id="artifacts_sort_badge_${measureCode}" style="font-size:11.5px;padding:3px 10px;border-radius:8px;background:rgba(16,185,129,0.18);border:1px solid rgba(16,185,129,0.35);color:#6ee7b7;font-weight:700;">
+                    <span id="artifacts_sort_badge_${measureCode}" style="font-size:11.5px;padding:3px 10px;border-radius:8px;background:rgba(16,160,185,0.18);border:1px solid rgba(16,160,185,0.35);color:#6ed5e7;font-weight:700;">
                       ⬇ جدیدترین در صدر جدول
                     </span>
                   </h3>
@@ -1369,7 +1369,7 @@
       <div class="sn-container">
         
         <!-- نوار هدر فهرست چک‌لیست‌ها مطابق با عکس ۵ -->
-        <header style="display:flex;justify-content:space-between;align-items:center;background:rgba(18,36,30,0.85);backdrop-filter:blur(14px);border:1px solid rgba(212,175,90,0.25);border-radius:14px;padding:14px 20px;margin-bottom:20px;">
+        <header style="display:flex;justify-content:space-between;align-items:center;background:rgba(19,25,35,0.85);backdrop-filter:blur(14px);border:1px solid rgba(212,175,90,0.25);border-radius:14px;padding:14px 20px;margin-bottom:20px;">
           <button type="button" class="btn btn--secondary btn--md" onclick="HassanHub.openMeasureDetailPage('${measureCode}')">
             <span>بازگشت</span>
             <span>${ICONS.arrowForward}</span>
@@ -1392,14 +1392,14 @@
               </button>
 
               <!-- انتخابگر سال -->
-              <select style="padding:8px 16px;background:rgba(18,36,30,0.9);border:1px solid rgba(212,175,90,0.3);border-radius:8px;color:#fff;font-family:inherit;font-weight:700">
+              <select style="padding:8px 16px;background:rgba(19,25,35,0.9);border:1px solid rgba(212,175,90,0.3);border-radius:8px;color:#fff;font-family:inherit;font-weight:700">
                 ${JALALI_YEARS.map(y => `<option value="${y}" ${y==='۱۴۰۵'?'selected':''}>${y}</option>`).join('')}
               </select>
             </div>
 
             <!-- فیلد جستجوی کلید واژه -->
             <div style="position:relative;width:280px;">
-              <input type="text" placeholder="جستجو کلید واژه" style="width:100%;padding:9px 14px 9px 36px;background:rgba(22,45,38,0.7);border:1px solid rgba(212,175,90,0.25);border-radius:8px;color:#fff;font-family:inherit;font-size:13px">
+              <input type="text" placeholder="جستجو کلید واژه" style="width:100%;padding:9px 14px 9px 36px;background:rgba(23,31,44,0.7);border:1px solid rgba(212,175,90,0.25);border-radius:8px;color:#fff;font-family:inherit;font-size:13px">
               <span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--sn-text-muted);pointer-events:none;">
                 ${ICONS.search}
               </span>
@@ -1408,7 +1408,7 @@
           </div>
 
           <!-- جدول چک‌لیست‌ها -->
-          <div style="overflow-x:auto;background:rgba(18,36,30,0.75);border:1px solid rgba(212,175,90,0.22);border-radius:14px;">
+          <div style="overflow-x:auto;background:rgba(19,25,35,0.75);border:1px solid rgba(212,175,90,0.22);border-radius:14px;">
             <table class="sn-table" style="width:100%;border-collapse:collapse;text-align:right;">
               <thead>
                 <tr style="background:rgba(212,175,90,0.12);color:var(--sn-gold-light);font-size:13px;border-bottom:1px solid rgba(212,175,90,0.2);">
@@ -1460,13 +1460,13 @@
         <div style="display:flex;flex-direction:column;gap:14px;">
           <div>
             <label style="display:block;font-size:12px;font-weight:700;color:var(--sn-text-gold);margin-bottom:6px">عنوان چک‌لیست</label>
-            <input type="text" id="chkNewTitle" value="چک‌لیست ارزیابی و پایش ${stmt.slice(0, 45)}..." style="width:100%;padding:10px 14px;background:rgba(22,45,38,0.7);border:1px solid rgba(212,175,90,0.25);border-radius:8px;color:#fff;font-family:inherit;font-size:13px">
+            <input type="text" id="chkNewTitle" value="چک‌لیست ارزیابی و پایش ${stmt.slice(0, 45)}..." style="width:100%;padding:10px 14px;background:rgba(23,31,44,0.7);border:1px solid rgba(212,175,90,0.25);border-radius:8px;color:#fff;font-family:inherit;font-size:13px">
           </div>
 
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
             <div>
               <label style="display:block;font-size:12px;font-weight:700;color:var(--sn-text-gold);margin-bottom:6px">دوره تناوب پایش</label>
-              <select id="chkNewCadence" style="width:100%;padding:9px;background:rgba(22,45,38,0.7);border:1px solid rgba(212,175,90,0.25);border-radius:8px;color:#fff;font-family:inherit">
+              <select id="chkNewCadence" style="width:100%;padding:9px;background:rgba(23,31,44,0.7);border:1px solid rgba(212,175,90,0.25);border-radius:8px;color:#fff;font-family:inherit">
                 <option value="monthly">ماهانه</option>
                 <option value="quarterly">فصلی (سه ماهه)</option>
                 <option value="biannual">شش ماهه</option>
@@ -1476,7 +1476,7 @@
             </div>
             <div>
               <label style="display:block;font-size:12px;font-weight:700;color:var(--sn-text-gold);margin-bottom:6px">سال ارزشیابی</label>
-              <select id="chkNewYear" style="width:100%;padding:9px;background:rgba(22,45,38,0.7);border:1px solid rgba(212,175,90,0.25);border-radius:8px;color:#fff;font-family:inherit">
+              <select id="chkNewYear" style="width:100%;padding:9px;background:rgba(23,31,44,0.7);border:1px solid rgba(212,175,90,0.25);border-radius:8px;color:#fff;font-family:inherit">
                 ${JALALI_YEARS.map(y => `<option value="${y}" ${y==='۱۴۰۵'?'selected':''}>${y}</option>`).join('')}
               </select>
             </div>
@@ -1484,12 +1484,12 @@
 
           <div>
             <label style="display:block;font-size:12px;font-weight:700;color:var(--sn-text-gold);margin-bottom:6px">مسئول جمع‌آوری و تکمیل</label>
-            <input type="text" id="chkNewCollector" value="سرپرستار بخش / رابط کیفیت" style="width:100%;padding:10px 14px;background:rgba(22,45,38,0.7);border:1px solid rgba(212,175,90,0.25);border-radius:8px;color:#fff;font-family:inherit;font-size:13px">
+            <input type="text" id="chkNewCollector" value="سرپرستار بخش / رابط کیفیت" style="width:100%;padding:10px 14px;background:rgba(23,31,44,0.7);border:1px solid rgba(212,175,90,0.25);border-radius:8px;color:#fff;font-family:inherit;font-size:13px">
           </div>
 
           <div>
             <label style="display:block;font-size:12px;font-weight:700;color:var(--sn-text-gold);margin-bottom:6px">سوال یا سنجه اول ارزیابی</label>
-            <textarea id="chkNewItem1" rows="3" style="width:100%;padding:10px 14px;background:rgba(22,45,38,0.7);border:1px solid rgba(212,175,90,0.25);border-radius:8px;color:#fff;font-family:inherit;font-size:13px">${stmt}</textarea>
+            <textarea id="chkNewItem1" rows="3" style="width:100%;padding:10px 14px;background:rgba(23,31,44,0.7);border:1px solid rgba(212,175,90,0.25);border-radius:8px;color:#fff;font-family:inherit;font-size:13px">${stmt}</textarea>
           </div>
 
           <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px;padding-top:14px;border-top:1px solid rgba(212,175,90,0.2)">
@@ -1620,7 +1620,7 @@
       <div class="sn-container">
         ${renderBreadcrumbHeader(crumbs)}
         <main class="sn-content-wrapper">
-          <div style="display:flex;justify-content:space-between;align-items:center;background:rgba(18,36,30,0.85);backdrop-filter:blur(14px);border:1px solid rgba(212,175,90,0.25);border-radius:14px;padding:16px 20px;margin-bottom:20px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;background:rgba(19,25,35,0.85);backdrop-filter:blur(14px);border:1px solid rgba(212,175,90,0.25);border-radius:14px;padding:16px 20px;margin-bottom:20px;">
             <div>
               <h3 style="margin:0;font-size:15px;font-weight:800;color:var(--sn-gold-light)">سامانه جامع مدیریت خطا و ایمنی بیمار</h3>
               <div style="font-size:12px;color:var(--sn-text-muted);margin-top:4px">
@@ -2129,7 +2129,7 @@
         id: sub.id,
         category: 'submission',
         typeLabel: '✍️ چک‌لیست تکمیل‌شده',
-        badgeColor: 'background:rgba(16,185,129,0.18);border:1px solid rgba(16,185,129,0.4);color:#6ee7b7;',
+        badgeColor: 'background:rgba(16,160,185,0.18);border:1px solid rgba(16,160,185,0.4);color:#6ed5e7;',
         title: (sub.checklist_title || 'ارزیابی ممیزی بالینی') + (sub.reference ? ' — ' + sub.reference : ''),
         code: sub.checklist_code || 'CL-SUB',
         dateText: dInfo.text,
@@ -2137,7 +2137,7 @@
         ts: dInfo.ts,
         author: sub.submitter_name ? (sub.submitter_name + (sub.submitter_role ? ' (' + sub.submitter_role + ')' : '')) : 'مسئول تکمیل',
         status: `امتیاز ${fa(sub.score || 0)} از ${fa(sub.max_score || 0)} (${fa(pct)}٪)`,
-        statusClass: isGood ? 'background:rgba(16,185,129,0.2);color:#34d399;border:1px solid rgba(16,185,129,0.4);' : 'background:rgba(245,158,11,0.2);color:#fbbf24;border:1px solid rgba(245,158,11,0.4);',
+        statusClass: isGood ? 'background:rgba(16,160,185,0.2);color:#34bbd3;border:1px solid rgba(16,160,185,0.4);' : 'background:rgba(245,158,11,0.2);color:#fbbf24;border:1px solid rgba(245,158,11,0.4);',
         versionText: sub.note ? (sub.note.length > 55 ? sub.note.substring(0, 52) + '…' : sub.note) : 'تکمیل‌شده در بخش',
         actionFn: "if(typeof go==='function') go('checklists');",
         actionLabel: 'مشاهده کارنامه',
@@ -2153,7 +2153,7 @@
       const isFull = ev.status === 'full_compliant';
       const isPart = ev.status === 'partial_compliant';
       const statusFa = isFull ? 'انطباق کامل (مصوب)' : (isPart ? 'انطباق مشروط' : 'عدم انطباق');
-      const statusCls = isFull ? 'background:rgba(16,185,129,0.2);color:#34d399;border:1px solid rgba(16,185,129,0.4);' : 
+      const statusCls = isFull ? 'background:rgba(16,160,185,0.2);color:#34bbd3;border:1px solid rgba(16,160,185,0.4);' : 
                         (isPart ? 'background:rgba(245,158,11,0.2);color:#fbbf24;border:1px solid rgba(245,158,11,0.4);' : 'background:rgba(239,68,68,0.2);color:#f87171;border:1px solid rgba(239,68,68,0.4);');
       unified.push({
         id: ev.id,
@@ -2192,7 +2192,7 @@
         ts: dInfo.ts,
         author: p.responsible_person || 'مدیر بهبود کیفیت',
         status: p.status === 'active' || p.status === 'approved' ? 'مصوب و ابلاغ‌شده' : (p.status === 'draft' ? 'پیش‌نویس' : 'جاری'),
-        statusClass: p.status === 'active' || p.status === 'approved' ? 'background:rgba(16,185,129,0.2);color:#34d399;border:1px solid rgba(16,185,129,0.4);' : 'background:rgba(245,158,11,0.2);color:#fbbf24;border:1px solid rgba(245,158,11,0.4);',
+        statusClass: p.status === 'active' || p.status === 'approved' ? 'background:rgba(16,160,185,0.2);color:#34bbd3;border:1px solid rgba(16,160,185,0.4);' : 'background:rgba(245,158,11,0.2);color:#fbbf24;border:1px solid rgba(245,158,11,0.4);',
         versionText: `نسخه ${fa(p.version_no || 1)} (بازنگری ${fa(p.revision_no || 0)})`,
         actionUrl: `/accreditation/policy.html?code=${encodeURIComponent(measureCode)}&type=policy&docId=${encodeURIComponent(p.id)}&returnUrl=${returnUrl}`,
         actionLabel: 'مشاهده سند',
@@ -2210,7 +2210,7 @@
         id: pr.id,
         category: 'procedure',
         typeLabel: isInst ? '📋 دستورالعمل مصوب' : '📋 روش اجرایی (SOP)',
-        badgeColor: 'background:rgba(16,185,129,0.18);border:1px solid rgba(16,185,129,0.4);color:#6ee7b7;',
+        badgeColor: 'background:rgba(16,160,185,0.18);border:1px solid rgba(16,160,185,0.4);color:#6ed5e7;',
         title: pr.title,
         code: pr.doc_code || '—',
         dateText: dInfo.text,
@@ -2218,7 +2218,7 @@
         ts: dInfo.ts,
         author: pr.responsible_person || 'سوپروایزر / مسئول بخش',
         status: pr.status === 'active' || pr.status === 'approved' ? 'مصوب و ابلاغ‌شده' : (pr.status === 'draft' ? 'پیش‌نویس' : 'جاری'),
-        statusClass: pr.status === 'active' || pr.status === 'approved' ? 'background:rgba(16,185,129,0.2);color:#34d399;border:1px solid rgba(16,185,129,0.4);' : 'background:rgba(245,158,11,0.2);color:#fbbf24;border:1px solid rgba(245,158,11,0.4);',
+        statusClass: pr.status === 'active' || pr.status === 'approved' ? 'background:rgba(16,160,185,0.2);color:#34bbd3;border:1px solid rgba(16,160,185,0.4);' : 'background:rgba(245,158,11,0.2);color:#fbbf24;border:1px solid rgba(245,158,11,0.4);',
         versionText: `نسخه ${fa(pr.version_no || 1)} (بازنگری ${fa(pr.revision_no || 0)})`,
         actionUrl: `/accreditation/policy.html?code=${encodeURIComponent(measureCode)}&type=${encodeURIComponent(pr.doc_type || 'procedure')}&docId=${encodeURIComponent(pr.id)}&returnUrl=${returnUrl}`,
         actionLabel: 'مشاهده سند',
@@ -2245,7 +2245,7 @@
         ts: dInfo.ts,
         author: `دوره ${cadenceFa}`,
         status: subsCount > 0 ? `${fa(subsCount)} مورد تکمیل‌شده` : 'آماده تکمیل',
-        statusClass: subsCount > 0 ? 'background:rgba(16,185,129,0.2);color:#34d399;border:1px solid rgba(16,185,129,0.4);' : 'background:rgba(59,130,246,0.18);color:#93c5fd;border:1px solid rgba(59,130,246,0.4);',
+        statusClass: subsCount > 0 ? 'background:rgba(16,160,185,0.2);color:#34bbd3;border:1px solid rgba(16,160,185,0.4);' : 'background:rgba(59,130,246,0.18);color:#93c5fd;border:1px solid rgba(59,130,246,0.4);',
         versionText: `تناوب: ${cadenceFa}`,
         actionFn: `HassanHub.openMeasureChecklistPage('${measureCode}')`,
         actionLabel: 'ورود به چک‌لیست',
@@ -2336,8 +2336,8 @@
     const sortBadge = document.getElementById('artifacts_sort_badge_' + measureCode);
     if (sortBadge) {
       sortBadge.textContent = sortDir === 'desc' ? '⬇ جدیدترین در صدر جدول' : '▲ قدیمی‌ترین در صدر جدول';
-      sortBadge.style.background = sortDir === 'desc' ? 'rgba(16,185,129,0.18)' : 'rgba(59,130,246,0.18)';
-      sortBadge.style.color = sortDir === 'desc' ? '#6ee7b7' : '#93c5fd';
+      sortBadge.style.background = sortDir === 'desc' ? 'rgba(16,160,185,0.18)' : 'rgba(59,130,246,0.18)';
+      sortBadge.style.color = sortDir === 'desc' ? '#6ed5e7' : '#93c5fd';
     }
 
     // بروزرسانی استایل دکمه‌های سوئیچر نما
@@ -2431,7 +2431,7 @@
   function renderArtifactsTableHtml(measureCode, items, sortDir, activeTab) {
     if (items.length === 0) {
       return `
-        <div style="background:rgba(12,28,22,0.7);border:1px dashed rgba(212,175,90,0.3);border-radius:14px;padding:36px 20px;text-align:center;color:var(--sn-text-muted);">
+        <div style="background:rgba(13,18,27,0.7);border:1px dashed rgba(212,175,90,0.3);border-radius:14px;padding:36px 20px;text-align:center;color:var(--sn-text-muted);">
           <div style="font-size:32px;margin-bottom:8px;">📂</div>
           <div style="font-size:14px;font-weight:700;color:var(--sn-gold-light);margin-bottom:6px;">هیچ موردی در این فیلتر ثبت نشده است</div>
           <div style="font-size:12px;margin-bottom:14px;">جهت تکمیل مستندات می‌توانید از کلیدهای بالای صفحه برای ثبت خط‌مشی، چک‌لیست یا شواهد استفاده کنید.</div>
@@ -2444,7 +2444,7 @@
 
     return `
       <!-- جدول جمع‌وجور و تمام‌عرض بدون نیاز به اسکرول افقی (Zero Horizontal Scroll) -->
-      <div class="sn-artifacts-table-wrap" style="width:100%;box-sizing:border-box;border-radius:14px;border:1px solid rgba(212,175,90,0.28);background:rgba(12,28,22,0.92);box-shadow:0 10px 28px rgba(0,0,0,0.45);overflow:hidden;">
+      <div class="sn-artifacts-table-wrap" style="width:100%;box-sizing:border-box;border-radius:14px;border:1px solid rgba(212,175,90,0.28);background:rgba(13,18,27,0.92);box-shadow:0 10px 28px rgba(0,0,0,0.45);overflow:hidden;">
         <table class="sn-artifacts-table" style="width:100%;table-layout:fixed;border-collapse:collapse;direction:rtl;text-align:right;font-size:12px;">
           <thead>
             <tr style="background:linear-gradient(90deg, rgba(212,175,90,0.2) 0%, rgba(212,175,90,0.1) 100%);border-bottom:2px solid rgba(212,175,90,0.3);color:var(--sn-gold-light);font-size:12px;font-weight:800;">
@@ -2466,8 +2466,8 @@
           </thead>
           <tbody>
             ${items.map((it, idx) => {
-              const bg = (idx % 2 === 0) ? 'background:rgba(16,36,28,0.45);' : 'background:rgba(22,50,40,0.65);';
-              const bgVal = (idx % 2 === 0) ? 'rgba(16,36,28,0.45)' : 'rgba(22,50,40,0.65)';
+              const bg = (idx % 2 === 0) ? 'background:rgba(17,24,35,0.45);' : 'background:rgba(23,33,49,0.65);';
+              const bgVal = (idx % 2 === 0) ? 'rgba(17,24,35,0.45)' : 'rgba(23,33,49,0.65)';
               return `
                 <tr style="${bg}border-bottom:1px solid rgba(255,255,255,0.05);cursor:pointer;transition:background 0.15s ease;"
                     onclick="HassanHub.openArtifactDossier('${measureCode}', ${idx})"
@@ -2586,19 +2586,19 @@
       const pct = (raw.max_score && raw.max_score > 0) ? Math.round(((raw.score || 0) / raw.max_score) * 100) : 100;
       
       detailsHtml = `
-        <div style="background:rgba(16,36,28,0.7);border:1px solid rgba(212,175,90,0.28);border-radius:14px;padding:16px;margin-bottom:16px;">
+        <div style="background:rgba(17,24,35,0.7);border:1px solid rgba(212,175,90,0.28);border-radius:14px;padding:16px;margin-bottom:16px;">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px;">
             <div style="font-size:13.5px;font-weight:800;color:var(--sn-gold-light);">
               📊 کارنامه ممیزی چک‌لیست: امتیاز ${fa(raw.score || 0)} از ${fa(raw.max_score || 0)} (${fa(pct)}٪ انطباق)
             </div>
-            <div style="font-size:11px;padding:3px 9px;border-radius:6px;background:rgba(16,185,129,0.2);color:#34d399;font-weight:700;">
+            <div style="font-size:11px;padding:3px 9px;border-radius:6px;background:rgba(16,160,185,0.2);color:#34bbd3;font-weight:700;">
               تکمیل‌شده و مصوب
             </div>
           </div>
           <div style="height:7px;border-radius:4px;background:rgba(255,255,255,0.08);overflow:hidden;margin-bottom:12px;">
-            <div style="height:100%;width:${pct}%;background:linear-gradient(90deg, #10b981 0%, #34d399 100%);"></div>
+            <div style="height:100%;width:${pct}%;background:linear-gradient(90deg, #10a0b9 0%, #34bbd3 100%);"></div>
           </div>
-          <div style="font-size:12.5px;line-height:1.7;color:#fff;background:rgba(0,0,0,0.25);padding:12px 14px;border-radius:10px;border-right:3px solid #10b981;">
+          <div style="font-size:12.5px;line-height:1.7;color:#fff;background:rgba(0,0,0,0.25);padding:12px 14px;border-radius:10px;border-right:3px solid #10a0b9;">
             <b>گزارش و یادداشت ارزیاب:</b> ${escapeHtml(raw.note || 'ارزیابی میدانی انجام شده و فرم تکمیل گردید.')}
           </div>
         </div>
@@ -2609,7 +2609,7 @@
             <div style="display:flex;flex-direction:column;gap:7px;max-height:240px;overflow-y:auto;padding-left:4px;">
               ${answers.map((ans, aIdx) => {
                 const ansFa = ans.answer === 'excellent' ? 'عالی (انطباق کامل)' : (ans.answer === 'yes' ? 'بله (منطبق)' : 'خیر (عدم انطباق)');
-                const ansColor = ans.answer === 'no' ? 'color:#f87171;background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.3);' : 'color:#34d399;background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.3);';
+                const ansColor = ans.answer === 'no' ? 'color:#f87171;background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.3);' : 'color:#34bbd3;background:rgba(16,160,185,0.15);border:1px solid rgba(16,160,185,0.3);';
                 return `
                   <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:9px 12px;display:flex;align-items:center;justify-content:space-between;gap:10px;">
                     <div style="flex:1;">
@@ -2626,7 +2626,7 @@
       `;
     } else if (it.category === 'evaluation') {
       detailsHtml = `
-        <div style="background:rgba(16,36,28,0.7);border:1px solid rgba(212,175,90,0.28);border-radius:14px;padding:16px;margin-bottom:16px;">
+        <div style="background:rgba(17,24,35,0.7);border:1px solid rgba(212,175,90,0.28);border-radius:14px;padding:16px;margin-bottom:16px;">
           <div style="font-size:13.5px;font-weight:800;color:var(--sn-gold-light);margin-bottom:8px;">📊 ارزیابی رسمی سنجه — دوره سال ${fa(raw.year || 1405)}</div>
           <div style="font-size:12.5px;color:#fff;line-height:1.7;background:rgba(0,0,0,0.25);padding:12px 14px;border-radius:10px;border-right:3px solid #8b5cf6;">
             <b>مشروح نظرات ارزیاب کیفیت:</b> ${escapeHtml(raw.notes || 'ارزیابی انطباق سنجه ثبت شده است.')}
@@ -2638,10 +2638,10 @@
       `;
     } else if (it.category === 'policy' || it.category === 'procedure') {
       detailsHtml = `
-        <div style="background:rgba(16,36,28,0.7);border:1px solid rgba(212,175,90,0.28);border-radius:14px;padding:16px;margin-bottom:16px;">
+        <div style="background:rgba(17,24,35,0.7);border:1px solid rgba(212,175,90,0.28);border-radius:14px;padding:16px;margin-bottom:16px;">
           <div style="font-size:13.5px;font-weight:800;color:var(--sn-gold-light);margin-bottom:8px;">📜 مشخصات سند مصوب: ${escapeHtml(it.title)}</div>
           <div style="font-size:12px;color:var(--sn-text-muted);margin-bottom:10px;">
-            کد سند: <bdi dir="ltr" style="font-family:monospace;color:var(--sn-gold-light);">${escapeHtml(it.code)}</bdi> · نسخه ${fa(raw.version_no || 1)} (بازنگری ${fa(raw.revision_no || 0)}) · وضعیت: <b style="color:#34d399;">${it.status}</b>
+            کد سند: <bdi dir="ltr" style="font-family:monospace;color:var(--sn-gold-light);">${escapeHtml(it.code)}</bdi> · نسخه ${fa(raw.version_no || 1)} (بازنگری ${fa(raw.revision_no || 0)}) · وضعیت: <b style="color:#34bbd3;">${it.status}</b>
           </div>
           <div style="font-size:12.5px;line-height:1.7;color:#fff;background:rgba(0,0,0,0.25);padding:12px 14px;border-radius:10px;border-right:3px solid #d4af37;">
             <b>مسئول تدوین و اجرا:</b> ${escapeHtml(raw.responsible_person || it.author)}
@@ -2659,7 +2659,7 @@
       `;
     } else if (it.category === 'evidence') {
       detailsHtml = `
-        <div style="background:rgba(16,36,28,0.7);border:1px solid rgba(212,175,90,0.28);border-radius:14px;padding:16px;margin-bottom:16px;">
+        <div style="background:rgba(17,24,35,0.7);border:1px solid rgba(212,175,90,0.28);border-radius:14px;padding:16px;margin-bottom:16px;">
           <div style="font-size:13.5px;font-weight:800;color:var(--sn-gold-light);margin-bottom:8px;">📎 سند شواهد پیوست‌شده: ${escapeHtml(it.title)}</div>
           <div style="font-size:12px;color:var(--sn-text-muted);margin-bottom:12px;">
             نام فایل: <bdi dir="ltr" style="font-family:monospace;color:#fff;">${escapeHtml(raw.file_name || it.code)}</bdi> · حجم فایل: <b>${it.status}</b> · ثبت‌کننده: <b>${escapeHtml(it.author)}</b>
@@ -2673,7 +2673,7 @@
       `;
     } else if (it.category === 'flowchart') {
       detailsHtml = `
-        <div style="background:rgba(16,36,28,0.7);border:1px solid rgba(212,175,90,0.28);border-radius:14px;padding:16px;margin-bottom:16px;">
+        <div style="background:rgba(17,24,35,0.7);border:1px solid rgba(212,175,90,0.28);border-radius:14px;padding:16px;margin-bottom:16px;">
           <div style="font-size:13.5px;font-weight:800;color:var(--sn-gold-light);margin-bottom:8px;">🔄 شناسنامه و فلوچارت فرآیند: ${escapeHtml(it.title)}</div>
           <div style="font-size:12px;color:var(--sn-text-muted);margin-bottom:12px;">
             کد فرآیند: <bdi dir="ltr" style="font-family:monospace;color:var(--sn-gold-light);">${escapeHtml(it.code)}</bdi> · حوزه فرآیند: <b>${escapeHtml(it.author)}</b>
@@ -2685,10 +2685,10 @@
       `;
     } else if (it.category === 'checklist') {
       detailsHtml = `
-        <div style="background:rgba(16,36,28,0.7);border:1px solid rgba(212,175,90,0.28);border-radius:14px;padding:16px;margin-bottom:16px;">
+        <div style="background:rgba(17,24,35,0.7);border:1px solid rgba(212,175,90,0.28);border-radius:14px;padding:16px;margin-bottom:16px;">
           <div style="font-size:13.5px;font-weight:800;color:var(--sn-gold-light);margin-bottom:8px;">✅ الگوی چک‌لیست ممیزی: ${escapeHtml(it.title)}</div>
           <div style="font-size:12px;color:var(--sn-text-muted);margin-bottom:12px;">
-            کد چک‌لیست: <bdi dir="ltr" style="font-family:monospace;color:var(--sn-gold-light);">${escapeHtml(it.code)}</bdi> · دوره پایش: <b>${escapeHtml(it.author)}</b> · وضعیت: <b style="color:#34d399;">${it.status}</b>
+            کد چک‌لیست: <bdi dir="ltr" style="font-family:monospace;color:var(--sn-gold-light);">${escapeHtml(it.code)}</bdi> · دوره پایش: <b>${escapeHtml(it.author)}</b> · وضعیت: <b style="color:#34bbd3;">${it.status}</b>
           </div>
           <button type="button" class="btn btn--success btn--sm" onclick="HassanHub.closeArtifactDossier(); HassanHub.openMeasureChecklistPage('${measureCode}');" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;padding:7px 14px;">
             <span>✍️</span> <span>ورود به سامانه تکمیل و ثبت این چک‌لیست</span>
@@ -2699,7 +2699,7 @@
 
     const modalHtml = `
       <div id="sn_artifact_dossier_modal" style="position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:14px;direction:rtl;animation:fadeIn 0.2s ease;">
-        <div style="background:linear-gradient(145deg, rgba(16,36,28,0.98) 0%, rgba(10,22,18,0.98) 100%);border:1px solid rgba(212,175,90,0.45);border-radius:18px;box-shadow:0 24px 60px rgba(0,0,0,0.75);max-width:760px;width:100%;max-height:92vh;display:flex;flex-direction:column;overflow:hidden;">
+        <div style="background:linear-gradient(145deg, rgba(17,24,35,0.98) 0%, rgba(11,15,21,0.98) 100%);border:1px solid rgba(212,175,90,0.45);border-radius:18px;box-shadow:0 24px 60px rgba(0,0,0,0.75);max-width:760px;width:100%;max-height:92vh;display:flex;flex-direction:column;overflow:hidden;">
           
           <!-- Header -->
           <header style="padding:16px 20px;border-bottom:1px solid rgba(212,175,90,0.22);display:flex;align-items:center;justify-content:space-between;background:rgba(0,0,0,0.25);">
@@ -2804,7 +2804,7 @@
 function renderArtifactsCardsTrackHtml(measureCode, items, activeTab) {
     if (items.length === 0) {
       return `
-        <div style="background:rgba(12,28,22,0.7);border:1px dashed rgba(212,175,90,0.3);border-radius:14px;padding:36px 20px;text-align:center;color:var(--sn-text-muted);">
+        <div style="background:rgba(13,18,27,0.7);border:1px dashed rgba(212,175,90,0.3);border-radius:14px;padding:36px 20px;text-align:center;color:var(--sn-text-muted);">
           <div style="font-size:32px;margin-bottom:8px;">📂</div>
           <div style="font-size:14px;font-weight:700;color:var(--sn-gold-light);margin-bottom:6px;">هیچ موردی در این فیلتر ثبت نشده است</div>
           <button type="button" class="btn btn--success btn--sm" onclick="HassanHub.openGenericForm('policy', '${measureCode}')" style="margin-top:10px;">
@@ -2830,9 +2830,9 @@ function renderArtifactsCardsTrackHtml(measureCode, items, activeTab) {
                      'ثبت مدرک/خط‌مشی تازه';
 
     cardsHtml += `
-      <div style="flex:0 0 260px;width:260px;background:rgba(18,38,30,0.6);border:2px dashed rgba(212,175,90,0.3);border-radius:16px;padding:24px 18px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:12px;cursor:pointer;transition:all 0.25s ease;"
+      <div style="flex:0 0 260px;width:260px;background:rgba(19,26,37,0.6);border:2px dashed rgba(212,175,90,0.3);border-radius:16px;padding:24px 18px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:12px;cursor:pointer;transition:all 0.25s ease;"
            onmouseover="this.style.borderColor='var(--sn-gold-light)';this.style.background='rgba(212,175,90,0.12)'"
-           onmouseout="this.style.borderColor='rgba(212,175,90,0.3)';this.style.background='rgba(18,38,30,0.6)'"
+           onmouseout="this.style.borderColor='rgba(212,175,90,0.3)';this.style.background='rgba(19,26,37,0.6)'"
            onclick="${addAction}">
         <div style="width:52px;height:52px;border-radius:50%;background:rgba(212,175,90,0.18);border:1px solid rgba(212,175,90,0.4);display:flex;align-items:center;justify-content:center;font-size:24px;color:var(--sn-gold-light);">
           ➕
@@ -2861,17 +2861,17 @@ function renderArtifactsCardsTrackHtml(measureCode, items, activeTab) {
 
     if (type === 'policy' || type === 'procedure') {
       const isPolicy = type === 'policy';
-      const badgeColor = isPolicy ? 'background:rgba(244,63,94,0.15);border:1px solid rgba(244,63,94,0.35);color:#fda4af;' : 'background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.35);color:#6ee7b7;';
+      const badgeColor = isPolicy ? 'background:rgba(244,63,94,0.15);border:1px solid rgba(244,63,94,0.35);color:#fda4af;' : 'background:rgba(16,160,185,0.15);border:1px solid rgba(16,160,185,0.35);color:#6ed5e7;';
       const typeLabel = isPolicy ? '📜 خط‌مشی استاندارد' : (item.doc_type === 'instruction' ? '📋 دستورالعمل مصوب' : '📋 روش اجرایی (SOP)');
       const docCode = item.doc_code || 'بدون کد';
       const statusLabel = item.status === 'active' || item.status === 'approved' ? 'مصوب و ابلاغ‌شده' : (item.status === 'draft' ? 'پیش‌نویس' : 'جاری');
-      const statusClass = item.status === 'active' || item.status === 'approved' ? 'background:rgba(16,185,129,0.2);color:#34d399;border:1px solid rgba(16,185,129,0.4);' : 'background:rgba(245,158,11,0.2);color:#fbbf24;border:1px solid rgba(245,158,11,0.4);';
+      const statusClass = item.status === 'active' || item.status === 'approved' ? 'background:rgba(16,160,185,0.2);color:#34bbd3;border:1px solid rgba(16,160,185,0.4);' : 'background:rgba(245,158,11,0.2);color:#fbbf24;border:1px solid rgba(245,158,11,0.4);';
 
       const returnUrl = (typeof window !== 'undefined' && window.location && window.location.href) ? encodeURIComponent(window.location.href) : '';
       const openUrl = `/accreditation/policy.html?code=${encodeURIComponent(measureCode)}&type=${encodeURIComponent(item.doc_type || (isPolicy ? 'policy' : 'procedure'))}&docId=${encodeURIComponent(item.id)}&returnUrl=${returnUrl}`;
 
       return `
-        <div class="sn-artifact-card" style="flex:0 0 340px;width:340px;min-width:340px;background:linear-gradient(145deg, rgba(20,42,34,0.94) 0%, rgba(12,28,22,0.96) 100%);border:1px solid rgba(212,175,90,0.28);border-radius:18px;padding:22px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 8px 24px rgba(0,0,0,0.38);transition:all 0.25s ease;text-align:right;"
+        <div class="sn-artifact-card" style="flex:0 0 340px;width:340px;min-width:340px;background:linear-gradient(145deg, rgba(21,29,41,0.94) 0%, rgba(13,18,27,0.96) 100%);border:1px solid rgba(212,175,90,0.28);border-radius:18px;padding:22px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 8px 24px rgba(0,0,0,0.38);transition:all 0.25s ease;text-align:right;"
              onmouseover="this.style.transform='translateY(-4px)';this.style.borderColor='rgba(212,175,90,0.6)';"
              onmouseout="this.style.transform='none';this.style.borderColor='rgba(212,175,90,0.28)';">
           
@@ -2935,7 +2935,7 @@ function renderArtifactsCardsTrackHtml(measureCode, items, activeTab) {
       const cadenceFa = { daily: 'روزانه', weekly: 'هفتگی', monthly: 'ماهانه', quarterly: 'فصلی', semiannual: 'شش‌ماهه', annual: 'سالانه', occasional: 'موردی' }[item.cadence] || (item.cadence || 'دوره‌ای');
 
       return `
-        <div class="sn-artifact-card" style="flex:0 0 340px;width:340px;min-width:340px;background:linear-gradient(145deg, rgba(20,42,34,0.94) 0%, rgba(12,28,22,0.96) 100%);border:1px solid rgba(212,175,90,0.28);border-radius:18px;padding:22px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 8px 24px rgba(0,0,0,0.38);transition:all 0.25s ease;text-align:right;"
+        <div class="sn-artifact-card" style="flex:0 0 340px;width:340px;min-width:340px;background:linear-gradient(145deg, rgba(21,29,41,0.94) 0%, rgba(13,18,27,0.96) 100%);border:1px solid rgba(212,175,90,0.28);border-radius:18px;padding:22px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 8px 24px rgba(0,0,0,0.38);transition:all 0.25s ease;text-align:right;"
              onmouseover="this.style.transform='translateY(-4px)';this.style.borderColor='rgba(212,175,90,0.6)';"
              onmouseout="this.style.transform='none';this.style.borderColor='rgba(212,175,90,0.28)';">
           
@@ -2959,7 +2959,7 @@ function renderArtifactsCardsTrackHtml(measureCode, items, activeTab) {
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:11.5px;color:var(--sn-text-muted);background:rgba(0,0,0,0.22);padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);margin-bottom:16px;">
               <div>
                 <span style="opacity:0.7">سوابق تکمیل:</span>
-                <span style="font-weight:800;color:#34d399;margin-right:4px;">${fa(subsCount)} مورد</span>
+                <span style="font-weight:800;color:#34bbd3;margin-right:4px;">${fa(subsCount)} مورد</span>
               </div>
               <div>
                 <span style="opacity:0.7">وضعیت:</span>
@@ -2985,7 +2985,7 @@ function renderArtifactsCardsTrackHtml(measureCode, items, activeTab) {
     if (type === 'flowchart') {
       const code = item.process_code || 'PR';
       return `
-        <div class="sn-artifact-card" style="flex:0 0 340px;width:340px;min-width:340px;background:linear-gradient(145deg, rgba(20,42,34,0.94) 0%, rgba(12,28,22,0.96) 100%);border:1px solid rgba(212,175,90,0.28);border-radius:18px;padding:22px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 8px 24px rgba(0,0,0,0.38);transition:all 0.25s ease;text-align:right;"
+        <div class="sn-artifact-card" style="flex:0 0 340px;width:340px;min-width:340px;background:linear-gradient(145deg, rgba(21,29,41,0.94) 0%, rgba(13,18,27,0.96) 100%);border:1px solid rgba(212,175,90,0.28);border-radius:18px;padding:22px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 8px 24px rgba(0,0,0,0.38);transition:all 0.25s ease;text-align:right;"
              onmouseover="this.style.transform='translateY(-4px)';this.style.borderColor='rgba(212,175,90,0.6)';"
              onmouseout="this.style.transform='none';this.style.borderColor='rgba(212,175,90,0.28)';">
           
@@ -3032,7 +3032,7 @@ function renderArtifactsCardsTrackHtml(measureCode, items, activeTab) {
     if (type === 'evidence') {
       const sizeKb = item.file_size_bytes ? Math.round(item.file_size_bytes / 1024) : 0;
       return `
-        <div class="sn-artifact-card" style="flex:0 0 340px;width:340px;min-width:340px;background:linear-gradient(145deg, rgba(20,42,34,0.94) 0%, rgba(12,28,22,0.96) 100%);border:1px solid rgba(212,175,90,0.28);border-radius:18px;padding:22px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 8px 24px rgba(0,0,0,0.38);transition:all 0.25s ease;text-align:right;"
+        <div class="sn-artifact-card" style="flex:0 0 340px;width:340px;min-width:340px;background:linear-gradient(145deg, rgba(21,29,41,0.94) 0%, rgba(13,18,27,0.96) 100%);border:1px solid rgba(212,175,90,0.28);border-radius:18px;padding:22px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 8px 24px rgba(0,0,0,0.38);transition:all 0.25s ease;text-align:right;"
              onmouseover="this.style.transform='translateY(-4px)';this.style.borderColor='rgba(212,175,90,0.6)';"
              onmouseout="this.style.transform='none';this.style.borderColor='rgba(212,175,90,0.28)';">
           
@@ -3372,7 +3372,7 @@ function renderArtifactsCardsTrackHtml(measureCode, items, activeTab) {
           <!-- نوار اقدامات پایین مودال -->
           <footer style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(212,175,90,0.22);padding-top:14px;margin-top:6px;flex-wrap:wrap;gap:10px;">
             <div style="font-size:12px;color:var(--sn-text-muted);display:flex;align-items:center;gap:8px;">
-              <span style="color:#10b981;">●</span>
+              <span style="color:#10a0b9;">●</span>
               <span>سند دارای ساختار استاندارد اعتباربخشی (ISO / Ministry of Health Format)</span>
             </div>
 
@@ -3407,7 +3407,7 @@ function renderArtifactsCardsTrackHtml(measureCode, items, activeTab) {
 
         return `
           <div style="display:flex;flex-direction:column;gap:16px;">
-            <div style="background:rgba(22,45,38,0.5);border:1px solid rgba(212,175,90,0.2);border-radius:12px;padding:16px;">
+            <div style="background:rgba(23,31,44,0.5);border:1px solid rgba(212,175,90,0.2);border-radius:12px;padding:16px;">
               <div style="font-size:13px;font-weight:800;color:var(--sn-gold-light);margin-bottom:12px;display:flex;align-items:center;gap:6px;">
                 ${ICONS.fileText} <span>مشخصات و کدهای شناسایی سند</span>
               </div>
@@ -3415,32 +3415,32 @@ function renderArtifactsCardsTrackHtml(measureCode, items, activeTab) {
               <div style="display:grid;grid-template-columns:2fr 1fr;gap:14px;margin-bottom:14px;">
                 <div>
                   <label style="display:block;font-size:12px;font-weight:700;color:var(--sn-text-gold);margin-bottom:6px">عنوان کامل سند *</label>
-                  <input type="text" id="f_title" value="${escapeHtml(data.title)}" style="width:100%;padding:10px 14px;background:rgba(18,36,30,0.85);border:1px solid rgba(212,175,90,0.3);border-radius:8px;color:#fff;font-family:inherit;font-size:13px;">
+                  <input type="text" id="f_title" value="${escapeHtml(data.title)}" style="width:100%;padding:10px 14px;background:rgba(19,25,35,0.85);border:1px solid rgba(212,175,90,0.3);border-radius:8px;color:#fff;font-family:inherit;font-size:13px;">
                 </div>
                 <div>
                   <label style="display:block;font-size:12px;font-weight:700;color:var(--sn-text-gold);margin-bottom:6px">کد دبیرخانه مدارک کنترل‌شده *</label>
-                  <input type="text" id="f_doc_code" value="${escapeHtml(data.doc_code)}" style="width:100%;padding:10px 14px;background:rgba(18,36,30,0.85);border:1px solid rgba(212,175,90,0.3);border-radius:8px;color:#fff;font-family:inherit;font-size:13px;direction:ltr;font-weight:700;">
+                  <input type="text" id="f_doc_code" value="${escapeHtml(data.doc_code)}" style="width:100%;padding:10px 14px;background:rgba(19,25,35,0.85);border:1px solid rgba(212,175,90,0.3);border-radius:8px;color:#fff;font-family:inherit;font-size:13px;direction:ltr;font-weight:700;">
                 </div>
               </div>
 
               <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;">
                 <div>
                   <label style="display:block;font-size:12px;font-weight:700;color:var(--sn-text-gold);margin-bottom:6px">شماره ویرایش / نسخه</label>
-                  <input type="text" id="f_version_no" value="${escapeHtml(data.version_no)}" style="width:100%;padding:9px 12px;background:rgba(18,36,30,0.85);border:1px solid rgba(212,175,90,0.3);border-radius:8px;color:#fff;font-family:inherit;font-size:12.5px;">
+                  <input type="text" id="f_version_no" value="${escapeHtml(data.version_no)}" style="width:100%;padding:9px 12px;background:rgba(19,25,35,0.85);border:1px solid rgba(212,175,90,0.3);border-radius:8px;color:#fff;font-family:inherit;font-size:12.5px;">
                 </div>
                 <div>
                   <label style="display:block;font-size:12px;font-weight:700;color:var(--sn-text-gold);margin-bottom:6px">واحد متولی / تدوین‌کننده</label>
-                  <input type="text" id="f_dept" value="${escapeHtml(data.dept)}" style="width:100%;padding:9px 12px;background:rgba(18,36,30,0.85);border:1px solid rgba(212,175,90,0.3);border-radius:8px;color:#fff;font-family:inherit;font-size:12.5px;">
+                  <input type="text" id="f_dept" value="${escapeHtml(data.dept)}" style="width:100%;padding:9px 12px;background:rgba(19,25,35,0.85);border:1px solid rgba(212,175,90,0.3);border-radius:8px;color:#fff;font-family:inherit;font-size:12.5px;">
                 </div>
                 <div>
                   <label style="display:block;font-size:12px;font-weight:700;color:var(--sn-text-gold);margin-bottom:6px">مسئول نظارت و پایش</label>
-                  <input type="text" id="f_responsible" value="${escapeHtml(data.responsible)}" style="width:100%;padding:9px 12px;background:rgba(18,36,30,0.85);border:1px solid rgba(212,175,90,0.3);border-radius:8px;color:#fff;font-family:inherit;font-size:12.5px;">
+                  <input type="text" id="f_responsible" value="${escapeHtml(data.responsible)}" style="width:100%;padding:9px 12px;background:rgba(19,25,35,0.85);border:1px solid rgba(212,175,90,0.3);border-radius:8px;color:#fff;font-family:inherit;font-size:12.5px;">
                 </div>
               </div>
             </div>
 
             <!-- بخش تاریخ‌های تصویب و بازنگری جلالی -->
-            <div style="background:rgba(22,45,38,0.5);border:1px solid rgba(212,175,90,0.2);border-radius:12px;padding:16px;">
+            <div style="background:rgba(23,31,44,0.5);border:1px solid rgba(212,175,90,0.2);border-radius:12px;padding:16px;">
               <div style="font-size:13px;font-weight:800;color:var(--sn-gold-light);margin-bottom:12px;display:flex;align-items:center;gap:6px;">
                 ${ICONS.calendar} <span>چرخه زمانی و اعتبار سند (تقویم جلالی)</span>
               </div>
@@ -3448,13 +3448,13 @@ function renderArtifactsCardsTrackHtml(measureCode, items, activeTab) {
                 <div>
                   <label style="display:block;font-size:12px;font-weight:700;color:var(--sn-gold-light);margin-bottom:6px">📅 تاریخ تصویب و ابلاغ (شمسی)</label>
                   <div style="display:flex;gap:6px;">
-                    <select id="snDateDay" style="padding:8px;background:rgba(18,36,30,0.9);border:1px solid rgba(212,175,90,0.3);border-radius:6px;color:#fff;font-family:inherit;">
+                    <select id="snDateDay" style="padding:8px;background:rgba(19,25,35,0.9);border:1px solid rgba(212,175,90,0.3);border-radius:6px;color:#fff;font-family:inherit;">
                       ${daysOpts}
                     </select>
-                    <select id="snDateMonth" style="padding:8px;background:rgba(18,36,30,0.9);border:1px solid rgba(212,175,90,0.3);border-radius:6px;color:#fff;font-family:inherit;">
+                    <select id="snDateMonth" style="padding:8px;background:rgba(19,25,35,0.9);border:1px solid rgba(212,175,90,0.3);border-radius:6px;color:#fff;font-family:inherit;">
                       ${monthsOpts}
                     </select>
-                    <select id="snDateYear" style="padding:8px;background:rgba(18,36,30,0.9);border:1px solid rgba(212,175,90,0.3);border-radius:6px;color:#fff;font-family:inherit;">
+                    <select id="snDateYear" style="padding:8px;background:rgba(19,25,35,0.9);border:1px solid rgba(212,175,90,0.3);border-radius:6px;color:#fff;font-family:inherit;">
                       ${yearsOpts}
                     </select>
                   </div>
@@ -3463,13 +3463,13 @@ function renderArtifactsCardsTrackHtml(measureCode, items, activeTab) {
                 <div>
                   <label style="display:block;font-size:12px;font-weight:700;color:var(--sn-gold-light);margin-bottom:6px">⏰ موعد بازنگری دوره‌ای (۱ سال پس از ابلاغ)</label>
                   <div style="display:flex;gap:6px;">
-                    <select id="snRevDay" style="padding:8px;background:rgba(18,36,30,0.9);border:1px solid rgba(212,175,90,0.3);border-radius:6px;color:#fff;font-family:inherit;">
+                    <select id="snRevDay" style="padding:8px;background:rgba(19,25,35,0.9);border:1px solid rgba(212,175,90,0.3);border-radius:6px;color:#fff;font-family:inherit;">
                       ${daysOpts}
                     </select>
-                    <select id="snRevMonth" style="padding:8px;background:rgba(18,36,30,0.9);border:1px solid rgba(212,175,90,0.3);border-radius:6px;color:#fff;font-family:inherit;">
+                    <select id="snRevMonth" style="padding:8px;background:rgba(19,25,35,0.9);border:1px solid rgba(212,175,90,0.3);border-radius:6px;color:#fff;font-family:inherit;">
                       ${monthsOpts}
                     </select>
-                    <select id="snRevYear" style="padding:8px;background:rgba(18,36,30,0.9);border:1px solid rgba(212,175,90,0.3);border-radius:6px;color:#fff;font-family:inherit;">
+                    <select id="snRevYear" style="padding:8px;background:rgba(19,25,35,0.9);border:1px solid rgba(212,175,90,0.3);border-radius:6px;color:#fff;font-family:inherit;">
                       ${revYearsOpts}
                     </select>
                   </div>
@@ -3485,17 +3485,17 @@ function renderArtifactsCardsTrackHtml(measureCode, items, activeTab) {
           <div style="display:flex;flex-direction:column;gap:14px;">
             <div>
               <label style="display:block;font-size:12px;font-weight:700;color:var(--sn-text-gold);margin-bottom:6px">۱. هدف از تدوین و اجرای خط‌مشی (Purpose)</label>
-              <textarea id="f_purpose" rows="4" style="width:100%;padding:10px 14px;background:rgba(18,36,30,0.85);border:1px solid rgba(212,175,90,0.3);border-radius:8px;color:#fff;font-family:inherit;font-size:13px;line-height:1.8;">${escapeHtml(data.purpose)}</textarea>
+              <textarea id="f_purpose" rows="4" style="width:100%;padding:10px 14px;background:rgba(19,25,35,0.85);border:1px solid rgba(212,175,90,0.3);border-radius:8px;color:#fff;font-family:inherit;font-size:13px;line-height:1.8;">${escapeHtml(data.purpose)}</textarea>
             </div>
 
             <div>
               <label style="display:block;font-size:12px;font-weight:700;color:var(--sn-text-gold);margin-bottom:6px">۲. دامنه شمول و کاربرد در بیمارستان (Scope)</label>
-              <textarea id="f_scope" rows="3" style="width:100%;padding:10px 14px;background:rgba(18,36,30,0.85);border:1px solid rgba(212,175,90,0.3);border-radius:8px;color:#fff;font-family:inherit;font-size:13px;line-height:1.8;">${escapeHtml(data.scope)}</textarea>
+              <textarea id="f_scope" rows="3" style="width:100%;padding:10px 14px;background:rgba(19,25,35,0.85);border:1px solid rgba(212,175,90,0.3);border-radius:8px;color:#fff;font-family:inherit;font-size:13px;line-height:1.8;">${escapeHtml(data.scope)}</textarea>
             </div>
 
             <div>
               <label style="display:block;font-size:12px;font-weight:700;color:var(--sn-text-gold);margin-bottom:6px">۳. مراجع قانونی، اسناد بالادستی و استانداردهای اعتباربخشی (Legal References)</label>
-              <textarea id="f_legal" rows="3" style="width:100%;padding:10px 14px;background:rgba(18,36,30,0.85);border:1px solid rgba(212,175,90,0.3);border-radius:8px;color:#fff;font-family:inherit;font-size:13px;line-height:1.8;">${escapeHtml(data.legal)}</textarea>
+              <textarea id="f_legal" rows="3" style="width:100%;padding:10px 14px;background:rgba(19,25,35,0.85);border:1px solid rgba(212,175,90,0.3);border-radius:8px;color:#fff;font-family:inherit;font-size:13px;line-height:1.8;">${escapeHtml(data.legal)}</textarea>
             </div>
           </div>
         `;
@@ -3507,12 +3507,12 @@ function renderArtifactsCardsTrackHtml(measureCode, items, activeTab) {
             <div>
               <label style="display:block;font-size:12px;font-weight:700;color:var(--sn-text-gold);margin-bottom:6px">۴. بیانیه و گزاره خط‌مشی قطعی بیمارستان (Policy Statement) *</label>
               <div style="font-size:11.5px;color:var(--sn-text-muted);margin-bottom:6px;">گزاره تعهدآور و الزام‌آور حاکمیت بالینی بیمارستان در خصوص این سنجه:</div>
-              <textarea id="f_policy_stmt" rows="5" style="width:100%;padding:12px 14px;background:rgba(18,36,30,0.9);border:1px solid rgba(212,175,90,0.35);border-radius:8px;color:var(--sn-gold-light);font-family:inherit;font-size:13.5px;line-height:1.9;font-weight:600;">${escapeHtml(data.policy_stmt)}</textarea>
+              <textarea id="f_policy_stmt" rows="5" style="width:100%;padding:12px 14px;background:rgba(19,25,35,0.9);border:1px solid rgba(212,175,90,0.35);border-radius:8px;color:var(--sn-gold-light);font-family:inherit;font-size:13.5px;line-height:1.9;font-weight:600;">${escapeHtml(data.policy_stmt)}</textarea>
             </div>
 
             <div>
               <label style="display:block;font-size:12px;font-weight:700;color:var(--sn-text-gold);margin-bottom:6px">۵. تعاریف، اصطلاحات و کلیدواژه‌ها (Definitions)</label>
-              <textarea id="f_definitions" rows="4" style="width:100%;padding:10px 14px;background:rgba(18,36,30,0.85);border:1px solid rgba(212,175,90,0.3);border-radius:8px;color:#fff;font-family:inherit;font-size:13px;line-height:1.8;">${escapeHtml(data.definitions)}</textarea>
+              <textarea id="f_definitions" rows="4" style="width:100%;padding:10px 14px;background:rgba(19,25,35,0.85);border:1px solid rgba(212,175,90,0.3);border-radius:8px;color:#fff;font-family:inherit;font-size:13px;line-height:1.8;">${escapeHtml(data.definitions)}</textarea>
             </div>
           </div>
         `;
@@ -3523,12 +3523,12 @@ function renderArtifactsCardsTrackHtml(measureCode, items, activeTab) {
           <div style="display:flex;flex-direction:column;gap:14px;">
             <div>
               <label style="display:block;font-size:12px;font-weight:700;color:var(--sn-text-gold);margin-bottom:6px">۶. شرح وظایف و تفکیک مسئولیت‌های رده‌های شغلی (Responsibilities)</label>
-              <textarea id="f_responsibilities" rows="5" style="width:100%;padding:10px 14px;background:rgba(18,36,30,0.85);border:1px solid rgba(212,175,90,0.3);border-radius:8px;color:#fff;font-family:inherit;font-size:13px;line-height:1.8;">${escapeHtml(data.responsibilities)}</textarea>
+              <textarea id="f_responsibilities" rows="5" style="width:100%;padding:10px 14px;background:rgba(19,25,35,0.85);border:1px solid rgba(212,175,90,0.3);border-radius:8px;color:#fff;font-family:inherit;font-size:13px;line-height:1.8;">${escapeHtml(data.responsibilities)}</textarea>
             </div>
 
             <div>
               <label style="display:block;font-size:12px;font-weight:700;color:var(--sn-text-gold);margin-bottom:6px">۷. روش اجرا و گام‌های عملیاتی اقدام (Step-by-Step Procedure)</label>
-              <textarea id="f_work_method" rows="6" style="width:100%;padding:10px 14px;background:rgba(18,36,30,0.85);border:1px solid rgba(212,175,90,0.3);border-radius:8px;color:#fff;font-family:inherit;font-size:13px;line-height:1.8;">${escapeHtml(data.work_method)}</textarea>
+              <textarea id="f_work_method" rows="6" style="width:100%;padding:10px 14px;background:rgba(19,25,35,0.85);border:1px solid rgba(212,175,90,0.3);border-radius:8px;color:#fff;font-family:inherit;font-size:13px;line-height:1.8;">${escapeHtml(data.work_method)}</textarea>
             </div>
           </div>
         `;
@@ -3540,32 +3540,32 @@ function renderArtifactsCardsTrackHtml(measureCode, items, activeTab) {
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
               <div>
                 <label style="display:block;font-size:12px;font-weight:700;color:var(--sn-text-gold);margin-bottom:6px">۸. روش نظارت، پایش و شاخص‌های سنجش اثربخشی (Monitoring & KPIs)</label>
-                <textarea id="f_monitoring" rows="4" style="width:100%;padding:10px 14px;background:rgba(18,36,30,0.85);border:1px solid rgba(212,175,90,0.3);border-radius:8px;color:#fff;font-family:inherit;font-size:13px;line-height:1.8;">${escapeHtml(data.monitoring)}</textarea>
+                <textarea id="f_monitoring" rows="4" style="width:100%;padding:10px 14px;background:rgba(19,25,35,0.85);border:1px solid rgba(212,175,90,0.3);border-radius:8px;color:#fff;font-family:inherit;font-size:13px;line-height:1.8;">${escapeHtml(data.monitoring)}</textarea>
               </div>
 
               <div>
                 <label style="display:block;font-size:12px;font-weight:700;color:var(--sn-text-gold);margin-bottom:6px">۹. فرم‌ها، چک‌لیست‌ها و مستندات پیوست مرتبط (Related Records)</label>
-                <textarea id="f_related_docs" rows="4" style="width:100%;padding:10px 14px;background:rgba(18,36,30,0.85);border:1px solid rgba(212,175,90,0.3);border-radius:8px;color:#fff;font-family:inherit;font-size:13px;line-height:1.8;">${escapeHtml(data.related_docs)}</textarea>
+                <textarea id="f_related_docs" rows="4" style="width:100%;padding:10px 14px;background:rgba(19,25,35,0.85);border:1px solid rgba(212,175,90,0.3);border-radius:8px;color:#fff;font-family:inherit;font-size:13px;line-height:1.8;">${escapeHtml(data.related_docs)}</textarea>
               </div>
             </div>
 
             <!-- جدول گردش امضا و تصویب رسمی -->
-            <div style="background:rgba(22,45,38,0.5);border:1px solid rgba(212,175,90,0.2);border-radius:12px;padding:16px;">
+            <div style="background:rgba(23,31,44,0.5);border:1px solid rgba(212,175,90,0.2);border-radius:12px;padding:16px;">
               <div style="font-size:13px;font-weight:800;color:var(--sn-gold-light);margin-bottom:12px;display:flex;align-items:center;gap:6px;">
                 ${ICONS.officialSeal} <span>جدول ارکان تایید و تصویب مصوب وزارت بهداشت</span>
               </div>
               <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;">
-                <div style="background:rgba(18,36,30,0.7);padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.08);">
+                <div style="background:rgba(19,25,35,0.7);padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.08);">
                   <div style="font-size:11px;color:var(--sn-gold-light);font-weight:700;margin-bottom:4px;">۱. تدوین‌کننده (تهیه‌کننده):</div>
                   <input type="text" id="f_author" value="${escapeHtml(data.author)}" style="width:100%;padding:6px 10px;background:transparent;border:1px solid rgba(212,175,90,0.3);border-radius:6px;color:#fff;font-family:inherit;font-size:12px;">
                 </div>
 
-                <div style="background:rgba(18,36,30,0.7);padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.08);">
+                <div style="background:rgba(19,25,35,0.7);padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.08);">
                   <div style="font-size:11px;color:var(--sn-gold-light);font-weight:700;margin-bottom:4px;">۲. تاییدکننده (مدیر کیفیت / مترون):</div>
                   <input type="text" id="f_reviewer" value="${escapeHtml(data.reviewer)}" style="width:100%;padding:6px 10px;background:transparent;border:1px solid rgba(212,175,90,0.3);border-radius:6px;color:#fff;font-family:inherit;font-size:12px;">
                 </div>
 
-                <div style="background:rgba(18,36,30,0.7);padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.08);">
+                <div style="background:rgba(19,25,35,0.7);padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.08);">
                   <div style="font-size:11px;color:var(--sn-gold-light);font-weight:700;margin-bottom:4px;">۳. تصویب‌کننده و ابلاغ (ریاست بیمارستان):</div>
                   <input type="text" id="f_approver" value="${escapeHtml(data.approver)}" style="width:100%;padding:6px 10px;background:transparent;border:1px solid rgba(212,175,90,0.3);border-radius:6px;color:#fff;font-family:inherit;font-size:12px;">
                 </div>
@@ -3633,8 +3633,8 @@ function renderArtifactsCardsTrackHtml(measureCode, items, activeTab) {
             <div style="margin-bottom:12px;">
               <b style="color:#0e7490;">۳. مراجع قانونی:</b> ${escapeHtml(data.legal)}
             </div>
-            <div style="margin-bottom:12px;background:#f0fdf4;border-right:3px solid #16a34a;padding:8px 12px;border-radius:4px;">
-              <b style="color:#15803d;">۴. بیانیه خط‌مشی:</b> ${escapeHtml(data.policy_stmt)}
+            <div style="margin-bottom:12px;background:#f0fbfd;border-right:3px solid #168ea3;padding:8px 12px;border-radius:4px;">
+              <b style="color:#1a617b;">۴. بیانیه خط‌مشی:</b> ${escapeHtml(data.policy_stmt)}
             </div>
             <div style="margin-bottom:12px;">
               <b style="color:#0e7490;">۵. تعاریف:</b> ${escapeHtml(data.definitions)}
@@ -3671,7 +3671,7 @@ function renderArtifactsCardsTrackHtml(measureCode, items, activeTab) {
               </td>
               <td style="padding:8px;border:1px solid #94a3b8;">
                 <div style="font-weight:700;">${escapeHtml(data.approver)}</div>
-                <div style="font-size:10px;color:#16a34a;font-weight:800;">✓ مصوب و لازم‌الاجرا</div>
+                <div style="font-size:10px;color:#168ea3;font-weight:800;">✓ مصوب و لازم‌الاجرا</div>
               </td>
             </tr>
           </table>
@@ -3854,7 +3854,7 @@ function renderArtifactsCardsTrackHtml(measureCode, items, activeTab) {
           <button type="button" class="sn-modal-close" onclick="document.getElementById('${modalId}').style.display='none'">${ICONS.close}</button>
         </div>
 
-        <div style="text-align:center;padding:24px;border:2px dashed rgba(212,175,90,0.3);border-radius:12px;background:rgba(22,45,38,0.5);margin-bottom:16px">
+        <div style="text-align:center;padding:24px;border:2px dashed rgba(212,175,90,0.3);border-radius:12px;background:rgba(23,31,44,0.5);margin-bottom:16px">
           <div style="display:flex;justify-content:center;margin-bottom:10px">${ICONS.uploadBig}</div>
           <div style="font-weight:700;color:var(--sn-gold-light);margin-bottom:6px">فایل شواهد، صورت‌جلسه، گزارش یا تصویر را بکشید یا انتخاب کنید</div>
           <div style="font-size:11.5px;color:var(--sn-text-muted);margin-bottom:14px">پشتیبانی از فرمت‌های PDF, JPG, PNG, DOCX تا سقف ۱۰ مگابایت</div>
