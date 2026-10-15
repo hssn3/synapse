@@ -77,3 +77,39 @@ img.syn-ico{
 
 /* --- اسپینر بارگذاری (index.html) هماهنگ شد؛ اینجا برای اطمینان --- */
 @keyframes syn-spin{to{transform:rotate(360deg)}}
+
+
+/* ============ ۱۴۰۵/۰۷/۲۳ (ب) — لوگوی شفاف در هدر + هدر حرفه‌ای + تبِ دانا ============ */
+/* نشانِ بدون کادر (نسخهٔ بدون پس‌زمینه) */
+.syn-mk{
+  width:34px;height:34px;display:block;object-fit:contain;flex:0 0 auto;
+  filter:drop-shadow(0 0 9px rgba(95,217,234,.45)) drop-shadow(0 0 20px rgba(95,217,234,.18));
+}
+.ghdr-brand{gap:10px}
+.ghdr-brand .syn-mk{width:36px;height:36px}
+.ghdr-brand b{
+  font-size:15px;font-weight:800;letter-spacing:.2px;
+  background:linear-gradient(120deg,#f4f8fb 25%,#a9e8f4 78%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+.ltop-brand .syn-mk{width:42px;height:42px}
+.gftr-brand .syn-mk{width:30px;height:30px}
+.shead .syn-mk,.brand .syn-mk{width:32px;height:32px}
+
+/* هدر حرفه‌ای: شیشه‌ای‌تر، خط فیروزه‌ای، عمق ملایم */
+.ghdr-in{
+  background:linear-gradient(180deg,rgba(9,20,38,.96) 0%,rgba(8,18,34,.84) 100%)!important;
+  border-bottom:1px solid rgba(95,217,234,.14)!important;
+  box-shadow:0 14px 38px -26px rgba(0,0,0,.9), inset 0 1px 0 rgba(255,255,255,.03)!important;
+}
+.ghdr-nav a{position:relative;transition:color .2s}
+.ghdr-nav a::after{
+  content:"";position:absolute;right:50%;left:50%;bottom:-7px;height:2px;border-radius:2px;
+  background:linear-gradient(90deg,#5fd9ea,#3ec6d8);opacity:0;transition:.25s;
+}
+.ghdr-nav a:hover::after{right:10%;left:10%;opacity:1}
+.ghdr-nav a:hover{color:#c9f2fa!important}
+
+/* تبِ مرکزی دانا: بدون برچسب — آیکون وسط‌چین بماند */
+.app-tabbar .app-tab.app-tab-dana .app-tab-t{display:none!important}
+.app-tabbar .app-tab.app-tab-dana{align-items:center;justify-content:center}

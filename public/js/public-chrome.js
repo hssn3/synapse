@@ -27,7 +27,7 @@
     hdr.innerHTML =
       '<div class="ghdr-in">' +
         '<a class="ghdr-brand" href="/" title="بازگشت به صفحه‌ی اصلی سامانه" style="text-decoration:none">' +
-          '<div class="lmark sm shine anim"><img class="syn-ico" src="/img/synapse-mark-64.png" alt="سیناپس" width="22" height="22"></div>' +
+          '<img class="syn-mk" src="/img/synapse-mark.png" alt="سیناپس" width="36" height="36">' +
           '<b>سیناپس</b>' +
         '</a>' +
         '<div class="ghdr-cta"><a class="btn btn-o btn-sm" href="/">ورود به سامانه</a></div>' +
@@ -38,7 +38,7 @@
     ftr.id = 'gftr';
     ftr.innerHTML =
       '<div class="gftr-in">' +
-        '<div class="gftr-brand"><div class="lmark sm shine"><img class="syn-ico" src="/img/synapse-mark-64.png" alt="سیناپس" width="22" height="22"></div>' +
+        '<div class="gftr-brand"><img class="syn-mk" src="/img/synapse-mark.png" alt="سیناپس" width="36" height="36">' +
           '<div><b>سیناپس</b>' +
           '<span>این فرم بدون ورود به سامانه تکمیل می‌شود و مستقیماً برای واحد بهبود کیفیت همان مرکز ثبت می‌گردد.</span></div>' +
         '</div>' +

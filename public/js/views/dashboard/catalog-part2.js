@@ -122,7 +122,7 @@ function renderSystemCatalogModalContent() {
     <!-- نوار هدر بالای کاتالوگ -->
     <div class="cat-booklet-topbar">
       <div class="cat-brand">
-        <div class="lmark sm shine anim" style="width:38px;height:38px;border-radius:10px"><img class="syn-ico" src="/img/synapse-mark-64.png" alt="سیناپس" width="20" height="20"></div>
+        <img class="syn-mk" src="/img/synapse-mark.png" alt="سیناپس" width="36" height="36">
         <div>
           <b style="font-size:14px;color:var(--th)">کاتالوگ رسمی و دیجیتال ابر سامانه بیمارستان</b>
           <div style="font-size:11px;color:var(--tm)">ارائه جامع امکانات، فرآیندها و مقایسه با روش‌های سنتی</div>
