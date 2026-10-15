@@ -10,11 +10,15 @@ services:
     environment:
       NODE_ENV: production
       PORT: 3000
-      # ⚠️ حتماً قبل از اجرای واقعی جایگزین کنید — با:
-      # node -e "console.log(require('crypto').randomBytes(48).toString('hex'))"
-      # توجه: این پلیس‌هولدر از ۱۴۰۵-۰۷-۲۰ در لیست مقادیر ضعیف است و در NODE_ENV=production
-      # باعث توقف عمدی سرور می‌شود تا استقرار با یک راز عمومیِ معلوم بالا نیاید.
-      JWT_SECRET: change_this_to_a_random_long_string_at_least_32_chars
+      # ⚠️ راز نشست از محیط می‌آید و در این فایل هیچ مقدار پیش‌فرضی ندارد.
+      # نبودن JWT_SECRET باعث می‌شود docker compose پیش از بالا آوردن سرویس با پیام
+      # «JWT_SECRET is required - see docs/DEPLOYMENT-CHECKLIST.md step A1» رد شود؛
+      # پس استقرار با یک راز عمومی/پلیس‌هولدر از همان ابتدا ممکن نیست.
+      # چرا: پلیس‌هولدر قبلی همین فایل، در WEAK_JWT_SECRETS داخل src/config/app.js هست؛
+      # یعنی مسیر مستندشدهٔ compose در NODE_ENV=production محکوم به توقف عمدی بود (ممیزی ۱۴۰۵/۰۷/۲۳).
+      # تولید راز: node -e "console.log(require('crypto').randomBytes(48).toString('hex'))"
+      # مقدار در .env کنار همین فایل (در گیت نیست) یا در محیط سرور نگه داشته شود.
+      JWT_SECRET: "${JWT_SECRET:?JWT_SECRET is required - see docs/DEPLOYMENT-CHECKLIST.md step A1}"
       JWT_EXPIRES_IN: 8h
       SESSION_COOKIE_NAME: sid
       SUPER_SESSION_COOKIE_NAME: ssid
