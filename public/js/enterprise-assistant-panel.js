@@ -36,7 +36,7 @@
     trigger.setAttribute('role', 'button');
     trigger.setAttribute('tabindex', '0');
     trigger.innerHTML = `
-      <span class="bubble-icon" style="font-size: 1.2rem; display: flex; align-items: center; justify-content: center;">✨</span>
+      <span class="bubble-icon"><img class="bubble-img" src="/img/synapse-dana.png" alt="دستیار سیناپس" draggable="false"></span>
       <span id="ent-assistant-badge" class="ent-assistant-badge" style="display:none"></span>
     `;
 
@@ -54,9 +54,9 @@
       drawer.innerHTML = `
         <div class="drawer-header">
           <div class="drawer-title-box">
-            <span class="drawer-badge">AI</span>
+            <span class="drawer-badge"><img src="/img/synapse-dana.png" alt="" draggable="false"></span>
             <div>
-              <h4 id="drawer-persona-title" class="drawer-title">دستیار هوشمند ۳۱۳</h4>
+              <h4 id="drawer-persona-title" class="drawer-title">دستیار سیناپس</h4>
               <span id="drawer-persona-role" class="drawer-subtitle">نقش: در حال بارگذاری...</span>
             </div>
           </div>
@@ -220,8 +220,11 @@
           currentPersona = p;
           const titleEl = document.getElementById('drawer-persona-title');
           const roleEl = document.getElementById('drawer-persona-role');
-          if (titleEl) titleEl.innerText = p.title || 'دستیار هوشمند';
-          if (roleEl) roleEl.innerText = 'نقش: ' + (p.role_code || '');
+          if (titleEl) titleEl.innerText = p.title || 'دستیار سیناپس';
+          if (roleEl) {
+            var _roleFa = (typeof ROLE_FA !== 'undefined' && ROLE_FA[p.role_code]) || (typeof S !== 'undefined' && S.user && S.user.role_title) || p.role_code || '';
+            roleEl.innerText = 'نقش: ' + _roleFa;
+          }
           setWelcomeMessage(p);
         }
       } catch (e) {

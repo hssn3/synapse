@@ -27,7 +27,7 @@
     hdr.innerHTML =
       '<div class="ghdr-in">' +
         '<a class="ghdr-brand" href="/" title="بازگشت به صفحه‌ی اصلی سامانه" style="text-decoration:none">' +
-          '<img class="syn-lg" src="/img/synapse-header.png" alt="سیناپس" height="44">'' +
+          '<img class="syn-lg" src="/img/synapse-header.png" alt="سیناپس" height="44">' +
         '</a>' +
         '<div class="ghdr-cta"><a class="btn btn-o btn-sm" href="/">ورود به سامانه</a></div>' +
       '</div>';

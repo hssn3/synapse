@@ -129,3 +129,35 @@ img.syn-ico{
 }
 .app-tabbar .app-tab.app-tab-dana .app-tab-ic img{width:48px;height:48px;display:block;border-radius:50%}
 .app-tabbar .app-tab.app-tab-dana .dana-orbit{display:none!important}
+
+
+/* ============================================================
+   ۱۴۰۵/۰۷/۲۳ — راند بازبینی زنده (درخواست کارفرما):
+   ۱) داک شناور (منو + دستیار) از پایین-راست به پایین-چپ منتقل شود
+   ۲) پنل گفتگوی دستیار نیز کنار همان سمت چپ باز شود
+   ۳) آیکون دکمه/نشان دستیار: نشان گُل سیناپس (به‌جای ✨ و AI)
+   ============================================================ */
+@media (min-width: 1025px) {
+  body.app-shell .floatdock.in-side { left: 18px; right: auto; }
+  body.app-shell .floatdock.in-side .dockmenu { left: 0; right: auto; }
+  body.app-shell #floatDock.in-side.side-narrow { left: 13px; right: auto; flex-direction: row; padding: 8px 10px; gap: 10px; }
+  body.app-shell .ent-assistant-drawer { left: 18px; right: auto; }
+  body.app-shell #floatDock.in-side.side-narrow .ent-assistant-drawer { left: 13px; right: auto; }
+}
+
+/* دکمه دستیار سیناپس: نشان گُل، هم‌خانواده با تبِ مرکزی */
+.ent-assistant-bubble {
+  background: transparent !important;
+  border-color: transparent !important;
+  padding: 0 !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, .5) !important;
+}
+.ent-assistant-bubble .bubble-icon { width: 100%; height: 100%; margin: 0; display: flex; align-items: center; justify-content: center; }
+.ent-assistant-bubble .bubble-img { width: 100%; height: 100%; display: block; border-radius: 50%; }
+.ent-assistant-bubble:hover {
+  border-color: transparent !important;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, .6), 0 0 22px rgba(62, 198, 216, .38) !important;
+}
+/* نشان کوچک کنار عنوان پنل: نشان گُل */
+.ent-assistant-drawer .drawer-badge { width: 30px; height: 30px; padding: 0 !important; border-radius: 50% !important; background: none !important; overflow: hidden; display: inline-flex; align-items: center; justify-content: center; }
+.ent-assistant-drawer .drawer-badge img { width: 100%; height: 100%; display: block; border-radius: 50%; }
