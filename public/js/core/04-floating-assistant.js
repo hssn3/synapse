@@ -297,8 +297,7 @@ function renderGlobalHeader(){
   el.innerHTML=`
   <div class="ghdr-in">
     <div class="ghdr-brand" onclick="goHome()" role="button" tabindex="0">
-      <img class="syn-mk" src="/img/synapse-mark.png" alt="سیناپس" width="36" height="36">
-      <b>سیناپس</b>
+      <img class="syn-lg" src="/img/synapse-header.png" alt="سیناپس" height="44">
     </div>
     <nav class="ghdr-nav">
       <a href="javascript:void(0)" onclick="goHome()">خانه</a>
@@ -371,8 +370,8 @@ function renderGlobalFooter(){
   const yr=new Date().toLocaleDateString('fa-IR', { year: 'numeric' });
   el.innerHTML=`
   <div class="gftr-in">
-    <div class="gftr-brand"><img class="syn-mk" src="/img/synapse-mark.png" alt="سیناپس" width="36" height="36">
-      <div><b>سیناپس</b>
+    <div class="gftr-brand"><img class="syn-lg" src="/img/synapse-header.png" alt="سیناپس" height="40">
+      <div>
       <span>سامانه یکپارچه نظارت، اعتباربخشی و پایش سلامت — بستری ابری و یکپارچه برای مراکز درمانی عضو.</span></div></div>
     <div class="gftr-col"><b>محصول</b>
       <a href="javascript:void(0)" onclick="goFeaturesPublic()">ماژول‌های سامانه</a>

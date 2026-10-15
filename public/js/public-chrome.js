@@ -27,8 +27,7 @@
     hdr.innerHTML =
       '<div class="ghdr-in">' +
         '<a class="ghdr-brand" href="/" title="بازگشت به صفحه‌ی اصلی سامانه" style="text-decoration:none">' +
-          '<img class="syn-mk" src="/img/synapse-mark.png" alt="سیناپس" width="36" height="36">' +
-          '<b>سیناپس</b>' +
+          '<img class="syn-lg" src="/img/synapse-header.png" alt="سیناپس" height="44">'' +
         '</a>' +
         '<div class="ghdr-cta"><a class="btn btn-o btn-sm" href="/">ورود به سامانه</a></div>' +
       '</div>';
@@ -38,8 +37,8 @@
     ftr.id = 'gftr';
     ftr.innerHTML =
       '<div class="gftr-in">' +
-        '<div class="gftr-brand"><img class="syn-mk" src="/img/synapse-mark.png" alt="سیناپس" width="36" height="36">' +
-          '<div><b>سیناپس</b>' +
+        '<div class="gftr-brand"><img class="syn-lg" src="/img/synapse-header.png" alt="سیناپس" height="40">' +
+          '<div>' +
           '<span>این فرم بدون ورود به سامانه تکمیل می‌شود و مستقیماً برای واحد بهبود کیفیت همان مرکز ثبت می‌گردد.</span></div>' +
         '</div>' +
         // راهنما به‌ازای هر فرم فرق می‌کند و متنِ ثابت روی بعضی‌شان دروغ بود:

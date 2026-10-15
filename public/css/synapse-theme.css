@@ -113,3 +113,19 @@ img.syn-ico{
 /* تبِ مرکزی دانا: بدون برچسب — آیکون وسط‌چین بماند */
 .app-tabbar .app-tab.app-tab-dana .app-tab-t{display:none!important}
 .app-tabbar .app-tab.app-tab-dana{align-items:center;justify-content:center}
+
+
+/* ============ ۱۴۰۵/۰۷/۲۳ (ج) — لوگوی کامل در هدر + نشان دانا ============ */
+.syn-lg{display:block;height:44px;width:auto;filter:drop-shadow(0 0 14px rgba(95,217,234,.22));}
+.ghdr-brand .syn-lg{height:46px}
+.ltop-brand .syn-lg{height:54px}
+.gftr-brand .syn-lg{height:40px}
+.shead .syn-lg,.brand .syn-lg{height:40px}
+
+/* نشانِ دانا: گلِ تمیز روی پس‌زمینهٔ پاک */
+.app-tabbar .app-tab.app-tab-dana .app-tab-ic{
+  width:48px;height:48px;margin-top:-18px;background:none!important;border-radius:50%;
+  box-shadow:0 6px 20px -6px rgba(62,198,216,.55),0 0 26px rgba(62,198,216,.28)!important;color:inherit!important;
+}
+.app-tabbar .app-tab.app-tab-dana .app-tab-ic img{width:48px;height:48px;display:block;border-radius:50%}
+.app-tabbar .app-tab.app-tab-dana .dana-orbit{display:none!important}

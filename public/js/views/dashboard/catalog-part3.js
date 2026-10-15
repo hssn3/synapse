@@ -11,8 +11,8 @@ function renderEntry(){
   <div id="login" class="lscroll">
     <div class="lpage">
       <div class="ltop">
-        <div class="ltop-brand"><img class="syn-mk" src="/img/synapse-mark.png" alt="سیناپس" width="36" height="36">
-          <div><b>سیناپس</b><span>سامانه یکپارچه نظارت، اعتباربخشی و پایش سلامت</span></div></div>
+        <div class="ltop-brand"><img class="syn-lg" src="/img/synapse-header.png" alt="سیناپس" height="52">
+          <div><span>سامانه یکپارچه نظارت، اعتباربخشی و پایش سلامت</span></div></div>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
           <button type="button" class="btn btn-o btn-sm shine" onclick="openSystemCatalogModal()" style="border-color:var(--gd);color:var(--gdl);font-weight:700;padding:4px 12px">📖 کاتالوگ آنلاین امکانات ✨</button>
           ${S.user?`<a href="javascript:void(0)" class="ltop-lnk" onclick="renderApp()">بازگشت به داشبورد ›</a>`:''}

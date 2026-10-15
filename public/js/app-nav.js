@@ -69,7 +69,7 @@
          <span class="app-tab-ic">${t2.i}</span><span class="app-tab-t">${t2.t}</span></button>` +
       // دکمه‌ی ویژه‌ی «دانا» — دقیقاً در وسط نوار (ترتیب DOM در RTL مستقیماً پنجره‌ی وسط را می‌سازد)
       `<button type="button" class="app-tab app-tab-dana" id="appTabDana" onclick="appNavOpenDana()" aria-label="دستیار هوشمند دانا">
-         <span class="app-tab-ic dana-ic">${iconOf('sparkle')}<i class="dana-orbit"></i></span>
+         <span class="app-tab-ic dana-ic"><img src="/img/synapse-dana.png" alt="" width="48" height="48"></span>
        </button>` +
       `<button type="button" class="app-tab" data-p="${t3.k}" onclick="go('${t3.k}');appNavSync()">
          <span class="app-tab-ic">${t3.i}</span><span class="app-tab-t">${t3.t}</span></button>` +
