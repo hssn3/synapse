@@ -1,0 +1,382 @@
+/* ==========================================================================
+   mobile-stack.css — موبایل: کارت‌ها «زیر هم»، بدون اسکرول افقی
+   ==========================================================================
+   خواست کارفرما (۱۴۰۵/۰۷/۲۴): «کل پروژه رو بررسی بصری کن، کارت‌ها برای نسخه
+   موبایل زیر هم باشند؛ نیاز به اسکرول به راست و چپ نباشه.»
+
+   این فایل *آخرین* شیت index.html است (بعد از synapse-theme) تا با تجاوزِ
+   افزودنی و !important، ریل‌های افقیِ ساخته‌شده برای «قاعدهٔ ۱۱» (جریان افقی
+   راست‌به‌چپ مخصوص دسکتاپ) را فقط در موبایل به جریان عمودی/چندخطی برگرداند.
+   دسکتاپ دست‌نخورده می‌ماند؛ اسکوپ: ≤768px (و دو شبکهٔ اکریدیشن ≤900px،
+   همراستا با ui-polish که همان‌جا ریل افقی می‌شوند).
+
+   استثنای تعمدی: جدول‌های داده و قاب نمودارها اسکرولِ لمسیِ *داخل قاب خودشان*
+   را نگه می‌دارند (تا ستون‌ها/برچسب‌ها خوانا بمانند)؛ اما هیچ‌چیز کل صفحه را
+   افقی نمی‌لغزاند. بامِ امنیتی: #content در موبایل overflow-x:clip — اگر روزی
+   جایی سرریز کند، صفحه جابه‌جا نمی‌شود و خزندهٔ E2E آن را باگ گزارش می‌کند.
+
+   نسخه: 20261016_stack1 · مکمل: mobile-system.css §4/§6/§9 و mobile-fix.css
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   ۱) بام امنیتی + برگهٔ چاپی (.psheet)
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  /* هیچ صفحه‌ای نباید چپ/راست بلغزد؛ #content آخرین قاب محتواست */
+  #content {
+    overflow-x: clip !important;
+  }
+
+  /* mobile-system §6 هر divِ دارای جدولِ مستقیم (#content گزارش‌ها هم) را
+     اسکرولر + قاب‌دار می‌کرد؛ برای ناحیهٔ محتوا قاب/حاشیه نمی‌خواهیم */
+  #content:has(> table) {
+    border: none !important;
+    border-radius: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  /* برگهٔ چاپی (.psheet) سندِ کل‌صفحه است، نه جدول داده؛ min-width:580pxِ
+     قاعدهٔ «table» آن را 580px می‌کرد و #content را ۲۳۸px می‌لغزاند
+     (باگ گزارش‌شدهٔ صفحهٔ «گزارش‌ها»). سند به عرض قاب برمی‌گردد و اگر جایی
+     واقعاً تنگ شد، خودِ برگه اسکرولِ مهارشدهٔ داخلی می‌گیرد */
+  table.psheet, .psheet {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   ۲) اکریدیشن (#acc) — مهار بادِ گرید + کارت‌های کمیته و میانبر
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  /* نسخهٔ تک‌ستونهٔ .acc-main-layout با 1fr ساده، آیتم‌های min-width:auto را
+     به min-content (۳۸۰px در قاب ۳۴۴px) باد می‌کرد و کارت‌ها ۲۸/۳۶px از کادر
+     بیرون می‌زدند (باگ صفحهٔ #acc). minmax(0,1fr) یالِ ترک را مهار می‌کند */
+  .acc-main-layout {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+  .acc-main-layout > * {
+    min-width: 0 !important;
+  }
+}
+
+@media (max-width: 768px) {
+  /* کارت بزرگ کمیته‌ها: در موبایل محتوا زیر هم — دکمه تمام‌عرض تا متن له نشود */
+  .acc-committee-hero-card {
+    flex-wrap: wrap !important;
+    row-gap: 14px !important;
+    padding: 18px 16px !important;
+  }
+  .acc-committee-hero-right {
+    min-width: 0 !important;
+  }
+  .acc-committee-hero-btn {
+    flex: 1 1 100% !important;
+    white-space: normal !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
+  }
+
+  /* سرصفحهٔ کارت میانبرها: عنوان و زیرنویس در یک سطر جعبهٔ ۳۰۰px جا نمی‌شوند */
+  .acc-shortcuts-hd {
+    flex-wrap: wrap !important;
+    row-gap: 6px !important;
+  }
+  .acc-shortcuts-title {
+    min-width: 0 !important;
+    flex-wrap: wrap !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   ۳) محورهای اصلی/فرعی اکریدیشن — در موبایل زیر هم (نه ریل اسکرولی)
+   -------------------------------------------------------------------------- */
+@media (max-width: 900px) {
+  .acc-root-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    flex-wrap: wrap !important;
+    overflow-x: visible !important;
+    scroll-snap-type: none !important;
+    padding-bottom: 0 !important;
+    gap: 14px !important;
+  }
+  .acc-root-card {
+    width: 100% !important;
+    min-width: 0 !important;
+    flex: 1 1 auto !important;
+    scroll-snap-align: none !important;
+  }
+  /* اتصال افقی «←» بین کارت‌ها در چیدمان عمودی معنایی ندارد */
+  .acc-root-card:not(:last-child)::after {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .acc-subaxes-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    flex-wrap: wrap !important;
+    overflow-x: visible !important;
+    scroll-snap-type: none !important;
+    padding-bottom: 0 !important;
+    gap: 12px !important;
+  }
+  .acc-subaxis-card {
+    width: 100% !important;
+    min-width: 0 !important;
+    flex: 1 1 auto !important;
+    scroll-snap-align: none !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   ۴) تب‌ها، پیل‌ها و نوار سویت اکریدیشن — چندخطی به‌جای ریل اسکرولی
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .acc-suite-nav {
+    flex-wrap: wrap !important;
+    overflow-x: visible !important;
+    gap: 8px !important;
+    padding: 6px 2px 10px !important;
+  }
+  .acc-tab-btn {
+    padding: 8px 14px !important;
+    font-size: 12px !important;
+  }
+
+  .ward-pills, .section-pills, .tabs, .nav-pills,
+  .acc-decision-tabs, .hub-tabs, .ss-ward-bar {
+    flex-wrap: wrap !important;
+    overflow-x: visible !important;
+    scroll-snap-type: none !important;
+  }
+
+  /* maskِ فِیدِ لبه‌ها فقط برای ریل اسکرولی بود؛ با چندخطی‌شدن، متنِ لبه را
+     محو می‌کرد — حذف می‌شود */
+  .acc-decision-tabs, .hub-tabs, .ward-pills, .section-pills, .ss-ward-bar,
+  #navcrumb .pathbar, .islide-sections-bar {
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   ۵) نوار مسیر (breadcrumb) — چندخطی، بدون نیاز به اسکرول
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  #navcrumb .pathbar, .pathbar {
+    flex-wrap: wrap !important;
+    overflow-x: visible !important;
+    padding: 2px 2px 0 !important;
+  }
+  .pathcard, #navcrumb .pathcard {
+    max-width: 100% !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   ۶) مدارک کنترل‌شده — شبکهٔ کارت‌ها تک‌ستونه، نوار شاخه چندخطی
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .lux-doc-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .lux-doc-card {
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+  .lux-doc-branch-bar {
+    flex-wrap: wrap !important;
+    overflow-x: visible !important;
+    padding-bottom: 8px !important;
+  }
+  /* پیل‌های شاخه متن بلند دارند و nowrap بودند؛ در چندخطی‌شدن باید بتوانند
+     بشکنند و گرنه از قاب بیرون می‌زنند (باگ مشاهده‌شده: پیل ۳۷۱px در قاب ۳۱۴px) */
+  .lux-doc-branch-pill {
+    white-space: normal !important;
+    max-width: 100% !important;
+    flex: 0 1 auto !important;
+    min-width: 0 !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   ۷) شاخص‌ها — نوار بخش‌ها و دکمه‌های بالای اسلاید: چندخطی
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .islide-sections-bar {
+    flex-wrap: wrap !important;
+    overflow-x: visible !important;
+  }
+  .btn-group {
+    flex-wrap: wrap !important;
+    overflow-x: visible !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   ۸) کاتالوگ — محور گام‌های فرایند: عمودی با کارت تمام‌عرض
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .cat-steps-axis {
+    flex-direction: column !important;
+    overflow-x: visible !important;
+  }
+  .cat-step-card {
+    min-width: 0 !important;
+    width: 100% !important;
+    flex: 1 1 auto !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   ۹) فلوی SOP (sn-flow) — ستونی و اتصال‌های عمودی (سرشاخه‌ها به‌هم می‌رسند)
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .sn-flow-viewport {
+    overflow-x: visible !important;
+    padding: 10px 4px 16px !important;
+  }
+  .sn-flow-track {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+  .sn-flow-card {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+  .sn-flow-connector {
+    width: 2px !important;
+    height: 34px !important;
+    background: linear-gradient(180deg, var(--sn-gold), var(--sn-primary)) !important;
+  }
+  .sn-flow-connector::after {
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   ۱۰) کارگاه خط‌مشی (صفحهٔ مستقل policy.html) — کارت‌های ناوبری زیر هم
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .sn-policy-nav-cards {
+    flex-wrap: wrap !important;
+    overflow-x: visible !important;
+  }
+  .sn-policy-nav-card {
+    flex: 1 1 100% !important;
+    min-width: 0 !important;
+  }
+
+  /* این صفحهٔ مستقل الگوی اپ‌شل (mobile-system) را لود نمی‌کند؛ نوار بالای
+     دسکتاپی‌اش در ۳۶۰px هم‌پوشانی داشت و سوئیچر «انواع مدارک سنجه» از لبه
+     بیرون می‌زد. نوار بالا ستونی می‌شود (منو/عنوان/سال زیر هم) تا ستون
+     متنِ عنوان له نشود؛ اجزای غیرضروری مخفی‌اند */
+  .top, .top.g {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    flex-wrap: nowrap !important;
+    row-gap: 10px !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 10px 12px !important;
+  }
+  .top .mbtn {
+    align-self: flex-start !important;
+  }
+  .top .ysel {
+    align-self: flex-start !important;
+    margin-inline-start: 0 !important;
+  }
+  .top .gsearch, .top .scut, .top .uchip {
+    display: none !important;
+  }
+  #headerDocTypeTitle, #headerMeasureStmt {
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+    max-width: 100% !important;
+  }
+  .policy-brand-badge {
+    white-space: normal !important;
+  }
+  .doc-type-switcher {
+    flex-wrap: wrap !important;
+  }
+  /* بنر «حالت رسمی فقط‌خواندنی»: اینلاین‌استایل nowrap دارد و در ۳۶۰px
+     ستون متن را به یک‌کلمه‌درهرفرخط می‌شکست؛ اجازهٔ شکستن می‌دهیم */
+  #readOnlyNoticeContainer > div {
+    flex-wrap: wrap !important;
+    row-gap: 8px !important;
+  }
+  #readOnlyNoticeContainer > div > div {
+    min-width: 0 !important;
+  }
+  #readOnlyNoticeContainer > div > span {
+    white-space: normal !important;
+  }
+  .policy-workspace-toolbar {
+    align-items: flex-start !important;
+  }
+  .policy-header-actions {
+    width: 100% !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   ۱۱) دانا — نوار چیپ‌های دراور: چندخطی
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .drawer-chips-bar {
+    flex-wrap: wrap !important;
+    overflow-x: visible !important;
+    white-space: normal !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   ۱۲) کلاس‌های عمومیِ «قاعدهٔ ۱۱» (دفاعی) — در موبایل زیر هم/چندخطی
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .process-flow-row, .steps-horizontal-flow, .horizontal-flow, .v-stack {
+    flex-direction: column !important;
+    flex-wrap: wrap !important;
+    overflow-x: visible !important;
+    scroll-snap-type: none !important;
+  }
+  .process-step-card, .horizontal-flow > *, .v-stack > * {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    width: 100% !important;
+    scroll-snap-align: none !important;
+  }
+  /* فلش اتصال افقی «←» در چیدمان عمودی به «↓» تبدیل می‌شود */
+  .process-step-card:not(:last-child)::after {
+    content: '↓' !important;
+    top: auto !important;
+    bottom: -18px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+  }
+
+  .acc-list, .standards-list, .errors-list-grid, .branch-list, .step-list, .kpi-list {
+    flex-direction: column !important;
+    flex-wrap: wrap !important;
+    overflow-x: visible !important;
+  }
+  .acc-list > *, .standards-list > *, .errors-list-grid > *,
+  .branch-list > *, .step-list > *, .kpi-list > * {
+    min-width: 0 !important;
+    width: 100% !important;
+    flex-shrink: 1 !important;
+  }
+}

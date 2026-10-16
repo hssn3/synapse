@@ -15,7 +15,7 @@ const hrdSurveyComplianceHtml = (rows) => {
   if (!rows || !rows.length) return '';
   return `<div style="margin-top:14px">
     <div style="font-weight:700;margin-bottom:6px">رعایتِ قید «دو نوبت در سال با فاصله‌ی شش ماه»</div>
-    ${rows.map(r => `<div style="display:flex;align-items:center;gap:10px;margin:4px 0;font-size:13px">
+    ${rows.map(r => `<div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:4px 0;font-size:13px">
         <b style="min-width:52px">${fa(r.year)}</b>
         <span style="min-width:96px">${fa(r.rounds)} نوبت</span>
         <span style="min-width:130px;color:var(--mut)">بیشترین فاصله: ${fa(r.max_gap_days)} روز</span>
