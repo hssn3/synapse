@@ -5,6 +5,11 @@
 async function loadAccDecisionEngine() {
   const box = $('accDecisionEngine');
   if (!box) return;
+
+  // کرکره (خواست مالک ۱۴۰۵/۰۷/۲۴): پیش‌فرض جمع — فقط سرشاخه دیده می‌شود؛ انتخاب کاربر در طول همین نشستِ صفحه حفظ می‌شود
+  const isOpen = !!window.__accDecisionOpen;
+  box.classList.toggle('collapsed', !isOpen);
+
   try {
     const data = await API.smartDecisions();
     if (!data) { box.remove(); return; }
@@ -14,7 +19,9 @@ async function loadAccDecisionEngine() {
     const measures = data.measuresAtRisk || [];
 
     box.innerHTML = `
-      <div class="acc-decision-hd">
+      <div class="acc-decision-hd" role="button" tabindex="0" aria-expanded="${isOpen ? 'true' : 'false'}"
+           title="باز و بستن بخش" onclick="toggleAccDecisionEngine()"
+           onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleAccDecisionEngine();}">
         <div class="acc-decision-title">
           <span>🧠</span>
           <span>موتور تصمیم‌گیرنده هوشمند سنجه‌های اعتباربخشی</span>
@@ -23,8 +30,10 @@ async function loadAccDecisionEngine() {
           <span>✨</span>
           <span>توصیه برخط بر اساس ${fa(520)} سنجه ملی</span>
         </div>
+        <span class="acc-decision-chevron" aria-hidden="true">▾</span>
       </div>
 
+      <div class="acc-decision-body">
       ${top ? `
         <div class="acc-top-action-hero">
           <div class="acc-top-action-info">
@@ -73,6 +82,7 @@ async function loadAccDecisionEngine() {
           `).join('')}
         </div>
       </div>
+      </div>
     `;
 
     window.__accDecisionData = data;
@@ -80,6 +90,16 @@ async function loadAccDecisionEngine() {
     if (box) box.remove();
   }
 }
+
+// کرکرهٔ موتور تصمیم‌گیرنده — کلیک/کیبورد روی سرشاخه، کل بدنه را جمع/باز می‌کند
+window.toggleAccDecisionEngine = function () {
+  const box = $('accDecisionEngine');
+  if (!box) return;
+  const nowCollapsed = box.classList.toggle('collapsed');
+  window.__accDecisionOpen = !nowCollapsed;
+  const hd = box.querySelector('.acc-decision-hd');
+  if (hd) hd.setAttribute('aria-expanded', window.__accDecisionOpen ? 'true' : 'false');
+};
 
 window.switchDecisionTab = function(tabKey, btn) {
   document.querySelectorAll('.acc-decision-tab').forEach(b => b.classList.remove('active'));

@@ -2602,7 +2602,23 @@ td.ss-cell{min-width:24px}
   flex-wrap: wrap;
   gap: 12px;
   margin-bottom: 16px;
+  cursor: pointer;
+  user-select: none;
 }
+
+/* سرشاخهٔ کرکرهٔ موتور تصمیم‌گیرنده (خواست مالک ۱۴۰۵/۰۷/۲۴): کلیک روی هدر، بدنه را جمع/باز می‌کند */
+.acc-decision-chevron {
+  color: var(--gd, #d4af37);
+  font-size: 15px;
+  line-height: 1;
+  transition: transform 0.25s ease;
+  transform: rotate(180deg); /* باز: رو به بالا (اقدامِ جمع‌کردن) */
+}
+.acc-decision-box.collapsed .acc-decision-chevron { transform: rotate(0deg); } /* جمع: رو به پایین */
+.acc-decision-box.collapsed .acc-decision-body { display: none; }
+.acc-decision-box.collapsed .acc-decision-hd { margin-bottom: 0; }
+.acc-decision-box.collapsed { padding-top: 18px; padding-bottom: 18px; }
+.acc-decision-hd:hover .acc-decision-chevron { text-shadow: 0 0 9px rgba(212, 175, 55, 0.85); }
 
 .acc-decision-title {
   display: flex;
