@@ -696,6 +696,131 @@ function renderSlide1Cover(slide, theme, list) {
   `;
 }
 
+// ————— چیدمان هوشمند برچسب‌های محور افقی نمودار (Anti-Overlap Labels) —————
+// چرا: برچسب‌های بلند فارسی (مثل عناوین اسلایدهای «در یک نگاه») تک‌خطی و روی هم می‌افتادند.
+// تخمین عمداً محافظه‌کارانه (کمی بزرگ‌تر از واقعیت) تا متن هرگز در هم فرونرود.
+function svgTextWidth(str, fs) {
+  let w = 0;
+  for (const ch of String(str || '')) {
+    if (ch === ' ') w += fs * 0.28;
+    else if (/[0-9]/.test(ch)) w += fs * 0.56;
+    else if (/[a-zA-Z]/.test(ch)) w += fs * 0.56;
+    else if ('()%٪،,؛:«»-–—/.'.includes(ch)) w += fs * 0.38;
+    else w += fs * 0.55;
+  }
+  return w;
+}
+
+// شکستن متن به سطرهای «متوازن» (کمینه‌کردن بیشینه‌ی پهنا) با حداکثر maxK سطر.
+// چرا حریصانه نه: شکستن حریصانه سطر اول را لبریز و سطر آخر را لاغر می‌کرد و
+// همان سطر لبریز، الگوریتم را به چرخش می‌انداخت. اینجا کوچک‌ترین k سطری که
+// «همه‌ی سطرهایش» جا می‌شوند انتخاب می‌شود؛ اگر هیچ‌کدام جا نشود null برمی‌گردد.
+function balanceWrapSvgLabel(text, fs, maxW, maxK) {
+  const words = String(text || '').trim().split(/\s+/).filter(Boolean);
+  if (!words.length) return [''];
+  const n = words.length;
+  const w = words.map(x => svgTextWidth(x, fs));
+  const sp = svgTextWidth(' ', fs);
+  const segW = (i, j) => { let s = 0; for (let k = i; k < j; k++) s += w[k] + (k > i ? sp : 0); return s; };
+
+  for (let k = 1; k <= Math.min(maxK, n); k++) {
+    const INF = Infinity;
+    // dp[j][t] = کمینه‌ی بیشینه‌پهنای ممکن برای t سطر روی j کلمه اول
+    const dp = Array.from({ length: n + 1 }, () => Array(k + 1).fill(INF));
+    const cut = Array.from({ length: n + 1 }, () => Array(k + 1).fill(0));
+    dp[0][0] = 0;
+    for (let t = 1; t <= k; t++) {
+      for (let j = t; j <= n; j++) {
+        for (let i = t - 1; i < j; i++) {
+          if (dp[i][t - 1] === INF) continue;
+          const cand = Math.max(dp[i][t - 1], segW(i, j));
+          if (cand < dp[j][t]) { dp[j][t] = cand; cut[j][t] = i; }
+        }
+      }
+    }
+    if (dp[n][k] === INF || dp[n][k] > maxW) continue;
+    const lines = [];
+    let j = n;
+    for (let t = k; t >= 1; t--) { const i = cut[j][t]; lines.unshift(words.slice(i, j).join(' ')); j = i; }
+    return lines;
+  }
+  return null;
+}
+
+// انتخاب بهترین چیدمان برچسب‌ها بر پایه پهنای هر گروه و بلندی متن‌ها:
+// ۱) تک‌خطی افقی  ۲) شکستن متوازن به ۲-۳ سطر (عناوین بلند «در یک نگاه»)
+// ۳) دو ردیف پله‌ای برای گروه‌های پرتعداد (۱۲ ماه + فصول)  ۴) چرخش — آخرین سنگر
+function planCategoryLabels(categories, groupW, fs) {
+  const MARGIN = 1.03; // حاشیه اطمینان سبک روی تخمین پهنای متن
+  const avail = groupW - 8;
+  const widthOf = (s, size) => svgTextWidth(s, size) * MARGIN;
+  const asLines = c => [c];
+
+  // ۱) همه برچسب‌ها تک‌خطی جا می‌شوند
+  if (categories.every(c => widthOf(c, fs) <= avail)) {
+    return { mode: 'single', fs, lineH: 13.5, wrapped: categories.map(asLines), padBottom: 58, categories };
+  }
+
+  // ۲) شکستن متوازن سطرها — ابتدا با اندازه پایه، در صورت نیاز یک پله کوچک‌تر
+  for (const size of [fs, fs - 1]) {
+    const wrapped = [];
+    let ok = true;
+    let maxLines = 1;
+    for (const c of categories) {
+      const lines = balanceWrapSvgLabel(c, size, avail / MARGIN, 3);
+      if (!lines) { ok = false; break; }
+      wrapped.push(lines);
+      maxLines = Math.max(maxLines, lines.length);
+    }
+    if (ok) {
+      return { mode: 'wrap', fs: size, lineH: 13.5, wrapped, padBottom: 26 + maxLines * 13.5 + 8, categories };
+    }
+  }
+
+  // ۳) دو ردیف پله‌ای: هر برچسب عملاً دو برابر پهنای گروه را در اختیار دارد
+  //    (اگر با اندازه پایه جا نشد، یک پله کوچک‌تر هم امتحان می‌شود تا از چرخش پرهیز کنیم)
+  const staggerAvail = groupW * 2 - 12;
+  if (categories.length >= 5) {
+    for (const size of [fs, fs - 1]) {
+      if (categories.every(c => svgTextWidth(c, size) * MARGIN <= staggerAvail)) {
+        return { mode: 'stagger', fs: size, lineH: 0, staggerOffset: 16, wrapped: categories.map(asLines), padBottom: 60, categories };
+      }
+    }
+  }
+
+  // ۴) چرخش ۳۲ درجه — آخرین راه‌حل برای داده‌های غیرمنتظره
+  const maxW = Math.max(...categories.map(c => svgTextWidth(c, fs)));
+  return {
+    mode: 'rotate', fs: fs - 0.5, rotate: 32, wrapped: categories.map(asLines),
+    padBottom: Math.max(72, Math.min(maxW * 0.53 + 30, 132)), categories
+  };
+}
+
+// رندر یک برچسب محور طبق پلن چیدمان (تک/چند خطی، پله‌ای یا چرخیده)
+function renderCategoryLabel(plan, i, groupX, labelTop, labelCol, labelWeight) {
+  const base = `fill="${labelCol}" font-size="${plan.fs}" font-weight="${labelWeight}" text-anchor="middle"`;
+  const cat = plan.categories[i];
+
+  if (plan.mode === 'stagger') {
+    const y = labelTop + (i % 2) * plan.staggerOffset;
+    return `<text x="${groupX}" y="${y}" ${base}>${esc(cat)}</text>`;
+  }
+
+  if (plan.mode === 'rotate') {
+    // «چرا ‎+14‎»: دُمِ بالایی متنِ چرخیده چند پیکسل بالا می‌زند؛ این فاصله
+    // تضمین می‌کند حتی بلندترین برچسب هم به محور افقی/میله‌ها نچسبد.
+    const y = labelTop + 14;
+    return `<text x="${groupX}" y="${y}" ${base} transform="rotate(${plan.rotate}, ${groupX}, ${y})">${esc(cat)}</text>`;
+  }
+
+  // single / wrap: سطرها از بالا به پایین، وسط‌چین روی مرکز گروه
+  const lines = plan.wrapped[i] || [cat];
+  const tspans = lines
+    .map((ln, li) => `<tspan x="${groupX}"${li === 0 ? '' : ` dy="${plan.lineH}"`}>${esc(ln)}</tspan>`)
+    .join('');
+  return `<text x="${groupX}" y="${labelTop}" ${base}>${tspans}</text>`;
+}
+
 // رندر نمودار SVG برداری پیشرفته با فیلتر دوره‌ها و خط مبنای هدف
 function renderSvgChart(slide, theme) {
   const allRows = slide.data || [];
@@ -740,16 +865,15 @@ function renderSvgChart(slide, theme) {
 
   const has1405 = vals1405.some(v => v !== null && v > 0);
 
-  // محاسبه ابعاد SVG
+  // محاسبه ابعاد SVG — ارتفاع داینامیک: فقط فضای پایین به اندازه برچسب‌ها بزرگ می‌شود
+  // چرا: با برچسب‌های چندخطی/پله‌ای نباید متن از کادر بیرون بزند یا در هم بیفتد.
   const W = 900;
-  const H = 340;
   const padLeft = 65;
   const padRight = 35;
   const padTop = 35;
-  const padBottom = 65;
+  const chartH = 240; // ثابت می‌ماند تا تناسبات میله‌ها حفظ شود
 
   const chartW = W - padLeft - padRight;
-  const chartH = H - padTop - padBottom;
 
   const maxVal = Math.max(
     ...vals1404,
@@ -760,6 +884,12 @@ function renderSvgChart(slide, theme) {
   const barCount = categories.length;
   const groupW = chartW / barCount;
   const barW = Math.min(groupW * (has1405 ? 0.38 : 0.55), 32);
+
+  // چیدمان هوشمند برچسب‌های محور افقی + ارتفاع داینامیک بخش پایین نمودار
+  const labelPlan = planCategoryLabels(categories, groupW, 11);
+  const labelTop = padTop + chartH + 24; // خط اول برچسب‌ها، زیر محور افقی
+  const padBottom = labelPlan.padBottom;
+  const H = padTop + chartH + padBottom;
 
   // خطوط راهنمای افقی
   const gridLines = [];
@@ -842,20 +972,14 @@ function renderSvgChart(slide, theme) {
     const labelCol = isSpecialPeriod ? '#38bdf8' : '#94a3b8';
     const labelWeight = isSpecialPeriod ? '800' : '500';
 
-    const lblY = H - padBottom + 20;
-    const catLabel = `
-      <text x="${groupX}" y="${lblY}" fill="${labelCol}" font-size="11" font-weight="${labelWeight}" text-anchor="middle" transform="${barCount > 8 ? `rotate(25, ${groupX}, ${lblY})` : ''}">
-        ${esc(cat)}
-      </text>
-    `;
+    const catLabel = renderCategoryLabel(labelPlan, i, groupX, labelTop, labelCol, labelWeight);
 
     return `<g class="chart-group">${barsBlock}${catLabel}</g>`;
   }).join('');
 
   return `
-    <div class="islide-svg-wrap">
-      <div class="islide-chart-controls-bar">
-        <div class="islide-legend-bar">
+    <div class="islide-chart-controls-bar">
+      <div class="islide-legend-bar">
           <div class="leg-item"><span class="leg-dot" style="background:#38bdf8"></span> عملکرد سال ۱۴۰۴ (پایه)</div>
           ${has1405 ? `<div class="leg-item"><span class="leg-dot" style="background:#f59e0b"></span> هدف / عملکرد سال ۱۴۰۵</div>` : ''}
           <div class="leg-item"><span class="sub-pill" style="background:rgba(212,175,90,0.15);color:#fce7b0;padding:2px 8px;border-radius:6px;font-size:11.5px">واحد: ${esc(slide.unit || 'تعداد')}</span></div>
@@ -874,6 +998,7 @@ function renderSvgChart(slide, theme) {
         </div>
       </div>
 
+    <div class="islide-svg-wrap">
       <svg viewBox="0 0 ${W} ${H}" class="islide-svg" preserveAspectRatio="xMidYMid meet">
         <defs>
           <linearGradient id="grad1404" x1="0" y1="0" x2="0" y2="1">
