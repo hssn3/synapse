@@ -36,8 +36,7 @@
     trigger.setAttribute('role', 'button');
     trigger.setAttribute('tabindex', '0');
     trigger.innerHTML = `
-      <span class="bubble-icon"><img class="bubble-img" src="/img/synapse-dana.png" alt="دستیار سیناپس" draggable="false"></span>
-      <span id="ent-assistant-badge" class="ent-assistant-badge" style="display:none"></span>
+      <span class="bubble-icon"><img class="bubble-img" src="/img/synapse-flower.png" alt="دستیار سیناپس" draggable="false"></span>
     `;
 
     // Insert at the top of the dock, above the main menu button
