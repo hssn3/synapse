@@ -98,7 +98,7 @@ RPG.define({
         { k: 'opportunities', l: 'فرصت‌های مشاهده‌شده *', t: 'num', list: 1 },
         { k: 'compliant', l: 'موارد رعایت‌شده *', t: 'num', list: 1 },
         { k: 'compliance_pct', l: 'درصد رعایت', t: 'num', computed: 1, list: 1,
-          render: (r) => `<b style="color:${r.compliance_pct >= 80 ? '#0b7a3e' : (r.compliance_pct >= 60 ? '#9a6b00' : '#c02626')}">${fa(r.compliance_pct == null ? '—' : r.compliance_pct)}٪</b>` },
+          render: (r) => `<b style="color:${r.compliance_pct >= 80 ? '#17576e' : (r.compliance_pct >= 60 ? '#9a6b00' : '#c02626')}">${fa(r.compliance_pct == null ? '—' : r.compliance_pct)}٪</b>` },
         { k: 'auditor', l: 'پایشگر', t: 'text' },
         { k: 'corrective_action', l: 'اقدام اصلاحی', t: 'area' },
         { k: 'note', l: 'توضیح', t: 'area' },
@@ -160,16 +160,16 @@ RPG.define({
     const hh = d.hand_hygiene_pct;
     return `
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px">
-        ${c(hh, 'رعایت بهداشت دست (۹۰ روز، ٪)', hh == null ? '#6b7280' : (hh >= 80 ? '#0b7a3e' : (hh >= 60 ? '#9a6b00' : '#c02626')), 'handhygiene')}
+        ${c(hh, 'رعایت بهداشت دست (۹۰ روز، ٪)', hh == null ? '#6b7280' : (hh >= 80 ? '#17576e' : (hh >= 60 ? '#9a6b00' : '#c02626')), 'handhygiene')}
         ${c(d.hand_hygiene_opportunities, 'فرصت مشاهده‌شده (۹۰ روز)', '#1550b8', 'handhygiene')}
-        ${c(d.failed_tests_90d, 'آزمون استریل مردود (۹۰ روز)', d.failed_tests_90d ? '#c02626' : '#0b7a3e', 'tests')}
-        ${c(d.quarantined_batches, 'بسته‌ی قرنطینه/فراخوان‌شده', d.quarantined_batches ? '#9a6b00' : '#0b7a3e', 'batches')}
+        ${c(d.failed_tests_90d, 'آزمون استریل مردود (۹۰ روز)', d.failed_tests_90d ? '#c02626' : '#17576e', 'tests')}
+        ${c(d.quarantined_batches, 'بسته‌ی قرنطینه/فراخوان‌شده', d.quarantined_batches ? '#9a6b00' : '#17576e', 'batches')}
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap">
-        ${c(d.hai_open, 'مورد عفونت باز', d.hai_open ? '#c02626' : '#0b7a3e', 'hai')}
-        ${c(d.hai_outbreaks, 'طغیان ثبت‌شده', d.hai_outbreaks ? '#c02626' : '#0b7a3e', 'hai')}
-        ${c(d.hai_unreported, 'گزارش‌نشده به سامانه', d.hai_unreported ? '#c02626' : '#0b7a3e', 'hai')}
-        ${c(d.antibiograms, 'گزارش مقاومت میکروبی', d.antibiograms ? '#0b7a3e' : '#c02626', 'antibiograms')}
+        ${c(d.hai_open, 'مورد عفونت باز', d.hai_open ? '#c02626' : '#17576e', 'hai')}
+        ${c(d.hai_outbreaks, 'طغیان ثبت‌شده', d.hai_outbreaks ? '#c02626' : '#17576e', 'hai')}
+        ${c(d.hai_unreported, 'گزارش‌نشده به سامانه', d.hai_unreported ? '#c02626' : '#17576e', 'hai')}
+        ${c(d.antibiograms, 'گزارش مقاومت میکروبی', d.antibiograms ? '#17576e' : '#c02626', 'antibiograms')}
       </div>
       <div style="margin-top:16px;color:var(--mut);font-size:13px;line-height:2">
         درصد بهداشت دست میانگینِ وزن‌دار است — مجموع رعایت‌ها بر مجموع فرصت‌ها — نه میانگینِ درصدها؛

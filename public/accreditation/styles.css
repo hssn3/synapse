@@ -1,5 +1,5 @@
 /* ==========================================================================
-   سامانه جامع مدیریت و اعتباربخشی بیمارستان - استایل‌های لوکس تیره (Dark Emerald & Gold)
+   سیناپس — استایل‌های لوکس تیره (Dark Navy & Gold)
    منطبق بر الزامات طراحی کارفرما: کارت‌های بزرگ افقی RTL، بدون انباشتگی عمودی
    ========================================================================== */
 
@@ -11,27 +11,27 @@
 }
 
 :root {
-  --bg-dark-900: #040907;
-  --bg-dark-850: #060f0b;
-  --bg-dark-800: #081611;
-  --bg-dark-700: #0e241c;
-  --surface-glass: rgba(10, 26, 19, 0.82);
-  --surface-glass-card: rgba(12, 31, 23, 0.78);
-  --surface-glass-hover: rgba(18, 44, 33, 0.92);
+  --bg-dark-900: #0a0e15;
+  --bg-dark-850: #090e15;
+  --bg-dark-800: #090e16;
+  --bg-dark-700: #0f1723;
+  --surface-glass: rgba(11,16,25,0.82);
+  --surface-glass-card: rgba(13,20,30,0.78);
+  --surface-glass-hover: rgba(19,28,43,0.92);
   --border-gold: rgba(212, 175, 90, 0.28);
   --border-gold-strong: rgba(212, 175, 90, 0.75);
-  --border-emerald: rgba(16, 185, 129, 0.35);
-  --emerald-500: #10b981;
-  --emerald-400: #34d399;
-  --emerald-glow: rgba(16, 185, 129, 0.45);
+  --border-emerald: rgba(16,160,185,0.35);
+  --emerald-500: #10a0b9;
+  --emerald-400: #34bbd3;
+  --emerald-glow: rgba(16,160,185,0.45);
   --gold-500: #d4af5a;
   --gold-400: #ecd599;
   --gold-300: #fff0c7;
   --gold-glow: rgba(212, 175, 90, 0.4);
-  --text-main: #f5f9f7;
-  --text-muted: #96b2a5;
-  --text-sub: #c7dbd2;
-  --shadow-lux: 0 20px 50px rgba(0, 0, 0, 0.65), 0 0 35px rgba(16, 185, 129, 0.08);
+  --text-main: #f5f8f9;
+  --text-muted: #96aeb2;
+  --text-sub: #c7d8db;
+  --shadow-lux: 0 20px 50px rgba(0, 0, 0, 0.65), 0 0 35px rgba(16,160,185,0.08);
   --transition-smooth: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -45,7 +45,7 @@ body {
   font-family: 'Vazirmatn', -apple-system, BlinkMacSystemFont, Tahoma, sans-serif;
   direction: rtl;
   text-align: right;
-  background: radial-gradient(circle at 85% 5%, #102e21 0%, #071510 38%, #030806 100%);
+  background: radial-gradient(circle at 85% 5%, #111c2d 0%, #080e16 38%, #090e16 100%);
   background-attachment: fixed;
   color: var(--text-main);
   line-height: 1.75;
@@ -57,7 +57,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: rgba(6, 17, 12, 0.94);
+  background: rgba(9,14,22,0.94);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border-bottom: 1.5px solid var(--border-gold);
@@ -110,7 +110,7 @@ body {
 
 .btn-header-act {
   background: linear-gradient(135deg, #ecd599 0%, #d4af5a 40%, #a87e2b 100%);
-  color: #06110b !important;
+  color: #090e16 !important;
   font-weight: 800;
   font-size: 0.85rem;
   padding: 9px 20px;
@@ -152,7 +152,7 @@ body {
 
 /* نوار تب‌های شیشه‌ای افقی */
 .top-nav {
-  background: rgba(8, 22, 16, 0.85);
+  background: rgba(9,14,22,0.85);
   backdrop-filter: blur(18px);
   border-bottom: 1px solid rgba(212, 175, 90, 0.2);
   padding: 0 28px;
@@ -237,7 +237,7 @@ body {
   flex-shrink: 0;
 }
 .icon-blue { background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.4); color: #38bdf8; }
-.icon-emerald { background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.4); color: #34d399; }
+.icon-emerald { background: rgba(16,160,185,0.15); border: 1px solid rgba(16,160,185,0.4); color: #34bbd3; }
 .icon-purple { background: rgba(168, 85, 247, 0.15); border: 1px solid rgba(168, 85, 247, 0.4); color: #c084fc; }
 .icon-amber { background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.4); color: #fbbf24; }
 .icon-rose { background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.4); color: #f87171; }
@@ -308,11 +308,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #06150e;
+  color: #080e17;
   box-shadow: 0 0 16px rgba(212, 175, 90, 0.4);
 }
 .badge-hub-a { background: linear-gradient(135deg, #ecd599, #d4af5a); }
-.badge-hub-b { background: linear-gradient(135deg, #a7f3d0, #10b981); }
+.badge-hub-b { background: linear-gradient(135deg, #a7e8f3, #10a0b9); }
 .badge-hub-c { background: linear-gradient(135deg, #fed7aa, #f59e0b); }
 
 .hub-master-title {
@@ -351,7 +351,7 @@ body {
 }
 
 .btn-open-workspace {
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  background: linear-gradient(135deg, #10a0b9 0%, #1b6580 100%);
   color: #ffffff !important;
   font-size: 0.88rem;
   font-weight: 800;
@@ -362,15 +362,15 @@ body {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  border: 1px solid rgba(167, 243, 208, 0.4);
-  box-shadow: 0 6px 18px rgba(16, 185, 129, 0.35);
+  border: 1px solid rgba(167,232,243,0.4);
+  box-shadow: 0 6px 18px rgba(16,160,185,0.35);
   transition: var(--transition-smooth);
   flex: 1;
 }
 .btn-open-workspace:hover {
   transform: translateY(-2px);
-  background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
-  box-shadow: 0 10px 24px rgba(16, 185, 129, 0.55);
+  background: linear-gradient(135deg, #34bbd3 0%, #10a0b9 100%);
+  box-shadow: 0 10px 24px rgba(16,160,185,0.55);
 }
 
 /* شبکه ماژول‌های ۵گانه سنجه‌ها (Horizontal RTL Connected Flow) */
@@ -456,7 +456,7 @@ body {
 .chip-pol { background: rgba(212, 175, 90, 0.14); border: 1px solid var(--border-gold); color: var(--gold-300); }
 .chip-chk { background: rgba(56, 189, 248, 0.14); border: 1px solid rgba(56, 189, 248, 0.35); color: #7dd3fc; }
 .chip-prc { background: rgba(168, 85, 247, 0.14); border: 1px solid rgba(168, 85, 247, 0.35); color: #d8b4fe; }
-.chip-sop { background: rgba(16, 185, 129, 0.14); border: 1px solid rgba(16, 185, 129, 0.35); color: #86efac; }
+.chip-sop { background: rgba(16,160,185,0.14); border: 1px solid rgba(16,160,185,0.35); color: #86dfef; }
 .chip-frm { background: rgba(244, 63, 94, 0.14); border: 1px solid rgba(244, 63, 94, 0.35); color: #fda4af; }
 
 .btn-doc-chip:hover {
@@ -466,7 +466,7 @@ body {
 
 /* بنر اطلاع‌رسانی یکپارچگی */
 .integration-banner {
-  background: linear-gradient(135deg, rgba(16, 46, 33, 0.85) 0%, rgba(7, 21, 16, 0.95) 100%);
+  background: linear-gradient(135deg, rgba(17,28,45,0.85) 0%, rgba(8,14,22,0.95) 100%);
   border: 1px solid var(--border-emerald);
   border-radius: 18px;
   padding: 16px 24px;

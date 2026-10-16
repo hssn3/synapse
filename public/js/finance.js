@@ -14,7 +14,7 @@ const finMoney = (v) => (v == null || v === '')
 const finVariance = (r) => {
   if (r.variance_pct == null) return '<span style="color:var(--td)">—</span>';
   const p = Number(r.variance_pct);
-  const clr = Math.abs(p) > 10 ? '#c02626' : (Math.abs(p) > 5 ? '#9a6b00' : '#0b7a3e');
+  const clr = Math.abs(p) > 10 ? '#c02626' : (Math.abs(p) > 5 ? '#9a6b00' : '#17576e');
   const sign = p > 0 ? 'مانده' : (p < 0 ? 'بیش‌هزینه' : 'منطبق');
   return `<span style="color:${clr};font-weight:700">${fa(Math.abs(p))}٪</span>
           <small style="color:var(--mut)"> ${sign}</small>`;
@@ -111,7 +111,7 @@ RPG.define({
           render: (r) => {
             if (r.achieved_pct == null) return '<span style="color:var(--td)">—</span>';
             const p = Number(r.achieved_pct);
-            const clr = p >= 100 ? '#0b7a3e' : (p >= 70 ? '#9a6b00' : '#c02626');
+            const clr = p >= 100 ? '#17576e' : (p >= 70 ? '#9a6b00' : '#c02626');
             return `<b style="color:${clr}">${fa(p)}٪</b>`;
           } },
         { k: 'share_of_budget_pct', l: 'سهم از کل منابع (٪)', t: 'num', step: '0.1', list: 1 },
@@ -176,34 +176,34 @@ RPG.define({
     const c = (n, l, clr, tab) => RPG.card(key, n, l, clr, tab);
     return `
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px">
-        ${c(d.budget_lines, 'ردیف بودجه‌ی ثبت‌شده', d.budget_lines ? '#0b7a3e' : '#c02626', 'budget')}
-        ${c(d.big_deviation, 'انحرافِ بیش از ۱۰٪', d.big_deviation ? '#c02626' : '#0b7a3e', 'budget')}
-        ${c(d.overspent, 'بیش‌هزینه نسبت به تخصیص', d.overspent ? '#9a6b00' : '#0b7a3e', 'budget')}
-        ${c(d.not_aligned, 'ناهم‌راستا با اهداف برنامه', d.not_aligned ? '#c02626' : '#0b7a3e', 'budget')}
+        ${c(d.budget_lines, 'ردیف بودجه‌ی ثبت‌شده', d.budget_lines ? '#17576e' : '#c02626', 'budget')}
+        ${c(d.big_deviation, 'انحرافِ بیش از ۱۰٪', d.big_deviation ? '#c02626' : '#17576e', 'budget')}
+        ${c(d.overspent, 'بیش‌هزینه نسبت به تخصیص', d.overspent ? '#9a6b00' : '#17576e', 'budget')}
+        ${c(d.not_aligned, 'ناهم‌راستا با اهداف برنامه', d.not_aligned ? '#c02626' : '#17576e', 'budget')}
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px">
-        ${c(d.reports_year, 'گزارش ماهانه‌ی آخرین سال', d.reports_year ? '#0b7a3e' : '#c02626', 'reports')}
-        ${c(d.reports_not_submitted, 'تحویلِ تیم رهبری نشده', d.reports_not_submitted ? '#c02626' : '#0b7a3e', 'reports')}
-        ${c(d.no_internal_control, 'بدون کنترل داخلی حسابداری', d.no_internal_control ? '#c02626' : '#0b7a3e', 'reports')}
-        ${c(d.donations_count, 'کمکِ ثبت‌شده', d.donations_count ? '#0b7a3e' : '#9a6b00', 'donations')}
+        ${c(d.reports_year, 'گزارش ماهانه‌ی آخرین سال', d.reports_year ? '#17576e' : '#c02626', 'reports')}
+        ${c(d.reports_not_submitted, 'تحویلِ تیم رهبری نشده', d.reports_not_submitted ? '#c02626' : '#17576e', 'reports')}
+        ${c(d.no_internal_control, 'بدون کنترل داخلی حسابداری', d.no_internal_control ? '#c02626' : '#17576e', 'reports')}
+        ${c(d.donations_count, 'کمکِ ثبت‌شده', d.donations_count ? '#17576e' : '#9a6b00', 'donations')}
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap">
-        ${c(d.donations_uncoordinated, 'کمکِ مددجو بدون هماهنگی مددکاری', d.donations_uncoordinated ? '#c02626' : '#0b7a3e', 'donations')}
-        ${c(d.donations_unrecorded, 'ثبت‌نشده در حسابداری', d.donations_unrecorded ? '#c02626' : '#0b7a3e', 'donations')}
-        ${c(d.targets, 'سالِ هدف‌گذاری‌شده', d.targets ? '#0b7a3e' : '#c02626', 'targets')}
-        ${c(d.target_gap, 'سالِ زیرِ هدف', d.target_gap ? '#9a6b00' : '#0b7a3e', 'targets')}
+        ${c(d.donations_uncoordinated, 'کمکِ مددجو بدون هماهنگی مددکاری', d.donations_uncoordinated ? '#c02626' : '#17576e', 'donations')}
+        ${c(d.donations_unrecorded, 'ثبت‌نشده در حسابداری', d.donations_unrecorded ? '#c02626' : '#17576e', 'donations')}
+        ${c(d.targets, 'سالِ هدف‌گذاری‌شده', d.targets ? '#17576e' : '#c02626', 'targets')}
+        ${c(d.target_gap, 'سالِ زیرِ هدف', d.target_gap ? '#9a6b00' : '#17576e', 'targets')}
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px">
-        ${c(d.cost_rows, 'ردیفِ گلوبال و هتلینگ', d.cost_rows ? '#0b7a3e' : '#c02626', 'costs')}
-        ${c(d.cost_overrun, 'هزینه‌ی بالاتر از تعرفه', d.cost_overrun ? '#9a6b00' : '#0b7a3e', 'costs')}
-        ${c(d.cost_quality_hit, 'با اثرِ ثبت‌شده بر کیفیت/ایمنی', d.cost_quality_hit ? '#c02626' : '#0b7a3e', 'costs')}
+        ${c(d.cost_rows, 'ردیفِ گلوبال و هتلینگ', d.cost_rows ? '#17576e' : '#c02626', 'costs')}
+        ${c(d.cost_overrun, 'هزینه‌ی بالاتر از تعرفه', d.cost_overrun ? '#9a6b00' : '#17576e', 'costs')}
+        ${c(d.cost_quality_hit, 'با اثرِ ثبت‌شده بر کیفیت/ایمنی', d.cost_quality_hit ? '#c02626' : '#17576e', 'costs')}
         ${/* این یکی برعکسِ بقیه رنگ می‌گیرد: الف‑۱‑۹‑۷ می‌گوید «هیچ موردی
              مشاهده نمی‌شود»، پس صفر سبز است و هر عددی قرمز. */''}
-        ${c(d.disruptions_year, 'اختلالِ خدمت در ۱۲ ماه', d.disruptions_year ? '#c02626' : '#0b7a3e', 'disruptions')}
+        ${c(d.disruptions_year, 'اختلالِ خدمت در ۱۲ ماه', d.disruptions_year ? '#c02626' : '#17576e', 'disruptions')}
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px">
-        ${c(d.disruptions_open, 'اختلالِ رفع‌نشده', d.disruptions_open ? '#c02626' : '#0b7a3e', 'disruptions')}
-        ${c(d.disruptions_harm, 'منجر به آسیبِ بیمار', d.disruptions_harm ? '#c02626' : '#0b7a3e', 'disruptions')}
+        ${c(d.disruptions_open, 'اختلالِ رفع‌نشده', d.disruptions_open ? '#c02626' : '#17576e', 'disruptions')}
+        ${c(d.disruptions_harm, 'منجر به آسیبِ بیمار', d.disruptions_harm ? '#c02626' : '#17576e', 'disruptions')}
       </div>
       <div style="margin-top:14px;padding:10px 14px;border-radius:12px;background:var(--cardbg,rgba(127,127,127,.07))">
         <div style="color:var(--mut);font-size:13px">جمعِ کمک‌های ثبت‌شده‌ی خیرین</div>

@@ -139,7 +139,7 @@
         back.setAttribute('role', 'presentation');
         back.innerHTML = '<div class="btn-modal" role="dialog" aria-modal="true">' +
           '<h3>ورودی</h3><p></p>' +
-          '<input type="text" class="btn-prompt-input" style="width:100%;box-sizing:border-box;padding:10px 12px;border-radius:8px;border:1px solid rgba(212,175,90,.4);background:#0a1a14;color:#fff;font-family:inherit;font-size:14px;direction:rtl">' +
+          '<input type="text" class="btn-prompt-input" style="width:100%;box-sizing:border-box;padding:10px 12px;border-radius:8px;border:1px solid rgba(212,175,90,.4);background:#0b1019;color:#fff;font-family:inherit;font-size:14px;direction:rtl">' +
           '<div class="btn-modal-actions" style="margin-top:14px">' +
           '<button type="button" class="btn--primary btn--md btn-ok">تأیید</button>' +
           '<button type="button" class="btn--secondary btn--md btn-cancel">انصراف</button>' +

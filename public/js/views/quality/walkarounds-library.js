@@ -71,7 +71,7 @@ function waBars(rows){
   if(!rows||!rows.length) return '<div class="sub">داده‌ای ثبت نشده است</div>';
   return rows.map(r=>`<div class="hbar"><div class="hl"><span>${esc(r.name)}</span>
       <span>${fa(r.done)}/${fa(r.total)} — ${fa(r.completion_pct)}٪</span></div>
-    <div class="hbt"><i style="width:${r.completion_pct}%;background:${r.completion_pct>=70?'linear-gradient(90deg,#1c8f68,var(--ok))':r.completion_pct>=40?'linear-gradient(90deg,#b8912f,var(--wr))':'linear-gradient(90deg,#a5503f,var(--dn))'}"></i></div></div>`).join('');
+    <div class="hbt"><i style="width:${r.completion_pct}%;background:${r.completion_pct>=70?'linear-gradient(90deg,#1c7e8f,var(--ok))':r.completion_pct>=40?'linear-gradient(90deg,#b8912f,var(--wr))':'linear-gradient(90deg,#a5503f,var(--dn))'}"></i></div></div>`).join('');
 }
 
 function drawWaDashboard(){

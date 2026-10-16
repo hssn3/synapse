@@ -98,7 +98,7 @@ RPG.define({
           render: (r) => {
             const m = r.minutes_to_report;
             if (m == null) return '—';
-            const c = m <= 15 ? '#0b7a3e' : (m <= 30 ? '#9a6b00' : '#c02626');
+            const c = m <= 15 ? '#17576e' : (m <= 30 ? '#9a6b00' : '#c02626');
             return `<b style="color:${c}">${fa(m)}</b>`;
           } },
         { k: 'receiver_name', l: 'گیرنده در بخش *', t: 'text', list: 1 },
@@ -136,7 +136,7 @@ RPG.define({
         { k: 'samples_checked', l: 'نمونه‌های بررسی‌شده *', t: 'num', list: 1 },
         { k: 'within_target', l: 'در مهلت *', t: 'num', list: 1 },
         { k: 'compliance_pct', l: 'درصد رعایت', t: 'num', computed: 1, list: 1,
-          render: (r) => `<b style="color:${r.compliance_pct >= 90 ? '#0b7a3e' : (r.compliance_pct >= 75 ? '#9a6b00' : '#c02626')}">${fa(r.compliance_pct == null ? '—' : r.compliance_pct)}٪</b>` },
+          render: (r) => `<b style="color:${r.compliance_pct >= 90 ? '#17576e' : (r.compliance_pct >= 75 ? '#9a6b00' : '#c02626')}">${fa(r.compliance_pct == null ? '—' : r.compliance_pct)}٪</b>` },
         { k: 'auditor', l: 'پایشگر', t: 'text' },
         { k: 'corrective_action', l: 'اقدام اصلاحی', t: 'area' },
         { k: 'note', l: 'توضیح', t: 'area' },
@@ -178,7 +178,7 @@ RPG.define({
         { k: 'max_score', l: 'امتیاز کل', t: 'num', list: 1 },
         { k: 'min_required', l: 'حد نصاب ابلاغی *', t: 'num', list: 1 },
         { k: 'passed', l: 'قبول', t: 'bool', computed: 1, list: 1,
-          render: (r) => r.passed ? '<span style="color:#0b7a3e">قبول</span>' : '<b style="color:#c02626">کمتر از حد نصاب</b>' },
+          render: (r) => r.passed ? '<span style="color:#17576e">قبول</span>' : '<b style="color:#c02626">کمتر از حد نصاب</b>' },
         { k: 'findings', l: 'یافته‌ها', t: 'area' },
         { k: 'action_plan', l: 'برنامه‌ی اقدام اصلاحی', t: 'area' },
         { k: 'action_due', l: 'مهلت اقدام', t: 'date' },
@@ -193,29 +193,29 @@ RPG.define({
     return `
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px">
         ${c(d.eqa_12m, 'ارزیابی خارجی کیفیت (۱۲ ماه — نیاز ۳)',
-          d.eqa_12m >= 3 ? '#0b7a3e' : (d.eqa_12m ? '#9a6b00' : '#c02626'), 'qc')}
-        ${c(d.qc_failed_90d, 'کنترل کیفی مردود (۹۰ روز)', d.qc_failed_90d ? '#c02626' : '#0b7a3e', 'qc')}
+          d.eqa_12m >= 3 ? '#17576e' : (d.eqa_12m ? '#9a6b00' : '#c02626'), 'qc')}
+        ${c(d.qc_failed_90d, 'کنترل کیفی مردود (۹۰ روز)', d.qc_failed_90d ? '#c02626' : '#17576e', 'qc')}
         ${c(d.qc_internal_30d, 'کنترل کیفی داخلی (۳۰ روز)', d.qc_internal_30d ? '#1550b8' : '#c02626', 'qc')}
-        ${c(d.samples_rejected_open, 'نمونه‌ی ردشده بدون نمونه‌ی مجدد', d.samples_rejected_open ? '#c02626' : '#0b7a3e', 'samples')}
+        ${c(d.samples_rejected_open, 'نمونه‌ی ردشده بدون نمونه‌ی مجدد', d.samples_rejected_open ? '#c02626' : '#17576e', 'samples')}
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px">
-        ${c(d.critical_values, 'دامنه‌ی بحرانی تعریف‌شده', d.critical_values ? '#0b7a3e' : '#c02626', 'critical')}
-        ${c(d.critical_not_posted, 'دامنه‌ی نصب‌نشده در معرض دید', d.critical_not_posted ? '#9a6b00' : '#0b7a3e', 'critical')}
+        ${c(d.critical_values, 'دامنه‌ی بحرانی تعریف‌شده', d.critical_values ? '#17576e' : '#c02626', 'critical')}
+        ${c(d.critical_not_posted, 'دامنه‌ی نصب‌نشده در معرض دید', d.critical_not_posted ? '#9a6b00' : '#17576e', 'critical')}
         ${c(d.critical_avg_minutes == null ? '—' : d.critical_avg_minutes, 'میانگین فاصله تا اعلام (دقیقه، ۹۰ روز)',
-          d.critical_avg_minutes == null ? '#6b7280' : (d.critical_avg_minutes <= 15 ? '#0b7a3e' : (d.critical_avg_minutes <= 30 ? '#9a6b00' : '#c02626')), 'criticalreports')}
-        ${c(d.critical_no_repeat, 'گزارش بحرانی بدون تکرار آزمایش', d.critical_no_repeat ? '#c02626' : '#0b7a3e', 'criticalreports')}
+          d.critical_avg_minutes == null ? '#6b7280' : (d.critical_avg_minutes <= 15 ? '#17576e' : (d.critical_avg_minutes <= 30 ? '#9a6b00' : '#c02626')), 'criticalreports')}
+        ${c(d.critical_no_repeat, 'گزارش بحرانی بدون تکرار آزمایش', d.critical_no_repeat ? '#c02626' : '#17576e', 'criticalreports')}
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap">
         ${c(tat == null ? '—' : tat, 'رعایت زمان پاسخ‌دهی (۹۰ روز، ٪)',
-          tat == null ? '#6b7280' : (tat >= 90 ? '#0b7a3e' : (tat >= 75 ? '#9a6b00' : '#c02626')), 'tat')}
-        ${c(d.reference_unannounced, 'جدول ابلاغ‌نشده به بخش‌ها', d.reference_unannounced ? '#c02626' : '#0b7a3e', 'reference')}
-        ${c(d.referrals_expired, 'قرارداد ارجاع منقضی', d.referrals_expired ? '#c02626' : '#0b7a3e', 'referrals')}
-        ${c(d.referrals_unassessed, 'ارجاع بدون ارزیابی صلاحیت', d.referrals_unassessed ? '#c02626' : '#0b7a3e', 'referrals')}
+          tat == null ? '#6b7280' : (tat >= 90 ? '#17576e' : (tat >= 75 ? '#9a6b00' : '#c02626')), 'tat')}
+        ${c(d.reference_unannounced, 'جدول ابلاغ‌نشده به بخش‌ها', d.reference_unannounced ? '#c02626' : '#17576e', 'reference')}
+        ${c(d.referrals_expired, 'قرارداد ارجاع منقضی', d.referrals_expired ? '#c02626' : '#17576e', 'referrals')}
+        ${c(d.referrals_unassessed, 'ارجاع بدون ارزیابی صلاحیت', d.referrals_unassessed ? '#c02626' : '#17576e', 'referrals')}
       </div>
       ${sup ? `<div class="g" style="margin-top:16px;padding:12px 14px">
         <b>آخرین ارزیابی آزمایشگاه مرجع سلامت</b> —
         ${faDateISO(sup.visit_date)} · امتیاز ${fa(sup.score)} از حد نصاب ${fa(sup.min_required)} ·
-        <b style="color:${sup.passed ? '#0b7a3e' : '#c02626'}">${sup.passed ? 'قبول' : 'کمتر از حد نصاب'}</b>
+        <b style="color:${sup.passed ? '#17576e' : '#c02626'}">${sup.passed ? 'قبول' : 'کمتر از حد نصاب'}</b>
       </div>` : `<div style="margin-top:16px;color:#c02626;font-size:13px">
         هنوز هیچ ارزیابیِ آزمایشگاه مرجع سلامت ثبت نشده است (ب-۸-۲-۱).</div>`}
       <div style="margin-top:16px;color:var(--mut);font-size:13px;line-height:2">

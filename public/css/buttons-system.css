@@ -23,12 +23,12 @@
 .btn--danger svg,.btn--success svg,.btn--warning svg,.btn--info svg{flex:none}
 
 /* ---- ۹ نوع ---- */
-.btn--primary{background:var(--sn-gold,#d4af5a);color:#0c1d17;border-color:transparent;box-shadow:0 4px 14px rgba(212,175,90,.35)}
+.btn--primary{background:var(--sn-gold,#d4af5a);color:#0d131c;border-color:transparent;box-shadow:0 4px 14px rgba(212,175,90,.35)}
 .btn--secondary{background:rgba(255,255,255,.08);color:#e2e8f0;border-color:rgba(255,255,255,.12)}
 .btn--outline{background:transparent;color:var(--sn-gold-light,#f0d896);border-color:rgba(212,175,90,.45)}
 .btn--ghost{background:rgba(255,255,255,.06);color:var(--sn-gold-light,#f0d896);border-color:transparent}
 .btn--danger{background:#dc2626;color:#fff;border-color:#991b1b;box-shadow:0 4px 14px rgba(220,38,38,.35)}
-.btn--success{background:var(--sn-primary,#10b981);color:#06281e;border-color:transparent;box-shadow:0 4px 14px rgba(16,185,129,.3)}
+.btn--success{background:var(--sn-primary,#10a0b9);color:#091425;border-color:transparent;box-shadow:0 4px 14px rgba(16,160,185,.3)}
 .btn--warning{background:#f59e0b;color:#1c1005;border-color:#92400e}
 .btn--info{background:#2563eb;color:#fff;border-color:#1e40af;box-shadow:0 4px 14px rgba(37,99,235,.35)}
 .btn--link{background:transparent;color:var(--sn-gold-light,#f0d896);border-color:transparent;min-height:44px;padding:10px 8px;text-decoration:underline;text-underline-offset:4px}
@@ -89,10 +89,10 @@
 }
 
 /* مودال تأیید فارسی (BTN) */
-.btn-modal-backdrop{position:fixed;inset:0;background:rgba(2,8,6,.7);backdrop-filter:blur(4px);
+.btn-modal-backdrop{position:fixed;inset:0;background:rgba(7,13,24,.7);backdrop-filter:blur(4px);
   display:flex;align-items:center;justify-content:center;z-index:9999;padding:16px}
-.btn-modal{background:#0f211b;border:1px solid rgba(212,175,90,.35);border-radius:16px;
-  max-width:440px;width:100%;padding:22px;color:#e8efe9;box-shadow:0 20px 60px rgba(0,0,0,.5);
+.btn-modal{background:#101620;border:1px solid rgba(212,175,90,.35);border-radius:16px;
+  max-width:440px;width:100%;padding:22px;color:#e8eeef;box-shadow:0 20px 60px rgba(0,0,0,.5);
   direction:rtl;text-align:right}
 .btn-modal h3{margin:0 0 8px;font-size:16px;color:var(--sn-gold-light,#f0d896)}
 .btn-modal p{margin:0 0 18px;font-size:13.5px;line-height:1.9;color:#cbd5e1}

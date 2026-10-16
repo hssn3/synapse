@@ -31,7 +31,7 @@ RPG.define({
         { k: 'assigned_staff', l: 'نفرِ چیده‌شده *', t: 'num', list: 1 },
         { k: 'gap', l: 'کسری / مازاد', t: 'num', computed: 1, list: 1,
           render: (r) => r.gap == null ? '—'
-            : `<b style="color:${r.gap < 0 ? '#c02626' : (r.gap > 0 ? '#1550b8' : '#0b7a3e')}">${r.gap > 0 ? '+' : ''}${fa(r.gap)}</b>` },
+            : `<b style="color:${r.gap < 0 ? '#c02626' : (r.gap > 0 ? '#1550b8' : '#17576e')}">${r.gap > 0 ? '+' : ''}${fa(r.gap)}</b>` },
         { k: 'nurse_per_bed', l: 'پرستار به تخت', t: 'num', computed: 1, list: 1 },
         { k: 'method', l: 'روش برآورد *', t: 'text' },
         { k: 'skill_mix', l: 'ترکیب مهارت (کیفی)', t: 'area' },
@@ -51,7 +51,7 @@ RPG.define({
         { k: 'sample_size', l: 'حجم نمونه', t: 'num', list: 1 },
         { k: 'compliance_pct', l: 'درصد انطباق', t: 'num', step: '0.1', list: 1,
           render: (r) => r.compliance_pct == null ? '—'
-            : `<b style="color:${r.compliance_pct >= 90 ? '#0b7a3e' : (r.compliance_pct >= 70 ? '#9a6b00' : '#c02626')}">${fa(r.compliance_pct)}٪</b>` },
+            : `<b style="color:${r.compliance_pct >= 90 ? '#17576e' : (r.compliance_pct >= 70 ? '#9a6b00' : '#c02626')}">${fa(r.compliance_pct)}٪</b>` },
         { k: 'status', l: 'وضعیت', t: 'select', opts: ['open', 'in_progress', 'closed'], fa: 'nsp_status', list: 1, chip: 1 },
         { k: 'recheck_date', l: 'تاریخ بازبینی', t: 'date', list: 1 },
         { k: 'auditor', l: 'پایشگر', t: 'text' },
@@ -72,7 +72,7 @@ RPG.define({
         { k: 'complete_count', l: 'تعداد پرونده‌ی کامل *', t: 'num', list: 1 },
         { k: 'completeness_pct', l: 'درصد کامل‌بودن', t: 'num', computed: 1, list: 1,
           render: (r) => r.completeness_pct == null ? '—'
-            : `<b style="color:${r.completeness_pct >= 90 ? '#0b7a3e' : (r.completeness_pct >= 70 ? '#9a6b00' : '#c02626')}">${fa(r.completeness_pct)}٪</b>` },
+            : `<b style="color:${r.completeness_pct >= 90 ? '#17576e' : (r.completeness_pct >= 70 ? '#9a6b00' : '#c02626')}">${fa(r.completeness_pct)}٪</b>` },
         { k: 'auditor', l: 'پایشگر', t: 'text', list: 1 },
         { k: 'common_defects', l: 'نقص‌های پرتکرار', t: 'area' },
         { k: 'corrective_action', l: 'اقدام اصلاحی', t: 'area' },
@@ -105,17 +105,17 @@ RPG.define({
     const c = (n, l, clr, tab) => RPG.card(key, n, l, clr, tab);
     return `
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px">
-        ${c(d.staffing_rows, 'ردیفِ برآورد نیرو', d.staffing_rows ? '#0b7a3e' : '#c02626', 'staffing')}
-        ${c(d.staffing_short, 'بخش/شیفتِ دارای کسری', d.staffing_short ? '#c02626' : '#0b7a3e', 'staffing')}
-        ${c(d.care_audits_year, 'پایش مراقبت در ۱۲ ماه', d.care_audits_year ? '#0b7a3e' : '#c02626', 'care_audits')}
-        ${c(d.care_audits_open, 'پایشِ بازِ بدون بسته‌شدن', d.care_audits_open ? '#9a6b00' : '#0b7a3e', 'care_audits')}
+        ${c(d.staffing_rows, 'ردیفِ برآورد نیرو', d.staffing_rows ? '#17576e' : '#c02626', 'staffing')}
+        ${c(d.staffing_short, 'بخش/شیفتِ دارای کسری', d.staffing_short ? '#c02626' : '#17576e', 'staffing')}
+        ${c(d.care_audits_year, 'پایش مراقبت در ۱۲ ماه', d.care_audits_year ? '#17576e' : '#c02626', 'care_audits')}
+        ${c(d.care_audits_open, 'پایشِ بازِ بدون بسته‌شدن', d.care_audits_open ? '#9a6b00' : '#17576e', 'care_audits')}
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap">
-        ${c(d.record_audits_year, 'نظارت بر پرونده در ۱۲ ماه', d.record_audits_year ? '#0b7a3e' : '#c02626', 'record_audits')}
+        ${c(d.record_audits_year, 'نظارت بر پرونده در ۱۲ ماه', d.record_audits_year ? '#17576e' : '#c02626', 'record_audits')}
         ${c(d.record_completeness, 'میانگین کامل‌بودن پرونده (٪)',
-          d.record_completeness >= 90 ? '#0b7a3e' : (d.record_completeness >= 70 ? '#9a6b00' : '#c02626'), 'record_audits')}
+          d.record_completeness >= 90 ? '#17576e' : (d.record_completeness >= 70 ? '#9a6b00' : '#c02626'), 'record_audits')}
         ${c(d.referrals_year, 'اعزام در ۱۲ ماه گذشته', '#1550b8', 'referrals')}
-        ${c(d.referrals_unsafe, 'اعزامِ بدون چک‌لیست ایمنی', d.referrals_unsafe ? '#c02626' : '#0b7a3e', 'referrals')}
+        ${c(d.referrals_unsafe, 'اعزامِ بدون چک‌لیست ایمنی', d.referrals_unsafe ? '#c02626' : '#17576e', 'referrals')}
       </div>
       ${d.staffing_worst ? `<div style="margin-top:14px" class="sd-note">${typeof ic === 'function' ? ic('alert') : ''}
         <div>بیشترین کسریِ نیرو: <b>${esc(d.staffing_worst)}</b></div></div>` : ''}

@@ -15,7 +15,7 @@ button{margin-top:22px;width:100%;padding:12px;border:none;border-radius:var(--r
       background:linear-gradient(135deg,var(--gdd),var(--gd));color:#20180a;font-weight:800;font-size:14px}
 button[disabled]{opacity:.55;cursor:progress}
 .msg{margin-top:18px;padding:12px 14px;border-radius:var(--rs);font-size:13px;display:none}
-.msg.ok{display:block;background:rgba(63,191,143,.14);border:1px solid var(--ok);color:var(--ok)}
+.msg.ok{display:block;background:rgba(63,172,191,.14);border:1px solid var(--ok);color:var(--ok)}
 .msg.err{display:block;background:rgba(217,122,106,.14);border:1px solid var(--dn);color:var(--dn)}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
 @media(max-width:620px){.grid2{grid-template-columns:1fr}}

@@ -164,7 +164,7 @@ function openDirModal(html){
   closeDirModal();
   const back = document.createElement('div');
   back.id = 'dirModalBack';
-  back.style.cssText = 'position:fixed;inset:0;background:rgba(4,10,8,.72);z-index:1200;display:flex;align-items:center;justify-content:center;padding:18px;backdrop-filter:blur(4px)';
+  back.style.cssText = 'position:fixed;inset:0;background:rgba(9,14,21,.72);z-index:1200;display:flex;align-items:center;justify-content:center;padding:18px;backdrop-filter:blur(4px)';
   back.innerHTML = `<div class="panel g" style="max-width:760px;width:100%;max-height:88vh;overflow:auto" role="dialog" aria-modal="true">${html}</div>`;
   back.addEventListener('mousedown', (e) => { if (e.target === back) closeDirModal(); });
   document.body.appendChild(back);

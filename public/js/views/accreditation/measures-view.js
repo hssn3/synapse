@@ -210,10 +210,10 @@ function renderMeasures(){
       </div>
 
       <!-- لایه عقب ۲: برگشت به زیرمحورها -->
-      <div class="acc-back-card" style="margin-top:-6px;border-color:rgba(63,191,143,0.3)" role="button" tabindex="0" onclick="S.accDepth=1; renderMeasures();">
-        <span class="back-tag" style="background:rgba(63,191,143,0.15);color:#4ee0aa">◂ لایه ۲: فهرست زیرمحورها</span>
+      <div class="acc-back-card" style="margin-top:-6px;border-color:rgba(63,172,191,0.3)" role="button" tabindex="0" onclick="S.accDepth=1; renderMeasures();">
+        <span class="back-tag" style="background:rgba(63,172,191,0.15);color:#4ecae0">◂ لایه ۲: فهرست زیرمحورها</span>
         <span>محور فعال: <b>${esc(ax.code)} - ${esc(ax.title)}</b></span>
-        <span style="font-size:11px;color:#4ee0aa">انتخاب زیرمحور دیگر ▴</span>
+        <span style="font-size:11px;color:#4ecae0">انتخاب زیرمحور دیگر ▴</span>
       </div>
 
       ${pathCards(ax.id)}

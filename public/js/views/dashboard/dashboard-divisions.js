@@ -195,7 +195,7 @@ function renderDash(){
         onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selAxis('${esc(a.code)}')}"
         title="ورود به محور «${esc(a.name)}» و دیدن سنجه‌هایش">
         <div class="hl"><span>${esc(a.name)}</span><span>${fa(a.f)}/${fa(a.total)}</span></div>
-        <div class="hbt"><i style="width:${a.pct}%;background:${a.pct>=70?'linear-gradient(90deg,#1c8f68,var(--ok))':a.pct>=40?'linear-gradient(90deg,#b8912f,var(--wr))':'linear-gradient(90deg,#a5503f,var(--dn))'}"></i></div></div>`).join('')}
+        <div class="hbt"><i style="width:${a.pct}%;background:${a.pct>=70?'linear-gradient(90deg,#1c7e8f,var(--ok))':a.pct>=40?'linear-gradient(90deg,#b8912f,var(--wr))':'linear-gradient(90deg,#a5503f,var(--dn))'}"></i></div></div>`).join('')}
       </div></div>
     <div class="chart g"><h4>❖ گیج رتبه تخمینی ${help('safety')}</h4>
       <div class="gauge" style="--deg:${gdeg}deg">

@@ -264,7 +264,7 @@ async function superTestAssistant(hospitalId){
   try{
     const r=await API.superTestAssistantSettings(hospitalId, body);
     if(r.ok){
-      out.innerHTML=`<div class="assist-empty" style="text-align:right;border-inline-start:3px solid var(--ok,#3ecf8e);background:rgba(62,207,142,.08);border-radius:8px;padding:10px 12px">
+      out.innerHTML=`<div class="assist-empty" style="text-align:right;border-inline-start:3px solid var(--ok,#3eb9cf);background:rgba(62,185,207,.08);border-radius:8px;padding:10px 12px">
         <div class="assist-empty-t">✅ اتصال موفق بود (${fa(r.ms)} میلی‌ثانیه)</div>
         <div class="assist-empty-d">پاسخ آزمایشی: «${esc((r.reply||'').slice(0,200))}»${r.tokens?` — ${fa(r.tokens)} توکن مصرف شد`:''}${r.model?`<br>مدلی که پاسخ داد: <b dir="ltr">${esc(r.model)}</b>`:''}</div>
       </div>`;

@@ -119,22 +119,22 @@ RPG.define({
     const c = (n, l, clr, tab) => RPG.card(key, n, l, clr, tab);
     return `
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px">
-        ${c(d.contractors, 'پیمانکار فعال', d.contractors ? '#0b7a3e' : '#c02626', 'vendors')}
-        ${c(d.suppliers, 'تأمین‌کننده فعال', d.suppliers ? '#0b7a3e' : '#c02626', 'vendors')}
-        ${c(d.no_criteria, 'بدون معیار انتخاب', d.no_criteria ? '#c02626' : '#0b7a3e', 'vendors')}
-        ${c(d.contract_expired, 'قراردادِ منقضی‌شده', d.contract_expired ? '#c02626' : '#0b7a3e', 'vendors')}
+        ${c(d.contractors, 'پیمانکار فعال', d.contractors ? '#17576e' : '#c02626', 'vendors')}
+        ${c(d.suppliers, 'تأمین‌کننده فعال', d.suppliers ? '#17576e' : '#c02626', 'vendors')}
+        ${c(d.no_criteria, 'بدون معیار انتخاب', d.no_criteria ? '#c02626' : '#17576e', 'vendors')}
+        ${c(d.contract_expired, 'قراردادِ منقضی‌شده', d.contract_expired ? '#c02626' : '#17576e', 'vendors')}
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px">
-        ${c(d.contract_soon, 'قراردادِ رو به انقضا (۶۰ روز)', d.contract_soon ? '#9a6b00' : '#0b7a3e', 'vendors')}
-        ${c(d.unreviewed, 'بدون پایش در ۱۲ ماه گذشته', d.unreviewed ? '#c02626' : '#0b7a3e', 'reviews')}
-        ${c(d.reviews_year, 'پایش در ۱۲ ماه گذشته', d.reviews_year ? '#0b7a3e' : '#c02626', 'reviews')}
-        ${c(d.unhappy, 'پایشِ با نتیجه‌ی «ناراضی»', d.unhappy ? '#9a6b00' : '#0b7a3e', 'reviews')}
+        ${c(d.contract_soon, 'قراردادِ رو به انقضا (۶۰ روز)', d.contract_soon ? '#9a6b00' : '#17576e', 'vendors')}
+        ${c(d.unreviewed, 'بدون پایش در ۱۲ ماه گذشته', d.unreviewed ? '#c02626' : '#17576e', 'reviews')}
+        ${c(d.reviews_year, 'پایش در ۱۲ ماه گذشته', d.reviews_year ? '#17576e' : '#c02626', 'reviews')}
+        ${c(d.unhappy, 'پایشِ با نتیجه‌ی «ناراضی»', d.unhappy ? '#9a6b00' : '#17576e', 'reviews')}
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap">
-        ${c(d.vendor_unwilling, 'بی‌تمایل به تداوم همکاری', d.vendor_unwilling ? '#c02626' : '#0b7a3e', 'reviews')}
-        ${c(d.stakeholders, 'ذینفعِ شناسایی‌شده', d.stakeholders ? '#0b7a3e' : '#c02626', 'stakeholders')}
+        ${c(d.vendor_unwilling, 'بی‌تمایل به تداوم همکاری', d.vendor_unwilling ? '#c02626' : '#17576e', 'reviews')}
+        ${c(d.stakeholders, 'ذینفعِ شناسایی‌شده', d.stakeholders ? '#17576e' : '#c02626', 'stakeholders')}
         ${c(d.stakeholders_key, 'ذینفعِ کلیدی', d.stakeholders_key ? '#1550b8' : '#9a6b00', 'stakeholders')}
-        ${c(d.stakeholders_uninformed, 'کلیدیِ بدون ابلاغ سیاست', d.stakeholders_uninformed ? '#c02626' : '#0b7a3e', 'stakeholders')}
+        ${c(d.stakeholders_uninformed, 'کلیدیِ بدون ابلاغ سیاست', d.stakeholders_uninformed ? '#c02626' : '#17576e', 'stakeholders')}
       </div>
       <div style="margin-top:16px;color:var(--mut);font-size:13px;line-height:2">
         عددِ «بدون پایش در ۱۲ ماه گذشته» مهم‌ترین عددِ این صفحه است: الف‑۱‑۱۰‑۲ صریحاً

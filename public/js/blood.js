@@ -56,7 +56,7 @@ RPG.define({
         { k: 'unit_count', l: 'تعداد واحد *', t: 'num', def: 1, list: 1 },
         { k: 'arrival_temp', l: 'دمای هنگام تحویل *', t: 'num', list: 1 },
         { k: 'temp_ok', l: 'زنجیره‌ی سرد', t: 'bool', computed: 1, list: 1,
-          render: (r) => r.temp_ok ? '<span style="color:#0b7a3e">سالم</span>' : '<b style="color:#c02626">شکسته</b>' },
+          render: (r) => r.temp_ok ? '<span style="color:#17576e">سالم</span>' : '<b style="color:#c02626">شکسته</b>' },
         { k: 'courier_name', l: 'نام حامل', t: 'text', list: 1 },
         { k: 'courier_cert_no', l: 'شماره گواهی حامل', t: 'text' },
         { k: 'courier_cert_expiry', l: 'تاریخ اعتبار گواهی حامل', t: 'date' },
@@ -158,7 +158,7 @@ RPG.define({
         { k: 'reported_date', l: 'تاریخ گزارش به سازمان', t: 'date', list: 1 },
         { k: 'reported_within_48h', l: 'در مهلت ۴۸ ساعت', t: 'bool', computed: 1, list: 1,
           render: (r) => !r.reported_date ? '<span style="color:#c02626">گزارش نشده</span>'
-            : (r.reported_within_48h ? '<span style="color:#0b7a3e">بله</span>' : '<b style="color:#c02626">خیر</b>') },
+            : (r.reported_within_48h ? '<span style="color:#17576e">بله</span>' : '<b style="color:#c02626">خیر</b>') },
         { k: 'status', l: 'وضعیت', t: 'select', opts: ['open', 'reported', 'closed'], fa: 'ev_status', list: 1, chip: 1 },
         { k: 'rca_done', l: 'تحلیل ریشه‌ای انجام شد', t: 'bool' },
         { k: 'rca_summary', l: 'خلاصه‌ی تحلیل ریشه‌ای', t: 'area' },
@@ -178,7 +178,7 @@ RPG.define({
         { k: 'bag_code', l: 'کد کیسه', t: 'text', list: 1 },
         { k: 'return_temp', l: 'دمای کیسه هنگام برگشت *', t: 'num', list: 1 },
         { k: 'temp_acceptable', l: 'دما قابل قبول', t: 'bool', computed: 1, list: 1,
-          render: (r) => r.temp_acceptable ? '<span style="color:#0b7a3e">بله</span>' : '<b style="color:#c02626">خیر</b>' },
+          render: (r) => r.temp_acceptable ? '<span style="color:#17576e">بله</span>' : '<b style="color:#c02626">خیر</b>' },
         { k: 'reusable', l: 'قابل بازگشت به موجودی', t: 'bool', list: 1 },
         { k: 'reason', l: 'علت برگشت', t: 'select',
           opts: ['عدم نیاز بیمار', 'ترخیص/فوت بیمار', 'لغو دستور پزشک', 'ناسازگاری', 'اشکال در فرآورده', 'سایر'], list: 1 },
@@ -196,23 +196,23 @@ RPG.define({
       <td style="color:${w.bad_temp ? '#c02626' : ''}">${fa(w.bad_temp || 0)}</td></tr>`).join('');
     return `
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px">
-        ${c(d.bags_expired, 'کیسه‌ی منقضی در موجودی', d.bags_expired ? '#c02626' : '#0b7a3e', 'bags')}
-        ${c(d.bags_expiring_7d, 'انقضا تا ۷ روز آینده', d.bags_expiring_7d ? '#9a6b00' : '#0b7a3e', 'bags')}
+        ${c(d.bags_expired, 'کیسه‌ی منقضی در موجودی', d.bags_expired ? '#c02626' : '#17576e', 'bags')}
+        ${c(d.bags_expiring_7d, 'انقضا تا ۷ روز آینده', d.bags_expiring_7d ? '#9a6b00' : '#17576e', 'bags')}
         ${c(d.bags_available, 'کیسه‌ی موجود', '#1550b8', 'bags')}
-        ${c(d.temp_out_30d, 'انحراف دما (۳۰ روز)', d.temp_out_30d ? '#c02626' : '#0b7a3e', 'units')}
+        ${c(d.temp_out_30d, 'انحراف دما (۳۰ روز)', d.temp_out_30d ? '#c02626' : '#17576e', 'units')}
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px">
-        ${c(d.units_no_alarm, 'دستگاه بدون سیستم هشدار', d.units_no_alarm ? '#c02626' : '#0b7a3e', 'units')}
-        ${c(d.receipts_temp_bad, 'تحویل با زنجیره‌ی سرد شکسته', d.receipts_temp_bad ? '#c02626' : '#0b7a3e', 'receipts')}
-        ${c(d.samples_rejected_open, 'نمونه‌ی ردشده بدون نمونه‌ی مجدد', d.samples_rejected_open ? '#c02626' : '#0b7a3e', 'samples')}
-        ${c(d.qc_failed_90d, 'کنترل کیفی مردود (۹۰ روز)', d.qc_failed_90d ? '#c02626' : '#0b7a3e', 'qc')}
+        ${c(d.units_no_alarm, 'دستگاه بدون سیستم هشدار', d.units_no_alarm ? '#c02626' : '#17576e', 'units')}
+        ${c(d.receipts_temp_bad, 'تحویل با زنجیره‌ی سرد شکسته', d.receipts_temp_bad ? '#c02626' : '#17576e', 'receipts')}
+        ${c(d.samples_rejected_open, 'نمونه‌ی ردشده بدون نمونه‌ی مجدد', d.samples_rejected_open ? '#c02626' : '#17576e', 'samples')}
+        ${c(d.qc_failed_90d, 'کنترل کیفی مردود (۹۰ روز)', d.qc_failed_90d ? '#c02626' : '#17576e', 'qc')}
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap">
-        ${c(d.qc_external, 'شرکت در ارزیابی خارجی کیفیت', d.qc_external ? '#0b7a3e' : '#c02626', 'qc')}
-        ${c(d.events_open, 'عارضه‌ی باز', d.events_open ? '#c02626' : '#0b7a3e', 'events')}
+        ${c(d.qc_external, 'شرکت در ارزیابی خارجی کیفیت', d.qc_external ? '#17576e' : '#c02626', 'qc')}
+        ${c(d.events_open, 'عارضه‌ی باز', d.events_open ? '#c02626' : '#17576e', 'events')}
         ${c(p48 == null ? '—' : p48, 'گزارش در مهلت ۴۸ ساعت (٪)',
-          p48 == null ? '#6b7280' : (p48 >= 90 ? '#0b7a3e' : (p48 >= 70 ? '#9a6b00' : '#c02626')), 'events')}
-        ${c(d.returns_temp_bad, 'برگشتی با دمای نامناسب', d.returns_temp_bad ? '#c02626' : '#0b7a3e', 'returns')}
+          p48 == null ? '#6b7280' : (p48 >= 90 ? '#17576e' : (p48 >= 70 ? '#9a6b00' : '#c02626')), 'events')}
+        ${c(d.returns_temp_bad, 'برگشتی با دمای نامناسب', d.returns_temp_bad ? '#c02626' : '#17576e', 'returns')}
       </div>
       ${wardRows ? `<div class="tbl-wrap" style="margin-top:18px"><table>
         <thead><tr><th>بخش</th><th>واحد برگشتی</th><th>دفعات</th><th>دمای نامناسب</th></tr></thead>

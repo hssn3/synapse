@@ -164,3 +164,15 @@ node tests/assistant-response-eval.js                             → همه‌�
 ### ۸.۶ نتیجه‌ی فاز ۱
 - از میان یافته‌ها، **شش مورد بحرانی/بالا** انتخاب و به واحدهای اجرایی W1–W3 سپرده شد؛ بقیه در `docs/IMPLEMENTATION_PLAN.md` با شرط ورود/خروج ثبت‌اند.
 - مواردی که با شاهد کافی به «کم‌ریسک/خارج از دامنه» طبقه‌بندی شدند: دسترسی عمومی‌های عمدی (فرم‌های بی‌ورود، پالیسی تم)، `dev-*` (production-gated) و موارد Backlog.
+
+
+## ۹) به‌روزرسانی ۱۴۰۵/۰۷/۲۳b — بیس‌لاین کلون ویندوزی + بازرسی مجوزدهی (۴۷۳ مسیر)
+
+- **بیس‌لاین کامل روی کلون تازه (Windows، Node v22.22.0):** smoke ۶/۶ · سوئیت‌ها ۳۵/۳۵ · ماتریس per-endpoint ۱۵/۱۵ · دانا ۲۱+۱۰ ادعا · privacy ۴/۴ · w5 ۴/۴ · `npm audit --omit=dev`=۰ · lint ۰ خطا · E2E واقعی (ورود/رندر/موبایل ۳۹۰) بدون خطا. جزئیات خام: پوشهٔ کار نشست (`.cluster/new313-master-prompt/` — خارج از مخزن، مطابق رویهٔ DECISIONS بند ۸).
+- **بازرسی مجوزدهی (استخراج مکانیکی ۴۷۳ مسیر از ۱۳۰ فایل):**
+  - فهرست A — «`authRequired` بدون نگهبان استاندارد در context اسکن»: **۱۶۶ مسیر** (هم‌خوان با رقم گزارش‌شدهٔ نشست ۱۴۰۵/۰۷/۲۵).
+  - فهرست B — «بدون `authRequired`»: **۵۳** = ۴۶ مسیر `/api/super/*` (کل روتر پشت `superAdminRequired` — تأیید سورس `super.js:39`) + ۷ مسیر auth عمدی (login/logout/dev با گارد محیطی).
+  - **۲۲ نمونهٔ دستی در سورس:** سوگیری منفی اسکن اثبات شد — اکثریت قاطع نمونه‌ها دارای نگهبان درون‌تابعی (`nrsCanManage`، `shiftAccessUnit`، `hnAccessWard`، `hasPerm`، `canApprovePrograms`، `canEditPeriod`، `mgmtCanManage`) یا میان‌افزار نام‌دار (`authorize()`، `superAdminRequired`، `canEditDocuments`، `requireFeature`) بودند.
+  - **کاندیدهای بازبینی دقیق‌تر (تأییدنشده، برای پاس بعد):** `assistant-enterprise/chat` (بدهی مستند دو-منبع مجوز)، خانوادهٔ `/api/kpis*`، `/api/export/*.xlsx`، چند read اکریدیشن (`scoring/dashboard/status`) و داشبوردها — فعلاً فقط `authRequired + hospitalScope`.
+- این دور هیچ تغییر کدی در سیستم مجوز ایجاد نکرد؛ خروجی = دادهٔ طبقه‌بندی‌شده + فهرست اولویت‌دار برای پاس بعدی.
+

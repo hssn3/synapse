@@ -1,14 +1,14 @@
 {
-  "name": "سامانه اعتباربخشی بیمارستانی",
-  "short_name": "اعتباربخشی",
-  "description": "سامانه جامع مدیریت، کیفیت و اعتباربخشی بیمارستان",
+  "name": "سیناپس — سامانه یکپارچه نظارت، اعتباربخشی و پایش سلامت",
+  "short_name": "سیناپس",
+  "description": "سامانه یکپارچه نظارت، اعتباربخشی و پایش سلامت",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "dir": "rtl",
   "lang": "fa",
-  "theme_color": "#0f172a",
-  "background_color": "#0f172a",
+  "theme_color": "#081222",
+  "background_color": "#081222",
   "icons": [
     {
       "src": "/img/icon-192.png",

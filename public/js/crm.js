@@ -5,7 +5,7 @@
 
 const crmSentimentBadge = (r) => {
   const map = {
-    positive: '<span class="chip" style="background:rgba(0,229,153,.15);color:#00e599;border:1px solid rgba(0,229,153,.3)">رضایت‌بخش 😊</span>',
+    positive: '<span class="chip" style="background:rgba(0,195,229,.15);color:#00c3e5;border:1px solid rgba(0,195,229,.3)">رضایت‌بخش 😊</span>',
     neutral: '<span class="chip" style="background:rgba(212,175,90,.15);color:#d4af5a;border:1px solid rgba(212,175,90,.3)">متوسط 😐</span>',
     negative: '<span class="chip" style="background:rgba(255,56,96,.15);color:#ff3860;border:1px solid rgba(255,56,96,.3)">ناراضی ⚠️</span>'
   };
@@ -15,10 +15,10 @@ const crmSentimentBadge = (r) => {
 const crmStageBadge = (r) => {
   const map = {
     admission: '<span class="chip" style="background:rgba(94,194,230,.15);color:#5ec2e6">پذیرش</span>',
-    inpatient: '<span class="chip" style="background:rgba(63,191,143,.15);color:#3fbf8f">بستری در بخش</span>',
+    inpatient: '<span class="chip" style="background:rgba(63,172,191,.15);color:#3facbf">بستری در بخش</span>',
     discharged: '<span class="chip" style="background:rgba(141,107,255,.15);color:#8d6bff">ترخیص‌شده</span>',
     followup_pending: '<span class="chip" style="background:rgba(224,143,60,.15);color:#e08f3c">نیازمند تماس پیگیری</span>',
-    followup_completed: '<span class="chip" style="background:rgba(0,229,153,.15);color:#00e599">پیگیری انجام شد</span>'
+    followup_completed: '<span class="chip" style="background:rgba(0,195,229,.15);color:#00c3e5">پیگیری انجام شد</span>'
   };
   return map[r.journey_stage] || esc(r.journey_stage);
 };
@@ -28,7 +28,7 @@ const crmTicketStatusBadge = (r) => {
     new: '<span class="chip" style="background:rgba(255,56,96,.15);color:#ff3860">جدید</span>',
     under_investigation: '<span class="chip" style="background:rgba(224,143,60,.15);color:#e08f3c">در حال بررسی</span>',
     capa_assigned: '<span class="chip" style="background:rgba(141,107,255,.15);color:#8d6bff">اقدام اصلاحی صادر شد</span>',
-    resolved: '<span class="chip" style="background:rgba(0,229,153,.15);color:#00e599">پاسخ داده شده</span>',
+    resolved: '<span class="chip" style="background:rgba(0,195,229,.15);color:#00c3e5">پاسخ داده شده</span>',
     closed: '<span class="chip" style="background:rgba(127,127,127,.15);color:var(--mut)">مختومه</span>'
   };
   return map[r.status] || esc(r.status);
@@ -36,7 +36,7 @@ const crmTicketStatusBadge = (r) => {
 
 const crmSeverityBadge = (r) => {
   const map = {
-    low: '<span class="chip" style="color:#3fbf8f">عادی</span>',
+    low: '<span class="chip" style="color:#3facbf">عادی</span>',
     medium: '<span class="chip" style="color:#d4af5a">متوسط</span>',
     high: '<span class="chip" style="color:#e08f3c">فوری</span>',
     critical: '<span class="chip" style="color:#ff3860;font-weight:700">بحرانی</span>'
@@ -59,7 +59,7 @@ RPG.define({
   dashboard: (d, key) => {
     if (!d) return '<div class="empty">داده‌ای یافت نشد</div>';
     const csatPct = Math.round((d.csat_score / 5) * 100);
-    const npsColor = d.nps_score >= 50 ? '#00e599' : (d.nps_score >= 0 ? '#d4af5a' : '#ff3860');
+    const npsColor = d.nps_score >= 50 ? '#00c3e5' : (d.nps_score >= 0 ? '#d4af5a' : '#ff3860');
 
     return `
       <div class="kpi-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-bottom:20px">
@@ -75,13 +75,13 @@ RPG.define({
         </div>
 
         <!-- NPS Card -->
-        <div class="panel g" style="padding:18px;border-radius:14px;background:rgba(18,24,38,0.7);backdrop-filter:blur(10px);border:1px solid rgba(0,229,153,0.2)">
+        <div class="panel g" style="padding:18px;border-radius:14px;background:rgba(18,24,38,0.7);backdrop-filter:blur(10px);border:1px solid rgba(0,195,229,0.2)">
           <div style="font-size:12px;color:var(--td);margin-bottom:6px">شاخص خالص ترویج‌کنندگان (NPS)</div>
           <div style="display:flex;align-items:baseline;justify-content:space-between">
             <span style="font-size:32px;font-weight:900;color:${npsColor}">+${fa(d.nps_score)}</span>
-            <span class="chip" style="background:rgba(0,229,153,.12);color:#00e599;font-weight:700">عالی (World Class)</span>
+            <span class="chip" style="background:rgba(0,195,229,.12);color:#00c3e5;font-weight:700">عالی (World Class)</span>
           </div>
-          <div class="bar" style="height:6px;margin-top:10px;background:rgba(255,255,255,0.06);border-radius:4px"><i style="background:#00e599;width:${Math.max(10, Math.min(100, d.nps_score))}%"></i></div>
+          <div class="bar" style="height:6px;margin-top:10px;background:rgba(255,255,255,0.06);border-radius:4px"><i style="background:#00c3e5;width:${Math.max(10, Math.min(100, d.nps_score))}%"></i></div>
           <div style="font-size:11px;color:var(--mut);margin-top:6px">نرخ وفاداری و معرفی مرکز به دیگران</div>
         </div>
 
@@ -102,7 +102,7 @@ RPG.define({
           <div style="font-size:12px;color:var(--td);margin-bottom:6px">شکایات و حقوق بیمار</div>
           <div style="display:flex;align-items:baseline;justify-content:space-between">
             <span style="font-size:32px;font-weight:900;color:#ff3860">${fa(d.open_tickets)}</span>
-            <span class="chip" style="background:rgba(0,229,153,.12);color:#00e599">${fa(d.resolved_tickets)} پاسخ‌داده</span>
+            <span class="chip" style="background:rgba(0,195,229,.12);color:#00c3e5">${fa(d.resolved_tickets)} پاسخ‌داده</span>
           </div>
           <div style="font-size:12px;color:var(--td);margin-top:12px">
             شکایات با اولویت فوری/بحرانی: <b style="color:#ff3860">${fa(d.critical_tickets)}</b>
@@ -131,7 +131,7 @@ RPG.define({
                   <span>${esc(rb.domain)}</span>
                   <b style="color:#00f0ff">${fa(rb.count)} مورد</b>
                 </div>
-                <div class="bar" style="height:6px"><i style="background:linear-gradient(90deg,#00f0ff,#00e599);width:${Math.min(100, rb.count * 25)}%"></i></div>
+                <div class="bar" style="height:6px"><i style="background:linear-gradient(90deg,#00f0ff,#00c3e5);width:${Math.min(100, rb.count * 25)}%"></i></div>
               </div>
             `).join('') : '<div class="empty">شکایتی ثبت نشده است</div>'}
           </div>
@@ -144,7 +144,7 @@ RPG.define({
             ${(d.recent_tickets && d.recent_tickets.length) ? `
               <div style="display:flex;flex-direction:column;gap:10px">
                 ${d.recent_tickets.map(t => `
-                  <div style="padding:10px 14px;background:rgba(255,255,255,0.03);border-radius:10px;border-right:3px solid ${t.severity==='critical'?'#ff3860':(t.severity==='high'?'#e08f3c':'#3fbf8f')}">
+                  <div style="padding:10px 14px;background:rgba(255,255,255,0.03);border-radius:10px;border-right:3px solid ${t.severity==='critical'?'#ff3860':(t.severity==='high'?'#e08f3c':'#3facbf')}">
                     <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px">
                       <b style="color:var(--th)">${esc(t.title)}</b>
                       ${crmTicketStatusBadge(t)}

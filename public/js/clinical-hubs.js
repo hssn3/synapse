@@ -254,7 +254,7 @@
 
     return '<div class="panel g" style="background:transparent;border:none;box-shadow:none">' +
       '<!-- بنر شیشه‌ای طلایی بالای هاب -->' +
-      '<div style="background:linear-gradient(135deg, rgba(30, 48, 42, 0.95), rgba(18, 30, 49, 0.95));border:1.5px solid rgba(201, 168, 76, 0.45);border-radius:20px;padding:22px 28px;margin-bottom:22px;box-shadow:0 12px 36px rgba(0,0,0,0.4);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px">' +
+      '<div style="background:linear-gradient(135deg, rgba(31,37,47,0.95), rgba(18, 30, 49, 0.95));border:1.5px solid rgba(201, 168, 76, 0.45);border-radius:20px;padding:22px 28px;margin-bottom:22px;box-shadow:0 12px 36px rgba(0,0,0,0.4);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px">' +
         '<div>' +
           '<div style="display:inline-flex;align-items:center;gap:6px;background:rgba(201,168,76,0.18);border:1px solid rgba(201,168,76,0.4);padding:3px 12px;border-radius:20px;color:var(--gd,#c9a84c);font-size:0.8rem;font-weight:800;margin-bottom:8px">' +
             '<span>✦</span> ' + esc(config.badge) +

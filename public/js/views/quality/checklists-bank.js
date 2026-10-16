@@ -505,7 +505,7 @@ function drawChkDetail(){
               const sub = auditedWardsMap[w];
               const pct = sub && sub.max_score ? Math.round((sub.score / sub.max_score) * 100) : null;
               return `
-              <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border-radius:6px;border:1px solid ${sub ? 'rgba(76,175,80,0.3)' : 'var(--bdr)'};background:${sub ? 'rgba(76,175,80,0.06)' : 'rgba(255,255,255,0.01)'}">
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border-radius:6px;border:1px solid ${sub ? 'rgba(76,160,175,0.3)' : 'var(--bdr)'};background:${sub ? 'rgba(76,160,175,0.06)' : 'rgba(255,255,255,0.01)'}">
                 <div>
                   <div style="font-size:12px;font-weight:600;color:${sub ? 'var(--th)' : 'var(--td)'}">${esc(w)}</div>
                   <div style="font-size:10.5px;color:${sub ? 'var(--ok)' : 'var(--td)'}">

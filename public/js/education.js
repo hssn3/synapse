@@ -20,7 +20,7 @@ const eduSessionLabel = (id) => {
 // «اثربخش بودن» را سرور از مقایسه‌ی نتیجه با هدف درمی‌آورد؛ این‌جا فقط
 // خوانا نشانش می‌دهیم تا کاربر نپرسد «این عدد از کجا آمد».
 const eduEffective = (r) => r.effective
-  ? '<b style="color:#0b7a3e">به هدف رسید</b>'
+  ? '<b style="color:#17576e">به هدف رسید</b>'
   : '<b style="color:#c02626">به هدف نرسید</b>';
 
 RPG.define({
@@ -100,7 +100,7 @@ RPG.define({
           render: (r) => {
             if (r.knowledge_gain == null) return '<span style="color:var(--td)">—</span>';
             const g = Number(r.knowledge_gain);
-            return `<span style="color:${g > 0 ? '#0b7a3e' : '#c02626'};font-weight:700">${g > 0 ? '+' : ''}${fa(g)}</span>`;
+            return `<span style="color:${g > 0 ? '#17576e' : '#c02626'};font-weight:700">${g > 0 ? '+' : ''}${fa(g)}</span>`;
           } },
         { k: 'skill_method', l: 'روش ارزیابی مهارت *', t: 'text' },
         { k: 'skill_score', l: 'امتیاز مهارت *', t: 'num', step: '0.1', list: 1 },
@@ -118,20 +118,20 @@ RPG.define({
     const c = (n, l, clr, tab) => RPG.card(key, n, l, clr, tab);
     return `
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px">
-        ${c(d.policies, 'سیاستِ آموزشیِ فعال', d.policies ? '#0b7a3e' : '#c02626', 'policies')}
-        ${c(d.policies_uncommunicated, 'تصویب‌شده ولی ابلاغ‌نشده', d.policies_uncommunicated ? '#c02626' : '#0b7a3e', 'policies')}
-        ${c(d.policies_stale, 'سررسیدِ بازنگری گذشته', d.policies_stale ? '#9a6b00' : '#0b7a3e', 'policies')}
-        ${c(d.sessions_year, 'برنامه‌ی ۱۲ ماه گذشته', d.sessions_year ? '#0b7a3e' : '#c02626', 'sessions')}
+        ${c(d.policies, 'سیاستِ آموزشیِ فعال', d.policies ? '#17576e' : '#c02626', 'policies')}
+        ${c(d.policies_uncommunicated, 'تصویب‌شده ولی ابلاغ‌نشده', d.policies_uncommunicated ? '#c02626' : '#17576e', 'policies')}
+        ${c(d.policies_stale, 'سررسیدِ بازنگری گذشته', d.policies_stale ? '#9a6b00' : '#17576e', 'policies')}
+        ${c(d.sessions_year, 'برنامه‌ی ۱۲ ماه گذشته', d.sessions_year ? '#17576e' : '#c02626', 'sessions')}
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px">
-        ${c(d.patient_sessions, 'برنامه‌ی آموزشِ بیمار', d.patient_sessions ? '#0b7a3e' : '#9a6b00', 'sessions')}
-        ${c(d.sessions_unevaluated, 'برگزارشده و سنجیده‌نشده', d.sessions_unevaluated ? '#c02626' : '#0b7a3e', 'effectiveness')}
-        ${c(d.evals, 'ارزیابیِ اثربخشی', d.evals ? '#0b7a3e' : '#c02626', 'effectiveness')}
-        ${c(d.evals_ineffective, 'دوره‌ای که به هدف نرسید', d.evals_ineffective ? '#9a6b00' : '#0b7a3e', 'effectiveness')}
+        ${c(d.patient_sessions, 'برنامه‌ی آموزشِ بیمار', d.patient_sessions ? '#17576e' : '#9a6b00', 'sessions')}
+        ${c(d.sessions_unevaluated, 'برگزارشده و سنجیده‌نشده', d.sessions_unevaluated ? '#c02626' : '#17576e', 'effectiveness')}
+        ${c(d.evals, 'ارزیابیِ اثربخشی', d.evals ? '#17576e' : '#c02626', 'effectiveness')}
+        ${c(d.evals_ineffective, 'دوره‌ای که به هدف نرسید', d.evals_ineffective ? '#9a6b00' : '#17576e', 'effectiveness')}
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap">
-        ${c(d.evals_no_action, 'نرسیده به هدف و بدون اقدام', d.evals_no_action ? '#c02626' : '#0b7a3e', 'effectiveness')}
-        ${c(d.evals_fed_back, 'نتیجه‌ای که به بازنگری سیاست رسید', d.evals_fed_back ? '#0b7a3e' : '#9a6b00', 'effectiveness')}
+        ${c(d.evals_no_action, 'نرسیده به هدف و بدون اقدام', d.evals_no_action ? '#c02626' : '#17576e', 'effectiveness')}
+        ${c(d.evals_fed_back, 'نتیجه‌ای که به بازنگری سیاست رسید', d.evals_fed_back ? '#17576e' : '#9a6b00', 'effectiveness')}
       </div>
       <div style="margin-top:16px;color:var(--mut);font-size:13px;line-height:2">
         عددِ «برگزارشده و سنجیده‌نشده» مهم‌ترینِ این صفحه است: الف‑۳‑۲‑۴ برگزاریِ دوره را

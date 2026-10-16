@@ -50,13 +50,13 @@ function drawProgList(){
           <span class="bdg ${f.type==='استراتژیک'?'b1':'b2'}" style="${f.type==='استراتژیک'?'background:#2563eb;color:#fff':'background:rgba(255,255,255,0.08);color:#cbd5e1'}">${fa(PRG.list.filter(x=>x.program_type==='استراتژیک').length)}</span>
         </div>
 
-        <div style="flex:1;min-width:210px;background:${f.type==='عملیاتی'?'linear-gradient(135deg, rgba(6, 95, 70, 0.9), rgba(16, 185, 129, 0.9))':'rgba(18, 32, 50, 0.8)'};color:#ffffff;border:1.5px solid ${f.type==='عملیاتی'?'#34d399':'rgba(255, 255, 255, 0.12)'};border-radius:14px;padding:12px 16px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;box-shadow:${f.type==='عملیاتی'?'0 0 16px rgba(16,185,129,0.35)':'0 4px 14px rgba(0,0,0,0.3)'};transition:all .2s ease"
+        <div style="flex:1;min-width:210px;background:${f.type==='عملیاتی'?'linear-gradient(135deg, rgba(18,66,83,0.9), rgba(16,160,185,0.9))':'rgba(18, 32, 50, 0.8)'};color:#ffffff;border:1.5px solid ${f.type==='عملیاتی'?'#34bbd3':'rgba(255, 255, 255, 0.12)'};border-radius:14px;padding:12px 16px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;box-shadow:${f.type==='عملیاتی'?'0 0 16px rgba(16,160,185,0.35)':'0 4px 14px rgba(0,0,0,0.3)'};transition:all .2s ease"
              onclick="setProgFilter('type','عملیاتی')">
           <div>
             <div style="font-weight:800;font-size:13.5px;color:#ffffff">⚙️ برنامه عملیاتی</div>
             <div style="font-size:11px;color:#94a3b8;margin-top:2px">اقدامات سالیانه واحدها و فعالیت‌های اسمارت</div>
           </div>
-          <span class="bdg ${f.type==='عملیاتی'?'b1':'b2'}" style="${f.type==='عملیاتی'?'background:#059669;color:#fff':'background:rgba(255,255,255,0.08);color:#cbd5e1'}">${fa(PRG.list.filter(x=>x.program_type==='عملیاتی').length)}</span>
+          <span class="bdg ${f.type==='عملیاتی'?'b1':'b2'}" style="${f.type==='عملیاتی'?'background:#1b6580;color:#fff':'background:rgba(255,255,255,0.08);color:#cbd5e1'}">${fa(PRG.list.filter(x=>x.program_type==='عملیاتی').length)}</span>
         </div>
 
         <div style="flex:1;min-width:210px;background:${f.type==='بهبود'?'linear-gradient(135deg, rgba(146, 64, 14, 0.9), rgba(245, 158, 11, 0.9))':'rgba(18, 32, 50, 0.8)'};color:#ffffff;border:1.5px solid ${f.type==='بهبود'?'#fbbf24':'rgba(255, 255, 255, 0.12)'};border-radius:14px;padding:12px 16px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;box-shadow:${f.type==='بهبود'?'0 0 16px rgba(245,158,11,0.35)':'0 4px 14px rgba(0,0,0,0.3)'};transition:all .2s ease"
@@ -288,8 +288,8 @@ function renderStrategicWizardContent(){
     bodyHtml = `
       <div style="font-size:12.5px;color:var(--td);margin-bottom:14px">تحلیل چهارگانه نقاط قوت، نقاط ضعف، فرصت‌ها و تهدیدها (ماتریس SWOT):</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
-        <div style="background:rgba(16,185,129,0.08);border:1.5px solid #10b981;border-radius:10px;padding:12px">
-          <h4 style="margin:0 0 8px 0;color:#065f46">💪 نقاط قوت (Strengths)</h4>
+        <div style="background:rgba(16,160,185,0.08);border:1.5px solid #10a0b9;border-radius:10px;padding:12px">
+          <h4 style="margin:0 0 8px 0;color:#124253">💪 نقاط قوت (Strengths)</h4>
           <textarea id="sw_strengths" rows="5" style="width:100%;font-size:12px">${esc(d.swot.strengths)}</textarea>
         </div>
         <div style="background:rgba(239,68,68,0.08);border:1.5px solid #ef4444;border-radius:10px;padding:12px">

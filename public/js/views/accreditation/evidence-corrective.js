@@ -154,7 +154,7 @@ function mCard(m, editable){
         <span style="font-size:10px;color:var(--gd);margin-right:8px">【مستند کتاب: ص. ${pageNum}】</span>
       </li>`).join('')}</ul>`
         :'<div style="font-size:11.5px;color:var(--td)">فهرست اقدام مجزا ثبت نشده — به متن اصلی کتاب مراجعه کنید.</div>'}
-      ${note?`<div style="margin-top:11px;padding-top:10px;border-top:1px dashed rgba(63,191,143,.25)">
+      ${note?`<div style="margin-top:11px;padding-top:10px;border-top:1px dashed rgba(63,172,191,.25)">
         <div style="font-size:10px;color:var(--ok);font-weight:700;margin-bottom:6px">شرط احراز — توضیح تکمیلی کتاب (ص. ${pageNum})</div>
         <div style="font-size:11.5px;line-height:1.9;color:var(--tm)">${esc(note)}</div></div>`:''}
       ${evalMethodRow(m)}

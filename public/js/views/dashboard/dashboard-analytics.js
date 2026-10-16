@@ -199,7 +199,7 @@ function renderAccHub(){
       <div class="acc-welcome-bar">
         <div class="acc-welcome-bar-right">
           <span style="color:#f7d070">✦</span>
-          <span>به پنل کاربری سامانه نوین جامع اطلاعات بیمارستانی و اعتباربخشی خوش آمدید</span>
+          <span>به پنل کاربری سیناپس خوش آمدید</span>
         </div>
         <div class="acc-welcome-bar-left">
           <span>سال ارزشیابی: <b>${fa(S.year||'1405')}</b></span>

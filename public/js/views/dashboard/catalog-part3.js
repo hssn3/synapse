@@ -11,8 +11,8 @@ function renderEntry(){
   <div id="login" class="lscroll">
     <div class="lpage">
       <div class="ltop">
-        <div class="ltop-brand"><div class="lmark sm shine anim">✦</div>
-          <div><b>سامانه جامع مدیریت بیمارستانی</b><span>ساختار سازمانی، پرستاری، کیفیت و اعتباربخشی — یکپارچه</span></div></div>
+        <div class="ltop-brand"><img class="syn-lg" src="/img/synapse-header.png" alt="سیناپس" height="52">
+          <div><span>سامانه یکپارچه نظارت، اعتباربخشی و پایش سلامت</span></div></div>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
           <button type="button" class="btn btn-o btn-sm shine" onclick="openSystemCatalogModal()" style="border-color:var(--gd);color:var(--gdl);font-weight:700;padding:4px 12px">📖 کاتالوگ آنلاین امکانات ✨</button>
           ${S.user?`<a href="javascript:void(0)" class="ltop-lnk" onclick="renderApp()">بازگشت به داشبورد ›</a>`:''}
@@ -22,7 +22,7 @@ function renderEntry(){
       <div class="lhero g gold">
         <span class="lglow lglow-a" aria-hidden="true"></span>
         <span class="lglow lglow-b" aria-hidden="true"></span>
-        <p class="lpill"><span class="ldot" aria-hidden="true"></span> ساختار سازمانی، پرستاری، کیفیت و اعتباربخشی — یک بستر ابری</p>
+        <p class="lpill"><span class="ldot" aria-hidden="true"></span> سامانه یکپارچه نظارت، اعتباربخشی و پایش سلامت — یک بستر ابری</p>
         <h1>ابر سیستم مدیریت بیمارستان، <span class="lgrad">یکپارچه و شفاف</span></h1>
         <p>ساختار سازمانی و سلسله‌مراتب پرستاری، کارتابل و پیام‌رسانی، کمیته‌ها، مدیریت خطر و ایمنی بیمار،
            کارت امتیازی متوازن (BSC)، آموزش کارکنان و مستندات کنترل‌شده — و در کنار همه‌ی این‌ها، ماژول
@@ -50,14 +50,14 @@ function renderEntry(){
           
           <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:18px;margin-bottom:20px">
             <div>
-              <div style="display:inline-flex;align-items:center;gap:10px;padding:6px 16px;background:rgba(16,185,129,0.14);border:1px solid rgba(16,185,129,0.4);border-radius:100px;color:#6ee7b7;font-size:0.8rem;font-weight:700;margin-bottom:12px">
-                <span style="width:8px;height:8px;background:#34d399;border-radius:50%;box-shadow:0 0 10px #34d399"></span>
+              <div style="display:inline-flex;align-items:center;gap:10px;padding:6px 16px;background:rgba(16,160,185,0.14);border:1px solid rgba(16,160,185,0.4);border-radius:100px;color:#6ed5e7;font-size:0.8rem;font-weight:700;margin-bottom:12px">
+                <span style="width:8px;height:8px;background:#34bbd3;border-radius:50%;box-shadow:0 0 10px #34bbd3"></span>
                 <span>کاتالوگ دیجیتال و تعاملی // ویرایش ۵ کشوری وزارت بهداشت</span>
               </div>
               <h2 style="font-size:1.75rem;font-weight:900;color:#ffffff;line-height:1.4;margin:0 0 8px 0">
-                سامانه جامع مدیریت <span class="gold-gradient-text">کیفیت، ایمنی بیمار</span> و <span class="emerald-gradient-text">اعتباربخشی پیشرفته</span>
+                سیناپس — <span class="gold-gradient-text">کیفیت، ایمنی بیمار</span> و <span class="emerald-gradient-text">اعتباربخشی پیشرفته</span>
               </h2>
-              <p style="font-size:0.92rem;color:var(--text-sub,#c7dbd2);max-width:760px;line-height:1.85;margin:0">
+              <p style="font-size:0.92rem;color:var(--text-sub,#c7d8db);max-width:760px;line-height:1.85;margin:0">
                 پلتفرم هوشمند انطباق با ۵۲۰ سنجه ملی، پایش بلادرنگ ۲۸ واقعه ناخواسته، اجرای افقی ۲۳ پروتکل بالینی SOP و هدایت‌شده با مغز هوش مصنوعی دانا.
               </p>
             </div>
@@ -103,8 +103,8 @@ function renderEntry(){
             <div class="stat-counter-card folded-corner" onclick="openSystemCatalogModal('accreditation')" style="cursor:pointer">
               <div class="stat-icon-halo">
                 <svg fill="none" height="30" viewbox="0 0 24 24" width="30">
-                  <rect height="16" rx="4" stroke="var(--emerald-400,#34d399)" stroke-width="1.8" width="16" x="4" y="4"></rect>
-                  <path d="M9 12h6M12 9v6" stroke="#bbf7d0" stroke-linecap="round" stroke-width="2"></path>
+                  <rect height="16" rx="4" stroke="var(--emerald-400,#34bbd3)" stroke-width="1.8" width="16" x="4" y="4"></rect>
+                  <path d="M9 12h6M12 9v6" stroke="#bbeef7" stroke-linecap="round" stroke-width="2"></path>
                 </svg>
               </div>
               <div class="stat-number emerald-gradient-text">۱۹</div>
@@ -129,7 +129,7 @@ function renderEntry(){
             <div style="font-size:1.15rem;font-weight:900;color:#ffffff;display:flex;align-items:center;gap:8px">
               <span>✦</span><span>فصول و محورهای اصلی کاتالوگ دیجیتال سامانه:</span>
             </div>
-            <span style="font-size:0.8rem;color:var(--text-muted,#96b2a5)">برای مشاهده جزئیات هر بخش کلیک کنید</span>
+            <span style="font-size:0.8rem;color:var(--text-muted,#96aeb2)">برای مشاهده جزئیات هر بخش کلیک کنید</span>
           </div>
 
           <div class="cat-chapters-grid">
@@ -171,7 +171,7 @@ function renderEntry(){
 
             <a class="cat-chapter-box folded-corner" href="/catalog.html#dana-copilot" target="_blank">
               <div>
-                <span class="cat-chapter-tag" style="background:rgba(16,185,129,0.15);border-color:rgba(16,185,129,0.4);color:#6ee7b7">بخش ۵ // هوش مصنوعی</span>
+                <span class="cat-chapter-tag" style="background:rgba(16,160,185,0.15);border-color:rgba(16,160,185,0.4);color:#6ed5e7">بخش ۵ // هوش مصنوعی</span>
                 <div class="cat-chapter-title">🧠 دستیار هوشمند بالینی دانا</div>
                 <div class="cat-chapter-desc">تسلط بر کلیه سنجه‌ها، ارزیابی عدم‌انطباق‌ها، پیشنهاد CAPA و بازیابی فوری شواهد</div>
               </div>
@@ -317,7 +317,7 @@ async function renderHospitalLogin(hid){
     <div class="lpage narrow">
       <div class="lcard g gold">
         <div class="lbrand">
-          <div class="lmark shine anim" id="hlogo">✦</div>
+          <div class="lmark shine anim" id="hlogo"><img class="syn-ico" src="/img/synapse-mark-64.png" alt="سیناپس" width="26" height="26"></div>
           <h1 id="hname">در حال بارگذاری…</h1>
           <p>خدمت مورد نظر خود را انتخاب کنید</p>
         </div>

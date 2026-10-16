@@ -112,14 +112,14 @@ class AssistantService {
           if (chatRes && chatRes.reply) {
             responseText = chatRes.reply;
             citations.push('پایگاه دانش سنجه‌ها و اعتباربخشی ملی (نسخه ۵)');
-            citations.push(`سامانه جامع کیفیت بیمارستان — پرسونای ${persona.title}`);
+            citations.push(`سامانه جامع کیفیت بیمارستان — ${persona.title}`);
           }
         } catch (e) {
           console.warn('[AssistantService] assistantChat fallback error:', e.message);
         }
 
         if (!responseText) {
-          citations.push('پایگاه دانش یکپارچه سامانه ۳۱۳');
+          citations.push('پایگاه دانش یکپارچه سیناپس');
           responseText = `درود بر شما. به عنوان ${persona.title}، در خدمت شما هستم تا در زمینه ثبت فرم‌ها، بررسی دستورالعمل‌ها، سنجه‌های کیفیت و پیگیری امور بالینی به شما یاری برسانم. چطور می‌توانم کمکتان کنم؟`;
         }
       }

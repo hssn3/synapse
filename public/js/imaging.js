@@ -48,7 +48,7 @@ RPG.define({
         { k: 'certificate_no', l: 'شماره تأییدیه', t: 'text' },
         { k: 'valid_until', l: 'تاریخ اعتبار', t: 'date', list: 1 },
         { k: 'is_valid', l: 'معتبر', t: 'bool', computed: 1, list: 1,
-          render: (r) => r.is_valid ? '<span style="color:#0b7a3e">معتبر</span>'
+          render: (r) => r.is_valid ? '<span style="color:#17576e">معتبر</span>'
             : (r.valid_until ? '<b style="color:#c02626">منقضی</b>' : '—') },
         { k: 'result', l: 'نتیجه', t: 'select', opts: ['pass', 'fail'], fa: 'qc_result', list: 1, chip: 1 },
         { k: 'findings', l: 'یافته‌ها', t: 'area' },
@@ -69,7 +69,7 @@ RPG.define({
         { k: 'dose_msv', l: 'دز دریافتی (mSv) *', t: 'num', list: 1 },
         { k: 'dose_limit_msv', l: 'حد مجاز همان بازه (mSv) *', t: 'num', list: 1 },
         { k: 'over_limit', l: 'عبور از حد', t: 'bool', computed: 1, list: 1,
-          render: (r) => r.over_limit ? '<b style="color:#c02626">بله</b>' : '<span style="color:#0b7a3e">خیر</span>' },
+          render: (r) => r.over_limit ? '<b style="color:#c02626">بله</b>' : '<span style="color:#17576e">خیر</span>' },
         { k: 'action_taken', l: 'اقدام انجام‌شده (در صورت عبور)', t: 'area' },
         { k: 'reported_by', l: 'ثبت‌کننده', t: 'text' },
         { k: 'note', l: 'توضیح', t: 'area' },
@@ -107,7 +107,7 @@ RPG.define({
           render: (r) => {
             const m = r.minutes_to_report;
             if (m == null) return '—';
-            const c = m <= 15 ? '#0b7a3e' : (m <= 30 ? '#9a6b00' : '#c02626');
+            const c = m <= 15 ? '#17576e' : (m <= 30 ? '#9a6b00' : '#c02626');
             return `<b style="color:${c}">${fa(m)}</b>`;
           } },
         { k: 'receiver_name', l: 'گیرنده در بخش *', t: 'text', list: 1 },
@@ -138,23 +138,23 @@ RPG.define({
     return `
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px">
         ${c(d.devices, 'دستگاه فعال', '#1550b8', 'devices')}
-        ${c(d.devices_no_valid_qc, 'دستگاه بدون تأییدیه‌ی معتبر', d.devices_no_valid_qc ? '#c02626' : '#0b7a3e', 'qc')}
-        ${c(d.qc_expiring_60d, 'تأییدیه‌ی رو به انقضا (۶۰ روز)', d.qc_expiring_60d ? '#9a6b00' : '#0b7a3e', 'qc')}
-        ${c(d.devices_no_pacs, 'دستگاه بدون اتصال PACS', d.devices_no_pacs ? '#9a6b00' : '#0b7a3e', 'devices')}
+        ${c(d.devices_no_valid_qc, 'دستگاه بدون تأییدیه‌ی معتبر', d.devices_no_valid_qc ? '#c02626' : '#17576e', 'qc')}
+        ${c(d.qc_expiring_60d, 'تأییدیه‌ی رو به انقضا (۶۰ روز)', d.qc_expiring_60d ? '#9a6b00' : '#17576e', 'qc')}
+        ${c(d.devices_no_pacs, 'دستگاه بدون اتصال PACS', d.devices_no_pacs ? '#9a6b00' : '#17576e', 'devices')}
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px">
-        ${c(d.dosimetry_records, 'رکورد دزیمتری', d.dosimetry_records ? '#0b7a3e' : '#c02626', 'dosimetry')}
-        ${c(d.dosimetry_over_limit, 'عبور از حد مجاز دز', d.dosimetry_over_limit ? '#c02626' : '#0b7a3e', 'dosimetry')}
-        ${c(d.prep_missing_form, 'پروسیجر بدون فرم آمادگی', d.prep_missing_form ? '#c02626' : '#0b7a3e', 'prep')}
-        ${c(d.prep_not_available, 'فرم آماده ولی در دسترس بخش‌ها نیست', d.prep_not_available ? '#9a6b00' : '#0b7a3e', 'prep')}
+        ${c(d.dosimetry_records, 'رکورد دزیمتری', d.dosimetry_records ? '#17576e' : '#c02626', 'dosimetry')}
+        ${c(d.dosimetry_over_limit, 'عبور از حد مجاز دز', d.dosimetry_over_limit ? '#c02626' : '#17576e', 'dosimetry')}
+        ${c(d.prep_missing_form, 'پروسیجر بدون فرم آمادگی', d.prep_missing_form ? '#c02626' : '#17576e', 'prep')}
+        ${c(d.prep_not_available, 'فرم آماده ولی در دسترس بخش‌ها نیست', d.prep_not_available ? '#9a6b00' : '#17576e', 'prep')}
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap">
         ${c(d.critical_reports_90d, 'یافته‌ی بحرانی (۹۰ روز)', '#1550b8', 'criticalreports')}
         ${c(d.critical_avg_minutes == null ? '—' : d.critical_avg_minutes, 'میانگین فاصله تا اعلام (دقیقه)',
-          d.critical_avg_minutes == null ? '#6b7280' : (d.critical_avg_minutes <= 15 ? '#0b7a3e' : (d.critical_avg_minutes <= 30 ? '#9a6b00' : '#c02626')), 'criticalreports')}
+          d.critical_avg_minutes == null ? '#6b7280' : (d.critical_avg_minutes <= 15 ? '#17576e' : (d.critical_avg_minutes <= 30 ? '#9a6b00' : '#c02626')), 'criticalreports')}
         ${c(d.reviews_90d, 'بازبینی کیفیت (۹۰ روز — نیاز ۳)',
-          d.reviews_90d >= 3 ? '#0b7a3e' : (d.reviews_90d ? '#9a6b00' : '#c02626'), 'reviews')}
-        ${c(d.reviews_not_presented, 'بازبینی ارائه‌نشده به تیم رهبری', d.reviews_not_presented ? '#c02626' : '#0b7a3e', 'reviews')}
+          d.reviews_90d >= 3 ? '#17576e' : (d.reviews_90d ? '#9a6b00' : '#c02626'), 'reviews')}
+        ${c(d.reviews_not_presented, 'بازبینی ارائه‌نشده به تیم رهبری', d.reviews_not_presented ? '#c02626' : '#17576e', 'reviews')}
       </div>
       <div style="margin-top:16px;color:var(--mut);font-size:13px;line-height:2">
         «دستگاه بدون تأییدیه‌ی معتبر» یعنی هیچ کنترل کیفیِ سالانه‌ای که امروز هنوز اعتبار داشته باشد ندارد —

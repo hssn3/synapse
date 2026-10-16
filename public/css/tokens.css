@@ -4,23 +4,26 @@
 
 :root {
   /* Backgrounds — عمق تیره نیلگون */
-  --bg-primary:    #0b1613;
-  --bg-secondary:  #0f1d19;
-  --bg-tertiary:   #14231d;
-  --bg-elevated:   #1a2c25;
-  --bg-overlay:    rgba(11, 22, 19, 0.85);
+  --bg-primary:    #081222;
+  --bg-secondary:  #0b1830;
+  --bg-tertiary:   #0f1f3a;
+  --bg-elevated:   #15294a;
+  --bg-overlay:    rgba(8, 18, 34, 0.85);
 
   /* Accents — طلا و زمرد */
   --accent-gold:        #d4a862;
   --accent-gold-bright: #f0c987;
   --accent-gold-dim:    rgba(212, 168, 98, 0.15);
-  --accent-emerald:     #2ecc8e;
-  --accent-emerald-dim: rgba(46, 204, 142, 0.12);
+  --accent-emerald:     #3ec6d8;
+  --accent-emerald-dim: rgba(62, 198, 216, 0.12);
+  --accent-cyan:        #3ec6d8;
+  --accent-cyan-bright: #5fd9ea;
+  --accent-cyan-dim:    rgba(62, 198, 216, 0.12);
 
   /* Text */
-  --text-primary:  #e8ede9;
-  --text-secondary:#a8b5ae;
-  --text-muted:    #6b7873;
+  --text-primary:  #e9eef3;
+  --text-secondary:#a9b7c4;
+  --text-muted:    #6e7b8a;
   --text-on-gold:  #1a1208;
 
   /* Semantic */
@@ -39,7 +42,8 @@
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
   --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.6);
   --shadow-glow-gold: 0 0 24px rgba(212, 168, 98, 0.25);
-  --shadow-glow-emerald: 0 0 24px rgba(46, 204, 142, 0.20);
+  --shadow-glow-emerald: 0 0 24px rgba(62, 198, 216, 0.20);
+  --shadow-glow-cyan: 0 0 26px rgba(62, 198, 216, 0.28);
 
   /* Radii */
   --radius-sm: 6px;

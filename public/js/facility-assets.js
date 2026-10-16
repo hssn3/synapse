@@ -14,9 +14,9 @@ const FAS = { view: 'due', list: [], due: null, detail: null, filters: { categor
 
 const FAS_STATUS_FA = { active: 'فعال', out_of_service: 'خارج از سرویس', scrapped: 'اسقاط' };
 const FAS_RESULT_FA = { ok: 'سالم / منطبق', needs_action: 'نیازمند اقدام', failed: 'مردود' };
-const FAS_RESULT_CLR = { ok: '#0b7a3e', needs_action: '#9a6b00', failed: '#c02626' };
+const FAS_RESULT_CLR = { ok: '#17576e', needs_action: '#9a6b00', failed: '#c02626' };
 const FAS_DUE_FA = { overdue: 'سررسید گذشته', due_soon: 'نزدیک سررسید', ok: 'در مهلت', unknown: 'بدون سررسید' };
-const FAS_DUE_CLR = { overdue: '#c02626', due_soon: '#9a6b00', ok: '#0b7a3e', unknown: '#6b7280' };
+const FAS_DUE_CLR = { overdue: '#c02626', due_soon: '#9a6b00', ok: '#17576e', unknown: '#6b7280' };
 const FAS_CATEGORIES = ['تجهیزات پزشکی', 'تأسیسات', 'بهداشت محیط', 'ایمنی و آتش‌نشانی', 'خودرو', 'سایر'];
 const FAS_RISK = ['بحرانی', 'زیاد', 'متوسط', 'کم'];
 const FAS_KINDS = ['کالیبراسیون', 'نگهداشت پیشگیرانه', 'بازرسی', 'آزمون/نمونه‌برداری', 'تمدید مجوز', 'سرویس دوره‌ای'];

@@ -12,7 +12,7 @@ async function enterApp(){
         <div class="lux-boot-logo-wrap">
           <img src="${logoSrc}" alt="نشان مرکز درمانی" class="lux-boot-logo-img" onerror="this.src='/img/hospital-logo-sample.svg'">
         </div>
-        <div class="lux-boot-brand">سامانه نوین جامع اطلاعات بیمارستانی و اعتباربخشی</div>
+        <div class="lux-boot-brand">سیناپس</div>
         <div class="lux-boot-sub">در حال بروزرسانی و دریافت داده‌ها از سرور…</div>
 
         <div class="lux-boot-prog-row">
