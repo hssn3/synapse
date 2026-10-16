@@ -11,6 +11,11 @@
  *   یا: SMOKE_BASE_URL=... node --test tests/rbac-endpoint-matrix.test.js
  *
  * داده‌ها: بیمارستان دموی ساختگی. هیچ داده واقعی.
+ *
+ * نسخه‌ی گسترده‌شده (۱۴۰۵/۰۷/۲۴): خانواده‌ی گاردهای تازه (چت دستیار، خروجی‌های xlsx،
+ * خانواده‌ی درختْ/status/scoring/dashboard/history/trend و KPI) + قراردادِ همگامیِ
+ * دو مرجع مجوز: assistant:chat:use باید برای همه‌ی نقش‌های پایه (جز anonymous_reporter)
+ * هم در JSON و هم در NIST باشد، و کلیدهای JSON نقش‌ها در my-permissions آینه شوند.
  */
 'use strict';
 const { describe, it, before } = require('node:test');
@@ -26,6 +31,11 @@ const USERS = {
   staff_nurse: 'a49eea44-f95c-459d-8e20-7d96f59206ec',
   accreditation_manager: '9a5a5df4-0c44-4700-9466-c15b463be1cf',
   hospital_president: '59995d03-9854-4597-a8be-a039d70ddeac',
+  // نقش‌های مرزیِ گاردهای تازه (اتحاد خانواده‌ی درخت / BSC / چک‌لیست)
+  quality_control_manager: '86d4b9a8-0f31-446d-8610-e1bed1a813fb',
+  clinical_supervisor: 'cd5081cc-e0ad-4d01-9c8e-d91adc440eaf',
+  social_worker: '073eeec7-11a3-4764-998a-5019f73523d0',
+  nursing_office_assistant: '829c22db-5e60-4ee0-85de-0157d7cb66f3',
 };
 
 // نشست هر نقش را یک‌بار می‌گیریم
@@ -266,5 +276,256 @@ describe('🛡️ RBAC endpoint matrix (HTTP, no UI)', () => {
     const adminPerms = (await req(sessions.admin.cookie, '/api/rbac/my-permissions')).data.permissions || [];
     const nursePerms = (await req(sessions.staff_nurse.cookie, '/api/rbac/my-permissions')).data.permissions || [];
     assert.ok(adminPerms.length > nursePerms.length, 'admin should have more permissions than nurse');
+  });
+
+  // ---------- ۱۶) چت دستیار: گاردِ assistant:chat:use (بندِ معلقِ DECISIONS #3) ----------
+  // چرا متنِ خالی: ترتیبِ هندلر «گارد → اعتبارسنجی» است. پس اگر گارد رد کند ۴۰۳ با
+  // required_permission می‌آید و اگر رد نکند ۴۰۰ اعتبارسنجی — یعنی عبور از گارد بدون
+  // فراخوانیِ لایه‌ی مدل. همین، تست را قطعی و آفلاین می‌کند.
+  it('assistant chat: anonymous 401, session passes guard (no model call)', async () => {
+    const anonLegacy = await fetch(`${BASE}/api/assistant/chat`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text: '' }),
+    });
+    assert.equal(anonLegacy.status, 401, 'anonymous legacy chat must be 401');
+    const anonEnt = await fetch(`${BASE}/api/assistant-enterprise/chat`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ message: '' }),
+    });
+    assert.equal(anonEnt.status, 401, 'anonymous enterprise chat must be 401');
+
+    const c = sessions.staff_nurse.cookie;
+    const r1 = await req(c, '/api/assistant/chat', { method: 'POST', body: { text: '' } });
+    assert.notEqual(r1.status, 401);
+    assert.ok(!(r1.data && r1.data.required_permission === 'assistant:chat:use'),
+      `staff_nurse blocked by legacy chat guard: ${r1.status} ${JSON.stringify(r1.data)}`);
+
+    const r2 = await req(c, '/api/assistant-enterprise/chat', { method: 'POST', body: { message: '' } });
+    assert.notEqual(r2.status, 401);
+    assert.ok(!(r2.data && r2.data.required_permission === 'assistant:chat:use'),
+      `staff_nurse blocked by enterprise chat guard: ${r2.status} ${JSON.stringify(r2.data)}`);
+  });
+
+  // ---------- ۱۷) چت دستیار: نقشِ محروم (anonymous_reporter) ۴۰۳ می‌گیرد ----------
+  // کاربرِ موقت با نقشِ ثبت‌کننده‌ی ناشناس ساخته می‌شود (روی دیتابیس دموی ساختگی)
+  // و در finally پاک می‌شود — الگوی mid-session test بالاتر.
+  it('assistant chat: anonymous_reporter role is denied across both chat routes', async () => {
+    const { query } = require('../src/config/database-sqlite');
+    const role = query("SELECT id FROM roles WHERE code = 'anonymous_reporter'").rows[0];
+    assert.ok(role, 'anonymous_reporter role must exist');
+    const uid = 'ffffffff-0000-4000-8000-00000000cafe';
+    const uname = 'zz.rbac.matrix.temp';
+    // ترتیب مهم است: ورود و ردیابیِ ردِ گارد، سطرِ audit_log می‌سازند و audit_log.user_id
+    // قیدِ خارجیِ بدونِ CASCADE دارد؛ بدونِ پاک‌سازیِ آن، حذفِ کاربر با خطای قید شکست می‌خورد.
+    const cleanup = () => {
+      query('DELETE FROM audit_log WHERE user_id = ?', [uid]);
+      query('DELETE FROM users WHERE id = ? OR username = ?', [uid, uname]);
+    };
+    cleanup();   // باقی‌مانده‌ی احتمالیِ اجرای نیمه‌کاره‌ی قبلی
+    try {
+      query(`INSERT INTO users (id, hospital_id, full_name, username, password_hash, role_id, is_active)
+             VALUES (?, ?, 'کاربرِ آزمون ماتریس RBAC', ?, 'x', ?, 1)`,
+        [uid, HOSPITAL_ID, uname, role.id]);
+      const s = await loginAs(uid);
+
+      const r1 = await req(s.cookie, '/api/assistant/chat', { method: 'POST', body: { text: 'تست ماتریس' } });
+      assert.equal(r1.status, 403, `anonymous_reporter legacy chat must be 403, got ${r1.status}`);
+      assert.equal(r1.data && r1.data.required_permission, 'assistant:chat:use');
+
+      const r2 = await req(s.cookie, '/api/assistant-enterprise/chat', { method: 'POST', body: { message: 'تست ماتریس' } });
+      assert.equal(r2.status, 403, `anonymous_reporter enterprise chat must be 403, got ${r2.status}`);
+
+      // سمت NIST هم نباید کلید را داشته باشد (سید آن را مستثنا کرده است)
+      const mp = await req(s.cookie, '/api/rbac/my-permissions');
+      assert.equal(mp.status, 200);
+      assert.ok(!(mp.data.permissions || []).includes('assistant:chat:use'),
+        'anonymous_reporter must not see assistant:chat:use in my-permissions');
+    } finally {
+      cleanup();
+    }
+  });
+
+  // ---------- ۱۸) همگامیِ JSON↔NIST: هر نقشِ پایه کلیدِ دانا را در هر دو مرجع دارد ----------
+  it('permission reconciliation: assistant:chat:use present in JSON and NIST for every base role', async () => {
+    const { query } = require('../src/config/database-sqlite');
+    const roles = query('SELECT id, code, permissions FROM roles WHERE hospital_id IS NULL').rows;
+    const nistIds = new Set(query(`
+      SELECT rp.role_id FROM role_permissions rp
+      JOIN permissions p ON p.id = rp.permission_id
+      WHERE p.key = 'assistant:chat:use'`).rows.map(x => x.role_id));
+    const missingJson = [], missingNist = [];
+    for (const r of roles) {
+      if (r.code === 'anonymous_reporter') continue;
+      let keys = [];
+      try { keys = JSON.parse(r.permissions || '[]'); } catch (e) { keys = []; }
+      if (!keys.includes('assistant:chat:use')) missingJson.push(r.code);
+      if (!nistIds.has(r.id)) missingNist.push(r.code);
+    }
+    assert.deepEqual(missingJson, [], 'base roles missing assistant:chat:use in roles.permissions');
+    assert.deepEqual(missingNist, [], 'base roles missing the NIST mapping');
+
+    // و سینکِ عمومی: کلیدهای JSON پرستار باید در NIST آینه شده باشند
+    const sn = query("SELECT id FROM roles WHERE code = 'staff_nurse'").rows[0];
+    assert.ok(sn, 'staff_nurse role must exist');
+    const nistKeys = new Set(query(`
+      SELECT p.key FROM role_permissions rp
+      JOIN permissions p ON p.id = rp.permission_id
+      WHERE rp.role_id = ?`, [sn.id]).rows.map(x => x.key));
+    for (const k of ['view_own_dashboard', 'submit_checklists', 'manage_patient_followup']) {
+      assert.ok(nistKeys.has(k), `staff_nurse JSON key «${k}» must be mirrored into NIST`);
+    }
+  });
+
+  it('my-permissions (NIST path): staff_nurse includes assistant:chat:use and mirrored JSON keys', async () => {
+    const r = await req(sessions.staff_nurse.cookie, '/api/rbac/my-permissions');
+    assert.equal(r.status, 200);
+    const perms = (r.data && r.data.permissions) || [];
+    assert.ok(perms.includes('assistant:chat:use'), 'my-permissions must include assistant:chat:use');
+    assert.ok(perms.includes('view_own_dashboard'), 'my-permissions must include mirrored JSON keys');
+    assert.ok(perms.includes('submit_checklists'), 'my-permissions must include mirrored JSON keys');
+  });
+
+  // ---------- ۱۹) خروجی‌های xlsx: اتحادِ هر خانواده ----------
+  it('export xlsx guards: family union allows members, denies others', async () => {
+    const getRaw = async (cookie, path) => {
+      const r = await fetch(`${BASE}${path}`, { headers: { cookie } });
+      await r.arrayBuffer().catch(() => {});
+      return r.status;
+    };
+    const nurse = sessions.staff_nurse.cookie;
+    const pres = sessions.hospital_president.cookie;
+    const social = sessions.social_worker.cookie;
+
+    // measures.xlsx — پرستار (view_measure_status_readonly) مجاز، مددکار ممنوع
+    assert.equal(await getRaw(nurse, '/api/export/measures.xlsx'), 200);
+    assert.equal(await getRaw(social, '/api/export/measures.xlsx'), 403);
+
+    // bsc.xlsx — ریاست (view_bsc) مجاز، پرستار ممنوع
+    assert.equal(await getRaw(pres, '/api/export/bsc.xlsx'), 200);
+    assert.equal(await getRaw(nurse, '/api/export/bsc.xlsx'), 403);
+
+    // checklists/:id.xlsx — پرستار (submit_checklists) مجاز، ریاست بدونِ مجوز چک‌لیست ممنوع
+    const list = await req(nurse, '/api/checklists');
+    assert.equal(list.status, 200);
+    const clId = ((list.data && list.data.checklists) || [])[0] && (list.data.checklists || [])[0].id;
+    assert.ok(clId, 'demo checklist must exist');
+    assert.equal(await getRaw(nurse, `/api/export/checklists/${clId}.xlsx`), 200);
+    assert.equal(await getRaw(pres, `/api/export/checklists/${clId}.xlsx`), 403);
+  });
+
+  // ---------- ۲۰) خانواده‌ی درخت: status/dashboard/scoring/history/trend ----------
+  it('accreditation family: viewers allowed, social_worker denied', async () => {
+    const nurse = sessions.staff_nurse.cookie;
+    const clinSup = sessions.clinical_supervisor.cookie;
+    const social = sessions.social_worker.cookie;
+
+    assert.equal((await req(nurse, '/api/accreditation/status')).status, 200);
+    assert.equal((await req(nurse, '/api/accreditation/dashboard')).status, 200);
+    assert.equal((await req(nurse, '/api/accreditation/scoring')).status, 200);
+    // سوپروایزر بالینی فقط edit_measure_status دارد — باید از اتحاد عبور کند
+    assert.equal((await req(clinSup, '/api/accreditation/status')).status, 200);
+
+    assert.equal((await req(social, '/api/accreditation/status')).status, 403);
+    assert.equal((await req(social, '/api/accreditation/dashboard')).status, 403);
+    assert.equal((await req(social, '/api/accreditation/scoring')).status, 403);
+
+    // history/trend روی یک سنجه‌ی واقعی از درخت پرستار
+    const tree = await req(nurse, '/api/accreditation/tree');
+    assert.equal(tree.status, 200);
+    let measureId = null;
+    (function find(nodes) {
+      for (const n of nodes || []) {
+        if (n.level_type === 'measure') { measureId = n.id; return; }
+        if (n.children && !measureId) find(n.children);
+      }
+    })(tree.data && tree.data.tree);
+    assert.ok(measureId, 'a measure must be visible in staff_nurse tree');
+    assert.equal((await req(nurse, `/api/measures/${measureId}/history`)).status, 200);
+    assert.equal((await req(nurse, `/api/measures/${measureId}/trend`)).status, 200);
+    assert.equal((await req(social, `/api/measures/${measureId}/history`)).status, 403);
+    assert.equal((await req(social, `/api/measures/${measureId}/trend`)).status, 403);
+  });
+
+  // ---------- ۲۱) خانواده‌ی KPI: unión شاخص/BSC/داشبورد ----------
+  it('kpis family: president (view_bsc/view_all_dashboards) allowed, staff_nurse denied', async () => {
+    const pres = sessions.hospital_president.cookie;
+    const nurse = sessions.staff_nurse.cookie;
+    for (const path of ['/api/kpis', '/api/kpis/rankings', '/api/kpis/dashboard']) {
+      assert.equal((await req(pres, path)).status, 200, `president ${path} should be 200`);
+      assert.equal((await req(nurse, path)).status, 403, `staff_nurse ${path} should be 403`);
+    }
+  });
+
+  // ---------- ۲۲) سینکِ زنده‌ی نقش سفارشی: create/update پنل باید NIST را آینه کند ----------
+  it('custom role lifecycle: panel create/update mirrors JSON into NIST exactly', async () => {
+    const { query } = require('../src/config/database-sqlite');
+    const admin = sessions.admin.cookie;
+    const code = 'zz_rbac_test_role';
+    const cleanup = () => {
+      const row = query('SELECT id FROM roles WHERE code = ?', [code]).rows[0];
+      if (!row) return;
+      query('DELETE FROM role_permissions WHERE role_id = ?', [row.id]);
+      query('DELETE FROM roles WHERE id = ?', [row.id]);
+    };
+    const nistKeysOf = (roleId) => query(`
+      SELECT p.key FROM role_permissions rp
+      JOIN permissions p ON p.id = rp.permission_id
+      WHERE rp.role_id = ?`, [roleId]).rows.map(x => x.key).sort();
+    cleanup();
+    try {
+      const create = await req(admin, '/api/roles', {
+        method: 'POST',
+        body: { code, title_fa: 'نقش آزمایشی ماتریس RBAC', permissions: ['view_bsc', 'view_indicators'] },
+      });
+      assert.equal(create.status, 201, `role create: ${create.status} ${JSON.stringify(create.data)}`);
+      const roleId = create.data.role.id;
+      assert.deepEqual(nistKeysOf(roleId), ['view_bsc', 'view_indicators'],
+        'create must mirror the JSON permission list into NIST');
+
+      // ویرایش: یکی حذف، یکی افزوده — آینه باید دقیق باشد، نه افزایشی؛
+      // اگر سلبِ مجوز در NIST باقی بماند، دکمه‌ی my-permissions/authorize کهنه می‌ماند.
+      const upd = await req(admin, `/api/roles/${roleId}`, {
+        method: 'PUT',
+        body: { permissions: ['view_bsc', 'view_all_dashboards'] },
+      });
+      assert.equal(upd.status, 200);
+      assert.deepEqual(nistKeysOf(roleId), ['view_all_dashboards', 'view_bsc'],
+        'update must mirror exactly (removed key must disappear from NIST)');
+    } finally {
+      cleanup();
+    }
+  });
+
+  // ---------- ۲۳) grant/revoke: JSON-اول (هر دو مرجع با هم) ----------
+  it('rbac grant/revoke updates both JSON and NIST', async () => {
+    const { query } = require('../src/config/database-sqlite');
+    const admin = sessions.admin.cookie;
+    const roleRow = query("SELECT id, permissions FROM roles WHERE code = 'accreditation_manager'").rows[0];
+    assert.ok(roleRow, 'accreditation_manager role must exist');
+    const originalKeys = JSON.parse(roleRow.permissions || '[]');
+    const KEY = 'manage_users';    // انتظار: این نقش آن را ندارد (نقش اداری است نه ادمین سامانه)
+    const hasMapping = () => !!query(`
+      SELECT rp.id FROM role_permissions rp
+      JOIN permissions p ON p.id = rp.permission_id
+      WHERE rp.role_id = ? AND p.key = ?`, [roleRow.id, KEY]).rows[0];
+    const restore = () => {
+      query('UPDATE roles SET permissions = ? WHERE id = ?', [JSON.stringify(originalKeys), roleRow.id]);
+      query(`DELETE FROM role_permissions WHERE role_id = ? AND permission_id = (SELECT id FROM permissions WHERE key = ?)`,
+        [roleRow.id, KEY]);
+    };
+    if (originalKeys.includes(KEY)) { restore(); }
+    try {
+      const g = await req(admin, '/api/rbac/grant', { method: 'POST', body: { role_code: 'accreditation_manager', permission_key: KEY } });
+      assert.equal(g.status, 200, `grant: ${g.status} ${JSON.stringify(g.data)}`);
+      const afterGrant = JSON.parse(query('SELECT permissions FROM roles WHERE id = ?', [roleRow.id]).rows[0].permissions);
+      assert.ok(afterGrant.includes(KEY), 'grant must append the key to roles.permissions (JSON)');
+      assert.ok(hasMapping(), 'grant must create the NIST mapping');
+
+      const rv = await req(admin, '/api/rbac/revoke', { method: 'POST', body: { role_code: 'accreditation_manager', permission_key: KEY } });
+      assert.equal(rv.status, 200, `revoke: ${rv.status} ${JSON.stringify(rv.data)}`);
+      const afterRevoke = JSON.parse(query('SELECT permissions FROM roles WHERE id = ?', [roleRow.id]).rows[0].permissions);
+      assert.ok(!afterRevoke.includes(KEY), 'revoke must remove the key from JSON');
+      assert.ok(!hasMapping(), 'revoke must remove the NIST mapping');
+    } finally {
+      restore();
+    }
   });
 });

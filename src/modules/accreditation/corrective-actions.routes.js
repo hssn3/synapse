@@ -312,15 +312,21 @@ router.put('/accreditation/eval-method/:measureId', authRequired,
 });
 
 /* ضریب وزنی سطح سنجه — از platform_settings، نه از کد. کلاینت همین را
-   می‌خواند تا محاسبه‌ی سمت مرورگر و سمت سرور یکی بماند. */
+   می‌خواند تا محاسبه‌ی سمت مرورگر و سمت سرور یکی بماند.
+   گارد: همان اتحادِ خانواده‌ی درخت. خودِ مقادیر سراسری (platform_settings) است،
+   پس hospitalScope لازم نیست — فقط «چه کسی اجازه‌ی دیدنِ مقیاسِ امتیازدهی دارد». */
 const scoringWeights = require('../../../database/seed-scoring-weights');
-router.get('/accreditation/scoring', authRequired, (req, res) => {
+router.get('/accreditation/scoring', authRequired,
+  requireAnyPermission('view_accreditation_full_tree', 'edit_measure_status', 'view_measure_status_readonly'),
+  (req, res) => {
   try { res.json({ level_weights: scoringWeights.read() }); }
   catch (err) { res.status(500).json({ error: 'خطای سرور' }); }
 });
 
-// Accreditation dashboard
-router.get('/accreditation/dashboard', authRequired, hospitalScope, (req, res) => {
+// Accreditation dashboard — همان اتحادِ خانواده‌ی درخت (مصرف‌کننده‌اش همان UI اعتباربخشی است)
+router.get('/accreditation/dashboard', authRequired,
+  requireAnyPermission('view_accreditation_full_tree', 'edit_measure_status', 'view_measure_status_readonly'),
+  hospitalScope, (req, res) => {
   try {
     const overall = query(`SELECT
       SUM(CASE WHEN ms.status = 'full_compliant' THEN 1 ELSE 0 END) as full_compliant,

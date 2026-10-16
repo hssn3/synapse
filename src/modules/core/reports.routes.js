@@ -98,21 +98,27 @@ router.get('/users/audit-log', authRequired, requirePermission('view_audit_log')
 });
 
 // ===== KPIs =====
-router.get('/kpis', authRequired, hospitalScope, (req, res) => {
+// گاردِ مجوز (ممیزی AUDIT §9): این سه مسیر فقط خواندنی‌اند ولی داده‌ی شاخص‌ها/BSC را
+// برمی‌گردانند. اتحاد چهارگانه، مصرف‌کننده‌های واقعی را پوشش می‌دهد (view/manage شاخص،
+// BSC و داشبوردهای مدیریتی)؛ هیچ مصرف‌کننده‌ی فرانتی خارج از این مجموعه پیدا نشد.
+const KPI_VIEW_UNION = ['view_bsc', 'view_indicators', 'manage_indicators', 'view_all_dashboards'];
+router.get('/kpis', authRequired, requireAnyPermission(...KPI_VIEW_UNION), hospitalScope, (req, res) => {
   try {
     const result = query('SELECT * FROM hospital_kpis WHERE hospital_id = ? AND is_active = 1 ORDER BY category, title', [req.hospitalId]);
     res.json({ kpis: result.rows });
   } catch (err) { res.status(500).json({ error: 'خطای سرور' }); }
 });
 
-router.get('/kpis/rankings', authRequired, (req, res) => {
+// جدول رتبه‌بندی نسل ۶ مرجعِ سراسری است (hospital_id ندارد) — hospitalScope فقط
+// زمینه‌ی بیمارستان را تنظیم می‌کند و غیابِ آن را زودتر و با پیامِ صریح رد می‌کند.
+router.get('/kpis/rankings', authRequired, requireAnyPermission(...KPI_VIEW_UNION), hospitalScope, (req, res) => {
   try {
     const result = query('SELECT * FROM gen6_rankings ORDER BY min_total_percent DESC');
     res.json({ rankings: result.rows });
   } catch (err) { res.status(500).json({ error: 'خطای سرور' }); }
 });
 
-router.get('/kpis/dashboard', authRequired, hospitalScope, (req, res) => {
+router.get('/kpis/dashboard', authRequired, requireAnyPermission(...KPI_VIEW_UNION), hospitalScope, (req, res) => {
   try {
     const kpis = query('SELECT * FROM hospital_kpis WHERE hospital_id = ? AND is_active = 1 ORDER BY category, title', [req.hospitalId]).rows;
     const grouped = {};

@@ -5,6 +5,9 @@
 const express = require('express');
 const router = express.Router();
 const common = require('../common');
+// گاردِ NIST برای مسیرِ چت (پایین). چرا import مستقیم و نه از common: authorize فقط
+// همین‌جا لازم است و common برای هر مصرف‌کننده‌ی تازه پهن‌تر از حدِ لازم می‌شود.
+const { authorize } = require('../rbac/authorize.middleware');
 const {
   query, db, authRequired, requirePermission, requireAnyPermission,
   hospitalScope, requireFeature, scopeFor, axisCodeOf, measureAllowed,
@@ -215,7 +218,10 @@ router.get('/assistant/status', authRequired, hospitalScope, (req, res) => {
   res.json({ chat_enabled: assistantChatEnabled(req.hospitalId) });
 });
 
-router.post('/assistant/chat', authRequired, hospitalScope, async (req, res) => {
+// گاردِ مجوز از امروز فعال است (بندِ معلقِ docs/DECISIONS.md #3). قبل از hospitalScope
+// می‌آید تا ردِ بی‌مجوز حتی به واکشیِ نام بیمارستان هم نرسد؛ خودِ گارد بعد از رد،
+// درخواست را در audit_log ثبت می‌کند.
+router.post('/assistant/chat', authRequired, authorize('assistant:chat', 'use'), hospitalScope, async (req, res) => {
   const text = typeof req.body.text === 'string' ? req.body.text.trim() : '';
   if (!text || text.length > 2000) return res.status(400).json({ error: 'متن نامعتبر است' });
   if (!assistantChatEnabled(req.hospitalId)) {

@@ -29,7 +29,11 @@ const { todayJalali } = require('../config/jalali');
 // ========================== خروجی Excel ==========================
 
 // --- سنجه‌ها ---
-router.get('/export/measures.xlsx', authRequired, hospitalScope, async (req, res) => {
+// گاردِ مجوز (ممیزی AUDIT §9): مصرف‌کننده‌ها UIِ گزارش‌ها (export_reports) و نمای
+// اعتباربخشی (درخت)اند — اتحاد سه‌گانه همان الگوی خط ۹۷ در tree.routes.js است.
+router.get('/export/measures.xlsx', authRequired,
+  requireAnyPermission('export_reports', 'view_accreditation_full_tree', 'view_measure_status_readonly'),
+  hospitalScope, async (req, res) => {
   try {
     const year = req.query.year || todayJalali().jy;
     const rows = query(`
@@ -157,7 +161,10 @@ router.get('/export/users.xlsx', authRequired, requirePermission('manage_users')
 });
 
 // --- BSC: مقادیر ماهانه + شاخص‌ها ---
-router.get('/export/bsc.xlsx', authRequired, hospitalScope, async (req, res) => {
+// گارد: همان اتحادِ موجزِ خط ۸۲ (view/manage_bsc) — مصرف‌کننده‌ی اصلی، دکمه‌ی خروجی
+// در bsc-view.js است که خودش پشت همین مجوزهاست.
+router.get('/export/bsc.xlsx', authRequired,
+  requireAnyPermission('view_bsc', 'manage_bsc'), hospitalScope, async (req, res) => {
   try {
     const year = parseInt(req.query.year) || todayJalali().jy;
     const rows = query(`
@@ -195,7 +202,10 @@ router.get('/export/bsc.xlsx', authRequired, hospitalScope, async (req, res) => 
 });
 
 // --- چک‌لیست خاص: اقلام + ارسال‌ها ---
-router.get('/export/checklists/:id.xlsx', authRequired, hospitalScope, async (req, res) => {
+// گارد: دقیقاً همان اتحادِ خروجی CSV چک‌لیست (src/modules/quality/checklists-submissions.routes.js:105)
+// تا xlsx و csv یک رفتار داشته باشند.
+router.get('/export/checklists/:id.xlsx', authRequired,
+  requireAnyPermission('submit_checklists', 'manage_checklists'), hospitalScope, async (req, res) => {
   try {
     const cl = query('SELECT id, title FROM checklists WHERE id = ? AND hospital_id = ?', [req.params.id, req.hospitalId]).rows[0];
     if (!cl) return res.status(404).json({ error: 'چک‌لیست یافت نشد' });
@@ -233,7 +243,10 @@ router.get('/export/checklists/:id.xlsx', authRequired, hospitalScope, async (re
 // ==================== تاریخچه وضعیت سنجه ====================
 
 // --- GET /api/measures/:id/history — لیست تغییرات وضعیت یک سنجه ---
-router.get('/measures/:id/history', authRequired, hospitalScope, (req, res) => {
+// گارد: خانواده‌ی درخت (این داده در جزئیاتِ سنجه، داخل همان نما نمایش داده می‌شود).
+router.get('/measures/:id/history', authRequired,
+  requireAnyPermission('view_accreditation_full_tree', 'edit_measure_status', 'view_measure_status_readonly'),
+  hospitalScope, (req, res) => {
   try {
     const rows = query(`
       SELECT msh.id, msh.old_status, msh.new_status, msh.changed_at, msh.note,
@@ -263,7 +276,10 @@ router.get('/measures/:id/history', authRequired, hospitalScope, (req, res) => {
 });
 
 // --- GET /api/measures/:id/trend — داده‌ی روند ماه‌به‌ماه ---
-router.get('/measures/:id/trend', authRequired, hospitalScope, (req, res) => {
+// گارد: همان خانواده‌ی درخت (نمودارِ روند در جزئیاتِ سنجه).
+router.get('/measures/:id/trend', authRequired,
+  requireAnyPermission('view_accreditation_full_tree', 'edit_measure_status', 'view_measure_status_readonly'),
+  hospitalScope, (req, res) => {
   try {
     const rows = query(`
       SELECT msh.new_status as status, msh.changed_at,

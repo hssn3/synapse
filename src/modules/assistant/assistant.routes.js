@@ -22,8 +22,12 @@ const MAX_MESSAGE_CHARS = 4000;
 // افزودن signal به chatComplete و fetchهایش.
 const PROVIDER_TIMEOUT_MS = 30000;
 
-// گفتگوی هوشمند مقید به نقش با پرسونای متناظر
-router.post('/chat', authRequired, async (req, res) => {
+// گفتگوی هوشمند مقید به نقش با پرسونای متناظر.
+// گاردِ مجوز assistant:chat:use از امروز فعال است (بندِ معلقِ docs/DECISIONS.md #3):
+// seed-assistant-access این کلید را افزودنی به همه‌ی نقش‌های پایه جز anonymous_reporter
+// داده و seed-rbac-nist-sync نگاشتِ NIST را همگام می‌کند — پس هیچ کاربرِ فعالی پس نمی‌افتد
+// و تنها ردِ عمدی، نقشِ ثبت‌کننده‌ی ناشناس است.
+router.post('/chat', authRequired, authorize('assistant:chat', 'use'), async (req, res) => {
   try {
     const { message, context } = req.body;
     if (!message) {

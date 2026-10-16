@@ -350,7 +350,14 @@ router.get('/accreditation/measures/:code/artifacts', authRequired, hospitalScop
   }
 });
 
-router.get('/accreditation/status', authRequired, hospitalScope, (req, res) => {
+// همان اتحادِ مجوزِ درخت (خط ۹۷): هر که درخت را می‌بیند، فهرست وضعیت را هم لازم دارد
+// (S.statusMap در data-loader از همین ساخته می‌شود) — سنجه‌ی گارد برای این GET جای
+// authorize اینجا requireAnyPermission است تا خواندنِ وضعیت برای نقش‌های edit-only
+// (سوپروایزر بالینی/کنترل عفونت) نشکند. فقط دو نقشِ بدونِ UIِ درخت ۴۰۳ می‌گیرند که
+// لودر آن را swallow می‌کند (canSeeTree=false → درخواست هم زده نمی‌شود).
+router.get('/accreditation/status', authRequired,
+  requireAnyPermission('view_accreditation_full_tree', 'edit_measure_status', 'view_measure_status_readonly'),
+  hospitalScope, (req, res) => {
   try {
     const year = statusYear(req);
     const result = query(`SELECT ms.*, m.code as measure_code, u.full_name as reviewer_name
