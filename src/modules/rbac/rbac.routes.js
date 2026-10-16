@@ -53,18 +53,29 @@ router.get('/matrix', authRequired, authorize('system:rbac', 'view'), (req, res)
 });
 
 // ۳. اعطای مجوز به یک نقش
+// قرارداد مرجع‌بودنِ JSON (src/services/rbac-sync.js): اول ستون roles.permissions
+// و بعد نگاشت NIST. چرا ترتیب مهم است: اگر فقط NIST را اضافه کنیم، سینکِ بعدی برای
+// نقش سفارشی (آینه‌ی دقیق) آن را دوباره حذف می‌کند چون کلید در JSON نیست — یعنی
+// «اعطا» مثل بازه‌ی موقت تا بوتِ بعدی می‌شد.
 router.post('/grant', authRequired, authorize('system:rbac', 'manage'), (req, res) => {
   const { role_code, permission_key } = req.body;
   if (!role_code || !permission_key) {
     return res.status(400).json({ error: 'role_code و permission_key الزامی هستند' });
   }
 
-  const role = db.prepare('SELECT id FROM roles WHERE code = ?').get(role_code);
+  const role = db.prepare('SELECT id, hospital_id, permissions FROM roles WHERE code = ?').get(role_code);
   const perm = db.prepare('SELECT id FROM permissions WHERE key = ?').get(permission_key);
   if (!role || !perm) {
     return res.status(404).json({ error: 'نقش یا مجوز مورد نظر یافت نشد' });
   }
 
+  let keys = [];
+  try { keys = JSON.parse(role.permissions || '[]'); } catch (e) { keys = []; }
+  if (!Array.isArray(keys)) keys = [];
+  if (!keys.includes(permission_key)) {
+    keys.push(permission_key);
+    db.prepare('UPDATE roles SET permissions = ? WHERE id = ?').run(JSON.stringify(keys), role.id);
+  }
   db.prepare(`
     INSERT OR IGNORE INTO role_permissions (id, role_id, permission_id)
     VALUES (?, ?, ?)
@@ -74,16 +85,27 @@ router.post('/grant', authRequired, authorize('system:rbac', 'manage'), (req, re
 });
 
 // ۴. سلب مجوز از یک نقش
+// آینه‌ی grant: هم از JSON حذف می‌شود (وگرنه سینکِ افزودنیِ بوت دوباره برش می‌گرداند)
+// و هم نگاشت NIST — چون سینک فقط ADD می‌کند و بدون حذفِ صریح، اینجا مجوز «سلب‌شده»
+// در مسیر evaluatePolicy/getUserPermissionSet باقی می‌ماند.
 router.post('/revoke', authRequired, authorize('system:rbac', 'manage'), (req, res) => {
   const { role_code, permission_key } = req.body;
   if (!role_code || !permission_key) {
     return res.status(400).json({ error: 'role_code و permission_key الزامی هستند' });
   }
 
-  const role = db.prepare('SELECT id FROM roles WHERE code = ?').get(role_code);
+  const role = db.prepare('SELECT id, hospital_id, permissions FROM roles WHERE code = ?').get(role_code);
   const perm = db.prepare('SELECT id FROM permissions WHERE key = ?').get(permission_key);
   if (!role || !perm) {
     return res.status(404).json({ error: 'نقش یا مجوز مورد نظر یافت نشد' });
+  }
+
+  let keys = [];
+  try { keys = JSON.parse(role.permissions || '[]'); } catch (e) { keys = []; }
+  if (!Array.isArray(keys)) keys = [];
+  const filtered = keys.filter(k => k !== permission_key);
+  if (filtered.length !== keys.length) {
+    db.prepare('UPDATE roles SET permissions = ? WHERE id = ?').run(JSON.stringify(filtered), role.id);
   }
 
   db.prepare(`

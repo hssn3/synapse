@@ -5,6 +5,9 @@
 const express = require('express');
 const router = express.Router();
 const common = require('../common');
+// سینکِ NIST از JSON — هر ویرایشِ نقش سفارشی باید فوراً در role_permissions هم بنشیند،
+// وگرنه مسیرِ NIST (my-permissions/authorize) تا بوتِ بعدی نسخه‌ی کهنه را نشان می‌دهد.
+const { syncRoleFromJson } = require('../../services/rbac-sync');
 const {
   query, db, authRequired, requirePermission, requireAnyPermission,
   hospitalScope, requireFeature, scopeFor, axisCodeOf, measureAllowed,
@@ -329,6 +332,9 @@ router.post('/roles', authRequired, requirePermission('manage_roles'), hospitalS
     const id = uuid();
     query('INSERT INTO roles (id, hospital_id, code, title_fa, permissions) VALUES (?, ?, ?, ?, ?)',
       [id, req.hospitalId, code, title_fa, JSON.stringify(permissions)]);
+    // نقش سفارشی = آینه‌ی دقیق در NIST؛ از همان لحظه‌ی ساخت، my-permissions و
+    // authorize همان چیزی را می‌بینند که در JSON نشسته است.
+    syncRoleFromJson(id, { mirror: true });
     res.status(201).json({ role: { id, code, title_fa, permissions, hospital_id: req.hospitalId } });
   } catch (err) { res.status(500).json({ error: 'خطای سرور' }); }
 });
@@ -347,6 +353,9 @@ router.put('/roles/:id', authRequired, requirePermission('manage_roles'), hospit
       const unknown = permissions.filter(p => !known.has(p));
       if (unknown.length) return res.status(400).json({ error: `مجوز نامعتبر: ${unknown.join(', ')}` });
       query('UPDATE roles SET permissions = ? WHERE id = ?', [JSON.stringify(permissions), req.params.id]);
+      // آینه‌ی کامل: مجوزِ برداشته‌شده هم باید از role_permissions حذف شود، وگرنه
+      // سلبِ مجوز در پنل هیچ اثری روی مسیر NIST (authorize/my-permissions) نداشت.
+      syncRoleFromJson(req.params.id, { mirror: true });
     }
     if (typeof title_fa === 'string' && title_fa.trim()) query('UPDATE roles SET title_fa = ? WHERE id = ?', [title_fa.trim(), req.params.id]);
     const updated = query('SELECT id, code, title_fa, permissions, hospital_id FROM roles WHERE id = ?', [req.params.id]).rows[0];

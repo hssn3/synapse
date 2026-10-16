@@ -696,6 +696,16 @@ catch (err) { seedFail('Indicator slides migration failed:', err); }
 try { require('../database/migrate-313-audit').runMigration(); }
 catch (err) { seedFail('Audit-313 migrations failed:', err); }
 
+// مجوزِ «گفت‌وگو با دانا» برای همه‌ی نقش‌های پایه (جز anonymous_reporter) — پیش‌نیازِ
+// گاردِ authorize روی مسیرهای چت که قبلاً هیچ مجوزی نمی‌خواستند (DECISIONS.md #3).
+// سپس سینکِ جداول NIST با ستون roles.permissions (مرجعِ canonical). ترتیب مهم است:
+// هر دو بعد از همه‌ی سیدهای نقش اجرا می‌شوند تا وضعیتِ نهاییِ JSON را ببینند؛ خودشان
+// idempotent اند و روی دیتابیسِ همگام صفر تغییر می‌گذارند.
+try { require('../database/seed-assistant-access').runMigration(); }
+catch (err) { seedFail('Assistant access seed failed:', err); }
+try { require('../database/seed-rbac-nist-sync').runMigration(); }
+catch (err) { seedFail('RBAC NIST sync seed failed:', err); }
+
 // شناسه‌ی یکتای ارسالِ فرم (client_token) + ایندکس یکتای جزئی — گاردِ «ارسال تکراری» روی
 // POST /api/forms/:id/submit. چرا در بوت: مهاجرت idempotent است (ستون/ایندکس پیش از ساخت
 // بررسی می‌شوند) و باید پیش از اولین درخواستِ فرم ساخته شده باشد، وگرنه مسیرِ توکندار با
