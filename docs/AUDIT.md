@@ -176,3 +176,13 @@ node tests/assistant-response-eval.js                             → همه‌�
   - **کاندیدهای بازبینی دقیق‌تر (تأییدنشده، برای پاس بعد):** `assistant-enterprise/chat` (بدهی مستند دو-منبع مجوز)، خانوادهٔ `/api/kpis*`، `/api/export/*.xlsx`، چند read اکریدیشن (`scoring/dashboard/status`) و داشبوردها — فعلاً فقط `authRequired + hospitalScope`.
 - این دور هیچ تغییر کدی در سیستم مجوز ایجاد نکرد؛ خروجی = دادهٔ طبقه‌بندی‌شده + فهرست اولویت‌دار برای پاس بعدی.
 
+## ۱۰) به‌روزرسانی ۱۴۰۵/۰۷/۲۴ — بستن کاندیدهای بخش ۹ (گاردهای per-route + هم‌ترازی دو منبع مجوز)
+
+- **کاندیدهای بخش ۹ همگی بسته شدند** (کامیت‌های `1aabfaf` سرویس/seedها + `f5ccf2b` گاردها/تست‌ها):
+  - چت دستیار (سازمانی + legacy): گارد `assistant:chat:use` (مسیر NIST). پیش‌نیاز: `seed-assistant-access` کلید را به همهٔ نقش‌های پایه جز `anonymous_reporter` می‌دهد؛ ریشهٔ واگرایی دو منبع با `src/services/rbac-sync.js` و seed بوت `seed-rbac-nist-sync` بسته شد (افزودنی برای نقش پایه، آینه برای نقش سفارشی بیمارستانی).
+  - خانوادهٔ `/api/kpis*`: اتحاد `view_bsc|view_indicators|manage_indicators|view_all_dashboards` + افزودن `hospitalScope` به `rankings`.
+  - صادرات `measures.xlsx`/`bsc.xlsx`/`checklists/:id.xlsx` + `history|trend` هر سنجه: گاردهای اتحاد خانوادگی.
+  - readهای اکریدیشن (`status`/`scoring`/`dashboard`): اتحاد `view_accreditation_full_tree|edit_measure_status|view_measure_status_readonly`.
+- **شواهد:** ماتریس per-endpoint **۲۴/۲۴** (allow/deny/۴۰۱ چت، اینواریانت‌های هم‌ترازی، نقش سفارشی آینه‌ای، grant/revoke دو-منبعی) · سوئیت‌های اصلی **۴۳/۴۳** · smoke **۶/۶** · دانا ۲۱+۱۰ · خزیدن E2E شش‌نقشی: صفر خطای صفحه/سرریز؛ تنها ۴۰۳ مشاهده‌شده = درخواست‌های پس‌زمینهٔ دو نقش بدون درخت در کاوش (موردانتظار). جزئیات در `docs/PROGRESS.md` بخش ۱۴۰۵/۰۷/۲۴.
+- **فهرست A (۱۶۶ مسیر «authRequired بدون نگهبان استاندارد») بازبینی خط‌به‌خط کامل نشد** — پوشش این دور، خانواده‌های کاندیدِ تأییدشده بود؛ بقیه بر اساس نمونه‌های دستی دارای نگهبان درون‌تابعی/میان‌افزار نام‌دار یا عمومی عمدی‌اند؛ بازبینی خط‌به‌خط به‌عنوان کار باقی می‌ماند.
+

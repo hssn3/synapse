@@ -1,6 +1,6 @@
 # PROGRESS — Hospital Platform Hardening & Completion
 
-> آخرین به‌روزرسانی: 2026-10-15 (نشست ۱۴۰۵/۰۷/۲۵ — آغاز کار روی همین ماشین ویندوزی، ادامه‌ی محلی)
+> آخرین به‌روزرسانی: 2026-10-16 (نشست ۱۴۰۵/۰۷/۲۴ — هم‌راستاسازی دو منبع مجوز + گاردهای per-route، ادامه‌ی محلی)
 > این فایل منبعِ حقیقتِ پیشرفت است. در شروع هر نشست: PROGRESS.md را بخوان، سپس `git status` و `git log` را با hash انتهای این فایل مقایسه کن.
 > HEAD محلی به‌عنوان مبنای — از روی حافظه تایپ نشود، همیشه از `git rev-parse HEAD` کپی شود.
 
@@ -267,3 +267,18 @@
 - رفع باگ: public-chrome.js (سینتکس شکسته بود → هدر/فوتر ۵ فرم عمومی رندر نمی‌شد)، حذف Google Fonts از catalog (CSP)، favicon ۷ صفحه، sw v19.
 - QA: ورود tile (nursing_director)، داک/پنل/چت، ۶ نمای SPA، صفحات عمومی، فرم‌های عمومی، خودآزمایی ۲۱۹ فایل JS — همه سبز.
 - DB: assistant_personas → «دستیار سیناپس» ×۴.
+
+
+---
+
+## ۱۴۰۵/۰۷/۲۴ (ح) — هم‌ترازی دو منبع مجوز + پاس گاردهای per-route (کامیت‌های `1aabfaf` · `f5ccf2b` · `f8b8e82`)
+- **بند ۳ نشست حسابرسی (۱۴۰۵/۰۷/۲۵) و کاندیدهای بخش ۹ AUDIT بسته شد:** `roles.permissions` (JSON) = منبع حقیقت؛ سرویس تازهٔ `src/services/rbac-sync.js` + دو seed بوت (`seed-assistant-access`، `seed-rbac-nist-sync` — در `src/app.js` پس از زنجیرهٔ مایگریشن‌ها) جداول `permissions`/`role_permissions` را هم در بوت و هم در زمان اجرا (grant/revoke در `rbac.routes.js`، ساخت/ویرایش نقش در پنل) هم‌گام نگه می‌دارند.
+  - قاعدهٔ ادغام: نقش پایه (`hospital_id IS NULL`) → افزودنی (مجوزهای NIST-only حفظ می‌شوند)؛ نقش سفارشی بیمارستانی → آینهٔ دقیق JSON؛ کلید بی‌نقطهٔ JSON → ردیف مشتق `domain='legacy'`.
+- **خروجی بوت واقعی:** `[Seed AssistantAccess]` ۲۷ نقش JSON به‌روز / ۲۱ نگاشت NIST جدید / anonymous_reporter مستثنی · `[Seed RbacSync]` ۲۸ نقش، ۷۳۲ نگاشت افزوده، صفر حذف.
+- **گاردهای per-route:** چت دستیار (سازمانی + legacy) = `assistant:chat:use`؛ صادرات `measures.xlsx`/`bsc.xlsx`/`checklists/:id.xlsx`/`history|trend` هر سنجه = اتحادهای خانوادگی؛ `status`/`scoring`/`dashboard` اکریدیشن = اتحاد خانوادهٔ درخت؛ `/api/kpis*` = اتحاد BSC/سنجه/داشبورد + افزودن `hospitalScope` به `rankings`.
+- **ماتریس per-endpoint ۱۵→۲۴:** allow/deny/۴۰۱ چت، اینواریانت‌های هم‌ترازی دو منبع، نقش سفارشی آینه‌ای، چرخهٔ grant/revoke دو-منبعی، `my-permissions` بر مبنای NIST.
+- **شواهد اجرا (Node v25.2.1، سرور :3312):** سوئیت‌های اصلی **۴۳/۴۳** · ماتریس **۲۴/۲۴** · smoke **۶/۶** · دانا **۲۱+۱۰** · خزیدن E2E شش‌نقشی (admin/staff_nurse/social_worker/nursing_office_assistant/clinical_supervisor/hospital_president) → همهٔ صفحات رندر، صفر خطای صفحه، صفر سرریز، ۴۰۳ فقط در کاوشِ نقش‌های بدون درخت (موردانتظار).
+- **DB پس از تست:** ۲۸ نقش · `role_permissions`=۷۹۹ · `permissions`=۱۲۲ · بدون بازماندهٔ تست · anonymous_reporter بدون کلید چت.
+- **کارهای بازِ نسخهٔ قبل:** بندهای ۲ و ۳ فهرست «ادامه در نشست بعد» (هم‌راستاسازی دو منبع + پاس per-route) اینجا بسته شدند.
+- **باقیِ باز:** revoke کلید Gemini (اقدام مالک) · تصمیم provider استقرار · بازبینی خط‌به‌خط باقی فهرست A · آرشیو ابزارهای تاریخی و LICENSE.
+- **گیت/دیپلوی:** سه کامیت کد بالا روی `main` محلی؛ پوش به GitHub + دیپلوی هم‌زمان روی سرور اوبونتو در پایان همین نشست (سینک سه‌طرفه با همین کلون دسکتاپ).
