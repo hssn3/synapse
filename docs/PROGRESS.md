@@ -285,3 +285,19 @@
   - **دیپلوی سرور اوبونتو (`root@104.252.77.146` → `/root/313`، سرویس systemd `synapse`):** بکاپ DB (`npm run backup-db` → `backups/`) → `git pull` تا `c04165f` → ری‌استارت سرویس → `healthz` ✅ + smoke سرور **۶/۶** ✅.
   - **تأیید مستقیم DB سرور (پس از سیدهای بوت):** ۲۸ نقش · `role_permissions`=۷۹۹ · `permissions`=۱۲۲ · ۱۰۷ ردیف legacy · ۲۷ نقش کلید چت در JSON · `anonymous_reporter` محروم · `staff_nurse`→NIST=۱.
   - [کامیت گزارش پایانی این نشست — پس از این سند؛ سینک سه‌طرفه: GitHub + سرور + دسکتاپ]
+
+---
+
+## ۱۴۰۵/۰۷/۲۴ (ط) — راند موبایل: کارت‌ها «زیر هم»، صفر اسکرول افقی (لایهٔ `mobile-stack.css`)
+- **خواست کارفرما:** «کل پروژه رو بررسی بصری کن، کارت‌ها برای نسخه موبایل زیر هم باشند؛ نیاز به اسکرول به راست و چپ نباشه» — با چرخهٔ تحویل کامل (دسکتاپ → GitHub → سرور).
+- **ابزار سنجش (خارج از گیت، پوشهٔ `scratch/`):** `e2e-mobile-crawl.js` (۳۶۰×۸۰۰ با isMobile/hasTouch — ۳ نقش/۷۷ صفحه-راند)، `mobile-probe.js`، `mobile-diag3.js` — قبل/بعد با همان ابزار مقایسه شد.
+- **ریشه‌های کشف‌شده و بسته‌شده:**
+  - **#acc:** ترکِ `1fr` در `.acc-main-layout` با `min-width:auto` آیتم‌ها به min-content (۳۸۰px در قاب ۳۴۴px) باد می‌کرد (سرریز ۲۸/۳۶px) → `minmax(0,1fr)` + `min-width:0`؛ کارت کمیته در موبایل: دکمهٔ تمام‌عرض؛ سرصفحهٔ میانبرها چندخطی.
+  - **گزارش‌ها:** قاعدهٔ موبایلِ §۶ در `mobile-system.css` عرض *هر* جدول (از جمله برگهٔ چاپیِ تک‌سلولی `.psheet`) را `min-width:580px` می‌کرد و `#content` را ۲۳۸px می‌لغزاند → `table.psheet{min-width:0;overflow-x:auto}` + بام `#content{overflow-x:clip}` در موبایل.
+  - **مدارک:** `minmax(320px,1fr)` در قاب ۲۶۵px → تک‌ستونه؛ نوار شاخه و پیل‌های بلند چندخطی؛ کارت‌های شبکه تمام‌عرض.
+  - **منابع انسانی (hrdev):** ردیف legend اینلاین `nowrap` بود → افزودن `flex-wrap` در `hr-development.js`.
+  - **ریل‌های افقی موبایل** (ui-polish §۴، pages.css، layout-modern، mobile-system §۴/§۹، hassan-clean، indicator-slides، app.css) در موبایل زیر هم/چندخطی شدند: `acc-root-grid`، `acc-subaxes-grid`، `acc-suite-nav`، تب‌ها/پیل‌ها، نوار مسیر (`pathbar`)، `cat-steps-axis`، فلوی SOP (`sn-flow` با اتصال عمودی)، `lux-doc-*`، `islide-sections-bar`، `btn-group`، `drawer-chips-bar` — و ماسک‌های فِیدِ لبه حذف شد.
+  - **صفحهٔ مستقل `accreditation/policy.html`** (که mobile-system را لود نمی‌کند): نوار بالا ستونی بدون هم‌پوشانی، سوئیچر مدارک و بنر فقط‌خواندنی چندخطی.
+- **فایل جدید `public/css/mobile-stack.css`:** آخرین شیت `index.html` (بعد از synapse-theme) و `policy.html`؛ اسکوپ فقط ≤768px (و دو شبکهٔ اکریدیشن ≤900px همراستا با ui-polish)؛ دسکتاپ و «قاعدهٔ ۱۱» دست‌نخورده. کش SW → `hosp-v23` (+ افزودن فایل به SHELL).
+- **شواهد اجرا (سرور محلی :۳۳۱۲):** خزیدن موبایل **CLEAN** — admin ۶۳ صفحه، staff_nurse ۷، hospital_president ۷: `doc=0/main=0` و صفر عنصر بیرون‌زده؛ اسکرین‌شات‌های «بعد»: `scratch/out/mobile-after/` · smoke **۶/۶** · یونیت/اینتگریشن **۹/۹**.
+- **استثنای تعمدی (در گزارش به کارفرما هم ذکر شد):** جدول‌های داده و قاب نمودارها اسکرول لمسی *داخل قاب خودشان* را نگه می‌دارند (برای خوانایی ستون‌ها)؛ اما کل صفحه هرگز افقی نمی‌شود.
