@@ -1,8 +1,16 @@
 # PROGRESS — Hospital Platform Hardening & Completion
 
-> آخرین به‌روزرسانی: 2026-10-20 (نشست ۱۴۰۵/۰۷/۲۸ — کاتالوگ عملیاتی + سرنامه/پاصفحهٔ پریمیوم)
+> آخرین به‌روزرسانی: 2026-10-20 (نشست ۱۴۰۵/۰۷/۲۸ — کاتالوگ عملیاتی + سرنامه/پاصفحهٔ پریمیوم + استقرار Wispbyte)
 > این فایل منبعِ حقیقتِ پیشرفت است. در شروع هر نشست: PROGRESS.md را بخوان، سپس `git status` و `git log` را با hash انتهای این فایل مقایسه کن.
 > HEAD محلی به‌عنوان مبنای — از روی حافظه تایپ نشود، همیشه از `git rev-parse HEAD` کپی شود.
+
+## نشست ۱۴۰۵/۰۷/۲۸ (ج) — استقرار زنده روی Wispbyte + خودبه‌روزرسانی خودکار
+- نصب زنده: `https://synapse.wisp.uno` — پنل wispbyte (سرور `22e42511`)، ایمیج `ghcr.io/parkervcp/yolks:nodejs_22`، ۵۱۲MiB RAM / ۱GiB دیسک؛ فرمان Startup **تک‌خطی** (پنل با `eval` خطوط را جمع می‌کند).
+- `.env` در بوت اول ساخته می‌شود (`NODE_ENV=production`, `PORT`, `JWT_SECRET` تصادفی ۴۸ کاراکتری) و عکس دمو یک‌بار با نشانگر `.db-restored-v3` بازگردانی می‌شود.
+- تله‌ها: npm 12 اسکریپت‌های نصب را مسدود می‌کند → `allowScripts` در `package.json` (کامیت `385b38a`)؛ پرچم CLI `--allow-scripts` در نصب پروژه‌ای `EALLOWSCRIPTS` می‌دهد؛ نبودِ باینری `better-sqlite3` = کرش `Could not locate the bindings file`.
+- خودبه‌روزرسانی: `scripts/live-deploy.js` (کامیت `df540ef`، `npm run serve:live`) به‌جای `node src/app.js` — poll هر ۱۲۰ ثانیه، `fetch/reset`، `npm install` فقط با تغییر `package*.json`، ری‌استارت نرمِ فرزند؛ شکست نصب = اپِ سالمِ قبلی زنده می‌ماند؛ backoff برای کرشِ فرزند.
+- شواهد: smoke **۶/۶** روی دامنه (total=395) · سوپروایزر در کنسول پنل فعال · تست محلی سناریوهای v1→v2، نصبِ وابستگی و کرش/ری‌استارت.
+- سند کامل: `docs/WISPBYTE-DEPLOY.md` · باز: `require_password` این نصب خاموش است (دمویی) و هر «شروع» سرور در پلن رایگان یک ویدیوی پاداش می‌خواهد.
 
 ## Mode
 - **MODE A — full agent** (فایل + ترمینال + Git + GitHub + تست). تأییدشده با اجرای واقعی در همین محیط.
