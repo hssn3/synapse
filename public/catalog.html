@@ -1,3062 +1,1228 @@
 <!DOCTYPE html>
-
-<html dir="rtl" lang="fa"><head>
+<!-- catalog-operational-v7 -->
+<html dir="rtl" lang="fa">
+<head>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<link rel="icon" href="/img/favicon-32.png" sizes="32x32">
-<link rel="apple-touch-icon" href="/img/icon-192.png">
-<title>سیناپس — کاتالوگ دیجیتال | سامانه یکپارچه نظارت، اعتباربخشی و پایش سلامت</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="کاتالوگ عملیاتی سیناپس — نقشهٔ بخش‌های سامانه، مرور جستجوپذیر ۳۹۵ سنجهٔ ویرایش ششم اعتباربخشی، ۲۳ روش اجرایی بالینی و مسیر ورود به دمو."/>
+<link rel="icon" href="/img/favicon-32.png" sizes="32x32"/>
+<link rel="apple-touch-icon" href="/img/icon-192.png"/>
+<title>سیناپس — کاتالوگ عملیاتی | سامانه یکپارچه نظارت، اعتباربخشی و پایش سلامت</title>
+<link rel="preload" href="/fonts/Vazirmatn-Variable.woff2" as="font" type="font/woff2" crossorigin/>
+<script src="/js/icons.js"></script>
 <style>
-    @font-face {
-      font-family: 'Vazirmatn';
-      src: url('/fonts/Vazirmatn-Variable.woff2') format('woff2');
-      font-weight: 100 900;
-      font-display: swap;
-    }
-    
-    /* Scroll margin to prevent sticky header overlap */
-    section[id] {
-      scroll-margin-top: 85px;
-    }
-    
-    header.main-nav {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      width: 100%;
-      background: rgba(9,14,22,0.92);
-      backdrop-filter: blur(22px);
-      -webkit-backdrop-filter: blur(22px);
-      border-bottom: 1px solid rgba(212, 175, 90, 0.25);
-      padding: 10px 24px;
-      margin: 0 0 28px 0;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.6);
-      box-sizing: border-box;
-    }
-
-    .nav-glass-bar {
-      max-width: 1380px;
-      margin: 0 auto;
-      background: transparent;
-      border: none;
-      box-shadow: none;
-      padding: 0;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      position: relative;
-    }
-
-    .brand-icon-box {
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
-      flex-shrink: 0;
-    }
-    .brand-icon-box svg {
-      width: 22px;
-      height: 22px;
-    }
-    .brand-text-title {
-      font-size: 0.95rem;
-      white-space: nowrap;
-    }
-    .brand-subtitle {
-      display: none;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 6px;
-      align-items: center;
-    }
-
-    .nav-link-item {
-      font-size: 0.8rem;
-      padding: 5px 8px;
-      white-space: nowrap;
-      border-radius: 6px;
-      text-decoration: none;
-      color: var(--text-sub);
-      transition: var(--transition-smooth);
-    }
-    .nav-link-item:hover {
-      color: var(--gold-300);
-      background: rgba(212, 175, 90, 0.12);
-    }
-
-    .nav-actions-group {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-shrink: 0;
-    }
-
-    .nav-cta-btn {
-      padding: 7px 14px;
-      font-size: 0.8rem;
-      border-radius: 10px;
-      white-space: nowrap;
-      gap: 6px;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      transition: var(--transition-smooth);
-    }
-
-    .nav-mob-toggle {
-      display: none;
-    }
-
-    .mob-only-link {
-      display: none;
-    }
-
-    .form-grid-2col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    :root {
-      --bg-dark-900: #0a0e15;
-      --bg-dark-850: #090e15;
-      --bg-dark-800: #090e16;
-      --bg-dark-700: #0f1723;
-      --surface-glass: rgba(11,16,25,0.72);
-      --surface-glass-card: rgba(13,20,30,0.68);
-      --surface-glass-hover: rgba(19,28,43,0.88);
-      --border-gold: rgba(212, 175, 90, 0.24);
-      --border-gold-strong: rgba(212, 175, 90, 0.75);
-      --border-emerald: rgba(16,160,185,0.35);
-      --emerald-500: #10a0b9;
-      --emerald-400: #34bbd3;
-      --emerald-glow: rgba(16,160,185,0.45);
-      --gold-500: #d4af5a;
-      --gold-400: #ecd599;
-      --gold-300: #fff0c7;
-      --gold-glow: rgba(212, 175, 90, 0.4);
-      --navy-900: #071626;
-      --navy-800: #0c2844;
-      --navy-700: #0f3962;
-      --text-main: #f5f8f9;
-      --text-muted: #96aeb2;
-      --text-sub: #c7d8db;
-      --shadow-lux: 0 25px 55px rgba(0, 0, 0, 0.65), 0 0 35px rgba(16,160,185,0.06), inset 0 1px 0 rgba(255, 255, 255, 0.08);
-      --transition-smooth: all 0.38s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    html, body {
-      max-width: 100vw;
-      overflow-x: hidden;
-    }
-
-    body {
-      font-family: 'Vazirmatn', -apple-system, BlinkMacSystemFont, Tahoma, sans-serif;
-      font-feature-settings: 'ss01', 'ss02';
-      background: radial-gradient(circle at 85% 5%, #111c2d 0%, #080e16 38%, #090e16 100%);
-      background-attachment: fixed;
-      color: var(--text-main);
-      line-height: 1.75;
-      direction: rtl;
-    }
-
-    /* Ambient Meshes & Golden Caustics */
-    .ambient-glow {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-image: 
-        radial-gradient(circle at 15% 20%, rgba(212, 175, 90, 0.08) 0%, transparent 42%),
-        radial-gradient(circle at 88% 50%, rgba(16,160,185,0.1) 0%, transparent 48%),
-        radial-gradient(circle at 50% 85%, rgba(15, 57, 98, 0.16) 0%, transparent 55%),
-        repeating-linear-gradient(115deg, rgba(212, 175, 90, 0.012) 0px, rgba(212, 175, 90, 0.012) 1px, transparent 1px, transparent 60px);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* Interactive Container */
-    .container {
-      max-width: 1380px;
-      margin: 0 auto;
-      padding: 0 28px;
-      position: relative;
-      z-index: 1;
-    }
-
-    /* Shimmer & Gradient Utilities */
-    .gold-gradient-text {
-      background: linear-gradient(135deg, #ffffff 0%, #faecc3 30%, #ecd599 50%, #d4af5a 75%, #997828 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      display: inline-block;
-    }
-
-    .emerald-gradient-text {
-      background: linear-gradient(135deg, #bbeef7 0%, #34bbd3 45%, #10a0b9 75%, #1b6580 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      display: inline-block;
-    }
-
-    /* Keyframe Animations */
-    @keyframes floatSlow {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-7px); }
-    }
-
-    @keyframes pulseGlow {
-      0%, 100% { opacity: 0.6; filter: drop-shadow(0 0 10px rgba(212, 175, 90, 0.4)); }
-      50% { opacity: 1; filter: drop-shadow(0 0 22px rgba(212, 175, 90, 0.85)); }
-    }
-
-    @keyframes laserTrack {
-      0% { transform: translateX(100%); opacity: 0.2; }
-      50% { opacity: 1; }
-      100% { transform: translateX(-100%); opacity: 0.2; }
-    }
-
-    @keyframes spinHalo {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    @keyframes radarPing {
-      0% { transform: scale(0.9); opacity: 0.9; }
-      70% { transform: scale(2.2); opacity: 0; }
-      100% { transform: scale(2.4); opacity: 0; }
-    }
-
-    /* Luxury Cards & Beveled Folded Corner */
-    .lux-card {
-      background: var(--surface-glass-card);
-      backdrop-filter: blur(22px);
-      -webkit-backdrop-filter: blur(22px);
-      border: 1px solid var(--border-gold);
-      border-radius: 22px;
-      position: relative;
-      padding: 2rem;
-      box-shadow: var(--shadow-lux);
-      transition: var(--transition-smooth);
-      overflow: hidden;
-    }
-
-    .lux-card:hover {
-      transform: translateY(-6px) scale(1.01);
-      border-color: var(--border-gold-strong);
-      box-shadow: 0 28px 60px rgba(0, 0, 0, 0.75), 0 0 35px rgba(212, 175, 90, 0.22);
-    }
-
-    /* Enhanced 3D Beveled Folded Corner */
-    .folded-corner::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 0;
-      height: 0;
-      border-style: solid;
-      border-width: 32px 32px 0 0;
-      border-color: #ecc976 transparent transparent transparent;
-      filter: drop-shadow(2px 3px 5px rgba(0, 0, 0, 0.7));
-      transition: var(--transition-smooth);
-      z-index: 2;
-    }
-
-    .folded-corner::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 0;
-      height: 0;
-      border-style: solid;
-      border-width: 0 0 32px 32px;
-      border-color: transparent transparent #080e16 transparent;
-      z-index: 3;
-    }
-
-    .lux-card:hover.folded-corner::before {
-      border-color: #fff0c7 transparent transparent transparent;
-      filter: drop-shadow(2px 3px 8px rgba(212, 175, 90, 0.6));
-    }
-
-    /* Hero Section */
-    .hero-section {
-      padding: 45px 0 60px 0;
-      text-align: center;
-      position: relative;
-    }
-
-    .hero-pill-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      padding: 8px 22px;
-      background: radial-gradient(circle at 50% 50%, rgba(16,160,185,0.18), rgba(7,13,23,0.7));
-      border: 1px solid rgba(16,160,185,0.5);
-      border-radius: 100px;
-      color: #6ed5e7;
-      font-size: 0.88rem;
-      font-weight: 600;
-      margin-bottom: 26px;
-      box-shadow: 0 0 25px rgba(16,160,185,0.22);
-    }
-
-    .hero-pill-badge .pulse-dot-wrap {
-      position: relative;
-      width: 12px;
-      height: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .hero-pill-badge .pulse-dot {
-      width: 8px;
-      height: 8px;
-      background-color: var(--emerald-400);
-      border-radius: 50%;
-      box-shadow: 0 0 10px var(--emerald-400);
-    }
-
-    .hero-pill-badge .pulse-dot-ping {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      border: 1.5px solid var(--emerald-400);
-      animation: radarPing 2s cubic-bezier(0, 0.2, 0.8, 1) infinite;
-    }
-
-    .hero-title {
-      font-size: 2.85rem;
-      font-weight: 900;
-      line-height: 1.38;
-      margin-bottom: 24px;
-      max-width: 1080px;
-      margin-left: auto;
-      margin-right: auto;
-      text-shadow: 0 4px 18px rgba(0, 0, 0, 0.5);
-    }
-
-    .hero-description {
-      font-size: 1.15rem;
-      color: var(--text-sub);
-      max-width: 900px;
-      margin: 0 auto 38px auto;
-      font-weight: 400;
-      line-height: 1.9;
-    }
-
-    .hero-actions {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      margin-bottom: 50px;
-    }
-
-    .btn-hero-primary {
-      background: linear-gradient(135deg, #10a0b9 0%, #1b6580 60%, #165166 100%);
-      color: #ffffff;
-      font-weight: 800;
-      font-size: 1rem;
-      padding: 15px 36px;
-      border-radius: 14px;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      border: 1px solid rgba(167,232,243,0.5);
-      box-shadow: 0 10px 28px rgba(16,160,185,0.42);
-      transition: var(--transition-smooth);
-      cursor: pointer;
-    }
-
-    .btn-hero-primary:hover {
-      transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 14px 38px rgba(16,160,185,0.6);
-      background: linear-gradient(135deg, #34bbd3 0%, #10a0b9 100%);
-    }
-
-    .btn-hero-secondary {
-      background: rgba(15,22,33,0.85);
-      color: var(--gold-300);
-      font-weight: 800;
-      font-size: 1rem;
-      padding: 15px 34px;
-      border-radius: 14px;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      border: 1.5px solid var(--gold-500);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
-      transition: var(--transition-smooth);
-    }
-
-    .btn-hero-secondary:hover {
-      background: rgba(212, 175, 90, 0.16);
-      border-color: var(--gold-300);
-      transform: translateY(-3px) scale(1.02);
-      color: #ffffff;
-      box-shadow: 0 12px 30px rgba(212, 175, 90, 0.25);
-    }
-
-    /* Key Stat Counters with Animated Sparkles & Shields */
-    .stat-counters-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 22px;
-      margin-top: 10px;
-    }
-
-    .stat-counter-card {
-      background: linear-gradient(145deg, rgba(17,24,35,0.75), rgba(9,14,22,0.85));
-      backdrop-filter: blur(18px);
-      border: 1px solid var(--border-gold);
-      border-radius: 20px;
-      padding: 1.75rem 1.4rem;
-      text-align: center;
-      position: relative;
-      min-height: 215px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      transition: var(--transition-smooth);
-      box-shadow: var(--shadow-lux);
-    }
-
-    .stat-counter-card:hover {
-      border-color: var(--gold-400);
-      transform: translateY(-6px) scale(1.01);
-      background: linear-gradient(145deg, rgba(23,34,50,0.9), rgba(12,18,27,0.95));
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.65), 0 0 25px rgba(212, 175, 90, 0.2);
-    }
-
-    .stat-icon-halo {
-      width: 44px;
-      height: 44px;
-      margin: 0 auto 10px auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-
-    .stat-number {
-      font-size: 2.85rem;
-      font-weight: 800;
-      line-height: 1.05;
-      margin-bottom: 8px;
-      font-feature-settings: "ss01", "ss02";
-    }
-
-    .stat-label {
-      font-size: 0.98rem;
-      font-weight: 700;
-      color: var(--text-main);
-      margin-bottom: 5px;
-    }
-
-    .stat-meta {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-
-    /* Section Shared Headers */
-    .section-wrapper {
-      padding: 55px 0;
-      position: relative;
-    }
-
-    .section-header-box {
-      margin-bottom: 34px;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      border-bottom: 1px solid rgba(212, 175, 90, 0.22);
-      padding-bottom: 20px;
-      position: relative;
-    }
-
-    .section-header-box::after {
-      content: '';
-      position: absolute;
-      bottom: -1px;
-      right: 0;
-      width: 140px;
-      height: 2px;
-      background: linear-gradient(90deg, var(--gold-500), var(--emerald-400));
-      box-shadow: 0 0 10px var(--gold-500);
-    }
-
-    .chapter-tag {
-      display: inline-block;
-      font-size: 0.82rem;
-      font-weight: 800;
-      color: var(--gold-400);
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      margin-bottom: 6px;
-    }
-
-    .section-title {
-      font-size: 1.9rem;
-      font-weight: 900;
-      color: #ffffff;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .section-subtitle {
-      font-size: 0.94rem;
-      color: var(--text-muted);
-      margin-top: 6px;
-      max-width: 840px;
-      line-height: 1.75;
-    }
-
-    .section-badge-right {
-      background: linear-gradient(135deg, rgba(13, 59, 102, 0.45), rgba(16,160,185,0.15));
-      border: 1px solid rgba(52,187,211,0.4);
-      padding: 8px 18px;
-      border-radius: 12px;
-      font-size: 0.85rem;
-      color: var(--emerald-400);
-      font-weight: 700;
-      white-space: nowrap;
-      box-shadow: 0 0 16px rgba(16,160,185,0.15);
-    }
-
-    /* Hubs (Chapter 1) with Luxury Crest Graphics */
-    .hubs-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 26px;
-      margin-bottom: 38px;
-      align-items: stretch;
-    }
-
-    .hub-card {
-      padding: 2.1rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      min-height: 480px;
-      height: 100%;
-      background: linear-gradient(170deg, rgba(16,23,35,0.75) 0%, rgba(9,14,21,0.9) 100%);
-    }
-
-    .hub-header {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 18px;
-    }
-
-    .hub-crest-wrap {
-      width: 54px;
-      height: 54px;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .hub-crest-halo {
-      position: absolute;
-      inset: 0;
-      border-radius: 16px;
-      border: 1.5px dashed var(--gold-400);
-      animation: spinHalo 18s linear infinite;
-      opacity: 0.7;
-    }
-
-    .hub-letter-badge {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, #ecd599 0%, #d4af5a 60%, #997828 100%);
-      color: #090e15;
-      font-weight: 900;
-      font-size: 1.35rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 18px rgba(212, 175, 90, 0.5), inset 0 1px 1px #fff;
-      z-index: 1;
-    }
-
-    .hub-title-text {
-      font-size: 1.4rem;
-      font-weight: 800;
-      color: #ffffff;
-      line-height: 1.35;
-    }
-
-    .hub-stats-row {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 16px;
-      flex-wrap: wrap;
-    }
-
-    .hub-micro-badge {
-      background: rgba(16,160,185,0.12);
-      border: 1px solid rgba(16,160,185,0.35);
-      padding: 5px 12px;
-      border-radius: 8px;
-      font-size: 0.85rem;
-      color: var(--emerald-400);
-      font-weight: 700;
-      box-shadow: 0 0 10px rgba(16,160,185,0.12);
-    }
-
-    .hub-features-list {
-      list-style: none;
-      margin-top: 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .hub-features-list li {
-      font-size: 0.95rem;
-      color: var(--text-sub);
-      display: flex;
-      align-items: baseline;
-      gap: 10px;
-      line-height: 1.85;
-    }
-
-    .hub-features-list li::before {
-      content: "✦";
-      color: var(--gold-400);
-      font-size: 0.75rem;
-      filter: drop-shadow(0 0 4px var(--gold-500));
-      flex-shrink: 0;
-    }
-
-    /* MANDATORY HORIZONTAL RTL FLOW CONTAINER WITH CONNECTIVE LASER TRACK */
-    .horizontal-scroll-flow {
-      display: flex;
-      gap: 24px;
-      overflow-x: auto;
-      padding: 16px 6px 26px 6px;
-      scroll-snap-type: x mandatory;
-      scrollbar-width: thin;
-      scrollbar-color: var(--gold-500) rgba(16,22,32,0.6);
-      position: relative;
-    }
-
-    .horizontal-scroll-flow::-webkit-scrollbar {
-      height: 8px;
-    }
-
-    .horizontal-scroll-flow::-webkit-scrollbar-track {
-      background: rgba(11,16,25,0.85);
-      border-radius: 10px;
-    }
-
-    .horizontal-scroll-flow::-webkit-scrollbar-thumb {
-      background: linear-gradient(90deg, var(--gold-500), var(--emerald-500));
-      border-radius: 10px;
-      box-shadow: 0 0 12px rgba(212, 175, 90, 0.6);
-    }
-
-    .flow-step-item {
-      flex: 0 0 340px;
-      scroll-snap-align: start;
-      position: relative;
-    }
-
-    .flow-connector-bar {
-      position: absolute;
-      top: 54px;
-      left: -24px;
-      width: 24px;
-      height: 3px;
-      background: linear-gradient(to left, var(--emerald-400), var(--gold-500));
-      z-index: 10;
-      box-shadow: 0 0 10px rgba(16,160,185,0.7);
-      overflow: hidden;
-    }
-
-    .flow-connector-bar::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: #ffffff;
-      animation: laserTrack 2s linear infinite;
-    }
-
-    .flow-step-item:last-child .flow-connector-bar {
-      display: none;
-    }
-
-    .navigation-flow-container {
-      background: radial-gradient(circle at 50% 0%, rgba(17,27,43,0.65), rgba(9,14,21,0.85));
-      border: 1px solid var(--border-gold);
-      border-radius: 22px;
-      padding: 1.85rem;
-      margin-top: 18px;
-      box-shadow: var(--shadow-lux);
-    }
-
-    .flow-level-card {
-      background: rgba(15,23,35,0.85);
-      border: 1px solid rgba(212, 175, 90, 0.28);
-      border-radius: 18px;
-      padding: 1.35rem 1.4rem;
-      min-height: 255px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: var(--transition-smooth);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
-    }
-
-    .flow-level-card:hover {
-      border-color: var(--emerald-400);
-      box-shadow: 0 14px 35px rgba(16,160,185,0.25), 0 0 20px rgba(16,160,185,0.15);
-      background: rgba(21,31,47,0.95);
-      transform: translateY(-4px);
-    }
-
-    .level-num-tag {
-      font-size: 0.8rem;
-      color: var(--gold-400);
-      font-weight: 800;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .level-title {
-      font-size: 1.15rem;
-      font-weight: 800;
-      color: #ffffff;
-      margin: 10px 0 8px 0;
-      line-height: 1.4;
-    }
-
-    .level-desc {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      line-height: 1.85;
-    }
-
-    .dual-action-pills {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 16px;
-      background: rgba(9,14,22,0.75);
-      padding: 8px 10px;
-      border-radius: 12px;
-      border: 1px solid rgba(212, 175, 90, 0.2);
-    }
-
-    .action-pill-item {
-      font-size: 0.82rem;
-      text-align: center;
-      padding: 8px 6px;
-      border-radius: 8px;
-      font-weight: 800;
-      transition: var(--transition-smooth);
-      cursor: pointer;
-    }
-
-    .action-pill-item:hover {
-      transform: scale(1.03);
-    }
-
-    .pill-upload {
-      background: linear-gradient(135deg, rgba(16,160,185,0.25), rgba(18,66,83,0.35));
-      color: #6ed5e7;
-      border: 1px solid rgba(16,160,185,0.5);
-      box-shadow: 0 0 10px rgba(16,160,185,0.2);
-    }
-
-    .pill-checklist {
-      background: linear-gradient(135deg, rgba(212, 175, 90, 0.25), rgba(168, 126, 43, 0.35));
-      color: #fff0c7;
-      border: 1px solid rgba(212, 175, 90, 0.5);
-      box-shadow: 0 0 10px rgba(212, 175, 90, 0.2);
-    }
-
-    /* Chapter 2: Clinical SOPs */
-    .axes-pills-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 28px;
-    }
-
-    .axis-pill-chip {
-      background: rgba(15,22,33,0.85);
-      border: 1px solid var(--border-gold);
-      padding: 9px 16px;
-      border-radius: 12px;
-      font-size: 0.88rem;
-      font-weight: 700;
-      color: var(--text-main);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      transition: var(--transition-smooth);
-      cursor: pointer;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
-    }
-
-    .axis-pill-chip.active, .axis-pill-chip:hover {
-      background: linear-gradient(135deg, rgba(16,160,185,0.3), rgba(15, 57, 98, 0.5));
-      border-color: var(--emerald-400);
-      color: #ffffff;
-      box-shadow: 0 0 20px rgba(16,160,185,0.35);
-      transform: translateY(-2px);
-    }
-
-    .axis-pill-chip span.code-tag {
-      background: rgba(212, 175, 90, 0.22);
-      color: var(--gold-300);
-      font-size: 0.76rem;
-      padding: 2px 7px;
-      border-radius: 6px;
-      font-weight: 800;
-      border: 1px solid rgba(212, 175, 90, 0.3);
-    }
-
-    .sop-card-horizontal {
-      background: linear-gradient(170deg, rgba(17,25,37,0.85), rgba(9,14,21,0.95));
-      border: 1px solid var(--border-gold);
-      border-radius: 20px;
-      padding: 1.35rem 1.4rem;
-      min-height: 245px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      box-shadow: var(--shadow-lux);
-      transition: var(--transition-smooth);
-    }
-
-    .sop-card-horizontal:hover {
-      border-color: var(--gold-400);
-      transform: translateY(-4px);
-      background: linear-gradient(170deg, rgba(23,34,50,0.95), rgba(12,18,27,0.98));
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.65), 0 0 24px rgba(212, 175, 90, 0.24);
-    }
-
-    .sop-badge-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .sop-code {
-      font-size: 0.8rem;
-      font-weight: 800;
-      color: var(--gold-400);
-      background: rgba(212, 175, 90, 0.14);
-      padding: 4px 10px;
-      border-radius: 8px;
-      border: 1px solid rgba(212, 175, 90, 0.35);
-      letter-spacing: 0.5px;
-    }
-
-    .sop-status-live {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      font-size: 0.78rem;
-      color: var(--emerald-400);
-      font-weight: 700;
-    }
-
-    .sop-status-live::before {
-      content: '';
-      width: 7px;
-      height: 7px;
-      background: var(--emerald-400);
-      border-radius: 50%;
-      box-shadow: 0 0 8px var(--emerald-400);
-      animation: radarPing 2s infinite;
-    }
-
-    .sop-name {
-      font-size: 1.1rem;
-      font-weight: 800;
-      color: #ffffff;
-      line-height: 1.6;
-    }
-
-    .sop-meta-info {
-      font-size: 0.84rem;
-      color: var(--text-muted);
-      display: flex;
-      justify-content: space-between;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      padding-top: 12px;
-    }
-
-    /* Chapter 3: Safety & Never Events */
-    .safety-highlight-banner {
-      background: linear-gradient(135deg, rgba(239, 68, 68, 0.16) 0%, rgba(168, 85, 247, 0.14) 50%, rgba(15,22,33,0.9) 100%);
-      border: 1.5px solid rgba(239, 68, 68, 0.5);
-      border-radius: 22px;
-      padding: 1.75rem 2.25rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 30px;
-      box-shadow: 0 14px 40px rgba(239, 68, 68, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .safety-highlight-banner::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      right: 0;
-      width: 6px;
-      background: #ef4444;
-      box-shadow: 0 0 14px #ef4444;
-    }
-
-    .safety-banner-content {
-      display: flex;
-      align-items: center;
-      gap: 22px;
-    }
-
-    .safety-icon-alarm {
-      width: 62px;
-      height: 62px;
-      border-radius: 18px;
-      background: radial-gradient(circle at 30% 30%, rgba(239, 68, 68, 0.35), rgba(70, 10, 10, 0.7));
-      border: 2px solid #ef4444;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 24px rgba(239, 68, 68, 0.5), inset 0 0 12px rgba(239, 68, 68, 0.4);
-      animation: floatSlow 4s ease-in-out infinite;
-      flex-shrink: 0;
-    }
-
-    .safety-icon-alarm svg {
-      width: 32px;
-      height: 32px;
-      stroke: #fca5a5;
-      fill: none;
-      stroke-width: 2.2;
-    }
-
-    .safety-banner-title {
-      font-size: 1.35rem;
-      font-weight: 900;
-      color: #ffffff;
-      margin-bottom: 6px;
-      line-height: 1.4;
-    }
-
-    .safety-banner-desc {
-      font-size: 0.92rem;
-      color: #fca5a5;
-      line-height: 1.8;
-      max-width: 820px;
-    }
-
-    .safety-stats-badge {
-      text-align: center;
-      background: rgba(11,16,23,0.9);
-      border: 1.5px solid var(--gold-500);
-      padding: 14px 26px;
-      border-radius: 16px;
-      box-shadow: 0 0 20px rgba(212, 175, 90, 0.3);
-      flex-shrink: 0;
-    }
-
-    .safety-stats-badge .num {
-      font-size: 2.4rem;
-      font-weight: 900;
-      color: #f87171;
-      line-height: 1.1;
-      text-shadow: 0 0 12px rgba(248, 113, 113, 0.5);
-    }
-
-    .safety-stats-badge .lbl {
-      font-size: 0.82rem;
-      color: var(--gold-300);
-      font-weight: 800;
-    }
-
-    .safety-tools-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      align-items: stretch;
-    }
-
-    .safety-tool-card {
-      min-height: 300px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 1.85rem;
-    }
-
-    .tool-icon-circle {
-      width: 50px;
-      height: 50px;
-      border-radius: 16px;
-      background: radial-gradient(circle at 30% 30%, var(--navy-700), var(--navy-900));
-      border: 1.5px solid var(--emerald-400);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 16px;
-      box-shadow: 0 0 18px rgba(16,160,185,0.35);
-      flex-shrink: 0;
-    }
-
-    .tool-icon-circle svg {
-      width: 25px;
-      height: 25px;
-      stroke: var(--emerald-300);
-      fill: none;
-      stroke-width: 2.2;
-    }
-
-    /* Chapter 4: Executive Intelligence & BSC */
-    .executive-dashboard-grid {
-      display: grid;
-      grid-template-columns: 1.25fr 1fr;
-      gap: 26px;
-      align-items: stretch;
-    }
-
-    .bsc-panel {
-      background: linear-gradient(165deg, rgba(16,23,35,0.9) 0%, rgba(9,14,21,0.95) 100%);
-      border: 1px solid var(--border-gold);
-      border-radius: 22px;
-      padding: 1.85rem 2rem;
-      box-shadow: var(--shadow-lux);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      min-height: 480px;
-    }
-
-    .bsc-header-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 22px;
-      border-bottom: 1px solid rgba(212, 175, 90, 0.22);
-      padding-bottom: 14px;
-    }
-
-    .bsc-perspective-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
-    .perspective-box {
-      background: rgba(9,14,21,0.75);
-      border: 1px solid rgba(212, 175, 90, 0.16);
-      border-radius: 16px;
-      padding: 1.25rem 1.35rem;
-      transition: var(--transition-smooth);
-    }
-
-    .perspective-box:hover {
-      border-color: var(--emerald-400);
-      background: rgba(15,22,33,0.95);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 15px rgba(16,160,185,0.15);
-    }
-
-    .persp-title {
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: var(--gold-300);
-      margin-bottom: 6px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .persp-score {
-      font-size: 1.65rem;
-      font-weight: 800;
-      color: #ffffff;
-      margin-bottom: 4px;
-      line-height: 1.2;
-    }
-
-    .persp-bar {
-      height: 7px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
-      overflow: hidden;
-      margin-top: 10px;
-    }
-
-    .persp-fill {
-      height: 100%;
-      border-radius: 10px;
-      background: linear-gradient(90deg, var(--emerald-500), var(--gold-400));
-      box-shadow: 0 0 8px var(--emerald-400);
-    }
-
-    .supervision-card {
-      padding: 1.85rem 2rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      min-height: 480px;
-    }
-
-    .live-supervision-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-top: 16px;
-    }
-
-    .sup-item {
-      background: rgba(10,14,21,0.8);
-      border: 1px solid rgba(212, 175, 90, 0.22);
-      padding: 12px 16px;
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      transition: var(--transition-smooth);
-    }
-
-    .sup-item:hover {
-      border-color: var(--emerald-400);
-      background: rgba(15,21,31,0.95);
-    }
-
-    .sup-dept {
-      font-weight: 800;
-      font-size: 0.92rem;
-      color: #ffffff;
-    }
-
-    .sup-status {
-      font-size: 0.8rem;
-      font-weight: 800;
-      padding: 5px 12px;
-      border-radius: 8px;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .status-done {
-      background: rgba(16,160,185,0.22);
-      color: #6ed5e7;
-      border: 1px solid var(--emerald-500);
-      box-shadow: 0 0 10px rgba(16,160,185,0.25);
-    }
-
-    .status-progress {
-      background: rgba(212, 175, 90, 0.22);
-      color: #fff0c7;
-      border: 1px solid var(--gold-500);
-      box-shadow: 0 0 10px rgba(212, 175, 90, 0.25);
-    }
-
-    /* Chapter 5: Dana AI Copilot with Sleek Holographic Core */
-    .copilot-container {
-      background: radial-gradient(circle at 100% 0%, rgba(15, 57, 98, 0.45) 0%, rgba(15,23,35,0.9) 60%, rgba(9,14,22,0.98) 100%);
-      border: 1.5px solid var(--border-gold-strong);
-      border-radius: 26px;
-      padding: 2.25rem;
-      display: grid;
-      grid-template-columns: 1fr 1.25fr;
-      gap: 36px;
-      align-items: center;
-      box-shadow: var(--shadow-lux), 0 0 45px rgba(212, 175, 90, 0.2);
-    }
-
-    .copilot-avatar-wrap {
-      position: relative;
-      width: 82px;
-      height: 82px;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .copilot-orbit-ring {
-      position: absolute;
-      inset: -6px;
-      border-radius: 50%;
-      border: 1.5px dashed var(--gold-400);
-      animation: spinHalo 14s linear infinite;
-      opacity: 0.8;
-    }
-
-    .copilot-avatar-box {
-      width: 72px;
-      height: 72px;
-      border-radius: 22px;
-      background: radial-gradient(circle at 30% 30%, #154877, #081b2e);
-      border: 2px solid var(--gold-400);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 30px rgba(212, 175, 90, 0.45);
-      z-index: 1;
-    }
-
-    .copilot-avatar-box svg {
-      width: 40px;
-      height: 40px;
-      stroke: var(--gold-300);
-      fill: none;
-      stroke-width: 2;
-      filter: drop-shadow(0 0 8px rgba(212, 175, 90, 0.6));
-    }
-
-    .chat-mock-window {
-      background: rgba(10,14,21,0.94);
-      border: 1px solid rgba(212, 175, 90, 0.3);
-      border-radius: 20px;
-      padding: 1.5rem;
-      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08);
-    }
-
-    .chat-message-bubble {
-      margin-bottom: 14px;
-      padding: 14px 18px;
-      border-radius: 16px;
-      font-size: 0.95rem;
-      line-height: 1.9;
-    }
-
-    .chat-user {
-      background: rgba(15, 57, 98, 0.5);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      color: #f1f5f9;
-      align-self: flex-start;
-      margin-left: 28px;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
-    }
-
-    .chat-ai {
-      background: rgba(17,27,43,0.9);
-      border: 1px solid rgba(16,160,185,0.45);
-      color: #ffffff;
-      margin-right: 28px;
-      position: relative;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 15px rgba(16,160,185,0.15);
-    }
-
-    .chat-ai::before {
-      content: 'دستیار بالینی دانا';
-      display: block;
-      font-size: 0.74rem;
-      font-weight: 900;
-      color: var(--gold-400);
-      margin-bottom: 4px;
-      letter-spacing: 0.5px;
-    }
-
-    /* Comparison Matrix */
-    .comparison-table-wrapper {
-      background: var(--surface-glass-card);
-      backdrop-filter: blur(20px);
-      border: 1px solid var(--border-gold);
-      border-radius: 22px;
-      overflow: hidden;
-      box-shadow: var(--shadow-lux);
-    }
-
-    .comp-table {
-      width: 100%;
-      border-collapse: collapse;
-      text-align: right;
-    }
-
-    .comp-table th {
-      padding: 1.1rem 1.35rem;
-      font-size: 0.95rem;
-      font-weight: 900;
-      background: rgba(11,16,23,0.98);
-      border-bottom: 2px solid var(--border-gold);
-    }
-
-    .comp-table th.col-feature {
-      width: 38%;
-      color: #ffffff;
-    }
-
-    .comp-table th.col-legacy {
-      width: 31%;
-      color: #94a3b8;
-      background: rgba(9,14,21,0.98);
-    }
-
-    .comp-table th.col-dana {
-      width: 31%;
-      color: var(--gold-300);
-      background: rgba(19,28,43,0.98);
-      border-right: 2px solid var(--border-gold);
-      border-left: 2px solid var(--border-gold);
-    }
-
-    .comp-table td {
-      padding: 1.1rem 1.35rem;
-      font-size: 0.9rem;
-      line-height: 1.8;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-      color: var(--text-sub);
-    }
-
-    .comp-table tr:hover td {
-      background: rgba(255, 255, 255, 0.03);
-    }
-
-    .comp-table td.dana-cell {
-      background: rgba(17,27,43,0.45);
-      color: #ffffff;
-      font-weight: 700;
-      border-right: 2px solid var(--border-gold);
-      border-left: 2px solid var(--border-gold);
-    }
-
-    .status-check-yes {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: #6ed5e7;
-      font-weight: 800;
-    }
-
-    .status-check-no {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: #f87171;
-    }
-
-    /* CTA Section */
-    .cta-final-card {
-      background: linear-gradient(135deg, rgba(15,22,33,0.96), rgba(9,14,22,0.98));
-      border: 2px solid var(--gold-500);
-      border-radius: 26px;
-      padding: 2.25rem 2.5rem;
-      margin: 40px 0 50px 0;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(212, 175, 90, 0.25);
-      display: grid;
-      grid-template-columns: 1.25fr 1fr;
-      gap: 40px;
-      align-items: center;
-    }
-
-    .demo-form {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    .form-input-lux {
-      background: rgba(9,14,22,0.85);
-      border: 1px solid rgba(212, 175, 90, 0.35);
-      border-radius: 14px;
-      padding: 13px 18px;
-      color: #ffffff;
-      font-family: inherit;
-      font-size: 0.95rem;
-      outline: none;
-      transition: var(--transition-smooth);
-    }
-
-    .form-input-lux:focus {
-      border-color: var(--gold-400);
-      box-shadow: 0 0 16px rgba(212, 175, 90, 0.4);
-      background: rgba(11,16,23,0.98);
-    }
-
-    .form-btn-submit {
-      background: linear-gradient(135deg, #ecd599 0%, #d4af5a 50%, #997828 100%);
-      color: #090e15;
-      font-weight: 900;
-      padding: 14px;
-      border-radius: 14px;
-      border: 1px solid #fff5d1;
-      font-size: 1rem;
-      cursor: pointer;
-      box-shadow: 0 10px 28px rgba(212, 175, 90, 0.45);
-      transition: var(--transition-smooth);
-    }
-
-    .form-btn-submit:hover {
-      background: linear-gradient(135deg, #fff0c7 0%, #ecd599 40%, #d4af5a 100%);
-      transform: translateY(-2px) scale(1.01);
-      box-shadow: 0 14px 35px rgba(212, 175, 90, 0.65);
-    }
-
-    footer.platform-footer {
-      border-top: 1px solid rgba(212, 175, 90, 0.22);
-      padding: 35px 0 55px 0;
-      text-align: center;
-      color: var(--text-muted);
-      font-size: 0.88rem;
-      position: relative;
-    }
-
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      gap: 26px;
-      margin-bottom: 14px;
-      flex-wrap: wrap;
-    }
-
-    .footer-links a {
-      color: var(--text-sub);
-      text-decoration: none;
-      transition: var(--transition-smooth);
-      font-size: 0.88rem;
-    }
-
-    .footer-links a:hover {
-      color: var(--gold-300);
-    }
-
-    /* Modal / Interaction preview overlay */
-    .preview-toast {
-      position: fixed;
-      bottom: 26px;
-      left: 26px;
-      background: rgba(11,16,25,0.96);
-      border: 1.5px solid var(--emerald-500);
-      padding: 14px 22px;
-      border-radius: 16px;
-      box-shadow: 0 14px 38px rgba(0, 0, 0, 0.8), 0 0 25px rgba(16,160,185,0.3);
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      z-index: 1000;
-      transform: translateY(140px);
-      transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .preview-toast.show {
-      transform: translateY(0);
-    }
-
-    /* Responsive */
-    @media (max-width: 1024px) {
-      .stat-counters-grid { grid-template-columns: repeat(2, 1fr); }
-      .hubs-grid { grid-template-columns: 1fr; }
-      .executive-dashboard-grid { grid-template-columns: 1fr; }
-      .copilot-container { grid-template-columns: 1fr; }
-      .cta-final-card { grid-template-columns: 1fr; }
-      .safety-tools-grid { grid-template-columns: 1fr; }
-    }
-
-    @media (max-width: 768px) {
-      /* Mobile Header & Nav */
-      header.main-nav {
-        padding: 8px 10px !important;
-        margin: 0 0 16px 0 !important;
-        width: 100% !important;
-        max-width: 100vw !important;
-        box-sizing: border-box !important;
-      }
-      .nav-glass-bar {
-        gap: 8px !important;
-        padding: 0 !important;
-        width: 100% !important;
-        max-width: 100% !important;
-        box-sizing: border-box !important;
-      }
-      .brand-group {
-        display: flex !important;
-        align-items: center !important;
-        gap: 8px !important;
-        flex: 1 1 auto !important;
-        min-width: 0 !important;
-        overflow: hidden !important;
-      }
-      .brand-icon-box {
-        width: 32px !important;
-        height: 32px !important;
-        border-radius: 9px !important;
-        flex-shrink: 0 !important;
-      }
-      .brand-icon-box svg {
-        width: 18px !important;
-        height: 18px !important;
-      }
-      .brand-text-title {
-        font-size: 0.76rem !important;
-        white-space: nowrap !important;
-        overflow: hidden !important;
-        text-overflow: ellipsis !important;
-        display: flex !important;
-        align-items: center !important;
-        gap: 5px !important;
-        min-width: 0 !important;
-      }
-      .brand-badge-v5 {
-        font-size: 0.62rem !important;
-        padding: 1px 5px !important;
-        flex-shrink: 0 !important;
-      }
-      .nav-actions-group {
-        display: flex !important;
-        align-items: center !important;
-        gap: 6px !important;
-        flex-shrink: 0 !important;
-      }
-      .nav-actions-group .nav-cta-btn {
-        padding: 6px 10px !important;
-        font-size: 0.76rem !important;
-        border-radius: 8px !important;
-      }
-      .nav-mob-toggle {
-        width: 34px !important;
-        height: 34px !important;
-        border-radius: 9px !important;
-        flex-shrink: 0 !important;
-      }
-      .desk-only {
-        display: none !important;
-      }
-      .nav-mob-toggle {
-        display: flex !important;
-        align-items: center;
-        justify-content: center;
-        width: 36px;
-        height: 36px;
-        border-radius: 10px;
-        background: rgba(15,23,35,0.85);
-        border: 1px solid var(--border-gold);
-        color: var(--gold-300);
-        cursor: pointer;
-        transition: var(--transition-smooth);
-        flex-shrink: 0;
-      }
-      .nav-mob-toggle:hover, .nav-mob-toggle:active {
-        background: rgba(212, 175, 90, 0.2);
-        border-color: var(--gold-400);
-      }
-      .nav-links {
-        display: none !important;
-      }
-      .nav-links.mob-open {
-        display: flex !important;
-        flex-direction: column !important;
-        position: absolute !important;
-        top: calc(100% + 10px) !important;
-        left: 0 !important;
-        right: 0 !important;
-        background: rgba(8,14,22,0.98) !important;
-        backdrop-filter: blur(28px) !important;
-        -webkit-backdrop-filter: blur(28px) !important;
-        border: 1.5px solid var(--border-gold) !important;
-        border-radius: 18px !important;
-        padding: 12px !important;
-        box-shadow: 0 20px 48px rgba(0, 0, 0, 0.9), 0 0 25px rgba(212, 175, 90, 0.2) !important;
-        z-index: 1002 !important;
-        gap: 6px !important;
-      }
-      .nav-links.mob-open .nav-link-item {
-        width: 100% !important;
-        box-sizing: border-box !important;
-        padding: 11px 14px !important;
-        font-size: 0.9rem !important;
-        font-weight: 700 !important;
-        border-radius: 10px !important;
-        background: rgba(17,24,35,0.55) !important;
-        border: 1px solid rgba(255, 255, 255, 0.05) !important;
-        color: var(--text-main) !important;
-        display: block !important;
-        text-align: right !important;
-      }
-      .nav-links.mob-open .nav-link-item:hover,
-      .nav-links.mob-open .nav-link-item:active {
-        background: rgba(16,160,185,0.25) !important;
-        border-color: var(--emerald-400) !important;
-        color: var(--gold-300) !important;
-      }
-      .nav-links.mob-open .mob-only-link {
-        display: block !important;
-      }
-      .nav-cta-btn {
-        padding: 6px 11px !important;
-        font-size: 0.78rem !important;
-        border-radius: 8px !important;
-      }
-
-      /* Container & Section Layout */
-      .container {
-        padding: 0 12px !important;
-      }
-      .section-wrapper {
-        padding: 30px 0 !important;
-      }
-
-      /* Hero Section */
-      .hero-section {
-        padding: 10px 0 24px 0 !important;
-      }
-      .hero-pill-badge {
-        font-size: 0.7rem !important;
-        padding: 6px 12px !important;
-        line-height: 1.5 !important;
-        margin-bottom: 14px !important;
-      }
-      .hero-title {
-        font-size: 1.45rem !important;
-        line-height: 1.45 !important;
-        margin-bottom: 12px !important;
-      }
-      .hero-description {
-        font-size: 0.85rem !important;
-        line-height: 1.8 !important;
-        margin-bottom: 20px !important;
-      }
-      .hero-actions {
-        flex-direction: column !important;
-        gap: 10px !important;
-        margin-bottom: 24px !important;
-        width: 100% !important;
-      }
-      .btn-hero-primary, .btn-hero-secondary {
-        width: 100% !important;
-        box-sizing: border-box !important;
-        justify-content: center !important;
-        padding: 12px 16px !important;
-        font-size: 0.88rem !important;
-        text-align: center !important;
-      }
-
-      /* Stat Counters */
-      .stat-counters-grid {
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 10px !important;
-      }
-      .stat-counter-card {
-        min-height: 135px !important;
-        padding: 0.9rem 0.5rem !important;
-        border-radius: 14px !important;
-      }
-      .stat-icon-halo {
-        width: 30px !important;
-        height: 30px !important;
-        margin-bottom: 4px !important;
-      }
-      .stat-icon-halo svg {
-        width: 24px !important;
-        height: 24px !important;
-      }
-      .stat-number {
-        font-size: 1.75rem !important;
-        margin-bottom: 2px !important;
-      }
-      .stat-label {
-        font-size: 0.8rem !important;
-        margin-bottom: 2px !important;
-      }
-      .stat-meta {
-        font-size: 0.66rem !important;
-        line-height: 1.35 !important;
-      }
-
-      /* Section Header Boxes */
-      .section-header-box {
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        gap: 10px !important;
-        margin-bottom: 18px !important;
-        padding-bottom: 14px !important;
-      }
-      .chapter-tag {
-        font-size: 0.72rem !important;
-      }
-      .section-title {
-        font-size: 1.25rem !important;
-        line-height: 1.4 !important;
-      }
-      .section-subtitle {
-        font-size: 0.82rem !important;
-        line-height: 1.7 !important;
-      }
-      .section-badge-right {
-        font-size: 0.75rem !important;
-        padding: 5px 12px !important;
-        align-self: flex-start !important;
-      }
-
-      /* Chapter 1 Hubs */
-      .hubs-grid {
-        grid-template-columns: 1fr !important;
-        gap: 14px !important;
-        margin-bottom: 20px !important;
-      }
-      .hub-card {
-        padding: 1.35rem 1.15rem !important;
-        min-height: auto !important;
-        border-radius: 16px !important;
-      }
-      .hub-title-text {
-        font-size: 1.15rem !important;
-      }
-      .hub-features-list li {
-        font-size: 0.85rem !important;
-        line-height: 1.75 !important;
-      }
-
-      /* Horizontal Flows (Rule 11) */
-      .navigation-flow-container,
-      #clinical-sop > div:has(.horizontal-scroll-flow) {
-        padding: 1.2rem 1rem !important;
-        border-radius: 18px !important;
-      }
-      .horizontal-scroll-flow {
-        gap: 16px !important;
-        padding: 8px 4px 16px 4px !important;
-      }
-      .flow-step-item {
-        flex: 0 0 280px !important;
-      }
-      .flow-connector-bar {
-        top: 44px !important;
-        left: -16px !important;
-        width: 16px !important;
-      }
-      .flow-level-card,
-      .sop-card-horizontal {
-        padding: 1.15rem 1rem !important;
-        min-height: 220px !important;
-        border-radius: 16px !important;
-      }
-      .axes-pills-row {
-        flex-wrap: nowrap !important;
-        overflow-x: auto !important;
-        -webkit-overflow-scrolling: touch !important;
-        padding-bottom: 8px !important;
-        gap: 8px !important;
-      }
-      .axis-pill-chip {
-        flex-shrink: 0 !important;
-        padding: 7px 11px !important;
-        font-size: 0.8rem !important;
-      }
-
-      /* Safety & Never Events */
-      .safety-highlight-banner {
-        flex-direction: column !important;
-        gap: 14px !important;
-        align-items: flex-start !important;
-        padding: 1.15rem 1rem !important;
-        border-radius: 16px !important;
-      }
-      .safety-banner-content {
-        gap: 12px !important;
-      }
-      .safety-icon-alarm {
-        width: 44px !important;
-        height: 44px !important;
-        border-radius: 12px !important;
-      }
-      .safety-icon-alarm svg {
-        width: 24px !important;
-        height: 24px !important;
-      }
-      .safety-banner-title {
-        font-size: 1rem !important;
-        line-height: 1.4 !important;
-      }
-      .safety-banner-desc {
-        font-size: 0.8rem !important;
-        line-height: 1.7 !important;
-      }
-      .safety-stats-badge {
-        width: 100% !important;
-        box-sizing: border-box !important;
-        padding: 8px 16px !important;
-        display: flex !important;
-        justify-content: space-around !important;
-        align-items: center !important;
-      }
-      .safety-stats-badge .num {
-        font-size: 1.8rem !important;
-      }
-      .safety-stats-badge .lbl {
-        font-size: 0.78rem !important;
-      }
-      .safety-tools-grid {
-        grid-template-columns: 1fr !important;
-        gap: 12px !important;
-      }
-      .safety-tool-card {
-        min-height: auto !important;
-        padding: 1.25rem 1rem !important;
-        border-radius: 16px !important;
-      }
-
-      /* Executive Intelligence & BSC */
-      .executive-dashboard-grid {
-        grid-template-columns: 1fr !important;
-        gap: 14px !important;
-      }
-      .bsc-panel, .supervision-card {
-        padding: 1.25rem 1rem !important;
-        min-height: auto !important;
-        border-radius: 18px !important;
-      }
-      .bsc-header-row {
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        gap: 10px !important;
-      }
-      .bsc-perspective-grid {
-        grid-template-columns: 1fr !important;
-        gap: 10px !important;
-      }
-      .perspective-box {
-        padding: 0.95rem !important;
-      }
-      .persp-score {
-        font-size: 1.4rem !important;
-      }
-      .sup-item {
-        padding: 10px 12px !important;
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        gap: 6px !important;
-      }
-      .sup-status {
-        align-self: flex-start !important;
-      }
-
-      /* Dana AI Copilot */
-      .copilot-container {
-        grid-template-columns: 1fr !important;
-        gap: 18px !important;
-        padding: 1.3rem 1rem !important;
-        border-radius: 18px !important;
-      }
-      .chat-mock-window {
-        padding: 1rem 0.85rem !important;
-        border-radius: 14px !important;
-      }
-      .chat-user {
-        margin-left: 8px !important;
-        font-size: 0.84rem !important;
-        padding: 10px 12px !important;
-      }
-      .chat-ai {
-        margin-right: 8px !important;
-        font-size: 0.84rem !important;
-        padding: 10px 12px !important;
-      }
-      .chat-mock-window input {
-        font-size: 0.82rem !important;
-      }
-      .chat-mock-window [style*="display: flex; gap: 10px"] {
-        flex-direction: column !important;
-      }
-      .chat-mock-window [style*="display: flex; gap: 10px"] button {
-        width: 100% !important;
-        justify-content: center !important;
-      }
-
-      /* Comparison Matrix Table */
-      .comparison-table-wrapper {
-        overflow-x: auto !important;
-        -webkit-overflow-scrolling: touch !important;
-        border-radius: 14px !important;
-      }
-      .comp-table {
-        min-width: 580px !important;
-      }
-      .comp-table th, .comp-table td {
-        padding: 0.8rem 0.9rem !important;
-        font-size: 0.82rem !important;
-      }
-
-      /* CTA Final Card & Demo Form */
-      .cta-final-card {
-        grid-template-columns: 1fr !important;
-        gap: 20px !important;
-        padding: 1.35rem 1rem !important;
-        margin: 20px 0 28px 0 !important;
-        border-radius: 18px !important;
-      }
-      .cta-final-card h2 {
-        font-size: 1.25rem !important;
-        line-height: 1.4 !important;
-      }
-      .cta-final-card p {
-        font-size: 0.85rem !important;
-        line-height: 1.8 !important;
-      }
-      .form-grid-2col {
-        grid-template-columns: 1fr !important;
-        gap: 10px !important;
-      }
-      .demo-form > div[style*="grid-template-columns"] {
-        grid-template-columns: 1fr !important;
-        gap: 10px !important;
-      }
-      .form-input-lux {
-        padding: 11px 13px !important;
-        font-size: 0.88rem !important;
-        width: 100% !important;
-        box-sizing: border-box !important;
-      }
-      .form-btn-submit {
-        padding: 12px 14px !important;
-        font-size: 0.9rem !important;
-        width: 100% !important;
-      }
-
-      /* Footer */
-      footer.platform-footer {
-        padding: 26px 12px 38px 12px !important;
-        font-size: 0.78rem !important;
-      }
-      .footer-links {
-        gap: 10px 14px !important;
-      }
-      .footer-links a {
-        font-size: 0.8rem !important;
-      }
-
-      /* Toast */
-      .preview-toast {
-        left: 12px !important;
-        right: 12px !important;
-        bottom: 14px !important;
-        padding: 11px 14px !important;
-        border-radius: 12px !important;
-      }
-    }
-  </style>
-<link rel="stylesheet" href="/css/synapse-theme.css?v=4">
-
-<style id="catalog-professional-v6">
-/* ==== ریفکتور حرفه‌ای کاتالوگ — نسل ششم (۱۴۰۵/۰۷/۲۷) ==== */
-html { scroll-behavior: smooth; }
-.hero-title, .section-title, .level-title, .sop-name, .hub-title-text { text-wrap: balance; }
-.section-subtitle { max-width: 920px; }
-
-/* نوار پیشرفت مطالعه */
-.cat-scroll-progress {
-  position: fixed; top: 0; right: 0; height: 3px; width: 0;
-  background: linear-gradient(270deg, #d4af5a 0%, #34bbd3 100%);
-  z-index: 1200; border-radius: 0 0 3px 3px;
-  box-shadow: 0 0 12px rgba(212,175,90,.55); pointer-events: none;
+/* =====================================================================
+   کاتالوگ عملیاتی سیناپس — بازنویسی کامل ۱۴۰۵/۰۷/۲۸
+   ---------------------------------------------------------------------
+   چرا بازنویسی شد: نسخهٔ قبلی یک بروشور بلند بازاریابی بود؛ کاربر نمی‌توانست
+   چیزی را «پیدا کند» یا به سامانهٔ واقعی برسد. این نسخه ابزار مرجع است:
+   ۱) جستجوی سراسری روی بخش‌ها + SOPها + هر ۳۹۵ سنجه (Ctrl+K)
+   ۲) دایرکتوری هر ماژول با لینک زنده به همان صفحهٔ سامانه
+   ۳) مرورگر سنجه‌های ویرایش ششم با فیلتر محور/سطح/پرچم ایمنی و راهنمای ارزیابی
+   دادهٔ سنجه‌ها تنبل بارگذاری می‌شود (فایل ایندکس سبک؛ شرح ارزیابی جداگانه).
+   ===================================================================== */
+:root{
+  --bg:#0B1119; --bg2:#0D1521; --panel:#101A26; --panel2:#14202F;
+  --line:rgba(255,255,255,.08); --line-gold:rgba(217,181,94,.24);
+  --gold:#D9B55E; --gold2:#F2D389; --gold-dim:rgba(217,181,94,.13);
+  --teal:#46C4D6; --teal-dim:rgba(70,196,214,.13);
+  --ink:#E9EFF6; --sub:#9CADC0; --faint:#65758A;
+  --flag:#E46A55; --flag-dim:rgba(228,106,85,.14); --ok:#45C08D;
+  --r-panel:20px; --r-tile:12px; --r-in:10px;
+  --top-h:58px; --rail-h:46px;
+  --shadow:0 10px 34px rgba(0,0,0,.34);
 }
-/* لینک فعال ناوبری (Scrollspy) */
-.nav-link-item.active {
-  color: var(--gold-300, #ffd77a) !important;
-  background: rgba(212,175,90,.14) !important;
-  box-shadow: inset 0 -2px 0 rgba(212,175,90,.75);
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:Vazirmatn,-apple-system,'Segoe UI',Tahoma,sans-serif;
+  font-size:14.5px;line-height:1.85;
+  background-image:radial-gradient(1100px 500px at 85% -100px, rgba(70,196,214,.07), transparent 60%),
+                   radial-gradient(900px 420px at 10% -60px, rgba(217,181,94,.06), transparent 60%);
+  background-repeat:no-repeat;
 }
-/* دسترس‌پذیری فوکوس */
-.nav-link-item:focus-visible, .nav-cta-btn:focus-visible, .axis-pill-chip:focus-visible,
-.cat-back-top:focus-visible, .sop-flow-btn:focus-visible, .btn-hero-primary:focus-visible,
-.btn-hero-secondary:focus-visible, .form-btn-submit:focus-visible {
-  outline: 2px solid #34bbd3; outline-offset: 3px;
+a{color:var(--gold2);text-decoration:none}
+a:hover{color:#fff}
+h1,h2,h3{margin:0;line-height:1.55;font-weight:800}
+p{margin:0}
+button{font-family:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:6px}
+::selection{background:rgba(217,181,94,.32)}
+svg.ic-s{width:1.15em;height:1.15em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.wrap{max-width:1280px;margin:0 auto;padding:0 22px}
+.skip{position:absolute;right:-9999px;top:8px;background:var(--gold);color:#1a1408;padding:8px 14px;border-radius:8px;z-index:200}
+.skip:focus{right:12px}
+
+/* ---------- نوار فرمان ---------- */
+.topbar{position:sticky;top:0;z-index:60;background:rgba(11,17,25,.86);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--line);height:var(--top-h)}
+.topbar .wrap{height:100%;display:flex;align-items:center;gap:16px}
+.brand{display:flex;align-items:center;gap:10px;flex-shrink:0;color:var(--ink)}
+.brand-mark{width:36px;height:36px;border-radius:11px;background:linear-gradient(140deg,#1C2B40,#101A26);border:1px solid var(--line-gold);display:grid;place-items:center;color:var(--gold)}
+.brand-mark svg{width:20px;height:20px}
+.brand b{font-size:.98rem;display:block;line-height:1.3}
+.brand i{font-style:normal;font-size:.7rem;color:var(--faint);display:block;line-height:1.3}
+.qf{flex:1;max-width:560px;position:relative}
+.qf input{width:100%;height:38px;border-radius:var(--r-in);border:1px solid var(--line);background:rgba(255,255,255,.045);color:var(--ink);padding:0 38px 0 74px;font-size:.86rem}
+.qf input::placeholder{color:var(--faint)}
+.qf .qf-ic{position:absolute;right:12px;top:9px;color:var(--faint);pointer-events:none}
+.qf kbd{position:absolute;left:8px;top:8px;font-family:inherit;font-size:.62rem;color:var(--faint);border:1px solid var(--line);border-radius:6px;padding:2px 6px;background:rgba(255,255,255,.03)}
+.qf-res{position:absolute;top:44px;right:0;left:0;background:#0F1926;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);overflow:hidden;display:none;max-height:64vh;overflow-y:auto}
+.qf-res.on{display:block}
+.qf-g{padding:8px 14px 4px;font-size:.68rem;color:var(--faint);border-top:1px solid rgba(255,255,255,.05)}
+.qf-g:first-child{border-top:0}
+.qf-i{display:flex;width:100%;text-align:right;gap:10px;align-items:center;padding:9px 14px;background:none;border:0;color:var(--ink);cursor:pointer;font-size:.84rem}
+.qf-i:hover,.qf-i.on{background:rgba(217,181,94,.10)}
+.qf-i .qf-t{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.qf-i .qf-s{color:var(--faint);font-size:.7rem;flex-shrink:0}
+.qf-empty{padding:14px;color:var(--sub);font-size:.82rem}
+.demo-btn{flex-shrink:0;height:36px;display:inline-flex;align-items:center;gap:7px;padding:0 16px;border-radius:10px;background:linear-gradient(135deg,#e0ab2e,#b88615);color:#1a1408;font-weight:800;font-size:.82rem;border:0;cursor:pointer}
+.demo-btn:hover{filter:brightness(1.06);color:#1a1408}
+
+/* ---------- ریل بخش‌ها ---------- */
+.rail{position:sticky;top:var(--top-h);z-index:55;background:rgba(11,17,25,.9);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.rail .wrap{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;height:var(--rail-h);align-items:center}
+.rail .wrap::-webkit-scrollbar{display:none}
+.rail a{flex-shrink:0;font-size:.79rem;color:var(--sub);padding:6px 11px;border-radius:8px;border:1px solid transparent}
+.rail a:hover{color:var(--gold2);background:var(--gold-dim)}
+.rail a.on{color:var(--gold2);background:var(--gold-dim);border-color:var(--line-gold)}
+
+/* ---------- بخش‌ها ---------- */
+.sec{padding:52px 0 10px;scroll-margin-top:calc(var(--top-h) + var(--rail-h) + 16px)}
+.sec-hd{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:22px;flex-wrap:wrap}
+.sec-hd h2{font-size:1.42rem;font-weight:900}
+.sec-hd p{color:var(--sub);font-size:.86rem;margin-top:4px;max-width:760px}
+.sec-no{color:var(--gold);font-size:.78rem;font-weight:800;letter-spacing:.02em}
+
+/* ---------- هیرو ---------- */
+.hero{padding:44px 0 8px}
+.hero-grid{display:grid;grid-template-columns:1.3fr .85fr;gap:28px;align-items:stretch}
+.hero h1{font-size:2.35rem;font-weight:900;line-height:1.5}
+.hero h1 span{color:var(--gold2)}
+.hero .lead{color:var(--sub);font-size:.95rem;margin-top:14px;max-width:640px}
+.hero-cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.btn{display:inline-flex;align-items:center;gap:8px;border-radius:10px;padding:10px 18px;font-size:.86rem;font-weight:700;cursor:pointer;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--ink)}
+.btn:hover{border-color:var(--line-gold);color:var(--gold2)}
+.btn-g{background:linear-gradient(135deg,#e0ab2e,#b88615);color:#1a1408;border:0}
+.btn-g:hover{color:#1a1408;filter:brightness(1.05)}
+.btn-t{border-color:rgba(70,196,214,.4);color:#8fe3ef;background:var(--teal-dim)}
+.btn-t:hover{color:#c8f4fb;border-color:var(--teal)}
+.stats-pane{background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid var(--line-gold);border-radius:var(--r-panel);padding:20px;display:flex;flex-direction:column;gap:12px;box-shadow:var(--shadow)}
+.stats-pane .sp-t{display:flex;justify-content:space-between;align-items:center;color:var(--sub);font-size:.78rem}
+.stats-pane .sp-t b{color:var(--gold2);font-size:.82rem}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;flex:1}
+.stat{background:rgba(255,255,255,.035);border:1px solid var(--line);border-radius:var(--r-tile);padding:13px 14px;text-align:right;cursor:pointer;transition:border-color .15s,background .15s;color:var(--ink)}
+.stat:hover{border-color:var(--line-gold);background:var(--gold-dim)}
+.stat b{display:block;font-size:1.55rem;font-weight:900;color:var(--gold2);font-variant-numeric:tabular-nums;line-height:1.3}
+.stat span{display:block;font-size:.78rem;color:var(--sub)}
+.stat i{font-style:normal;display:block;font-size:.66rem;color:var(--faint);margin-top:2px}
+.hero-note{display:flex;gap:8px;align-items:flex-start;color:var(--faint);font-size:.74rem;margin-top:12px}
+
+/* ---------- دایرکتوری ---------- */
+.dir-bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
+.gchips{display:flex;gap:6px;flex-wrap:wrap}
+.gchip{border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--sub);border-radius:999px;padding:6px 13px;font-size:.77rem;cursor:pointer}
+.gchip:hover{color:var(--gold2);border-color:var(--line-gold)}
+.gchip[aria-pressed="true"]{background:var(--gold-dim);color:var(--gold2);border-color:var(--line-gold);font-weight:700}
+.inp{height:36px;border-radius:var(--r-in);border:1px solid var(--line);background:rgba(255,255,255,.045);color:var(--ink);padding:0 12px;font-size:.82rem;width:100%}
+.inp::placeholder{color:var(--faint)}
+.dir-search{flex:1;min-width:200px;max-width:340px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(248px,1fr));gap:12px}
+.tile{background:linear-gradient(165deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:var(--r-tile);padding:15px;display:flex;flex-direction:column;gap:10px;transition:border-color .15s,transform .15s}
+.tile:hover{border-color:var(--line-gold)}
+.tile.flash{border-color:var(--gold);box-shadow:0 0 0 3px rgba(217,181,94,.18)}
+.tile-hd{display:flex;gap:10px;align-items:center}
+.tile-ic{width:34px;height:34px;border-radius:10px;background:var(--gold-dim);border:1px solid var(--line-gold);color:var(--gold2);display:grid;place-items:center;flex-shrink:0}
+.tile-ic svg{width:18px;height:18px}
+.tile h3{font-size:.94rem;font-weight:800}
+.tile p{color:var(--sub);font-size:.78rem;line-height:1.8;flex:1}
+.tile-ft{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.lnk{font-size:.78rem;font-weight:700;display:inline-flex;align-items:center;gap:5px}
+.hint{font-size:.66rem;color:var(--faint)}
+.empty{padding:28px;text-align:center;color:var(--sub);border:1px dashed var(--line);border-radius:var(--r-tile);font-size:.86rem}
+
+/* ---------- مرور سنجه‌ها ---------- */
+.mx-bar{display:grid;grid-template-columns:minmax(210px,1.5fr) minmax(170px,1fr) 130px auto auto;gap:10px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:var(--r-tile);padding:12px}
+select.inp{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--faint) 50%),linear-gradient(135deg,var(--faint) 50%,transparent 50%);background-position:calc(14px) 16px,calc(19px) 16px;background-size:5px 5px;background-repeat:no-repeat;padding-left:30px}
+select.inp option{background:#101A26;color:var(--ink)}
+.safe-btn{display:inline-flex;align-items:center;gap:7px;height:36px;border-radius:var(--r-in);border:1px solid var(--line);background:rgba(255,255,255,.035);color:var(--sub);padding:0 13px;font-size:.79rem;cursor:pointer;white-space:nowrap}
+.safe-btn[aria-pressed="true"]{background:var(--flag-dim);border-color:rgba(228,106,85,.45);color:#f2a093;font-weight:700}
+.mx-status{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:14px 2px 8px;color:var(--sub);font-size:.8rem;flex-wrap:wrap}
+.mx-list{display:flex;flex-direction:column;gap:8px}
+.mrow{background:linear-gradient(165deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:var(--r-tile);overflow:hidden}
+.mrow.flash{border-color:var(--gold);box-shadow:0 0 0 3px rgba(217,181,94,.16)}
+.mrow-hd{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:start;width:100%;text-align:right;background:none;border:0;color:var(--ink);padding:13px 15px;cursor:pointer;font-size:.86rem}
+.mrow-hd:hover{background:rgba(255,255,255,.028)}
+.mrow-code{font-weight:800;color:var(--gold2);font-size:.78rem;background:var(--gold-dim);border:1px solid var(--line-gold);border-radius:8px;padding:2px 9px;white-space:nowrap;font-variant-numeric:tabular-nums;margin-top:2px}
+.mrow-stmt{line-height:1.9}
+.mrow-badges{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;align-items:center}
+.bdg{font-size:.67rem;border-radius:999px;padding:2px 9px;border:1px solid var(--line);color:var(--sub);white-space:nowrap}
+.bdg-lv{color:#bcd7ff;border-color:rgba(120,170,255,.28);background:rgba(120,170,255,.08)}
+.bdg-w{color:#ffe2a8;border-color:rgba(217,181,94,.3);background:var(--gold-dim)}
+.bdg-sf{color:#f2a093;border-color:rgba(228,106,85,.4);background:var(--flag-dim)}
+.mrow-bd{border-top:1px dashed var(--line);padding:14px 16px 16px;background:rgba(0,0,0,.14);font-size:.82rem;display:none}
+.mrow-bd.on{display:block}
+.mx-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.mx-meta .bdg{font-size:.7rem}
+.mx-std{color:var(--sub);margin-bottom:10px;font-size:.8rem}
+.mx-sec-t{color:var(--gold2);font-size:.78rem;font-weight:800;margin:12px 0 6px}
+.mx-steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.mx-steps li{display:flex;gap:9px;align-items:flex-start;color:var(--ink);font-size:.8rem;line-height:1.85}
+.mx-steps .dot{width:6px;height:6px;border-radius:50%;background:var(--teal);margin-top:9px;flex-shrink:0}
+.mx-steps .resp{color:var(--faint);font-size:.68rem;white-space:nowrap;margin-top:3px}
+.mx-notes{white-space:pre-wrap;color:#cfdae7;font-size:.8rem;line-height:2;background:rgba(255,255,255,.025);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-top:6px}
+.mx-acts{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;align-items:center}
+.mx-btn{display:inline-flex;align-items:center;gap:6px;border-radius:9px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--ink);padding:7px 13px;font-size:.76rem;cursor:pointer}
+.mx-btn:hover{border-color:var(--line-gold);color:var(--gold2)}
+.mx-load{color:var(--faint);font-size:.78rem;padding:8px 0}
+.mx-more{display:block;width:100%;margin-top:12px;border:1px dashed var(--line);background:none;color:var(--sub);border-radius:var(--r-tile);padding:11px;cursor:pointer;font-size:.8rem}
+.mx-more:hover{color:var(--gold2);border-color:var(--line-gold)}
+
+/* ---------- SOP ---------- */
+.sop-rail{display:flex;gap:14px;overflow-x:auto;padding:2px 2px 12px;scroll-snap-type:x proximity}
+.sop-rail::-webkit-scrollbar{height:8px}
+.sop-rail::-webkit-scrollbar-thumb{background:rgba(255,255,255,.14);border-radius:99px}
+.sop-card{flex:0 0 296px;scroll-snap-align:start;background:linear-gradient(165deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:var(--r-tile);padding:16px;display:flex;flex-direction:column;gap:9px}
+.sop-card h3{font-size:.94rem;font-weight:800}
+.sop-card p{color:var(--sub);font-size:.78rem;flex:1;line-height:1.9}
+.sop-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.sop-code{font-size:.7rem;font-weight:800;color:var(--teal);background:var(--teal-dim);border:1px solid rgba(70,196,214,.3);border-radius:7px;padding:2px 8px}
+.sop-ref{font-size:.7rem;color:var(--faint)}
+.sop-meta{display:flex;justify-content:space-between;align-items:center;border-top:1px dashed var(--line);padding-top:9px;font-size:.72rem;color:var(--faint)}
+.sop-all{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:8px;margin-top:18px}
+.sop-li{display:flex;gap:10px;align-items:baseline;background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:10px;padding:9px 12px;font-size:.79rem}
+.sop-li .c{color:var(--teal);font-size:.68rem;font-weight:800;white-space:nowrap;font-variant-numeric:tabular-nums}
+.sop-li.flash{border-color:var(--teal);box-shadow:0 0 0 3px rgba(70,196,214,.15)}
+
+/* ---------- ایمنی ---------- */
+.safe-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:22px;align-items:start}
+.safe-pane{background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:var(--r-panel);padding:22px}
+.safe-big{display:flex;align-items:baseline;gap:10px;margin-bottom:16px}
+.safe-big b{font-size:2.3rem;font-weight:900;color:var(--gold2);font-variant-numeric:tabular-nums}
+.safe-big span{color:var(--sub);font-size:.84rem}
+.sbar{margin-bottom:13px}
+.sbar .sb-t{display:flex;justify-content:space-between;font-size:.78rem;color:var(--sub);margin-bottom:5px}
+.sbar .sb-tr{height:8px;border-radius:99px;background:rgba(255,255,255,.06);overflow:hidden}
+.sbar .sb-f{height:100%;border-radius:99px;background:linear-gradient(90deg,#b88615,#e0ab2e)}
+.safe-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.safe-list li{display:flex;gap:10px;align-items:flex-start;color:var(--sub);font-size:.83rem;line-height:1.9}
+.safe-list .dot{width:7px;height:7px;border-radius:50%;background:var(--flag);margin-top:10px;flex-shrink:0}
+
+/* ---------- هوش / دانا ---------- */
+.tiles-4{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.prompt{display:flex;gap:10px;align-items:center;background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:10px;padding:11px 13px;font-size:.81rem;color:#cfdae7;line-height:1.9}
+.prompt button{flex-shrink:0;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--sub);border-radius:8px;padding:5px 10px;font-size:.7rem;cursor:pointer}
+.prompt button:hover{color:var(--gold2);border-color:var(--line-gold)}
+.dana-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:22px;align-items:start}
+
+/* ---------- مقایسه ---------- */
+.cmp-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r-panel);background:var(--panel)}
+table.cmp{width:100%;min-width:680px;border-collapse:collapse;font-size:.83rem}
+table.cmp th,table.cmp td{padding:12px 16px;text-align:right;border-bottom:1px solid var(--line);vertical-align:top}
+table.cmp thead th{background:rgba(217,181,94,.08);color:var(--gold2);font-size:.78rem;font-weight:800;white-space:nowrap}
+table.cmp tbody tr:last-child td{border-bottom:0}
+table.cmp td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+table.cmp td.v5{color:var(--sub)}
+table.cmp td.v6{color:var(--ink);font-weight:700}
+table.cmp td.ch{color:var(--teal);font-weight:700;white-space:nowrap}
+.cmp-note{color:var(--faint);font-size:.75rem;margin-top:12px;line-height:2}
+
+/* ---------- دمو ---------- */
+.demo-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:22px;align-items:start}
+.acc-table{width:100%;border-collapse:collapse;font-size:.82rem}
+.acc-table th,.acc-table td{padding:10px 12px;text-align:right;border-bottom:1px solid var(--line)}
+.acc-table thead th{color:var(--gold2);font-size:.74rem;background:rgba(217,181,94,.07)}
+.acc-table td.u{font-family:Consolas,monospace;font-size:.78rem;color:#bcd7ff;direction:ltr;text-align:left}
+.acc-table td.p{font-family:Consolas,monospace;font-size:.78rem;color:#ffe2a8;direction:ltr;text-align:left}
+.copy{background:none;border:1px solid var(--line);color:var(--faint);border-radius:7px;padding:2px 8px;font-size:.66rem;cursor:pointer;margin-right:6px}
+.copy:hover{color:var(--gold2);border-color:var(--line-gold)}
+.paths{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.contact-strip{margin-top:20px;border:1px solid var(--line);border-radius:var(--r-tile);background:rgba(255,255,255,.03);padding:14px 16px;display:flex;gap:18px;flex-wrap:wrap;font-size:.82rem;color:var(--sub)}
+.contact-strip a{font-weight:700}
+
+/* ---------- فوتر ---------- */
+footer{margin-top:56px;border-top:1px solid var(--line);padding:26px 0 34px;color:var(--faint);font-size:.78rem}
+.foot-links{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:10px}
+.foot-links a{color:var(--sub)}
+.foot-links a:hover{color:var(--gold2)}
+
+/* ---------- توست ---------- */
+#toast{position:fixed;bottom:26px;right:50%;transform:translate(50%,20px);background:#12202F;border:1px solid var(--line-gold);color:var(--gold2);border-radius:12px;padding:10px 20px;font-size:.82rem;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:120}
+#toast.on{opacity:1;transform:translate(50%,0)}
+
+/* ---------- موبایل ---------- */
+@media (max-width:960px){
+  .hero-grid,.safe-grid,.dana-grid,.demo-grid{grid-template-columns:1fr}
+  .mx-bar{grid-template-columns:1fr 1fr}
+  .mx-bar .inp,.mx-bar select{min-width:0}
+  .brand i{display:none}
 }
-/* چیپ‌های محور به‌صورت دکمهٔ واقعی + شمارندهٔ سنجه */
-button.axis-pill-chip { font-family: inherit; font-size: .88rem; line-height: 1.45; }
-.axis-pill-chip .chip-count {
-  font-size: .68rem; font-weight: 800; color: var(--gold-300, #ffd77a);
-  background: rgba(212,175,90,.12); border: 1px solid rgba(212,175,90,.3);
-  padding: 2px 7px; border-radius: 999px; white-space: nowrap;
+@media (max-width:640px){
+  body{font-size:14px}
+  .wrap{padding:0 14px}
+  .hero h1{font-size:1.7rem}
+  .sec{padding:38px 0 6px}
+  .mx-bar{grid-template-columns:1fr}
+  .mrow-hd{grid-template-columns:1fr;gap:8px}
+  .mrow-code{width:max-content}
+  .mrow-badges{justify-content:flex-start}
+  .demo-btn span.dt{display:none}
+  .demo-btn{padding:0 12px}
+  .tiles{grid-template-columns:1fr}
+  .paths{grid-template-columns:1fr}
+  .qf input{padding-left:12px}
+  .qf kbd{display:none}
 }
-.axis-pill-chip.active .chip-count {
-  color: #9feaf5; background: rgba(52,187,211,.16); border-color: rgba(52,187,211,.45);
-}
-/* ارتقای بصری کارت‌ها */
-.hub-card { transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
-.hub-card:hover {
-  transform: translateY(-4px); border-color: var(--gold-400, #d4af5a);
-  box-shadow: 0 18px 44px rgba(0,0,0,.5), 0 0 24px rgba(212,175,90,.16);
-}
-.sop-card-horizontal:focus-within { border-color: var(--emerald-400); box-shadow: 0 0 0 2px rgba(52,187,211,.35); }
-/* پیمایش افقی SOP */
-.sop-flow-nav { display: flex; gap: 10px; justify-content: center; margin-top: 10px; }
-.sop-flow-btn {
-  width: 40px; height: 40px; border-radius: 12px; cursor: pointer;
-  display: inline-flex; align-items: center; justify-content: center;
-  font-size: 1.4rem; font-weight: 800; line-height: 1;
-  background: rgba(15,22,33,.9); color: var(--gold-300, #ffd77a);
-  border: 1px solid var(--border-gold, rgba(212,175,90,.3));
-  transition: var(--transition-smooth, all .2s ease);
-}
-.sop-flow-btn:hover { background: rgba(212,175,90,.18); border-color: var(--gold-400, #d4af5a); transform: translateY(-2px); }
-.sop-flow-cta {
-  display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between;
-  margin-top: 14px; padding: 14px 16px; border-radius: 14px;
-  background: rgba(16,160,185,.08); border: 1px solid rgba(52,187,211,.22);
-}
-.sop-flow-cta p { margin: 0; font-size: .82rem; line-height: 1.8; color: var(--text-muted, #94a3b8); max-width: 760px; }
-/* بازگشت به بالا */
-.cat-back-top {
-  position: fixed; left: 18px; bottom: 18px; width: 44px; height: 44px; z-index: 1100;
-  display: inline-flex; align-items: center; justify-content: center;
-  border-radius: 14px; cursor: pointer; color: var(--gold-300, #ffd77a);
-  background: rgba(9,14,22,.92); border: 1px solid rgba(212,175,90,.45);
-  box-shadow: 0 10px 28px rgba(0,0,0,.45); backdrop-filter: blur(10px);
-  opacity: 0; visibility: hidden; transform: translateY(10px);
-  transition: opacity .25s ease, transform .25s ease, visibility .25s ease, background .2s ease;
-}
-.cat-back-top.show { opacity: 1; visibility: visible; transform: translateY(0); }
-.cat-back-top:hover { background: rgba(212,175,90,.16); border-color: var(--gold-400, #d4af5a); }
-@media (max-width: 768px) {
-  .cat-back-top { left: 12px; bottom: 88px; width: 42px; height: 42px; }
-  .sop-flow-cta { justify-content: center; text-align: center; }
-  .axis-pill-chip .chip-count { display: none; }
-}
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+@media (prefers-reduced-motion: reduce){
+  *{transition:none!important;animation:none!important}
+  html{scroll-behavior:auto}
 }
 </style>
 </head>
 <body>
-<div class="cat-scroll-progress" id="catScrollProgress" aria-hidden="true"></div>
-<!-- Ambient Glow overlay -->
-<div class="ambient-glow"></div>
-<!-- Main Navigation -->
-<header class="main-nav">
-<div class="nav-glass-bar">
-<a href="/" class="brand-group" style="text-decoration:none;flex-shrink:0" title="بازگشت به صفحه اصلی سامانه">
-<div class="brand-icon-box">
-<svg fill="none" viewBox="0 0 24 24">
-<path d="M12 2L3 7v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z" stroke="url(#goldGradBrand)" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path>
-<path d="M12 7v10M7 12h10" stroke="#34bbd3" stroke-linecap="round" stroke-width="2.2"></path>
-<defs>
-<linearGradient id="goldGradBrand" x1="3" x2="21" y1="2" y2="22">
-<stop stop-color="#fff0c7"></stop>
-<stop offset="0.5" stop-color="#d4af5a"></stop>
-<stop offset="1" stop-color="#997828"></stop>
-</linearGradient>
-</defs>
-</svg>
-</div>
-<div>
-<div class="brand-text-title">
-<span>سیناپس — کیفیت و اعتباربخشی بالینی</span>
-<span class="brand-badge-v5">ویرایش ۶</span>
-</div>
-<div class="brand-subtitle">سامانه یکپارچه نظارت، اعتباربخشی و پایش سلامت</div>
-</div>
-</a>
-<nav class="nav-links" id="catNavLinks">
-<a class="nav-link-item" href="#hero">نمای کلی</a>
-<a class="nav-link-item" href="#accreditation">محورها و سنجهها</a>
-<a class="nav-link-item" href="#clinical-sop">فرآیندهای SOP</a>
-<a class="nav-link-item" href="#safety-never-events">ایمنی و Never Events</a>
-<a class="nav-link-item" href="#intelligence">هوش مدیریتی (BSC)</a>
-<a class="nav-link-item" href="#dana-copilot">دستیار دانا AI</a>
-<a class="nav-link-item" href="#comparison">مقایسه عملکرد</a>
-<a class="nav-link-item mob-only-link" href="/accreditation/policy.html">پورتال سنجه‌ها</a>
-<a class="nav-link-item mob-only-link" href="#demo">درخواست دمو و مشاوره</a>
+<a class="skip" href="#main">پرش به محتوای اصلی</a>
+
+<!-- ===================== نوار فرمان ===================== -->
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="#hero" aria-label="سیناپس — کاتالوگ عملیاتی">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 12h4l2-5 3 10 2.5-6 1.5 3h5"/><circle cx="5" cy="5" r="1.6"/><circle cx="19" cy="19" r="1.6"/>
+        </svg>
+      </span>
+      <b>سیناپس<span style="color:var(--gold)">.</span></b>
+      <i>کاتالوگ عملیاتی سامانه</i>
+    </a>
+    <div class="qf">
+      <span class="qf-ic" aria-hidden="true">
+        <svg class="ic-s" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m20 20-4.4-4.4"/></svg>
+      </span>
+      <input id="qf" type="search" autocomplete="off" placeholder="جستجو در بخش‌ها، روش‌های اجرایی و ۳۹۵ سنجه…" aria-label="جستجوی سراسری کاتالوگ"/>
+      <kbd>Ctrl K</kbd>
+      <div class="qf-res" id="qfRes" role="listbox" aria-label="نتایج جستجو"></div>
+    </div>
+    <button type="button" class="demo-btn" onclick="location.hash='#demo'">
+      <svg class="ic-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"/></svg>
+      <span class="dt">ورود به دمو</span>
+    </button>
+  </div>
+</header>
+
+<!-- ===================== ریل بخش‌ها ===================== -->
+<nav class="rail" aria-label="بخش‌های کاتالوگ">
+  <div class="wrap">
+    <a href="#hero" class="on">شروع</a>
+    <a href="#directory">دایرکتوری بخش‌ها</a>
+    <a href="#accreditation">مرور سنجه‌ها</a>
+    <a href="#clinical-sop">روش‌های اجرایی</a>
+    <a href="#safety-never-events">ایمنی بیمار</a>
+    <a href="#intelligence">هوش مدیریتی</a>
+    <a href="#dana-copilot">دانا</a>
+    <a href="#comparison">مقایسهٔ نسل ۵ و ۶</a>
+    <a href="#demo">دمو و تماس</a>
+  </div>
 </nav>
 
-<div class="nav-actions-group">
-  <a class="nav-cta-btn" href="/" title="ورود به سامانه بیمارستان" style="background:linear-gradient(135deg,#10a0b9,#1b6580);color:#fff">
-    <span>ورود به سامانه</span>
-  </a>
-  <a class="nav-cta-btn desk-only" href="/accreditation/policy.html" title="مشاهده پورتال مستقل خط‌مشی‌ها و سنجه‌ها" style="background:rgba(212,175,90,0.15);border-color:var(--gold-500);color:var(--gold-300)">
-    <span>پورتال سنجه‌ها</span>
-  </a>
-  <a class="nav-cta-btn desk-only" href="#demo">
-    <span>درخواست دمو</span>
-    <svg fill="none" height="13" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" width="13"><path d="M19 12H5M12 19l-7-7 7-7"></path></svg>
-  </a>
-  <button class="nav-mob-toggle" id="catMenuToggleBtn" aria-label="منوی سامانه" type="button">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
-      <line x1="3" y1="12" x2="21" y2="12"></line>
-      <line x1="3" y1="6" x2="21" y2="6"></line>
-      <line x1="3" y1="18" x2="21" y2="18"></line>
-    </svg>
-  </button>
-</div>
+<main id="main">
 
-</div>
-</header>
-<main class="container">
-<!-- 1. Hero Showcase -->
-<section class="hero-section" id="hero">
-<div class="hero-pill-badge">
-<div class="pulse-dot-wrap">
-<div class="pulse-dot-ping"></div>
-<div class="pulse-dot"></div>
-</div>
-<span>مطابق با ویرایش ششم استاندارد ملی اعتباربخشی بیمارستانهای ایران</span>
-</div>
-<h1 class="hero-title">
-        سیناپس — <span class="gold-gradient-text">کیفیت، ایمنی بیمار</span> و <span class="emerald-gradient-text">اعتباربخشی پیشرفته</span>
-      </h1>
-<p class="hero-description">
-        پلتفرم هوشمند انطباق یکپارچه با ۳۹۵ سنجه کشوری وزارت بهداشت، درمان و آموزش پزشکی. معماری دیجیتال جهت حذف کامل اسناد کاغذی، نظارت بیدرنگ بر ۲۸ واقعه ناخواسته، پیادهسازی گامبهگام ۲۳ فرآیند SOP بالینی و شبیهسازی دقیق ممیزی ارزیابان کشوری.
-      </p>
-<div class="hero-actions">
-<a class="btn-hero-primary" href="#accreditation" onclick="showInteractivePreview('پیشنمایش تعاملی سنجههای ملی فعال شد.')">
-<svg fill="none" height="20" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" width="20"><path d="M5 3l14 9-14 9V3z"></path></svg>
-<span>ورود به پیشنمایش تعاملی سنجهها</span>
-</a>
-<a class="btn-hero-secondary" href="#demo">
-<svg fill="none" height="20" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" width="20"><rect height="16" rx="2" width="18" x="3" y="4"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg>
-<span>رزرو جلسه دمو برای هیئترئیسه بیمارستان</span>
-</a>
-</div>
-<!-- Stat Counters Grid with Animated Shields -->
-<div class="stat-counters-grid">
-<div class="stat-counter-card folded-corner">
-<div class="stat-icon-halo">
-<svg fill="none" height="36" viewBox="0 0 24 24" width="36">
-<circle cx="12" cy="12" r="9" stroke="var(--gold-400)" stroke-dasharray="3 3" stroke-width="1.8"></circle>
-<path d="M8 12l2.5 2.5L16 9" stroke="#fff0c7" stroke-linecap="round" stroke-width="2"></path>
-</svg>
-</div>
-<div class="stat-number gold-gradient-text">۳۹۵</div>
-<div class="stat-label">سنجه ملی مصوب</div>
-<div class="stat-meta">پوشش ۱۰۰٪ ویرایش ششم وزارت بهداشت</div>
-</div>
-<div class="stat-counter-card folded-corner">
-<div class="stat-icon-halo">
-<svg fill="none" height="36" viewBox="0 0 24 24" width="36">
-<path d="M12 2l8 4.5v6c0 5-3.5 9.5-8 11.5-4.5-2-8-6.5-8-11.5v-6l8-4.5z" stroke="#ef4444" stroke-width="1.8"></path>
-<path d="M12 8v5M12 16h.01" stroke="#fca5a5" stroke-linecap="round" stroke-width="2"></path>
-</svg>
-</div>
-<div class="stat-number" style="color: #f87171; text-shadow: 0 0 15px rgba(248,113,113,0.4);">۱۲۱</div>
-<div class="stat-label">سنجه الزامی ایمنی</div>
-<div class="stat-meta">خطوط قرمز بالینی (Never Events)</div>
-</div>
-<div class="stat-counter-card folded-corner">
-<div class="stat-icon-halo">
-<svg fill="none" height="36" viewBox="0 0 24 24" width="36">
-<rect height="16" rx="4" stroke="var(--emerald-400)" stroke-width="1.8" width="16" x="4" y="4"></rect>
-<path d="M9 12h6M12 9v6" stroke="#bbeef7" stroke-linecap="round" stroke-width="2"></path>
-</svg>
-</div>
-<div class="stat-number emerald-gradient-text">۱۸</div>
-<div class="stat-label">محور تخصصی</div>
-<div class="stat-meta">در ۳ هاب راهبردی، درمانی و پشتیبانی</div>
-</div>
-<div class="stat-counter-card folded-corner">
-<div class="stat-icon-halo">
-<svg fill="none" height="36" viewBox="0 0 24 24" width="36">
-<polygon fill="rgba(212,175,90,0.1)" points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" stroke="var(--gold-400)" stroke-width="1.8"></polygon>
-</svg>
-</div>
-<div class="stat-number" style="color: var(--gold-300); text-shadow: 0 0 15px rgba(212,175,90,0.4);">۸۸</div>
-<div class="stat-label">استاندارد کشوری</div>
-<div class="stat-meta">با ماتریس شواهد و روشهای ارزیابی دقیق</div>
-</div>
-</div>
-</section>
-<!-- 2. Chapter 1: Accreditation Suite -->
-<section class="section-wrapper" id="accreditation">
-<div class="section-header-box">
-<div>
-<span class="chapter-tag">بخش اول // ACCREDITATION SUITE</span>
-<h2 class="section-title">
-<span class="gold-gradient-text">موتور ارزیابی و استانداردهای اعتباربخشی</span>
-</h2>
-<p class="section-subtitle">
-            ساختار مهندسیشده سهگانه برای هدایت ارزیابیهای ادواری و ممیزی رسمی با اتصال خودکار شواهد به تکتک سنجهها.
-          </p>
-</div>
-<div class="section-badge-right">۳ هاب مادر // ۱۸ محور تخصصی</div>
-</div>
-<!-- 3 Master Hubs -->
-<div class="hubs-grid">
-<!-- Hub A -->
-<div class="lux-card folded-corner hub-card">
-<div>
-<div class="hub-header">
-<div class="hub-crest-wrap">
-<div class="hub-crest-halo"></div>
-<div class="hub-letter-badge">الف</div>
-</div>
-<div>
-<div class="hub-title-text">رهبری و مدیریت کیفیت</div>
-<div style="font-size: 0.82rem; color: var(--gold-400); font-weight: 600; margin-top: 2px;">Leadership &amp; Quality Governance</div>
-</div>
-</div>
-<div class="hub-stats-row">
-<span class="hub-micro-badge">۷ محور تخصصی</span>
-<span class="hub-micro-badge">۱۵۱ سنجه مصوب</span>
-</div>
-<p style="font-size: 0.95rem; color: var(--text-sub); margin-bottom: 14px; line-height: 2.0;">
-              حکمرانی بالینی، مدیریت منابع انسانی، بهداشت محیط، ایمنی تاسیسات و برنامهریزی استراتژیک بیمارستانی.
-            </p>
-<ul class="hub-features-list">
-<li>مدیریت خطر و برنامههای ارتقای مستمر کیفیت (QI)</li>
-<li>پرونده الکترونیک صلاحیت حرفهای کارکنان و پزشکان</li>
-<li>انطباق کدهای بحران، سامانه HICS و مانورهای ادواری</li>
-</ul>
-</div>
-<button class="nav-cta-btn" onclick="showInteractivePreview('پیمایش هاب الف فعال شد')" style="margin-top: 24px; justify-content: center; font-size: 0.88rem; width: 100%;">
-            مشاهده استانداردهای محور الف
-          </button>
-</div>
-<!-- Hub B -->
-<div class="lux-card folded-corner hub-card" style="border-color: rgba(16,160,185,0.45);">
-<div>
-<div class="hub-header">
-<div class="hub-crest-wrap">
-<div class="hub-crest-halo" style="border-color: var(--emerald-400);"></div>
-<div class="hub-letter-badge" style="background: linear-gradient(135deg, #34bbd3, #10a0b9 60%, #124253); color: #fff;">ب</div>
-</div>
-<div>
-<div class="hub-title-text">مراقبت و درمان</div>
-<div style="font-size: 0.82rem; color: var(--emerald-400); font-weight: 600; margin-top: 2px;">Clinical Care &amp; Treatment</div>
-</div>
-</div>
-<div class="hub-stats-row">
-<span class="hub-micro-badge" style="border-color: var(--emerald-400);">۹ محور بالینی تخصصی</span>
-<span class="hub-micro-badge" style="border-color: var(--emerald-400);">۱۹۲ سنجه بالینی</span>
-</div>
-<p style="font-size: 0.95rem; color: var(--text-sub); margin-bottom: 14px; line-height: 2.0;">
-              شریان حیاتی بیمارستان شامل اورژانس پیشرفته، اتاقهای عمل، مراقبتهای ویژه، مادر و نوزاد و مدیریت دارویی ب-۶.
-            </p>
-<ul class="hub-features-list">
-<li>تریاژ استاندارد ESI و مدیریت زمانهای طلایی اورژانس</li>
-<li>چکلیست جراحی ایمن WHO و کنترل فرآیند بیهوشی</li>
-<li>تلفیق دارویی و نظارت داروساز بالینی بر استوک بخشها</li>
-</ul>
-</div>
-<button class="btn-hero-primary" onclick="showInteractivePreview('پیمایش هاب ب فعال شد')" style="margin-top: 24px; justify-content: center; font-size: 0.88rem; width: 100%;">
-            مشاهده استانداردهای محور ب
-          </button>
-</div>
-<!-- Hub C -->
-<div class="lux-card folded-corner hub-card">
-<div>
-<div class="hub-header">
-<div class="hub-crest-wrap">
-<div class="hub-crest-halo"></div>
-<div class="hub-letter-badge">ج</div>
-</div>
-<div>
-<div class="hub-title-text">حمایت از گیرنده خدمت</div>
-<div style="font-size: 0.82rem; color: var(--gold-400); font-weight: 600; margin-top: 2px;">Patient Rights &amp; Facilities</div>
-</div>
-</div>
-<div class="hub-stats-row">
-<span class="hub-micro-badge">منشور حقوق بیمار</span>
-<span class="hub-micro-badge">۵۲ سنجه حمایت از گیرنده</span>
-</div>
-<p style="font-size: 0.95rem; color: var(--text-sub); margin-bottom: 14px; line-height: 2.0;">
-              تضمین کرامت انسانی، رضایت آگاهانه، مدیریت شکایات در کمتر از ۲۴ ساعت و رفاه همراهان بیمار.
-            </p>
-<ul class="hub-features-list">
-<li>نظرسنجی دیجیتال هوشمند با لینک پیامکی پس از ترخیص</li>
-<li>رسیدگی سیستمی به شکایات با کد رهگیری اختصاصی</li>
-<li>انطباق محیط فیزیکی با استانداردهای افراد کمتوان</li>
-</ul>
-</div>
-<button class="nav-cta-btn" onclick="showInteractivePreview('پیمایش هاب ج فعال شد')" style="margin-top: 24px; justify-content: center; font-size: 0.88rem; width: 100%;">
-            مشاهده استانداردهای محور ج
-          </button>
-</div>
-</div>
-<!-- MANDATORY HORIZONTAL RTL FLOW: 4-Level Navigation Architecture -->
-<div class="navigation-flow-container">
-<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px;">
-<div>
-<h3 style="font-size: 1.15rem; font-weight: 800; color: #ffffff;">جریان یکپارچه پیمایش ۴ سطحی سنجهها (Horizontal RTL Interactive Flow)</h3>
-<p style="font-size: 0.84rem; color: var(--text-muted); margin-top: 4px;">برای مشاهده تمام سطوح به سمت چپ اسکرول کنید — بدون انباشتگی عمودی</p>
-</div>
-<span style="font-size: 0.8rem; color: var(--gold-400); background: rgba(212,175,90,0.14); padding: 6px 14px; border-radius: 8px; border: 1px solid rgba(212,175,90,0.25);">
-            هدایت افقی پیوسته ➔
-          </span>
-</div>
-<div class="horizontal-scroll-flow">
-<!-- Step 1 -->
-<div class="flow-step-item">
-<div class="flow-level-card">
-<div>
-<div class="level-num-tag">
-<span>گام اول // لایه کلان</span>
-<span class="gold-gradient-text">HUB LEVEL</span>
-</div>
-<h4 class="level-title">هاب محورهای سهگانه</h4>
-<p class="level-desc">انتخاب میان هابهای الف (مدیریت)، ب (درمان) یا ج (حقوق گیرنده خدمت) با نمایش درصد آمادگی و انطباق زنده کل بیمارستان.</p>
-</div>
-<div style="font-size: 0.8rem; color: var(--emerald-400); background: rgba(16,160,185,0.12); padding: 10px; border-radius: 10px; border: 1px solid rgba(16,160,185,0.25); text-align: center;">
-                نمایشگر ضریب آمادگی ارزیابی نهایی: ۹۱.۴٪
-              </div>
-</div>
-<div class="flow-connector-bar"></div>
-</div>
-<!-- Step 2 -->
-<div class="flow-step-item">
-<div class="flow-level-card">
-<div>
-<div class="level-num-tag">
-<span>گام دوم // استانداردها</span>
-<span class="gold-gradient-text">STANDARD VIEW</span>
-</div>
-<h4 class="level-title">صفحه تخصصی استاندارد</h4>
-<p class="level-desc">دسترسی به ۸۸ استاندارد کشوری (مانند ب-۲ اورژانس یا الف-۳ منابع انسانی) به همراه کتابچه راهنمای ارزیابی و الزامات مستنداتی.</p>
-</div>
-<div style="font-size: 0.8rem; color: var(--gold-300); background: rgba(212,175,90,0.12); padding: 10px; border-radius: 10px; border: 1px solid rgba(212,175,90,0.25); text-align: center;">
-                تعداد سنجههای ذیل استاندارد : ۱ تا ۱۸ سنجه
-              </div>
-</div>
-<div class="flow-connector-bar"></div>
-</div>
-<!-- Step 3 -->
-<div class="flow-step-item">
-<div class="flow-level-card" style="border-color: var(--gold-400);">
-<div>
-<div class="level-num-tag">
-<span>گام سوم // قلب سامانه</span>
-<span class="gold-gradient-text">MEASURE DETAIL</span>
-</div>
-<h4 class="level-title">صفحه تفصیلی سنجه</h4>
-<p class="level-desc">مشاهده متن کامل سنجه، روش ارزیابی (مشاهده، مصاحبه، بررسی اسناد) با اکشنهای دوگانه بارگذاری شواهد و ارزیابی عینی.</p>
-</div>
-<!-- Dual Action Buttons -->
-<div class="dual-action-pills">
-<div class="action-pill-item pill-upload">بارگذاری مستندات</div>
-<div class="action-pill-item pill-checklist">ورود به چکلیست</div>
-</div>
-</div>
-<div class="flow-connector-bar"></div>
-</div>
-<!-- Step 4 -->
-<div class="flow-step-item">
-<div class="flow-level-card">
-<div>
-<div class="level-num-tag">
-<span>گام چهارم // پایش میدانی</span>
-<span class="gold-gradient-text">AUDIT &amp; EXECUTION</span>
-</div>
-<h4 class="level-title">مدیریت چکلیست و ممیزی</h4>
-<p class="level-desc">ثبت امتیازات ۴ گزینهای (کامل، نسبی، ضعیف، عدم انطباق)، مهر زمانی، ثبت بارکد پرونده بیمار و امضای دیجیتال سوپروایزر مربوطه.</p>
-</div>
-<div style="font-size: 0.8rem; color: var(--emerald-400); background: rgba(16,160,185,0.18); padding: 10px; border-radius: 10px; border: 1px solid rgba(16,160,185,0.3); text-align: center;">
-                تولید خودکار کارنامه نهایی و گزارش مغایرت
-              </div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- 3. Chapter 2: Clinical SOPs (10 Axes & Connected Flowchart) -->
-<section class="section-wrapper" id="clinical-sop">
-<div class="section-header-box">
-<div>
-<span class="chapter-tag">بخش دوم // CLINICAL EXCELLENCE</span>
-<h2 class="section-title">
-<span class="emerald-gradient-text">مدیریت مراقبتهای بالینی و فرآیندهای ۲۳گانه SOP</span>
-</h2>
-<p class="section-subtitle">
-            ۹ محور تخصصی بالینی و پیادهسازی گامبهگام دستورالعملهای استاندارد بالینی با تایید معاونت درمان و دفتر نظارت و اعتباربخشی.
-          </p>
-</div>
-<div class="section-badge-right">۲۳ روش اجرایی استاندارد (SOP)</div>
-</div>
-<!-- دکمه‌های فیلتر محورهای بالینی نسل ششم — Counts بر اساس سنجه‌های واقعی هر محور -->
-<div class="axes-pills-row" role="group" aria-label="فیلتر فرآیندهای بالینی بر اساس محورهای نسل ششم">
-<button type="button" class="axis-pill-chip active" aria-pressed="true" onclick="filterAxes('all', this)">
-<span class="code-tag">ALL</span>
-<span>همه محورهای بالینی</span>
-<span class="chip-count">۱۹۲ سنجه</span>
-</button>
-<button type="button" class="axis-pill-chip" aria-pressed="false" onclick="filterAxes('emergency', this)">
-<span class="code-tag">ب-۲</span>
-<span>اورژانس و حوادث</span>
-<span class="chip-count">۲۴ سنجه</span>
-</button>
-<button type="button" class="axis-pill-chip" aria-pressed="false" onclick="filterAxes('pharma', this)">
-<span class="code-tag">ب-۶</span>
-<span>مدیریت خدمات دارویی</span>
-<span class="chip-count">۱۶ سنجه</span>
-</button>
-<button type="button" class="axis-pill-chip" aria-pressed="false" onclick="filterAxes('infection', this)">
-<span class="code-tag">ب-۵</span>
-<span>کنترل عفونت‌های بیمارستانی</span>
-<span class="chip-count">۲۴ سنجه</span>
-</button>
-<button type="button" class="axis-pill-chip" aria-pressed="false" onclick="filterAxes('surgery', this)">
-<span class="code-tag">ب-۳</span>
-<span>اتاق عمل و جراحی</span>
-<span class="chip-count">۱۵ سنجه</span>
-</button>
-<button type="button" class="axis-pill-chip" aria-pressed="false" onclick="filterAxes('maternal', this)">
-<span class="code-tag">ب-۴</span>
-<span>مادر و نوزاد (بلوک زایمان)</span>
-<span class="chip-count">۱۶ سنجه</span>
-</button>
-<button type="button" class="axis-pill-chip" aria-pressed="false" onclick="filterAxes('lab', this)">
-<span class="code-tag">ب-۸</span>
-<span>آزمایشگاه و پاتولوژی</span>
-<span class="chip-count">۱۴ سنجه</span>
-</button>
-<button type="button" class="axis-pill-chip" aria-pressed="false" onclick="filterAxes('blood', this)">
-<span class="code-tag">ب-۸</span>
-<span>بانک خون و هموویژیلانس</span>
-<span class="chip-count">۱۱ سنجه</span>
-</button>
-<button type="button" class="axis-pill-chip" aria-pressed="false" onclick="filterAxes('imaging', this)">
-<span class="code-tag">ب-۷</span>
-<span>تصویربرداری پزشکی</span>
-<span class="chip-count">۱۳ سنجه</span>
-</button>
-<button type="button" class="axis-pill-chip" aria-pressed="false" onclick="filterAxes('outpatient', this)">
-<span class="code-tag">ب-۹</span>
-<span>خدمات سرپایی و کلینیک</span>
-<span class="chip-count">۱۶ سنجه</span>
-</button>
-</div>
-<!-- MANDATORY HORIZONTAL RTL FLOW: 23 Approved Clinical SOPs -->
-<div style="background: radial-gradient(circle at 50% 0%, rgba(15,23,37,0.7), rgba(9,14,22,0.9)); border: 1px solid var(--border-gold); border-radius: 22px; padding: 1.85rem; box-shadow: var(--shadow-lux);">
-<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px;">
-<div>
-<h3 style="font-size: 1.15rem; font-weight: 800; color: #ffffff;">مسیر افقی فرآیندهای بالینی تصویبشده (Connected Clinical SOP Matrix)</h3>
-<p style="font-size: 0.84rem; color: var(--text-muted); margin-top: 4px;">نمونهٔ منتخب ۶ فرآیند از ۲۳ روش اجرایی؛ جریان افقی برای پیگیری لحظهای اجرای پروتکلها در بخشهای بستری و ویژه</p>
-</div>
-<span style="font-size: 0.8rem; color: var(--emerald-400); background: rgba(16,160,185,0.18); padding: 6px 14px; border-radius: 8px; border: 1px solid rgba(16,160,185,0.3);">
-            پایش آنلاین زمان پاسخدهی (TAT)
-          </span>
-</div>
-<div class="horizontal-scroll-flow" id="sop-flow-track">
-<!-- SOP 1 -->
-<div class="flow-step-item">
-<div class="sop-card-horizontal">
-<div>
-<div class="sop-badge-top">
-<span class="sop-code">SOP-CLN-01</span>
-<span class="sop-status-live">اجرا در بخشها</span>
-</div>
-<h4 class="sop-name" style="margin-top: 14px;">جداسازی و مهار فیزیکی بیماران روانپزشکی</h4>
-<p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 8px; line-height: 1.85;">ثبت فرم ثبت مهار، پایش علائم حیاتی هر ۱۵ دقیقه و دستور کتبی پزشک مقیم.</p>
-</div>
-<div class="sop-meta-info">
-<span>استاندارد مرجع: ب-۱-۱۰</span>
-<span class="emerald-gradient-text">انطباق: ۹۸٪</span>
-</div>
-</div>
-<div class="flow-connector-bar"></div>
-</div>
-<!-- SOP 2 -->
-<div class="flow-step-item">
-<div class="sop-card-horizontal">
-<div>
-<div class="sop-badge-top">
-<span class="sop-code">SOP-PHR-04</span>
-<span class="sop-status-live">حساسیت دارویی</span>
-</div>
-<h4 class="sop-name" style="margin-top: 14px;">تلفیق دارویی و پیشگیری از تداخلات</h4>
-<p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 8px; line-height: 1.85;">تطبیق تاریخچه دارویی بیمار در بدو بستری، انتقال بینبخشی و هنگام ترخیص توسط داروساز.</p>
-</div>
-<div class="sop-meta-info">
-<span>استاندارد مرجع: ب-۶-۲</span>
-<span class="emerald-gradient-text">انطباق: ۹۴٪</span>
-</div>
-</div>
-<div class="flow-connector-bar"></div>
-</div>
-<!-- SOP 3 -->
-<div class="flow-step-item">
-<div class="sop-card-horizontal">
-<div>
-<div class="sop-badge-top">
-<span class="sop-code">SOP-SAF-09</span>
-<span class="sop-status-live">ایمنی سقوط</span>
-</div>
-<h4 class="sop-name" style="margin-top: 14px;">ارزیابی خطر سقوط بر اساس مقیاس مورس</h4>
-<p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 8px; line-height: 1.85;">دستبند زرد شناسه، نردههای محافظ تخت و نظارت اختصاصی در بخشهای سالمندان و نورولوژی.</p>
-</div>
-<div class="sop-meta-info">
-<span>استاندارد مرجع: ب-۱-۳</span>
-<span class="emerald-gradient-text">انطباق: ۱۰۰٪</span>
-</div>
-</div>
-<div class="flow-connector-bar"></div>
-</div>
-<!-- SOP 4 -->
-<div class="flow-step-item">
-<div class="sop-card-horizontal">
-<div>
-<div class="sop-badge-top">
-<span class="sop-code">SOP-SUR-03</span>
-<span class="sop-status-live">اتاق عمل</span>
-</div>
-<h4 class="sop-name" style="margin-top: 14px;">اجرای سهمرحلهای جراحی ایمن (WHO)</h4>
-<p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 8px; line-height: 1.85;">علامتگذاری موضع جراحی، Sign-in قبل بیهوشی، Time-out قبل برش و Sign-out قبل خروج.</p>
-</div>
-<div class="sop-meta-info">
-<span>استاندارد مرجع: ب-۳-۲</span>
-<span class="emerald-gradient-text">انطباق: ۹۹٪</span>
-</div>
-</div>
-<div class="flow-connector-bar"></div>
-</div>
-<!-- SOP 5 -->
-<div class="flow-step-item">
-<div class="sop-card-horizontal">
-<div>
-<div class="sop-badge-top">
-<span class="sop-code">SOP-BLD-02</span>
-<span class="sop-status-live">ترانسفوزیون</span>
-</div>
-<h4 class="sop-name" style="margin-top: 14px;">هموویژیلانس و ایمنی تزریق خون</h4>
-<p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 8px; line-height: 1.85;">تطبیق بارکد دوگانه بر بالین، کنترل عوارض حاد و ثبت الکترونیک در سامانه سازمان انتقال خون.</p>
-</div>
-<div class="sop-meta-info">
-<span>استاندارد مرجع: ب-۸-۶</span>
-<span class="emerald-gradient-text">انطباق: ۹۶٪</span>
-</div>
-</div>
-<div class="flow-connector-bar"></div>
-</div>
-<!-- SOP 6 -->
-<div class="flow-step-item">
-<div class="sop-card-horizontal">
-<div>
-<div class="sop-badge-top">
-<span class="sop-code">SOP-INF-07</span>
-<span class="sop-status-live">کنترل عفونت</span>
-</div>
-<h4 class="sop-name" style="margin-top: 14px;">مدیریت ایزولاسیون و بهداشت دست (WHO)</h4>
-<p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 8px; line-height: 1.85;">پایش ۵ لحظه بهداشت دست، تفکیک زبالههای عفونی و ایزولاسیون تنفسی هوابرد/قطرهای.</p>
-</div>
-<div class="sop-meta-info">
-<span>استاندارد مرجع: ب-۵-۴ و ب-۵-۷</span>
-<span class="emerald-gradient-text">انطباق: ۹۲٪</span>
-</div>
-</div>
-</div>
-</div>
-<div class="sop-flow-nav" role="group" aria-label="پیمایش افقی فرآیندهای بالینی">
-<button type="button" class="sop-flow-btn" id="sopNext" aria-label="فرآیندهای بعدی">‹</button>
-<button type="button" class="sop-flow-btn" id="sopPrev" aria-label="فرآیندهای قبلی">›</button>
-</div>
-<div class="sop-flow-cta">
-<p>۶ فرآیند منتخب از ۲۳ روش اجرایی استاندارد نمایش داده شده است؛ متن کامل هر ۲۳ فرآیند همراه با فرم‌ها و شواهد ممیزی در سامانهٔ بیمارستان در دسترس است.</p>
-<a class="nav-cta-btn" href="/" style="background:rgba(16,160,185,.18);border-color:var(--emerald-400);color:#8fe3ef;white-space:nowrap">مشاهده در سامانه ›</a>
-</div>
-</div>
-</section>
-<!-- 4. Chapter 3: Patient Safety & Never Events -->
-<section class="section-wrapper" id="safety-never-events">
-<div class="section-header-box">
-<div>
-<span class="chapter-tag">بخش سوم // PATIENT SAFETY &amp; ZERO HARM</span>
-<h2 class="section-title">
-<span class="gold-gradient-text">سیستم جامع ایمنی بیمار و وقایع ۲۸گانه ناخواسته (Never Events)</span>
-</h2>
-<p class="section-subtitle">
-            زیرساخت ثبت فوقمحرمانه حوادث بدون سرزنش (No-Blame Culture) همراه با ماتریس تحلیل ریشهای خطا (RCA) و تحلیل علل شکست (FMEA).
-          </p>
-</div>
-<div class="section-badge-right" style="color: #f87171; border-color: rgba(239,68,68,0.5); background: rgba(239,68,68,0.15);">
-          خط قرمز اعتباربخشی کشوری
-        </div>
-</div>
-<!-- Critical Alert Banner with Pulse Wave -->
-<div class="safety-highlight-banner">
-<div class="safety-banner-content">
-<div class="safety-icon-alarm">
-<svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" x2="12" y1="9" y2="13"></line><line x1="12" x2="12.01" y1="17" y2="17"></line></svg>
-</div>
-<div>
-<div class="safety-banner-title">پروتکل فوری اعلام و واکنش به Never Events در کمتر از ۶ ساعت</div>
-<div class="safety-banner-desc">
-              سامانه به محض ثبت هر یک از ۲۸ واقعه ناخواسته مرگبار یا آسیبرسان شدید، پیامک فوری رمزگذاریشده به رئیس بیمارستان، مدیر پرستاری و مسئول ایمنی ارسال میکند.
-            </div>
-</div>
-</div>
-<div class="safety-stats-badge">
-<div class="num">۱۲۱</div>
-<div class="lbl">سنجه خط قرمز ایمنی</div>
-</div>
-</div>
-<!-- 3 Safety Engineering Modules -->
-<div class="safety-tools-grid">
-<div class="lux-card folded-corner safety-tool-card">
-<div>
-<div class="tool-icon-circle">
-<svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-</div>
-<h3 style="font-size: 1.15rem; font-weight: 800; color: #ffffff; margin-bottom: 10px; line-height: 1.4;">ثبت محرمانه و بدون سرزنش خطا</h3>
-<p style="font-size: 0.92rem; color: var(--text-sub); line-height: 1.85; margin-bottom: 18px;">
-            امکان گزارشدهی ناشناس توسط پرسنل پرستاری، خدمات و کادر درمان به همراه دستهبندی وقایع نزدیک به خطا (Near Miss) برای پیشگیری قبل از وقوع.
-          </p>
-</div>
-<div style="font-size: 0.82rem; color: var(--gold-300); background: rgba(212,175,90,0.14); padding: 10px 14px; border-radius: 10px; border: 1px solid rgba(212,175,90,0.25); text-align: center;">
-            رشد ۴۰٪ گزارشدهی داوطلبانه پس از پیادهسازی
-          </div>
-</div>
-<div class="lux-card folded-corner safety-tool-card">
-<div>
-<div class="tool-icon-circle">
-<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" x2="12.01" y1="17" y2="17"></line></svg>
-</div>
-<h3 style="font-size: 1.15rem; font-weight: 800; color: #ffffff; margin-bottom: 10px; line-height: 1.4;">ماژول تحلیل ریشهای RCA</h3>
-<p style="font-size: 0.92rem; color: var(--text-sub); line-height: 1.85; margin-bottom: 18px;">
-            ابزار دیجیتال رسم نمودار استخوان ماهی (ایشیکاوا)، تکنیک ۵ چرا (5-Whys) و تشکیل خودکار جلسات کمیته مرگومیر و آسیبهای شدید بالینی.
-          </p>
-</div>
-<div style="font-size: 0.82rem; color: var(--emerald-400); background: rgba(16,160,185,0.14); padding: 10px 14px; border-radius: 10px; border: 1px solid rgba(16,160,185,0.25); text-align: center;">
-            تولید CAPA هوشمند (اقدامات اصلاحی و پیشگیرانه)
-          </div>
-</div>
-<div class="lux-card folded-corner safety-tool-card">
-<div>
-<div class="tool-icon-circle">
-<svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
-</div>
-<h3 style="font-size: 1.15rem; font-weight: 800; color: #ffffff; margin-bottom: 10px; line-height: 1.4;">تحلیل حالات و اثرات خطا (FMEA)</h3>
-<p style="font-size: 0.92rem; color: var(--text-sub); line-height: 1.85; margin-bottom: 18px;">
-            محاسبه خودکار شاخص اولویت ریسک (RPN = شدت × احتمال وقوع × قابلیت کشف) در فرآیندهای پرخطر مانند تجویز داروهای مشابه و جراحیهای پرریسک.
-          </p>
-</div>
-<div style="font-size: 0.82rem; color: var(--gold-300); background: rgba(212,175,90,0.14); padding: 10px 14px; border-radius: 10px; border: 1px solid rgba(212,175,90,0.25); text-align: center;">
-            اولویتبندی خودکار مداخلات مهندسی ایمنی
-          </div>
-</div>
-</div>
-</section>
-<!-- 5. Chapter 4: Executive Intelligence, BSC & Clinical Supervision -->
-<section class="section-wrapper" id="intelligence">
-<div class="section-header-box">
-<div>
-<span class="chapter-tag">بخش چهارم // EXECUTIVE INTELLIGENCE</span>
-<h2 class="section-title">
-<span class="gold-gradient-text">هوش مدیریتی، کارت امتیازی (BSC) و نظارت بالینی</span>
-</h2>
-<p class="section-subtitle">
-            دید ۳۶۰ درجه برای رئیس بیمارستان و مدیران ارشد؛ ترکیب شاخصهای مالی، بالینی، ایمنی و توسعه سرمایه انسانی.
-          </p>
-</div>
-<div class="section-badge-right">داشبورد زنده سوپروایزری</div>
-</div>
-<div class="executive-dashboard-grid">
-<!-- BSC Perspective Grid -->
-<div class="bsc-panel folded-corner">
-<div class="bsc-header-row">
-<div>
-<h3 style="font-size: 1.15rem; font-weight: 800; color: #ffffff;">کارت امتیازی متوازن بیمارستان (Balanced Scorecard)</h3>
-<p style="font-size: 0.84rem; color: var(--text-muted); margin-top: 4px;">انطباق اهداف استراتژیک با عملکرد واقعی بخشها در سال جاری</p>
-</div>
-<div style="font-size: 0.88rem; font-weight: 800; color: var(--emerald-400); background: rgba(16,160,185,0.18); padding: 7px 16px; border-radius: 12px; border: 1px solid rgba(16,160,185,0.35);">
-              شاخص کل بیمارستان: ۹۳.۲٪
-            </div>
-</div>
-<div class="bsc-perspective-grid">
-<!-- P1 -->
-<div class="perspective-box">
-<div class="persp-title">
-<span>۱. منظر بیمار و جامعه</span>
-<span class="emerald-gradient-text" style="font-weight: 800;">۹۵٪</span>
-</div>
-<div class="persp-score">رضایت ۹۴.۸٪</div>
-<p style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.6;">رسیدگی به شکایات: میانگین ۶ ساعت</p>
-<div class="persp-bar"><div class="persp-fill" style="width: 95%;"></div></div>
-</div>
-<!-- P2 -->
-<div class="perspective-box">
-<div class="persp-title">
-<span>۲. فرآیندهای داخلی و بالینی</span>
-<span class="gold-gradient-text" style="font-weight: 800;">۹۱٪</span>
-</div>
-<div class="persp-score">SOP انطباق ۹۱٪</div>
-<p style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.6;">نرخ عفونت بیمارستانی: کمتر از ۱.۱٪</p>
-<div class="persp-bar"><div class="persp-fill" style="width: 91%;"></div></div>
-</div>
-<!-- P3 -->
-<div class="perspective-box">
-<div class="persp-title">
-<span>۳. رشد، یادگیری و مهارت</span>
-<span class="emerald-gradient-text" style="font-weight: 800;">۸۸٪</span>
-</div>
-<div class="persp-score">ساعت آموزش: ۴۸h</div>
-<p style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.6;">گواهینامههای احیای قلبی ریوی CPR</p>
-<div class="persp-bar"><div class="persp-fill" style="width: 88%;"></div></div>
-</div>
-<!-- P4 -->
-<div class="perspective-box">
-<div class="persp-title">
-<span>۴. منظر بهرهوری و مالی</span>
-<span class="gold-gradient-text" style="font-weight: 800;">۹۴٪</span>
-</div>
-<div class="persp-score">تخت اشغالی ۸۴٪</div>
-<p style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.6;">کاهش ۳۵٪ کسورات بیمهای پروندهها</p>
-<div class="persp-bar"><div class="persp-fill" style="width: 94%;"></div></div>
-</div>
-</div>
-</div>
-<!-- Supervision & Document Control -->
-<div class="lux-card folded-corner supervision-card">
-<div>
-<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-<h3 style="font-size: 1.15rem; font-weight: 800; color: #ffffff;">نظارت بالینی زنده و شیفت پرستاری</h3>
-<span class="brand-badge-v5">SUPERVISION</span>
-</div>
-<p style="font-size: 0.86rem; color: var(--text-muted); line-height: 1.75;">
-              گزارش لحظهای سوپروایزر بالینی، کنترل ترالی کد ۹۹ و چکلیست تحویل شیفت بر بالین.
-            </p>
-<div class="live-supervision-list">
-<div class="sup-item">
-<div>
-<div class="sup-dept">بخش مراقبتهای ویژه ICU-1</div>
-<div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">چک ترالی احیا و تست دستگاه دفیبریلاتور</div>
-</div>
-<span class="sup-status status-done">تایید شد (۰۷:۱۵)</span>
-</div>
-<div class="sup-item">
-<div>
-<div class="sup-dept">اورژانس حاد و تحتنظر</div>
-<div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">پایش تعیین تکلیف بیماران زیر ۶ ساعت</div>
-</div>
-<span class="sup-status status-progress">در حال پایش (۸۸٪)</span>
-</div>
-<div class="sup-item">
-<div>
-<div class="sup-dept">داروخانه مرکزی و انبار سرم</div>
-<div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">کنترل زنجیره سرما و یخچال واکسن/خون</div>
-</div>
-<span class="sup-status status-done">دما: ۴.۲°C نرمال</span>
-</div>
-</div>
-</div>
-<div style="margin-top: 20px; background: rgba(8,14,22,0.85); border: 1px dashed var(--border-gold); padding: 14px 18px; border-radius: 14px; display: flex; align-items: center; justify-content: space-between;">
-<div>
-<div style="font-size: 0.88rem; font-weight: 800; color: #ffffff;">ماژول اسناد کنترلشده و مستندات</div>
-<div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">نسخهبندی خودکار، تاییدیه مسئول فنی و امضای دیجیتال</div>
-</div>
-<span style="font-size: 0.85rem; color: var(--gold-300); font-weight: 900;">۱,۴۲۰ سند فعال</span>
-</div>
-</div>
-</div>
-</section>
-<!-- 6. Chapter 5: Dana AI Copilot -->
-<section class="section-wrapper" id="dana-copilot">
-<div class="section-header-box">
-<div>
-<span class="chapter-tag">بخش پنجم // ARTIFICIAL INTELLIGENCE</span>
-<h2 class="section-title">
-<span class="emerald-gradient-text">دستیار هوشمند بالینی دانا و بانک دانش یکپارچه</span>
-</h2>
-<p class="section-subtitle">
-            هوش مصنوعی اختصاصی آموزشدیده روی تمام متون استانداردهای ملی، بخشنامههای ابلاغی وزارت بهداشت و کتب مرجع بالینی.
-          </p>
-</div>
-<div class="section-badge-right">دستیار آفلاین و آنلاین بیمارستان</div>
-</div>
-<div class="copilot-container folded-corner">
-<div>
-<div class="copilot-avatar-wrap">
-<div class="copilot-orbit-ring"></div>
-<div class="copilot-avatar-box">
-<svg viewBox="0 0 24 24"><path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"></path><rect height="12" rx="4" width="16" x="4" y="10"></rect><circle cx="9" cy="16" r="1.5"></circle><circle cx="15" cy="16" r="1.5"></circle></svg>
-</div>
-</div>
-<h3 style="font-size: 1.65rem; font-weight: 900; color: #ffffff; margin-bottom: 12px; line-height: 1.35;">دستیار هوشمند «دانا»</h3>
-<p style="font-size: 0.95rem; color: var(--text-sub); line-height: 1.9; margin-bottom: 24px;">
-            دانا با بازیابی معنایی سریع (Semantic Search) در ثانیه به پرستاران، سرپرستاران و مدیران کیفیت پاسخ میدهد؛ از آخرین الزامات سنجه ب-۶-۱-۶ داروهای با هشدار بالا (High-Alert) تا تدوین فرمهای تحلیل خطا.
-          </p>
-<div style="display: flex; gap: 12px; flex-wrap: wrap;">
-<div style="background: rgba(16,160,185,0.18); border: 1px solid var(--emerald-500); padding: 10px 16px; border-radius: 12px; font-size: 0.84rem; color: #6ed5e7; font-weight: 700;">
-              ✓ سازگار با شبکه بسته محلی (Intranet)
-            </div>
-<div style="background: rgba(212,175,90,0.18); border: 1px solid var(--gold-500); padding: 10px 16px; border-radius: 12px; font-size: 0.84rem; color: #fff0c7; font-weight: 700;">
-              ✓ امنیت کامل پروندهها و بیماران
-            </div>
-</div>
-</div>
-<!-- Chat Mock -->
-<div class="chat-mock-window">
-<div class="chat-message-bubble chat-user">
-            «سنجههای الزامآور در زمینه نگهداری داروهای با شباهت اسمی و ظاهری (LASA) در ویرایش ششم کدامند و چه شواهدی باید بارگذاری شود؟»
-          </div>
-<div class="chat-message-bubble chat-ai">
-            طبق استاندارد ملی <strong>ب-۶-۱-۶ (نگهداری و توزیع ایمن داروهای با هشدار بالا)</strong>:
-            <br/>
-            ۱. برچسبگذاری با خط قرمز و حروف بزرگ (Tall Man Lettering) بر روی قفسهها الزامی است.
-            <br/>
-            ۲. جداسازی فیزیکی محل نگهداری حداقل در ۲ قفسه مجزا با نشانه بصری هشدار.
-            <br/>
-<strong>شواهد مورد نیاز جهت ممیزی ارزیاب:</strong> فرم ماهانه ممیزی استوک بخش توسط داروساز و سابقه آموزش به پرسنل جدیدالورود.
-          </div>
-<div style="display: flex; gap: 10px; margin-top: 16px;">
-<input class="form-input-lux" placeholder="از دانا درباره استانداردهای بیمارستان بپرسید..." readonly="" style="flex: 1; font-size: 0.88rem;" type="text" value="روش مستندسازی واقعه سقوط بیمار در اورژانس چیست؟"/>
-<button class="nav-cta-btn" onclick="showInteractivePreview('پرسش به دستیار دانا ارسال شد')" style="padding: 10px 20px; font-size: 0.88rem;">پرسش</button>
-</div>
-</div>
-</div>
-</section>
-<!-- 7. Feature Comparison Matrix -->
-<section class="section-wrapper" id="comparison">
-<div class="section-header-box">
-<div>
-<span class="chapter-tag">بخش ششم // COMPARISON MATRIX</span>
-<h2 class="section-title">
-<span class="gold-gradient-text">ماتریس مقایسه: سامانه هوشمند دانا در برابر سیستمهای سنتی</span>
-</h2>
-<p class="section-subtitle">
-            چرا برترین بیمارستانهای آموزشی، تخصصی و خصوصی کشور به معماری یکپارچه دیجیتال مهاجرت میکنند؟
-          </p>
-</div>
-</div>
-<div class="comparison-table-wrapper">
-<table class="comp-table">
-<thead>
-<tr>
-<th class="col-feature">قابلیت و معیار ارزیابی بیمارستانی</th>
-<th class="col-legacy">روش سنتی و پروندههای کاغذی زونکن</th>
-<th class="col-dana">سیناپس — مدیریت کیفیت با دانا</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>سرعت آمادهسازی شواهد ممیزی ادواری</strong></td>
-<td><span class="status-check-no">✕ ۲ الی ۳ هفته جستجوی دستی در زونکنها</span></td>
-<td class="dana-cell"><span class="status-check-yes">✓ دسترسی بیدرنگ (کمتر از ۵ ثانیه) با بارکد سنجه</span></td>
-</tr>
-<tr>
-<td><strong>پایش خطوط قرمز و وقایع ناخواسته (Never Events)</strong></td>
-<td><span class="status-check-no">✕ تاخیر چندینروزه در گزارش یا پنهانکاری</span></td>
-<td class="dana-cell"><span class="status-check-yes">✓ هشدار پیامکی فوری در لحظه ثبت بدون سرزنش</span></td>
-</tr>
-<tr>
-<td><strong>تطابق خودکار با ۳۹۵ سنجه ملی وزارت بهداشت</strong></td>
-<td><span class="status-check-no">✕ مغایرت بالا به دلیل فایلهای اکسل متعدد</span></td>
-<td class="dana-cell"><span class="status-check-yes">✓ انطباق ۱۰۰٪ با کتابچه ملی نسخه ۶ و آپدیت خودکار</span></td>
-</tr>
-<tr>
-<td><strong>تحلیل علل ریشهای خطا (RCA و FMEA)</strong></td>
-<td><span class="status-check-no">✕ جلسات فرسایشی دستی بدون ماتریس اثرات</span></td>
-<td class="dana-cell"><span class="status-check-yes">✓ تولید خودکار نمودار ایشیکاوا و محاسبه عددی RPN</span></td>
-</tr>
-<tr>
-<td><strong>امنیت اطلاعات، سطح دسترسی و لاگ تغییرات</strong></td>
-<td><span class="status-check-no">✕ خطر مفقودی اسناد و تغییرات بدون ثبت</span></td>
-<td class="dana-cell"><span class="status-check-yes">✓ رمزنگاری سطح بالا، امضای دیجیتال و لاگ تغییرات کامل</span></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<!-- 8. Call to Action & Contact Section -->
-<section class="cta-final-card folded-corner" id="demo">
-<div>
-<span class="brand-badge-v5" style="margin-bottom: 14px; display: inline-block;">استقرار و مشاوره تخصصی</span>
-<h2 style="font-size: 2rem; font-weight: 900; color: #ffffff; margin-bottom: 16px; line-height: 1.4;">
-          آمادگی بیمارستان خود را برای کسب <span class="gold-gradient-text">درجه یک عالی اعتباربخشی</span> تضمین کنید
-        </h2>
-<p style="font-size: 0.95rem; color: var(--text-sub); line-height: 1.9; margin-bottom: 24px;">
-          تیم کارشناسان ارشد ارزیابی اعتباربخشی و مهندسین نرمافزار ما آماده ارائه جلسه پرزنت اختصاصی برای ریاست، مدیریت، تیم بهبود کیفیت و مترون محترم بیمارستان هستند.
+<!-- ===================== هیرو ===================== -->
+<section class="sec hero" id="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <h1>نقشهٔ کامل سامانه، <span>سنجه‌به‌سنجه</span></h1>
+        <p class="lead">
+          این صفحه بروشور نیست؛ فهرست عملیاتی است: هر بخش سامانه، هر سنجهٔ ویرایش ششم و هر روش اجرایی را
+          همین‌جا پیدا کنید و با یک کلیک، همان صفحه را در سامانهٔ در حال اجرا باز کنید.
         </p>
-<div style="display: flex; gap: 24px; font-size: 0.92rem; color: var(--gold-300); font-weight: 700; flex-wrap: wrap;">
-<div>📞 تماس مستقیم: ۰۲۱-۸۸۴۵۰۰۹۰</div>
-<div>✉️ ایمیل: info@hospital-quality.ir</div>
-   <div style="margin-top:14px">
-     <a href="/" class="btn-hero-primary" style="font-size:0.9rem;padding:10px 22px">
-       <span>ورود مستقیم کادر درمان به سامانه بیمارستان ›</span>
-     </a>
-   </div>
-</div>
-</div>
-<!-- Simple Luxury Request Form -->
-<form class="demo-form" onsubmit="handleFormSubmit(event)">
-<div>
-<h3 style="font-size: 1.15rem; font-weight: 800; color: #ffffff; margin-bottom: 4px;">درخواست دمو و جلسه ارزیابی مقدماتی</h3>
-<p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 8px;">اطلاعات خود را ثبت نمایید؛ کارشناسان ظرف ۴ ساعت کاری با شما تماس میگیرند.</p>
-</div>
-<input class="form-input-lux" placeholder="نام و نام خانوادگی مسئول" required="" type="text"/>
-<input class="form-input-lux" placeholder="نام بیمارستان / مرکز درمانی و شهر" required="" type="text"/>
-<div class="form-grid-2col">
-<input class="form-input-lux" placeholder="شماره تماس مستقیم" required="" type="tel"/>
-<select class="form-input-lux" style="color: var(--text-main);">
-<option value="teaching">بیمارستان آموزشی / دولتی</option>
-<option value="private">بیمارستان خصوصی / خیریه</option>
-<option value="special">مرکز تخصصی و فوقتخصصی</option>
-</select>
-</div>
-<button class="form-btn-submit" type="submit">
-          ثبت درخواست جلسه دمو و بررسی ظرفیت
-        </button>
-</form>
+        <div class="hero-cta">
+          <button type="button" class="btn btn-g" onclick="focusQuickfind()">جستجوی سریع (Ctrl+K)</button>
+          <a class="btn btn-t" href="#directory">مرور بخش‌های سامانه</a>
+          <a class="btn" href="#accreditation">مرور ۳۹۵ سنجه</a>
+        </div>
+        <p class="hero-note">
+          <svg class="ic-s" viewBox="0 0 24 24" style="color:var(--teal);margin-top:5px"><circle cx="12" cy="12" r="9.2"/><path d="M12 10.8v5.4"/><circle cx="12" cy="7.6" r="1.1"/></svg>
+          <span>همهٔ لینک‌های «باز کردن در سامانه» به نسخهٔ واقعی و در حال اجرا می‌روند؛ برای ورود، حساب‌های دموی بخش «دمو و تماس» را ببینید.</span>
+        </p>
+      </div>
+      <div class="stats-pane">
+        <div class="sp-t"><b>ویرایش ششم کشوری</b><span>برای فیلتر، روی هر عدد بزنید</span></div>
+        <div class="stats">
+          <button type="button" class="stat" data-go="measures"><b id="st-measures">۳۹۵</b><span>سنجهٔ ملی</span><i>در ۸۸ استاندارد</i></button>
+          <button type="button" class="stat" data-go="safety"><b id="st-safety">۱۲۱</b><span>سنجهٔ پرچم ایمنی بیمار</span><i>الزامی و پایش‌شده</i></button>
+          <button type="button" class="stat" data-go="standards"><b id="st-std">۸۸</b><span>استاندارد</span><i>در ۳ بخش کلان</i></button>
+          <button type="button" class="stat" data-go="axes"><b id="st-axes">۱۸</b><span>محور تخصصی</span><i>الف / ب / ج</i></button>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
+
+<!-- ===================== دایرکتوری ===================== -->
+<section class="sec" id="directory">
+  <div class="wrap">
+    <div class="sec-hd">
+      <div>
+        <div class="sec-no">بخش دوم</div>
+        <h2>دایرکتوری عملیاتی سامانه</h2>
+        <p>همهٔ ماژول‌های سامانه در یک نگاه — از میزکار و کارتابل تا بالینی و مدیریتی. هر کارت، توضیح یک‌خطی و لینک ورود به همان صفحه در سامانه دارد.</p>
+      </div>
+    </div>
+    <div class="dir-bar">
+      <div class="gchips" id="gchips" role="group" aria-label="فیلتر گروه ماژول"></div>
+      <div class="dir-search"><input class="inp" id="dirQ" type="search" placeholder="فیلتر بخش‌ها… (مثلاً ایمنی، پرستاری، گزارش)" aria-label="فیلتر بخش‌ها"/></div>
+    </div>
+    <div class="tiles" id="tiles"></div>
+    <div class="empty" id="tilesEmpty" hidden>بخشی با این عبارت پیدا نشد؛ فیلتر را پاک کنید یا در جستجوی سراسری (Ctrl+K) امتحان کنید.</div>
+  </div>
+</section>
+
+<!-- ===================== مرور سنجه‌ها ===================== -->
+<section class="sec" id="accreditation">
+  <div class="wrap">
+    <div class="sec-hd">
+      <div>
+        <div class="sec-no">بخش سوم</div>
+        <h2>مرور سنجه‌های ویرایش ششم</h2>
+        <p>هر ۳۹۵ سنجه با سطح ارزش‌گذاری، وزن، پرچم ایمنی بیمار و راهنمای ارزیابی — جستجو و فیلتر کنید، جزئیات را باز کنید و همان سنجه را در سامانه ببینید.</p>
+      </div>
+    </div>
+    <div class="mx-bar">
+      <input class="inp" id="mxQ" type="search" placeholder="جستجو در کد یا متن سنجه…" aria-label="جستجوی سنجه"/>
+      <select class="inp" id="mxAxis" aria-label="فیلتر محور"><option value="">همهٔ محورها</option></select>
+      <select class="inp" id="mxLevel" aria-label="فیلتر سطح">
+        <option value="">همهٔ سطوح</option>
+        <option value="1">سطح ۱</option>
+        <option value="2">سطح ۲</option>
+        <option value="3">سطح ۳</option>
+      </select>
+      <button type="button" class="safe-btn" id="mxSafe" aria-pressed="false">
+        <svg class="ic-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 21V4"/><path d="M5.5 5h11l-2 3.5 2 3.5h-11"/></svg>
+        فقط ایمنی بیمار
+      </button>
+      <button type="button" class="safe-btn" id="mxReset">پاک‌کردن فیلترها</button>
+    </div>
+    <div class="mx-status">
+      <span id="mxCount" aria-live="polite">برای دیدن سنجه‌ها کمی صبر کنید…</span>
+      <span class="hint">منبع: کتاب رسمی ویرایش ششم — استخراج و صحت‌سنجی‌شده</span>
+    </div>
+    <div class="mx-list" id="mxList"></div>
+    <button type="button" class="mx-more" id="mxMore" hidden>نمایش موارد بیشتر</button>
+  </div>
+</section>
+
+<!-- ===================== SOP ===================== -->
+<section class="sec" id="clinical-sop">
+  <div class="wrap">
+    <div class="sec-hd">
+      <div>
+        <div class="sec-no">بخش چهارم</div>
+        <h2>۲۳ روش اجرایی بالینی</h2>
+        <p>فرآیندهای تصویب‌شده‌ای که سامانه اجرای آن‌ها را پایش می‌کند. شش فرآیند پرکاربرد با شرح و استناد استاندارد، به‌علاوهٔ فهرست کامل ۲۳ روش.</p>
+      </div>
+      <a class="btn btn-t" href="/#documents" target="_blank" rel="noopener">مشاهدهٔ مدارک در سامانه</a>
+    </div>
+    <div class="sop-rail" id="sopRail" aria-label="روش‌های اجرایی منتخب"></div>
+    <div class="sop-all" id="sopAll"></div>
+  </div>
+</section>
+
+<!-- ===================== ایمنی بیمار ===================== -->
+<section class="sec" id="safety-never-events">
+  <div class="wrap">
+    <div class="sec-hd">
+      <div>
+        <div class="sec-no">بخش پنجم</div>
+        <h2>ایمنی بیمار — ۱۲۱ سنجهٔ پرچم‌دار</h2>
+        <p>این سنجه‌ها در کتاب با پرچم ایمنی بیمار مشخص شده‌اند؛ یعنی مستقیماً به جان بیمار مربوط‌اند و در ارزیابی حساس‌تر دیده می‌شوند.</p>
+      </div>
+    </div>
+    <div class="safe-grid">
+      <div class="safe-pane">
+        <div class="safe-big"><b id="sfTotal">۱۲۱</b><span>سنجهٔ پرچم ایمنی بیمار در ویرایش ششم</span></div>
+        <div class="sbar"><div class="sb-t"><span>بخش الف — رهبری و مدیریت</span><b id="sfA">۲۴</b></div><div class="sb-tr"><div class="sb-f" id="sfBarA" style="width:19.8%"></div></div></div>
+        <div class="sbar"><div class="sb-t"><span>بخش ب — مراقبت و درمان</span><b id="sfB">۹۲</b></div><div class="sb-tr"><div class="sb-f" id="sfBarB" style="width:76%"></div></div></div>
+        <div class="sbar"><div class="sb-t"><span>بخش ج — حمایت از گیرنده خدمت</span><b id="sfC">۵</b></div><div class="sb-tr"><div class="sb-f" id="sfBarC" style="width:4.2%"></div></div></div>
+        <div class="mx-acts">
+          <button type="button" class="mx-btn" onclick="openSafetyFilter()">دیدن همهٔ ۱۲۱ سنجه در مرورگر</button>
+        </div>
+      </div>
+      <div class="safe-pane">
+        <div class="mx-sec-t" style="margin-top:0">سامانه برای ایمنی بیمار چه دارد؟</div>
+        <ul class="safe-list">
+          <li><span class="dot"></span><span>گزارش خطا و وقایع ناخواسته — محرمانه و بدون ورود با کد رهگیری و RCA شرطی.</span></li>
+          <li><span class="dot"></span><span>FMEA برای فرایندهای پرخطر و پیگیری اقدامات کاهشی.</span></li>
+          <li><span class="dot"></span><span>چک‌لیست جراحی ایمن WHO، تلفیق دارویی و پایش عوارض انتقال خون.</span></li>
+          <li><span class="dot"></span><span>واکراند مدیریتی و داشبورد مصوبه‌های عقب‌افتاده.</span></li>
+          <li><span class="dot"></span><span>گزارش «کجا خودمان را بالاتر از واقعیت دیده‌ایم» — شکاف خودارزیابی با ارزیاب.</span></li>
+        </ul>
+        <div class="mx-acts">
+          <a class="mx-btn" href="/#errors" target="_blank" rel="noopener">ماژول گزارش خطا در سامانه</a>
+          <a class="mx-btn" href="/#fmea" target="_blank" rel="noopener">ماژول FMEA</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== هوش مدیریتی ===================== -->
+<section class="sec" id="intelligence">
+  <div class="wrap">
+    <div class="sec-hd">
+      <div>
+        <div class="sec-no">بخش ششم</div>
+        <h2>هوش مدیریتی و پایش مستمر</h2>
+        <p>اعداد اعتباربخشی نباید فقط شب ارزیابی به‌وجود بیایند؛ این ماژول‌ها وضعیت را در طول سال زنده نگه می‌دارند.</p>
+      </div>
+    </div>
+    <div class="tiles-4" id="intelTiles"></div>
+  </div>
+</section>
+
+<!-- ===================== دانا ===================== -->
+<section class="sec" id="dana-copilot">
+  <div class="wrap">
+    <div class="sec-hd">
+      <div>
+        <div class="sec-no">بخش هفتم</div>
+        <h2>دانا — دستیار هوشمند نقش‌محور</h2>
+        <p>دانا از کتاب رسمی سنجه‌ها و مدارک خودِ بیمارستان پاسخ می‌دهد و کارهای هر نقش را می‌داند؛ این نمونه‌پرامت‌ها را کپی کنید و در سامانه از او بپرسید.</p>
+      </div>
+      <a class="btn btn-t" href="/#dash" target="_blank" rel="noopener">گفتگو با دانا در سامانه</a>
+    </div>
+    <div class="dana-grid">
+      <div class="safe-pane">
+        <div class="mx-sec-t" style="margin-top:0">دانا برای چه ساخته شده؟</div>
+        <ul class="safe-list">
+          <li><span class="dot" style="background:var(--teal)"></span><span>پاسخ از متن کتاب اعتباربخشی با استناد به کد سنجه — نه پاسخ عمومی.</span></li>
+          <li><span class="dot" style="background:var(--teal)"></span><span>بازیابی از مدارک و خط‌مشی‌های همان بیمارستان (بانک دانش).</span></li>
+          <li><span class="dot" style="background:var(--teal)"></span><span>پاسخ به «الان باید چه کار کنم؟» بر اساس نقش و تناوب وظایف.</span></li>
+          <li><span class="dot" style="background:var(--teal)"></span><span>پیشنهاد پیش‌نویس اقدام اصلاحی و خلاصه‌سازی گزارش‌ها برای جلسات.</span></li>
+        </ul>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div class="prompt"><span style="flex:1">«وضعیت انطباق محور ب-۵ در این دوره چقدر است و کدام سنجه‌ها شاهد ناقص دارند؟»</span><button type="button" data-copy="وضعیت انطباق محور ب-۵ در این دوره چقدر است و کدام سنجه‌ها شاهد ناقص دارند؟">کپی</button></div>
+        <div class="prompt"><span style="flex:1">«از سنجه‌های پرچم ایمنی بیمار، چه کارهایی روی کارتابل من باقی مانده است؟»</span><button type="button" data-copy="از سنجه‌های پرچم ایمنی بیمار، چه کارهایی روی کارتابل من باقی مانده است؟">کپی</button></div>
+        <div class="prompt"><span style="flex:1">«برای سنجه ب-۳-۲-۱ چه شواهدی معمولاً پذیرفته می‌شود؟»</span><button type="button" data-copy="برای سنجه ب-۳-۲-۱ چه شواهدی معمولاً پذیرفته می‌شود؟">کپی</button></div>
+        <div class="prompt"><span style="flex:1">«شکاف خودارزیابی و ارزیاب داخلی را برای جلسهٔ کمیتهٔ بهبود کیفیت خلاصه کن.»</span><button type="button" data-copy="شکاف خودارزیابی و ارزیاب داخلی را برای جلسهٔ کمیتهٔ بهبود کیفیت خلاصه کن.">کپی</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== مقایسه ===================== -->
+<section class="sec" id="comparison">
+  <div class="wrap">
+    <div class="sec-hd">
+      <div>
+        <div class="sec-no">بخش هشتم</div>
+        <h2>ویرایش پنجم به ویرایش ششم — چه چیزی تغییر کرد؟</h2>
+        <p>سامانه با کتاب ویرایش ششم هم‌تراز شده است. این جدول، دقیقاً همان اعدادی است که برای مهاجرت سنجه‌به‌سنجه استخراج و با کتاب رسمی صحت‌سنجی شد.</p>
+      </div>
+    </div>
+    <div class="cmp-wrap">
+      <table class="cmp">
+        <thead>
+          <tr><th>شاخص</th><th>ویرایش پنجم</th><th>ویرایش ششم</th><th>تغییر</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>سنجه‌های ملی</td><td class="num v5">۵۲۰</td><td class="num v6">۳۹۵</td><td class="num ch">−۱۲۵</td></tr>
+          <tr><td>استانداردها</td><td class="num v5">۱۱۱</td><td class="num v6">۸۸</td><td class="num ch">−۲۳</td></tr>
+          <tr><td>محورهای تخصصی</td><td class="num v5">۱۹</td><td class="num v6">۱۸</td><td class="num ch">−۱</td></tr>
+          <tr><td>سنجه‌های پرچم ایمنی بیمار</td><td class="num v5">۱۲۳</td><td class="num v6">۱۲۱</td><td class="num ch">−۲</td></tr>
+          <tr><td>ترکیب سطوح ارزش‌گذاری (۱ / ۲ / ۳)</td><td class="num v5">۲۰۸ / ۲۲۱ / ۹۱</td><td class="num v6">۲۰۸ / ۱۵۱ / ۳۶</td><td class="num ch">تمرکز بر سطح ۱</td></tr>
+          <tr><td>وزن سنجه‌ها</td><td class="num v5">۳۹۷×۱ + ۱۲۳×۲</td><td class="num v6">۱۴۵×۱ + ۱۲۰×۱٫۵ + ۱۳۰×۲</td><td class="num ch">وزن ۱٫۵ اضافه شد</td></tr>
+          <tr><td>هم‌پوشانی با ویرایش پنجم</td><td class="num v5">—</td><td class="num v6">۸۲ از ۸۸ استاندارد (۹۳٪) · ۲۷۹ از ۳۹۵ سنجه (۷۱٪)</td><td class="ch">حدود یک‌سوم سنجه‌ها نو است</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="cmp-note">
+      اعداد از استخراج ماشینی متن دو ویرایش به‌دست آمده و سمت ویرایش ششم با کتاب رسمی مطابقت داده شده است؛
+      شاخص تشابه Jaccard برای استانداردها ۷۰٫۱٪ و برای سنجه‌ها ۴۳٫۹٪ است (این دو عدد سنجهٔ تشابه مجموعه‌هاست، نه سهم باقی‌مانده).
+    </p>
+  </div>
+</section>
+
+<!-- ===================== دمو ===================== -->
+<section class="sec" id="demo">
+  <div class="wrap">
+    <div class="sec-hd">
+      <div>
+        <div class="sec-no">بخش نهم</div>
+        <h2>ورود به دمو</h2>
+        <p>دموی عمومی «بیمارستان نمونه» فعال است. با هر حساب، سامانه دقیقاً از دیدِ همان نقش باز می‌شود — برای جلسهٔ ارائه، چند نقش را کنار هم نشان دهید.</p>
+      </div>
+      <a class="btn btn-g" href="/" target="_blank" rel="noopener">باز کردن صفحهٔ ورود سامانه</a>
+    </div>
+    <div class="demo-grid">
+      <div class="safe-pane">
+        <div class="mx-sec-t" style="margin-top:0">حساب‌های نمایندهٔ دمو <span class="hint">(رمز همهٔ حساب‌های نقش‌دار: Demo@2026)</span></div>
+        <table class="acc-table">
+          <thead><tr><th>نقش</th><th>نام کاربری</th><th>رمز</th></tr></thead>
+          <tbody id="demoRows"></tbody>
+        </table>
+        <p class="hint" style="margin-top:10px">حساب سامانه‌ی مدیریت بیمارستان: <span class="u" style="direction:ltr;display:inline-block">hospital3_admin</span> با رمز <span style="direction:ltr;display:inline-block">Hospital3@Admin2026</span> — پنل سوپرادمین در مسیر <span style="direction:ltr;display:inline-block">/admin313</span>.</p>
+      </div>
+      <div>
+        <div class="mx-sec-t" style="margin-top:0">مسیرهای پیشنهادی برای یک جلسهٔ ۱۰ دقیقه‌ای</div>
+        <div class="paths" id="demoPaths"></div>
+        <div class="contact-strip">
+          <span>برای جلسهٔ ارائهٔ اختصاصی یا استقرار:</span>
+          <a href="tel:+982188450090">۰۲۱-۸۸۴۵۰۰۹۰</a>
+          <a href="mailto:info@hospital-quality.ir">info@hospital-quality.ir</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 </main>
-<button type="button" class="cat-back-top" id="catBackTop" aria-label="بازگشت به بالای صفحه" title="بازگشت به بالا">
-<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
-</button>
-<!-- Interactive Toast Notification -->
-<div class="preview-toast" id="interactiveToast">
-<div style="width: 12px; height: 12px; border-radius: 50%; background: var(--emerald-400); box-shadow: 0 0 12px var(--emerald-400);"></div>
-<span id="toastMessage" style="font-size: 0.9rem; color: #ffffff; font-weight: 700;">پیشنمایش تعاملی فعال شد</span>
-</div>
-<!-- Footer -->
-<footer class="platform-footer">
-<div class="container">
-<div class="footer-links">
-<a href="#hero">صفحه اصلی</a>
-<a href="#accreditation">محورها و سنجهها</a>
-<a href="#clinical-sop">پروتکلهای SOP</a>
-<a href="#safety-never-events">ایمنی بیمار</a>
-<a href="#dana-copilot">دستیار بالینی دانا</a>
-<a href="#demo">تماس و استقرار</a>
-</div>
-<p style="margin-bottom: 6px;">سامانه ملی جامع مدیریت کیفیت، ایمنی بیمار و اعتباربخشی بیمارستانها — ویرایش ششم کشوری</p>
-<p style="font-size: 0.78rem; color: rgba(255,255,255,0.4);">طراحیشده با رعایت کلیه استانداردهای امنیت دادههای سلامت و پروتکلهای محرمانگی پزشکی</p>
-</div>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-links">
+      <a href="#directory">دایرکتوری بخش‌ها</a>
+      <a href="#accreditation">مرور سنجه‌ها</a>
+      <a href="#clinical-sop">روش‌های اجرایی</a>
+      <a href="#safety-never-events">ایمنی بیمار</a>
+      <a href="#dana-copilot">دانا</a>
+      <a href="#comparison">مقایسهٔ نسل‌ها</a>
+      <a href="#demo">دمو</a>
+    </div>
+    <p style="color:var(--sub)">سیناپس — سامانهٔ یکپارچهٔ نظارت، اعتباربخشی و پایش سلامت · هم‌تراز با ویرایش ششم اعتباربخشی کشوری</p>
+    <p>طراحی‌شده با رعایت محرمانگی داده‌های سلامت؛ داده‌های این صفحه عمومی است و هیچ اطلاعات بیماری در آن نیست.</p>
+  </div>
 </footer>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
 <script>
+/* =====================================================================
+   کاتالوگ عملیاتی — منطق صفحه
+   سه لایهٔ داده:
+   ۱) ماژول‌ها و SOPها: ثابت و درون همین فایل
+   ۲) فهرست ۳۹۵ سنجه: /accreditation/catalog/measures-index.json (تنبل، ~۱۲۰KB)
+   ۳) راهنمای ارزیابی هر سنجه: /accreditation/catalog/measures-notes.json (فقط وقت بازکردن جزئیات)
+   ===================================================================== */
 (function () {
   'use strict';
-  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // --- منوی موبایل ---
-  var catMenuToggleBtn = document.getElementById('catMenuToggleBtn');
-  var catNavLinks = document.getElementById('catNavLinks');
-  if (catMenuToggleBtn && catNavLinks) {
-    catMenuToggleBtn.setAttribute('aria-expanded', 'false');
-    function closeMenu() { catNavLinks.classList.remove('mob-open'); catMenuToggleBtn.setAttribute('aria-expanded', 'false'); }
-    catMenuToggleBtn.addEventListener('click', function (e) {
-      e.stopPropagation();
-      var open = catNavLinks.classList.toggle('mob-open');
-      catMenuToggleBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
     });
-    document.addEventListener('click', function (e) {
-      if (!catNavLinks.contains(e.target) && !catMenuToggleBtn.contains(e.target)) closeMenu();
-    });
-    catNavLinks.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', closeMenu); });
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMenu(); });
   }
-
-  // --- اعلان تعاملی ---
+  function fa(n) { return String(n).replace(/[0-9]/g, function (d) { return '۰۱۲۳۴۵۶۷۸۹'[+d]; }); }
+  function faW(w) { return fa(String(w)).replace('.', '٫'); }
   var toastTimer = null;
-  function showInteractivePreview(message) {
-    var toast = document.getElementById('interactiveToast');
-    var msgElem = document.getElementById('toastMessage');
-    if (!toast || !msgElem) return;
-    msgElem.textContent = message;
-    toast.classList.add('show');
+  function toast(msg) {
+    var t = $('#toast'); if (!t) return;
+    t.textContent = msg; t.classList.add('on');
     if (toastTimer) clearTimeout(toastTimer);
-    toastTimer = setTimeout(function () { toast.classList.remove('show'); }, 3400);
+    toastTimer = setTimeout(function () { t.classList.remove('on'); }, 2600);
   }
-  window.showInteractivePreview = showInteractivePreview;
+  window.focusQuickfind = function () { var i = $('#qf'); if (i) { i.focus(); i.select(); } };
 
-  // --- فیلتر محورهای بالینی (دکمه‌های دسترس‌پذیر) ---
-  window.filterAxes = function (category, btn) {
-    var chips = document.querySelectorAll('.axis-pill-chip');
-    chips.forEach(function (chip) {
-      chip.classList.remove('active');
-      chip.setAttribute('aria-pressed', 'false');
+  /* ---------------- دادهٔ ثابت: گروه‌ها و ماژول‌ها ---------------- */
+  var GROUPS = [
+    { id: 'mk', t: 'میزکار و کارتابل' },
+    { id: 'acc', t: 'اعتباربخشی و ممیزی' },
+    { id: 'sf', t: 'ایمنی بیمار و مدیریت خطر' },
+    { id: 'cl', t: 'مراقبت بالینی و پاراکلینیک' },
+    { id: 'mg', t: 'مدیریت، منابع و ساختار' }
+  ];
+  var MODULES = [
+    { k:'dash', g:'mk', i:'dashboard', t:'میزکار', d:'خلاصهٔ وضعیت انطباق، کارهای پیش‌رو و شاخص‌های کلیدی هر نقش در یک صفحه.' },
+    { k:'duties', g:'mk', i:'badge', t:'کارتابل و مسئولیت‌ها', d:'دستورکارها، پیام‌ها، یادآوری جلسات و وظایف شیفت با مهلت و اولویت.' },
+    { k:'inbox', g:'mk', i:'inbox', t:'کارتابل شخصی', d:'اقلام کاری من و اقلامی که در غیاب همکار، به‌جای او به من سپرده شده.' },
+    { k:'messages', g:'mk', i:'message', t:'پیام‌های داخلی', d:'مکاتبهٔ امن درون‌سازمانی بین کادر درمان و مدیران.' },
+    { k:'directives', g:'mk', i:'flag', t:'ابلاغیه و دستور', d:'ابلاغ خط‌مشی‌ها و دستورهای مدیریتی با تأیید خواندن.' },
+    { k:'calendar', g:'mk', i:'calendar', t:'تقویم', d:'جلسات کمیته‌ها، رویدادها و سررسیدهای بیمارستان در یک تقویم مشترک.' },
+    { k:'activities', g:'mk', i:'edit', t:'ثبت فعالیت‌ها', d:'ثبت فعالیت‌های روزانهٔ هر بخش با فرم‌ساز داده‌محور.' },
+    { k:'tenures', g:'mk', i:'clock', t:'تصدی سمنت‌ها', d:'سابقهٔ تصدی پست‌های سازمانی و تحویل‌گیری مسئولیت.' },
+    { k:'profile', g:'mk', i:'user', t:'تنظیمات کاربری', d:'پروفایل، تغییر رمز و تعیین کاربر جانشین.' },
+
+    { k:'acc', g:'acc', i:'grid', t:'هاب اعتباربخشی', d:'نقطهٔ ورود به سنجه‌ها، مدارک و ابزارهای ارزیابی هر نقش.' },
+    { k:'measures', g:'acc', i:'list', t:'سنجه‌ها و ارزیابی', d:'ثبت وضعیت هر سنجه با شواهد، مسئول و مهلت — هم‌تراز ویرایش ششم.' },
+    { k:'reviewgaps', g:'acc', i:'scale', t:'اختلاف با ارزیاب', d:'شکاف میان خودارزیابی و نمرهٔ ارزیاب داخلی/بیرونی، پیش از ارزیابی رسمی.' },
+    { k:'documents', g:'acc', i:'docs', t:'مدارک و کتابخانه', d:'خط‌مشی، روش اجرایی و دستورالعمل با نسخه، گردش امضا و بایگانی.' },
+    { k:'doccodes', g:'acc', i:'doc', t:'دفتر کد مدارک', d:'کدگذاری یگانهٔ اسناد مطابق ساختار مورد انتظار ارزیاب.' },
+    { k:'knowledge', g:'acc', i:'book', t:'بانک دانش دانا', d:'بازبینی پاسخ‌های پیش‌نویس دستیار بر اساس مدارک همان بیمارستان.' },
+    { k:'reports', g:'acc', i:'download', t:'گزارش و خروجی', d:'روند انطباق، درصد آمادگی به‌تفکیک محور و خروجی Excel/PDF.' },
+    { k:'checklists', g:'acc', i:'check', t:'بانک چک‌لیست‌ها', d:'ساخت چک‌لیست با نمره‌دهی لیکرت/بله‌خیر و تخصیص به حیطه و بخش.' },
+    { k:'audits', g:'acc', i:'clipboard', t:'حسابرسی داخلی', d:'اجرای دوره‌ای حسابرسی روی چک‌لیست‌ها با تاریخچهٔ قابل‌مقایسه.' },
+    { k:'walkarounds', g:'acc', i:'eye', t:'بازدید میدانی مدیریتی', d:'ثبت بازدید مدیران از بخش‌ها و پیگیری مصوبات تا تسویه.' },
+    { k:'satisfaction', g:'acc', i:'star', t:'نظرسنجی رضایت', d:'پرسشنامهٔ ۱۰بخشی رضایت بیمار و داشبورد نتایج.' },
+    { k:'followup', g:'acc', i:'heart', t:'پیگیری بیمار', d:'پیگیری پس از ترخیص و مسیر مراقبت مادر و نوزاد.' },
+
+    { k:'errors', g:'sf', i:'alert', t:'گزارش خطا و وقایع', d:'ثبت محرمانه یا ناشناس با کد رهگیری و بازشدن RCA در موارد شدید.' },
+    { k:'fmea', g:'sf', i:'target', t:'FMEA', d:'تحلیل حالات بالقوهٔ شکست و اثرات آن برای فرایندهای پرخطر.' },
+    { k:'safesurgery', g:'sf', i:'shield', t:'جراحی ایمن WHO', d:'چک‌لیست سه‌مرحله‌ای و پایش انطباق اتاق عمل.' },
+    { k:'medrecon', g:'sf', i:'plus', t:'تلفیق دارویی', d:'تطبیق داروهای بیمار در پذیرش، انتقال بین‌بخشی و ترخیص.' },
+    { k:'waste', g:'sf', i:'trash', t:'پسماند پزشکی', d:'تفکیک، بی‌خطرسازی و ممنوعیت بازیافت پسماند ویژه.' },
+    { k:'infection', g:'sf', i:'shield', t:'کنترل عفونت', d:'پایش NNIS، بهداشت دست و ایزولاسیون تنفسی/تماسی.' },
+    { k:'patientfocus', g:'sf', i:'heart', t:'بیمارمحوری و علت‌کاوی', d:'تحلیل شکایات و وقایع با نگاه بیمارمحور و اقدام اصلاحی.' },
+    { k:'disaster', g:'sf', i:'alert', t:'حوادث و بلایا', d:'برنامهٔ EOP، تیم فرمان‌دهی حادثه و آمادگی تداوم خدمات.' },
+    { k:'occhealth', g:'sf', i:'stethoscope', t:'سلامت حرفه‌ای', d:'پروندهٔ سلامت کارکنان، مواجهه‌های شغلی و پایش عوامل زیان‌آور.' },
+
+    { k:'nursing', g:'cl', i:'users', t:'سلسله‌مراتب پرستاری', d:'سوپروایزرها، بخش‌ها و پوشش متقاطع پرستاری.' },
+    { k:'headnurse', g:'cl', i:'bed', t:'داشبورد سرپرستار', d:'حضورغیاب، مرخصی و وظایف شیفت بخش برای سرپرستار و جانشین.' },
+    { k:'staffshift', g:'cl', i:'calendar', t:'پرسنل و برنامهٔ شیفت', d:'برنامه‌ریزی شیفت و توزیع نیروی پرستاری بخش‌ها.' },
+    { k:'shiftatt', g:'cl', i:'clock', t:'حضور شیفت و گزارش ۲۴ساعته', d:'تحویل شیفت، وقایع شیفت و گزارش شبانه‌روزی.' },
+    { k:'nsupervision', g:'cl', i:'eye', t:'نظارت مدیریت پرستاری', d:'چک‌لیست‌های نظارت سوپروایزر و پیگیری اقدامات اصلاحی.' },
+    { k:'pharmacy', g:'cl', i:'plus', t:'مدیریت دارویی', d:'انطباق سنجه‌های دارویی، موجودی و ایمنی دارو.' },
+    { k:'lab', g:'cl', i:'search', t:'خدمات آزمایشگاه', d:'سنجه‌های محور ب-۸ برای آزمایشگاه و پایش کیفیت نمونه.' },
+    { k:'imaging', g:'cl', i:'eye', t:'تصویربرداری و ایمنی پرتو', d:'سنجه‌های محور ب-۷، دوز پرتوی و ایمنی بیمار و کارکنان.' },
+    { k:'blood', g:'cl', i:'pulse', t:'طب انتقال خون', d:'هموویژیلانس، زنجیرهٔ سرد و گزارش عوارض تزریق خون.' },
+    { k:'maternal', g:'cl', i:'heart', t:'مراقبت مادر و نوزاد', d:'هاب عملیاتی محور ب-۴ از بارداری تا ترخیص نوزاد.' },
+    { k:'outpatient', g:'cl', i:'stethoscope', t:'خدمات سرپایی', d:'کلینیک‌ها، نوبت‌دهی و سنجه‌های محور ب-۹.' },
+    { k:'patientrights', g:'cl', i:'users', t:'حمایت از گیرنده خدمت', d:'حقوق بیمار، رضایت آگاهانه و رسیدگی به شکایات — بخش ج.' },
+    { k:'crm', g:'cl', i:'heart', t:'مدیریت بیمار و CRM', d:'پروندهٔ ارتباط با بیمار و پیگیری‌های خدمت.' },
+
+    { k:'orgchart', g:'mg', i:'tree', t:'نمودار سازمانی', d:'چارت پست‌ها و روابط پاسخگویی، قابل چاپ.' },
+    { k:'orgstructure', g:'mg', i:'building', t:'ساختار سازمانی', d:'گروه شغلی، واحد، پست و ساختمان — زیرساخت چارت و انتساب‌ها.' },
+    { k:'management', g:'mg', i:'badge', t:'حوزهٔ مدیریت', d:'پست‌های نام‌دار مدیریتی و مسئولیت‌های متناظر.' },
+    { k:'support', g:'mg', i:'grid', t:'حوزهٔ پشتیبانی', d:'زیرمجموعهٔ پشتیبانی چارت سازمانی و وظایف آن.' },
+    { k:'committees', g:'mg', i:'users', t:'کمیته‌ها', d:'۱۷+ کمیته با صورت‌جلسه، مصوبه، مسئول و مهلت پیگیری.' },
+    { k:'processes', g:'mg', i:'refresh', t:'فرآیندها و فلوچارت', d:'ثبت فرایندهای اصلی با فلوچارت و صاحبان فرایند.' },
+    { k:'programs', g:'mg', i:'trend', t:'برنامه‌های بهبود', d:'پیشنهاد CAPA، جریان تأیید و پیگیری پیشرفت.' },
+    { k:'training', g:'mg', i:'graduation', t:'نیازسنجی آموزشی', d:'جریان سه‌مرحله‌ای کارمند ← مافوق ← سازمان.' },
+    { k:'hrdev', g:'mg', i:'edit', t:'ارزیابی و توسعهٔ کارکنان', d:'ارزیابی عملکرد و برنامهٔ توسعهٔ شایستگی‌ها.' },
+    { k:'vendors', g:'mg', i:'building', t:'پیمانکاران و تأمین‌کنندگان', d:'ارزیابی، قرارداد و پایش پیمانکاران بالینی و پشتیبانی.' },
+    { k:'finance', g:'mg', i:'chart', t:'منابع مالی و مشارکت مردمی', d:'درآمدها، هزینه‌ها و مشارکت‌های مردمی.' },
+    { k:'education', g:'mg', i:'play', t:'آموزش و اثربخشی', d:'دوره‌ها، گواهی‌ها و سنجش اثربخشی آموزش.' },
+    { k:'bsc', g:'mg', i:'target', t:'کارت امتیازی متوازن', d:'شاخص‌ها در چهار منظر با تارگت، جهت مطلوب و روند.' },
+    { k:'indicators', g:'mg', i:'trend', t:'شاخص‌های بیمارستان', d:'ثبت و پایش شاخص‌های عملکردی در طول دورهٔ اعتباربخشی.' },
+    { k:'assets', g:'mg', i:'building', t:'اقلام و نگهداشت دوره‌ای', d:'تجهیزات و برنامهٔ نگهداشت/کالیبراسیون دوره‌ای.' },
+    { k:'users', g:'mg', i:'users', t:'کاربران و نقش‌ها', d:'نقش سفارشی از کاتالوگ مجوز، ساخت کاربر و override موردی.' },
+    { k:'settings', g:'mg', i:'settings', t:'تنظیمات بیمارستان', d:'مشخصات مرکز، دورهٔ اعتباربخشی و قواعد یادآور.' },
+    { k:'guide', g:'mg', i:'help', t:'راهنمای نقش من', d:'دستیار «الان باید چه کار کنم؟» برای هر سمت بیمارستانی.' }
+  ];
+
+  /* ---------------- دادهٔ ثابت: SOPها ---------------- */
+  var SOPS = [
+    { c:'SOP-PSY-01', t:'جداسازی و مهار ایمن بیماران روان‌پزشکی' },
+    { c:'SOP-PSY-02', t:'مدیریت رفتارهای پرخطر اجتماعی' },
+    { c:'SOP-SKN-01', t:'مراقبت پوست و پیشگیری از زخم فشاری' },
+    { c:'SOP-BLD-01', t:'مدیریت عوارض ناخواسته به دنبال تزریق خون' },
+    { c:'SOP-CPR-01', t:'عملیات احیای قلبی-ریوی-مغزی (CPCR)' },
+    { c:'SOP-TRS-01', t:'انتقال درون و برون‌بخشی بیماران' },
+    { c:'SOP-SEC-01', t:'ایمنی فیزیکی بیماران و پیشگیری از سقوط' },
+    { c:'SOP-MED-01', t:'تلفیق دارویی در بدو پذیرش و ترخیص' },
+    { c:'SOP-TRG-01', t:'تریاژ استاندارد اورژانس به روش ESI' },
+    { c:'SOP-SUT-01', t:'جراحی ایمن و چک‌لیست قبل از بیهوشی' },
+    { c:'SOP-ISO-01', t:'جداسازی و ایزولاسیون بیماران تنفسی و تماسی' },
+    { c:'SOP-AUT-01', t:'اتوپسی و انتقال جسد متوفی' },
+    { c:'SOP-DON-01', t:'فراهم‌آوری و پیوند اعضا از بیماران مرگ مغزی' },
+    { c:'SOP-CLN-01', t:'نظافت، پاک‌سازی و ضدعفونی سطوح پرتماس' },
+    { c:'SOP-STR-01', t:'استریلیزاسیون و پایش عملکرد اتوکلاوها' },
+    { c:'SOP-SPT-01', t:'ارجاع بیماران بستری به پزشکی ورزشی' },
+    { c:'SOP-PRC-01', t:'ارائه خدمات پاراکلینیکی شبانه‌روزی' },
+    { c:'SOP-DIS-01', t:'ترک بدون اطلاع بیمار' },
+    { c:'SOP-IDN-01', t:'شناسایی صحیح بیماران با حداقل دو شناسه' },
+    { c:'SOP-PSY-05', t:'تأمین لوازم مصرفی بخش روان‌پزشکی با الزامات ایمنی' },
+    { c:'SOP-CVL-01', t:'تعبیه CV Line در بیماران بستری' },
+    { c:'SOP-SCO-01', t:'ارائه خدمت اسکولی به بیماران' },
+    { c:'SOP-RSK-01', t:'مدیریت پیشگیرانهٔ خطر برای جلوگیری از وقایع ناخواسته' }
+  ];
+  // شش فرآیند منتخب — استنادها با سنجه‌های ویرایش ششم صحت‌سنجی شده‌اند
+  var FEATURED = [
+    { c:'SOP-PSY-01', t:'مهار و جداسازی ایمن بیمار روان‌پزشکی', d:'ثبت فرم مهار، پایش علائم حیاتی و دستور کتبی پزشک مقیم؛ شرایط اتاق مهار ایمن.', ref:'ب-۱-۱۰', tag:'روان‌پزشکی' },
+    { c:'SOP-MED-01', t:'تلفیق دارویی در پذیرش و ترخیص', d:'تطبیق تاریخچهٔ دارویی بیمار در بدو بستری، انتقال بین‌بخشی و لحظهٔ ترخیص با داروساز.', ref:'ب-۱-۵ · ب-۶-۲', tag:'ایمنی دارو' },
+    { c:'SOP-SEC-01', t:'پیشگیری از سقوط و ایمنی فیزیکی', d:'ارزیابی خطر سقوط، شناسهٔ زرد، نرده‌های محافظ و نظارت اختصاصی در بخش‌های پرخطر.', ref:'ب-۱-۳', tag:'ایمنی بیمار' },
+    { c:'SOP-SUT-01', t:'جراحی ایمن سه‌مرحله‌ای (WHO)', d:'علامت‌گذاری موضع، Sign-in پیش از بیهوشی، Time-out پیش از برش و Sign-out پیش از خروج.', ref:'ب-۳-۲', tag:'اتاق عمل' },
+    { c:'SOP-BLD-01', t:'هموویژیلانس و ایمنی تزریق خون', d:'تطبیق دوگانهٔ بالینی، زنجیرهٔ سرد و ثبت عوارض با فرم‌های نظام مراقبت از خون.', ref:'ب-۸-۶', tag:'انتقال خون' },
+    { c:'SOP-ISO-01', t:'ایزولاسیون و بهداشت دست', d:'پایش پنج لحظهٔ بهداشت دست، ایزولاسیون تنفسی/تماسی و تفکیک پسماند عفونی.', ref:'ب-۵-۴ · ب-۵-۷', tag:'کنترل عفونت' }
+  ];
+
+  /* ---------------- دادهٔ ثابت: هوش، دمو، مسیرها ---------------- */
+  var INTEL = [
+    { k:'bsc', i:'target', t:'کارت امتیازی متوازن (BSC)', d:'ثبت ماهانهٔ شاخص‌ها در چهار منظر با تارگت و جهت مطلوب؛ روند هر شاخص دیده می‌شود.' },
+    { k:'indicators', i:'trend', t:'شاخص‌های عملکردی', d:'شاخص‌های بیمارستان در طول دوره پایش می‌شوند، نه شب ارزیابی.' },
+    { k:'reports', i:'download', t:'گزارش‌ها و روند', d:'نمودار روند انطباق، شکاف هر محور و خروجی برای جلسهٔ مدیریت.' },
+    { k:'committees', i:'users', t:'کمیته‌ها و مصوبات', d:'هر مصوبه مسئول و مهلت دارد و روی کارتابل همان فرد می‌نشیند.' }
+  ];
+  var DEMO_ROWS = [
+    { r:'ریاست بیمارستان', u:'h3.mgmt1.kbif5' },
+    { r:'مدیر اعتباربخشی', u:'h3.mgmt10.egcjj' },
+    { r:'مدیر کنترل کیفیت', u:'h3.mgmt2.eya3d' },
+    { r:'مدیر پرستاری', u:'h3.nursing_director' },
+    { r:'مسئول ایمنی بیمار', u:'h3.patient_safety' },
+    { r:'سوپروایزر کنترل عفونت', u:'h3.ic_supervisor' },
+    { r:'سوپروایزر بالینی', u:'h3.sup1' },
+    { r:'سرپرستار بخش جراحی', u:'h3.wh.jospno' }
+  ];
+  var PATHS = [
+    { h:'/#measures', t:'وضعیت ۳۹۵ سنجه', d:'درخت سنجه‌ها با وضعیت زنده و شواهد.' },
+    { h:'/#errors', t:'ایمنی بیمار و گزارش خطا', d:'فرم محرمانه، کد رهگیری و RCA.' },
+    { h:'/#documents', t:'مدارک کنترل‌شده', d:'نسخه، گردش امضا و بایگانی اسناد.' },
+    { h:'/#duties', t:'کارتابل و وظایف', d:'کارهای هر نقش با مهلت و اولویت.' }
+  ];
+
+  /* ---------------- رندر دایرکتوری ---------------- */
+  var dirState = { g:'all', q:'' };
+  function icon(n) { try { return (typeof window.ic === 'function') ? window.ic(n) : ''; } catch (e) { return ''; } }
+  function groupTitle(id) { for (var i=0;i<GROUPS.length;i++) if (GROUPS[i].id===id) return GROUPS[i].t; return ''; }
+  function renderGroupChips() {
+    var box = $('#gchips'); if (!box) return;
+    var html = '<button type="button" class="gchip" data-g="all" aria-pressed="true">همه (' + fa(MODULES.length) + ')</button>';
+    GROUPS.forEach(function (gr) {
+      var n = MODULES.filter(function (m) { return m.g === gr.id; }).length;
+      html += '<button type="button" class="gchip" data-g="' + gr.id + '" aria-pressed="false">' + esc(gr.t) + ' (' + fa(n) + ')</button>';
     });
-    var el = btn || document.querySelector('.axis-pill-chip');
-    if (el) { el.classList.add('active'); el.setAttribute('aria-pressed', 'true'); }
-    var track = document.getElementById('sop-flow-track');
-    if (track) track.scrollTo({ left: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
-    showInteractivePreview('فیلتر فرآیندهای بالینی: ' + (el ? el.textContent.replace(/\s+/g, ' ').trim() : 'همه'));
-  };
+    box.innerHTML = html;
+    box.addEventListener('click', function (e) {
+      var b = e.target.closest('.gchip'); if (!b) return;
+      dirState.g = b.getAttribute('data-g');
+      $$('.gchip', box).forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+      renderTiles();
+    });
+  }
+  function matchDir(m) {
+    if (dirState.g !== 'all' && m.g !== dirState.g) return false;
+    if (!dirState.q) return true;
+    var q = dirState.q.toLowerCase();
+    return (m.t + ' ' + m.d + ' ' + m.k).toLowerCase().indexOf(q) !== -1;
+  }
+  function renderTiles() {
+    var box = $('#tiles'); if (!box) return;
+    var list = MODULES.filter(matchDir);
+    box.innerHTML = list.map(function (m) {
+      return '<article class="tile" id="mod-' + esc(m.k) + '" data-g="' + esc(m.g) + '">' +
+        '<div class="tile-hd"><span class="tile-ic">' + icon(m.i) + '</span><h3>' + esc(m.t) + '</h3></div>' +
+        '<p>' + esc(m.d) + '</p>' +
+        '<div class="tile-ft"><a class="lnk" href="/#' + esc(m.k) + '" target="_blank" rel="noopener">باز کردن در سامانه' +
+        '<svg class="ic-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"/></svg></a>' +
+        '<span class="hint">' + esc(groupTitle(m.g)) + '</span></div></article>';
+    }).join('');
+    var em = $('#tilesEmpty'); if (em) em.hidden = list.length > 0;
+  }
+  var dirQ = $('#dirQ');
+  if (dirQ) dirQ.addEventListener('input', function () {
+    dirState.q = dirQ.value.trim();
+    renderTiles();
+  });
 
-  // --- فرم دمو ---
-  window.handleFormSubmit = function (e) {
-    e.preventDefault();
-    showInteractivePreview('درخواست دمو با موفقیت ثبت شد؛ همکاران ما به زودی با شما تماس خواهند گرفت.');
-    e.target.reset();
-  };
+  /* ---------------- رندر SOP ---------------- */
+  function renderSops() {
+    var rail = $('#sopRail');
+    if (rail) rail.innerHTML = FEATURED.map(function (s) {
+      return '<article class="sop-card">' +
+        '<div class="sop-top"><span class="sop-code">' + esc(s.c) + '</span><span class="sop-ref">' + esc(s.tag) + '</span></div>' +
+        '<h3>' + esc(s.t) + '</h3><p>' + esc(s.d) + '</p>' +
+        '<div class="sop-meta"><span>استاندارد مرجع: ' + esc(s.ref) + '</span>' +
+        '<a class="lnk" href="/#documents" target="_blank" rel="noopener">در سامانه</a></div></article>';
+    }).join('');
+    var all = $('#sopAll');
+    if (all) all.innerHTML = SOPS.map(function (s) {
+      return '<div class="sop-li" id="sop-' + esc(s.c) + '"><span class="c">' + esc(s.c) + '</span><span>' + esc(s.t) + '</span></div>';
+    }).join('');
+  }
 
-  // --- اسکرول نرم لنگرها ---
-  document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
-    anchor.addEventListener('click', function (e) {
-      var href = this.getAttribute('href');
-      if (!href || href === '#') return;
-      var target = null;
-      try { target = document.querySelector(href); } catch (err) { return; }
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
-        if (history.replaceState) history.replaceState(null, '', href);
+  /* ---------------- رندر هوش و دمو ---------------- */
+  function renderIntel() {
+    var box = $('#intelTiles'); if (!box) return;
+    box.innerHTML = INTEL.map(function (x) {
+      return '<article class="tile"><div class="tile-hd"><span class="tile-ic">' + icon(x.i) + '</span><h3>' + esc(x.t) + '</h3></div>' +
+        '<p>' + esc(x.d) + '</p><div class="tile-ft"><a class="lnk" href="/#' + esc(x.k) + '" target="_blank" rel="noopener">باز کردن در سامانه</a></div></article>';
+    }).join('');
+  }
+  function renderDemo() {
+    var tb = $('#demoRows');
+    if (tb) tb.innerHTML = DEMO_ROWS.map(function (r) {
+      return '<tr><td>' + esc(r.r) + '</td><td class="u">' + esc(r.u) + '</td><td class="p">Demo@2026</td></tr>';
+    }).join('');
+    var p = $('#demoPaths');
+    if (p) p.innerHTML = PATHS.map(function (x) {
+      return '<a class="tile" href="' + esc(x.h) + '" target="_blank" rel="noopener" style="text-decoration:none">' +
+        '<div class="tile-hd"><span class="tile-ic">' + icon('play') + '</span><h3>' + esc(x.t) + '</h3></div>' +
+        '<p>' + esc(x.d) + '</p></a>';
+    }).join('');
+  }
+
+  /* ---------------- مرور سنجه‌ها ---------------- */
+  var MIndex = null, MNotes = null, idxPromise = null, notesPromise = null;
+  var MX = { q:'', axis:'', level:'', safe:false, shown:40 };
+  var PAGE = 40;
+
+  function loadIndex() {
+    if (MIndex) return Promise.resolve(MIndex);
+    if (idxPromise) return idxPromise;
+    setMxStatus('در حال بارگذاری فهرست ۳۹۵ سنجه…');
+    idxPromise = fetch('/accreditation/catalog/measures-index.json')
+      .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+      .then(function (j) {
+        MIndex = j;
+        buildAxisOptions();
+        renderSafety();
+        qfBuildIndex();
+        renderMeasures();
+        return j;
+      })
+      .catch(function (e) {
+        idxPromise = null;
+        setMxStatus('بارگذاری فهرست سنجه‌ها ناموفق بود (' + esc(e.message) + '). اتصال را بررسی کنید و صفحه را نو کنید.');
+        throw e;
+      });
+    return idxPromise;
+  }
+  function loadNotes() {
+    if (MNotes) return Promise.resolve(MNotes);
+    if (notesPromise) return notesPromise;
+    notesPromise = fetch('/accreditation/catalog/measures-notes.json')
+      .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+      .then(function (j) { MNotes = j; return j; })
+      .catch(function (e) { notesPromise = null; throw e; });
+    return notesPromise;
+  }
+  function setMxStatus(t) { var el = $('#mxCount'); if (el) el.textContent = t; }
+  function buildAxisOptions() {
+    var sel = $('#mxAxis'); if (!sel || !MIndex) return;
+    var cur = sel.value;
+    var html = '<option value="">همهٔ محورها (۱۸)</option>';
+    var lastCh = '';
+    (MIndex.axes || []).forEach(function (a) {
+      if (a.ch !== lastCh) {
+        if (lastCh) html += '</optgroup>';
+        html += '<optgroup label="بخش ' + esc(a.ch) + '">';
+        lastCh = a.ch;
       }
+      html += '<option value="' + esc(a.c) + '">' + esc(a.c) + ' — ' + esc(a.t) + ' (' + fa(a.m) + ' سنجه)</option>';
+    });
+    if (lastCh) html += '</optgroup>';
+    sel.innerHTML = html;
+    sel.value = cur;
+  }
+  function matchMx(m) {
+    if (MX.axis && m.ax !== MX.axis) return false;
+    if (MX.level && String(m.l) !== MX.level) return false;
+    if (MX.safe && !m.f) return false;
+    if (!MX.q) return true;
+    var q = MX.q.toLowerCase();
+    return (m.c + ' ' + m.s).toLowerCase().indexOf(q) !== -1;
+  }
+  function measureRow(m) {
+    var badges = '<span class="bdg bdg-lv">سطح ' + fa(m.l) + '</span>' +
+      '<span class="bdg bdg-w">وزن ' + faW(m.w) + '</span>' +
+      (m.f ? '<span class="bdg bdg-sf">ایمنی بیمار</span>' : '');
+    return '<article class="mrow" id="mrow-' + esc(m.c) + '" data-c="' + esc(m.c) + '">' +
+      '<button type="button" class="mrow-hd" aria-expanded="false">' +
+        '<span class="mrow-code">' + esc(m.c) + '</span>' +
+        '<span class="mrow-stmt">' + esc(m.s) + '</span>' +
+        '<span class="mrow-badges">' + badges + '</span>' +
+      '</button>' +
+      '<div class="mrow-bd"></div></article>';
+  }
+  function renderMeasures() {
+    if (!MIndex) return;
+    var list = MIndex.measures.filter(matchMx);
+    var shown = list.slice(0, MX.shown);
+    var box = $('#mxList'); if (!box) return;
+    var active = [];
+    if (MX.q) active.push('«' + MX.q + '»');
+    if (MX.axis) active.push('محور ' + MX.axis);
+    if (MX.level) active.push('سطح ' + fa(MX.level));
+    if (MX.safe) active.push('فقط ایمنی بیمار');
+    setMxStatus('نمایش ' + fa(shown.length) + ' از ' + fa(list.length) + ' سنجه' +
+      (list.length !== MIndex.measures.length ? ' (فیلتر: ' + active.join(' · ') + ')' : '') +
+      (list.length ? '' : ' — موردی با این فیلتر پیدا نشد.'));
+    box.innerHTML = shown.map(measureRow).join('');
+    var more = $('#mxMore');
+    if (more) {
+      more.hidden = list.length <= MX.shown;
+      more.textContent = 'نمایش ' + fa(Math.min(PAGE, list.length - MX.shown)) + ' مورد بیشتر';
+    }
+  }
+  function fillDetail(row, code) {
+    if (row.getAttribute('data-filled') === '1') return Promise.resolve();
+    var bd = $('.mrow-bd', row);
+    bd.innerHTML = '<div class="mx-load">در حال بارگذاری راهنمای ارزیابی…</div>';
+    var m = null;
+    if (MIndex) MIndex.measures.some(function (x) { if (x.c === code) { m = x; return true; } return false; });
+    var std = null;
+    if (MIndex && m) MIndex.standards.some(function (x) { if (x.c === m.std) { std = x; return true; } return false; });
+    return loadNotes().then(function (notes) {
+      var d = notes[code] || { n:'', st:[] };
+      var steps = (d.st || []).map(function (s) {
+        return '<li><span class="dot"></span><span style="flex:1">' + esc(s[0]) +
+          (s[1] ? '<span class="resp"> — ' + esc(s[1]) + '</span>' : '') + '</span></li>';
+      }).join('');
+      var html = '<div class="mx-meta">' +
+        '<span class="bdg bdg-lv">سطح ' + fa(m ? m.l : '') + '</span>' +
+        '<span class="bdg bdg-w">وزن ' + faW(m ? m.w : '') + '</span>' +
+        (m && m.f ? '<span class="bdg bdg-sf">پرچم ایمنی بیمار</span>' : '') +
+        '<span class="bdg">صفحهٔ ' + fa(m ? m.p : '') + ' کتاب</span></div>';
+      if (std) html += '<div class="mx-std">استاندارد <b>' + esc(std.c) + '</b> — ' + esc(std.s) + '</div>';
+      if (steps) html += '<div class="mx-sec-t">مراحل موردانتظار</div><ul class="mx-steps">' + steps + '</ul>';
+      if (d.n) html += '<div class="mx-sec-t">راهنمای ارزیابی</div><div class="mx-notes">' + esc(d.n) + '</div>';
+      html += '<div class="mx-acts">' +
+        '<a class="mx-btn" href="/#measures" target="_blank" rel="noopener">باز کردن ماژول سنجه‌ها در سامانه</a>' +
+        '<button type="button" class="mx-btn" data-copycode="' + esc(code) + '">کپی کد سنجه</button>' +
+        '<span class="hint">کد را می‌توانید در جستجوی سامانه جای‌گذاری کنید</span></div>';
+      bd.innerHTML = html;
+      row.setAttribute('data-filled', '1');
+    }).catch(function () {
+      bd.innerHTML = '<div class="mx-load">راهنمای ارزیابی بارگذاری نشد — متن کامل در <a href="/#measures" target="_blank" rel="noopener">ماژول سنجه‌ها</a> در دسترس است.</div>';
+    });
+  }
+  var mxList = $('#mxList');
+  if (mxList) mxList.addEventListener('click', function (e) {
+    var copyBtn = e.target.closest('[data-copycode]');
+    if (copyBtn) { copy(copyBtn.getAttribute('data-copycode'), 'کد سنجه کپی شد'); return; }
+    var hd = e.target.closest('.mrow-hd'); if (!hd) return;
+    var row = hd.closest('.mrow'); if (!row) return;
+    var open = row.classList.toggle('open');
+    hd.setAttribute('aria-expanded', String(open));
+    var bd = $('.mrow-bd', row);
+    if (open) {
+      bd.classList.add('on');
+      if (row.getAttribute('data-filled') !== '1') fillDetail(row, row.getAttribute('data-c'));
+    } else {
+      bd.classList.remove('on');
+    }
+  });
+  function debounce(fn, ms) {
+    var t = null;
+    return function () { var a = arguments, self = this; clearTimeout(t); t = setTimeout(function () { fn.apply(self, a); }, ms); };
+  }
+  var mxQ = $('#mxQ');
+  if (mxQ) mxQ.addEventListener('input', debounce(function () {
+    MX.q = mxQ.value.trim(); MX.shown = PAGE;
+    if (MIndex) renderMeasures(); else loadIndex().catch(function(){});
+  }, 140));
+  var mxAxis = $('#mxAxis');
+  if (mxAxis) mxAxis.addEventListener('change', function () { MX.axis = mxAxis.value; MX.shown = PAGE; renderMeasures(); });
+  var mxLevel = $('#mxLevel');
+  if (mxLevel) mxLevel.addEventListener('change', function () { MX.level = mxLevel.value; MX.shown = PAGE; renderMeasures(); });
+  var mxSafe = $('#mxSafe');
+  if (mxSafe) mxSafe.addEventListener('click', function () {
+    MX.safe = !MX.safe; mxSafe.setAttribute('aria-pressed', String(MX.safe)); MX.shown = PAGE; renderMeasures();
+  });
+  var mxReset = $('#mxReset');
+  if (mxReset) mxReset.addEventListener('click', function () {
+    MX = { q:'', axis:'', level:'', safe:false, shown:PAGE };
+    if (mxQ) mxQ.value = ''; if (mxAxis) mxAxis.value = ''; if (mxLevel) mxLevel.value = '';
+    if (mxSafe) mxSafe.setAttribute('aria-pressed', 'false');
+    renderMeasures();
+  });
+  var mxMore = $('#mxMore');
+  if (mxMore) mxMore.addEventListener('click', function () { MX.shown += PAGE; renderMeasures(); });
+  window.openSafetyFilter = function () {
+    MX = { q:'', axis:'', level:'', safe:true, shown:PAGE };
+    if (mxQ) mxQ.value = ''; if (mxAxis) mxAxis.value = ''; if (mxLevel) mxLevel.value = '';
+    if (mxSafe) mxSafe.setAttribute('aria-pressed', 'true');
+    var sec = $('#accreditation'); if (sec) sec.scrollIntoView({ behavior:'smooth', block:'start' });
+    loadIndex().then(renderMeasures).catch(function(){});
+  };
+  function renderSafety() {
+    if (!MIndex) return;
+    var chs = MIndex.stats.byChapter || [];
+    var total = 0; chs.forEach(function (c) { total += c.safety; });
+    var elT = $('#sfTotal'); if (elT) elT.textContent = fa(total);
+    chs.forEach(function (c, i) {
+      var num = $('#sf' + (i === 0 ? 'A' : (i === 1 ? 'B' : 'C')));
+      var bar = $('#sfBar' + (i === 0 ? 'A' : (i === 1 ? 'B' : 'C')));
+      if (num) num.textContent = fa(c.safety);
+      if (bar) bar.style.width = (total ? (c.safety / total * 100).toFixed(1) : 0) + '%';
+    });
+  }
+  // آمار هیرو از دادهٔ واقعی (پس از بارگذاری ایندکس به‌روز می‌شود؛ مقدار اولیه از قبل صحت‌سنجی شده)
+  function renderHeroStats() {
+    if (!MIndex) return;
+    var s = MIndex.stats;
+    var a = $('#st-measures'), b = $('#st-safety'), c = $('#st-std'), d = $('#st-axes');
+    if (a) a.textContent = fa(s.measures);
+    if (b) b.textContent = fa(s.safety);
+    if (c) c.textContent = fa(s.standards);
+    if (d) d.textContent = fa(s.axes);
+  }
+  $$('.stat').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var go = btn.getAttribute('data-go');
+      var sec = $('#accreditation'); if (sec) sec.scrollIntoView({ behavior:'smooth', block:'start' });
+      if (go === 'safety') window.openSafetyFilter();
+      else loadIndex().then(renderMeasures).catch(function(){});
     });
   });
 
-  // --- نوار پیشرفت مطالعه، اسکرول‌اسپای و بازگشت به بالا ---
-  var progressBar = document.getElementById('catScrollProgress');
-  var backTop = document.getElementById('catBackTop');
-  var navAnchors = Array.prototype.slice.call(document.querySelectorAll('.nav-links .nav-link-item[href^="#"]'));
-  var sections = Array.prototype.slice.call(document.querySelectorAll('main section[id]'));
-  function onScroll() {
-    var doc = document.documentElement;
-    var max = doc.scrollHeight - doc.clientHeight;
-    var pct = max > 0 ? Math.min(100, Math.max(0, (doc.scrollTop / max) * 100)) : 0;
-    if (progressBar) progressBar.style.width = pct.toFixed(2) + '%';
-    if (backTop) backTop.classList.toggle('show', doc.scrollTop > 480);
-    var current = '';
-    for (var i = 0; i < sections.length; i++) {
-      if (sections[i].getBoundingClientRect().top <= 160) current = sections[i].id;
+  /* ---------------- جستجوی سراسری ---------------- */
+  var QF = { items: [], active: -1 };
+  function qfBuildIndex() {
+    QF.items = [];
+    MODULES.forEach(function (m) { QF.items.push({ type:'mod', k:m.k, t:m.t, s:groupTitle(m.g), x:(m.t + ' ' + m.d + ' ' + m.k + ' ' + groupTitle(m.g)) }); });
+    SOPS.forEach(function (s) { QF.items.push({ type:'sop', k:s.c, t:s.t, s:s.c, x:(s.t + ' ' + s.c) }); });
+    if (MIndex) MIndex.measures.forEach(function (m) { QF.items.push({ type:'measure', k:m.c, t:m.s, s:m.c + ' · محور ' + m.ax, x:(m.c + ' ' + m.s) }); });
+  }
+  function qfSearch(q) {
+    if (!q || q.length < 2) return { mod:[], sop:[], measure:[] };
+    q = q.toLowerCase();
+    var out = { mod:[], sop:[], measure:[] };
+    for (var i = 0; i < QF.items.length; i++) {
+      var it = QF.items[i];
+      var hay = (it.x || (it.t + ' ' + it.s)).toLowerCase();
+      if (hay.indexOf(q) === -1) continue;
+      var g = it.type === 'mod' ? out.mod : (it.type === 'sop' ? out.sop : out.measure);
+      if (g.length < (it.type === 'measure' ? 8 : 6)) g.push(it);
     }
-    navAnchors.forEach(function (a) {
-      var isActive = a.getAttribute('href') === '#' + current;
-      a.classList.toggle('active', isActive);
-      if (isActive) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
+    return out;
+  }
+  function qfRender(q) {
+    var box = $('#qfRes'); if (!box) return;
+    var r = qfSearch(q);
+    var flat = [];
+    var html = '';
+    function block(t, arr) {
+      if (!arr.length) return '';
+      var h = '<div class="qf-g">' + t + '</div>';
+      arr.forEach(function (it) {
+        flat.push(it);
+        var idx = flat.length - 1;
+        h += '<button type="button" class="qf-i" data-i="' + idx + '" role="option">' +
+          '<span class="qf-t">' + esc(it.t) + '</span><span class="qf-s">' + esc(it.s) + '</span></button>';
+      });
+      return h;
+    }
+    html += block('بخش‌های سامانه', r.mod);
+    html += block('روش‌های اجرایی', r.sop);
+    html += block('سنجه‌ها', r.measure);
+    if (!html) {
+      html = '<div class="qf-empty">چیزی برای «' + esc(q) + '» پیدا نشد. کد سنجه (مثل ب-۵-۴-۱) یا نام بخش را امتحان کنید.</div>';
+      if (!MIndex) html += '<div class="qf-empty">فهرست سنجه‌ها هنوز بارگذاری نشده؛ لحظه‌ای بعد دوباره تایپ کنید.</div>';
+    }
+    QF.flat = flat; QF.active = -1;
+    box.innerHTML = html;
+    box.classList.add('on');
+  }
+  function qfClose() { var b = $('#qfRes'); if (b) { b.classList.remove('on'); b.innerHTML = ''; } }
+  function qfPick(i) {
+    var it = (QF.flat || [])[i]; if (!it) return;
+    qfClose();
+    var qf = $('#qf'); if (qf) qf.blur();
+    if (it.type === 'mod') {
+      var dir = $('#directory'); if (dir) dir.scrollIntoView({ behavior:'smooth', block:'start' });
+      dirState.q = ''; var dq = $('#dirQ'); if (dq) dq.value = '';
+      dirState.g = 'all'; $$('.gchip').forEach(function (x) { x.setAttribute('aria-pressed', String(x.getAttribute('data-g') === 'all')); });
+      renderTiles(); flash('#mod-' + it.k);
+      toast('بخش «' + it.t + '» — لینک ورود داخل کارت است');
+    } else if (it.type === 'sop') {
+      var el = $('#sop-' + it.k);
+      if (el) { el.scrollIntoView({ behavior:'smooth', block:'center' }); flash('#sop-' + it.k); }
+    } else {
+      MX = { q: it.k, axis:'', level:'', safe:false, shown:PAGE };
+      var mq = $('#mxQ'); if (mq) mq.value = it.k;
+      var ma = $('#mxAxis'); if (ma) ma.value = '';
+      var ml = $('#mxLevel'); if (ml) ml.value = '';
+      var ms = $('#mxSafe'); if (ms) ms.setAttribute('aria-pressed','false');
+      loadIndex().then(function () {
+        renderMeasures();
+        var sec = $('#accreditation'); if (sec) sec.scrollIntoView({ behavior:'smooth', block:'start' });
+        var row = $('#mrow-' + it.k);
+        if (row) {
+          var hd = $('.mrow-hd', row);
+          if (hd && row.getAttribute('data-filled') !== '1') { row.classList.add('open'); hd.setAttribute('aria-expanded','true'); $('.mrow-bd', row).classList.add('on'); fillDetail(row, it.k); }
+          flash('#mrow-' + it.k);
+        }
+      }).catch(function(){});
+    }
+  }
+  function flash(sel) {
+    var el = $(sel); if (!el) return;
+    el.classList.add('flash');
+    setTimeout(function () { el.classList.remove('flash'); }, 2600);
+  }
+  var qfInput = $('#qf');
+  if (qfInput) {
+    qfInput.addEventListener('input', debounce(function () { qfBuildIndex(); qfRender(qfInput.value.trim()); }, 110));
+    qfInput.addEventListener('keydown', function (e) {
+      var items = $$('.qf-i', $('#qfRes'));
+      if (!items.length) return;
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        QF.active = Math.max(0, Math.min(items.length - 1, (QF.active < 0 ? -1 : QF.active) + (e.key === 'ArrowDown' ? 1 : -1)));
+        items.forEach(function (x, i) { x.classList.toggle('on', i === QF.active); });
+        if (items[QF.active]) items[QF.active].scrollIntoView({ block:'nearest' });
+      } else if (e.key === 'Enter') {
+        e.preventDefault(); qfPick(QF.active >= 0 ? QF.active : 0);
+      } else if (e.key === 'Escape') { qfClose(); }
     });
   }
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', onScroll);
-  onScroll();
-  if (backTop) backTop.addEventListener('click', function () {
-    window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+  var qfRes = $('#qfRes');
+  if (qfRes) qfRes.addEventListener('click', function (e) {
+    var b = e.target.closest('.qf-i'); if (!b) return;
+    qfPick(parseInt(b.getAttribute('data-i'), 10) || 0);
+  });
+  document.addEventListener('click', function (e) {
+    var w = $('.qf'); if (w && !w.contains(e.target)) qfClose();
+  });
+  document.addEventListener('keydown', function (e) {
+    if ((e.ctrlKey || e.metaKey) && (e.key === 'k' || e.key === 'K')) { e.preventDefault(); focusQuickfind(); }
   });
 
-  // --- پیمایش افقی فرآیندهای SOP (قاعدهٔ ۱۱: جریان افقی RTL) ---
-  var track = document.getElementById('sop-flow-track');
-  var nextBtn = document.getElementById('sopNext');
-  var prevBtn = document.getElementById('sopPrev');
-  function scrollTrack(dir) {
-    if (!track) return;
-    var step = Math.max(300, Math.min(420, track.clientWidth * 0.8));
-    track.scrollBy({ left: dir * step, behavior: reduceMotion ? 'auto' : 'smooth' });
+  /* ---------------- کپی ---------------- */
+  function copy(text, msg) {
+    function done() { toast(msg || 'کپی شد'); }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done).catch(function () { legacyCopy(text, done); });
+    } else legacyCopy(text, done);
   }
-  if (nextBtn) nextBtn.addEventListener('click', function () { scrollTrack(-1); });
-  if (prevBtn) prevBtn.addEventListener('click', function () { scrollTrack(1); });
+  function legacyCopy(text, done) {
+    try {
+      var ta = document.createElement('textarea');
+      ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+      done();
+    } catch (e) { toast('کپی نشد — دستی انتخاب کنید'); }
+  }
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-copy]'); if (!b) return;
+    copy(b.getAttribute('data-copy'), 'متن پرسش کپی شد');
+  });
 
-  // --- هش اولیه ---
-  window.addEventListener('DOMContentLoaded', function () {
-    if (location.hash) {
-      var el = null;
-      try { el = document.querySelector(location.hash); } catch (err) { el = null; }
-      if (el) setTimeout(function () { el.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' }); }, 200);
+  /* ---------------- ریل: بخش فعال ---------------- */
+  var RAIL_SECS = ['hero','directory','accreditation','clinical-sop','safety-never-events','intelligence','dana-copilot','comparison','demo'];
+  function syncRail() {
+    var y = window.scrollY + 120, cur = RAIL_SECS[0];
+    for (var i = 0; i < RAIL_SECS.length; i++) {
+      var el = document.getElementById(RAIL_SECS[i]);
+      if (el && el.offsetTop <= y) cur = RAIL_SECS[i];
     }
+    $$('.rail a').forEach(function (a) { a.classList.toggle('on', a.getAttribute('href') === '#' + cur); });
+  }
+  var ticking = false;
+  window.addEventListener('scroll', function () {
+    if (ticking) return; ticking = true;
+    requestAnimationFrame(function () { syncRail(); ticking = false; });
+  }, { passive: true });
+
+  /* ---------------- راه‌اندازی ---------------- */
+  renderGroupChips();
+  renderTiles();
+  renderSops();
+  renderIntel();
+  renderDemo();
+  qfBuildIndex();
+  syncRail();
+
+  // بارگذاری تنبل فهرست سنجه‌ها: اگر لنگر صفحه به بخش سنجه/ایمنی است فوری، وگرنه در زمان بیکاری
+  function idleLoad() {
+    if (window.location.hash === '#accreditation' || window.location.hash === '#safety-never-events') {
+      loadIndex().then(function () { renderHeroStats(); }).catch(function(){});
+      return;
+    }
+    if ('requestIdleCallback' in window) requestIdleCallback(function () { loadIndex().then(renderHeroStats).catch(function(){}); }, { timeout: 2500 });
+    else setTimeout(function () { loadIndex().then(renderHeroStats).catch(function(){}); }, 1400);
+  }
+  idleLoad();
+
+  // اولین تعامل با ناحیهٔ سنجه‌ها هم فوراً بارگذاری را شروع می‌کند (تجربهٔ بدون انتظار)
+  ['#mxQ','#mxAxis','#mxLevel','#mxSafe'].forEach(function (sel) {
+    var el = $(sel);
+    if (el) el.addEventListener('focus', function () { loadIndex().catch(function(){}); }, { once:true });
   });
 })();
 </script>
-</body></html>
+</body>
+</html>
