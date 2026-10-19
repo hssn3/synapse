@@ -5,6 +5,7 @@
   "main": "src/app.js",
   "scripts": {
     "start": "node src/app.js",
+    "serve:live": "node scripts/live-deploy.js",
     "dev": "nodemon src/app.js",
     "migrate": "node database/migrate.js",
     "migrate-sqlite": "node database/migrate-sqlite.js",
