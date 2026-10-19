@@ -1,83 +1,91 @@
-# استقرار خودکار — هر push روی `main` = آپدیت خودکار نصب‌ها
+# استقرار خودکار — هر push روی `main` = آپدیت خودکار سایت
 
-> منبعِ حقیقتِ رفتارِ دیپلویِ خودکار · آخرین به‌روزرسانی: ۱۴۰۵/۰۷/۲۸
-> جزئیاتِ مخصوصِ پنل Wispbyte (متغیرها، پاداش/کپچا، npm 12) در `docs/WISPBYTE-DEPLOY.md` است.
+> تنها نصبِ فعال: **Wispbyte** (`https://synapse.wisp.uno`، سرور `22e42511`). سرور قبلی حذف شده است.
+> آخرین به‌روزرسانی: ۱۴۰۵/۰۷/۲۸ · جزئیاتِ پنل (پاداش/کپچا، npm 12، متغیرها): `docs/WISPBYTE-DEPLOY.md`.
 
-## دو نصبِ فعال
-
-| نصب | میزبان | مسیر | اجرا | نشانی |
-|---|---|---|---|---|
-| اصلی (Ubuntu) | `104.252.77.146` (systemd: `synapse`) | `/root/313` | `node scripts/boot.js` | `http://104.252.77.146/` (nginx → 3311) |
-| دموی رایگان (Wispbyte) | پنل `wispbyte.com`, سرور `22e42511` | `/home/container` | `node scripts/boot.js` (در Startup) | `https://synapse.wisp.uno` |
-
-هر دو یک زنجیرهٔ واحد دارند:
+## زنجیره
 
 ```
-systemd / پنل ──► scripts/boot.js ──► scripts/live-deploy.js ──► src/app.js
+پنل Wispbyte ──► scripts/boot.js ──► scripts/live-deploy.js ──► src/app.js
                   (نگهبانِ ثابت)       (پایشِ main هر ۱۲۰ ثانیه)    (اپ)
 ```
+
+`boot.js` عمداً کوچک و بدونِ آپدیت‌پذیریِ درجاست؛ چون اجرای آن از Startup پنل می‌آید و فقط با
+ری‌استارتِ کانتینر عوض می‌شود. هر منطقِ دیپلوی در `live-deploy.js` است که خودش را هم به‌روز می‌کند.
 
 ## رفتار در سه حالت
 
 | چه چیزی عوض شده | نتیجه |
 |---|---|
-| `docs/`، `tests/`، `*.md` ریشه، `.opencode/` | کد روی دیسک به‌روز می‌شود؛ **اپ ری‌استارت نمی‌شود** (بدون downtime) |
-| خودِ `scripts/live-deploy.js` یا `scripts/boot.js` | سوپروایزر تمیز خارج می‌شود؛ نگهبان نسخهٔ تازه را بالا می‌آورد |
-| هر چیز دیگر (`src/`، `public/`، `database/`، `package.json`…) | اگر `package*.json` عوض شده `npm install`؛ سپس ری‌استارت نرم (SIGTERM، ۸ ثانیه مهلت) |
+| `docs/`، `tests/`، `*.md` ریشه، `.opencode/` | فایل‌ها روی دیسک به‌روز می‌شوند؛ **اپ ری‌استارت نمی‌شود** (بدون downtime) |
+| خودِ `scripts/live-deploy.js` یا `scripts/boot.js` | سوپروایزر تمیز خارج می‌شود؛ `boot.js` نسخهٔ تازه را بالا می‌آورد |
+| هر چیز دیگر (`src/`، `public/`، `database/`، `package.json`…) | اگر `package*.json` عوض شده باشد `npm install`؛ سپس ری‌استارت نرم (SIGTERM، ۸ ثانیه مهلت) |
 
 قواعد ایمنی:
 
-- `git fetch --depth 1` + `git reset --hard FETCH_HEAD` — فایل‌های ردیابی‌نشده (`.env`، `database/hospital.db`، `backups/`، `node_modules/`) دست‌نخورده می‌مانند.
+- `git fetch --depth 1` + `git reset --hard FETCH_HEAD` — فقط فایل‌های ردیابی‌شده؛ `.env`، `database/`، `backups/`، `uploads/`، `node_modules/` دست‌نخورده می‌مانند.
 - اگر `npm install` شکست بخورد، **اپِ سالمِ فعلی کشته نمی‌شود** و نصب در بررسی بعدی تکرار می‌شود.
 - خطای شبکه/GitHub فقط لاگ می‌شود؛ اپ بدون GitHub هم بالا می‌ماند.
 - خروجِ غیرمنتظرهٔ اپ → بالا آمدنِ دوباره با backoff (۳ تا ۳۰ ثانیه). خروجِ سوپروایزر → `boot.js` دو ثانیه بعد دوباره.
-- تنها استثنا: تغییرِ خودِ `scripts/boot.js` تا ری‌استارتِ کانتینر/سرویس اثر کامل ندارد (فرآیندِ در حال اجرا قابل جایگزینیِ درجا نیست)؛ boot.js عمداً کوچک و ثابت است.
+- تنها استثنا: تغییرِ خودِ `scripts/boot.js` تا ری‌استارتِ کانتینر اثر کامل ندارد.
 
-## Ubuntu — عملیات
+## ماندگاری داده (تأییدشده با اجرای واقعی)
 
-```bash
-# وضعیت
-systemctl status synapse --no-pager
-tail -f /root/313-server.log          # خطوط [boot-guard] و [live-deploy]
+- DB روی والیوم پایدار کانتینر است: `/home/container/database/hospital.db` (+ `-wal`/`-shm`).
+- `demo-restore` فقط وقتی نشانگر `.db-restored-v3` وجود نداشته باشد اجرا می‌شود — یعنی فقط در نصب تازه؛ آپدیت و ری‌استارت داده را بازنویسی نمی‌کند.
+- تست انجام‌شده (۱۴۰۵/۰۷/۲۸):
+  1. `POST /api/public/complaint` با متنِ مارکر یکتا → `200` و `id=0b107dcb-…`
+  2. خواندن با نقش «ریاست بیمارستان» (`GET /api/users/complaints/list`) → رکورد با `source=public` دیده شد.
+  3. **ری‌استارت کامل کانتینر از پنل** → پس از بالا آمدن، همان رکورد با همان `id` و `created_at=2026-10-19 23:48:51` باقی بود.
+  4. رکورد آزمایشی با `PUT /api/users/complaints/:id` و `status=closed` بسته شد (داده‌ی دمو تمیز ماند).
+- نتیجه: نوشتن‌های کاربران واقعی‌اند و روی دیسک می‌مانند؛ بکاپ خودکار روزانه هم در `backups/` والیوم ذخیره می‌شود.
+
+## عملیات (پنل Wispbyte)
+
+```text
+# وضعیت و لاگ
+کنسول سرور ← خطوط [boot-guard] و [live-deploy] و «Hospital Platform running on port …»
 
 # دیپلوی فوری (بدون منتظرِ ۱۲۰ ثانیه)
-cd /root/313 && git fetch --depth 1 origin main && git reset --hard FETCH_HEAD && \
-  npm install --no-audit --no-fund && systemctl restart synapse
+پنل ← Restart (آزاد، بدون ویدیوی پاداش) — Startup خودش fetch/reset می‌کند
 
-# خاموش‌کردنِ بررسیِ خودکار (بدون توقفِ اپ)
-systemctl edit synapse
-#   [Service]
-#   Environment=DEPLOY_DISABLE=1
-systemctl daemon-reload && systemctl restart synapse
+# بررسی سلامت از بیرون
+curl -s https://synapse.wisp.uno/healthz
+SMOKE_BASE_URL=https://synapse.wisp.uno npm run smoke-test      # ۶/۶
 
-# بازگشت کامل به حالتِ قبل از خودکارسازی
-cp /root/synapse.service.bak /etc/systemd/system/synapse.service   # نسخهٔ پشتیبان با ExecStart=node src/app.js
-systemctl daemon-reload && systemctl restart synapse
+# تغییر بازهٔ بررسی (پیش‌فرض ۱۲۰ ثانیه، حداقل ۳۰)
+در Startup:  DEPLOY_POLL_SECONDS=60 exec node scripts/boot.js
 
-# عقب‌گردِ یک نسخه (rollback) — سوپروایزر همان لحظه دوباره جلو نمی‌برد چون main همان است
-cd /root/313 && git reset --hard <sha> && systemctl restart synapse
+# خاموش‌کردنِ بررسی خودکار (اپ روشن می‌ماند)
+در Startup:  DEPLOY_DISABLE=1 exec node scripts/boot.js
 
-# بکاپ قبل از هر تغییر
-cd /root/313 && npm run backup-db
+# بازگشت به اجرای سادهٔ بدون سوپروایزر
+در Startup:  exec node src/app.js
+
+# rollback امن (تاریخ را جلو نبر): یک کامیت revert روی main بزن؛ سوپروایزر خودش اعمال می‌کند
+# اگر باید بدون revert عقب بروی: اول DEPLOY_DISABLE=1، بعد در Startup یک‌بار reset به sha دلخواه، سپس Restart
 ```
 
-- بکاپِ خودکار روزانهٔ اپ (`BackupCron`) و بکاپِ دستی در `/root/313/backups/` است (خارج از گیت).
-- `.env` سرور (`NODE_ENV`، `PORT`، `JWT_SECRET`) در ۱۴۰۵/۱۰/۱۶ ساخته شده و مستقل از گیت است.
-- سرویس با `NODE_ENV=development` بالا می‌آید (تنظیمِ موجود در `.env` سرور؛ عمداً تغییر داده نشد).
+- «شروع» سرور در پلن رایگان یک ویدیوی پاداش می‌خواهد (نشستِ ~۵ ساعته)؛ «Restart» آزاد است.
+- ذخیرهٔ Startup در پنل ممکن است به‌خاطر Cloudflare Rocket Loader بی‌صدا انجام نشود؛
+  `window.__cfRLUnblockHandlers = true` را ست کن و بعد از ذخیره صفحه را رفرش کن و مقدار را ببین.
 
-## Wispbyte — عملیات
+## تأییدهای اجرای واقعی
 
-- Startup ← `exec node scripts/boot.js` (بقیهٔ خطوط: clone/fetch، `.env`، `npm install`، `demo-restore`).
-- کنسول پنل: خطوط `[boot-guard]` و `[live-deploy]` را ببین.
-- خاموش‌کردن: در Startup به‌جای boot.js همان `node src/app.js` را بگذار (با هر ری‌استارتِ کانتینر یک بار `AUTO_UPDATE=1` هم اجرا می‌شود).
-- جزئیاتِ npm 12 / `allowScripts` / ویدیوی پاداشِ شروع: `docs/WISPBYTE-DEPLOY.md`.
-
-## تأیید (اجرای واقعی ۱۴۰۵/۰۷/۲۸)
-
-| زمان | رخداد |
+| زمان (UTC) | رخداد |
 |---|---|
-| `22:52:14` | Wispbyte: کامیت `38a9853` دیده شد → `22:52:15` ری‌استارت → smoke ۶/۶ |
-| `23:06:21` | Wispbyte: زنجیرهٔ `boot-guard → live-deploy → app` فعال شد |
-| `23:08:22` | Wispbyte: کامیت فقط-مستندات `eb4a633` گرفته شد و **ری‌استارت نکرد** (uptime پیوسته ۴۹→۱۲۹s) |
-| `23:14:56` | Ubuntu: بکاپِ DB+uploads گرفته شد، `628e4b9 → eb4a633` دیپلوی شد، `npm install` ۲ ثانیه |
-| `23:15:37` | Ubuntu: سرویس با `scripts/boot.js` بالا آمد؛ smoke روی `127.0.0.1:3311` **۶/۶** |
+| `22:52:14` | کامیت `38a9853` دیده شد → `22:52:15` ری‌استارت → smoke ۶/۶ |
+| `23:06:21` | زنجیرهٔ `boot-guard → live-deploy → app` فعال شد |
+| `23:08:22` | کامیت فقط-مستندات `eb4a633` گرفته شد و **ری‌استارت نکرد** (uptime پیوسته ۴۹→۱۲۹s) |
+| `23:20:28` | کامیت فقط-مستندات `1b1f8c5` گرفته شد؛ بدون ری‌استارت (uptime پیوسته) |
+| `23:48:51` | ثبت عمومی تست → `23:50` ری‌استارت کانتینر → رکورد سالم باقی ماند |
+
+## عیب‌یابی
+
+| نشانه | علت/درمان |
+|---|---|
+| `Could not locate the bindings file` | npm 12 اسکریپت نصبِ `better-sqlite3` را مسدود کرده؛ `allowScripts` در `package.json` باید باشد (کامیت `385b38a`) |
+| Start با `403 captchaRequired` | نشستِ ویدیوی پاداش مصرف شده؛ دوباره از صفحهٔ پنل Start بزن |
+| ذخیرهٔ Startup اعمال نمی‌شود | Rocket Loader؛ `window.__cfRLUnblockHandlers = true` سپس `saveStartupCommand(...)` |
+| سایت بالا نیست، کنسول زنده است | خروجیِ `[live-deploy]` را ببین: backoff/کرشِ اپ، `EADDRINUSE`، یا `npm install` ناموفق |
+| آپدیت نمی‌آید | `git status`/`git log` در پنل؟ اینترنت کانتینر؟ `DEPLOY_DISABLE` ست نشده باشد؟ |
