@@ -28,7 +28,7 @@ async function loadAccDecisionEngine() {
         </div>
         <div class="acc-decision-badge">
           <span>✨</span>
-          <span>توصیه برخط بر اساس ${fa(520)} سنجه ملی</span>
+          <span>توصیه برخط بر اساس ${fa(395)} سنجه ملی</span>
         </div>
         <span class="acc-decision-chevron" aria-hidden="true">▾</span>
       </div>

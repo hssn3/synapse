@@ -3,7 +3,7 @@
  * مبتنی بر طراحی اولیه حسن و هویت تم دارک لوکس پلتفرم بیمارستان
  * 
  * ویژگی‌ها:
- * ۱. هاب ۱۰ کارتی مراقبت و درمان (ب-1 تا ب-10)
+ * ۱. هاب ۹ کارتی مراقبت و درمان (ب-1 تا ب-9 — نسل۶: ب-۱۰ ادغام شد)
  * ۲. هاب ۱۸ کارتی زیرشاخه مراقبت عمومی بالینی (۱۳ استاندارد + ۵ سند/چک‌لیست)
  * ۳. زنجیره افقی RTL متصل ۲۳ روش اجرایی بالینی (Rule 11) بدون انباشت عمودی
  * ۴. هاب ۸ کارتی رهبری و مدیریت (الف-1 تا الف-8) شامل مدیریت خطا و ایمنی بیمار
@@ -13,7 +13,7 @@
  *    سطح ۲: صفحه استاندارد با کارت‌های تفکیک‌شده سنجه‌ها
  *    سطح ۳: صفحه اختصاصی سنجه با دو پیکان بزرگ اکشن (بارگذاری مستندات و چک‌لیست)
  *    سطح ۴: فهرست و مدیریت چک‌لیست‌های اختصاصی سنجه
- * ۷. تضمین دسترسی ۱۰۰٪ به تمامی ۱۱۱ استاندارد و ۵۲۰ سنجه ملی
+ * ۷. تضمین دسترسی ۱۰۰٪ به تمامی ۸۸ استاندارد و ۳۹۵ سنجه ملی (نسل۶)
  * ۸. ایزولاسیون یونیکد Bidi (<bdi dir="ltr">) و عدم واژگونی ارقام
  * ۹. رفع قطعی پرش به صفحات قبلی با ریست وضعیت در ناوبری
  */
@@ -203,7 +203,7 @@
   };
 
   // =========================================================================
-  // ۲. داده‌های ۱۰ محور مراقبت و درمان
+  // ۲. داده‌های ۹ محور مراقبت و درمان (نسل۶)
   // =========================================================================
   const CARE_AXES = [
     { code: 'ب-1', title: 'مراقبت‌های عمومی بالینی', icon: ICONS.careGen, view: 'general_care_sub' },
@@ -213,26 +213,22 @@
     { code: 'ب-5', title: 'پیشگیری و کنترل عفونت', icon: ICONS.infection, view: 'sub_axis' },
     { code: 'ب-6', title: 'مدیریت دارویی', icon: ICONS.pharmacy, view: 'sub_axis' },
     { code: 'ب-7', title: 'خدمات تصویربرداری', icon: ICONS.imaging, view: 'sub_axis' },
-    { code: 'ب-8', title: 'خدمات آزمایشگاه', icon: ICONS.laboratory, view: 'sub_axis' },
-    { code: 'ب-9', title: 'طب انتقال خون', icon: ICONS.bloodTrans, view: 'sub_axis' },
-    { code: 'ب-10', title: 'خدمات سرپایی', icon: ICONS.outpatient, view: 'sub_axis' }
+    { code: 'ب-8', title: 'خدمات آزمایشگاه و طب انتقال خون', icon: ICONS.laboratory, view: 'sub_axis' },
+    { code: 'ب-9', title: 'خدمات سرپایی', icon: ICONS.outpatient, view: 'sub_axis' }
   ];
 
-  // ۱۸ کارت زیرشاخه مراقبت عمومی بالینی (۱۳ استاندارد مصوب ب-۱-۱ تا ب-۱-۱۳ + ۵ نوع سند/چک‌لیست)
+  // ۱۵ کارت زیرشاخه مراقبت عمومی بالینی (۹ استاندارد ملی نسل۶ + بستهٔ روان‌پزشکی ب-۱-۱۰ + ۵ نوع سند/چک‌لیست)
   const GENERAL_CARE_SUBCARDS = [
-    { id: 'gc-01', code: 'ب-1-1', title: 'شناسایی بیماران', icon: ICONS.idPatient, type: 'standard' },
-    { id: 'gc-02', code: 'ب-1-2', title: 'ارزیابی اولیه بیمار', icon: ICONS.assessInit, type: 'standard' },
-    { id: 'gc-03', code: 'ب-1-3', title: 'ارائه ایمن مراقبت‌های پرستاری', icon: ICONS.nurseCare, type: 'standard' },
-    { id: 'gc-04', code: 'ب-1-4', title: 'بیماران در معرض خطر و آسیب‌پذیر', icon: ICONS.highRisk, type: 'standard' },
-    { id: 'gc-05', code: 'ب-1-5', title: 'ارائه ایمن مراقبت‌های پزشکان', icon: ICONS.doctorCare, type: 'standard' },
-    { id: 'gc-06', code: 'ب-1-6', title: 'دارودهی بیماران', icon: ICONS.medDose, type: 'standard' },
-    { id: 'gc-07', code: 'ب-1-7', title: 'ارزیابی تخصصی تغذیه بیماران', icon: ICONS.nutrition1, type: 'standard' },
-    { id: 'gc-08', code: 'ب-1-8', title: 'روند تغذیه بیماران', icon: ICONS.nutrition2, type: 'standard' },
-    { id: 'gc-09', code: 'ب-1-9', title: 'تامین خدمات توانبخشی', icon: ICONS.rehab, type: 'standard' },
-    { id: 'gc-10', code: 'ب-1-10', title: 'برنامه‌ریزی آموزش بیماران', icon: ICONS.patientEdu, type: 'standard' },
-    { id: 'gc-11', code: 'ب-1-11', title: 'توازن مراقبت و درمان', icon: ICONS.careBalance, type: 'standard' },
-    { id: 'gc-12', code: 'ب-1-12', title: 'ترخیص ایمن بیماران', icon: ICONS.discharge, type: 'standard' },
-    { id: 'gc-13', code: 'ب-1-13', title: 'مراقبت و درمان بیماران روانپزشکی', icon: ICONS.highRisk, type: 'standard' },
+    { id: 'gc-01', code: 'ب-1-1', title: 'ارزیابی اولیه بیمار', icon: ICONS.assessInit, type: 'standard' },
+    { id: 'gc-02', code: 'ب-1-2', title: 'برنامه‌ریزی مراقبت و درمان بر پایه ارزیابی اولیه', icon: ICONS.nurseCare, type: 'standard' },
+    { id: 'gc-03', code: 'ب-1-3', title: 'بیماران در معرض خطر و آسیب‌پذیر', icon: ICONS.highRisk, type: 'standard' },
+    { id: 'gc-04', code: 'ب-1-4', title: 'ارائه ایمن مراقبت‌های پزشکان', icon: ICONS.doctorCare, type: 'standard' },
+    { id: 'gc-05', code: 'ب-1-5', title: 'دارودهی بیماران', icon: ICONS.medDose, type: 'standard' },
+    { id: 'gc-06', code: 'ب-1-6', title: 'ارزیابی و روند تغذیه بیماران', icon: ICONS.nutrition1, type: 'standard' },
+    { id: 'gc-07', code: 'ب-1-7', title: 'تأمین خدمات توانبخشی', icon: ICONS.rehab, type: 'standard' },
+    { id: 'gc-08', code: 'ب-1-8', title: 'برنامه‌ریزی آموزش بیماران', icon: ICONS.patientEdu, type: 'standard' },
+    { id: 'gc-09', code: 'ب-1-9', title: 'ترخیص ایمن بیماران', icon: ICONS.discharge, type: 'standard' },
+    { id: 'gc-10', code: 'ب-1-10', title: 'سنجه‌های اختصاصی روان‌پزشکی (بستهٔ تک‌تخصصی)', icon: ICONS.highRisk, type: 'standard' },
     // مستندات و چک‌لیست‌های پنج‌گانه
     { id: 'gc-14', code: 'doc-inst', title: 'دستورالعمل‌ها', icon: ICONS.guidelines, type: 'doc', docType: 'instruction' },
     { id: 'gc-15', code: 'doc-sop', title: 'روش‌های اجرایی', icon: ICONS.sopWorkflows, type: 'doc', view: 'procedures_flow' },
@@ -374,7 +370,7 @@
     const targetCode = normCode(code);
     let list = [];
 
-    // ۱. بررسی رجیستری جامع و سراسری ۵۲۰ سنجه ملی
+    // ۱. بررسی رجیستری جامع و سراسری ۳۹۵ سنجه ملی (نسل۶)
     if (window.ALL_ACCREDITATION_MEASURES && Array.isArray(window.ALL_ACCREDITATION_MEASURES)) {
       list = window.ALL_ACCREDITATION_MEASURES.filter(m => {
         const mStd = normCode(m._std);
@@ -418,7 +414,7 @@
     const targetCode = normCode(axisCode);
     let stds = [];
 
-    // ۱. بررسی رجیستری جامع و رسمی ۱۱۱ استاندارد ملی
+    // ۱. بررسی رجیستری جامع و رسمی ۸۸ استاندارد ملی (نسل۶)
     if (window.ALL_ACCREDITATION_STANDARDS && Array.isArray(window.ALL_ACCREDITATION_STANDARDS)) {
       stds = window.ALL_ACCREDITATION_STANDARDS
         .filter(s => normCode(s.axis) === targetCode)
@@ -988,7 +984,7 @@
           <div class="sn-book-guide-panel" id="book_guide_${m.code}">
             <div class="sn-book-address-banner">
               <div class="sn-book-address-text">
-                <span style="display:inline-flex;align-items:center;gap:6px;">${ICONS.library} <span>کتاب ملی استانداردهای اعتباربخشی بیمارستان‌های ایران (ویرایش پنجم)</span></span>
+                <span style="display:inline-flex;align-items:center;gap:6px;">${ICONS.library} <span>کتاب ملی استانداردهای اعتباربخشی بیمارستان‌های ایران (ویرایش ششم)</span></span>
                 <span style="opacity:0.6">|</span>
                 <span>صفحه کتاب: <b>${fa(pNum)}</b></span>
                 <span style="opacity:0.6">|</span>
@@ -1190,7 +1186,7 @@
               <div class="sn-book-guide-panel" id="book_guide_${measureCode}">
                 <div class="sn-book-address-banner">
                   <div class="sn-book-address-text">
-                    <span style="display:inline-flex;align-items:center;gap:6px;">${ICONS.library} <span>کتاب ملی استانداردهای اعتباربخشی بیمارستان‌های ایران (ویرایش پنجم)</span></span>
+                    <span style="display:inline-flex;align-items:center;gap:6px;">${ICONS.library} <span>کتاب ملی استانداردهای اعتباربخشی بیمارستان‌های ایران (ویرایش ششم)</span></span>
                     <span style="opacity:0.6">|</span>
                     <span>صفحه کتاب: <b>${fa(pNum)}</b></span>
                     <span style="opacity:0.6">|</span>
@@ -1551,7 +1547,7 @@
     const safetyCards = [
       {
         id: 'safe-measures',
-        title: '۱۲۳ سنجه الزامی ایمنی بیمار',
+        title: '۱۲۱ سنجه الزامی ایمنی بیمار',
         sub: 'مشاهده و ارزیابی سنجه‌های Never Events',
         icon: ICONS.shieldAlert,
         action: "HassanHub.openSafetyMeasuresList()"
@@ -1624,11 +1620,11 @@
             <div>
               <h3 style="margin:0;font-size:15px;font-weight:800;color:var(--sn-gold-light)">سامانه جامع مدیریت خطا و ایمنی بیمار</h3>
               <div style="font-size:12px;color:var(--sn-text-muted);margin-top:4px">
-                شامل ۱۲۳ سنجه الزامی ایمنی بیمار، وقایع ۲۸‌گانه ناخواسته (Never Events)، ابزارهای RCA و FMEA
+                شامل ۱۲۱ سنجه الزامی ایمنی بیمار، وقایع ۲۸‌گانه ناخواسته (Never Events)، ابزارهای RCA و FMEA
               </div>
             </div>
             <div style="font-size:12px;font-weight:700;color:var(--sn-gold);background:rgba(212,175,90,0.15);border:1px solid rgba(212,175,90,0.35);padding:6px 14px;border-radius:20px">
-              ۱۲۳ سنجه الزامی فعال
+              ۱۲۱ سنجه الزامی فعال
             </div>
           </div>
 
@@ -1640,7 +1636,7 @@
     `;
   };
 
-  // رندر صفحه ۱۲۳ سنجه الزامی ایمنی بیمار
+  // رندر صفحه ۱۲۱ سنجه الزامی ایمنی بیمار
   window.renderHassanSafetyMeasuresPage = function() {
     HassanState.currentSubView = 'safety_measures';
     HassanState.selectedAxisCode = 'الف-8';
@@ -1650,7 +1646,7 @@
       { label: 'اعتباربخشی بیمارستان', action: "go('acc')" },
       { label: 'رهبری و مدیریت', action: "HassanHub.go('management')" },
       { label: 'مدیریت خطا و ایمنی بیمار', action: "HassanHub.openSafetyHub()" },
-      { label: '۱۲۳ سنجه الزامی ایمنی بیمار', isCurrent: true }
+      { label: '۱۲۱ سنجه الزامی ایمنی بیمار', isCurrent: true }
     ];
 
     const mList = (window.ALL_ACCREDITATION_MEASURES || []).filter(m => m.patient_safety_flag);
@@ -1702,7 +1698,7 @@
               <span class="sn-std-pill-meta">${fa(mList.length)} سنجه الزامی مصوب وزارت بهداشت</span>
               <span class="sn-std-pill-book">کتاب استانداردهای اعتباربخشی ملی</span>
             </div>
-            <h1 class="sn-std-title-text">۱۲۳ سنجه الزامی ایمنی بیمار (Never Events)</h1>
+            <h1 class="sn-std-title-text">۱۲۱ سنجه الزامی ایمنی بیمار (Never Events)</h1>
             <div class="sn-std-subtitle-text">
               فهرست کامل و یکپارچه سنجه‌های الزامی ایمنی بیمار با دسترسی فوری به مستندات، چک‌لیست‌ها و راهنمای کتاب:
             </div>
@@ -3219,7 +3215,7 @@ function renderArtifactsCardsTrackHtml(measureCode, items, activeTab) {
         responsible: 'مسئول حقوق گیرنده خدمت / سوپروایزر بالینی',
         scope: 'کلیه ورودی‌ها، تریاژ، اورژانس، درمانگاه‌های تخصصی، بخش‌های بستری و پاراکلینیک بیمارستان',
         purpose: 'تضمین دسترسی ایمن، سریع، کرامت‌محور و بدون مانع کلیه بیماران و مراجعین کم‌توان جسمی، سالمندان و افراد دارای معلولیت به تمامی بخش‌های درمانی و تشخیصی مطابق با استانداردهای ملی اعتباربخشی.',
-        legal: 'کتاب استانداردهای ملی اعتباربخشی بیمارستان‌های ایران (ویرایش پنجم - سنجه ' + code + ')، قانون جامع حمایت از حقوق معلولان، منشور حقوق بیمار.',
+        legal: 'کتاب استانداردهای ملی اعتباربخشی بیمارستان‌های ایران (ویرایش ششم - سنجه ' + code + ')، قانون جامع حمایت از حقوق معلولان، منشور حقوق بیمار.',
         definitions: '• کم‌توان جسمی: هر فردی که به دلایل مادرزادی، بیماری حاد، شکستگی یا کهولت سن برای حرکت، پیمایش یا ارتباط نیازمند وسایل کمکی یا راهنما باشد.\n• مسیر دسترسی هموار: رمپ‌های استاندارد با شیب حداکثر ۸٪ و دستگیره کمکی دوطرفه.',
         policy_stmt: 'بیمارستان متعهد است کلیه خدمات درمانی و مشاوره‌ای را بدون کوچک‌ترین تاخیر ناشی از موانع ساختمانی یا فیزیکی به مراجعین کم‌توان ارائه نماید. اختصاص صندلی چرخدار، حضور راهنما در بدو ورود و اولویت در پذیرش و بستری این بیماران الزامی و غیرقابل اغماض است.',
         responsibilities: '• انتظامات و خدمات: تحویل ویلچر و راهنمایی همراه و بیمار از بدو ورود به تریاژ.\n• منشی پذیرش: اخذ مشخصات و صدور قبض بدون معطلی بیمار در صف و اعزام سریع.\n• سرپرستار بخش: اختصاص اتاق‌های نزدیک به ایستگاه پرستاری و سرویس بهداشتی مناسب‌سازی‌شده.\n• خدمات پشتیبانی: بازرسی روزانه رمپ‌ها، دستگیره‌ها، بالابرها و زنگ اخبار سرویس‌ها.',
@@ -3240,7 +3236,7 @@ function renderArtifactsCardsTrackHtml(measureCode, items, activeTab) {
       responsible: 'مسئول بهبود کیفیت / سرپرستار بخش',
       scope: 'کلیه بخش‌های بستری، مراقبت‌های ویژه، پاراکلینیک و درمانگاه‌های بیمارستان',
       purpose: 'استقرار الزامات ملی سنجه ' + code + ' و ارتقای ایمنی، اثربخشی بالینی و کیفیت خدمات درمانی به مراجعین بیمارستان.',
-      legal: 'کتاب استانداردهای ملی اعتباربخشی بیمارستان‌های ایران (ویرایش پنجم - سنجه ' + code + ') و بخشنامه‌های ابلاغی وزارت بهداشت.',
+      legal: 'کتاب استانداردهای ملی اعتباربخشی بیمارستان‌های ایران (ویرایش ششم - سنجه ' + code + ') و بخشنامه‌های ابلاغی وزارت بهداشت.',
       definitions: 'مفاهیم و تعاریف عملیاتی مرتبط با الزامات سنجه مصوب ' + code + ' در کتابچه راهنما.',
       policy_stmt: 'بیمارستان خود را ملزم به پایبندی کامل به الزامات این سند می‌داند و کلیه کادر درمان و اداری مکلف به اجرای بندهای این ابلاغیه می‌باشند.',
       responsibilities: '• مدیریت و رهبری: تامین منابع و زیرساخت‌ها.\n• دفتر کیفیت: آموزش، پایش و ممیزی میدانی.\n• کادر درمان: اجرای دقیق گام‌های مندرج و ثبت کامل شواهد در پرونده بیمار.',

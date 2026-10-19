@@ -135,7 +135,7 @@ function getDocBranch(d){
     return { key: 'lab', code: 'ب-8', title: 'خدمات آزمایشگاه تشخیص طبی و آسیب‌شناسی', icon: '🧪', color: '#1b6580' };
   }
   if (code.includes('-BT-') || code.startsWith('BT-') || title.includes('انتقال خون') || title.includes('بانک خون') || title.includes('هموویژیلانس')) {
-    return { key: 'blood', code: 'ب-9', title: 'بانک خون و طب انتقال خون', icon: '🩸', color: '#e11d48' };
+    return { key: 'blood', code: 'ب-8', title: 'بانک خون و طب انتقال خون', icon: '🩸', color: '#e11d48' };
   }
   if (code.includes('-IMG-') || code.startsWith('IMG-') || title.includes('تصویربرداری') || title.includes('رادیولوژی') || title.includes('سی‌تی') || title.includes('سونوگرافی') || title.includes('پرتو')) {
     return { key: 'imaging', code: 'ب-7', title: 'تصویربرداری پزشکی و پرتوپزشکی', icon: '📷', color: '#7c3aed' };
@@ -153,7 +153,7 @@ function getDocBranch(d){
     return { key: 'patientrights', code: 'ج-2', title: 'احترام به حقوق بیمار و منشور حقوق گیرنده خدمت', icon: '⚖️', color: '#2563eb' };
   }
   if (code.includes('-OPT-') || code.startsWith('OPT-') || title.includes('سرپایی') || title.includes('درمانگاه') || title.includes('کلینیک') || title.includes('نوبت')) {
-    return { key: 'outpatient', code: 'ب-10', title: 'خدمات سرپایی و کلینیک‌های تخصصی', icon: '🏥', color: '#0891b2' };
+    return { key: 'outpatient', code: 'ب-9', title: 'خدمات سرپایی و کلینیک‌های تخصصی', icon: '🏥', color: '#0891b2' };
   }
   if (code.includes('-NUT-') || code.startsWith('NUT-') || title.includes('تغذیه') || title.includes('رژیم') || title.includes('آشپزخانه')) {
     return { key: 'nutrition', code: 'ب-1', title: 'تغذیه بالینی و خدمات رژیم‌درمانی', icon: '🥗', color: '#168ea3' };

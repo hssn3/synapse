@@ -10,9 +10,10 @@ before(() => {
 });
 
 describe('database core', () => {
-  it('۵۲۰ سنجه در درخت وجود دارد', () => {
+  // نسل۶ (۱۴۰۵/۰۷): ۳۷۸ سنجهٔ ملی + ۱۷ سنجهٔ بستهٔ اختصاصی روان‌پزشکی = ۳۹۵
+  it('۳۹۵ سنجهٔ نسل ششم در درخت وجود دارد', () => {
     const r = query("SELECT COUNT(*) c FROM accreditation_sections WHERE level_type='measure'").rows[0];
-    assert.equal(r.c, 520);
+    assert.equal(r.c, 395);
   });
 
   it('جدول measure_status_history وجود دارد', () => {

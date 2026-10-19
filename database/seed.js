@@ -124,6 +124,8 @@ async function seedAccreditationData() {
     let sectionCount = 0, axisCount = 0, standardCount = 0, measureCount = 0;
 
     for (const [sectionCode, sectionData] of Object.entries(data)) {
+      // نسخهٔ ۶ برای متادیتا کلیدهای source/source2 هم دارد؛ فقط فصل‌های واقعی وارد شوند
+      if (!sectionData || typeof sectionData !== 'object' || !sectionData.axes) continue;
       // Insert section
       const sectionRes = await client.query(
         `INSERT INTO accreditation_sections (code, level_type, title, page)
@@ -185,7 +187,7 @@ async function seedAccreditationData() {
                 measure.page || null,
                 measure.level || null,
                 measure.patient_safety_flag ? 1 : 0,
-                (measure.patient_safety_flag ? 2.0 : 1.0),
+                measure.weight != null ? measure.weight : (measure.patient_safety_flag ? 2.0 : 1.0),
               ]
             );
             measureCount++;

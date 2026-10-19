@@ -364,6 +364,8 @@ async function seedData() {
 
     const insertMany = db.transaction(() => {
       for (const [sectionCode, sectionData] of Object.entries(data)) {
+        // نسخهٔ ۶ برای متادیتا کلیدهای source/source2 هم دارد؛ فقط فصل‌های واقعی وارد شوند
+        if (!sectionData || typeof sectionData !== 'object' || !sectionData.axes) continue;
         const sectionId = uuid();
         insertSection.run(sectionId, sectionCode, 'section', null, sectionData.title || null, null, null, sectionData.title_page || null, null, 0, 1.0);
         sectionCount++;
@@ -394,7 +396,7 @@ async function seedData() {
               insertSection.run(uuid(), measure.code, 'measure', parentStandardId, null,
                 measure.statement || null, measure.detail_text || null, measure.page || null,
                 measure.level || null, measure.patient_safety_flag ? 1 : 0,
-                measure.patient_safety_flag ? 2.0 : 1.0);
+                measure.weight != null ? measure.weight : (measure.patient_safety_flag ? 2.0 : 1.0));
               measureCount++;
             }
           }

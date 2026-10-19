@@ -89,7 +89,7 @@ const {
 // Helper to bind mountCrud to this module router
 const mountCrud = (prefix, ...args) => common.mountCrud(router, prefix, ...args);
 
-// ===== طب انتقال خون و هموویژیلانس (محور ب-۹) — database/seed-blood-transfusion.js =====
+// ===== طب انتقال خون و هموویژیلانس (نسل۶: محور ب-۸) — database/seed-blood-transfusion.js =====
 const BT_PRODUCTS = ['خون کامل', 'گلبول قرمز متراکم', 'پلاسمای تازه منجمد', 'پلاکت', 'کرایوپرسیپیتیت'];
 
 const BT_RESOURCES = {
@@ -102,14 +102,14 @@ const BT_RESOURCES = {
     defaults: { is_active: 1 },
     order: 'title',
     enums: { unit_type: ['یخچال بانک خون', 'فریزر پلاسما/کرایو', 'شیکر-انکوباتور پلاکت', 'یخچال بخش/اتاق عمل'] },
-    // ب-۹-۱-۲ برای پلاکت «تکان آرام با روتاتور» را جزء الزام آورده، پس شیکری که
+    // ب-8-4-2 برای پلاکت «تکان آرام با روتاتور» را جزء الزام آورده، پس شیکری که
     // آژیتاتور ندارد یعنی پلاکت در شرایط غیرمجاز نگهداری می‌شود.
     validate: (r) => {
       if (!r.title) return 'عنوان محل نگهداری الزامی است';
       if (r.min_temp === null || r.max_temp === null) return 'حد پایین و بالای دمای مجاز الزامی است';
       if (r.min_temp >= r.max_temp) return 'حد پایین دما باید کمتر از حد بالا باشد';
       if (r.unit_type === 'شیکر-انکوباتور پلاکت' && !r.has_agitator)
-        return 'نگهداری پلاکت بدون آژیتاتور/روتاتور مجاز نیست (ب-۹-۱-۲)';
+        return 'نگهداری پلاکت بدون آژیتاتور/روتاتور مجاز نیست (ب-8-4-2)';
       return null;
     },
   },
@@ -123,14 +123,14 @@ const BT_RESOURCES = {
     defaults: { dedicated_vehicle: 1, box_has_datalogger: 1, accepted: 1 },
     order: 'receipt_date DESC',
     enums: { product_type: BT_PRODUCTS },
-    // ب-۹-۱-۱ سه چیز را هم‌زمان الزام کرده و هر سه در همین یک فرم سنجیده می‌شود:
+    // ب-8-4-1 سه چیز را هم‌زمان الزام کرده و هر سه در همین یک فرم سنجیده می‌شود:
     // گواهیِ *معتبر* حامل، محفظه‌ی ثبت‌کننده‌ی دما، و ثبتِ دما هنگام تحویل.
     // «معتبر» یعنی تاریخ‌دار و منقضی‌نشده — وگرنه شماره‌ی گواهی به‌تنهایی چیزی
     // را اثبات نمی‌کند.
     validate: (r) => {
       if (!r.receipt_date) return 'تاریخ تحویل الزامی است';
       if (!(r.unit_count > 0)) return 'تعداد واحد باید بیشتر از صفر باشد';
-      if (r.arrival_temp === null) return 'ثبت دمای فرآورده هنگام تحویل الزامی است (ب-۹-۱-۱)';
+      if (r.arrival_temp === null) return 'ثبت دمای فرآورده هنگام تحویل الزامی است (ب-8-4-1)';
       if (r.courier_cert_no && !r.courier_cert_expiry)
         return 'تاریخ اعتبار گواهی حامل الزامی است؛ گواهی بدون تاریخ، «معتبر» شمرده نمی‌شود';
       if (r.courier_cert_expiry && r.courier_cert_expiry < r.receipt_date)
@@ -156,7 +156,7 @@ const BT_RESOURCES = {
       // و اگر «سازگار» اول می‌بود کیسه‌ی آزمایش‌نشده خودبه‌خود «سازگار» ثبت می‌شد.
       crossmatch_result: ['', 'سازگار', 'ناسازگار'] },
     uniqueHint: { msg: 'کیسه‌ای با این کد قبلاً ثبت شده است' },
-    // ب-۹-۲-۲ برچسبِ کراسمچ را «حداقل شامل نام، بخش بستری، شناسه‌ی بیمار و نامِ
+    // ب-8-5-1 برچسبِ کراسمچ را «حداقل شامل نام، بخش بستری، شناسه‌ی بیمار و نامِ
     // انجام‌دهنده‌ی آزمایش سازگاری» خواسته. کیسه‌ای که وضعیتش کراسمچ‌شده است ولی
     // این‌ها را ندارد، همان کیسه‌ای است که سرِ بالین قابل تشخیص نیست.
     validate: (r) => {
@@ -165,9 +165,9 @@ const BT_RESOURCES = {
       if (r.collected_date && r.expiry_date < r.collected_date)
         return 'تاریخ انقضا نمی‌تواند پیش از تاریخ اهدا باشد';
       if (['crossmatched', 'issued', 'transfused'].includes(r.status)) {
-        if (!r.crossmatch_patient) return 'برای کیسه‌ی کراسمچ‌شده، شناسه‌ی بیمار الزامی است (ب-۹-۲-۲)';
-        if (!r.crossmatch_ward) return 'برای کیسه‌ی کراسمچ‌شده، بخش بستری الزامی است (ب-۹-۲-۲)';
-        if (!r.crossmatch_by) return 'نام انجام‌دهنده‌ی آزمایش سازگاری الزامی است (ب-۹-۲-۲)';
+        if (!r.crossmatch_patient) return 'برای کیسه‌ی کراسمچ‌شده، شناسه‌ی بیمار الزامی است (ب-8-5-1)';
+        if (!r.crossmatch_ward) return 'برای کیسه‌ی کراسمچ‌شده، بخش بستری الزامی است (ب-8-5-1)';
+        if (!r.crossmatch_by) return 'نام انجام‌دهنده‌ی آزمایش سازگاری الزامی است (ب-8-5-1)';
         if (r.crossmatch_result === 'ناسازگار' && r.status !== 'crossmatched')
           return 'کیسه‌ی ناسازگار قابل تحویل یا تزریق نیست';
       }
@@ -183,7 +183,7 @@ const BT_RESOURCES = {
     bools: ['label_complete', 'identity_verified', 'accepted', 'resampled'],
     defaults: { label_complete: 1, identity_verified: 1, accepted: 1 },
     order: 'check_date DESC',
-    // ب-۹-۲-۱: «در صورت عدم انطباق، اخذ نمونه‌ی مجدد». پس ردکردنِ نمونه پایانِ کار
+    // ب-8-1-2: «در صورت عدم انطباق، اخذ نمونه‌ی مجدد». پس ردکردنِ نمونه پایانِ کار
     // نیست؛ تا نمونه‌ی مجدد ثبت نشود، بیمار بی‌آزمایش مانده است.
     validate: (r) => {
       if (!r.check_date) return 'تاریخ کنترل الزامی است';
@@ -192,7 +192,7 @@ const BT_RESOURCES = {
       if (r.resampled && !r.resample_date) return 'تاریخ نمونه‌گیری مجدد الزامی است';
       // برچسبِ ناقص یا هویتِ تأییدنشده یعنی نمونه نباید پذیرفته شود.
       if (r.accepted && (!r.label_complete || !r.identity_verified))
-        return 'نمونه با برچسب ناقص یا هویتِ تأییدنشده قابل پذیرش نیست (ب-۹-۲-۱)';
+        return 'نمونه با برچسب ناقص یا هویتِ تأییدنشده قابل پذیرش نیست (ب-8-1-2)';
       return null;
     },
   },
@@ -202,14 +202,14 @@ const BT_RESOURCES = {
       'interpretation', 'corrective_action', 'provider', 'performed_by', 'note'],
     order: 'qc_date DESC',
     enums: { kind: ['internal', 'external'], result: ['pass', 'fail'] },
-    // ب-۹-۳-۲: کنترل کیفیِ داخلی «بر اساس هر سری ساخت» است، پس شماره‌ی سری برای
+    // ب-8-2-3: کنترل کیفیِ داخلی «بر اساس هر سری ساخت» است، پس شماره‌ی سری برای
     // آن اجباری است؛ و نتیجه‌ی مردود بدون اقدام اصلاحی، همان چیزی است که ممیز
     // به‌عنوان نبودِ چرخه‌ی کیفیت ثبت می‌کند.
     validate: (r) => {
       if (!r.qc_date) return 'تاریخ کنترل کیفیت الزامی است';
       if (!r.item_name) return 'نام آنتی‌سرم/آزمایش الزامی است';
       if (r.kind === 'internal' && !r.lot_no)
-        return 'شماره سری ساخت برای کنترل کیفی داخلی الزامی است (ب-۹-۳-۲)';
+        return 'شماره سری ساخت برای کنترل کیفی داخلی الزامی است (ب-8-2-3)';
       if (r.kind === 'external' && !r.provider) return 'نام برگزارکننده‌ی ارزیابی خارجی الزامی است';
       if (r.result === 'fail' && !r.corrective_action)
         return 'برای نتیجه‌ی مردود، ثبت اقدام اصلاحی الزامی است';
@@ -228,9 +228,9 @@ const BT_RESOURCES = {
         'TRALI (آسیب حاد ریه)', 'TACO (اضافه‌بار گردش خون)', 'عفونی/باکتریال', 'سایر'],
       severity: ['خفیف', 'متوسط', 'شدید', 'تهدیدکننده‌ی حیات'],
       status: ['open', 'reported', 'closed'] },
-    // ب-۹-۴-۴ مهلت را عدد داده: «حداکثر ظرف ۴۸ ساعت». پس این را سرور از دو تاریخ
+    // ب-8-6-4 مهلت را عدد داده: «حداکثر ظرف ۴۸ ساعت». پس این را سرور از دو تاریخ
     // حساب می‌کند نه از تیکِ کاربر — وگرنه شاخصِ «در مهلت» قابلِ دست‌کاری بود.
-    // ب-۹-۴-۱ هم تحلیل ریشه‌ای و طرح در کمیته را برای بستنِ پرونده لازم می‌داند.
+    // ب-8-6-6 هم تحلیل ریشه‌ای و طرح در کمیته را برای بستنِ پرونده لازم می‌داند.
     validate: (r) => {
       if (!r.event_date) return 'تاریخ عارضه الزامی است';
       if (!r.ward) return 'بخش الزامی است';
@@ -243,13 +243,13 @@ const BT_RESOURCES = {
         r.reported_within_48h = 0;
       }
       if (r.status !== 'open' && !r.reported_date)
-        return 'برای خروج از وضعیت «باز»، تاریخ گزارش به سازمان انتقال خون الزامی است (ب-۹-۴-۴)';
+        return 'برای خروج از وضعیت «باز»، تاریخ گزارش به سازمان انتقال خون الزامی است (ب-8-6-4)';
       if (r.status !== 'open' && !r.standard_form_done)
-        return 'گزارش بدون تکمیل فرم استاندارد سازمان انتقال خون پذیرفته نیست (ب-۹-۴-۴)';
+        return 'گزارش بدون تکمیل فرم استاندارد سازمان انتقال خون پذیرفته نیست (ب-8-6-4)';
       if (r.status === 'closed' && (!r.rca_done || !r.rca_summary))
-        return 'بستن پرونده بدون تحلیل ریشه‌ای ممکن نیست (ب-۹-۴-۱)';
+        return 'بستن پرونده بدون تحلیل ریشه‌ای ممکن نیست (ب-8-6-6)';
       if (r.status === 'closed' && !r.committee_ref)
-        return 'شماره‌ی صورت‌جلسه‌ی کمیته‌ی طب انتقال خون برای بستن پرونده الزامی است (ب-۹-۴-۱)';
+        return 'شماره‌ی صورت‌جلسه‌ی کمیته‌ی طب انتقال خون برای بستن پرونده الزامی است (ب-8-6-6)';
       return null;
     },
   },
@@ -263,17 +263,17 @@ const BT_RESOURCES = {
     order: 'return_date DESC',
     enums: { product_type: BT_PRODUCTS,
       reason: ['عدم نیاز بیمار', 'ترخیص/فوت بیمار', 'لغو دستور پزشک', 'ناسازگاری', 'اشکال در فرآورده', 'سایر'] },
-    // ب-۹-۴-۶: «ارزیابی دمای خون‌های برگشتی و اقدام اصلاحی در صورت لزوم». پس
+    // ب-8-6-5: «ارزیابی دمای خون‌های برگشتی و اقدام اصلاحی در صورت لزوم». پس
     // قابلِ استفاده بودنِ کیسه از دما نتیجه می‌شود نه از نظر کاربر: بالای ۱۰ درجه
     // زنجیره‌ی سرد شکسته و کیسه دیگر قابل بازگشت به موجودی نیست.
     validate: (r) => {
       if (!r.return_date) return 'تاریخ برگشت الزامی است';
       if (!r.ward) return 'بخش برگشت‌دهنده الزامی است (مبنای پایش به تفکیک بخش)';
-      if (r.return_temp === null) return 'ثبت دمای کیسه‌ی برگشتی الزامی است (ب-۹-۴-۶)';
+      if (r.return_temp === null) return 'ثبت دمای کیسه‌ی برگشتی الزامی است (ب-8-6-5)';
       r.temp_acceptable = (r.return_temp >= 1 && r.return_temp <= 10) ? 1 : 0;
       if (!r.temp_acceptable) r.reusable = 0;
       if (!r.temp_acceptable && !r.corrective_action)
-        return 'دمای برگشتی خارج از محدوده است؛ ثبت اقدام اصلاحی الزامی است (ب-۹-۴-۶)';
+        return 'دمای برگشتی خارج از محدوده است؛ ثبت اقدام اصلاحی الزامی است (ب-8-6-5)';
       return null;
     },
   },
@@ -332,7 +332,7 @@ router.get('/blood-dashboard', authRequired, requireAnyPermission('view_blood', 
       temp_out_30d: one(`SELECT COUNT(*) c FROM blood_temp_logs WHERE hospital_id = ? AND in_range = 0
         AND log_date >= date('now', '-30 day')`),
       bags_available: one("SELECT COUNT(*) c FROM blood_bags WHERE hospital_id = ? AND status = 'available'"),
-      // «کنترل روزانه از نظر تاریخ انقضا» (ب-۹-۱-۲) — کیسه‌ای که هنوز در موجودی
+      // «کنترل روزانه از نظر تاریخ انقضا» (ب-8-4-2) — کیسه‌ای که هنوز در موجودی
       // است ولی تاریخش گذشته، دقیقاً همان چیزی است که نباید در یخچال بماند.
       bags_expired: one(`SELECT COUNT(*) c FROM blood_bags WHERE hospital_id = ?
         AND status IN ('available','crossmatched') AND expiry_date < date('now')`),
@@ -351,7 +351,7 @@ router.get('/blood-dashboard', authRequired, requireAnyPermission('view_blood', 
         AND return_date >= date('now', '-30 day')`),
       returns_temp_bad: one('SELECT COUNT(*) c FROM blood_returns WHERE hospital_id = ? AND temp_acceptable = 0'),
       units_list: query('SELECT * FROM blood_storage_units WHERE hospital_id = ? AND is_active = 1 ORDER BY title', [req.hospitalId]).rows,
-      // ب-۹-۴-۶ پایش را «به تفکیک بخش‌ها» خواسته — همان چیزی که به کمیته گزارش می‌شود
+      // ب-8-6-5 پایش را «به تفکیک بخش‌ها» خواسته — همان چیزی که به کمیته گزارش می‌شود
       returns_by_ward: query(`SELECT ward, COUNT(*) n, SUM(unit_count) units,
         SUM(CASE WHEN temp_acceptable = 0 THEN 1 ELSE 0 END) bad_temp
         FROM blood_returns WHERE hospital_id = ? GROUP BY ward ORDER BY units DESC LIMIT 12`, [req.hospitalId]).rows,

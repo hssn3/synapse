@@ -88,10 +88,10 @@ function calc(list){
   let f=0,p=0,n=0,u=0,na=0,sfT=0,sfF=0,wT=0,wE=0;
   list.forEach(m=>{
     const s=statusOf(m.id), sf=!!m.patient_safety_flag;
-    // وزن = ضریب ایمنی بیمار × ضریب سطح سنجه. ضریب سطح از تنظیمات پلتفرم
-    // می‌آید و پیش‌فرضش ۱ است، پس تا وقتی سوپرادمین عوضش نکند رفتار همان
-    // چیزی است که بوده.
-    const w=(sf?2:1)*(+(S.levelW||{})[m.measure_level||1]||1);
+    // وزن = وزن رسمی سنجه × ضریب سطح سنجه. از نسل۶ وزن واقعی کتاب (۱ / ۱٫۵ / ۲)
+    // در weight_multiplier ذخیره می‌شود؛ اگر خالی بود رفتار قدیمی (۲ برای سنجه
+    // ایمنی بیمار) حفظ می‌شود. ضریب سطح از تنظیمات پلتفرم می‌آید (پیش‌فرض ۱).
+    const w=(+m.weight_multiplier>0?+m.weight_multiplier:(sf?2:1))*(+(S.levelW||{})[m.measure_level||1]||1);
     if(s==='not_applicable'){ na++; return; }
     wT+=w;
     if(s==='full_compliant'){f++;wE+=w;} else if(s==='partial'){p++;wE+=w*0.5;}

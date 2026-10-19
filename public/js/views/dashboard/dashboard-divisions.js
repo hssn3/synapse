@@ -103,10 +103,10 @@ function renderDash(){
         <span class="kpi-title">سنجه‌های تکمیل‌شده</span>
         <span class="kpi-icon">✓</span>
       </div>
-      <div class="kpi-value">${fa(st.f)} <span style="font-size:1.1rem;font-weight:600;color:var(--tm);margin-right:2px">/ ${fa(st.all||520)}</span></div>
+      <div class="kpi-value">${fa(st.f)} <span style="font-size:1.1rem;font-weight:600;color:var(--tm);margin-right:2px">/ ${fa(st.all||395)}</span></div>
       <div class="kpi-footer">
         <span class="trend-badge trend-up">↑ ${fa(st.pct)}٪ انطباق</span>
-        <span>از کل ۵۲۰ سنجه</span>
+        <span>از کل ۳۹۵ سنجه</span>
       </div>
       <div class="kpi-progress"><div class="kpi-progress-bar bar-ok" style="width:${st.pct}%"></div></div>
     </div>

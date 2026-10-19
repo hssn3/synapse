@@ -1,5 +1,5 @@
 // src/services/gap-analysis.js
-// تحلیل شکاف ۵۲۰ سنجه با شناسایی خودکار gap و پیشنهاد اقدامات
+// تحلیل شکاف ۳۹۵ سنجه با شناسایی خودکار gap و پیشنهاد اقدامات
 
 const { query, db } = require('../config/database-sqlite');
 const { uuid } = require('../utils/db');

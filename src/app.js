@@ -166,6 +166,13 @@ catch (err) { seedFail('Checklist seed/migration failed:', err); }
 try { require('../database/seed-sections-documents').runMigration(); }
 catch (err) { seedFail('Section/document bridge seed/migration failed:', err); }
 
+// جایگزینی درخت اعتباربخشی به «ویرایش ششم» (نسل۶ — ۸۸ استاندارد / ۳۹۵ سنجه).
+// چرا این‌جا: پیش از seed-standard-titles و seed-section-tree-fix اجرا شود تا همان
+// بوت، عنوان/ترتیب/آیکون ردیف‌های تازه را بسازد. خودش نشانهٔ نسل۶ را چک می‌کند:
+// روی درخت جدید چیزی نمی‌کند (idempotent) و روی نصب‌های نسل۵ یک‌بار سوئیچ می‌کند.
+try { require('../database/seed-accreditation-v6').runMigration(); }
+catch (err) { seedFail('Accreditation v6 swap seed failed:', err); }
+
 try { require('../database/seed-leadership-sops').runMigration(); }
 catch (err) { seedFail('Leadership SOPs seed/migration failed:', err); }
 
@@ -255,7 +262,7 @@ catch (err) { seedFail('MeasureTextFix failed:', err); }
 try { require('../database/seed-infection-control').runMigration(); }
 catch (err) { seedFail('InfectionControl seed/migration failed:', err); }
 
-// طب انتقال خون و هموویژیلانس — محور ب-۹
+// طب انتقال خون و هموویژیلانس — نسل۶: ذیل محور ب-۸ (آزمایشگاه و انتقال خون)
 try { require('../database/seed-blood-transfusion').runMigration(); }
 catch (err) { seedFail('BloodTransfusion seed/migration failed:', err); }
 
@@ -622,7 +629,7 @@ catch (err) { seedFail('Clinical modules migration failed:', err); }
 try { require('../database/migrate-clinical-crm').runMigration(); }
 catch (err) { seedFail('Clinical-CRM migration failed:', err); }
 
-// Gap Analysis (تحلیل شکاف ۵۲۰ سنجه)
+// Gap Analysis (تحلیل شکاف ۳۹۵ سنجه)
 try { require('../database/seed-gap-analysis').runMigration(); }
 catch (err) { seedFail('Gap analysis migration failed:', err); }
 

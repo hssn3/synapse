@@ -86,7 +86,7 @@ function renderMeasures(){
             <div class="abadge">🏛️</div>
             <div style="flex:1">
               <h3>سامانه جامع استانداردهای اعتباربخشی ملی بیمارستان</h3>
-              <div class="sub">ارزیابی بر اساس آخرین کتاب استانداردهای وزارت بهداشت (ویرایش پنجم) · ۵۲۰ سنجه ملی رسمی</div>
+              <div class="sub">ارزیابی بر اساس آخرین کتاب استانداردهای وزارت بهداشت (ویرایش ششم · دور ششم) · ۳۹۵ سنجه ملی و بستهٔ تخصصی</div>
             </div>
             <div style="min-width:140px;text-align:left">
               <div class="bar"><i class="bf-gd" style="width:${overallPct}%"></i></div>

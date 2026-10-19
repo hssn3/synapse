@@ -7,8 +7,8 @@
  *
  *   ۱) /healthz سالم است (اتصال دیتابیس واقعاً پاسخ میدهد)
  *   ۲) ورود با حساب دمو کار میکند و کوکی نشست ست میشود
- *   ۳) داشبورد با ۵۲۰ سنجه بالا میآید (دادهی seed سالم است)
- *   ۴) درخت اعتباربخشی همان ۵۲۰ سنجه را میدهد
+ *   ۳) داشبورد با ۳۹۵ سنجه بالا میآید (دادهی seed سالم است)
+ *   ۴) درخت اعتباربخشی همان ۳۹۵ سنجه را میدهد
  *   ۵) درخواستِ بدون احراز ۴۰۱ میگیرد (لایهی auth روشن است)
  *   ۶) /api/public/hospitals فقط شناسه/نام میدهد (دریگاه عمومی سالم)
  *
@@ -25,7 +25,7 @@
 const BASE = (process.env.SMOKE_BASE_URL || 'http://127.0.0.1:3000').replace(/\/+$/, '');
 const USER = process.env.SMOKE_USER || 'hospital3_admin';
 const PASS = process.env.SMOKE_PASS || 'Hospital3@Admin2026';
-const EXPECT_MEASURES = 520;
+const EXPECT_MEASURES = 395; // نسل۶: ۳۷۸ ملی + ۱۷ روان‌پزشکی
 
 let failed = 0;
 const ok = (name, cond, detail) => {

@@ -59,11 +59,11 @@ const TOOLS = {
     const rules = {
       'monthly_program': 'برنامه ماهانه شیفت: تدوین و ویرایش منحصراً در صلاحیت سرپرستار بخش است؛ تایید نهایی بر عهده سوپروایزر و مترون است. پرستار بالینی فقط مجاز به ثبت درخواست و مشاهده است.',
       'error_report': 'گزارش خطاهای ناخواسته: ثبت خطا توسط تمام کارکنان بدون سرزنش (No-Blame Culture) مجاز و تشویق‌شده است. تحلیل ریشه‌ای (RCA) بر عهده مسئول ایمنی بیمار است.',
-      'patient_safety': '۱۲۳ سنجه ایمنی بیمار ویرایش پنجم ملی: عدم تحقق این سنجه‌ها به تنزل درجه اعتباربخشی کل مرکز می‌انجامد.'
+      'patient_safety': '۱۲۱ سنجه ایمنی بیمار ویرایش ششم ملی: عدم تحقق این سنجه‌ها به تنزل درجه اعتباربخشی کل مرکز می‌انجامد.'
     };
     return {
       explanation: rules[topic] || `قانون مربوط به ${topic} در دستورالعمل‌های کنترل کیفیت بیمارستان ثبت شده است.`,
-      citation: 'کتاب استانداردهای اعتباربخشی ملی بیمارستان‌های ایران (ویرایش پنجم)'
+      citation: 'کتاب استانداردهای اعتباربخشی ملی بیمارستان‌های ایران (ویرایش ششم)'
     };
   },
 
@@ -73,7 +73,7 @@ const TOOLS = {
     if (roleCode === 'nurse') {
       return { error: 'دسترسی به شاخص‌های کلیدی کلان فقط برای سرپرستاران و مدیران مجاز است.' };
     }
-    const measuresTotal = db.prepare('SELECT COUNT(*) c FROM measure_status WHERE hospital_id = ?').get(user.hospital_id)?.c || 520;
+    const measuresTotal = db.prepare('SELECT COUNT(*) c FROM measure_status WHERE hospital_id = ?').get(user.hospital_id)?.c || 395; // نسل۶
     const measuresDone = db.prepare("SELECT COUNT(*) c FROM measure_status WHERE hospital_id = ? AND status = 'compliant'").get(user.hospital_id)?.c || 391;
     return {
       metric: metric || 'accreditation_compliance',

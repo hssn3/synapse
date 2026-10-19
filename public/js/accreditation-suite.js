@@ -56,7 +56,7 @@
       <div class="acc-suite-nav">
         <button type="button" class="acc-tab-btn ${currentTab === 'measures' ? 'active' : ''}" onclick="switchAccTab('measures')">
           <span>📊 سنجه‌ها و ارزیابی (۳ شاخه لایه‌ای)</span>
-          <span class="tab-badge">۵۲۰ سنجه</span>
+          <span class="tab-badge">۳۹۵ سنجه</span>
         </button>
         <button type="button" class="acc-tab-btn ${currentTab === 'indicators' ? 'active' : ''}" onclick="switchAccTab('indicators')">
           <span>📋 شناسنامه شاخص‌ها (Indicator Passport)</span>
@@ -140,7 +140,7 @@
         </div>
         <div class="sheet-field-group">
           <label class="sheet-label">۳. تعاریف و الزامات بالادستی:</label>
-          <textarea id="doc_definitions" class="sheet-textarea" rows="2">مطابق با ویرایش پنجم کتاب استانداردهای اعتباربخشی ملی بیمارستان‌های ایران (ابلاغی وزارت بهداشت، درمان و آموزش پزشکی).</textarea>
+          <textarea id="doc_definitions" class="sheet-textarea" rows="2">مطابق با ویرایش ششم کتاب استانداردهای اعتباربخشی ملی بیمارستان‌های ایران (ابلاغی وزارت بهداشت، درمان و آموزش پزشکی).</textarea>
         </div>
         <div class="sheet-field-group">
           <label class="sheet-label">۴. شیوه انجام کار و مسئولیت‌ها:</label>

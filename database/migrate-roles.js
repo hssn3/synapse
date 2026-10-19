@@ -17,8 +17,9 @@ const AXIS_ROLE = {
   'الف-1':'quality_control_manager','الف-2':'quality_control_manager','الف-3':'hr_manager','الف-4':'nursing_director',
   'الف-5':'quality_control_manager','الف-6':'environmental_health_officer','الف-7':'technical_officer','ب-1':'clinical_supervisor',
   'ب-2':'clinical_supervisor','ب-3':'clinical_supervisor','ب-4':'breastfeeding_specialist','ب-5':'infection_control_supervisor',
-  'ب-6':'technical_officer','ب-7':'quality_control_manager','ب-8':'quality_control_manager','ب-9':'quality_control_manager',
-  'ب-10':'clinical_supervisor','ج-1':'nursing_director','ج-2':'quality_control_manager',
+  // نسل۶: ب-۹ خدمات سرپایی است (جایگاه ب-۱۰ قدیم) و ب-۸ آزمایشگاه+انتقال خون؛ ب-۱۰ حذف شد.
+  'ب-6':'technical_officer','ب-7':'quality_control_manager','ب-8':'quality_control_manager','ب-9':'clinical_supervisor',
+  'ج-1':'nursing_director','ج-2':'quality_control_manager',
 };
 
 const KW_ROLE = [

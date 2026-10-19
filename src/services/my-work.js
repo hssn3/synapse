@@ -133,30 +133,30 @@ const SIGNALS = [
     n: (h, u, ctx) => c(`SELECT COUNT(*) c FROM hand_hygiene_audits WHERE hospital_id = ?
         AND date(audit_date) >= date(?)`, [h, ctx.monthStart]) },
 
-  // ---------- طب انتقال خون (ب-۹) ----------
+  // ---------- طب انتقال خون (نسل۶: ب-۸) ----------
   { key: 'blood_expired', bucket: 'today', perms: ['view_blood', 'manage_blood'], page: 'blood',
     title: '{n} کیسه‌ی خونِ منقضی هنوز در موجودی',
-    why: 'ب-۹-۱-۲ — کنترل روزانه‌ی تاریخ انقضا',
+    why: 'ب-8-4-2 — کنترل روزانه‌ی تاریخ انقضا',
     n: (h) => c(`SELECT COUNT(*) c FROM blood_bags WHERE hospital_id = ?
         AND status IN ('available','crossmatched') AND date(expiry_date) < date('now')`, [h]) },
   { key: 'blood_expiring', bucket: 'week', perms: ['view_blood', 'manage_blood'], page: 'blood',
     title: '{n} کیسه‌ی خون تا هفت روز دیگر منقضی می‌شود',
-    why: 'ب-۹-۱-۲ — تنظیم مصرف پیش از انقضا',
+    why: 'ب-8-4-2 — تنظیم مصرف پیش از انقضا',
     n: (h) => c(`SELECT COUNT(*) c FROM blood_bags WHERE hospital_id = ?
         AND status IN ('available','crossmatched') AND date(expiry_date) >= date('now')
         AND date(expiry_date) <= date('now','+7 day')`, [h]) },
   { key: 'blood_temp_out', bucket: 'today', perms: ['view_blood', 'manage_blood'], page: 'blood',
     title: '{n} انحراف دمای بانک خون در هفته‌ی گذشته',
-    why: 'ب-۹-۱-۲ — دامنه‌ی ۲٫۵ تا ۵٫۵ درجه',
+    why: 'ب-8-4-2 — دامنه‌ی ۲٫۵ تا ۵٫۵ درجه',
     n: (h) => c(`SELECT COUNT(*) c FROM blood_temp_logs WHERE hospital_id = ? AND in_range = 0
         AND date(log_date) >= date('now','-7 day')`, [h]) },
   { key: 'blood_sample_open', bucket: 'today', perms: ['view_blood', 'manage_blood'], page: 'blood',
     title: '{n} نمونه‌ی بانک خونِ ردشده بدون نمونه‌ی مجدد',
-    why: 'ب-۹-۲-۱ — بیمار بی‌آزمایش مانده',
+    why: 'ب-8-1-2 — بیمار بی‌آزمایش مانده',
     n: (h) => c(`SELECT COUNT(*) c FROM blood_sample_checks WHERE hospital_id = ? AND accepted = 0 AND resampled = 0`, [h]) },
   { key: 'blood_event_open', bucket: 'today', perms: ['view_blood', 'manage_blood'], page: 'blood',
     title: '{n} عارضه‌ی تزریق خونِ باز',
-    why: 'ب-۹-۴-۴ — مهلت گزارش ۴۸ ساعت است',
+    why: 'ب-8-6-4 — مهلت گزارش ۴۸ ساعت است',
     n: (h) => c(`SELECT COUNT(*) c FROM blood_adverse_events WHERE hospital_id = ? AND status <> 'closed'`, [h]) },
 
   // ---------- آزمایشگاه (ب-۸) ----------

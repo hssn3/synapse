@@ -164,9 +164,9 @@ const ROLE_AXES = {
   accounting_manager: ['الف-1'],
 
   // کادر عالی و سرپرستی پرستاری
-  nursing_director: ['الف-1', 'الف-3', 'الف-4', 'ب-1', 'ب-2', 'ب-3', 'ب-4', 'ب-5', 'ب-10', 'ج-1', 'ج-2'],
+  nursing_director: ['الف-1', 'الف-3', 'الف-4', 'ب-1', 'ب-2', 'ب-3', 'ب-4', 'ب-5', 'ب-9', 'ج-1', 'ج-2'],
   education_supervisor: ['الف-1', 'الف-3', 'الف-4', 'ب-1'],
-  clinical_supervisor: ['ب-1', 'ب-2', 'ب-3', 'ب-9', 'ب-10'],
+  clinical_supervisor: ['ب-1', 'ب-2', 'ب-3', 'ب-8', 'ب-9'],
   infection_control_supervisor: ['الف-6', 'ب-1', 'ب-5'],
   infection_supervisor: ['الف-6', 'ب-1', 'ب-5'],
   head_nurse: ['ب-1', 'ب-2', 'الف-4'],
@@ -174,7 +174,7 @@ const ROLE_AXES = {
 
   // سایر نقش‌های پشتیبان
   safety_officer: ['الف-1', 'الف-8', 'ب-1'], env_health: ['الف-6', 'ج-1'], equipment: ['الف-7'],
-  pharmacist: ['ب-6'], lab_manager: ['ب-8'], imaging_manager: ['ب-7'], blood_bank: ['ب-9'],
+  pharmacist: ['ب-6'], lab_manager: ['ب-8'], imaging_manager: ['ب-7'], blood_bank: ['ب-8'],
   social_worker: ['ج-1', 'ج-2'], him_officer: ['الف-5'], disaster_officer: ['الف-2'], hr_officer: ['الف-3'],
 
   // کادر بالینی پایه و گزارش‌دهنده
@@ -184,7 +184,7 @@ const ROLE_AXES = {
 
 // دامنه‌ی محورهای کاربر جاری. نکته‌ی امنیتی: پیش‌فرض «رد» است، نه «همه».
 // پیش از این هر نقشی که در ROLE_AXES نبود (مثل infection_control_supervisor یا نقش‌های سفارشی)
-// به دلیل fallback به '*' کل ۵۲۰ سنجه را می‌دید.
+// به دلیل fallback به '*' کل ۳۹۵ سنجه را می‌دید.
 function roleScope(){
   const u = S.user || {};
   const sc = ROLE_AXES[u.role_code] ?? ROLE_AXES[u.role];

@@ -121,7 +121,7 @@ node tests/assistant-response-eval.js                             → همه‌�
 | `quick_check=ok`، صفر نقض FK؛ ۴۷ جدول بدون FK؛ ۳۴ جدول با `hospital_id` بدون ایندکس | کوئری | 🟡 |
 | ارجاع یتیم: `reminder_rules`(۱) + `example_seed_log`(۶) → بیمارستان حذف‌شده | ریشه: `seed-hospital-three-scenario.js:504` | 🟡 (در W3 بررسی می‌شود) |
 | `document_signoffs`: ۶۰۲/۶۰۲ ردیف با `user_id=NULL` | کوئری | 🟡 |
-| `accreditation_sections`: ۵۲۰ سنجه با `title=NULL` (متن در `statement`) | کوئری | 🟡 |
+| `accreditation_sections`: ۳۹۵ سنجه با `title=NULL` (متن در `statement`) | کوئری | 🟡 |
 | `seed-measure-status-year.js:65` → `DROP TABLE measure_status` و کپی فقط ۱۰ ستون (خطر ازدست‌رفتن ستون) | بازرسی کد | 🟡 (در W3 اصلاح) |
 | خطای seed در بوت فقط لاگ می‌شود | `src/app.js` ~۱۱۰-۱۱۱ | 🟡 (در W3 نمایان می‌شود) |
 | بکاپ/restore بدون راست‌آزمایی پس از بازگردانی (فقط `demo-restore` راست‌آزمایی می‌کند) | بازرسی اسکریپت‌ها | 🟡 |

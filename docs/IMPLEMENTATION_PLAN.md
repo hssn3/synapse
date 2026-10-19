@@ -13,7 +13,7 @@
 | نکته‌ی محیطی | `node` روی PATH نسخه‌ی ۲۴ است و `better-sqlite3` (ABI 127) روی آن خطای `ERR_DLOPEN_FAILED` می‌دهد | اجرای واقعی؛ راه‌حل: مسیر کامل Node 22 |
 | بیس‌لاین تست | `test:all` ۳۵/۳۵ · `smoke` ۶/۶ · `test:rbac-matrix` ۱۵/۱۵ · دانا ۲۱+۱۰ ادعا | اجرای همین نشست |
 | امنیت وابستگی | `npm audit --omit=dev` → ۰ آسیب‌پذیری | اجرای همین نشست |
-| سرور محلی | `127.0.0.1:3311` (development)، ۵۲۰ سنجه، ۶۹ کاربر، ۲۲۰ جدول | `/healthz` + smoke + کوئری |
+| سرور محلی | `127.0.0.1:3311` (development)، ۳۹۵ سنجه، ۶۹ کاربر، ۲۲۰ جدول | `/healthz` + smoke + کوئری |
 | نشست ۱۴۰۵/۰۷/۲۳b | کلون ویندوزی + بیس‌لاین کاملِ سبز؛ اسناد ARCHITECTURE/API_CONTRACTS اضافه شد | `.cluster/new313-master-prompt/evidence-mainline.md` (خارج از مخزن) |
 
 ---

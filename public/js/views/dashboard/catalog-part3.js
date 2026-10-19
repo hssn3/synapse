@@ -26,7 +26,7 @@ function renderEntry(){
         <h1>ابر سیستم مدیریت بیمارستان، <span class="lgrad">یکپارچه و شفاف</span></h1>
         <p>ساختار سازمانی و سلسله‌مراتب پرستاری، کارتابل و پیام‌رسانی، کمیته‌ها، مدیریت خطر و ایمنی بیمار،
            کارت امتیازی متوازن (BSC)، آموزش کارکنان و مستندات کنترل‌شده — و در کنار همه‌ی این‌ها، ماژول
-           اعتباربخشی با درخت کامل سنجه‌های ویرایش پنجم. همه در یک سامانه‌ی واحد برای هر مرکز درمانی.
+           اعتباربخشی با درخت کامل سنجه‌های ویرایش ششم. همه در یک سامانه‌ی واحد برای هر مرکز درمانی.
            خدمات بدون‌ورود (گزارش خطا، FMEA، انتقادات، نظرسنجی رضایت و…) هم پس از انتخاب مرکز، مخصوص همان مرکز در دسترس‌اند.</p>
         <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;justify-content:center">
           <button class="btn btn-g shine anim" onclick="openSystemCatalogModal()" style="background:linear-gradient(135deg,#e0ab2e,#b88615);border:none;box-shadow:0 0 20px rgba(224,171,46,.45);font-weight:700">📖 کاتالوگ آنلاین و تور تعاملی امکانات سامانه ✨</button>
@@ -52,13 +52,13 @@ function renderEntry(){
             <div>
               <div style="display:inline-flex;align-items:center;gap:10px;padding:6px 16px;background:rgba(16,160,185,0.14);border:1px solid rgba(16,160,185,0.4);border-radius:100px;color:#6ed5e7;font-size:0.8rem;font-weight:700;margin-bottom:12px">
                 <span style="width:8px;height:8px;background:#34bbd3;border-radius:50%;box-shadow:0 0 10px #34bbd3"></span>
-                <span>کاتالوگ دیجیتال و تعاملی // ویرایش ۵ کشوری وزارت بهداشت</span>
+                <span>کاتالوگ دیجیتال و تعاملی // ویرایش ششم کشوری وزارت بهداشت</span>
               </div>
               <h2 style="font-size:1.75rem;font-weight:900;color:#ffffff;line-height:1.4;margin:0 0 8px 0">
                 سیناپس — <span class="gold-gradient-text">کیفیت، ایمنی بیمار</span> و <span class="emerald-gradient-text">اعتباربخشی پیشرفته</span>
               </h2>
               <p style="font-size:0.92rem;color:var(--text-sub,#c7d8db);max-width:760px;line-height:1.85;margin:0">
-                پلتفرم هوشمند انطباق با ۵۲۰ سنجه ملی، پایش بلادرنگ ۲۸ واقعه ناخواسته، اجرای افقی ۲۳ پروتکل بالینی SOP و هدایت‌شده با مغز هوش مصنوعی دانا.
+                پلتفرم هوشمند انطباق با ۳۹۵ سنجه ملی، پایش بلادرنگ ۲۸ واقعه ناخواسته، اجرای افقی ۲۳ پروتکل بالینی SOP و هدایت‌شده با مغز هوش مصنوعی دانا.
               </p>
             </div>
             
@@ -83,9 +83,9 @@ function renderEntry(){
                   <path d="M8 12l2.5 2.5L16 9" stroke="#fff0c7" stroke-linecap="round" stroke-width="2"></path>
                 </svg>
               </div>
-              <div class="stat-number gold-gradient-text">۵۲۰</div>
+              <div class="stat-number gold-gradient-text">۳۹۵</div>
               <div class="stat-label">سنجه ملی مصوب</div>
-              <div class="stat-meta">پوشش ۱۰۰٪ ویرایش پنجم وزارت بهداشت</div>
+              <div class="stat-meta">پوشش ۱۰۰٪ ویرایش ششم وزارت بهداشت</div>
             </div>
 
             <div class="stat-counter-card folded-corner" onclick="openSystemCatalogModal('safety-never-events')" style="cursor:pointer">
@@ -95,7 +95,7 @@ function renderEntry(){
                   <path d="M12 8v5M12 16h.01" stroke="#fca5a5" stroke-linecap="round" stroke-width="2"></path>
                 </svg>
               </div>
-              <div class="stat-number" style="color:#f87171;text-shadow:0 0 15px rgba(248,113,113,0.4)">۱۲۳</div>
+              <div class="stat-number" style="color:#f87171;text-shadow:0 0 15px rgba(248,113,113,0.4)">۱۲۱</div>
               <div class="stat-label">سنجه الزامی ایمنی</div>
               <div class="stat-meta">خطوط قرمز بالینی (Never Events)</div>
             </div>
@@ -118,7 +118,7 @@ function renderEntry(){
                   <polygon fill="rgba(212,175,90,0.1)" points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" stroke="var(--gold-400,#ecd599)" stroke-width="1.8"></polygon>
                 </svg>
               </div>
-              <div class="stat-number" style="color:var(--gold-300,#fff0c7);text-shadow:0 0 15px rgba(212,175,90,0.4)">۱۱۱</div>
+              <div class="stat-number" style="color:var(--gold-300,#fff0c7);text-shadow:0 0 15px rgba(212,175,90,0.4)">۸۸</div>
               <div class="stat-label">استاندارد کشوری</div>
               <div class="stat-meta">با ماتریس شواهد و ممیزی ادواری</div>
             </div>
@@ -137,7 +137,7 @@ function renderEntry(){
               <div>
                 <span class="cat-chapter-tag">بخش ۱ // ارزیابی</span>
                 <div class="cat-chapter-title">🏛️ موتور سنجه‌ها و اعتباربخشی</div>
-                <div class="cat-chapter-desc">۳ هاب کلان، ۱۰۸ استاندارد، درخت کامل ۵۲۰ سنجه با بارگذاری سبک و چک‌لیست‌های رسمی</div>
+                <div class="cat-chapter-desc">۳ هاب کلان، ۸۸ استاندارد، درخت کامل ۳۹۵ سنجه با بارگذاری سبک و چک‌لیست‌های رسمی</div>
               </div>
               <div class="cat-chapter-link"><span>مشاهده فصل و سنجه‌ها</span> <span>⟵</span></div>
             </a>
@@ -182,7 +182,7 @@ function renderEntry(){
               <div>
                 <span class="cat-chapter-tag">بخش ۶ // مقایسه</span>
                 <div class="cat-chapter-title">⚖️ ماتریس تمایز با سیستم‌های سنتی</div>
-                <div class="cat-chapter-desc">مقایسه ویژگی‌به‌ویژگی پلتفرم نسل پنجم ما با نرم‌افزارهای قدیمی و سیستم‌های دستی</div>
+                <div class="cat-chapter-desc">مقایسه ویژگی‌به‌ویژگی پلتفرم نسل ششم ما با نرم‌افزارهای قدیمی و سیستم‌های دستی</div>
               </div>
               <div class="cat-chapter-link"><span>مشاهده جدول مقایسه</span> <span>⟵</span></div>
             </a>
@@ -215,7 +215,7 @@ function renderEntry(){
         <p class="lsec-s">مدیریت روزمره‌ی بیمارستان از یک مجموعه ابزار پراکنده، به یک جریان کاری یکپارچه و قابل‌پیگیری تبدیل می‌شود — که اعتباربخشی هم بخشی طبیعی از همان جریان است:</p>
         <ol class="lsteps">
           <li class="lstep g"><b aria-hidden="true">۱</b><h4>پیکربندی مرکز</h4><p>تعریف ساختار سازمانی، بخش‌ها، سلسله‌مراتب پرستاری، نقش‌ها و دسترسی‌ها روی بستر اختصاصی مرکز.</p></li>
-          <li class="lstep g"><b aria-hidden="true">۲</b><h4>راه‌اندازی ماژول‌ها</h4><p>کمیته‌ها، کارتابل، BSC و — در کنار همه‌ی این‌ها — درخت کامل سنجه‌های اعتباربخشی ویرایش پنجم.</p></li>
+          <li class="lstep g"><b aria-hidden="true">۲</b><h4>راه‌اندازی ماژول‌ها</h4><p>کمیته‌ها، کارتابل، BSC و — در کنار همه‌ی این‌ها — درخت کامل سنجه‌های اعتباربخشی ویرایش ششم.</p></li>
           <li class="lstep g"><b aria-hidden="true">۳</b><h4>پایش و مستندسازی</h4><p>ثبت روزمره‌ی شواهد، خودارزیابی، ممیزی داخلی و اقدامات اصلاحی.</p></li>
           <li class="lstep g"><b aria-hidden="true">۴</b><h4>ممیزی رسمی</h4><p>خروجی یکپارچه و آماده‌ی ارائه به تیم ارزیاب، بدون آشفتگی لحظه‌ی آخر.</p></li>
         </ol>
@@ -226,7 +226,7 @@ function renderEntry(){
         <div class="lhero g" style="padding:26px">
           <p>سامانه‌ی جامع مدیریت بیمارستانی، برای پشتیبانی مراکز درمانی در ساختار سازمانی، سلسله‌مراتب
              پرستاری، کارتابل و ارتباطات داخلی، کمیته‌ها، کیفیت و ایمنی بیمار ساخته شده است — و
-             اعتباربخشی (با تمرکز بر استانداردهای ملی ویرایش پنجم) یکی از ماژول‌های همین سامانه است،
+             اعتباربخشی (با تمرکز بر استانداردهای ملی ویرایش ششم) یکی از ماژول‌های همین سامانه است،
              نه کل آن. هر مرکز درمانی به‌صورت مستقل و با داده‌ها و کاربران خودش از سامانه استفاده می‌کند.</p>
         </div>
       </div>

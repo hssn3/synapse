@@ -1,8 +1,8 @@
 {
-  "createdAt": "2026-09-07T04:57:29.778Z",
-  "sourceDb": "/home/user/hospital-accreditation-platform/database/hospital.db",
-  "rawBytes": 7737344,
-  "gzipBytes": 1259820,
+  "createdAt": "2026-10-19T08:02:21.446Z",
+  "sourceDb": "C:\\Users\\RH\\Desktop\\synapse\\database\\hospital.db",
+  "rawBytes": 10403840,
+  "gzipBytes": 1767469,
   "hospitals": [
     {
       "name": "بیمارستان نمونه شماره یک",
@@ -11,31 +11,31 @@
   ],
   "counts": {
     "hospitals": 1,
-    "users": 62,
-    "roles": 19,
-    "measure_status": 520,
+    "users": 69,
+    "roles": 28,
+    "measure_status": 395,
     "shift_entries": 4539,
-    "committee_meeting_minutes": 104,
-    "controlled_documents": 22,
-    "hospital_kpis": 71,
-    "checklists": 4,
-    "processes": 6,
-    "facility_assets": 3,
+    "committee_meeting_minutes": 103,
+    "controlled_documents": 306,
+    "hospital_kpis": 103,
+    "checklists": 83,
+    "processes": 10,
+    "facility_assets": 28,
     "blood_bags": 4,
     "lab_qc_records": 4,
     "imaging_devices": 2,
     "patient_satisfaction_surveys": 12,
     "nursing_shift_attendance": 471,
-    "nursing_supervisor_reports": 2,
+    "nursing_supervisor_reports": 8,
     "occ_hazards": 4,
-    "occ_incidents": 4,
+    "occ_incidents": 6,
     "fin_budget_lines": 6,
     "fin_donations": 6,
     "pf_coi_cases": 4,
     "pf_readmissions": 8,
     "pf_ama_discharges": 10,
     "edu_policies": 3,
-    "edu_sessions": 5,
+    "edu_sessions": 8,
     "edu_effectiveness": 4,
     "fin_cost_management": 4,
     "service_disruptions": 2,
@@ -43,20 +43,15 @@
     "stakeholders": 6
   },
   "scrubbedColumns": [
-    "assistant_hospital_settings.api_key",
-    "superadmin_dev_settings.github_token"
+    "superadmin_dev_settings.github_token",
+    "assistant_hospital_settings.api_key"
   ],
   "purgedTables": [
-    "assistant_conversations (49)",
-    "dev_assistant_messages (4)",
-    "audit_log (764)",
-    "super_audit_log (3)",
-    "error_log (8)",
-    "deleted_records (5564)"
+    "audit_log (107)",
+    "error_log (2)",
+    "deleted_records (12)"
   ],
   "uploads": [
     "logo-sample-hospital.webp"
-  ],
-  "scrubbedAt": "2026-10-12T10:31:30.708Z",
-  "scrubNote": "api_key scrubbed 1405-07-20 — repo became public; secrets must never live in the repo"
+  ]
 }

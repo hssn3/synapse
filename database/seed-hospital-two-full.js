@@ -6,7 +6,7 @@
  * 1. Hospital #2 tenant creation and isolation (subdomain: h2)
  * 2. 12 Inpatient & specialized wards (اورژانس، ICU، CCU، جراحی، ارتوپدی، داخلی، اطفال/NICU، زنان، اتاق عمل، دیالیز، کت‌لب، آنکولوژی)
  * 3. 19 Official Hospital Roles & Users with realistic Iranian healthcare identities and passwords
- * 4. 520 National Accreditation Measures initialized for year 1405 (with 123 Patient Safety critical measures)
+ * 4. 395 National Accreditation Measures initialized for year 1405 (with 121 Patient Safety measures)
  * 5. Official Hospital Committees & standard 6-section MoH minutes
  * 6. Clinical Safety Modules:
  *    - 28 Never Events (خطاهای ۲۸ گانه بیمارستانی) with Root Cause Analysis (RCA) & CAPA
@@ -236,7 +236,7 @@ function runSeed() {
   }
   console.log('[Hospital #2] Committees and standard 6-section MoH minutes generated.');
 
-  // 5. 520 National Accreditation Measures Initialization (with 123 Patient Safety)
+  // 5. 395 National Accreditation Measures Initialization (with 121 Patient Safety)
   const measures = db.prepare("SELECT id, code, patient_safety_flag FROM accreditation_sections WHERE level_type = 'measure'").all();
   console.log(`[Hospital #2] Initializing ${measures.length} national measures in measure_status...`);
 
