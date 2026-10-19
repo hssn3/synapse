@@ -1964,8 +1964,91 @@
     }
   </style>
 <link rel="stylesheet" href="/css/synapse-theme.css?v=4">
+
+<style id="catalog-professional-v6">
+/* ==== ریفکتور حرفه‌ای کاتالوگ — نسل ششم (۱۴۰۵/۰۷/۲۷) ==== */
+html { scroll-behavior: smooth; }
+.hero-title, .section-title, .level-title, .sop-name, .hub-title-text { text-wrap: balance; }
+.section-subtitle { max-width: 920px; }
+
+/* نوار پیشرفت مطالعه */
+.cat-scroll-progress {
+  position: fixed; top: 0; right: 0; height: 3px; width: 0;
+  background: linear-gradient(270deg, #d4af5a 0%, #34bbd3 100%);
+  z-index: 1200; border-radius: 0 0 3px 3px;
+  box-shadow: 0 0 12px rgba(212,175,90,.55); pointer-events: none;
+}
+/* لینک فعال ناوبری (Scrollspy) */
+.nav-link-item.active {
+  color: var(--gold-300, #ffd77a) !important;
+  background: rgba(212,175,90,.14) !important;
+  box-shadow: inset 0 -2px 0 rgba(212,175,90,.75);
+}
+/* دسترس‌پذیری فوکوس */
+.nav-link-item:focus-visible, .nav-cta-btn:focus-visible, .axis-pill-chip:focus-visible,
+.cat-back-top:focus-visible, .sop-flow-btn:focus-visible, .btn-hero-primary:focus-visible,
+.btn-hero-secondary:focus-visible, .form-btn-submit:focus-visible {
+  outline: 2px solid #34bbd3; outline-offset: 3px;
+}
+/* چیپ‌های محور به‌صورت دکمهٔ واقعی + شمارندهٔ سنجه */
+button.axis-pill-chip { font-family: inherit; font-size: .88rem; line-height: 1.45; }
+.axis-pill-chip .chip-count {
+  font-size: .68rem; font-weight: 800; color: var(--gold-300, #ffd77a);
+  background: rgba(212,175,90,.12); border: 1px solid rgba(212,175,90,.3);
+  padding: 2px 7px; border-radius: 999px; white-space: nowrap;
+}
+.axis-pill-chip.active .chip-count {
+  color: #9feaf5; background: rgba(52,187,211,.16); border-color: rgba(52,187,211,.45);
+}
+/* ارتقای بصری کارت‌ها */
+.hub-card { transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+.hub-card:hover {
+  transform: translateY(-4px); border-color: var(--gold-400, #d4af5a);
+  box-shadow: 0 18px 44px rgba(0,0,0,.5), 0 0 24px rgba(212,175,90,.16);
+}
+.sop-card-horizontal:focus-within { border-color: var(--emerald-400); box-shadow: 0 0 0 2px rgba(52,187,211,.35); }
+/* پیمایش افقی SOP */
+.sop-flow-nav { display: flex; gap: 10px; justify-content: center; margin-top: 10px; }
+.sop-flow-btn {
+  width: 40px; height: 40px; border-radius: 12px; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 1.4rem; font-weight: 800; line-height: 1;
+  background: rgba(15,22,33,.9); color: var(--gold-300, #ffd77a);
+  border: 1px solid var(--border-gold, rgba(212,175,90,.3));
+  transition: var(--transition-smooth, all .2s ease);
+}
+.sop-flow-btn:hover { background: rgba(212,175,90,.18); border-color: var(--gold-400, #d4af5a); transform: translateY(-2px); }
+.sop-flow-cta {
+  display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between;
+  margin-top: 14px; padding: 14px 16px; border-radius: 14px;
+  background: rgba(16,160,185,.08); border: 1px solid rgba(52,187,211,.22);
+}
+.sop-flow-cta p { margin: 0; font-size: .82rem; line-height: 1.8; color: var(--text-muted, #94a3b8); max-width: 760px; }
+/* بازگشت به بالا */
+.cat-back-top {
+  position: fixed; left: 18px; bottom: 18px; width: 44px; height: 44px; z-index: 1100;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 14px; cursor: pointer; color: var(--gold-300, #ffd77a);
+  background: rgba(9,14,22,.92); border: 1px solid rgba(212,175,90,.45);
+  box-shadow: 0 10px 28px rgba(0,0,0,.45); backdrop-filter: blur(10px);
+  opacity: 0; visibility: hidden; transform: translateY(10px);
+  transition: opacity .25s ease, transform .25s ease, visibility .25s ease, background .2s ease;
+}
+.cat-back-top.show { opacity: 1; visibility: visible; transform: translateY(0); }
+.cat-back-top:hover { background: rgba(212,175,90,.16); border-color: var(--gold-400, #d4af5a); }
+@media (max-width: 768px) {
+  .cat-back-top { left: 12px; bottom: 88px; width: 42px; height: 42px; }
+  .sop-flow-cta { justify-content: center; text-align: center; }
+  .axis-pill-chip .chip-count { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+}
+</style>
 </head>
 <body>
+<div class="cat-scroll-progress" id="catScrollProgress" aria-hidden="true"></div>
 <!-- Ambient Glow overlay -->
 <div class="ambient-glow"></div>
 <!-- Main Navigation -->
@@ -1973,22 +2056,22 @@
 <div class="nav-glass-bar">
 <a href="/" class="brand-group" style="text-decoration:none;flex-shrink:0" title="بازگشت به صفحه اصلی سامانه">
 <div class="brand-icon-box">
-<svg fill="none" viewbox="0 0 24 24">
+<svg fill="none" viewBox="0 0 24 24">
 <path d="M12 2L3 7v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z" stroke="url(#goldGradBrand)" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path>
 <path d="M12 7v10M7 12h10" stroke="#34bbd3" stroke-linecap="round" stroke-width="2.2"></path>
 <defs>
-<lineargradient id="goldGradBrand" x1="3" x2="21" y1="2" y2="22">
+<linearGradient id="goldGradBrand" x1="3" x2="21" y1="2" y2="22">
 <stop stop-color="#fff0c7"></stop>
 <stop offset="0.5" stop-color="#d4af5a"></stop>
 <stop offset="1" stop-color="#997828"></stop>
-</lineargradient>
+</linearGradient>
 </defs>
 </svg>
 </div>
 <div>
 <div class="brand-text-title">
 <span>سیناپس — کیفیت و اعتباربخشی بالینی</span>
-<span class="brand-badge-v5">ویرایش ۵</span>
+<span class="brand-badge-v5">ویرایش ۶</span>
 </div>
 <div class="brand-subtitle">سامانه یکپارچه نظارت، اعتباربخشی و پایش سلامت</div>
 </div>
@@ -2014,7 +2097,7 @@
   </a>
   <a class="nav-cta-btn desk-only" href="#demo">
     <span>درخواست دمو</span>
-    <svg fill="none" height="13" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="13"><path d="M19 12H5M12 19l-7-7 7-7"></path></svg>
+    <svg fill="none" height="13" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" width="13"><path d="M19 12H5M12 19l-7-7 7-7"></path></svg>
   </a>
   <button class="nav-mob-toggle" id="catMenuToggleBtn" aria-label="منوی سامانه" type="button">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
@@ -2045,11 +2128,11 @@
       </p>
 <div class="hero-actions">
 <a class="btn-hero-primary" href="#accreditation" onclick="showInteractivePreview('پیشنمایش تعاملی سنجههای ملی فعال شد.')">
-<svg fill="none" height="20" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24" width="20"><path d="M5 3l14 9-14 9V3z"></path></svg>
+<svg fill="none" height="20" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" width="20"><path d="M5 3l14 9-14 9V3z"></path></svg>
 <span>ورود به پیشنمایش تعاملی سنجهها</span>
 </a>
 <a class="btn-hero-secondary" href="#demo">
-<svg fill="none" height="20" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24" width="20"><rect height="16" rx="2" width="18" x="3" y="4"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg>
+<svg fill="none" height="20" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" width="20"><rect height="16" rx="2" width="18" x="3" y="4"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg>
 <span>رزرو جلسه دمو برای هیئترئیسه بیمارستان</span>
 </a>
 </div>
@@ -2057,7 +2140,7 @@
 <div class="stat-counters-grid">
 <div class="stat-counter-card folded-corner">
 <div class="stat-icon-halo">
-<svg fill="none" height="36" viewbox="0 0 24 24" width="36">
+<svg fill="none" height="36" viewBox="0 0 24 24" width="36">
 <circle cx="12" cy="12" r="9" stroke="var(--gold-400)" stroke-dasharray="3 3" stroke-width="1.8"></circle>
 <path d="M8 12l2.5 2.5L16 9" stroke="#fff0c7" stroke-linecap="round" stroke-width="2"></path>
 </svg>
@@ -2068,7 +2151,7 @@
 </div>
 <div class="stat-counter-card folded-corner">
 <div class="stat-icon-halo">
-<svg fill="none" height="36" viewbox="0 0 24 24" width="36">
+<svg fill="none" height="36" viewBox="0 0 24 24" width="36">
 <path d="M12 2l8 4.5v6c0 5-3.5 9.5-8 11.5-4.5-2-8-6.5-8-11.5v-6l8-4.5z" stroke="#ef4444" stroke-width="1.8"></path>
 <path d="M12 8v5M12 16h.01" stroke="#fca5a5" stroke-linecap="round" stroke-width="2"></path>
 </svg>
@@ -2079,7 +2162,7 @@
 </div>
 <div class="stat-counter-card folded-corner">
 <div class="stat-icon-halo">
-<svg fill="none" height="36" viewbox="0 0 24 24" width="36">
+<svg fill="none" height="36" viewBox="0 0 24 24" width="36">
 <rect height="16" rx="4" stroke="var(--emerald-400)" stroke-width="1.8" width="16" x="4" y="4"></rect>
 <path d="M9 12h6M12 9v6" stroke="#bbeef7" stroke-linecap="round" stroke-width="2"></path>
 </svg>
@@ -2090,7 +2173,7 @@
 </div>
 <div class="stat-counter-card folded-corner">
 <div class="stat-icon-halo">
-<svg fill="none" height="36" viewbox="0 0 24 24" width="36">
+<svg fill="none" height="36" viewBox="0 0 24 24" width="36">
 <polygon fill="rgba(212,175,90,0.1)" points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" stroke="var(--gold-400)" stroke-width="1.8"></polygon>
 </svg>
 </div>
@@ -2112,7 +2195,7 @@
             ساختار مهندسیشده سهگانه برای هدایت ارزیابیهای ادواری و ممیزی رسمی با اتصال خودکار شواهد به تکتک سنجهها.
           </p>
 </div>
-<div class="section-badge-right">۳ هاب مادر // ۱۹ حوزه کلیدی</div>
+<div class="section-badge-right">۳ هاب مادر // ۱۸ محور تخصصی</div>
 </div>
 <!-- 3 Master Hubs -->
 <div class="hubs-grid">
@@ -2130,8 +2213,8 @@
 </div>
 </div>
 <div class="hub-stats-row">
-<span class="hub-micro-badge">۸ حوزه کلیدی</span>
-<span class="hub-micro-badge">۱۴۶ سنجه مصوب</span>
+<span class="hub-micro-badge">۷ محور تخصصی</span>
+<span class="hub-micro-badge">۱۵۱ سنجه مصوب</span>
 </div>
 <p style="font-size: 0.95rem; color: var(--text-sub); margin-bottom: 14px; line-height: 2.0;">
               حکمرانی بالینی، مدیریت منابع انسانی، بهداشت محیط، ایمنی تاسیسات و برنامهریزی استراتژیک بیمارستانی.
@@ -2160,8 +2243,8 @@
 </div>
 </div>
 <div class="hub-stats-row">
-<span class="hub-micro-badge" style="border-color: var(--emerald-400);">۱۰ حوزه بالینی تخصصی</span>
-<span class="hub-micro-badge" style="border-color: var(--emerald-400);">۲۸۸ سنجه حساس</span>
+<span class="hub-micro-badge" style="border-color: var(--emerald-400);">۹ محور بالینی تخصصی</span>
+<span class="hub-micro-badge" style="border-color: var(--emerald-400);">۱۹۲ سنجه بالینی</span>
 </div>
 <p style="font-size: 0.95rem; color: var(--text-sub); margin-bottom: 14px; line-height: 2.0;">
               شریان حیاتی بیمارستان شامل اورژانس پیشرفته، اتاقهای عمل، مراقبتهای ویژه، مادر و نوزاد و مدیریت دارویی ب-۶.
@@ -2191,7 +2274,7 @@
 </div>
 <div class="hub-stats-row">
 <span class="hub-micro-badge">منشور حقوق بیمار</span>
-<span class="hub-micro-badge">۸۶ سنجه رضایتمندی</span>
+<span class="hub-micro-badge">۵۲ سنجه حمایت از گیرنده</span>
 </div>
 <p style="font-size: 0.95rem; color: var(--text-sub); margin-bottom: 14px; line-height: 2.0;">
               تضمین کرامت انسانی، رضایت آگاهانه، مدیریت شکایات در کمتر از ۲۴ ساعت و رفاه همراهان بیمار.
@@ -2245,10 +2328,10 @@
 <span class="gold-gradient-text">STANDARD VIEW</span>
 </div>
 <h4 class="level-title">صفحه تخصصی استاندارد</h4>
-<p class="level-desc">دسترسی به ۸۸ استاندارد کشوری (مانند ب-۱ اورژانس یا الف-۴ منابع انسانی) به همراه کتابچه راهنمای ارزیابی و الزامات مستنداتی.</p>
+<p class="level-desc">دسترسی به ۸۸ استاندارد کشوری (مانند ب-۲ اورژانس یا الف-۳ منابع انسانی) به همراه کتابچه راهنمای ارزیابی و الزامات مستنداتی.</p>
 </div>
 <div style="font-size: 0.8rem; color: var(--gold-300); background: rgba(212,175,90,0.12); padding: 10px; border-radius: 10px; border: 1px solid rgba(212,175,90,0.25); text-align: center;">
-                تعداد سنجههای ذیل استاندارد انتخابی: ۱۸ سنجه
+                تعداد سنجههای ذیل استاندارد : ۱ تا ۱۸ سنجه
               </div>
 </div>
 <div class="flow-connector-bar"></div>
@@ -2305,55 +2388,65 @@
 </div>
 <div class="section-badge-right">۲۳ روش اجرایی استاندارد (SOP)</div>
 </div>
-<!-- 9 Clinical Axes Filter Chips -->
-<div class="axes-pills-row">
-<div class="axis-pill-chip active" onclick="filterAxes('all')">
+<!-- دکمه‌های فیلتر محورهای بالینی نسل ششم — Counts بر اساس سنجه‌های واقعی هر محور -->
+<div class="axes-pills-row" role="group" aria-label="فیلتر فرآیندهای بالینی بر اساس محورهای نسل ششم">
+<button type="button" class="axis-pill-chip active" aria-pressed="true" onclick="filterAxes('all', this)">
 <span class="code-tag">ALL</span>
 <span>همه محورهای بالینی</span>
-</div>
-<div class="axis-pill-chip" onclick="filterAxes('emergency')">
+<span class="chip-count">۱۹۲ سنجه</span>
+</button>
+<button type="button" class="axis-pill-chip" aria-pressed="false" onclick="filterAxes('emergency', this)">
 <span class="code-tag">ب-۲</span>
 <span>اورژانس و حوادث</span>
-</div>
-<div class="axis-pill-chip" onclick="filterAxes('pharma')">
+<span class="chip-count">۲۴ سنجه</span>
+</button>
+<button type="button" class="axis-pill-chip" aria-pressed="false" onclick="filterAxes('pharma', this)">
 <span class="code-tag">ب-۶</span>
 <span>مدیریت خدمات دارویی</span>
-</div>
-<div class="axis-pill-chip" onclick="filterAxes('infection')">
+<span class="chip-count">۱۶ سنجه</span>
+</button>
+<button type="button" class="axis-pill-chip" aria-pressed="false" onclick="filterAxes('infection', this)">
 <span class="code-tag">ب-۵</span>
-<span>کنترل عفونتهای بیمارستانی</span>
-</div>
-<div class="axis-pill-chip" onclick="filterAxes('surgery')">
+<span>کنترل عفونت‌های بیمارستانی</span>
+<span class="chip-count">۲۴ سنجه</span>
+</button>
+<button type="button" class="axis-pill-chip" aria-pressed="false" onclick="filterAxes('surgery', this)">
 <span class="code-tag">ب-۳</span>
 <span>اتاق عمل و جراحی</span>
-</div>
-<div class="axis-pill-chip" onclick="filterAxes('maternal')">
+<span class="chip-count">۱۵ سنجه</span>
+</button>
+<button type="button" class="axis-pill-chip" aria-pressed="false" onclick="filterAxes('maternal', this)">
 <span class="code-tag">ب-۴</span>
 <span>مادر و نوزاد (بلوک زایمان)</span>
-</div>
-<div class="axis-pill-chip" onclick="filterAxes('lab')">
+<span class="chip-count">۱۶ سنجه</span>
+</button>
+<button type="button" class="axis-pill-chip" aria-pressed="false" onclick="filterAxes('lab', this)">
 <span class="code-tag">ب-۸</span>
 <span>آزمایشگاه و پاتولوژی</span>
-</div>
-<div class="axis-pill-chip" onclick="filterAxes('blood')">
+<span class="chip-count">۱۴ سنجه</span>
+</button>
+<button type="button" class="axis-pill-chip" aria-pressed="false" onclick="filterAxes('blood', this)">
 <span class="code-tag">ب-۸</span>
 <span>بانک خون و هموویژیلانس</span>
-</div>
-<div class="axis-pill-chip" onclick="filterAxes('imaging')">
+<span class="chip-count">۱۱ سنجه</span>
+</button>
+<button type="button" class="axis-pill-chip" aria-pressed="false" onclick="filterAxes('imaging', this)">
 <span class="code-tag">ب-۷</span>
 <span>تصویربرداری پزشکی</span>
-</div>
-<div class="axis-pill-chip" onclick="filterAxes('outpatient')">
+<span class="chip-count">۱۳ سنجه</span>
+</button>
+<button type="button" class="axis-pill-chip" aria-pressed="false" onclick="filterAxes('outpatient', this)">
 <span class="code-tag">ب-۹</span>
 <span>خدمات سرپایی و کلینیک</span>
-</div>
+<span class="chip-count">۱۶ سنجه</span>
+</button>
 </div>
 <!-- MANDATORY HORIZONTAL RTL FLOW: 23 Approved Clinical SOPs -->
 <div style="background: radial-gradient(circle at 50% 0%, rgba(15,23,37,0.7), rgba(9,14,22,0.9)); border: 1px solid var(--border-gold); border-radius: 22px; padding: 1.85rem; box-shadow: var(--shadow-lux);">
 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px;">
 <div>
 <h3 style="font-size: 1.15rem; font-weight: 800; color: #ffffff;">مسیر افقی فرآیندهای بالینی تصویبشده (Connected Clinical SOP Matrix)</h3>
-<p style="font-size: 0.84rem; color: var(--text-muted); margin-top: 4px;">جریان افقی متصل به منظور پیگیری لحظهای اجرای پروتکلها در بخشهای بستری و ویژه</p>
+<p style="font-size: 0.84rem; color: var(--text-muted); margin-top: 4px;">نمونهٔ منتخب ۶ فرآیند از ۲۳ روش اجرایی؛ جریان افقی برای پیگیری لحظهای اجرای پروتکلها در بخشهای بستری و ویژه</p>
 </div>
 <span style="font-size: 0.8rem; color: var(--emerald-400); background: rgba(16,160,185,0.18); padding: 6px 14px; border-radius: 8px; border: 1px solid rgba(16,160,185,0.3);">
             پایش آنلاین زمان پاسخدهی (TAT)
@@ -2372,7 +2465,7 @@
 <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 8px; line-height: 1.85;">ثبت فرم ثبت مهار، پایش علائم حیاتی هر ۱۵ دقیقه و دستور کتبی پزشک مقیم.</p>
 </div>
 <div class="sop-meta-info">
-<span>استاندارد مرجع: ب-۱-۳</span>
+<span>استاندارد مرجع: ب-۱-۱۰</span>
 <span class="emerald-gradient-text">انطباق: ۹۸٪</span>
 </div>
 </div>
@@ -2408,7 +2501,7 @@
 <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 8px; line-height: 1.85;">دستبند زرد شناسه، نردههای محافظ تخت و نظارت اختصاصی در بخشهای سالمندان و نورولوژی.</p>
 </div>
 <div class="sop-meta-info">
-<span>استاندارد مرجع: ب-۳-۴</span>
+<span>استاندارد مرجع: ب-۱-۳</span>
 <span class="emerald-gradient-text">انطباق: ۱۰۰٪</span>
 </div>
 </div>
@@ -2426,7 +2519,7 @@
 <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 8px; line-height: 1.85;">علامتگذاری موضع جراحی، Sign-in قبل بیهوشی، Time-out قبل برش و Sign-out قبل خروج.</p>
 </div>
 <div class="sop-meta-info">
-<span>استاندارد مرجع: ب-۲-۱</span>
+<span>استاندارد مرجع: ب-۳-۲</span>
 <span class="emerald-gradient-text">انطباق: ۹۹٪</span>
 </div>
 </div>
@@ -2462,11 +2555,19 @@
 <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 8px; line-height: 1.85;">پایش ۵ لحظه بهداشت دست، تفکیک زبالههای عفونی و ایزولاسیون تنفسی هوابرد/قطرهای.</p>
 </div>
 <div class="sop-meta-info">
-<span>استاندارد مرجع: ب-۷-۱</span>
+<span>استاندارد مرجع: ب-۵-۴ و ب-۵-۷</span>
 <span class="emerald-gradient-text">انطباق: ۹۲٪</span>
 </div>
 </div>
 </div>
+</div>
+<div class="sop-flow-nav" role="group" aria-label="پیمایش افقی فرآیندهای بالینی">
+<button type="button" class="sop-flow-btn" id="sopNext" aria-label="فرآیندهای بعدی">‹</button>
+<button type="button" class="sop-flow-btn" id="sopPrev" aria-label="فرآیندهای قبلی">›</button>
+</div>
+<div class="sop-flow-cta">
+<p>۶ فرآیند منتخب از ۲۳ روش اجرایی استاندارد نمایش داده شده است؛ متن کامل هر ۲۳ فرآیند همراه با فرم‌ها و شواهد ممیزی در سامانهٔ بیمارستان در دسترس است.</p>
+<a class="nav-cta-btn" href="/" style="background:rgba(16,160,185,.18);border-color:var(--emerald-400);color:#8fe3ef;white-space:nowrap">مشاهده در سامانه ›</a>
 </div>
 </div>
 </section>
@@ -2490,7 +2591,7 @@
 <div class="safety-highlight-banner">
 <div class="safety-banner-content">
 <div class="safety-icon-alarm">
-<svg viewbox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" x2="12" y1="9" y2="13"></line><line x1="12" x2="12.01" y1="17" y2="17"></line></svg>
+<svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" x2="12" y1="9" y2="13"></line><line x1="12" x2="12.01" y1="17" y2="17"></line></svg>
 </div>
 <div>
 <div class="safety-banner-title">پروتکل فوری اعلام و واکنش به Never Events در کمتر از ۶ ساعت</div>
@@ -2509,7 +2610,7 @@
 <div class="lux-card folded-corner safety-tool-card">
 <div>
 <div class="tool-icon-circle">
-<svg viewbox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+<svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
 </div>
 <h3 style="font-size: 1.15rem; font-weight: 800; color: #ffffff; margin-bottom: 10px; line-height: 1.4;">ثبت محرمانه و بدون سرزنش خطا</h3>
 <p style="font-size: 0.92rem; color: var(--text-sub); line-height: 1.85; margin-bottom: 18px;">
@@ -2523,7 +2624,7 @@
 <div class="lux-card folded-corner safety-tool-card">
 <div>
 <div class="tool-icon-circle">
-<svg viewbox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" x2="12.01" y1="17" y2="17"></line></svg>
+<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" x2="12.01" y1="17" y2="17"></line></svg>
 </div>
 <h3 style="font-size: 1.15rem; font-weight: 800; color: #ffffff; margin-bottom: 10px; line-height: 1.4;">ماژول تحلیل ریشهای RCA</h3>
 <p style="font-size: 0.92rem; color: var(--text-sub); line-height: 1.85; margin-bottom: 18px;">
@@ -2537,7 +2638,7 @@
 <div class="lux-card folded-corner safety-tool-card">
 <div>
 <div class="tool-icon-circle">
-<svg viewbox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+<svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
 </div>
 <h3 style="font-size: 1.15rem; font-weight: 800; color: #ffffff; margin-bottom: 10px; line-height: 1.4;">تحلیل حالات و اثرات خطا (FMEA)</h3>
 <p style="font-size: 0.92rem; color: var(--text-sub); line-height: 1.85; margin-bottom: 18px;">
@@ -2682,12 +2783,12 @@
 <div class="copilot-avatar-wrap">
 <div class="copilot-orbit-ring"></div>
 <div class="copilot-avatar-box">
-<svg viewbox="0 0 24 24"><path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"></path><rect height="12" rx="4" width="16" x="4" y="10"></rect><circle cx="9" cy="16" r="1.5"></circle><circle cx="15" cy="16" r="1.5"></circle></svg>
+<svg viewBox="0 0 24 24"><path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"></path><rect height="12" rx="4" width="16" x="4" y="10"></rect><circle cx="9" cy="16" r="1.5"></circle><circle cx="15" cy="16" r="1.5"></circle></svg>
 </div>
 </div>
 <h3 style="font-size: 1.65rem; font-weight: 900; color: #ffffff; margin-bottom: 12px; line-height: 1.35;">دستیار هوشمند «دانا»</h3>
 <p style="font-size: 0.95rem; color: var(--text-sub); line-height: 1.9; margin-bottom: 24px;">
-            دانا با بازیابی معنایی سریع (Semantic Search) در ثانیه به پرستاران، سرپرستاران و مدیران کیفیت پاسخ میدهد؛ از آخرین الزامات سنجه ب-۶-۳ داروهای با هشدار بالا (High-Alert) تا تدوین فرمهای تحلیل خطا.
+            دانا با بازیابی معنایی سریع (Semantic Search) در ثانیه به پرستاران، سرپرستاران و مدیران کیفیت پاسخ میدهد؛ از آخرین الزامات سنجه ب-۶-۱-۶ داروهای با هشدار بالا (High-Alert) تا تدوین فرمهای تحلیل خطا.
           </p>
 <div style="display: flex; gap: 12px; flex-wrap: wrap;">
 <div style="background: rgba(16,160,185,0.18); border: 1px solid var(--emerald-500); padding: 10px 16px; border-radius: 12px; font-size: 0.84rem; color: #6ed5e7; font-weight: 700;">
@@ -2704,7 +2805,7 @@
             «سنجههای الزامآور در زمینه نگهداری داروهای با شباهت اسمی و ظاهری (LASA) در ویرایش ششم کدامند و چه شواهدی باید بارگذاری شود؟»
           </div>
 <div class="chat-message-bubble chat-ai">
-            طبق استاندارد ملی <strong>ب-۶-۳ (مدیریت خدمات دارویی)</strong>:
+            طبق استاندارد ملی <strong>ب-۶-۱-۶ (نگهداری و توزیع ایمن داروهای با هشدار بالا)</strong>:
             <br/>
             ۱. برچسبگذاری با خط قرمز و حروف بزرگ (Tall Man Lettering) بر روی قفسهها الزامی است.
             <br/>
@@ -2755,7 +2856,7 @@
 <tr>
 <td><strong>تطابق خودکار با ۳۹۵ سنجه ملی وزارت بهداشت</strong></td>
 <td><span class="status-check-no">✕ مغایرت بالا به دلیل فایلهای اکسل متعدد</span></td>
-<td class="dana-cell"><span class="status-check-yes">✓ انطباق ۱۰۰٪ با کتابچه ملی نسخه ۵ و آپدیت خودکار</span></td>
+<td class="dana-cell"><span class="status-check-yes">✓ انطباق ۱۰۰٪ با کتابچه ملی نسخه ۶ و آپدیت خودکار</span></td>
 </tr>
 <tr>
 <td><strong>تحلیل علل ریشهای خطا (RCA و FMEA)</strong></td>
@@ -2813,6 +2914,9 @@
 </form>
 </section>
 </main>
+<button type="button" class="cat-back-top" id="catBackTop" aria-label="بازگشت به بالای صفحه" title="بازگشت به بالا">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
+</button>
 <!-- Interactive Toast Notification -->
 <div class="preview-toast" id="interactiveToast">
 <div style="width: 12px; height: 12px; border-radius: 50%; background: var(--emerald-400); box-shadow: 0 0 12px var(--emerald-400);"></div>
@@ -2834,78 +2938,125 @@
 </div>
 </footer>
 <script>
-    
-    // Mobile navigation drawer toggle
-    const catMenuToggleBtn = document.getElementById('catMenuToggleBtn');
-    const catNavLinks = document.getElementById('catNavLinks');
-    if (catMenuToggleBtn && catNavLinks) {
-      catMenuToggleBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        catNavLinks.classList.toggle('mob-open');
-      });
-      document.addEventListener('click', (e) => {
-        if (!catNavLinks.contains(e.target) && !catMenuToggleBtn.contains(e.target)) {
-          catNavLinks.classList.remove('mob-open');
-        }
-      });
-      catNavLinks.querySelectorAll('a').forEach(a => {
-        a.addEventListener('click', () => {
-          catNavLinks.classList.remove('mob-open');
-        });
-      });
-    }
+(function () {
+  'use strict';
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Hash scrolling support
-    window.addEventListener('DOMContentLoaded', () => {
-      if (window.location.hash) {
-        const el = document.querySelector(window.location.hash);
-        if (el) setTimeout(() => el.scrollIntoView({ behavior: 'smooth' }), 250);
+  // --- منوی موبایل ---
+  var catMenuToggleBtn = document.getElementById('catMenuToggleBtn');
+  var catNavLinks = document.getElementById('catNavLinks');
+  if (catMenuToggleBtn && catNavLinks) {
+    catMenuToggleBtn.setAttribute('aria-expanded', 'false');
+    function closeMenu() { catNavLinks.classList.remove('mob-open'); catMenuToggleBtn.setAttribute('aria-expanded', 'false'); }
+    catMenuToggleBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var open = catNavLinks.classList.toggle('mob-open');
+      catMenuToggleBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    document.addEventListener('click', function (e) {
+      if (!catNavLinks.contains(e.target) && !catMenuToggleBtn.contains(e.target)) closeMenu();
+    });
+    catNavLinks.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', closeMenu); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMenu(); });
+  }
+
+  // --- اعلان تعاملی ---
+  var toastTimer = null;
+  function showInteractivePreview(message) {
+    var toast = document.getElementById('interactiveToast');
+    var msgElem = document.getElementById('toastMessage');
+    if (!toast || !msgElem) return;
+    msgElem.textContent = message;
+    toast.classList.add('show');
+    if (toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toast.classList.remove('show'); }, 3400);
+  }
+  window.showInteractivePreview = showInteractivePreview;
+
+  // --- فیلتر محورهای بالینی (دکمه‌های دسترس‌پذیر) ---
+  window.filterAxes = function (category, btn) {
+    var chips = document.querySelectorAll('.axis-pill-chip');
+    chips.forEach(function (chip) {
+      chip.classList.remove('active');
+      chip.setAttribute('aria-pressed', 'false');
+    });
+    var el = btn || document.querySelector('.axis-pill-chip');
+    if (el) { el.classList.add('active'); el.setAttribute('aria-pressed', 'true'); }
+    var track = document.getElementById('sop-flow-track');
+    if (track) track.scrollTo({ left: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+    showInteractivePreview('فیلتر فرآیندهای بالینی: ' + (el ? el.textContent.replace(/\s+/g, ' ').trim() : 'همه'));
+  };
+
+  // --- فرم دمو ---
+  window.handleFormSubmit = function (e) {
+    e.preventDefault();
+    showInteractivePreview('درخواست دمو با موفقیت ثبت شد؛ همکاران ما به زودی با شما تماس خواهند گرفت.');
+    e.target.reset();
+  };
+
+  // --- اسکرول نرم لنگرها ---
+  document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+    anchor.addEventListener('click', function (e) {
+      var href = this.getAttribute('href');
+      if (!href || href === '#') return;
+      var target = null;
+      try { target = document.querySelector(href); } catch (err) { return; }
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+        if (history.replaceState) history.replaceState(null, '', href);
       }
     });
+  });
 
-    // Interactive Notification Toast
-    function showInteractivePreview(message) {
-      const toast = document.getElementById('interactiveToast');
-      const msgElem = document.getElementById('toastMessage');
-      if (toast && msgElem) {
-        msgElem.textContent = message;
-        toast.classList.add('show');
-        setTimeout(() => {
-          toast.classList.remove('show');
-        }, 3400);
-      }
+  // --- نوار پیشرفت مطالعه، اسکرول‌اسپای و بازگشت به بالا ---
+  var progressBar = document.getElementById('catScrollProgress');
+  var backTop = document.getElementById('catBackTop');
+  var navAnchors = Array.prototype.slice.call(document.querySelectorAll('.nav-links .nav-link-item[href^="#"]'));
+  var sections = Array.prototype.slice.call(document.querySelectorAll('main section[id]'));
+  function onScroll() {
+    var doc = document.documentElement;
+    var max = doc.scrollHeight - doc.clientHeight;
+    var pct = max > 0 ? Math.min(100, Math.max(0, (doc.scrollTop / max) * 100)) : 0;
+    if (progressBar) progressBar.style.width = pct.toFixed(2) + '%';
+    if (backTop) backTop.classList.toggle('show', doc.scrollTop > 480);
+    var current = '';
+    for (var i = 0; i < sections.length; i++) {
+      if (sections[i].getBoundingClientRect().top <= 160) current = sections[i].id;
     }
-
-    // Filter Chips Interactive State
-    function filterAxes(category) {
-      const chips = document.querySelectorAll('.axis-pill-chip');
-      chips.forEach(chip => chip.classList.remove('active'));
-      event.currentTarget.classList.add('active');
-      showInteractivePreview('فیلتر فرآیندهای بالینی: ' + event.currentTarget.innerText.trim());
-    }
-
-    // Form submission mock
-    function handleFormSubmit(e) {
-      e.preventDefault();
-      showInteractivePreview('درخواست دمو با موفقیت ثبت شد. همکاران ما به زودی با شما تماس خواهند گرفت.');
-      e.target.reset();
-    }
-
-    // Smooth scroll for nav items
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        const targetId = this.getAttribute('href');
-        if (targetId && targetId !== '#') {
-          const target = document.querySelector(targetId);
-          if (target) {
-            e.preventDefault();
-            target.scrollIntoView({
-              behavior: 'smooth',
-              block: 'start'
-            });
-          }
-        }
-      });
+    navAnchors.forEach(function (a) {
+      var isActive = a.getAttribute('href') === '#' + current;
+      a.classList.toggle('active', isActive);
+      if (isActive) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
     });
-  </script>
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  onScroll();
+  if (backTop) backTop.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+  });
+
+  // --- پیمایش افقی فرآیندهای SOP (قاعدهٔ ۱۱: جریان افقی RTL) ---
+  var track = document.getElementById('sop-flow-track');
+  var nextBtn = document.getElementById('sopNext');
+  var prevBtn = document.getElementById('sopPrev');
+  function scrollTrack(dir) {
+    if (!track) return;
+    var step = Math.max(300, Math.min(420, track.clientWidth * 0.8));
+    track.scrollBy({ left: dir * step, behavior: reduceMotion ? 'auto' : 'smooth' });
+  }
+  if (nextBtn) nextBtn.addEventListener('click', function () { scrollTrack(-1); });
+  if (prevBtn) prevBtn.addEventListener('click', function () { scrollTrack(1); });
+
+  // --- هش اولیه ---
+  window.addEventListener('DOMContentLoaded', function () {
+    if (location.hash) {
+      var el = null;
+      try { el = document.querySelector(location.hash); } catch (err) { el = null; }
+      if (el) setTimeout(function () { el.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' }); }, 200);
+    }
+  });
+})();
+</script>
 </body></html>
