@@ -224,6 +224,17 @@ async function deploy() {
     return;
   }
 
+  // اگر کدِ خودِ سوپروایزر عوض شده، همین فرآیند باید با نسخه‌ی تازه جایگزین
+  // شود؛ وگرنه Node نسخه‌ی قدیمیِ بارگذاری‌شده را تا ری‌استارت کانتینر اجرا
+  // می‌کند (تستِ واقعی ۱۴۰۵/۰۷/۲۸: فیلترِ docs-only تا ری‌استارت بی‌اثر بود).
+  const selfUpdate = changedFiles.some((f) => /^scripts\/(live-deploy|boot)\.js$/.test(f));
+  if (selfUpdate) {
+    log('کدِ خودِ سوپروایزر عوض شد — خروجِ تمیز تا boot.js نسخه‌ی تازه را بالا بیاورد');
+    stopping = true;
+    await stopApp();
+    process.exit(0);
+  }
+
   log('ری‌استارتِ نرم برای بارگذاری کدِ تازه…');
   await restartApp();
 }

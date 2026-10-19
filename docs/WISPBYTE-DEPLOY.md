@@ -34,7 +34,7 @@
 پنل دستور را در `/entrypoint.sh` با `eval` اجرا می‌کند و **خطوط جدید را به فاصله تبدیل می‌کند**؛ پس هر `if ... then` چندخطی با `syntax error near unexpected token 'then'` می‌شکند. همه‌چیز باید با `;` در یک خط باشد:
 
 ```
-cd /home/container || exit 1; if [ ! -f package.json ] && [ -n "${GIT_ADDRESS}" ]; then git clone --depth 1 -b "${BRANCH:-main}" "${GIT_ADDRESS}" . || echo "[boot] git clone failed"; fi; if [ -d .git ] && [ "${AUTO_UPDATE:-0}" = "1" ]; then git fetch --depth 1 origin "${BRANCH:-main}" && git reset --hard FETCH_HEAD || echo "[boot] git update skipped"; fi; if [ ! -f .env ]; then { echo NODE_ENV=production; echo PORT=${SERVER_PORT:-12220}; echo JWT_SECRET=$(head -c 64 /dev/urandom | base64 | tr -dc A-Za-z0-9 | head -c 48); } > .env; fi; if [ ! -f .deps-ok ]; then rm -rf node_modules; fi; if [ -n "${NODE_PACKAGES}" ]; then npm install --no-audit --no-fund ${NODE_PACKAGES}; fi; if [ -n "${UNNODE_PACKAGES}" ]; then npm uninstall ${UNNODE_PACKAGES}; fi; if [ -f package.json ]; then npm install --no-audit --no-fund; touch .deps-ok; fi; if [ ! -f .db-restored-v3 ]; then npm run demo-restore -- --force || echo "[boot] demo-restore failed"; touch .db-restored-v3; fi; exec node scripts/live-deploy.js
+cd /home/container || exit 1; if [ ! -f package.json ] && [ -n "${GIT_ADDRESS}" ]; then git clone --depth 1 -b "${BRANCH:-main}" "${GIT_ADDRESS}" . || echo "[boot] git clone failed"; fi; if [ -d .git ] && [ "${AUTO_UPDATE:-0}" = "1" ]; then git fetch --depth 1 origin "${BRANCH:-main}" && git reset --hard FETCH_HEAD || echo "[boot] git update skipped"; fi; if [ ! -f .env ]; then { echo NODE_ENV=production; echo PORT=${SERVER_PORT:-12220}; echo JWT_SECRET=$(head -c 64 /dev/urandom | base64 | tr -dc A-Za-z0-9 | head -c 48); } > .env; fi; if [ ! -f .deps-ok ]; then rm -rf node_modules; fi; if [ -n "${NODE_PACKAGES}" ]; then npm install --no-audit --no-fund ${NODE_PACKAGES}; fi; if [ -n "${UNNODE_PACKAGES}" ]; then npm uninstall ${UNNODE_PACKAGES}; fi; if [ -f package.json ]; then npm install --no-audit --no-fund; touch .deps-ok; fi; if [ ! -f .db-restored-v3 ]; then npm run demo-restore -- --force || echo "[boot] demo-restore failed"; touch .db-restored-v3; fi; exec node scripts/boot.js
 ```
 
 چه می‌کند:
@@ -44,20 +44,31 @@ cd /home/container || exit 1; if [ ! -f package.json ] && [ -n "${GIT_ADDRESS}" 
 3. `.env` فقط یک‌بار ساخته می‌شود: `NODE_ENV=production` + `PORT` از `SERVER_PORT` + `JWT_SECRET` تصادفی ۴۸ کاراکتری (اجباری؛ گاردِ `src/config/app.js` در production بدون آن بالا نمی‌آید).
 4. `node_modules` فقط وقتی نشانگر `.deps-ok` نباشد از صفر نصب می‌شود (اولین بوت حدود ۳ دقیقه؛ بعد از آن چند ثانیه).
 5. اگر نشانگر `.db-restored-v3` نباشد، عکس دمو روی دیتابیس بازگردانی می‌شود (`npm run demo-restore -- --force`).
-6. در پایان، **`scripts/live-deploy.js`** بالا می‌آید (سوپروایزر خودبه‌روز — بخش بعد).
+6. در پایان، **`scripts/boot.js`** بالا می‌آید: نگهبانِ بیرونی → `scripts/live-deploy.js` (سوپروایزر خودبه‌روز) → `src/app.js` (بخش بعد).
 
 > برای وادار کردن نصب مجدد وابستگی‌ها یا بازگردانی دوبارهٔ دیتابیس، همان فایل نشانگر (`.deps-ok` / `.db-restored-v3`) را در File Manager پاک کن و ری‌استارت بزن.
 
-## به‌روزرسانی خودکار پس از هر push (`scripts/live-deploy.js`)
+## به‌روزرسانی خودکار پس از هر push (`scripts/boot.js` + `scripts/live-deploy.js`)
 
-پلن رایگان نه webhook دارد نه CI؛ متغیر `AUTO_UPDATE` پنل هم فقط هنگامِ استارتِ کانتینر کار می‌کند. برای خواستِ «هر بار GitHub آپدیت شد، این نصب هم آپدیت شود»، فرمانِ نهاییِ Startup به‌جای `node src/app.js` این سوپروایزر را اجرا می‌کند:
+پلن رایگان نه webhook دارد نه CI؛ متغیر `AUTO_UPDATE` پنل هم فقط هنگامِ استارتِ کانتینر کار می‌کند. برای خواستِ «هر بار GitHub آپدیت شد، این نصب هم آپدیت شود»، فرمانِ نهاییِ Startup به‌جای `node src/app.js` زنجیرهٔ سه‌لایه را اجرا می‌کند:
 
-- اپ را به‌عنوان **فرزند** بالا می‌آورد (لاگ‌ها بدون تغییر به کنسول پنل می‌روند).
+```
+پنل ──exec──► scripts/boot.js ──spawn──► scripts/live-deploy.js ──spawn──► src/app.js
+              (نگهبانِ ثابت)              (دیپلویِ خودبه‌روز)            (اپ)
+```
+
+- `live-deploy.js` اپ را به‌عنوان **فرزند** بالا می‌آورد (لاگ‌ها بدون تغییر به کنسول پنل می‌روند).
 - هر `DEPLOY_POLL_SECONDS` (پیش‌فرض **۱۲۰ ثانیه**) با `git ls-remote` HEAD ریموت را می‌پرسد.
-- اگر جلو رفته بود: `git fetch --depth 1` → `git reset --hard FETCH_HEAD` → اگر `package.json`/`package-lock.json` عوض شده باشد `npm install` → **ری‌استارتِ نرم با SIGTERM** (۸ ثانیه مهلت) تا کدِ تازه و مهاجرت‌ها/seedهای بوت دوباره اجرا شوند.
+- اگر جلو رفته بود: `git fetch --depth 1` → `git reset --hard FETCH_HEAD` → اگر `package.json`/`package-lock.json` عوض شده باشد `npm install` → بر اساس نوع تغییر یکی از این سه:
+  - **تغییر مستندات/تست‌ها** (`docs/`، `tests/`، `*.md` ریشه، `.opencode/`): فقط کد روی دیسک به‌روز می‌شود؛ اپ **ری‌استارت نمی‌شود** (بدون downtime).
+  - **تغییر کدِ خودِ سوپروایزر** (`scripts/live-deploy.js` یا `scripts/boot.js`): سوپروایزر با `SIGTERM` اپ را می‌بندد و تمیز خارج می‌شود؛ `boot.js` بلافاصله نسخهٔ تازه را بالا می‌آورد (بدون ری‌استارت کانتینر و بدون ویدیوی پاداش).
+  - **هر تغییر دیگر** (`src/`، `public/`، `database/`، `package.json`…): ری‌استارتِ نرم با `SIGTERM` (۸ ثانیه مهلت) تا کدِ تازه و مهاجرت‌ها/seedهای بوت دوباره اجرا شوند.
 - اگر `npm install` شکست بخورد، **اپِ سالمِ فعلی کشته نمی‌شود**؛ همان کد قبلی سرویس می‌دهد و نصب در بررسی بعدی تکرار می‌شود (تله‌ی better-sqlite3: کدِ تازه با باینریِ ناقص = کرش).
-- خروجِ غیرمنتظرهٔ اپ → بالا آوردنِ دوباره با backoff (۳ تا ۳۰ ثانیه) تا پنل «stopped» نبیند.
+- خروجِ غیرمنتظرهٔ اپ → بالا آوردنِ دوباره با backoff (۳ تا ۳۰ ثانیه) تا پنل «stopped» نبیند؛ خروجِ غیرمنتظرهٔ سوپروایزر → `boot.js` دو ثانیه بعد دوباره بالا می‌آورد.
 - خطای شبکه/GitHub فقط لاگ می‌شود؛ دسترس‌پذیریِ اپ به GitHub گره نمی‌خورد.
+
+> تنها استثنا: تغییرِ خودِ `scripts/boot.js` تا ری‌استارتِ کانتینر اثر کامل نمی‌کند (نگهبانِ در حال اجرا قابلِ جایگزینیِ درجا نیست)؛ به همین دلیل boot.js عمداً کوچک و تقریباً ثابت است.
+
 
 متغیرهای اختیاری (در Startup یا `.env`): `DEPLOY_POLL_SECONDS` (کمینه ۳۰) · `DEPLOY_BRANCH` · `DEPLOY_REMOTE` · `APP_ENTRY` · `DEPLOY_DISABLE=1`.
 

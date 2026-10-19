@@ -30,7 +30,7 @@
 npm install                 # وابستگیها (Node 22 لازم است)
 npm run demo-restore        # بازگردانی عکس دمو به database/hospital.db (برای کار محلی)
 npm start                   # سرور روی :3000 (توسعه: PORT=3311 هم رایج)
-npm run serve:live          # سوپروایزر خودبه‌روز: هر ۲ دقیقه main را می‌پاید و fetch/reset/install/restart می‌کند (نصب Wispbyte)
+npm run serve:live          # نگهبانِ خودبه‌روز: boot.js → live-deploy.js → اپ؛ هر ۲ دقیقه main را می‌پاید (نصب Wispbyte)
 npm run smoke-test          # ۶ چک سلامت (سرور باید بالا باشد؛ SMOKE_BASE_URL قابل تغییر)
 npm run test:assistant      # ۲۱ ادعای بازیابی دانا — آفلاین
 npm run test:assistant-response  # ۱۰ ادعای مسیر پاسخ دانا — آفلاین (کلید LLM را موقتاً خالی میکند و برمیگرداند)
