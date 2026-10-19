@@ -1,7 +1,7 @@
 'use strict';
 // Service Worker حداقلی PWA
 // فقط پوسته و استاتیک را کش می‌کند؛ API هرگز کش نمی‌شود.
-const CACHE = 'hosp-v25';  // با هر انتشار استاتیک bump کنید تا پوسته به‌روز شود
+const CACHE = 'hosp-v26';  // با هر انتشار استاتیک bump کنید تا پوسته به‌روز شود
 const SHELL = ['/', '/index.html', '/manifest.json', '/css/app.css', '/css/ui-polish.css', '/css/mobile-system.css', '/css/mobile-stack.css', '/js/ui-polish.js'];
 const NETWORK_FIRST = [/^\/$/, /^\/index\.html$/];
 
