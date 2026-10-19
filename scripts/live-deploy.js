@@ -197,6 +197,10 @@ async function deploy() {
   const diff = git(['diff', '--name-only', before, 'FETCH_HEAD']);
   const changedFiles = (diff.stdout || '').trim().split('\n').filter(Boolean);
   const needsInstall = changedFiles.some((f) => /^(package\.json|package-lock\.json|npm-shrinkwrap\.json)$/.test(f));
+  // کامیتِ فقط-مستندات نباید دموی زنده را ری‌استارت کند (downtime بی‌دلیل).
+  // public/ جزوِ مستندات نیست چون فایل‌های استاتیک همان لحظه سرو می‌شوند و
+  // کشِ سرویس‌ورکر باید با نسخه‌ی تازه هم‌تراز شود؛ برای آن‌ها ری‌استارت می‌زنیم.
+  const runtimeChange = changedFiles.some((f) => !/^(docs\/|tests\/|\.opencode\/|[^/]+\.md$)/.test(f));
 
   const reset = git(['reset', '--hard', 'FETCH_HEAD']);
   if (reset.status !== 0) {
@@ -213,6 +217,11 @@ async function deploy() {
       log('نصب ناموفق بود — اپِ فعلی دست‌نخورده می‌ماند؛ تلاشِ دوباره در بررسیِ بعدی');
       return;
     }
+  }
+
+  if (!runtimeChange) {
+    log('این کامیت فقط مستندات/تست بود — ری‌استارت لازم نیست (اپ روشن می‌ماند)');
+    return;
   }
 
   log('ری‌استارتِ نرم برای بارگذاری کدِ تازه…');
