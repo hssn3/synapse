@@ -238,9 +238,15 @@ function fillComplaints(HID) {
   MONTHS.forEach((M, i) => {
     const [type, content] = COMPLAINTS[i % COMPLAINTS.length];
     const body = `${content} (${TAG})`;
+    // گارد باید کلِ بازهٔ همان ماهِ شمسی را بگیرد، نه فقط ماهِ میلادیِ «روز اول» را:
+    // روزِ تصادفیِ ۸ تا ۲۲ می‌تواند به ماهِ میلادیِ بعد بیفتد و آن‌وقت گاردِ قبلی
+    // ردیفِ موجود را نمی‌دید؛ نتیجه: هر بوت ~۱۱ ردیفِ تکراری (باگِ ۱۴۰۵/۰۷/۲۸ —
+    // ۶۰+ نسخه از یک ردیف در دموی زنده). مقایسهٔ رشته‌ای ISO با created_at درست است.
+    const from = g(M.jy, M.jm, 1);
+    const to = g(M.jy, M.jm, 29);
     if (cnt(`SELECT COUNT(*) c FROM patient_complaints_suggestions
-             WHERE hospital_id=? AND content=? AND substr(created_at,1,7)=?`,
-      [HID, body, g(M.jy, M.jm, 1).slice(0, 7)])) return;
+             WHERE hospital_id=? AND content=? AND created_at >= ? AND created_at <= ?`,
+      [HID, body, from, to])) return;
     query(`INSERT INTO patient_complaints_suggestions
              (id, hospital_id, type, content, is_anonymous, status, response, created_at, source)
            VALUES (?,?,?,?,?,?,?,?,?)`,
