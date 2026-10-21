@@ -1,8 +1,15 @@
 # PROGRESS — Hospital Platform Hardening & Completion
 
-> آخرین به‌روزرسانی: 2026-10-20 (نشست ۱۴۰۵/۰۷/۲۸ — کاتالوگ عملیاتی + سرنامه/پاصفحهٔ پریمیوم + استقرار Wispbyte + حذف سرور اوبونتو + تست ماندگاری بک‌اند)
+> آخرین به‌روزرسانی: 2026-10-22 (نشست ۱۴۰۵/۰۷/۳۰ — اصلاحات دانا: override سطح کاربر + کارهای باز من + timeout واقعی provider)
 > این فایل منبعِ حقیقتِ پیشرفت است. در شروع هر نشست: PROGRESS.md را بخوان، سپس `git status` و `git log` را با hash انتهای این فایل مقایسه کن.
 > HEAD محلی به‌عنوان مبنای — از روی حافظه تایپ نشود، همیشه از `git rev-parse HEAD` کپی شود.
+
+## نشست ۱۴۰۵/۰۷/۳۰ (۲۰۲۶-۱۰-۲۲) — اصلاحات دانا: override سطح کاربر، کارهای من، timeout واقعی
+- **override سطح کاربر در دانا:** `searchMeasures` حالا `user_measure_overrides` را با `measureAllowed` اعمال می‌کند (deny داخل محور می‌بندد، grant بیرون از محور باز می‌کند) و ستون `id` سنجه هم در بازیابی برگردانده می‌شود؛ `liveFacts` هم شمارش را با همان قاعده هم‌تراز کرد. پیش از این deny از راه دانا دور زده می‌شد و grant اثری نداشت.
+- **کارهای باز من در پاسخ آفلاین:** بلوک `mine` در `fallbackFromContext` از داخل شرط `knowledge` بیرون آمد؛ محاسبه‌ی `mine` هم قبل از تصمیم `blocked` منتقل شد تا مرز نقش، فهرست کارهای خود کاربر را نبلعد.
+- **timeout واقعی provider:** `chatComplete` و هر سه پیاده‌سازی (OpenAI-compatible/Gemini/Anthropic) سیگنال abort می‌گیرند؛ `handleMessage` کنترلر ۳۰ ثانیه‌ای و پیام آبرومند دارد و روت یک backstop ۴۵ ثانیه‌ای با پاس‌دادن همان سیگنال. پیش از این Promise.race فقط انتظار کاربر را کوتاه می‌کرد و اتصال HTTP باز می‌ماند.
+- **آزمون‌ها:** ادعاهای جدید در `tests/assistant-retrieval-eval.js` (override deny/grant، fallback کارها، مرز نقش + mine) و `tests/assistant-response-eval.js` (abort واقعی fetch با timeout کوتاه). گیت: GitHub Actions؛ فقط بعد از سبز شدن merge می‌شود.
+- **مرزها:** بدون تغییر اسکیمای دیتابیس و بدون راز جدید؛ فایل‌های تغییر‌یافته: `assistant-context.js`، `assistant-chat.js`، `ai-provider.js`، `assistant.routes.js`، `assistant.service.js` + دو eval.
 
 ## نشست ۱۴۰۵/۰۷/۲۸ (د) — حذف سرور اوبونتو + اثبات ماندگاری بک‌اند
 - خواست مالک: سرور `104.252.77.146` حذف شد؛ فقط سه چیز می‌ماند: سایت `https://synapse.wisp.uno`، پوشهٔ دسکتاپ (`C:\Users\RH\Desktop\synapse`) و GitHub (`hssn3/synapse`). ارجاع‌های تاریخیِ سرور در همین فایل صرفاً سابقه‌اند و بخشی از استقرارِ فعلی نیستند.
