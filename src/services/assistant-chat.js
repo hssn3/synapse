@@ -43,6 +43,12 @@ const ctxEngine = require('./assistant-context');
 
 const ASSISTANT_NAME = 'دانا';
 
+// مهلت پاسخ provider. پیش از این فقط روتِ سازمانی یک Promise.race داشت: کاربر
+// بعد از ۳۰ ثانیه جواب می‌گرفت ولی درخواستِ HTTPِ بیرونی باز می‌ماند و توکن
+// مصرف می‌کرد. حالا AbortController تا خودِ fetch/SDK می‌رود. مسیرِ قدیمی که
+// مستقیماً handleMessage را صدا می‌زند هم همین مهلت را می‌گیرد.
+const PROVIDER_TIMEOUT_MS = 30000;
+
 // ---------- لایه‌ی ۱: بازیابی ----------
 //
 // کلِ منطقِ بازیابی به src/services/assistant-context.js منتقل شد. اینجا فقط
@@ -232,7 +238,7 @@ function buildSystemPrompt({ hospitalName, roleLabel, roleScope, ctx }) {
   return lines.join('\n');
 }
 
-async function handleMessage({ hospitalId, userId, conversationId, text, hospitalName, roleCode, roleLabel, permissions }) {
+async function handleMessage({ hospitalId, userId, conversationId, text, hospitalName, roleCode, roleLabel, permissions, signal, timeoutMs }) {
   const convId = ensureConversation(hospitalId, userId, conversationId);
   // تاریخچه *قبل* از ذخیره‌ی پیامِ فعلی خوانده می‌شود، وگرنه پیامِ جاری دو بار
   // به مدل می‌رسید (یک‌بار در history و یک‌بار به‌عنوان userText).
@@ -241,7 +247,10 @@ async function handleMessage({ hospitalId, userId, conversationId, text, hospita
 
   // لایه‌ی ۱ — بازیابی، محدود به حوزه‌ی نقشِ همین کاربر
   const roleScope = scopeFor(roleCode, permissions);
-  let ctx = buildContext({ hospitalId, userId, text, roleScope, perms: permissions });
+  // overrideها یک‌بار خوانده می‌شوند و به بازیابیِ اول و بازیابیِ ترکیبیِ تاریخچه
+  // داده می‌شوند تا هر دو مسیر یک مرزِ دسترسی داشته باشند.
+  const overrides = ctxEngine.loadUserOverrides(userId, hospitalId);
+  let ctx = buildContext({ hospitalId, userId, text, roleScope, perms: permissions, overrides });
 
   // پرسشِ پیگیرانه («برای همان موضوع اولین قدم چیست؟»، «چرا؟»، «مثال بزن») هیچ
   // کلمه‌ی موضوعی ندارد، پس بازیابی روی خودش همیشه دست‌خالی برمی‌گشت و دانا
@@ -258,7 +267,7 @@ async function handleMessage({ hospitalId, userId, conversationId, text, hospita
     const prevUsers = history.filter(m => m.role === 'user').slice(-2).map(m => m.content);
     if (prevUsers.length) {
       const merged = buildContext({
-        hospitalId, userId, text: `${prevUsers.join(' ')} ${text}`, roleScope, perms: permissions,
+        hospitalId, userId, text: `${prevUsers.join(' ')} ${text}`, roleScope, perms: permissions, overrides,
       });
       if (!merged.blocked && !merged.empty) ctx = merged;
     }
@@ -307,19 +316,42 @@ async function handleMessage({ hospitalId, userId, conversationId, text, hospita
 
   const systemPrompt = buildSystemPrompt({ hospitalName, roleLabel, roleScope, ctx });
 
+  // مهلت provider. تایمر فقط دور فراخوانیِ بیرونی است، نه کلِ بازیابی؛ و
+  // AbortController به خودِ fetch/SDK داده می‌شود (نه فقط Promise.race) تا
+  // درخواستِ گیرکرده واقعاً بسته شود. signalِ روت — اگر باشد — هم وصل می‌شود
+  // تا backstopِ روت بتواند همین اتصال را ببندد.
+  const timeout = Math.max(50, Number(timeoutMs) || PROVIDER_TIMEOUT_MS);
+  const ac = new AbortController();
+  const timer = setTimeout(() => ac.abort(), timeout);
+  const onAbort = () => ac.abort();
+  if (signal) {
+    if (signal.aborted) ac.abort();
+    else signal.addEventListener('abort', onAbort, { once: true });
+  }
   let ext;
   try {
     ext = await chatComplete({
       provider: settings.provider, apiKey: settings.api_key, model: settings.model,
-      baseUrl: settings.base_url, systemPrompt, userText: text, history,
+      baseUrl: settings.base_url, systemPrompt, userText: text, history, signal: ac.signal,
     });
   } catch (err) {
     // سرویس بیرونی خطا داد. اگر لایه‌ی ۱ چیزی داشت، همان را بدهیم — کاربر
-    // دستِ‌خالی نماند.
-    const why = `ارتباط با سرویس کمکی برقرار نشد: ${err.message}`;
+    // دستِ‌خالی نماند. خطای abort پیامِ خامِ «This operation was aborted» ندارد
+    // و همان پیامِ روشنِ timeout را می‌گیرد.
+    const timedOut = ac.signal.aborted || (err && err.code === 'PROVIDER_TIMEOUT');
+    const why = timedOut
+      ? `سرویس کمکی بیش از ${Math.max(1, Math.round(timeout / 1000))} ثانیه پاسخ نداد، پس این درخواست رها شد.`
+        + ' لطفاً کوتاه‌تر بپرسید یا کمی بعد دوباره تلاش کنید.'
+      : `ارتباط با سرویس کمکی برقرار نشد: ${err.message}`;
     const msg = ctx.empty ? why : fallbackFromContext(ctx, why);
     saveMessage(convId, 'assistant', msg, 'internal', 0);
-    return { conversationId: convId, reply: msg, source: 'internal', error: true };
+    return {
+      conversationId: convId, reply: msg, source: 'internal', error: true,
+      ...(timedOut ? { providerTimeout: true } : {}),
+    };
+  } finally {
+    clearTimeout(timer);
+    if (signal) signal.removeEventListener('abort', onAbort);
   }
 
   // پاسخِ خالی از سرویس (سقفِ توکن مدل، فیلترِ محتوا، یا مدلی که فقط

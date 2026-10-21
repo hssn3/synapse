@@ -96,7 +96,7 @@ function openaiError(data, status, label) {
 // ---------- پیاده‌سازی‌ها ----------
 const KINDS = {
   // https://docs.anthropic.com/en/api/messages
-  async anthropic({ apiKey, model, systemPrompt, userText, baseUrl, history }) {
+  async anthropic({ apiKey, model, systemPrompt, userText, baseUrl, history, signal }) {
     const Anthropic = require('@anthropic-ai/sdk');
     const client = new Anthropic({ apiKey, ...(baseUrl ? { baseURL: baseUrl } : {}) });
     let res;
@@ -109,8 +109,11 @@ const KINDS = {
         output_config: { effort: 'medium' },
         system: systemPrompt,
         messages: [...(history || []), { role: 'user', content: userText }],
-      });
+      }, signal ? { signal } : undefined);
     } catch (err) {
+      // abort باید دست‌نخورده به chatComplete برسد؛ اگر اول با APIError
+      // تطبیق داده شود، پیامِ timeout به «خطای آنتروپیک (undefined)» تبدیل می‌شود.
+      if (err && (err.name === 'AbortError' || err.code === 'ABORT_ERR')) throw err;
       if (err instanceof Anthropic.AuthenticationError) throw new Error('کلید API آنتروپیک نامعتبر است');
       if (err instanceof Anthropic.RateLimitError) throw new Error('سقف نرخ درخواست آنتروپیک پر شده — کمی بعد دوباره تلاش کنید');
       if (err instanceof Anthropic.BadRequestError) throw new Error(`درخواست نامعتبر — نام مدل را بررسی کنید (${String(err.message).slice(0, 120)})`);
@@ -127,7 +130,7 @@ const KINDS = {
   },
 
   // https://ai.google.dev/gemini-api/docs
-  async gemini({ apiKey, model, systemPrompt, userText, baseUrl, history }) {
+  async gemini({ apiKey, model, systemPrompt, userText, baseUrl, history, signal }) {
     const mdl = model || PRESETS.gemini.model;
     const root = (baseUrl || 'https://generativelanguage.googleapis.com/v1beta').replace(/\/+$/, '');
     const url = `${root}/models/${encodeURIComponent(mdl)}:generateContent?key=${encodeURIComponent(apiKey)}`;
@@ -137,6 +140,7 @@ const KINDS = {
     }));
     const res = await fetch(url, {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
+      signal,
       body: JSON.stringify({
         systemInstruction: { parts: [{ text: systemPrompt }] },
         contents: [...past, { role: 'user', parts: [{ text: userText }] }],
@@ -151,7 +155,7 @@ const KINDS = {
 
   // فرمت chat/completions ِ OpenAI — مشترکِ z.ai، AvalAI، OpenRouter، OpenAI و
   // هر سرویس سفارشی/خودمیزبان.
-  async openai({ apiKey, model, systemPrompt, userText, baseUrl, preset, label, history }) {
+  async openai({ apiKey, model, systemPrompt, userText, baseUrl, preset, label, history, signal }) {
     const base = baseUrl || (preset && preset.baseUrl);
     if (!base) {
       const err = new Error('نشانی (Base URL) این سرویس تنظیم نشده');
@@ -161,6 +165,7 @@ const KINDS = {
     const mdl = model || (preset && preset.model) || 'gpt-3.5-turbo';
     const res = await fetch(chatUrl(base), {
       method: 'POST',
+      signal,
       headers: {
         'Content-Type': 'application/json',
         ...(apiKey ? { Authorization: `Bearer ${apiKey}` } : {}),
@@ -376,7 +381,7 @@ const SAFETY_LINE =
 // history: پیام‌های پیشینِ همین گفت‌وگو به شکل [{role:'user'|'assistant', content}]،
 // از قدیمی به جدید و بدون پیامِ فعلی. بدون این، هر پرسشِ پیگیرانه («چرا؟»، «مثال
 // بزن») بی‌بافت به مدل می‌رسید و جوابِ بی‌ربط می‌گرفت.
-async function chatComplete({ provider, apiKey, model, systemPrompt, userText, baseUrl, history }) {
+async function chatComplete({ provider, apiKey, model, systemPrompt, userText, baseUrl, history, signal }) {
   const preset = PRESETS[provider];
   if (!preset) throw new Error(`فروشنده‌ی هوش مصنوعی نامعتبر: ${provider}`);
   // سرویسِ خودمیزبان ممکن است بدون کلید باشد (مثلاً vLLM یا Ollama پشتِ شبکه‌ی
@@ -392,8 +397,18 @@ async function chatComplete({ provider, apiKey, model, systemPrompt, userText, b
       apiKey, model, baseUrl, preset, label: preset.label,
       systemPrompt: `${systemPrompt}\n\n${SAFETY_LINE}`, userText,
       history: Array.isArray(history) ? history : [],
+      // سیگنال تا خودِ fetch/SDK می‌رود؛ پیش از این فقط Promise.race در روت
+      // بود و درخواستِ HTTP بعد از تایم‌اوت هم باز می‌ماند.
+      signal,
     });
   } catch (err) {
+    // abort از سمتِ لایه‌ی بالاتر (مهلتِ چت) خطای شبکه نیست؛ پیامِ خامِ
+    // «This operation was aborted» نباید به کاربر برسد.
+    if (err && (err.name === 'AbortError' || err.code === 'ABORT_ERR' || err.code === 'PROVIDER_TIMEOUT')) {
+      const e = new Error(`سرویس ${preset.label} به موقع پاسخ نداد`);
+      e.code = 'PROVIDER_TIMEOUT';
+      throw e;
+    }
     // خطای شبکه‌ی خامِ fetch («fetch failed») برای کاربری که دارد لینک را دستی
     // تست می‌کند بی‌معناست — نشانی/پورت را ببیند بهتر می‌فهمد مشکل کجاست.
     if (err instanceof TypeError && /fetch failed/i.test(err.message)) {

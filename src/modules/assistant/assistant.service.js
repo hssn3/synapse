@@ -8,7 +8,7 @@ const crypto = require('crypto');
 const assistantChat = require('../../services/assistant-chat');
 
 class AssistantService {
-  async processUserMessage(user, message, context = null) {
+  async processUserMessage(user, message, context = null, options = {}) {
     const roleCode = user.role_code || user.role || 'user';
     const persona = getPersonaForRole(roleCode);
     const text = (message || '').trim();
@@ -16,6 +16,7 @@ class AssistantService {
     const toolCalls = [];
     const citations = [];
     let responseText = '';
+    let guardrailStatus = 'allowed';
 
     // Context-Aware Form Help override
     if (context && (text.includes('راهنما') || text.includes('کمک') || text.includes('فرم') || text.includes('اینجا'))) {
@@ -107,10 +108,13 @@ class AssistantService {
             text,
             roleCode,
             roleLabel: persona.title,
-            permissions: user.permissions || []
+            permissions: user.permissions || [],
+            // backstopِ روت تا abortِ آن، اتصالِ provider را هم ببندد
+            signal: options.signal,
           });
           if (chatRes && chatRes.reply) {
             responseText = chatRes.reply;
+            if (chatRes.providerTimeout) guardrailStatus = 'provider_timeout';
             citations.push('پایگاه دانش سنجه‌ها و اعتباربخشی ملی (نسخه ۵)');
             citations.push(`سامانه جامع کیفیت بیمارستان — ${persona.title}`);
           }
@@ -140,7 +144,7 @@ class AssistantService {
       response: responseText,
       persona: persona.title,
       citations: Array.from(new Set(citations)),
-      guardrail_status: 'allowed'
+      guardrail_status: guardrailStatus
     };
   }
 

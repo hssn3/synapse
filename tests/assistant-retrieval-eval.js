@@ -51,6 +51,34 @@ ok('guide: OCR', ctx.searchGuide('چطور از عکس متن بخوانم؟').s
 ok('measures: نقش بیمجوز → blocked', ctx.searchMeasures('ایمنی اتاق عمل', []).blocked === true);
 ok('measures: چندواژهای بدون کرش', Array.isArray(ctx.searchMeasures('رضایت کارکنان', '*').measures));
 
+// ---------- override سطح کاربر (grant/deny) ----------
+// پیش از این دانا فقط محور نقش را می‌دید؛ deny از راه دانا دور زده می‌شد و
+// grant بیرون از محور هم اثری نداشت.
+{
+  const top = ctx.searchMeasures('بهداشت دست', '*').measures[0];
+  ok('override: سنجه‌ی بازیابی‌شده id دارد', !!top && !!top.id, top ? String(top.id).slice(0, 8) : '—');
+  if (top) {
+    const denied = ctx.searchMeasures('بهداشت دست', '*', {
+      grants: new Set(), denies: new Set([top.id]),
+    });
+    ok('override: deny سطح کاربر در دانا اعمال می‌شود',
+      !denied.measures.some(m => m.id === top.id), `${denied.measures.length} سنجه‌ی باقی‌مانده`);
+  }
+}
+{
+  const outside = ctx.searchMeasures('ایمنی', '*').measures.find(m => !String(m.code).startsWith('ب-5'));
+  if (outside) {
+    const granted = ctx.searchMeasures('ایمنی', ['ب-5'], {
+      grants: new Set([outside.id]), denies: new Set(),
+    });
+    ok('override: grant سطح کاربر بیرون از محور نقش را باز می‌کند',
+      granted.measures.some(m => m.id === outside.id), outside.code);
+  } else {
+    ok('override: grant سطح کاربر بیرون از محور نقش را باز می‌کند', true,
+      'سنجه‌ی بیرون از ب-5 پیدا نشد — رد شد');
+  }
+}
+
 // ---------- buildContext ----------
 {
   const c = ctx.buildContext({ hospitalId, userId: adminId, text: 'چند سنجه مانده؟', roleScope: '*' });
@@ -62,6 +90,15 @@ ok('measures: چندواژهای بدون کرش', Array.isArray(ctx.searchMeasu
   if (busy) {
     const cb = ctx.buildContext({ hospitalId, userId: busy.id, text: 'چه کارهایی برای من مانده؟', roleScope: '*' });
     ok('buildContext: کاربر دارای وظیفه، فهرست میگیرد', (cb.mine || []).length > 0, (cb.mine || []).slice(0, 2).join(' // ').slice(0, 140));
+    // مرز نقش نباید فهرست کارهای خودِ کاربر را ببلعد. gate عمداً true است تا
+    // مطمئن شویم سنجه واقعاً بیرون از محور است، نه اینکه اصلاً مچ نشده باشد.
+    const gate = ctx.searchMeasures('بهداشت دست', []);
+    const cm = ctx.buildContext({
+      hospitalId, userId: busy.id, text: 'بهداشت دست چه کارهایی برای من مانده؟', roleScope: [],
+    });
+    ok('buildContext: مرز نقش فهرست کارهای من را نمی‌بلعد',
+      gate.blocked === true && cm.blocked === false && (cm.mine || []).length > 0,
+      `gate=${gate.blocked} blocked=${cm.blocked} mine=${(cm.mine || []).length}`);
   } else {
     ok('buildContext: کاربر دارای وظیفه، فهرست میگیرد', true, 'در این دیتابیس هیچ کار بازی نیست — آزمون رد شد');
   }
@@ -75,6 +112,16 @@ ok('wantsMine گیتش را نگه میدارد', ctx.wantsMine('چکلیست م
 
 // ---------- نشت بین بیمارستانها ----------
 ok('myOpenItems: hospital ناشناخته → خالی', ctx.myOpenItems('hospital-does-not-exist', adminId).length === 0);
+
+// ---------- پاسخ آفلاین: کارهای من نباید پشت شرط knowledge گم شود ----------
+{
+  const out = ctx.fallbackFromContext({
+    entities: [], guide: [], facts: [], measures: [], knowledge: [],
+    mine: ['کارتابل — آزمونِ باز'],
+  }, '');
+  ok('fallbackFromContext: کارهای من بدون دانش هم نمایش داده می‌شود',
+    out.includes('آزمونِ باز'), out.slice(0, 80));
+}
 ok('searchKnowledge: hospital ناشناخته → خالی', ctx.searchKnowledge('hospital-does-not-exist', 'هر چیزی').length === 0);
 
 // ---------- موجودیت واقعی (از مسیر buildContext) ----------

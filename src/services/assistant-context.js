@@ -23,7 +23,7 @@
  * اصلی سنجه‌ها هم با آن فیلتر می‌کند.
  */
 const { query } = require('../config/database-sqlite');
-const { axisCodeOf } = require('../config/role-axes');
+const { measureAllowed } = require('../config/role-axes');
 
 // ---------- نرمال‌سازی و کلمه‌سازی ----------
 
@@ -265,7 +265,25 @@ function wordMatches(haystack, w) {
   return wordRe(w).test(normalize(haystack));
 }
 
-function searchMeasures(text, roleScope) {
+// overrideهای سطح کاربر — همان منبعی که درخت سنجه‌ها و اقدامات اصلاحی با
+// loadOverrides می‌خوانند. پیش از این فقط محور نقش در دانا اعمال می‌شد و
+// user_measure_overrides نادیده می‌ماند: deny یک سنجه از راه دانا دور زده
+// می‌شد و grant بیرون از محور هم هیچ اثری نداشت. جدول در نصب‌های قدیمی ممکن
+// است نباشد؛ در آن حالت مجموعه‌ی خالی برمی‌گردد (همان رفتار قبلی، بدون کرش).
+function loadUserOverrides(userId, hospitalId) {
+  const grants = new Set(), denies = new Set();
+  if (!userId) return { grants, denies };
+  try {
+    const rows = query(
+      `SELECT measure_id, access_type FROM user_measure_overrides
+       WHERE user_id = ?${hospitalId ? ' AND hospital_id = ?' : ''}`,
+      hospitalId ? [userId, hospitalId] : [userId]).rows;
+    for (const r of rows) (r.access_type === 'grant' ? grants : denies).add(r.measure_id);
+  } catch (e) { /* جدول هنوز مهاجرت نشده — بدون override ادامه بده */ }
+  return { grants, denies };
+}
+
+function searchMeasures(text, roleScope, overrides) {
   const ws = words(text);
   if (!ws.length) return { measures: [], blocked: false };
 
@@ -280,7 +298,7 @@ function searchMeasures(text, roleScope) {
     // LIKE فقط برای کم‌کردنِ حجمِ اسکن است؛ تصمیمِ نهایی با wordMatches گرفته
     // می‌شود، وگرنه «دست» با «دستورالعمل» مچ می‌ماند.
     const rows = query(
-      `SELECT code, title, statement, page FROM accreditation_sections
+      `SELECT id, code, title, statement, page FROM accreditation_sections
        WHERE level_type = 'measure' AND (statement LIKE ? OR title LIKE ?)
        LIMIT ?`, [like, like, MEASURE_POOL]).rows
       .filter(r => wordMatches(`${r.statement || ''} ${r.title || ''}`, w));
@@ -322,9 +340,14 @@ function searchMeasures(text, roleScope) {
   // مرزِ نقش — همان دامنه‌ای که رابط اصلی سنجه‌ها اعمال می‌کند. تفاوتِ «موضوع در
   // کتاب نیست» با «هست ولی مالِ این سمت نیست» عمدی است: اولی می‌تواند به لایه‌ی ۲
   // برود، دومی هرگز.
-  const inScope = roleScope === '*'
-    ? ranked
-    : ranked.filter(m => roleScope.includes(axisCodeOf(m.code)));
+  //
+  // از measureAllowed استفاده می‌شود نه مقایسه‌ی مستقیم محور، چون همان تابع
+  // overrideهای سطح کاربر (user_measure_overrides) را هم اعمال می‌کند: deny
+  // باید حتی داخل محور نقش هم ببندد و grant باید بیرون از محور باز کند. پیش از
+  // این، دانا فقط محور نقش را می‌دید؛ یعنی یک deny از راه دانا دور زده می‌شد و
+  // یک grant هم در دانا اثری نداشت.
+  const ov = overrides || { grants: new Set(), denies: new Set() };
+  const inScope = ranked.filter(m => measureAllowed(roleScope, m, ov));
   if (!inScope.length) return { measures: [], blocked: true };
 
   return { measures: inScope.slice(0, 5), blocked: false };
@@ -391,27 +414,32 @@ function num(sql, params) {
   try { return query(sql, params).rows[0].c || 0; } catch (e) { return null; }
 }
 
-function liveFacts(hospitalId, userId, roleScope) {
+function liveFacts(hospitalId, userId, roleScope, overrides) {
   const f = [];
 
-  // ۱) خودارزیابی سنجه‌ها، محدود به محورهای همین نقش
-  const scopeSql = roleScope === '*'
-    ? ''
-    : ` AND (${(roleScope.length ? roleScope : ['__none__']).map(() => `s.code LIKE ?`).join(' OR ')})`;
-  const scopeParams = roleScope === '*' ? [] : (roleScope.length ? roleScope.map(a => a + '-%') : ['__none__']);
-
-  const totalM = num(
-    `SELECT COUNT(*) c FROM accreditation_sections s WHERE s.level_type = 'measure'${scopeSql}`,
-    scopeParams);
+  // ۱) خودارزیابی سنجه‌ها، محدود به محورهای همین نقش + overrideهای سطح کاربر.
+  // چرا در JS فیلتر می‌شود: grant/deny روی measure_id است نه روی محور؛ فیلترِ
+  // SQL قبلی فقط محور را می‌دید، پس آمارِ دانا با درختی که کاربر واقعاً می‌بیند
+  // یکی نبود (سنجه‌ی denyشده در شمارش می‌ماند و سنجه‌ی grantشده غایب بود).
+  const ov = overrides || { grants: new Set(), denies: new Set() };
+  let allowedIds = [];
+  try {
+    allowedIds = query(`SELECT id, code FROM accreditation_sections WHERE level_type = 'measure'`).rows
+      .filter(m => measureAllowed(roleScope, m, ov)).map(m => m.id);
+  } catch (e) { /* جدول سنجه‌ها هنوز مهاجرت نشده */ }
+  const totalM = allowedIds.length;
   if (totalM) {
-    const byStatus = query(
-      `SELECT ms.status st, COUNT(*) c
-       FROM measure_status ms JOIN accreditation_sections s ON s.id = ms.measure_id
-       WHERE ms.hospital_id = ? AND s.level_type = 'measure'${scopeSql}
-       GROUP BY ms.status`, [hospitalId, ...scopeParams]).rows;
+    let byStatus = [];
+    try {
+      byStatus = query(
+        `SELECT status st, COUNT(*) c FROM measure_status
+         WHERE hospital_id = ? AND measure_id IN (${allowedIds.map(() => '?').join(',')})
+         GROUP BY status`, [hospitalId, ...allowedIds]).rows;
+    } catch (e) { /* measure_status در نصب قدیمی */ }
     const g = k => (byStatus.find(r => r.st === k) || {}).c || 0;
     const recorded = byStatus.reduce((a, r) => a + r.c, 0);
-    const label = roleScope === '*' ? 'کل سنجه‌ها' : 'سنجه‌های حوزه‌ی سمت شما';
+    const label = roleScope === '*' && !ov.grants.size && !ov.denies.size
+      ? 'کل سنجه‌ها' : 'سنجه‌های حوزه‌ی سمت شما';
     f.push(`${label}: ${totalM} سنجه؛ ثبت‌شده ${recorded}، برقرار ${g('full_compliant')}، `
       + `نسبتاً برقرار ${g('partial')}، برقرار نیست ${g('non_compliant')}، `
       + `هنوز ثبت‌نشده ${Math.max(0, totalM - recorded)}.`);
@@ -569,19 +597,25 @@ function myOpenItems(hospitalId, userId) {
   return items;
 }
 
-function buildContext({ hospitalId, userId, text, roleScope, perms }) {
-  const m = searchMeasures(text, roleScope);
+function buildContext({ hospitalId, userId, text, roleScope, perms, overrides }) {
+  // overrideها یک‌بار خوانده و به هر دو مصرف‌کننده (بازیابی و آمار) داده می‌شوند
+  // تا پاسخ و عددها با هم و با درخت سنجه‌ها یکسان بمانند.
+  const ov = overrides || loadUserOverrides(userId, hospitalId);
+  const m = searchMeasures(text, roleScope, ov);
   // مرزِ نقش کوتاه‌مدار می‌کند، ولی فقط وقتی هیچ منبعِ دیگری هم چیزی ندارد —
   // وگرنه سؤالِ «کمیته‌ها کجاست؟» از یک پرستار، صرفاً به‌خاطر اینکه یک سنجه‌ی
   // بیرونِ محورش مچ شده، به‌غلط «خارج از حوزه‌ی شماست» می‌گرفت.
   const guide = searchGuide(text);
   const knowledge = searchKnowledge(hospitalId, text);
   const entities = searchEntities(hospitalId, text, perms);
+  // «کارهای من» باید *قبل* از تصمیم blocked محاسبه شود: پرسشی مثل «بهداشت دست
+  // چه کارهایی برای من مانده؟» ممکن است یک سنجه‌ی بیرونِ محور را مچ کند، ولی
+  // فهرست کارهای خودِ کاربر منبعی مستقل و مجاز است؛ نباید قربانی مرز نقش شود.
   const mine = wantsMine(text) ? myOpenItems(hospitalId, userId) : [];
-  if (m.blocked && !guide.length && !knowledge.length && !entities.length) {
+  if (m.blocked && !guide.length && !knowledge.length && !entities.length && !mine.length) {
     return { blocked: true, guide: [], measures: [], knowledge: [], entities: [], mine: [], facts: [], empty: false };
   }
-  const facts = wantsFacts(text) ? liveFacts(hospitalId, userId, roleScope) : [];
+  const facts = wantsFacts(text) ? liveFacts(hospitalId, userId, roleScope, ov) : [];
   const empty = !guide.length && !m.measures.length && !knowledge.length && !entities.length && !facts.length && !mine.length;
   return { blocked: false, guide, measures: m.measures, knowledge, entities, mine, facts, empty };
 }
@@ -667,11 +701,13 @@ function fallbackFromContext(ctx, why) {
   if (ctx.knowledge.length) {
     lines.push('', `از اسناد تأییدشده‌ی بیمارستان — «${ctx.knowledge[0].title}»:`);
     lines.push(String(ctx.knowledge[0].content).slice(0, 1500));
+  }
+  // این بلوک عمداً بیرون از شرط knowledge است. پیش از این داخلش افتاده بود و
+  // هر کاربری که دانشِ تأییدشده‌ی مرتبط نداشت، فهرست کارهای بازِ خودش را در
+  // پاسخِ آفلاین نمی‌دید — دقیقاً همان چیزی که «چه کاری برای من مانده؟» می‌خواهد.
   if ((ctx.mine || []).length) {
     lines.push('', 'کارهای بازِ خودِ شما (از دادهی واقعی):');
     ctx.mine.slice(0, 3).forEach(x => lines.push('— ' + x));
-  }
-
   }
   if (why) lines.push('', why);
   return lines.join('\n');
@@ -680,5 +716,5 @@ function fallbackFromContext(ctx, why) {
 module.exports = {
   PLATFORM_GUIDE, buildContext, contextBlock, fallbackFromContext,
   normalize, words, searchGuide, searchMeasures, searchKnowledge, liveFacts, wantsFacts, wantsMine, myOpenItems,
-  needsHistoryContext,
+  loadUserOverrides, needsHistoryContext,
 };

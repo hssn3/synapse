@@ -14,13 +14,12 @@ const { getPersonaForRole } = require('./persona.registry');
 // قدیمی‌ترِ دانا (src/modules/core/assistant-legacy.routes.js:220) بازتر است، چون این مسیر متنِ
 // context فرم (headers/fields) را هم می‌فرستد.
 const MAX_MESSAGE_CHARS = 4000;
-// مهلتِ provider بیرونی: chatComplete (src/services/ai-provider.js:379) و هر چهار fetch داخلش
-// (خط ۱۳۸، ۱۶۲، ۲۴۲، ۲۵۸) هیچ timeout/AbortSignal ندارند؛ سرویسِ بیرونیِ گیرکرده درخواستِ کاربر
-// را تا ابد باز می‌گذاشت. صداقتِ فنی: چون chatComplete سیگنال نمی‌گیرد و آن فایل خارج از دامنه‌ی
-// این تغییر است، این abort خودِ درخواستِ HTTP بیرونی را نمی‌کُشد — تضمینِ واقعیِ این تغییر این است
-// که «کاربر بیشتر از ۳۰ ثانیه منتظر نمی‌ماند و خطای خام نمی‌بیند». گامِ مکمل (خارج از این دامنه):
-// افزودن signal به chatComplete و fetchهایش.
-const PROVIDER_TIMEOUT_MS = 30000;
+// backstopِ درخواست. مهلتِ خودِ provider (۳۰ ثانیه) در assistant-chat.js اعمال
+// می‌شود و AbortController آن تا fetch/SDK می‌رود؛ این تایمر فقط سقفِ سختِ
+// مسیرِ HTTP است تا یک باگِ غیرمنتظره در لایه‌ی بازیابی هم درخواست را معلق
+// نگذارد. سیگنالِ همین کنترلر به سرویس پاس می‌شود، پس اگر اینجا هم abort شود
+// اتصالِ بیرونی واقعاً بسته می‌شود.
+const REQUEST_TIMEOUT_MS = 45000;
 
 // گفتگوی هوشمند مقید به نقش با پرسونای متناظر.
 // گاردِ مجوز assistant:chat:use از امروز فعال است (بندِ معلقِ docs/DECISIONS.md #3):
@@ -47,11 +46,11 @@ if (typeof message !== 'string' || message.length > MAX_MESSAGE_CHARS) {
     }
 
     const ac = new AbortController();
-    const timer = setTimeout(() => ac.abort(), PROVIDER_TIMEOUT_MS);
+    const timer = setTimeout(() => ac.abort(), REQUEST_TIMEOUT_MS);
     let result;
     try {
       result = await Promise.race([
-        assistantService.processUserMessage(req.user, message, context),
+        assistantService.processUserMessage(req.user, message, context, { signal: ac.signal }),
         new Promise((_, reject) => {
           ac.signal.addEventListener('abort', () => {
             const e = new Error('PROVIDER_TIMEOUT');
@@ -69,9 +68,9 @@ if (typeof message !== 'string' || message.length > MAX_MESSAGE_CHARS) {
       // «پس‌افتِ امن» عمداً ۲۰۰ است نه ۵۰۴: پنلِ چت سازمانی res.ok را چک نمی‌کند و فقط
       // data.response را نشان می‌دهد (public/js/enterprise-assistant-panel.js:263-296)، پس
       // خطای خام برای کاربر یعنی حبابِ خطای بی‌توضیح — و خواسته‌ی صریح، پرهیز از ۵۰۰ خام بود.
-      console.warn('[Assistant] provider timeout after', PROVIDER_TIMEOUT_MS, 'ms');
+      console.warn('[Assistant] request timeout after', REQUEST_TIMEOUT_MS, 'ms');
       return res.json({
-        response: `سرویس کمکی بیش از ${PROVIDER_TIMEOUT_MS / 1000} ثانیه پاسخ نداد، پس این درخواست رها شد. `
+        response: `پردازش این درخواست بیش از ${REQUEST_TIMEOUT_MS / 1000} ثانیه طول کشید، پس رها شد. `
           + 'لطفاً کوتاه‌تر بپرسید یا کمی بعد دوباره تلاش کنید؛ اگر تکرار شد، سوپرادمین باید وضعیت سرویس را بررسی کند.',
         persona: getPersonaForRole(req.user.role_code || req.user.role || 'user').title,
         citations: [],
