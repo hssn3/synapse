@@ -60,6 +60,57 @@ let savedKey = null, savedProvider = null;
   const r6 = await ask(admin, 'qzxw qqxx', adminPermsArr);
   ok('متن بیقرینه: دستخالی آبرومند', r6.reply && r6.reply.length > 10 && !r6.roleBlocked && !r6.offTopic, nz(r6.reply).slice(0, 130));
 
+  // ---------- مهلت provider: باید خودِ درخواست را abort کند، نه فقط Promise.race ----------
+  // fetch شبیه‌سازی می‌شود و تا ابد معلق می‌ماند؛ فقط با AbortSignal رد می‌شود.
+  // اگر سیگنال تا fetch نرود، گاردِ ۳ ثانیه‌ای این آزمون را قرمز می‌کند.
+  {
+    const full = db.prepare('SELECT provider, model, api_key, base_url FROM assistant_hospital_settings WHERE hospital_id=?').get(hospitalId);
+    const realFetch = global.fetch;
+    let sawAbort = false;
+    try {
+      db.prepare("UPDATE assistant_hospital_settings SET provider='custom', model='timeout-test', api_key=NULL, base_url='https://timeout.invalid/v1' WHERE hospital_id=?").run(hospitalId);
+      global.fetch = (url, opts) => new Promise((_, reject) => {
+        const sig = opts && opts.signal;
+        const onAbort = () => {
+          sawAbort = true;
+          const e = new Error('aborted by test');
+          e.name = 'AbortError';
+          reject(e);
+        };
+        if (sig) {
+          if (sig.aborted) onAbort();
+          else sig.addEventListener('abort', onAbort, { once: true });
+        }
+      });
+      let guard;
+      const guardP = new Promise((_, reject) => {
+        guard = setTimeout(() => reject(new Error('آزمون timeout خودش گیر کرد')), 3000);
+      });
+      const t0 = Date.now();
+      let rt;
+      try {
+        rt = await Promise.race([
+          chat.handleMessage({
+            hospitalId, userId: admin.id, conversationId: null, text: 'چکلیست را کجا ثبت کنم؟',
+            hospitalName, roleCode: 'admin', roleLabel: 'کاربر', permissions: adminPermsArr, timeoutMs: 120,
+          }),
+          guardP,
+        ]);
+      } finally { clearTimeout(guard); }
+      created.push(rt.conversationId);
+      const elapsed = Date.now() - t0;
+      ok('مهلت provider: abort واقعی + پاسخ آبرومند',
+        rt.providerTimeout === true && sawAbort === true && elapsed < 2000 && /پاسخ نداد|رها شد/.test(nz(rt.reply)),
+        `providerTimeout=${rt.providerTimeout} abort=${sawAbort} ${elapsed}ms`);
+    } finally {
+      global.fetch = realFetch;
+      if (full) {
+        db.prepare('UPDATE assistant_hospital_settings SET provider=?, model=?, api_key=?, base_url=? WHERE hospital_id=?')
+          .run(full.provider, full.model, full.api_key, full.base_url, hospitalId);
+      }
+    }
+  }
+
   const conv = db.prepare('SELECT COUNT(*) c FROM assistant_conversations WHERE id=?').get(r1.conversationId).c;
   const msgs = db.prepare('SELECT COUNT(*) c FROM assistant_messages WHERE conversation_id=?').get(r1.conversationId).c;
   ok('ماندگاری: گفتوگو و پیامها ذخیره شدند', conv === 1 && msgs >= 2, `${conv} گفتوگو / ${msgs} پیام`);
