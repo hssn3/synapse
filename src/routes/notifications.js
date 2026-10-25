@@ -24,6 +24,11 @@ router.post('/notifications', authRequired, requirePermission('manage_users'), h
   try {
     const { user_id, title, body, link } = req.body || {};
     if (!user_id || !title) return res.status(400).json({ error: 'user_id و title الزامی است' });
+    // گیرنده باید عضوِ همان بیمارستانی باشد که فرستنده در آن مجوز دارد؛ وگرنه
+    // اعلان با hospital_id فرستنده برای کاربرِ tenant دیگر درج می‌شد.
+    const target = query('SELECT id FROM users WHERE id = ? AND hospital_id = ? AND is_active = 1',
+      [user_id, req.hospitalId]).rows[0];
+    if (!target) return res.status(404).json({ error: 'کاربر یافت نشد' });
     const id = crypto.randomUUID();
     query('INSERT INTO notifications (id, hospital_id, user_id, title, body, link) VALUES (?,?,?,?,?,?)',
       [id, req.hospitalId || null, user_id, String(title).slice(0, 200), String(body || '').slice(0, 2000), link || null]);

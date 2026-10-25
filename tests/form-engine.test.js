@@ -121,7 +121,7 @@ describe('📋 Enterprise Form Engine — Schema-Driven Tests', () => {
     };
 
     const sub = await formService.submitForm(testHospitalId, 'monthly-program', headNurseUser, validData);
-    const reviewRes = await formService.reviewSubmission(sub.submissionId, { id: 'usr-sup-test' }, {
+    const reviewRes = await formService.reviewSubmission('monthly-program', sub.submissionId, { id: 'usr-sup-test', hospital_id: testHospitalId }, {
       status: 'approved',
       rejection_reason: null
     });

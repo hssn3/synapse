@@ -242,12 +242,19 @@ class FormService {
     return formRepo.findSubmissions(hospitalId, form.id);
   }
 
-  async reviewSubmission(submissionId, reviewerUser, { status, rejection_reason }) {
-    const sub = formRepo.findSubmissionById(submissionId);
-    if (!sub) throw new Error('پاسخ ثبت‌شده یافت نشد');
+  async reviewSubmission(formIdOrSlug, submissionId, reviewerUser, { status, rejection_reason }) {
+    // هم فرمِ مسیر و هم پاسخ باید به بیمارستانِ بازبین تعلق داشته باشند؛ بدون
+    // این، داشتنِ مجوز approve روی فرمِ خود، بازبینیِ پاسخِ بیمارستانِ دیگر را
+    // ممکن می‌کرد (subId فقط یک UUID است).
+    const form = formRepo.findFormByIdOrSlug(reviewerUser.hospital_id, formIdOrSlug);
+    if (!form) throw new Error('فرم یافت نشد');
+    const sub = formRepo.findSubmissionById(reviewerUser.hospital_id, submissionId);
+    if (!sub || sub.form_id !== form.id) throw new Error('پاسخ ثبت‌شده یافت نشد');
 
     formRepo.updateSubmissionReview({
+      hospitalId: reviewerUser.hospital_id,
       submissionId,
+      formId: form.id,
       reviewerId: reviewerUser.id,
       status,
       rejectionReason: rejection_reason

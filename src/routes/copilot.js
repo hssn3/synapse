@@ -35,12 +35,19 @@ router.post('/conversations/:id/message', authRequired, hospitalScope, async (re
     if (!message || message.trim().length === 0) {
       return res.status(400).json({ error: 'پیام نمی‌تواند خالی باشد' });
     }
+    if (message.length > 4000) {
+      return res.status(400).json({ error: 'متن پیام بیش از حد مجاز است (حداکثر ۴۰۰۰ نویسه)' });
+    }
 
     const aiProvider = getAiProvider();
-    const response = await copilot.sendMessage(conversationId, message, aiProvider);
+    const response = await copilot.sendMessage(conversationId, message, aiProvider,
+      { hospitalId: req.hospitalId, userId: req.user.id });
 
     res.json(response);
   } catch (err) {
+    if (err.message && err.message.includes('Session not found')) {
+      return res.status(404).json({ error: 'گفت‌وگو یافت نشد' });
+    }
     console.error('[Copilot] Send message error:', err);
     res.status(500).json({ error: 'خطا در ارسال پیام' });
   }
@@ -56,10 +63,14 @@ router.post('/conversations/:id/persona', authRequired, hospitalScope, async (re
       return res.status(400).json({ error: 'پرسونا مشخص نشده است' });
     }
 
-    const result = copilot.switchPersona(conversationId, persona);
+    const result = copilot.switchPersona(conversationId, persona,
+      { hospitalId: req.hospitalId, userId: req.user.id });
 
     res.json(result);
   } catch (err) {
+    if (err.message && err.message.includes('Session not found')) {
+      return res.status(404).json({ error: 'گفت‌وگو یافت نشد' });
+    }
     console.error('[Copilot] Switch persona error:', err);
     res.status(500).json({ error: 'خطا در تعویض پرسونا' });
   }

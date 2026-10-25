@@ -98,11 +98,18 @@ router.post('/role-login', [body('user_id').trim().notEmpty()], async (req, res)
 
     const user = query(
       `SELECT u.id, u.hospital_id, u.full_name, u.username, u.password_hash, u.is_active,
+              u.locked_until, u.failed_login_attempts,
               r.code as role_code, r.title_fa as role_title, r.permissions
        FROM users u JOIN roles r ON u.role_id = r.id WHERE u.id = ?`,
       [req.body.user_id]
     ).rows[0];
     if (!user || !user.is_active) return res.status(401).json({ error: 'کاربر یافت نشد' });
+    // بیمارستانِ غیرفعال نباید از مسیر کاشی‌ای هم نشست بدهد؛ لیست عمومی
+    // (GET /entry/hospitals/:id) این را فیلتر می‌کند، ولی خودِ مسیر ورود نه.
+    const hospital = query('SELECT is_active FROM hospitals WHERE id = ?', [user.hospital_id]).rows[0];
+    if (!hospital || Number(hospital.is_active) !== 1) {
+      return res.status(403).json({ error: 'این مرکز غیرفعال است' });
+    }
 
     if (passwordRequired) {
       if (!req.body.password) return res.status(401).json({ error: 'رمز عبور الزامی است' });

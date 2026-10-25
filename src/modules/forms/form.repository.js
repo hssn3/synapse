@@ -156,17 +156,17 @@ class FormRepository {
     `).all(hospitalId, formId);
   }
 
-  findSubmissionById(submissionId) {
+  findSubmissionById(hospitalId, submissionId) {
     return db.prepare(`
       SELECT s.*, f.title as form_title, f.slug as form_slug, v.schema_json
       FROM form_submissions s
       JOIN forms f ON s.form_id = f.id
       JOIN form_versions v ON s.form_version_id = v.id
-      WHERE s.id = ?
-    `).get(submissionId);
+      WHERE s.id = ? AND s.hospital_id = ?
+    `).get(submissionId, hospitalId);
   }
 
-  updateSubmissionReview({ submissionId, reviewerId, status, rejectionReason }) {
+  updateSubmissionReview({ hospitalId, submissionId, formId, reviewerId, status, rejectionReason }) {
     db.prepare(`
       UPDATE form_submissions
       SET status = ?, 
@@ -176,8 +176,9 @@ class FormRepository {
           approved_at = CASE WHEN ? = 'approved' THEN datetime('now') ELSE approved_at END, 
           rejection_reason = ?,
           updated_at = datetime('now')
-      WHERE id = ?
-    `).run(status, reviewerId, status, reviewerId, status, rejectionReason || null, submissionId);
+      WHERE id = ? AND hospital_id = ? AND form_id = ?
+    `).run(status, reviewerId, status, reviewerId, status, rejectionReason || null,
+      submissionId, hospitalId, formId);
   }
 }
 

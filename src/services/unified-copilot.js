@@ -89,11 +89,14 @@ function getPersonaGreeting(persona, context) {
 /**
  * ارسال پیام و دریافت پاسخ از LLM
  */
-async function sendMessage(conversationId, message, aiProvider) {
-  // بارگذاری session
+async function sendMessage(conversationId, message, aiProvider, { hospitalId, userId } = {}) {
+  // نشست فقط با id بارگذاری نمی‌شود: id یک UUID است و حدس‌زدنش سخت، ولی
+  // هر کاربرِ واردشده‌ای که id را ببیند نباید بتواند در گفت‌وگوی کاربر/بیمارستان
+  // دیگر پیام بگذارد. هر سه شرط با هم، fail-closed است.
   const session = db.prepare(`
-    SELECT * FROM copilot_sessions WHERE id = ?
-  `).get(conversationId);
+    SELECT * FROM copilot_sessions
+    WHERE id = ? AND hospital_id = ? AND user_id = ?
+  `).get(conversationId, hospitalId, userId);
 
   if (!session) {
     throw new Error('Session not found');
@@ -188,16 +191,17 @@ function extractSources(context) {
 /**
  * تعویض پرسونا در همان session
  */
-function switchPersona(conversationId, newPersona) {
+function switchPersona(conversationId, newPersona, { hospitalId, userId } = {}) {
   if (!PERSONAS[newPersona]) {
     throw new Error(`Invalid persona: ${newPersona}`);
   }
 
-  db.prepare(`
+  const r = db.prepare(`
     UPDATE copilot_sessions 
     SET persona = ?, updated_at = ? 
-    WHERE id = ?
-  `).run(newPersona, tehranNow().toISOString().slice(0, 19).replace('T', ' '), conversationId);
+    WHERE id = ? AND hospital_id = ? AND user_id = ?
+  `).run(newPersona, tehranNow().toISOString().slice(0, 19).replace('T', ' '), conversationId, hospitalId, userId);
+  if (!r.changes) throw new Error('Session not found');
 
   return {
     persona: PERSONAS[newPersona],

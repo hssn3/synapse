@@ -61,6 +61,12 @@ router.post('/login', [
 
     if (!user.is_active) return res.status(403).json({ error: 'حساب غیرفعال است' });
 
+    // مرکزِ غیرفعال نباید نشست بدهد، حتی با رمز درست.
+    const hospital = query('SELECT is_active FROM hospitals WHERE id = ?', [user.hospital_id]).rows[0];
+    if (!hospital || Number(hospital.is_active) !== 1) {
+      return res.status(403).json({ error: 'این مرکز غیرفعال است' });
+    }
+
     if (user.locked_until && new Date(user.locked_until) > new Date()) {
       const remaining = Math.ceil((new Date(user.locked_until) - new Date()) / 60000);
       return res.status(429).json({ error: `حساب قفل است. ${remaining} دقیقه` });

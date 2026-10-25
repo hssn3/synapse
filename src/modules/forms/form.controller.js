@@ -79,9 +79,9 @@ class FormController {
   }
 
   async review(req, res) {
-    const { subId } = req.params;
+    const { id, subId } = req.params;
     const parsed = ReviewSubmissionSchema.parse(req.body);
-    const result = await formService.reviewSubmission(subId, req.user, parsed);
+    const result = await formService.reviewSubmission(id, subId, req.user, parsed);
     res.json(result);
   }
 }
