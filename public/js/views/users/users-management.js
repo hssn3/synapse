@@ -49,7 +49,7 @@ async function renderUsers(){
           return `<tr style="${inactive?'opacity:.55':''}"><td style="color:var(--th)">${pfx?`<span class="bdg b1" style="margin-left:6px;font-size:11px">${esc(pfx)}</span>`:''}${esc(u.full_name)}${inactive?' <span class="bdg b3">غیرفعال</span>':''}</td><td style="color:var(--gdl)">${esc(u.username)}</td>
           <td>${esc(ROLE_FA[u.role_code]||u.role_title||'')}</td><td>${esc(u.department||'—')}</td>
           <td style="font-size:11px">${sc==='*'?'همه محورها':(sc.length?sc.join('، '):'—')}</td>
-          <td><button class="btn btn-o btn-sm" onclick="openOverrides('${u.id}','${esc(u.full_name).replace(/'/g,'')}')">مدیریت</button></td></tr>`;
+          <td><button class="btn btn-o btn-sm" onclick="openOverrides('${u.id}','${jsArg(u.full_name)}')">مدیریت</button></td></tr>`;
         }).join('')}</tbody></table></div>
         <div class="sub" style="margin-top:8px">کاربرانِ «غیرفعال» متصدیان پیشینِ همین سمت‌ها هستند — برای حفظ سابقه‌ی کاری‌شان نگه داشته شده‌اند و امکان ورود ندارند.</div>
         <div id="ov_box"></div>

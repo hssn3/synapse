@@ -10,7 +10,8 @@ function setupSecurity(app) {
     // CSP فعال طبق الزام بخش ۵ PROJECT_SPEC.md - سخت‌گیرانه اما سازگار با SPA فعلی
     // توجه: چون این SPA از onclick inline در HTML تولیدشده استفاده می‌کند، فعلاً 'unsafe-inline'
     // برای script-src لازم است؛ در فاز بعدی توصیه می‌شود onclick ها به addEventListener منتقل شوند
-    // تا بشود 'unsafe-inline' را کامل حذف کرد.
+    // تا بشود 'unsafe-inline' را کامل حذف کرد. تا آن زمان، دادهٔ سروری داخل رشتهٔ onclick
+    // با jsArg (نه esc) فرار می‌کند تا unsafe-inline راه سوءاستفادهٔ قابل‌توجهی نداشته باشد.
     // نکته مهم: helmet به‌صورت پیش‌فرض script-src-attr را جدا از script-src به 'none' تنظیم می‌کند
     // (حتی وقتی script-src شامل unsafe-inline باشد) و چون این SPA کاملاً روی onclick تکیه دارد،
     // بدون این خط صریح، هیچ‌کدام از دکمه‌ها/فرم‌ها در مرورگرهای امروزی کار نمی‌کردند.
@@ -29,6 +30,9 @@ function setupSecurity(app) {
         fontSrc: ["'self'"],
         connectSrc: ["'self'"],
         objectSrc: ["'none'"],
+        frameSrc: ["'none'"],
+        workerSrc: ["'self'"],
+        manifestSrc: ["'self'"],
         frameAncestors: ["'none'"],
         baseUri: ["'self'"],
         formAction: ["'self'"],

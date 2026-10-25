@@ -9,10 +9,14 @@ function renderRoleMosaic(){
   const bands={}; ROLE_BANDS.forEach(b=>{ bands[b.k]=[]; });
   HOSP_ROLES.forEach(r=>{ bands[bandOf(r)].push(r); });
 
+  // دادهٔ سرور (عنوان نقش، شناسهٔ کاربر) هرگز داخل رشتهٔ onclick نمی‌رود: مرورگر
+  // موجودیت‌های HTML داخل ویژگیِ رویداد را پیش از اجرای JS برمی‌گرداند، پس «&#39;»
+  // دوباره کوتیشن می‌شود و مقدارِ کاربر از رشته بیرون می‌زند (XSS). شناسه‌ها فقط در
+  // data-* می‌نشینند و یک شنوندهٔ واگذارشده آن‌ها را می‌خواند.
   const card=r=>{
     const open=ROLE_OPEN.has(r.role_id), single=r.users.length===1;
     return `<div class="rolecard g${open?' open':''}">
-      <button type="button" class="rolecard-hd" onclick="${single?`chooseUser('${esc(r.users[0].id)}','${esc(r.role_title)}')`:`toggleRoleTile('${r.role_id}')`}">
+      <button type="button" class="rolecard-hd" data-role-id="${esc(r.role_id)}"${single?` data-user-id="${esc(r.users[0].id)}"`:''}>
         <span class="role-ic">${roleIcon(r.role_code)}</span>
         <span class="role-tx">
           <b>${esc(r.role_title)}</b>
@@ -21,7 +25,7 @@ function renderRoleMosaic(){
         ${single?'':`<span class="role-chev">${open?'▾':'‹'}</span>`}
       </button>
       ${(open&&!single)?`<div class="usermosaic">${r.users.map(u=>`
-        <button type="button" class="usertile" onclick="chooseUser('${esc(u.id)}','${esc(r.role_title)}')">${esc(u.full_name)}</button>
+        <button type="button" class="usertile" data-role-id="${esc(r.role_id)}" data-user-id="${esc(u.id)}">${esc(u.full_name)}</button>
       `).join('')}</div>`:''}
     </div>`;
   };
@@ -33,6 +37,15 @@ function renderRoleMosaic(){
       <div class="roleband-t">${esc(b.t)}</div>
       <div class="rolegrid">${bands[b.k].map(card).join('')}</div>
     </div>`).join('');
+
+  box.onclick=e=>{
+    const btn=e.target.closest('button[data-role-id]');
+    if(!btn) return;
+    const role=HOSP_ROLES.find(r=>String(r.role_id)===btn.dataset.roleId);
+    if(!role) return;
+    if(btn.dataset.userId) chooseUser(btn.dataset.userId,role.role_title);
+    else toggleRoleTile(role.role_id);
+  };
 }
 // انتخاب کاربر: اگر پسورد اجباری نباشد مستقیم وارد می‌شود؛ اگر سوپرادمین اجباری کرده باشد
 // یک فیلد رمز درجا باز می‌شود (بدون فرم/صفحه‌ی جدا).
@@ -44,12 +57,14 @@ function chooseUser(userId,roleTitle){
     <div class="fg"><label>رمز عبور</label><input id="pw_in" type="password" autocomplete="current-password"></div>
     <div id="lerr2" style="color:var(--dn);font-size:13px;margin-bottom:10px;display:none"></div>
     <div style="display:flex;gap:8px">
-      <button class="btn btn-g" style="flex:1" id="pwbtn" onclick="doRoleLogin('${esc(userId)}')">ورود</button>
-      <button class="btn btn-o" onclick="renderRoleMosaic()">انصراف</button>
+      <button class="btn btn-g" style="flex:1" id="pwbtn">ورود</button>
+      <button class="btn btn-o" id="pwcancel">انصراف</button>
     </div>
   </div>`;
   $('pw_in').focus();
   $('pw_in').addEventListener('keydown',e=>{ if(e.key==='Enter') doRoleLogin(userId); });
+  $('pwbtn').addEventListener('click',()=>doRoleLogin(userId));
+  $('pwcancel').addEventListener('click',renderRoleMosaic);
 }
 async function doRoleLogin(userId){
   const pwEl=$('pw_in'), err=$('lerr2')||$('lerr'), btn=$('pwbtn');

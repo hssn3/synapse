@@ -445,7 +445,7 @@
               </div>
               <div style="display:flex; justify-content:space-between; align-items:center; margin-top:4px;">
                 <span style="font-size:11px; color:var(--td);">آخرین جلسه: ${c.lastDate}</span>
-                <button type="button" class="btn btn-sm btn-doc-gen policy" onclick="viewCommitteeMinutes('${c.id}', '${c.name}')">مشاهده صورتجلسه</button>
+                <button type="button" class="btn btn-sm btn-doc-gen policy" onclick="viewCommitteeMinutes('${c.id}', '${jsArg(c.name)}')">مشاهده صورتجلسه</button>
               </div>
             </div>
           `).join('')}
@@ -540,7 +540,7 @@
                 </div>
               </div>
               <div style="text-align:left; margin-top:4px;">
-                <button type="button" class="btn btn-sm btn-doc-gen sop" onclick="printChecklistSheet('${chk.id}', '${chk.title}')">🖨️ چاپ فرم چک‌لیست</button>
+                <button type="button" class="btn btn-sm btn-doc-gen sop" onclick="printChecklistSheet('${chk.id}', '${jsArg(chk.title)}')">🖨️ چاپ فرم چک‌لیست</button>
               </div>
             </div>
           `).join('')}

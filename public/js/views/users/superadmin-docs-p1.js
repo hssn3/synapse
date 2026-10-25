@@ -382,7 +382,7 @@ async function superOpenHospital(id){
     catch(e){ $('hospList').innerHTML=`<div class="empty">${esc(e.message)}</div>`; return; }
   }
   if(!h){ superBackToHospitals(); return; }
-  const nameJs=esc(h.name).replace(/'/g,"\\'");
+  const nameJs=jsArg(h.name);
   $('hospList').innerHTML=`
     <div class="hdet">
       <div class="hdet-hd">

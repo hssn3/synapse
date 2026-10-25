@@ -514,7 +514,7 @@ function drawChkDetail(){
                 </div>
                 <div>
                   ${sub ? `<button class="tgl" style="font-size:11px" onclick="openChkSubmission('${sub.id}')">مشاهده</button>`
-                        : (canSubmitChecklists() ? `<button class="tgl prim" style="font-size:11px" onclick="fillChecklist('${c.id}','${esc(w)}')">+ ارزیابی</button>` : '')}
+                        : (canSubmitChecklists() ? `<button class="tgl prim" style="font-size:11px" onclick="fillChecklist('${c.id}','${jsArg(w)}')">+ ارزیابی</button>` : '')}
                 </div>
               </div>`;
             }).join('')}

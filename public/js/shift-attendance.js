@@ -135,7 +135,7 @@
           ${d.wards.map(w => {
             const done = w.staff.length - w.counts['ثبت‌نشده'];
             const pct = w.staff.length ? Math.round(done / w.staff.length * 100) : 0;
-            return `<button class="sa-wardbtn ${w.ward === cur.ward ? 'on' : ''}" onclick="saSelectWard('${E(w.ward).replace(/'/g, '&#39;')}')">
+            return `<button class="sa-wardbtn ${w.ward === cur.ward ? 'on' : ''}" onclick="saSelectWard('${jsArg(w.ward)}')">
               <span class="sa-wardname">${E(w.ward)}</span>
               <span class="sa-wardnums">
                 <b class="sa-ok">${F(w.counts['حاضر'] + w.counts['تأخیر'] + w.counts['جانشین'])}</b>

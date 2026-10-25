@@ -163,9 +163,9 @@ function reminderPanelHtml(rem){
         <td><select id="rr_c_${r.id}" class="sel" style="min-width:150px">${chOpts(r.channel)}</select></td>
         <td><span class="bdg ${r.enabled?'b1':'b3'}">${r.enabled?'فعال':'غیرفعال'}</span></td>
         <td style="white-space:nowrap">
-          <button class="tgl" onclick="saveRule('${r.id}','${esc(r.name)}','${r.rule_type}',${r.enabled?1:0})">ذخیره</button>
-          <button class="tgl" onclick="saveRule('${r.id}','${esc(r.name)}','${r.rule_type}',${r.enabled?0:1})">${r.enabled?'غیرفعال‌کردن':'فعال‌کردن'}</button>
-          <button class="tgl dngr" onclick="delRule('${r.id}')">حذف</button></td></tr>`).join('')}</tbody></table></div>`}
+          <button class="tgl" data-rule-id="${esc(r.id)}" data-rule-name="${esc(r.name)}" data-rule-type="${esc(r.rule_type)}" data-enabled="1" onclick="saveRuleFromBtn(this)">ذخیره</button>
+          <button class="tgl" data-rule-id="${esc(r.id)}" data-rule-name="${esc(r.name)}" data-rule-type="${esc(r.rule_type)}" data-enabled="0" onclick="saveRuleFromBtn(this)">${r.enabled?'غیرفعال‌کردن':'فعال‌کردن'}</button>
+          <button class="tgl dngr" data-rule-id="${esc(r.id)}" onclick="delRuleFromBtn(this)">حذف</button></td></tr>`).join('')}</tbody></table></div>`}
       <div class="docgrid" style="margin-top:12px">
         <div class="fg" style="margin:0"><label>نام قانون جدید</label><input id="rr_name" maxlength="120" placeholder="مثال: بازبینی مدارک بخش اورژانس"></div>
         <div class="fg" style="margin:0"><label>موضوع</label><select id="rr_type" class="sel">
@@ -186,6 +186,16 @@ function reminderPanelHtml(rem){
 }
 function ruleFormBody(id, name, type, enabled){
   return {name, rule_type:type, days_before:+($('rr_d_'+id).value||7), channel:$('rr_c_'+id).value, enabled:!!enabled};
+}
+// نام/نوع قانون از data-* خوانده می‌شود، نه از رشتهٔ onclick؛ در غیر این صورت
+// موجودیت‌های HTML داخل ویژگیِ رویداد پیش از اجرای JS برمی‌گردند و نامِ شامل
+// کوتیشن می‌تواند کد اجرا کند.
+function saveRuleFromBtn(btn){
+  const d=btn.dataset;
+  return saveRule(d.ruleId, d.ruleName, d.ruleType, d.enabled==='1'?1:0);
+}
+function delRuleFromBtn(btn){
+  return delRule(btn.dataset.ruleId);
 }
 async function saveRule(id, name, type, enabled){
   try{ await API.updateReminderRule(id, ruleFormBody(id,name,type,enabled)); toast('قانون به‌روزرسانی شد'); renderSettings(); }

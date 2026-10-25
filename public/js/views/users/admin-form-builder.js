@@ -41,7 +41,7 @@ function fbRenderFields() {
   box.innerHTML = window.FB_FIELDS.map((f, i) => `
     <div style="display:flex; gap:10px; margin-bottom:10px; align-items:center;">
       <span>نوع: ${f.type}</span>
-      <input type="text" value="${f.title}" onchange="window.FB_FIELDS[${i}].title=this.value" placeholder="عنوان فیلد">
+      <input type="text" value="${esc(f.title)}" onchange="window.FB_FIELDS[${i}].title=this.value" placeholder="عنوان فیلد">
       <label><input type="checkbox" onchange="window.FB_FIELDS[${i}].required=this.checked"> اجباری</label>
       <button class="btn btn-r btn-sm" onclick="window.FB_FIELDS.splice(${i},1);fbRenderFields()">حذف</button>
     </div>

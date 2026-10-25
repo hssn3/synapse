@@ -204,7 +204,7 @@ async function superAssistantForm(hospitalId, hospitalName){
         <div id="asf_test_result" style="margin-top:8px"></div>
         <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
           <button class="btn btn-o btn-sm" id="asf_test_btn" onclick="superTestAssistant('${hospitalId}')">تست اتصال</button>
-          <button class="btn btn-g btn-sm" onclick="superSaveAssistant('${hospitalId}','${(hospitalName||'').replace(/'/g,"\\'")}')">ذخیره</button>
+          <button class="btn btn-g btn-sm" onclick="superSaveAssistant('${hospitalId}','${jsArg(hospitalName)}')">ذخیره</button>
           <button class="btn btn-o btn-sm" onclick="document.getElementById('superSub').innerHTML=''">بستن</button>
         </div>
       </div></div>`;
@@ -315,7 +315,7 @@ async function superAssistantLog(hospitalId, hospitalName){
           <td>${esc(c.title||'—')}</td>
           <td>${fa(c.message_count)}</td>
           <td style="color:var(--td);white-space:nowrap">${faDateTime(c.updated_at)}</td>
-          <td><button class="btn btn-o btn-sm" onclick="superAssistantLogView('${hospitalId}','${c.id}','${(hospitalName||'').replace(/'/g,"\\'")}')">مشاهده ›</button></td>
+          <td><button class="btn btn-o btn-sm" onclick="superAssistantLogView('${hospitalId}','${c.id}','${jsArg(hospitalName)}')">مشاهده ›</button></td>
         </tr>`).join('')}
         </tbody></table></div>`}
         <button class="btn btn-o btn-sm" style="margin-top:14px" onclick="document.getElementById('superSub').innerHTML=''">بستن</button>
@@ -337,7 +337,7 @@ async function superAssistantLogView(hospitalId, conversationId, hospitalName){
           </div>
         </div>`).join('')}</div>
         <div style="display:flex;gap:8px;margin-top:14px">
-          <button class="btn btn-o btn-sm" onclick="superAssistantLog('${hospitalId}','${(hospitalName||'').replace(/'/g,"\\'")}')">بازگشت به فهرست ‹</button>
+          <button class="btn btn-o btn-sm" onclick="superAssistantLog('${hospitalId}','${jsArg(hospitalName)}')">بازگشت به فهرست ‹</button>
           <button class="btn btn-o btn-sm" onclick="document.getElementById('superSub').innerHTML=''">بستن</button>
         </div>
       </div></div>`;
