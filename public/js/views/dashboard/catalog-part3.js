@@ -97,7 +97,7 @@ function renderEntry(){
               </div>
               <div class="stat-number" style="color:#f87171;text-shadow:0 0 15px rgba(248,113,113,0.4)">۱۲۱</div>
               <div class="stat-label">سنجه الزامی ایمنی</div>
-              <div class="stat-meta">خطوط قرمز بالینی (Never Events)</div>
+              <div class="stat-meta">پرچم ایمنی بیمار در کتاب ویرایش ششم</div>
             </div>
 
             <div class="stat-counter-card folded-corner" onclick="openSystemCatalogModal('accreditation')" style="cursor:pointer">
@@ -107,7 +107,7 @@ function renderEntry(){
                   <path d="M9 12h6M12 9v6" stroke="#bbeef7" stroke-linecap="round" stroke-width="2"></path>
                 </svg>
               </div>
-              <div class="stat-number emerald-gradient-text">۱۹</div>
+              <div class="stat-number emerald-gradient-text">۱۸</div>
               <div class="stat-label">محور تخصصی</div>
               <div class="stat-meta">در ۳ هاب راهبردی، درمانی و پشتیبانی</div>
             </div>

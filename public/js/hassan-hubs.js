@@ -154,7 +154,7 @@
     sparkles: `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>`,
     officialSeal: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>`,
     viewEye: `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`,
-    // ۱۰ محور مراقبت و درمان
+    // ۹ محور مراقبت و درمان
     careGen: `<svg viewBox="0 0 24 24" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 3v5a4.5 4.5 0 0 0 9 0V3"/><path d="M9 12.5v4a4.5 4.5 0 0 0 9 0v-2"/><circle cx="18" cy="12.5" r="2.5" fill="rgba(16,160,185,0.2)"/></svg>`,
     emergency: `<svg viewBox="0 0 24 24" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="5" width="15" height="12" rx="2"/><polygon points="16 8 20 8 23 11 23 17 16 17 16 8"/><circle cx="5.5" cy="18.5" r="2.5" fill="rgba(16,160,185,0.2)"/><circle cx="18.5" cy="18.5" r="2.5" fill="rgba(16,160,185,0.2)"/><path d="M8 9v4M6 11h4"/></svg>`,
     surgery: `<svg viewBox="0 0 24 24" fill="none" stroke="#d4af5a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4l5 5L7 21.5 2 16.5 14.5 4z"/><line x1="13" y1="7.5" x2="16.5" y2="11"/><circle cx="18.5" cy="18.5" r="2.5" fill="rgba(16,160,185,0.2)"/><line x1="17" y1="17" x2="13" y2="13"/></svg>`,
