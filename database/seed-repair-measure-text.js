@@ -85,8 +85,36 @@ function repairDb() {
     const after = String(r.statement || '').replace(/ {2,}/g, ' ');
     if (after !== r.statement) { query('UPDATE accreditation_sections SET statement = ? WHERE id = ?', [after, r.id]); wsFixed++; }
   }
+  // خطِ تازه وسطِ جملهٔ سنجه معنا ندارد؛ دو مورد در نسخهٔ ششم از استخراج
+  // باقی مانده بود («کنترل کیفی\nدورهای…»). فقط statement — چون detail_text
+  // عمداً پاراگراف‌بندی دارد.
+  let nlFixed = 0;
+  const nlp = query(`SELECT id, statement FROM accreditation_sections
+                     WHERE statement LIKE '%' || char(10) || '%'
+                        OR statement LIKE '%' || char(13) || '%'`).rows;
+  for (const r of nlp) {
+    const after = String(r.statement || '').replace(/\s*[\r\n]+\s*/g, ' ').replace(/ {2,}/g, ' ');
+    if (after !== r.statement) { query('UPDATE accreditation_sections SET statement = ? WHERE id = ?', [after, r.id]); nlFixed++; }
+  }
 
-  return { changedRows, changedFields, total: rows.length, wsFixed };
+  return { changedRows, changedFields, total: rows.length, wsFixed, nlFixed };
+}
+
+function fixStatementNewlines(data) {
+  let n = 0;
+  const walk = (node) => {
+    if (Array.isArray(node)) { node.forEach(walk); return; }
+    if (!node || typeof node !== 'object') return;
+    for (const k of Object.keys(node)) {
+      const v = node[k];
+      if (k === 'statement' && typeof v === 'string') {
+        const f = v.replace(/\s*[\r\n]+\s*/g, ' ').replace(/ {2,}/g, ' ');
+        if (f !== v) { node[k] = f; n++; }
+      } else if (v && typeof v === 'object') walk(v);
+    }
+  };
+  walk(data);
+  return n;
 }
 
 function repairJson(latin) {
@@ -102,15 +130,18 @@ function repairJson(latin) {
     return o;
   };
   walk(data);
+  const nlFixed = fixStatementNewlines(data);
   fs.writeFileSync(p, JSON.stringify(data, null, 2), 'utf8');
-  return { changedStrings: n };
+  return { changedStrings: n, nlFixed };
 }
 
 function runMigration() {
   try {
     const r = repairDb();
     console.log(`[Seed TextRepair] ✅ ${r.changedRows} ردیف / ${r.changedFields} فیلد از ${r.total} سنجه ترمیم شد` +
-      (r.changedRows === 0 ? ' (قبلاً سالم بود)' : '') + (r.wsFixed ? ` | ${r.wsFixed} فاصلهٔ تکراری نرمال شد` : ''));
+      (r.changedRows === 0 ? ' (قبلاً سالم بود)' : '') +
+      (r.wsFixed ? ` | ${r.wsFixed} فاصلهٔ تکراری نرمال شد` : '') +
+      (r.nlFixed ? ` | ${r.nlFixed} خطِ تازهٔ زائد در statement نرمال شد` : ''));
   } catch (err) {
     console.error('[Seed TextRepair] failed:', err.message);
   }
