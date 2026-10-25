@@ -7,4 +7,5 @@
   window.CatalogMeasures.init({ onIndexLoaded: window.CatalogQuickfind.rebuildIndex });
   window.CatalogChrome.init();
   window.CatalogMeasures.idleLoad();
+  window.CatalogMotion.init();
 })();
