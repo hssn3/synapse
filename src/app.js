@@ -60,6 +60,14 @@ setupSecurity(app);
 // و برای جلوگیری از فشار حافظه با درخواست‌های همزمان زیاد (مقیاس تعداد کاربر بالا) کاهش یافته
 app.use(express.json({ limit: '2mb' }));
 app.use(express.urlencoded({ extended: true, limit: '2mb' }));
+// سرویس‌ورکر نباید در لبه/مرورگر کش شود: در قطعیِ کوتاهِ سرور، پروکسی Wisp
+// صفحه‌ی «آفلاین» را روی همین مسیر با TTL چهارساعته کش کرد و نصب PWA شکست.
+// ثبت هم نسخه‌دار است (index.html) تا نسخه‌ی مسمومِ قبلی دور زده شود.
+app.get('/sw.js', (req, res) => {
+  res.set('Cache-Control', 'no-store, max-age=0');
+  res.type('application/javascript');
+  res.sendFile(path.join(__dirname, '../public/sw.js'));
+});
 app.use(express.static(path.join(__dirname, '../public')));
 
 const uploadDir = path.resolve(config.upload.dir);
