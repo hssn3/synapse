@@ -279,8 +279,8 @@ async function ensureMeasureDetails(list){
     const r=await API.measureDetails(ids);
     // merge باید روی خودِ آبجکتهای ax.measures هم اعمال شود — آنها کپی هستند نه
     // ارجاع به S.byId (بازتولید: پس از واکشی، کارتها همچنان — نشان میدادند).
-    const dm={}; (r.measures||[]).forEach(row=>{ dm[row.id]=row.detail_text; const bn=S.byId[row.id]; if(bn) bn.detail_text=row.detail_text; });
-    (list||[]).forEach(m=>{ if(dm[m.id]!==undefined) m.detail_text=dm[m.id]; });
+    const dm={}; (r.measures||[]).forEach(row=>{ dm[row.id]=row; const bn=S.byId[row.id]; if(bn){ bn.detail_text=row.detail_text; bn.step_owners=row.step_owners; } });
+    (list||[]).forEach(m=>{ const row=dm[m.id]; if(row){ m.detail_text=row.detail_text; m.step_owners=row.step_owners; } });
     const open=[...document.querySelectorAll('.drop.on')].map(d=>d.id);
     renderMeasures();
     open.forEach(id=>{ const el=$(id); if(el) el.classList.add('on'); });

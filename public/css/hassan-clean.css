@@ -1100,6 +1100,13 @@ html[data-theme="light"] {
   margin-top: 2px;
 }
 
+.sn-book-step-owner {
+  margin-top: 5px;
+  font-size: 11px;
+  color: #d4af5a;
+  opacity: .9;
+}
+
 .sn-book-methods-row {
   display: flex;
   align-items: center;

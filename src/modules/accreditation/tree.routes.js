@@ -107,7 +107,7 @@ router.get('/accreditation/tree', authRequired,
   // full=1 برای مصرفکنندههایی که متن کامل میخواهند سرِ جایش است.
   const wantFull = req.query.full === '1';
   const allRows = query('SELECT * FROM accreditation_sections ORDER BY code').rows;
-  if (!wantFull) allRows.forEach(r => { delete r.detail_text; });
+  if (!wantFull) allRows.forEach(r => { delete r.detail_text; delete r.step_owners; });
     const nodes = {};
     const roots = [];
     for (const row of allRows) {
@@ -143,7 +143,13 @@ router.get('/accreditation/tree', authRequired,
       const ids = String(req.query.ids || '').split(',').map(x => x.trim()).filter(Boolean).slice(0, 60);
       if (!ids.length) return res.json({ measures: [] });
       const ph = ids.map(() => '?').join(',');
-      const rows = query(`SELECT id, detail_text FROM accreditation_sections WHERE id IN (${ph})`, ids).rows;
+      const rows = query(`SELECT id, detail_text, step_owners FROM accreditation_sections WHERE id IN (${ph})`, ids).rows;
+      // step_owners در دیتابیس رشتهٔ JSON است؛ API آرایه می‌دهد تا فرانت بدون
+      // JSON.parse دوباره (و بدون شکستن روی مقدار خراب) مصرفش کند.
+      rows.forEach(r => {
+        try { r.step_owners = r.step_owners ? JSON.parse(r.step_owners) : []; }
+        catch (e) { r.step_owners = []; }
+      });
       res.json({ measures: rows });
     } catch (err) { console.error('[MeasureFull]', err); res.status(500).json({ error: 'خطای سرور' }); }
   });

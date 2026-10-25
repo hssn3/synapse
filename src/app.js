@@ -112,6 +112,24 @@ function seedFail(name, err) {
   console.error('[Boot] ❌ ' + name + ' — ' + ((err && err.message) || String(err)));
 }
 
+/* ---------- گاردِ دادهٔ نمایشی ----------
+   سیدهای نمونه (سناریوی بیمارستان نمایشی، سه‌ماهه، پرکردن بازه، لوگو) تا امروز
+   بی‌قید روی هر نصب و بعضی‌شان روی «همه‌ی بیمارستان‌ها» اجرا می‌شدند. روی یک نصب
+   واقعی این یعنی داده‌ی جعلی در پرونده‌ی مشتری. حالا فقط وقتی اجرا می‌شوند که
+   پایگاه‌داده نشانهٔ دمو داشته باشد (کاربر hospital3_admin که خودِ سناریو می‌سازد)
+   یا اپراتور صریحاً SEED_DEMO_DATA=1 بگذارد. روی دیتابیس دمو/بازگردانی‌شده
+   رفتار قبلی حفظ می‌شود؛ SEED_DEMO_DATA=0 برای خاموش‌کردن اجباری است. */
+const DEMO_MARKER_USERNAME = 'hospital3_admin';
+function demoDataAllowed() {
+  const flag = String(process.env.SEED_DEMO_DATA || '').trim();
+  if (flag === '1') return true;
+  if (flag === '0') return false;
+  try {
+    const { db } = require('./config/database-sqlite');
+    return !!db.prepare('SELECT 1 FROM users WHERE username = ? LIMIT 1').get(DEMO_MARKER_USERNAME);
+  } catch (e) { return false; }
+}
+
 try { bootstrapEmptyDatabase(); }
 catch (err) { seedFail('bootstrapEmptyDatabase failed:', err); }
 
@@ -430,8 +448,11 @@ catch (err) { seedFail('Reminder migration failed:', err); }
 // seed-org-divisions، seed-nursing-hierarchy، seed-management-hierarchy، seed-org-chart-positions،
 // seed-documents، seed-meetings، seed-accreditation-period و seed-hospital-profile باشد چون از
 // جداول همه‌ی آن‌ها استفاده می‌کند (و خودش هم آن migration ها را برای بیمارستان تازه صدا می‌زند).
-try { require('../database/seed-hospital-three-scenario').runMigration(); }
-catch (err) { seedFail('Hospital-three scenario migration failed:', err); }
+// گاردِ demoDataAllowed: روی نصب واقعی نباید بیمارستان/داده‌ی جعلی بسازد.
+if (demoDataAllowed()) {
+  try { require('../database/seed-hospital-three-scenario').runMigration(); }
+  catch (err) { seedFail('Hospital-three scenario migration failed:', err); }
+}
 
 // نقش‌های واقعی پست‌های مدیریتی (ریاست، مسئول فنی، مالی، منابع انسانی و ...) و انتقال
 // کاربرِ هر پست از staff_nurse به نقش درست خودش. باید بعد از seed سناریو باشد چون آن
@@ -451,9 +472,11 @@ catch (err) { seedFail('CRM roles migration failed:', err); }
 // catch (err) { seedFail('Hospital3 real1403 migration failed:', err); }
 
 // ده نظرسنجی رضایت نمونه — بعد از سناریوی بالا، چون به بیمارستانِ نمونه‌ی همان فایل
-// و به جدولی که seed-satisfaction می‌سازد وابسته است.
-try { require('../database/seed-satisfaction-samples').runMigration(); }
-catch (err) { seedFail('Satisfaction samples migration failed:', err); }
+// و به جدولی که seed-satisfaction می‌سازد وابسته است. (نمایشی — پشت گارد دمو)
+if (demoDataAllowed()) {
+  try { require('../database/seed-satisfaction-samples').runMigration(); }
+  catch (err) { seedFail('Satisfaction samples migration failed:', err); }
+}
 
 // ترمیم متنِ آسیب‌دیده‌ی کتاب سنجه‌ها (استخراج معیوب از PDF). باید بعد از
 // seed سنجه‌ها باشد و idempotent است — بار دوم صفر ردیف عوض می‌کند.
@@ -481,6 +504,11 @@ catch (err) { seedFail('Measure status year migration failed:', err); }
 // فقط ردیف‌های تأییدنشده را دوباره استنتاج می‌کند.
 try { require('../database/seed-eval-methods').runMigration(); }
 catch (err) { seedFail('Eval-method migration failed:', err); }
+
+// مسئولِ رسمیِ هر گام سنجه (ستون step_owners) از JSON مرجع. متن detail_text دست
+// نمی‌خورد؛ فقط آرایه‌ای هم‌طول با گام‌ها ذخیره می‌شود. idempotent است.
+try { require('../database/seed-measure-step-owners').runMigration(); }
+catch (err) { seedFail('Measure step-owner migration failed:', err); }
 
 // سه قضاوت مستقل روی هر سنجه (خودارزیابی / ارزیابی داخلی / ارزیابی بیرونی).
 // باید *بعد از* migration دوره‌ای‌شدن باشد، چون آن یکی جدول را با فهرست ستونِ
@@ -515,25 +543,34 @@ catch (err) { seedFail('Patient-followup migration failed:', err); }
 // نمونه‌ی کاملِ سه‌ماهه‌ی اول (شاخص ماهانه، جلسه و صورت‌جلسه، برنامه‌ی بهبود، نیازسنجی
 // آموزشی، گزارش خطا، واکراند، اجرای چک‌لیست، شکایت، وظیفه، فرایند). باید بعد از سناریوی
 // بیمارستان نمونه و بعد از نقش‌های مدیریتی باشد چون به دوره‌ی فعال، شاخص‌ها، کمیته‌ها و
-// کاربرانِ ساخته‌شده‌ی آن‌ها تکیه می‌کند.
-try { require('../database/seed-quarter-one-sample').seedQuarterOneSample(); }
-catch (err) { seedFail('Quarter-one sample seed failed:', err); }
+// کاربرانِ ساخته‌شده‌ی آن‌ها تکیه می‌کند. (نمایشی — پشت گارد دمو)
+if (demoDataAllowed()) {
+  try { require('../database/seed-quarter-one-sample').seedQuarterOneSample(); }
+  catch (err) { seedFail('Quarter-one sample seed failed:', err); }
+}
 
 // عمق‌دادن به همان سه‌ماهه: کارتابل، داشبورد سرپرستار، فعالیت‌ها، شاخص‌های
 // بیشتر، نظرسنجی داخلی، مصوبه‌های واکراند و … . بعد از seed-q1 اجرا می‌شود.
-try { require('../database/seed-quarter-one-depth').seedQuarterOneDepth(); }
-catch (err) { seedFail('Quarter-one depth seed failed:', err); }
+if (demoDataAllowed()) {
+  try { require('../database/seed-quarter-one-depth').seedQuarterOneDepth(); }
+  catch (err) { seedFail('Quarter-one depth seed failed:', err); }
+}
 
 // پرکردن بازه‌ی بهمن ۱۴۰۳ تا شهریور ۱۴۰۵ برای فرم‌هایی که فقط داده‌ی ۱۴۰۵ داشتند
 // (برنامه‌ی بهبود، ممیزی، خطا، FMEA، واکراند، شکایت، پیشنهاد، رضایت‌سنجی، پیگیری
 // بیمار، گزارش شیفت، مرخصی، صورت‌جلسه). بعد از seed-q1-depth چون روی همان جدول‌ها
-// می‌نویسد و فقط ماه‌های خالی را پر می‌کند.
-try { require('../database/seed-range-fill').runMigration(); }
-catch (err) { seedFail('Range fill seed failed:', err); }
+// می‌نویسد و فقط ماه‌های خالی را پر می‌کند. (نمایشی — پشت گارد دمو)
+if (demoDataAllowed()) {
+  try { require('../database/seed-range-fill').runMigration(); }
+  catch (err) { seedFail('Range fill seed failed:', err); }
+}
 
 // لوگوی بیمارستان نمونه — SVG مخزن را به WebP تبدیل و روی همان مرکز ست می‌کند
-try { require('../database/seed-hospital-logo').seedHospitalLogo(); }
-catch (err) { seedFail('Hospital logo seed failed:', err); }
+// (نمایشی — پشت گارد دمو)
+if (demoDataAllowed()) {
+  try { require('../database/seed-hospital-logo').seedHospitalLogo(); }
+  catch (err) { seedFail('Hospital logo seed failed:', err); }
+}
 
 // پاک‌سازی رکوردهای آزمایشی با متن فارسیِ نابودشده («????») — باید بعد از همه‌ی
 // seed‌ها باشد تا اگر seedی چنین رکوردی ساخت هم پاک شود. جزئیات در خود فایل.

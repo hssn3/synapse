@@ -56,9 +56,19 @@ async function setEvalM(id, el){
   }catch(e){ el.checked=!el.checked; toast(e.message,true); }
 }
 
+// مسئولان گام‌ها از measures-full می‌آیند (آرایه) و ممکن است در درختِ سبک
+// هنوز نرسیده باشند (رشتهٔ JSON یا خالی). هر دو شکل را بی‌صدا به آرایه تبدیل
+// می‌کنیم تا نبودشان چیزی را نشکند — فقط چیپِ مسئول نمایش داده نمی‌شود.
+function stepOwnersOf(m){
+  const v=m&&m.step_owners;
+  if(Array.isArray(v)) return v;
+  try{ const a=JSON.parse(v||'[]'); return Array.isArray(a)?a:[]; }catch(e){ return []; }
+}
+
 function mCard(m, editable){
   const s=statusOf(m.id), lvl=m.measure_level||1;
   const {acts,note}=parseGuide(m.detail_text||'');
+  const stepOwners=stepOwnersOf(m);
   const ev=evidenceOf((m.statement||'')+' '+(m.detail_text||''));
   const sel={full_compliant:'s-f',partial:'s-p',non_compliant:'s-n',not_applicable:'s-na'}[s]||'';
   const role=ROLE_FA[m.responsible_role]||'—';
@@ -148,9 +158,10 @@ function mCard(m, editable){
     <!-- بخش‌های بازشونده (Drops) -->
     <div class="drop" id="g_${m.id}"><div class="dsec guide">
       <div class="dl">◈ اقدامات و مدارک الزامی طبق کتاب ملی اعتباربخشی ${help('evidence')} <span class="acc-book-page-pill" style="float:left">ص. ${pageNum}</span></div>
-      ${acts.length?`<ul class="acts">${acts.map(a=>`<li>
+      ${acts.length?`<ul class="acts">${acts.map((a,i)=>`<li>
         <span class="acc-doc-type-badge ${detectDocType(a)}">${docTypeLabel(a)}</span>
         <span>${esc(a)}</span>
+        ${stepOwners[i]?`<span class="bdg brole" style="font-size:10px" title="مسئول رسمی این گام در کتاب">مسئول: ${esc(stepOwners[i])}</span>`:''}
         <span style="font-size:10px;color:var(--gd);margin-right:8px">【مستند کتاب: ص. ${pageNum}】</span>
       </li>`).join('')}</ul>`
         :'<div style="font-size:11.5px;color:var(--td)">فهرست اقدام مجزا ثبت نشده — به متن اصلی کتاب مراجعه کنید.</div>'}

@@ -427,7 +427,17 @@ function fillMinutes(HID) {
 
 function runMigration() {
   try {
-    const hospitals = query('SELECT id FROM hospitals').rows;
+    // این seed دادهٔ نمایشی می‌سازد و قبلاً روی «همه‌ی بیمارستان‌ها» می‌نوشت — یعنی
+    // روی یک نصب چندمرکزی، پرونده‌ی مشتریِ واقعی هم دادهٔ جعلی می‌گرفت. حالا پیش‌فرض
+    // فقط مرکز نمایشی (کاربر نشانهٔ hospital3_admin) است؛ SEED_DEMO_DATA=1 یا
+    // `node ... --all` برای پرکردن همه (محیط دمو) صریح است.
+    const flag = String(process.env.SEED_DEMO_DATA || '').trim();
+    const allHospitals = flag === '1' || process.argv.includes('--all');
+    const hospitals = allHospitals
+      ? query('SELECT id FROM hospitals').rows
+      : query(`SELECT DISTINCT h.id FROM hospitals h
+                 JOIN users u ON u.hospital_id = h.id
+                WHERE u.username = ?`, ['hospital3_admin']).rows;
     let total = 0, touched = 0;
     for (const h of hospitals) {
       const HID = h.id;
@@ -443,7 +453,7 @@ function runMigration() {
       if (n) { total += n; touched++; }
     }
     console.log(`[Seed RangeFill] ✅ ${total} ردیف نمونه در بازه‌ی بهمن ۱۴۰۳ تا مرداد ۱۴۰۵ `
-      + `برای ${touched} بیمارستان افزوده شد`);
+      + `برای ${touched} بیمارستان${allHospitals ? '' : ' (فقط مرکز نمایشی)'} افزوده شد`);
   } catch (err) {
     console.error('[Seed RangeFill] failed:', err.message);
   }

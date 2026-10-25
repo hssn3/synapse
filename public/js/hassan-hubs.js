@@ -618,7 +618,7 @@
     HassanState.selectedAxisTitle = '';
 
     const cardsHtml = MANAGEMENT_AXES.map(ax => `
-      <div class="hassan-mgmt-card" role="button" tabindex="0" onclick="HassanHub.onAxisCardClick('${ax.code}', '${escapeHtml(ax.title)}')">
+      <div class="hassan-mgmt-card" role="button" tabindex="0" onclick="HassanHub.onAxisCardClick('${ax.code}', '${jsArg(ax.title)}')">
         <div class="hassan-mgmt-icon">
           ${ax.icon}
         </div>
@@ -646,7 +646,7 @@
     HassanState.selectedAxisTitle = '';
 
     const cardsHtml = SUPPORT_AXES.map(ax => `
-      <div class="hassan-mgmt-card" role="button" tabindex="0" onclick="HassanHub.onAxisCardClick('${ax.code}', '${escapeHtml(ax.title)}')">
+      <div class="hassan-mgmt-card" role="button" tabindex="0" onclick="HassanHub.onAxisCardClick('${ax.code}', '${jsArg(ax.title)}')">
         <div class="hassan-mgmt-icon">
           ${ax.icon}
         </div>
@@ -693,7 +693,7 @@
       const shortTitle = STANDARD_SHORT_TITLES[normCode(std.code)] || std.title || `استاندارد ${std.code}`;
       const subIcon = getSubIconForCode(std.code);
       return `
-        <div class="hassan-subcard" role="button" tabindex="0" onclick="HassanHub.openStandardPage('${std.code}', '${escapeHtml(std.title || '')}')">
+        <div class="hassan-subcard" role="button" tabindex="0" onclick="HassanHub.openStandardPage('${std.code}', '${jsArg(std.title || '')}')">
           <div class="hassan-subcard-icon-circle">
             ${subIcon}
           </div>
@@ -711,7 +711,7 @@
     ];
 
     const docCardsHtml = docCards.map(c => `
-      <div class="hassan-subcard hassan-doc-card" role="button" tabindex="0" onclick="HassanHub.openDocumentHubModal('${c.docType}', '${axisCode}', '${escapeHtml(axisTitle)}')">
+      <div class="hassan-subcard hassan-doc-card" role="button" tabindex="0" onclick="HassanHub.openDocumentHubModal('${c.docType}', '${axisCode}', '${jsArg(axisTitle)}')">
         <div class="hassan-subcard-icon-circle">
           ${c.icon}
         </div>
@@ -801,7 +801,7 @@
     ];
 
     const cardsHtml = CLINICAL_PROCEDURES.map((p, idx) => `
-      <div class="sn-chain-card" role="button" tabindex="0" onclick="HassanHub.openProcedureForm('${p.code}', '${escapeHtml(p.title)}')">
+      <div class="sn-chain-card" role="button" tabindex="0" onclick="HassanHub.openProcedureForm('${p.code}', '${jsArg(p.title)}')">
         <div class="sn-chain-step-badge">گام ${fa(p.step)}</div>
         <div class="sn-chain-icon-box">${ICONS.sopWorkflows}</div>
         <div class="sn-chain-title">${escapeHtml(p.title)}</div>
@@ -1141,7 +1141,7 @@
 
               <!-- ردیف کلیدهای تکمیلی (خط‌مشی، چک‌لیست، فلوچارت، روش اجرایی و کتاب) با آیکون‌های وکتور -->
               <div class="sn-hero-actions-grid" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));gap:12px;margin-bottom:20px;">
-                <button type="button" class="sn-hero-btn sn-hero-btn-policy" onclick="HassanHub.openGenericForm('policy', '${measureCode}', '${escapeHtml(stmt)}')">
+                <button type="button" class="sn-hero-btn sn-hero-btn-policy" onclick="HassanHub.openGenericForm('policy', '${measureCode}', '${jsArg(stmt)}')">
                   <div class="sn-hero-btn-icon">${ICONS.policyBtn}</div>
                   <div class="sn-hero-btn-text">
                     <span class="sn-hero-btn-title">خط‌مشی سنجه</span>
@@ -1149,7 +1149,7 @@
                   </div>
                 </button>
 
-                <button type="button" class="sn-hero-btn sn-hero-btn-checklist" style="border-color:rgba(16,160,185,0.35);" onclick="HassanHub.openGenericForm('checklist', '${measureCode}', '${escapeHtml(stmt)}')">
+                <button type="button" class="sn-hero-btn sn-hero-btn-checklist" style="border-color:rgba(16,160,185,0.35);" onclick="HassanHub.openGenericForm('checklist', '${measureCode}', '${jsArg(stmt)}')">
                   <div class="sn-hero-btn-icon" style="background:rgba(16,160,185,0.15);color:#6ed5e7;">${ICONS.actionChecklist}</div>
                   <div class="sn-hero-btn-text">
                     <span class="sn-hero-btn-title">چک‌لیست ممیزی</span>
@@ -1157,7 +1157,7 @@
                   </div>
                 </button>
 
-                <button type="button" class="sn-hero-btn sn-hero-btn-flowchart" style="border-color:rgba(59,130,246,0.35);" onclick="HassanHub.openGenericForm('flowchart', '${measureCode}', '${escapeHtml(stmt)}')">
+                <button type="button" class="sn-hero-btn sn-hero-btn-flowchart" style="border-color:rgba(59,130,246,0.35);" onclick="HassanHub.openGenericForm('flowchart', '${measureCode}', '${jsArg(stmt)}')">
                   <div class="sn-hero-btn-icon" style="background:rgba(59,130,246,0.15);color:#93c5fd;">${ICONS.procedureBtn}</div>
                   <div class="sn-hero-btn-text">
                     <span class="sn-hero-btn-title">فلوچارت فرآیند</span>
@@ -1165,7 +1165,7 @@
                   </div>
                 </button>
 
-                <button type="button" class="sn-hero-btn sn-hero-btn-proc" onclick="HassanHub.openGenericForm('procedure', '${measureCode}', '${escapeHtml(stmt)}')">
+                <button type="button" class="sn-hero-btn sn-hero-btn-proc" onclick="HassanHub.openGenericForm('procedure', '${measureCode}', '${jsArg(stmt)}')">
                   <div class="sn-hero-btn-icon">${ICONS.instructionBtn}</div>
                   <div class="sn-hero-btn-text">
                     <span class="sn-hero-btn-title">روش اجرایی (SOP)</span>
@@ -1354,7 +1354,7 @@
         <td colspan="7" style="text-align:center;padding:50px 20px;">
           <div style="display:flex;justify-content:center;margin-bottom:12px">${ICONS.emptyBox}</div>
           <div style="font-size:15px;color:var(--sn-text-muted);margin-bottom:14px">موردی یافت نشد</div>
-          <button type="button" class="btn btn--success btn--md" onclick="HassanHub.openChecklistBuilder('${measureCode}', '${escapeHtml(stmt)}')">
+          <button type="button" class="btn btn--success btn--md" onclick="HassanHub.openChecklistBuilder('${measureCode}', '${jsArg(stmt)}')">
             + ساخت اولین چک‌لیست برای این سنجه
           </button>
         </td>
@@ -1382,7 +1382,7 @@
             
             <div style="display:flex;align-items:center;gap:12px;">
               <!-- دکمه آبی ساخت چک‌لیست -->
-              <button type="button" class="btn btn--info btn--md" onclick="HassanHub.openChecklistBuilder('${measureCode}', '${escapeHtml(stmt)}')">
+              <button type="button" class="btn btn--info btn--md" onclick="HassanHub.openChecklistBuilder('${measureCode}', '${jsArg(stmt)}')">
                 <span>${ICONS.plus}</span>
                 <span>ساخت چک لیست</span>
               </button>
@@ -3074,6 +3074,7 @@ function renderArtifactsCardsTrackHtml(measureCode, items, activeTab) {
   // ۱۱. موتور امن راهنمای کتاب سنجه (Safe Non-blocking Book Guide)
   // =========================================================================
   window.__measureBookCache = window.__measureBookCache || {};
+  window.__measureOwnersCache = window.__measureOwnersCache || {};
 
   HassanHub.toggleBookGuide = async function(code, measureId, page) {
     code = normCode(code);
@@ -3095,18 +3096,20 @@ function renderArtifactsCardsTrackHtml(measureCode, items, activeTab) {
     }
 
     if (window.__measureBookCache[code]) {
-      renderBookContent(bodyEl, code, window.__measureBookCache[code], page);
+      renderBookContent(bodyEl, code, window.__measureBookCache[code], page, (window.__measureOwnersCache || {})[code]);
       return;
     }
 
     let localDetail = '';
+    let localOwners;
     if (window.S && window.S.byId && measureId && window.S.byId[measureId] && window.S.byId[measureId].detail_text) {
       localDetail = window.S.byId[measureId].detail_text;
+      localOwners = window.S.byId[measureId].step_owners;
     } else if (window.S && Array.isArray(window.S.sections)) {
       window.S.sections.forEach(sec => {
         (sec.axes || []).forEach(ax => {
           (ax.measures || []).forEach(m => {
-            if (m.code === code && m.detail_text) localDetail = m.detail_text;
+            if (m.code === code && m.detail_text) { localDetail = m.detail_text; localOwners = m.step_owners; }
           });
         });
       });
@@ -3114,7 +3117,8 @@ function renderArtifactsCardsTrackHtml(measureCode, items, activeTab) {
 
     if (localDetail) {
       window.__measureBookCache[code] = localDetail;
-      renderBookContent(bodyEl, code, localDetail, page);
+      window.__measureOwnersCache[code] = localOwners || [];
+      renderBookContent(bodyEl, code, localDetail, page, localOwners);
       return;
     }
 
@@ -3130,8 +3134,10 @@ function renderArtifactsCardsTrackHtml(measureCode, items, activeTab) {
         const res = await API.measureDetails([measureId]);
         if (res && res.measures && res.measures[0] && res.measures[0].detail_text) {
           const dt = res.measures[0].detail_text;
+          const owners = res.measures[0].step_owners;
           window.__measureBookCache[code] = dt;
-          renderBookContent(bodyEl, code, dt, page);
+          window.__measureOwnersCache[code] = Array.isArray(owners) ? owners : [];
+          renderBookContent(bodyEl, code, dt, page, owners);
           return;
         }
       }
@@ -3142,19 +3148,25 @@ function renderArtifactsCardsTrackHtml(measureCode, items, activeTab) {
     }
   };
 
-  function renderBookContent(bodyEl, code, detailText, page) {
+  function renderBookContent(bodyEl, code, detailText, page, owners) {
     if (!detailText || !detailText.trim()) {
       renderFallbackBookContent(bodyEl, code, page);
       return;
     }
 
-    const rawSteps = detailText.split(/[•\n]+/).map(s => s.trim()).filter(s => s.length > 5);
+    // وقتی مسئول گام‌ها داریم، فقط با جداکنندهٔ رسمی کتاب (U+F0A7) می‌شکنیم تا
+    // اندیس گام‌ها با اندیس owners یکی بماند. شکستن روی newline/• می‌تواند یک
+    // گام را دو تکه کند و مسئول‌ها را جابه‌جا نشان دهد.
+    const ownerList = Array.isArray(owners) ? owners : [];
+    const rawSteps = (ownerList.length
+      ? detailText.split('\uf0a7')
+      : detailText.split(/[•\n]+/)).map(s => s.trim()).filter(s => s.length > 5);
     const steps = rawSteps.length ? rawSteps : [detailText.trim()];
 
-    const stepsHtml = steps.map((step) => `
+    const stepsHtml = steps.map((step, i) => `
       <div class="sn-book-step-card">
         <span class="sn-book-step-icon">${ICONS.checkSmall}</span>
-        <div style="flex:1">${escapeHtml(step)}</div>
+        <div style="flex:1">${escapeHtml(step)}${ownerList[i] ? `<div class="sn-book-step-owner">مسئول: ${escapeHtml(ownerList[i])}</div>` : ''}</div>
       </div>
     `).join('');
 
