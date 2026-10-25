@@ -96,7 +96,7 @@ function renderEntry(){
                 </svg>
               </div>
               <div class="stat-number" style="color:#f87171;text-shadow:0 0 15px rgba(248,113,113,0.4)">۱۲۱</div>
-              <div class="stat-label">سنجه الزامی ایمنی</div>
+              <div class="stat-label">پرچم ایمنی بیمار</div>
               <div class="stat-meta">پرچم ایمنی بیمار در کتاب ویرایش ششم</div>
             </div>
 
