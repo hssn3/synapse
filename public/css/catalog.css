@@ -90,18 +90,10 @@ body.scrolled .tb-strip{opacity:0}
 body.scrolled .tb-bar{box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 22px 50px -30px rgba(0,0,0,.95)}
 .tb-bar .wrap{height:100%;display:flex;align-items:center;gap:16px}
 .brand{display:flex;align-items:center;gap:11px;flex-shrink:0;color:var(--ink)}
-.brand .bt{display:flex;flex-direction:column;min-width:0}
-.brand-mark{
-  width:42px;height:42px;border-radius:50%;display:grid;place-items:center;color:var(--gold2);
-  background:radial-gradient(circle at 32% 26%,#213650,#0B1421 72%);
-  border:1px solid rgba(231,196,119,.55);
-  box-shadow:inset 0 0 0 3px rgba(7,12,20,.94),inset 0 0 0 4px rgba(231,196,119,.28),0 6px 22px -8px rgba(231,196,119,.55);
-  transition:box-shadow .3s ease,transform .3s var(--ease);animation:markGlow 6s ease-in-out infinite;
-}
-.brand:hover .brand-mark{transform:rotate(-6deg) scale(1.03);box-shadow:inset 0 0 0 3px rgba(7,12,20,.94),inset 0 0 0 4px rgba(255,227,168,.62),0 8px 28px -8px rgba(231,196,119,.75)}
-.brand-mark svg{width:19px;height:19px}
-.brand b{font-size:1rem;display:block;line-height:1.25;letter-spacing:.01em}
-.brand i{font-style:normal;font-size:.68rem;color:var(--faint);display:block;line-height:1.3}
+/* لوگوی رسمی سایت (همان تصویر هدر سامانه)؛ نشان دست‌ساز قبلی حذف شد تا برند یکدست بماند. */
+.brand-lockup{display:block;height:46px;width:auto;flex:0 0 auto;filter:drop-shadow(0 0 14px rgba(90,215,232,.22));transition:filter .3s ease,transform .3s var(--ease)}
+.brand:hover .brand-lockup{transform:translateY(-1px);filter:drop-shadow(0 0 18px rgba(90,215,232,.38))}
+.brand-sub{font-size:.68rem;color:var(--faint);line-height:1.5;padding-inline-start:12px;border-inline-start:1px solid rgba(255,255,255,.10);white-space:nowrap}
 .rd{position:absolute;right:0;left:0;bottom:-1px;height:2px;background:rgba(255,255,255,.04);overflow:hidden;pointer-events:none}
 .rd i{display:block;height:100%;width:100%;transform-origin:100% 50%;transform:scaleX(0);background:linear-gradient(90deg,rgba(231,196,119,.12),#E7C477 55%,#FFE3A8);box-shadow:0 0 14px rgba(231,196,119,.65)}
 .qf{flex:1;max-width:560px;position:relative;margin-inline:auto}
@@ -433,9 +425,7 @@ footer{position:relative;margin-top:80px;background:linear-gradient(180deg,rgba(
 footer::before{content:'';position:absolute;top:0;right:0;left:0;height:1px;background:linear-gradient(90deg,transparent,rgba(231,196,119,.62) 50%,transparent);box-shadow:0 0 24px rgba(231,196,119,.28)}
 .foot-grid{display:grid;grid-template-columns:1.45fr 1fr 1fr 1.1fr;gap:38px;padding:56px 0 6px}
 .foot-brand .brand{align-items:flex-start}
-.foot-brand .brand-mark{width:48px;height:48px;animation:none}
-.foot-brand .brand-mark svg{width:21px;height:21px}
-.foot-brand .brand b{font-size:1.14rem}
+.foot-brand .brand-lockup{height:44px}
 .foot-brand p{color:var(--sub);margin-top:15px;max-width:360px;line-height:1.95;font-size:.79rem}
 .foot-chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:17px}
 .foot-chip{border:1px solid rgba(231,196,119,.20);color:#D8C48D;background:rgba(231,196,119,.06);border-radius:999px;padding:3px 11px;font-size:.68rem}
@@ -474,7 +464,6 @@ footer::before{content:'';position:absolute;top:0;right:0;left:0;height:1px;back
 /* ---------- کی‌فریم‌ها ---------- */
 @keyframes aurora{0%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(-1.6%,1.2%,0) scale(1.05)}100%{transform:translate3d(1.4%,-1%,0) scale(1.02)}}
 @keyframes spin{to{transform:translateX(-50%) rotate(360deg)}}
-@keyframes markGlow{0%,100%{box-shadow:inset 0 0 0 3px rgba(7,12,20,.94),inset 0 0 0 4px rgba(231,196,119,.28),0 6px 22px -8px rgba(231,196,119,.5)}50%{box-shadow:inset 0 0 0 3px rgba(7,12,20,.94),inset 0 0 0 4px rgba(255,227,168,.48),0 8px 30px -8px rgba(231,196,119,.8)}}
 @keyframes heroIn{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
 @keyframes pulseDot{0%,100%{opacity:.65;transform:scale(.9)}50%{opacity:1;transform:scale(1.15)}}
 @keyframes cardIn{from{opacity:0;transform:translateY(12px) scale(.985)}to{opacity:1;transform:none}}
@@ -491,7 +480,7 @@ footer::before{content:'';position:absolute;top:0;right:0;left:0;height:1px;back
   .hero{padding-top:44px}
   .mx-bar{grid-template-columns:1fr 1fr}
   .mx-bar .inp,.mx-bar select{min-width:0}
-  .brand i{display:none}
+  .brand-sub{display:none}
   .foot-grid{grid-template-columns:1fr 1fr;gap:30px}
   .hero::before{top:-38%}
 }
@@ -506,8 +495,7 @@ footer::before{content:'';position:absolute;top:0;right:0;left:0;height:1px;back
   .mrow-hd{grid-template-columns:1fr;gap:8px}
   .mrow-code{width:max-content}
   .mrow-badges{justify-content:flex-start}
-  .brand b{font-size:.92rem}
-  .brand-mark{width:36px;height:36px}
+  .brand-lockup{height:38px}
   .tb-bar .wrap{gap:10px}
   .demo-btn span.dt{display:none}
   .demo-btn{padding:0 13px}
