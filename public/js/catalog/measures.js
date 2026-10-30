@@ -8,13 +8,14 @@
   var MIndex = null, MNotes = null, idxPromise = null, notesPromise = null;
   var MX = { q: '', axis: '', level: '', safe: false, shown: 40 };
   var PAGE = 40;
+  var ASSET_V = '?v=20261031_v12';
   var onIndexLoaded = null;
 
   function loadIndex() {
     if (MIndex) return Promise.resolve(MIndex);
     if (idxPromise) return idxPromise;
     setMxStatus('در حال بارگذاری فهرست ۳۹۵ سنجه…');
-    idxPromise = fetch('/accreditation/catalog/measures-index.json')
+    idxPromise = fetch('/accreditation/catalog/measures-index.json' + ASSET_V)
       .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
       .then(function (j) {
         MIndex = j;
@@ -35,7 +36,7 @@
   function loadNotes() {
     if (MNotes) return Promise.resolve(MNotes);
     if (notesPromise) return notesPromise;
-    notesPromise = fetch('/accreditation/catalog/measures-notes.json')
+    notesPromise = fetch('/accreditation/catalog/measures-notes.json' + ASSET_V)
       .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
       .then(function (j) { MNotes = j; return j; })
       .catch(function (e) { notesPromise = null; throw e; });

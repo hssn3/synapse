@@ -1,8 +1,8 @@
 {
-  "createdAt": "2026-10-19T08:02:21.446Z",
+  "createdAt": "2026-10-30T16:00:27.810Z",
   "sourceDb": "C:\\Users\\RH\\Desktop\\synapse\\database\\hospital.db",
-  "rawBytes": 10403840,
-  "gzipBytes": 1767469,
+  "rawBytes": 10412032,
+  "gzipBytes": 1795222,
   "hospitals": [
     {
       "name": "بیمارستان نمونه شماره یک",
