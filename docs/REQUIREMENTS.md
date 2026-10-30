@@ -93,7 +93,7 @@
 - **Given** جدولی با ستون‌های اضافه‌ی نمره
 - **When** seed اجرا شود (دو بار)
 - **Then** هیچ ستونی از دست نرود، شمارش ردیف‌ها ثابت بماند و اجرای دوم بی‌تغییر باشد.
-- **نگاشت:** `database/seed-measure-status-year.js` — شاهد زنده پس از اجرا: `cols=18 rows=520 quick_check=ok` ✅
+- **نگاشت:** `database/seed-measure-status-year.js` — شاهد زنده پس از اجرا: `cols=18 rows=395 quick_check=ok` ✅
 
 ### AC-16 — مسیر استقراری که مستند شده واقعاً بالا می‌آید
 - **Given** `docker compose` بدون `JWT_SECRET`
