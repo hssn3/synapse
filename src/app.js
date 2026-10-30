@@ -280,10 +280,6 @@ catch (err) { seedFail('Education seed/migration failed:', err); }
 try { require('../database/seed-gap10').runMigration(); }
 catch (err) { seedFail('Gap10 seed/migration failed:', err); }
 
-// تعمیرِ «رعایت ← رضایت» در متنِ الف-۳-۴-۴ و الف-۳-۴-۵
-try { require('../database/seed-measure-text-fix').runMigration(); }
-catch (err) { seedFail('MeasureTextFix failed:', err); }
-
 // پیشگیری و کنترل عفونت — محور ب-۵
 try { require('../database/seed-infection-control').runMigration(); }
 catch (err) { seedFail('InfectionControl seed/migration failed:', err); }
@@ -700,7 +696,7 @@ catch (err) { seedFail('Patient rights and outpatient docs seed failed:', err); 
 try { require('../database/seed-digital-library-enrichment').runSeed(); }
 catch (err) { seedFail('Digital library enrichment seed failed:', err); }
 
-// تصحیح عناوین کامل استانداردهای الف-3-2، ب-1-1 و ج-1-6 طبق کتاب اعتباربخشی ملی
+// تصحیح عناوین کامل استانداردهای الف-3-2، ب-1-1، ب-7-3 و ج-1-4 طبق کتاب اعتباربخشی ملی
 try { require('../database/seed-standards-titles-fix').runMigration(); }
 catch (err) { seedFail('Standards titles fix seed failed:', err); }
 
