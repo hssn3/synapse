@@ -118,7 +118,7 @@ let HUB_CARDS = { accreditation:[], quality:[], org:[] };
 
 // نگاشت «هر صفحه زیر کدام تب است» — برای روشن‌ماندن تب فعال و دکمه‌ی بازگشت
 const HUB_OF = {
-  measures:'acc', reviewgaps:'acc', doccodes:'acc', documents:'acc',
+  measures:'acc', learn:'acc', reviewgaps:'acc', doccodes:'acc', documents:'acc',
   checklists:'acc', audits:'acc', walkarounds:'acc', errors:'acc', fmea:'acc',
   satisfaction:'acc', followup:'acc', committees:'acc', bsc:'acc', indicators:'acc', programs:'acc', processes:'acc',
   orgchart:'acc', orgstructure:'acc', nursing:'acc', support:'acc', management:'acc',
@@ -145,7 +145,7 @@ const HUB_OF = {
 // «مراقبت و ایمنی بیمار» و… همان عنوان‌هایی است که کاربرِ اعتباربخشی هر روز
 // می‌بیند، پس بدون توضیح می‌فهمدشان.
 const PAGE_CATS = [
-  { k:'assess', t:'سنجه‌ها و خودارزیابی', pages:['measures','reviewgaps'] },
+  { k:'assess', t:'سنجه‌ها و خودارزیابی', pages:['measures','learn','reviewgaps'] },
   { k:'clinical_hubs', t:'هاب‌های فرآیندی بالینی و حقوق بیمار', pages:['patientrights','maternal','outpatient'] },
   { k:'lead',   t:'رهبری و مدیریت',        pages:['committees','programs','walkarounds','reports','users','settings','vendors','finance','patientfocus'] },
   { k:'docs',   t:'مدارک و فرآیندها',      pages:['documents','doccodes','processes','knowledge'] },
@@ -163,7 +163,7 @@ PAGE_CATS.forEach(c => c.pages.forEach(p => { CAT_OF[p] = c; }));
 // (CARD_DESC/HUB_CARDS) کوتاه‌تر و آشناتر از عنوانِ بلندِ داخلِ صفحه است.
 const PAGE_TITLE_FA = {
   acc:'اعتباربخشی', duties:'مسئولیت من', dash:'داشبورد',
-  measures:'سنجه‌ها و خودارزیابی', reviewgaps:'اختلاف با ارزیاب',
+  measures:'سنجه‌ها و خودارزیابی', learn:'آموزش سنجه‌ها', reviewgaps:'اختلاف با ارزیاب',
   committees:'کمیته‌ها', programs:'برنامه‌های بهبود', walkarounds:'بازدید میدانی',
   reports:'گزارش و خروجی', users:'کاربران', settings:'تنظیمات بیمارستان',
   documents:'مدارک کنترل‌شده', doccodes:'دفتر کد مدارک', processes:'فرآیندها و فلوچارت',
@@ -227,7 +227,7 @@ function renderPageCrumbs(p){
 
 // ترتیب کارت‌ها = ترتیب اهمیت، از بالا به پایین. کارفرما صریح خواست مهم‌ترین‌ها اول بیایند.
 const ACC_ORDER = [
-  'measures','reviewgaps','patientrights','maternal','outpatient','committees','indicators','bsc','documents','doccodes','programs',
+  'measures','learn','reviewgaps','patientrights','maternal','outpatient','committees','indicators','bsc','documents','doccodes','programs',
   'checklists','audits','walkarounds','assets','pharmacy','infection','blood','lab','imaging','disaster','errors','fmea','satisfaction','followup','processes',
   'training','orgchart','orgstructure','nursing','staffshift','support','management',
   'tenures','reports','users','settings',
@@ -239,6 +239,7 @@ const CARD_DESC = {
   maternal:'مراقبت مادران پرخطر، مدیریت بخش نوزادان و ترویج زایمان طبیعی',
   outpatient:'خدمات سرپایی، حفاظت پرتوی، دندانپزشکی و کلینیک‌های تخصصی',
   measures:'خودارزیابی سنجه‌ها و ثبت وضعیت هر کدام',
+  learn:'مسیر یادگیری نقش‌محور سنجه‌های نسل ششم، مرحله‌به‌مرحله و کلمه‌به‌کلمه',
   reviewgaps:'اختلاف نمره‌ی خودارزیابی با ارزیاب',
   committees:'کمیته‌های الزامی، جلسات و صورت‌جلسه‌ها',
   indicators:'۶۱ شاخص استاندارد، شناسنامه و ثبت داده‌ی دوره‌ای',

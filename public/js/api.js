@@ -69,6 +69,9 @@ const API = {
 
   // accreditation
   tree() { return this.get('/accreditation/tree'); },
+  // مسیر آموزشی نقش‌محور سنجه‌های نسل ششم (فقط خواندنی؛ وضعیت رسمی سنجه را تغییر نمی‌دهد)
+  learningPath() { return this.get('/accreditation/learning/path'); },
+  learningMeasure(id) { return this.get('/accreditation/learning/measure/' + encodeURIComponent(id)); },
   // متن کامل کتاب سنجههای مشخص — واکشی تنبل پس از درخت سبک
   measureDetails(ids) { return this.get('/accreditation/measures-full?ids=' + encodeURIComponent(ids.join(','))); },
   // اقلام و زیرمنوهای تکمیل‌شده و مرتبط با هر سنجه (خط‌مشی، روش اجرایی، چک‌لیست، فلوچارت و شواهد)

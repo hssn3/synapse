@@ -184,6 +184,7 @@ function renderAccHub(){
 
   // کارت‌های میانبر اصلی مطابق تصویر مرجع ۲
   const shortcutCards = [
+    { title: 'آموزش سنجه‌های نسل ششم', sub: 'مسیر یادگیری نقش‌محور، مرحله‌به‌مرحله', icon: '📚', action: "openLearning()" },
     { title: 'دستور کارها', sub: 'پیگیری وظایف و اقدامات', icon: '🗂️', action: "go('duties')" },
     { title: 'صورت جلسات کمیته‌ها', sub: 'ثبت و پیگیری مصوبات', icon: '👥', action: "go('committees')" },
     { title: 'شاخص‌ها', sub: 'پایش سنجه‌ها و KPI', icon: '📈', action: "go('indicator_slides')" },

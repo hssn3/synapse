@@ -72,6 +72,11 @@ function syncRouteHash(p, opts = {}){
       targetHash = '#acc';
     }
   }
+  if(p === 'learn'){
+    targetHash = (typeof LRN !== 'undefined' && LRN.view === 'lesson' && LRN.measureId)
+      ? '#learn?id=' + encodeURIComponent(LRN.measureId)
+      : '#learn';
+  }
   if(location.hash !== targetHash){
     if(opts.skipHashUpdate || opts.fromHistory) return;
     window.__navigatingViaGo = true;
@@ -288,7 +293,23 @@ function handleRoute(route, opts = {}){
     return;
   }
 
-  // ۲. مسیر مستقیم سنجه‌ها
+  // ۲. مسیر آموزش سنجه‌ها — با شناسهٔ سنجه مستقیم درس همان سنجه باز می‌شود
+  if(route.page === 'learn'){
+    const id = String((route.params && route.params.id) || '').trim();
+    if(typeof LRN !== 'undefined'){
+      LRN.view = id ? 'lesson' : 'catalog';
+      LRN.measureId = id || null;
+      LRN.stage = 0;
+      if(LRN.measureId && LRN.lesson && String(LRN.lessonKey) !== id){
+        LRN.lesson = null;
+        LRN.lessonKey = '';
+      }
+    }
+    go('learn', { skipHashUpdate: true, fromHistory: opts.fromHistory });
+    return;
+  }
+
+  // ۳. مسیر مستقیم سنجه‌ها
   if(route.page === 'measures'){
     restoreSubRouteState('measures', route.params);
     go('measures', { skipHashUpdate: true });

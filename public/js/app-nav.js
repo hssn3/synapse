@@ -101,7 +101,7 @@
           'staffshift', 'shiftatt', 'assets', 'pharmacy', 'disaster', 'infection', 'blood', 'lab',
           'imaging', 'knowledge', 'occhealth', 'hrdev', 'vendors', 'nsupervision', 'finance',
           'patientfocus', 'education', 'crm', 'safesurgery', 'medrecon', 'waste',
-          'patientrights', 'maternal', 'outpatient'];
+          'patientrights', 'maternal', 'outpatient', 'learn'];
         try {
           if (dutiesSubpages.includes(cur) && keys.includes('duties')) activeKey = 'duties';
           else if (accSubpages.includes(cur) && keys.includes('acc')) activeKey = 'acc';
@@ -159,7 +159,7 @@
     const box = document.getElementById('appSheetScroll');
     if (!box || typeof NAV_GROUPS === 'undefined') return;
     const items = g => g.items.map(n =>
-      `<button type="button" class="nitem app-nitem" data-p="${n.k}" onclick="go('${n.k}');appNavCloseMore();">
+      `<button type="button" class="nitem app-nitem" data-p="${n.k}" onclick="${n.a || `go('${n.k}')`};appNavCloseMore();">
          <span class="ic">${n.i}</span><span class="ntxt">${esc2(n.t)}</span>
          <span class="nbadge" data-badge="${n.k}"></span>
        </button>`).join('');

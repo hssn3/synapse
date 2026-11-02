@@ -398,7 +398,7 @@ const ALL_APP_PAGES = new Set([
   'hrdev', 'vendors', 'nsupervision', 'finance', 'patientfocus', 'education', 'blood',
   'lab', 'imaging', 'errors', 'fmea', 'activities', 'guide', 'profile', 'satisfaction',
   'followup', 'doccodes', 'tenures', 'crm', 'safesurgery', 'medrecon', 'waste',
-  'patientrights', 'maternal', 'outpatient', 'directives'
+  'patientrights', 'maternal', 'outpatient', 'directives', 'learn'
 ]);
 
 function isValidAppPage(p){

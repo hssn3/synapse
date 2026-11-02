@@ -68,6 +68,8 @@ function renderApp(){
   // که انگار کل منو مال اعتباربخشی است — پس مثل quality/org یک گروه جمع‌شونده‌ی
   // مستقل با عنوان روشن می‌گیرد، هم‌تراز با بقیه‌ی ماژول‌ها.
   const accreditation=[{k:'measures',i:ic('list'),t:'سنجه‌ها و ارزیابی'}]
+    // آموزش نقش‌محور برای همهٔ سمت‌ها باز است؛ دامنهٔ سنجه‌ها را خودِ سرور بر اساس سمت فیلتر می‌کند
+    .concat([{k:'learn',i:ic('graduation'),t:'آموزش سنجه‌ها',a:'openLearning()'}])
     // گزارش اختلاف فقط برای کسی معنا دارد که اجازه‌ی ثبت نمره‌ی ارزیاب را هم دارد
     .concat(canReview()?[{k:'reviewgaps',i:ic('chart')||ic('list'),t:'اختلاف با ارزیاب'}]:[])
     .concat(canManageDocs()?[{k:'doccodes',i:ic('list'),t:'دفتر کد مدارک'}]:[])
@@ -87,6 +89,7 @@ function renderApp(){
     {g:null, items:[
       {k:'dash',       i:ic('dashboard'), t:'میزکار'},
       {k:'acc',        i:ic('clipboard'), t:'اعتباربخشی'},
+      {k:'learn',      i:ic('graduation'), t:'آموزش سنجه‌ها', a:'openLearning()'},
       ...((typeof slidesCanView==='function'&&slidesCanView())?[{k:'indicator_slides', i:ic('chart'),     t:'شاخص‌ها'}]:[]),
       {k:'duties',     i:ic('badge'),     t:'کارتابل و مسئولیت‌ها'},
       {k:'directives', i:ic('message'), t:'ابلاغیه و دستور'},
@@ -149,7 +152,8 @@ function renderApp(){
           // جای بج خالی از ابتدا در DOM هست تا refreshNavBadges فقط متن را عوض کند
           const items=grp.items.map(n=>{
             const locked=!featureEnabled(n.k);
-            return `<div class="nitem${locked?' nitem-locked':''}" data-p="${n.k}" data-title="${esc(n.t)}" title="${locked?'برای فعال‌سازی این بخش خرید کنید':esc(n.t)}" onclick="go('${n.k}');closeSidebar()"><span class="ic">${n.i}</span><span class="ntxt">${esc(n.t)}</span>${locked?'<span class="nlock">🔒</span>':''}<span class="nbadge" data-badge="${n.k}"></span></div>`;
+            const act=n.a||`go('${n.k}')`;
+            return `<div class="nitem${locked?' nitem-locked':''}" data-p="${n.k}" data-title="${esc(n.t)}" title="${locked?'برای فعال‌سازی این بخش خرید کنید':esc(n.t)}" onclick="${act};closeSidebar()"><span class="ic">${n.i}</span><span class="ntxt">${esc(n.t)}</span>${locked?'<span class="nlock">🔒</span>':''}<span class="nbadge" data-badge="${n.k}"></span></div>`;
           }).join('');
           if(!grp.g) return items;
           const open=navGroupOpen(grp.g);
@@ -485,7 +489,7 @@ function go(p, opts = {}){
   // بخش خریداری‌نشده — به‌جای صفحه‌ی واقعی، صفحه‌ی قفل/خرید نشان داده می‌شود (سرور هم مستقل همین را
   // با requireFeature اجرا می‌کند؛ این‌جا فقط برای تجربه‌ی کاربری، بدون رفت‌وبرگشت به سرور)
   if(!featureEnabled(p)){ renderFeatureGate(p); return; }
-  ({acc:renderAccHub, knowledge:renderKnowledge, duties:renderDutiesHub, dash:renderDash, inbox:renderInbox, messages:renderMessages, settings:renderSettings, measures:renderMeasures, reports:renderReports, reviewgaps:renderReviewGaps, users:renderUsers, committees:renderCommittees, documents:renderDocuments, checklists:renderChecklists, audits:renderAudits, walkarounds:renderWalkarounds, processes:renderProcesses, programs:renderPrograms, training:renderTraining, bsc:renderBsc, indicators:(typeof renderIndicatorSlidesView==='function'?renderIndicatorSlidesView:renderIndicators), calendar:renderCalendar, orgstructure:renderOrg, orgchart:renderOrgChart, nursing:renderNursing, support:renderSupport, management:renderManagement, headnurse:renderHeadNurse, staffshift:renderShiftSchedule, shiftatt:renderShiftAttendance, assets:renderFacilityAssets, pharmacy:renderPharmacy, disaster:renderDisaster, infection:renderInfection, occhealth:renderOccHealth, hrdev:renderHrDev, vendors:renderVendors, nsupervision:renderNsupervision, finance:renderFinance, patientfocus:renderPatientFocus, education:renderEducation, blood:renderBlood, lab:renderLab, imaging:renderImaging, errors:renderErrors, fmea:renderFmea, activities:renderActivities, guide:renderRoleGuide, profile:renderProfile, satisfaction:renderSatisfactionResults, followup:renderFollowup, doccodes:renderDocCodes, tenures:renderTenures, formbuilder:renderFormBuilder, forms:renderFormFiller,
+  ({acc:renderAccHub, knowledge:renderKnowledge, duties:renderDutiesHub, dash:renderDash, inbox:renderInbox, messages:renderMessages, settings:renderSettings, measures:renderMeasures, learn:(typeof renderMeasureLearning==='function'?renderMeasureLearning:renderDash), reports:renderReports, reviewgaps:renderReviewGaps, users:renderUsers, committees:renderCommittees, documents:renderDocuments, checklists:renderChecklists, audits:renderAudits, walkarounds:renderWalkarounds, processes:renderProcesses, programs:renderPrograms, training:renderTraining, bsc:renderBsc, indicators:(typeof renderIndicatorSlidesView==='function'?renderIndicatorSlidesView:renderIndicators), calendar:renderCalendar, orgstructure:renderOrg, orgchart:renderOrgChart, nursing:renderNursing, support:renderSupport, management:renderManagement, headnurse:renderHeadNurse, staffshift:renderShiftSchedule, shiftatt:renderShiftAttendance, assets:renderFacilityAssets, pharmacy:renderPharmacy, disaster:renderDisaster, infection:renderInfection, occhealth:renderOccHealth, hrdev:renderHrDev, vendors:renderVendors, nsupervision:renderNsupervision, finance:renderFinance, patientfocus:renderPatientFocus, education:renderEducation, blood:renderBlood, lab:renderLab, imaging:renderImaging, errors:renderErrors, fmea:renderFmea, activities:renderActivities, guide:renderRoleGuide, profile:renderProfile, satisfaction:renderSatisfactionResults, followup:renderFollowup, doccodes:renderDocCodes, tenures:renderTenures, formbuilder:renderFormBuilder, forms:renderFormFiller,
     // ماژول‌های CRM و ایمنی بالینی — اضافه‌شده در فاز CRM
     crm:renderCrm, safesurgery:renderSafeSurgery, medrecon:renderMedRecon, waste:renderWasteLog,
     directives:renderDirectives,
