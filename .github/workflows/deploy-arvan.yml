@@ -1,0 +1,96 @@
+# =====================================================================
+# استقرار خودکار روی اروان‌کلاد (۱۴۰۵/۰۸/۱۶)
+# ---------------------------------------------------------------------
+# چرا این workflow:
+# پنل «کانتینر ابری» اروان پس از ساختِ اپ، هیچ تغییری را ذخیره نمی‌کند
+# (ایمیج/متغیر محیطی/مانیفست/دامنه همه با reload به حالت قبل برمی‌گردند —
+# با چند بار آزمایش روی همین پروژه تأیید شد). پس به‌روزرسانی باید از بیرون
+# و مستقیم روی کلاستر انجام شود.
+#
+# زنجیره‌ی کامل:
+#   push روی main → CI (تست‌ها) → Docker Image (build/push با tag sha-<۷کاراکتر>)
+#   → همین workflow → kubectl set image → rollout → تست سلامت روی دامنه
+#
+# نکته‌ی امنیتی: مخزن عمومی است، پس هیچ رازی داخل فایل نیست. تنها راز،
+# ARVAN_KUBECONFIG است که در Secrets مخزن ذخیره شده و فقط به همین job داده
+# می‌شود. این مسیر به توکن شخصیِ مالک وابسته نیست: GITHUB_TOKEN خودکار است و
+# توکن کلاستر جدا ذخیره شده است.
+# =====================================================================
+name: Deploy Arvan
+
+on:
+  workflow_run:
+    workflows: ["Docker Image"]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      sha:
+        description: "کامیت هدف (خالی = نوک شاخهٔ main)"
+        required: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-arvan
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: kubectl set image + smoke
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.workflow_run.conclusion == 'success' &&
+       github.event.workflow_run.head_branch == 'main')
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: تعیین کامیت هدف
+        id: target
+        run: |
+          SHA="${{ github.event.workflow_run.head_sha }}"
+          if [ -z "$SHA" ]; then SHA="${{ inputs.sha }}"; fi
+          if [ -z "$SHA" ]; then
+            SHA="$(git ls-remote https://github.com/${{ github.repository }}.git refs/heads/main | cut -c1-40)"
+          fi
+          echo "sha=$SHA" >> "$GITHUB_OUTPUT"
+          echo "short=${SHA:0:7}" >> "$GITHUB_OUTPUT"
+          echo "هدف: $SHA"
+
+      - name: نصب kubectl
+        run: |
+          curl -sfL -o kubectl https://dl.k8s.io/release/v1.31.4/bin/linux/amd64/kubectl
+          chmod +x kubectl && sudo mv kubectl /usr/local/bin/kubectl
+          kubectl version --client
+
+      - name: نوشتن KubeConfig از Secrets
+        run: |
+          mkdir -p "$HOME/.kube"
+          printf '%s' "${{ secrets.ARVAN_KUBECONFIG }}" > "$HOME/.kube/config"
+          chmod 600 "$HOME/.kube/config"
+          kubectl -n synapse get deployment synapse-app -o name
+
+      - name: نشاندن ایمیج تازه و انتظار برای rollout
+        run: |
+          IMG="ghcr.io/${{ github.repository }}:sha-${{ steps.target.outputs.short }}"
+          echo "deploy → $IMG"
+          kubectl -n synapse set image deployment/synapse-app "synapse-app=$IMG"
+          kubectl -n synapse rollout status deployment/synapse-app --timeout=420s
+          kubectl -n synapse get pods -l app=synapse-app -o wide
+
+      - name: تست سلامت روی دامنه
+        run: |
+          for i in $(seq 1 24); do
+            code=$(curl -s -o /dev/null -w '%{http_code}' https://synaaps.my.id/healthz || true)
+            echo "تلاش $i → $code"
+            if [ "$code" = "200" ]; then
+              curl -s https://synaaps.my.id/healthz; exit 0
+            fi
+            sleep 10
+          done
+          echo "❌ سایت ۲۰۰ نداد"; exit 1
+
+      - name: لاگ پاد در صورت خطا
+        if: failure()
+        run: kubectl -n synapse logs -l app=synapse-app --tail=120 || true
