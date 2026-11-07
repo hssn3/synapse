@@ -1,20 +1,19 @@
 # =====================================================================
-# استقرار خودکار روی اروان‌کلاد (۱۴۰۵/۰۸/۱۶)
+# استقرار خودکار روی اروان‌کلاد (نسخهٔ مقاوم‌شده — ۱۴۰۵/۰۸/۱۶)
 # ---------------------------------------------------------------------
-# چرا این workflow:
-# پنل «کانتینر ابری» اروان پس از ساختِ اپ، هیچ تغییری را ذخیره نمی‌کند
-# (ایمیج/متغیر محیطی/مانیفست/دامنه همه با reload به حالت قبل برمی‌گردند —
-# با چند بار آزمایش روی همین پروژه تأیید شد). پس به‌روزرسانی باید از بیرون
-# و مستقیم روی کلاستر انجام شود.
+# چرا بازنویسی شد: نسخهٔ اول با `kubectl rollout status` منتظر می‌ماند، ولی API
+# اروان watch رانیمه‌کاره قطع می‌کند («object has been deleted» / INTERNAL_ERROR) و
+# job بی‌دلیل شکست می‌خورد. همچنین کشف شد که پنل برای اپ تازه‌ساخته گاهی
+# Service نمی‌سازد؛ بدون Service، اینگرس Endpoint ندارد و لبه ۵۰۳ می‌دهد.
 #
-# زنجیره‌ی کامل:
-#   push روی main → CI (تست‌ها) → Docker Image (build/push با tag sha-<۷کاراکتر>)
-#   → همین workflow → kubectl set image → rollout → تست سلامت روی دامنه
+# بنابراین این نسخه:
+#   ۱) وجود Service را تضمین می‌کند (idempotent)،
+#   ۲) ایمیج را ست می‌کند،
+#   ۳) به‌جای watch، وضعیت را با polling ساده می‌پرسد (مقاوم به قطع stream)،
+#   ۴) در پایان healthz دامنه را چک می‌کند.
 #
-# نکته‌ی امنیتی: مخزن عمومی است، پس هیچ رازی داخل فایل نیست. تنها راز،
-# ARVAN_KUBECONFIG است که در Secrets مخزن ذخیره شده و فقط به همین job داده
-# می‌شود. این مسیر به توکن شخصیِ مالک وابسته نیست: GITHUB_TOKEN خودکار است و
-# توکن کلاستر جدا ذخیره شده است.
+# توجه: والیوم داده RWO است (یک نود در هر لحظه)، پس هنگام تعویض پاد چند دقیقه
+# قطعی طبیعی است. زمان pull ایمیج از GHCR روی نودهای اروان ۳ تا ۱۵ دقیقه است.
 # =====================================================================
 name: Deploy Arvan
 
@@ -37,13 +36,20 @@ concurrency:
 
 jobs:
   deploy:
-    name: kubectl set image + smoke
+    name: set image + wait + smoke
     if: >-
       github.event_name == 'workflow_dispatch' ||
       (github.event.workflow_run.conclusion == 'success' &&
        github.event.workflow_run.head_branch == 'main')
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 35
+
+    env:
+      NS: synapse
+      # نام اپ زندهٔ فعلی. اپ اولیهٔ synapse-app پس از تغییر ایمیج در کنترلر پلتفرم
+      # گیر کرد (پاد ContainerCreating) و کنار گذاشته شد؛ اپ فعلی synapse-prod است
+      # و اینگرس هم به همین سرویس اشاره می‌کند.
+      DEPLOY: synapse-prod
 
     steps:
       - name: تعیین کامیت هدف
@@ -62,35 +68,52 @@ jobs:
         run: |
           curl -sfL -o kubectl https://dl.k8s.io/release/v1.31.4/bin/linux/amd64/kubectl
           chmod +x kubectl && sudo mv kubectl /usr/local/bin/kubectl
-          kubectl version --client
 
-      - name: نوشتن KubeConfig از Secrets
+      - name: KubeConfig
         run: |
           mkdir -p "$HOME/.kube"
           printf '%s' "${{ secrets.ARVAN_KUBECONFIG }}" > "$HOME/.kube/config"
           chmod 600 "$HOME/.kube/config"
-          kubectl -n synapse get deployment synapse-app -o name
 
-      - name: نشاندن ایمیج تازه و انتظار برای rollout
+      - name: تضمین Service
+        run: |
+          kubectl -n "$NS" expose deployment "$DEPLOY" --port=80 --target-port=3000 \
+            --name="$DEPLOY" --dry-run=client -o yaml | kubectl apply -f -
+
+      - name: نشاندن ایمیج
         run: |
           IMG="ghcr.io/${{ github.repository }}:sha-${{ steps.target.outputs.short }}"
           echo "deploy → $IMG"
-          kubectl -n synapse set image deployment/synapse-app "synapse-app=$IMG"
-          kubectl -n synapse rollout status deployment/synapse-app --timeout=420s
-          kubectl -n synapse get pods -l app=synapse-app -o wide
+          kubectl -n "$NS" set image "deployment/$DEPLOY" "$DEPLOY=$IMG"
+
+      - name: انتظار برای پاد سالم (polling)
+        run: |
+          IMG="ghcr.io/${{ github.repository }}:sha-${{ steps.target.outputs.short }}"
+          for i in $(seq 1 80); do
+            info=$(kubectl -n "$NS" get "deployment/$DEPLOY" \
+              -o jsonpath='{.status.readyReplicas}|{.spec.template.spec.containers[0].image}' 2>/dev/null || echo "0|")
+            ready="${info%%|*}"; cur="${info##*|}"
+            echo "تلاش $i — ready=${ready:-0} image=$cur"
+            if [ "${ready:-0}" = "1" ] && [ "$cur" = "$IMG" ]; then
+              echo "✅ پاد آماده است"; exit 0
+            fi
+            sleep 15
+          done
+          echo "⚠️ پاد در ۲۰ دقیقه آماده نشد"
+          kubectl -n "$NS" get pods -o wide
+          kubectl -n "$NS" get events --sort-by=.lastTimestamp | tail -20
+          exit 1
 
       - name: تست سلامت روی دامنه
         run: |
           for i in $(seq 1 24); do
             code=$(curl -s -o /dev/null -w '%{http_code}' https://synaaps.my.id/healthz || true)
             echo "تلاش $i → $code"
-            if [ "$code" = "200" ]; then
-              curl -s https://synaaps.my.id/healthz; exit 0
-            fi
+            if [ "$code" = "200" ]; then curl -s https://synaaps.my.id/healthz; exit 0; fi
             sleep 10
           done
           echo "❌ سایت ۲۰۰ نداد"; exit 1
 
       - name: لاگ پاد در صورت خطا
         if: failure()
-        run: kubectl -n synapse logs -l app=synapse-app --tail=120 || true
+        run: kubectl -n "$NS" logs -l app="$DEPLOY" --tail=120 || true
