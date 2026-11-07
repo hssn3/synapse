@@ -3,7 +3,13 @@
  */
 const formRepo = require('./form.repository');
 const Ajv = require('ajv');
-const ajv = new Ajv({ allErrors: true, coerceTypes: true });
+// strict: false — چرا (۱۴۰۵/۰۸/۱۶): اسکیماهای فرم از کلیدهای مخصوصِ رابط کاربری
+// مثل «show_if» استفاده می‌کنند که کلیدویژه‌ی استاندارد JSON Schema نیستند. در ajv 6
+// این‌ها بی‌صدا نادیده گرفته می‌شدند؛ از ajv 8 حالت strict پیش‌فرض است و کامپایل
+// با «strict mode: unknown keyword: show_if» می‌شکند (در استقرار اروان‌کلاد هم
+// همین باعث خطای زمان اجرا می‌شد). این کلیدها فقط نمایشی‌اند و نباید اعتبارسنجیِ
+// داده را متوقف کنند، پس strict خاموش است؛ همه‌ی قواعد استاندارد همچنان اعمال می‌شوند.
+const ajv = new Ajv({ allErrors: true, coerceTypes: true, strict: false });
 
 // ---------------------------------------------------------------------------
 // گاردِ «ارسالِ تکراری فرم» — شناسه‌ی یکتای سمتِ کلاینت (client_token)
