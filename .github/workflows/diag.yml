@@ -1,0 +1,54 @@
+# =====================================================================
+# تشخیص وضعیت کلاستر (فقط‌خواندنی)
+# ---------------------------------------------------------------------
+# چرا: دسترسی kubectl از ماشین توسعه به API اروان گاهی قطع می‌شود، ولی
+# runnerهای GitHub به آن می‌رسند. این workflow هیچ تغییری اعمال نمی‌کند؛
+# فقط وضعیت را چاپ می‌کند تا بتوانیم بفهمیم پاد چرا Pending است.
+# اجرا: gh workflow run diag.yml
+# =====================================================================
+name: Diag
+
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  diag:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: نصب kubectl
+        run: |
+          curl -sfL -o kubectl https://dl.k8s.io/release/v1.31.4/bin/linux/amd64/kubectl
+          chmod +x kubectl && sudo mv kubectl /usr/local/bin/kubectl
+
+      - name: KubeConfig
+        run: |
+          mkdir -p "$HOME/.kube"
+          printf '%s' "${{ secrets.ARVAN_KUBECONFIG }}" > "$HOME/.kube/config"
+          chmod 600 "$HOME/.kube/config"
+
+      - name: وضعیت کلی
+        run: |
+          kubectl -n synapse get deploy,rs,pods,svc,ingress,pvc -o wide
+          echo "-----"
+          kubectl -n synapse get events --sort-by=.lastTimestamp | tail -40
+
+      - name: جزئیات پادها
+        run: |
+          for p in $(kubectl -n synapse get pods -o name); do
+            echo "===== $p"
+            kubectl -n synapse describe "$p" | sed -n '1,80p'
+          done
+
+      - name: لاگ آخرین پاد
+        run: |
+          for p in $(kubectl -n synapse get pods -o name); do
+            echo "===== logs $p"
+            kubectl -n synapse logs "$p" --tail=60 || true
+          done
+
+      - name: تست دامنه
+        run: curl -s -o /dev/null -w "healthz=%{http_code}\n" https://synaaps.my.id/healthz || true
