@@ -36,12 +36,26 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 WORKDIR /app
 
+# پیش‌فرض‌های زمان اجرا داخل خود ایمیج (استقرار اروان‌کلاد).
+# چرا اینجا و نه فقط در پنل: پنل اروان مقادیر «متغیرهای محیطی» را در این نصب ذخیره
+# نمی‌کرد (با reload تأیید شد؛ ردیف‌ها خالی برمی‌گشتند) و بدون DATA_DIR داده داخل
+# لایه‌ی موقت کانتینر می‌نشست. مقدارها اینجا پیش‌فرض‌اند و هر مقدار پنل آن‌ها را
+# بازنویسی می‌کند (process.env بر ENV تصویر مقدم است).
+ENV NODE_ENV=production \
+    PORT=3000 \
+    DATA_DIR=/data \
+    BASE_URL=https://synaaps.my.id
+
 COPY package.json package-lock.json ./
 # npm ci به‌جای npm install چون package-lock.json در مخزن هست — نصب قطعی و تکرارپذیر
 RUN npm ci --omit=dev
 
 COPY . .
 
+RUN mkdir -p /data/database /data/uploads /data/backups
+# پوشه‌ی داده از قبل ساخته می‌شود تا اگر والیوم مانت نشد هم entrypoint و اپ
+# مجبور نباشند با مجوز ریشه بسازند (سطح کم‌ترین غافلگیری). خودِ مسیر با ENV بالا
+# به اپ داده می‌شود.
 RUN mkdir -p uploads database/backups
 # .dockerignore جلوی کپیِ node_modules ویندوزی، .git، دیتابیس محلی و uploads را می‌گیرد؛
 # بدون آن، باینری‌های native با معماری غلط روی نسخه‌ی لینوکسی می‌نشستند.
