@@ -1,0 +1,45 @@
+# =====================================================================
+# چرا این فایل اضافه شد (۱۴۰۵/۰۸/۱۶ — استقرار روی اروان‌کلاد):
+# Dockerfile با «COPY . .» همه‌ی پوشه را داخل ایمیج می‌ریزد. بدون این فایل:
+#   ۱) node_modules ویندوزی روی node_modules لینوکسیِ «npm ci» کپی می‌شد و
+#      باینری‌های native (better-sqlite3/sharp) با معماری غلط، ایمیج را خراب می‌کرد؛
+#   ۲) دیتابیس محلی و uploads کاربر داخل ایمیج می‌رفت — داده‌ی واقعی در تصویر.
+# پس: هرچه در زمان اجرا ساخته یا نگه‌داری می‌شود، وارد ایمیج نمی‌شود.
+# =====================================================================
+node_modules
+npm-debug.log*
+
+.git
+.gitignore
+.github
+.opencode
+
+# داده‌ی محلی/ماندگار — روی والیوم سرور می‌نشیند، نه داخل ایمیج
+database/*.db
+database/*.db-wal
+database/*.db-shm
+database/*.db-journal
+database/backups
+uploads
+*.log
+
+# فایل‌های محیطی و ابزار محلی
+.env
+.env.*
+!.env.example
+.railwayignore
+docker-compose.yml
+Dockerfile
+.dockerignore
+
+# اسناد و تست‌ها در زمان اجرا لازم نیستند (حجم و سطح حمله را کم می‌کند)
+docs
+tests
+HANDOFF-ACC-V6.md
+RBAC_MATRIX_DRAFT.md
+ROLE_ACCESS_MATRIX.md
+PROJECT_STRUCTURE.md
+SETUP_INSTRUCTIONS.md
+CHANGELOG.md
+گزارش-تحلیل-جامع.md
+راهنمای-سریع.md
