@@ -1,0 +1,64 @@
+# =====================================================================
+# هم‌ترازیِ دامنه با سرویس اپ (ابزار عملیاتیِ یک‌بارمصرف)
+# ---------------------------------------------------------------------
+# چرا لازم شد: پنل اروان پس از ساختِ اپ، تغییر «دامنه» را ذخیره نمی‌کند و در
+# عمل اینگرس `synapse-ingress` با بک‌اند سرویس قدیمی باقی می‌ماند. وقتی اپ با
+# نام تازه‌ای بازسازی شود، باید بک‌اند اینگرس به سرویس زنده اشاره کند — وگرنه
+# لبه ۵۰۳ می‌دهد.
+#
+# این workflow فقط همین یک کار را می‌کند (بدون دستور دلخواه)، و فقط دستی
+# اجرا می‌شود. اجرا:
+#   gh workflow run align-domain.yml -f service=synapse-prod -f host=synaaps.my.id
+# =====================================================================
+name: Align Domain
+
+on:
+  workflow_dispatch:
+    inputs:
+      service:
+        description: "نام سرویس مقصد در namespace synapse"
+        required: true
+        default: synapse-prod
+      host:
+        description: "دامنه‌ای که باید سرو شود"
+        required: true
+        default: synaaps.my.id
+
+permissions:
+  contents: read
+
+jobs:
+  align:
+    name: ingress backend → ${{ inputs.service }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: نصب kubectl
+        run: |
+          curl -sfL -o kubectl https://dl.k8s.io/release/v1.31.4/bin/linux/amd64/kubectl
+          chmod +x kubectl && sudo mv kubectl /usr/local/bin/kubectl
+
+      - name: KubeConfig
+        run: |
+          mkdir -p "$HOME/.kube"
+          printf '%s' "${{ secrets.ARVAN_KUBECONFIG }}" > "$HOME/.kube/config"
+          chmod 600 "$HOME/.kube/config"
+
+      - name: نشاندن بک‌اند اینگرس
+        run: |
+          kubectl -n synapse get ingress synapse-ingress -o wide
+          kubectl -n synapse patch ingress synapse-ingress --type=json \
+            -p "[{\"op\":\"replace\",\"path\":\"/spec/rules/0/http/paths/0/backend/service/name\",\"value\":\"${{ inputs.service }}\"}]"
+          kubectl -n synapse get ingress synapse-ingress \
+            -o jsonpath='{.spec.rules[0].host} → {.spec.rules[0].http.paths[0].backend.service.name}:{.spec.rules[0].http.paths[0].backend.service.port.number}{"\n"}'
+
+      - name: تست پاسخ دامنه
+        run: |
+          for i in $(seq 1 30); do
+            code=$(curl -s -o /dev/null -w '%{http_code}' "https://${{ inputs.host }}/healthz" || true)
+            echo "تلاش $i → $code"
+            if [ "$code" = "200" ]; then curl -s "https://${{ inputs.host }}/healthz"; exit 0; fi
+            sleep 10
+          done
+          echo "❌ دامنه ۲۰۰ نداد"; exit 1
