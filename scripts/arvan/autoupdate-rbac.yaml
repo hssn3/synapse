@@ -1,0 +1,37 @@
+# =====================================================================
+# دسترسیِ به‌روزرسانِ خودکار (استقرار اروان‌کلاد)
+# ---------------------------------------------------------------------
+# چرا: CronJob باید بتواند فقط «ایمیجِ» Deployment اپ سیناپس را عوض کند و
+# هیچ دسترسی دیگری نداشته باشد. کمترین امتیاز لازم = get/list/patch روی
+# deployments در همین namespace.
+# اجرا:  kubectl apply -f scripts/arvan/autoupdate-rbac.yaml
+# =====================================================================
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: synapse-updater
+  namespace: synapse
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: synapse-updater
+  namespace: synapse
+rules:
+  - apiGroups: ["apps"]
+    resources: ["deployments"]
+    verbs: ["get", "list", "watch", "patch", "update"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: synapse-updater
+  namespace: synapse
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: synapse-updater
+subjects:
+  - kind: ServiceAccount
+    name: synapse-updater
+    namespace: synapse

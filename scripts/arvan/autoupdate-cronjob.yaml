@@ -1,0 +1,65 @@
+# =====================================================================
+# CronJob به‌روزرسانِ خودکار سیناپس روی اروان‌کلاد
+# ---------------------------------------------------------------------
+# هر ۵ دقیقه: آخرین کامیت main → چک CI سبز → دیجست ایمیج sha-<short> از GHCR
+# → در صورت تفاوت، همان دیجست روی Deployment نشانده می‌شود (rollout خودکار).
+#
+# چرا ConfigMap و نه ساخت ایمیج: اسکریپت به‌روزرسان باید مستقل از ایمیج اپ
+# باشد؛ وگرنه برای اصلاح خودِ به‌روزرسان باید یک دور کامل build برویم.
+#
+# چرا image همان اپ: این ایمیج روی نود کش شده است (که خود اپ را هم اجرا می‌کند)
+# و شامل node است — نیازی به ایمیج تازه و دانلود دوباره نیست.
+#
+# اجرا:  kubectl apply -f scripts/arvan/autoupdate-cronjob.yaml
+#        (پیش‌تر: kubectl create configmap synapse-autoupdate -n synapse \
+#          --from-file=arvan-autoupdate.js=scripts/arvan-autoupdate.js)
+# =====================================================================
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: synapse-autoupdate
+  namespace: synapse
+spec:
+  schedule: "*/5 * * * *"
+  concurrencyPolicy: Forbid
+  startingDeadlineSeconds: 120
+  successfulJobsHistoryLimit: 2
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      backoffLimit: 1
+      activeDeadlineSeconds: 240
+      template:
+        metadata:
+          labels:
+            app: synapse-autoupdate
+        spec:
+          serviceAccountName: synapse-updater
+          restartPolicy: Never
+          containers:
+            - name: updater
+              image: ghcr.io/hssn3/synapse:sha-8baaa25
+              imagePullPolicy: IfNotPresent
+              command: ["node", "/opt/arvan-autoupdate.js"]
+              env:
+                - name: NAMESPACE
+                  value: synapse
+                - name: DEPLOYMENT
+                  value: synapse-app
+                - name: GH_REPO
+                  value: hssn3/synapse
+              resources:
+                limits:
+                  cpu: 200m
+                  memory: 256Mi
+                requests:
+                  cpu: 50m
+                  memory: 64Mi
+              volumeMounts:
+                - name: script
+                  mountPath: /opt
+                  readOnly: true
+          volumes:
+            - name: script
+              configMap:
+                name: synapse-autoupdate
