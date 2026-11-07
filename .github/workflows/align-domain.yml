@@ -45,6 +45,17 @@ jobs:
           printf '%s' "${{ secrets.ARVAN_KUBECONFIG }}" > "$HOME/.kube/config"
           chmod 600 "$HOME/.kube/config"
 
+      - name: اطمینان از وجود سرویس مقصد
+        run: |
+          # چرا: پنل اروان برای اپ تازه‌ساخته گاهی سرویس نمی‌سازد (همین پروژه).
+          # بدون Service، اینگرس به بک‌اندی بدون Endpoint اشاره می‌کند و لبه ۵۰۳ می‌دهد.
+          # دستور idempotent است: اگر سرویس باشد، فقط اعمال می‌شود.
+          kubectl -n synapse expose deployment "${{ inputs.service }}" \
+            --port=80 --target-port=3000 --name="${{ inputs.service }}" \
+            --dry-run=client -o yaml | kubectl apply -f -
+          kubectl -n synapse get svc "${{ inputs.service }}" -o wide
+          kubectl -n synapse get endpoints "${{ inputs.service }}" || true
+
       - name: نشاندن بک‌اند اینگرس
         run: |
           kubectl -n synapse get ingress synapse-ingress -o wide
